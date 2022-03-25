@@ -1,0 +1,822 @@
+{
+  "intake.name.0": {
+    "en": "Intake questionnaire",
+    "de-be": "TODO"
+  },
+  "intake.description.0": {
+    "en": "The purpose of the background questionnaire is to find out a little more about each user.",
+    "de-be": "TODO"
+  },
+  "intake.typicalDuration.0": {
+    "en": "Duration 5-10 minutes",
+    "de-be": "TODO"
+  },
+  "intake.Q1.title.0": {
+    "en": "What is your gender?",
+    "de-be": "Was ist Ihr Geschlecht?"
+  },
+  "intake.Q1.helpGroup.text.0": {
+    "en": "Why are we asking this?",
+    "de-be": "Warum fragen wir das?"
+  },
+  "intake.Q1.helpGroup.text.1": {
+    "en": "In order to examine the differences between men and women.",
+    "de-be": "Um nach Unterschieden zwischen Männern und Frauen zu suchen."
+  },
+  "intake.Q1.rg.scg.option.0": {
+    "en": "Male",
+    "de-be": "Mann"
+  },
+  "intake.Q1.rg.scg.option.1": {
+    "en": "Female",
+    "de-be": "Frau"
+  },
+  "intake.Q1.rg.scg.option.2": {
+    "en": "Other",
+    "de-be": "Anderes"
+  },
+  "intake.Q2.title.0": {
+    "en": "What is your date of birth (year and month)?",
+    "de-be": "Wann sind Sie geboren (Jahr und Monat)?"
+  },
+  "intake.Q2.helpGroup.text.0": {
+    "en": "Why are we asking this?",
+    "de-be": "Warum fragen wir das?"
+  },
+  "intake.Q2.helpGroup.text.1": {
+    "en": "In order to examine the differences between age groups.",
+    "de-be": "Um nach Unterschieden zwischen Altersgruppen zu suchen."
+  },
+  "intake.Q2.rg.feedback.text.1": {
+    "en": " years old",
+    "de-be": " Jahr/e"
+  },
+  "intake.Q3.title.0": {
+    "en": "What is your home postal code?",
+    "de-be": "Welche Postleitzahl hat Ihr Wohnsitz?"
+  },
+  "intake.Q3.helpGroup.text.0": {
+    "en": "Why are we asking this?",
+    "de-be": "Warum fragen wir das?"
+  },
+  "intake.Q3.helpGroup.text.1": {
+    "en": "In order to verify the representativeness of our cohort (the group of participants in this study), and to examine the geographical differences in the spread of the coronavirus and influenza.",
+    "de-be": "Um zu kontrollieren, wie repräsentativ unsere Kohorte (Teilnehmer-Gruppe an dieser Studie) ist, und um nach geografischen Unterschieden in der Verteilung von COVID-19 und Grippe zu suchen."
+  },
+  "intake.Q3.helpGroup.text.2": {
+    "en": "How should I answer this question?",
+    "de-be": "Wie soll ich diese Frage beantworten?"
+  },
+  "intake.Q3.helpGroup.text.3": {
+    "en": "Insert the postal code of your place of residence",
+    "de-be": "TODO"
+  },
+  "intake.Q3.rg.scg.input.0": {
+    "en": "Postal code:",
+    "de-be": "Postleitzahl"
+  },
+  "intake.Q3.rg.scg.description.input.0": {
+    "en": "Postal code",
+    "de-be": "TODO"
+  },
+  "intake.Q3.rg.scg.option.1": {
+    "en": "I prefer not to answer this question",
+    "de-be": "Das möchte ich nicht angeben"
+  },
+  "intake.Q3.error.3": {
+    "en": "Please enter the digits of your postal code",
+    "de-be": "Bitte geben Sie die vier Stellen Ihrer Postleitzahl ein"
+  },
+  "intake.Q3.error.4": {
+    "en": "Please enter at most 5 digits",
+    "de-be": "TODO"
+  },
+  "intake.Q4.title.0": {
+    "en": "What is your current professional status? (Assume a normal situation, without any COVID-19 measures).",
+    "de-be": "TODO"
+  },
+  "intake.Q4.helpGroup.text.0": {
+    "en": "Why are we asking this?",
+    "de-be": "TODO"
+  },
+  "intake.Q4.helpGroup.text.1": {
+    "en": "To check how representative our sample is compared to the population as a whole, and to find out whether the chance of getting flu is different for people in different types of occupation.",
+    "de-be": "TODO"
+  },
+  "intake.Q4.helpGroup.text.2": {
+    "en": "How should I answer it?",
+    "de-be": "TODO"
+  },
+  "intake.Q4.helpGroup.text.3": {
+    "en": "Please, tick the box that most closely resembles your main occupation. For pre-school children who don't go to daycare tick the \"other\" box.",
+    "de-be": "TODO"
+  },
+  "intake.Q4.rg.scg.option.0": {
+    "en": "Paid employment, full time",
+    "de-be": "TODO"
+  },
+  "intake.Q4.rg.scg.option.1": {
+    "en": "Paid employment, part time",
+    "de-be": "TODO"
+  },
+  "intake.Q4.rg.scg.option.2": {
+    "en": "Self-employed (businessman, farmer, tradesman, etc.)",
+    "de-be": "TODO"
+  },
+  "intake.Q4.rg.scg.option.3": {
+    "en": "Attending daycare/school/college/university",
+    "de-be": "TODO"
+  },
+  "intake.Q4.rg.scg.option.4": {
+    "en": "Home-maker (e.g. housewife)",
+    "de-be": "TODO"
+  },
+  "intake.Q4.rg.scg.option.5": {
+    "en": "Unemployed",
+    "de-be": "TODO"
+  },
+  "intake.Q4.rg.scg.option.6": {
+    "en": "Long-term sick-leave or parental leave",
+    "de-be": "TODO"
+  },
+  "intake.Q4.rg.scg.option.7": {
+    "en": "Retired",
+    "de-be": "TODO"
+  },
+  "intake.Q4.rg.scg.option.8": {
+    "en": "Other",
+    "de-be": "TODO"
+  },
+  "intake.Q4b.title.0": {
+    "en": "What is the postal code of your school/college/workplace (where you spend the majority of your working/studying time)?",
+    "de-be": "Was ist die Postleitzahl, wo Sie den Großteil Ihrer (Arbeits-)Zeit verbringen (zum Beispiel: Arbeitsplatz/Schule/Universität)?"
+  },
+  "intake.Q4b.helpGroup.text.0": {
+    "en": "Why are we asking this?",
+    "de-be": "Warum fragen wir das?"
+  },
+  "intake.Q4b.helpGroup.text.1": {
+    "en": "To be able to determine the distance you regularly travel during your movements.",
+    "de-be": "Um zu bestimmen, wie weit Sie sich auf regelmäßiger Basis (fort-)bewegen."
+  },
+  "intake.Q4b.rg.scg.input.0": {
+    "en": "Postal code",
+    "de-be": "Postleitzahl"
+  },
+  "intake.Q4b.rg.scg.description.input.0": {
+    "en": "Postal code",
+    "de-be": "TODO"
+  },
+  "intake.Q4b.rg.scg.option.1": {
+    "en": "I don’t know/can’t remember",
+    "de-be": "Das weiß ich nicht"
+  },
+  "intake.Q4b.rg.scg.option.2": {
+    "en": "Not applicable (e.g. don’t have a fixed workplace)",
+    "de-be": "Entfällt/ich habe keinen festen Arbeitsplatz"
+  },
+  "intake.Q4b.error.3": {
+    "en": "Please enter the digits of your postal code",
+    "de-be": "4 Ziffern"
+  },
+  "intake.Q4b.error.4": {
+    "en": "Please enter at most 5 digits",
+    "de-be": "TODO"
+  },
+  "intake.Q4h.title.0": {
+    "en": "Which of the following descriptions most closely matches with your main occupation? ",
+    "de-be": "Welche Art von Arbeit leisten Sie?"
+  },
+  "intake.Q4h.helpGroup.text.0": {
+    "en": "Why are we asking this?",
+    "de-be": "Warum fragen wir das?"
+  },
+  "intake.Q4h.helpGroup.text.1": {
+    "en": "To check how representative our sample is compared to the population as a whole and to find out whether the chance of getting COVID-19 or flu are different for people in different types of occupation.",
+    "de-be": "Um zu überprüfen, wie repräsentativ unsere Kohorte (Gruppe der Teilnehmer an dieser Studie) im Vergleich mit der Bevölkerung ist, und um zu bestimmen, ob sich die Möglichkeiten der Ansteckung mit COVID-19 oder Grippe bei Menschen mit verschiedenen Berufen unterscheiden."
+  },
+  "intake.Q4h.helpGroup.text.2": {
+    "en": "How should I answer this question?",
+    "de-be": "Wie soll ich diese Frage beantworten?"
+  },
+  "intake.Q4h.helpGroup.text.3": {
+    "en": "Please tick the box that most closely resembles your main occupation.",
+    "de-be": "Kreuzen Sie das Kästchen an, das am meisten mit Ihrem Hauptberuf übereinstimmt."
+  },
+  "intake.Q4h.rg.scg.option.0": {
+    "en": "Services and sales workers (Personal Services Workers, Sales Workers, Personal Care Workers, Protective Services Workers)",
+    "de-be": "TODO"
+  },
+  "intake.Q4h.rg.scg.option.1": {
+    "en": "Craft and related trades workers (Handicraft and printing workers, Food processing, wood working, garment and other craft and related trades workers,  Metal, machinery and related trades workers, Electrical and electronic trades workers, Building and related trades workers, excluding electricians)",
+    "de-be": "TODO"
+  },
+  "intake.Q4h.rg.scg.option.2": {
+    "en": "Armed forces occupations (Commissioned armed forces officers, Armed forces occupations other ranks, Non-commissioned armed forces officers)",
+    "de-be": "TODO"
+  },
+  "intake.Q4h.rg.scg.option.3": {
+    "en": "Managers (Chief Executives, Senior Officials and Legislators, Administrative and Commercial Managers, Production and Specialized Services Managers, Hospitality, Retail and Other Services Managers)",
+    "de-be": "TODO"
+  },
+  "intake.Q4h.rg.scg.option.4": {
+    "en": "Professionals (Science and Engineering Professionals, Health Professionals,  Teaching Professionals, Business and Administration Professionals, Information and Communications Technology Professionals, Legal, Social and Cultural Professionals)",
+    "de-be": "TODO"
+  },
+  "intake.Q4h.rg.scg.option.5": {
+    "en": "Technicians and associate professionals (Science and Engineering Associate Professionals, Health Associate Professionals, Business and Administration Associate Professionals, Legal, Social, Cultural and Related Associate Professionals, Information and Communications Technicians)",
+    "de-be": "TODO"
+  },
+  "intake.Q4h.rg.scg.option.6": {
+    "en": "Clerical support workers (General and Keyboard Clerks, Customer Services Clerks,  Numerical and Material Recording Clerks, Other Clerical Support Workers)",
+    "de-be": "TODO"
+  },
+  "intake.Q4h.rg.scg.option.7": {
+    "en": "Skilled agricultural, forestry and fishery workers",
+    "de-be": "TODO"
+  },
+  "intake.Q4h.rg.scg.option.8": {
+    "en": "Plant and machine operators and assemblers (Stationary Plant and Machine Operators, Assemblers, Drivers and Mobile Plant Operators)",
+    "de-be": "TODO"
+  },
+  "intake.Q4h.rg.scg.option.9": {
+    "en": "Elementary occupations (Cleaners and Helpers, Agricultural, Forestry and Fishery Labourers, Labourers in Mining, Construction, Manufacturing and Transport, Food Preparation Assistants, Street and Related Sales and Services Workers, Refuse Workers and Other Elementary Workers)",
+    "de-be": "TODO"
+  },
+  "intake.Q4h.rg.scg.input.10": {
+    "en": "Other",
+    "de-be": "Andere"
+  },
+  "intake.Q4h.rg.scg.description.input.10": {
+    "en": "Describe here (optional)",
+    "de-be": "Beschreiben Sie es hier (optional einzutragen)"
+  },
+  "intake.Q4d.title.0": {
+    "en": "What is the highest level of formal education/qualification that you have?",
+    "de-be": "TODO"
+  },
+  "intake.Q4d.helpGroup.text.0": {
+    "en": "Why are we asking this?",
+    "de-be": "TODO"
+  },
+  "intake.Q4d.helpGroup.text.1": {
+    "en": "To check how representative our sample is compared to the population of the UK (Italy, Belgium..) as a whole.",
+    "de-be": "TODO"
+  },
+  "intake.Q4d.helpGroup.text.2": {
+    "en": "How should I answer it?",
+    "de-be": "TODO"
+  },
+  "intake.Q4d.helpGroup.text.3": {
+    "en": "Please choose the box that represents your HIGHEST level of educational achievements. The different option rougly equate to: 1 - no qualifications, 2 - school-leaving exams at around 16 years of age, 3 - school-leaving exams at around 18 years of age, 4 - University degree or equivalent professional qualification, 5 - Higher degree or advanced professional qualification. If you are an adult who is currently undergoing part - time training(e.g.night school) then tick the box that represents your current highest level of education.",
+    "de-be": "TODO"
+  },
+  "intake.Q4d.rg.nUk7.text.0": {
+    "en": "Select all options that apply",
+    "de-be": "TODO"
+  },
+  "intake.Q4d.rg.mcg.option.0": {
+    "en": "I have no formal qualification",
+    "de-be": "TODO"
+  },
+  "intake.Q4d.rg.mcg.option.1": {
+    "en": "GCSE's, levels, CSEs or equivalent",
+    "de-be": "TODO"
+  },
+  "intake.Q4d.rg.mcg.option.2": {
+    "en": "A-levels or equivalent (e.g. Higher, NVQ Level3, BTEC)",
+    "de-be": "TODO"
+  },
+  "intake.Q4d.rg.mcg.option.3": {
+    "en": "Bachelors Degree (BA, BSc) or equivalent",
+    "de-be": "TODO"
+  },
+  "intake.Q4d.rg.mcg.option.4": {
+    "en": "Higher Degree or equivalent (e.g. Masters Degree, PGCE, PhD, Medical Doctorate, Advanced Professional Award)",
+    "de-be": "TODO"
+  },
+  "intake.Q4d.rg.mcg.option.5": {
+    "en": "I am still in education",
+    "de-be": "TODO"
+  },
+  "intake.Q5.title.0": {
+    "en": "Except people you meet on public transports, do you have contact with any of the following during the course of a typical day (so without COVID-19 measures)?",
+    "de-be": "TODO"
+  },
+  "intake.Q5.helpGroup.text.0": {
+    "en": "Perché ti facciamo questa domanda?",
+    "de-be": "TODO"
+  },
+  "intake.Q5.helpGroup.text.1": {
+    "en": "To find out whether you are likely to be exposed to more infection risk than the average person (e.g. work with children, or patients).",
+    "de-be": "TODO"
+  },
+  "intake.Q5.helpGroup.text.2": {
+    "en": "Hint:",
+    "de-be": "TODO"
+  },
+  "intake.Q5.helpGroup.text.3": {
+    "en": "Groups of people could include any setting where you come into contact with large numbers of people at once, e.g. a teacher who may contact many children in a day.",
+    "de-be": "TODO"
+  },
+  "intake.Q5.rg.dwL8.text.0": {
+    "en": "Select all options that apply",
+    "de-be": "TODO"
+  },
+  "intake.Q5.rg.mcg.option.0": {
+    "en": "More than 10 children or teenagers (without counting your own children)",
+    "de-be": "TODO"
+  },
+  "intake.Q5.rg.mcg.option.1": {
+    "en": "More than 10 people aged over 65",
+    "de-be": "TODO"
+  },
+  "intake.Q5.rg.mcg.option.2": {
+    "en": "Patients",
+    "de-be": "TODO"
+  },
+  "intake.Q5.rg.mcg.option.3": {
+    "en": "Groups of people (more than 10 individuals at any one time)",
+    "de-be": "TODO"
+  },
+  "intake.Q5.rg.mcg.option.4": {
+    "en": "None of the above",
+    "de-be": "TODO"
+  },
+  "intake.Q6.title.0": {
+    "en": "INCLUDING YOU, how many people in each of the following age groups live in your household?",
+    "de-be": "TODO"
+  },
+  "intake.Q6.helpGroup.text.0": {
+    "en": "Why are we asking this?",
+    "de-be": "TODO"
+  },
+  "intake.Q6.helpGroup.text.1": {
+    "en": "Members of larger households, or those with children, may more likely get infected than the others.",
+    "de-be": "TODO"
+  },
+  "intake.Q6.rg.mat.row0.l.label.0": {
+    "en": "0 - 4 years",
+    "de-be": "TODO"
+  },
+  "intake.Q6.rg.mat.row1.l.label.0": {
+    "en": "5 - 18 years",
+    "de-be": "TODO"
+  },
+  "intake.Q6.rg.mat.row2.l.label.0": {
+    "en": "19 - 44 years",
+    "de-be": "TODO"
+  },
+  "intake.Q6.rg.mat.row3.l.label.0": {
+    "en": "45 - 64 years",
+    "de-be": "TODO"
+  },
+  "intake.Q6.rg.mat.row4.l.label.0": {
+    "en": "65+",
+    "de-be": "TODO"
+  },
+  "intake.Q6c.title.0": {
+    "en": "One or several of these people are they at risk of complications in case of flu or COVID-19 (e.g, pregnant, over 65, underlying health condition, obese, etc.)?",
+    "de-be": "TODO"
+  },
+  "intake.Q6c.helpGroup.text.0": {
+    "en": "Why are we asking this?",
+    "de-be": "Warum fragen wir das?"
+  },
+  "intake.Q6c.helpGroup.text.1": {
+    "en": "TODO",
+    "de-be": "TODO"
+  },
+  "intake.Q6c.helpGroup.text.2": {
+    "en": "How should I answer this question?",
+    "de-be": "Wie soll ich diese Frage beantworten?"
+  },
+  "intake.Q6c.helpGroup.text.3": {
+    "en": "TODO",
+    "de-be": "TODO"
+  },
+  "intake.Q6c.rg.scg.option.0": {
+    "en": "Yes",
+    "de-be": "Ja"
+  },
+  "intake.Q6c.rg.scg.option.1": {
+    "en": "No",
+    "de-be": "Nein"
+  },
+  "intake.Q6c.rg.scg.option.2": {
+    "en": "Don't know/would rather not answer",
+    "de-be": "Das weiß ich nicht / möchte ich nicht angeben"
+  },
+  "intake.Q6b.title.0": {
+    "en": "How many of the children in your household go to school or day-care?",
+    "de-be": "Wie viele Kinder in Ihrem Haushalt sitzen in der Schule oder einer Kita?"
+  },
+  "intake.Q6b.helpGroup.text.0": {
+    "en": "Why are we asking this?",
+    "de-be": "Warum fragen wir das?"
+  },
+  "intake.Q6b.helpGroup.text.1": {
+    "en": "Attending school, daycare or childcare can increase the risk of contracting the coronavirus or influenza, as well as other similar illnesses. We wish to study this issue.",
+    "de-be": "Zur Schule oder Kita zu gehen kann ein erhöhtes Risiko für die Ansteckung mit COVID-19 oder Grippe bzw. anderen artähnlichen Krankheiten mit sich bringen. Wir möchten das gerne untersuchen."
+  },
+  "intake.Q6b.helpGroup.text.2": {
+    "en": "How should I answer this question?",
+    "de-be": "Wie soll ich diese Frage beantworten?"
+  },
+  "intake.Q6b.helpGroup.text.3": {
+    "en": "If your child attends school, daycare or childcare (even if only one day a week), please count it. Participation in (sport) associations or other extracurricular activities does not count.",
+    "de-be": "Wenn Ihr Kind zur Schule oder zur Kita (Kindertagesstätte, Kindergarten) geht (auch wenn es nur an einem Tag in der Woche ist), so antworten Sie bitte mit ja. Mitgliedschaft in (Sport-)Vereinen oder andere außerschulische Aktivitäten zählen nicht."
+  },
+  "intake.Q6b.rg.scg.option.0": {
+    "en": "None",
+    "de-be": "Keines"
+  },
+  "intake.Q6b.rg.scg.option.6": {
+    "en": "More than 5",
+    "de-be": "mehr als 5"
+  },
+  "intake.Q7.title.0": {
+    "en": "What means of transportation do you typically use for your daily activities?",
+    "de-be": "Wie bewegen Sie sich in der Regel für Ihre täglichen Aktivitäten?"
+  },
+  "intake.Q7.helpGroup.text.0": {
+    "en": "Why are we asking this?",
+    "de-be": "Warum fragen wir das?"
+  },
+  "intake.Q7.helpGroup.text.1": {
+    "en": "We want to know if people who regularly use public transportation have a higher risk of infection.",
+    "de-be": "Wir untersuchen, ob Menschen, die oft mit dem öffentlichen Verkehr (ÖPNV) fahren/reisen, ein erhöhtes Infektionsrisiko aufweisen."
+  },
+  "intake.Q7.helpGroup.text.2": {
+    "en": "How should I answer this question?",
+    "de-be": "Wie soll ich diese Frage beantworten?"
+  },
+  "intake.Q7.helpGroup.text.3": {
+    "en": "Mark the box that best matches the means of transportation you most frequently use.",
+    "de-be": "Bitte kreuzen Sie diejenige Alternative an, die am besten mit Ihrem am meisten gewählten Verkehrsmittel übereinstimmt."
+  },
+  "intake.Q7.rg.9JtQ.text.0": {
+    "en": "Please select the transportation means you use the most.",
+    "de-be": "Bitte wählen Sie die Transportweise, von der Sie meistens Gebrauch machen."
+  },
+  "intake.Q7.rg.scg.option.0": {
+    "en": "Walking",
+    "de-be": "Zu Fuß"
+  },
+  "intake.Q7.rg.scg.option.1": {
+    "en": "Bike",
+    "de-be": "Mit dem Rad"
+  },
+  "intake.Q7.rg.scg.option.2": {
+    "en": "Motorbike/scooter",
+    "de-be": "Mit dem Motorroller oder Motorrad"
+  },
+  "intake.Q7.rg.scg.option.3": {
+    "en": "Car",
+    "de-be": "Mit dem Auto"
+  },
+  "intake.Q7.rg.scg.option.4": {
+    "en": "Public transportation (bus, train, tube, etc)",
+    "de-be": "Mit dem öffentlichen Verkehr (ÖPNV: Bus, Zug, U-Bahn, Straßenbahn usw.)"
+  },
+  "intake.Q7.rg.scg.option.5": {
+    "en": "Other",
+    "de-be": "Anders"
+  },
+  "intake.Q8.title.0": {
+    "en": "How often do you have common colds or flu-like diseases?",
+    "de-be": "Wie oft haben Sie Beschwerden durch Erkältung oder grippeartige Symptome (Beispiel: laufende Nase, Husten)?"
+  },
+  "intake.Q8.helpGroup.text.0": {
+    "en": "Why are we asking this?",
+    "de-be": "Warum fragen wir das?"
+  },
+  "intake.Q8.helpGroup.text.1": {
+    "en": "We want to know if some people have an increased risk of infection.",
+    "de-be": "Wir untersuchen, ob manche Menschen ein erhöhtes Infektionsrisiko haben."
+  },
+  "intake.Q8.rg.scg.option.0": {
+    "en": "Never",
+    "de-be": "Niemals"
+  },
+  "intake.Q8.rg.scg.option.1": {
+    "en": "Once or twice a year",
+    "de-be": "1 oder 2 Mal pro Jahr"
+  },
+  "intake.Q8.rg.scg.option.2": {
+    "en": "Between 3 and 5 times a year",
+    "de-be": "Zwischen 3 und 5 Mal pro Jahr"
+  },
+  "intake.Q8.rg.scg.option.3": {
+    "en": "Between 6 and 10 times a year",
+    "de-be": "Zwischen 6 und 10 Mal pro Jahr"
+  },
+  "intake.Q8.rg.scg.option.4": {
+    "en": "More that 10 times a year",
+    "de-be": "Mehr als 10 Mal pro Jahr"
+  },
+  "intake.Q8.rg.scg.option.5": {
+    "en": "I don't know",
+    "de-be": "Das weiß ich nicht"
+  },
+  "intake.Q11.title.0": {
+    "en": "Do you take regular medication for any of the following medical conditions?",
+    "de-be": "TODO"
+  },
+  "intake.Q11.helpGroup.text.0": {
+    "en": "Why are we asking this?",
+    "de-be": "TODO"
+  },
+  "intake.Q11.helpGroup.text.1": {
+    "en": "This question allows us to find out whether you have other medical conditions that may increase your risk of having more severe illness if you are infected.",
+    "de-be": "TODO"
+  },
+  "intake.Q11.helpGroup.text.2": {
+    "en": "How should I answer it?",
+    "de-be": "TODO"
+  },
+  "intake.Q11.helpGroup.text.3": {
+    "en": "Only answer \"yes\" if you take regular medication for your medical problem. If, for instance, you only occasionally take an asthma inhaler, then do not answer \"yes\" for asthma.",
+    "de-be": "TODO"
+  },
+  "intake.Q11.rg.hYo0.text.0": {
+    "en": "Select all options that apply",
+    "de-be": "TODO"
+  },
+  "intake.Q11.rg.mcg.option.0": {
+    "en": "No",
+    "de-be": "TODO"
+  },
+  "intake.Q11.rg.mcg.option.1": {
+    "en": "Asthma",
+    "de-be": "TODO"
+  },
+  "intake.Q11.rg.mcg.option.2": {
+    "en": "Diabetes",
+    "de-be": "TODO"
+  },
+  "intake.Q11.rg.mcg.option.3": {
+    "en": "Chronic lung disorder besides asthma e.g. COPD, emphysema, or other disorders that affect your breathing",
+    "de-be": "TODO"
+  },
+  "intake.Q11.rg.mcg.option.4": {
+    "en": "Heart disorder",
+    "de-be": "TODO"
+  },
+  "intake.Q11.rg.mcg.option.5": {
+    "en": "Kidney disorder",
+    "de-be": "TODO"
+  },
+  "intake.Q11.rg.mcg.option.6": {
+    "en": "An immunocompromising condition (e.g. splenectomy, organ transplant, acquired immune deficiency, cancer treatment)",
+    "de-be": "TODO"
+  },
+  "intake.Q11.rg.mcg.option.7": {
+    "en": "I would rather not answer",
+    "de-be": "TODO"
+  },
+  "intake.Q12.title.0": {
+    "en": "Are you currently pregnant?",
+    "de-be": "Sind Sie in diesem Moment schwanger?"
+  },
+  "intake.Q12.helpGroup.text.0": {
+    "en": "Why are we asking this?",
+    "de-be": "Warum fragen wir das?"
+  },
+  "intake.Q12.helpGroup.text.1": {
+    "en": "Pregnancy is a potential risk factor for severe symptoms in the event of infection.",
+    "de-be": "Schwangerschaft ist ein möglicher Risikofaktor für ernste Beschwerden bei Infektionen."
+  },
+  "intake.Q12.rg.scg.option.0": {
+    "en": "Yes",
+    "de-be": "Ja"
+  },
+  "intake.Q12.rg.scg.option.1": {
+    "en": "No",
+    "de-be": "Nein"
+  },
+  "intake.Q12.rg.scg.option.2": {
+    "en": "Don't know/would rather not answer",
+    "de-be": "Das weiß ich nicht/möchte ich lieber nicht angeben"
+  },
+  "intake.Q12b.title.0": {
+    "en": "Which trimester of the pregnancy are you in?",
+    "de-be": "In welchem Quartal Ihrer Schwangerschaft sind Sie?"
+  },
+  "intake.Q12b.helpGroup.text.0": {
+    "en": "Why are we asking this?",
+    "de-be": "Warum fragen wir das?"
+  },
+  "intake.Q12b.helpGroup.text.1": {
+    "en": "The risk of severe symptoms can vary depending on the pregnancy trimester, but this link has not yet been clearly established.",
+    "de-be": "Das Risiko ernster Beschwerden durch eine Infektion kann sich je nach Quartal einer Schwangerschaft unterscheiden, aber ganz klar ist das noch nicht."
+  },
+  "intake.Q12b.rg.scg.option.0": {
+    "en": "First trimester (week 1-12)",
+    "de-be": "Erstes Quartal (Woche 1-12)"
+  },
+  "intake.Q12b.rg.scg.option.1": {
+    "en": "Second trimester (week 13-28)",
+    "de-be": "Zweites Quartal (Woche 13-28)"
+  },
+  "intake.Q12b.rg.scg.option.2": {
+    "en": "Third trimester (week 29-delivery)",
+    "de-be": "Drittes Quartal (Woche 29 bis zur Entbindung/Geburt)"
+  },
+  "intake.Q12b.rg.scg.option.3": {
+    "en": "Don't know/would rather not answer",
+    "de-be": "Das weiß ich nicht / möchte ich nicht angeben"
+  },
+  "intake.Q13.title.0": {
+    "en": "Do you smoke tobacco?",
+    "de-be": "TODO"
+  },
+  "intake.Q13.helpGroup.text.0": {
+    "en": "Why are we asking this?",
+    "de-be": "TODO"
+  },
+  "intake.Q13.helpGroup.text.1": {
+    "en": "Smoking might make you more likely to get a more severe dose of virus disease. We would like to test this.",
+    "de-be": "TODO"
+  },
+  "intake.Q13.helpGroup.text.2": {
+    "en": "How should I answer it?",
+    "de-be": "TODO"
+  },
+  "intake.Q13.helpGroup.text.3": {
+    "en": "Please, answer as accurately as possible.",
+    "de-be": "TODO"
+  },
+  "intake.Q13.rg.scg.option.0": {
+    "en": "No",
+    "de-be": "TODO"
+  },
+  "intake.Q13.rg.scg.option.1": {
+    "en": "Yes, occasionally",
+    "de-be": "TODO"
+  },
+  "intake.Q13.rg.scg.option.2": {
+    "en": "Yes, daily, fewer than 10 times a day",
+    "de-be": "TODO"
+  },
+  "intake.Q13.rg.scg.option.3": {
+    "en": "Yes, daily, 10 or more times a day",
+    "de-be": "TODO"
+  },
+  "intake.Q13.rg.scg.option.4": {
+    "en": "Yes, only e-cigarettes",
+    "de-be": "TODO"
+  },
+  "intake.Q13.rg.scg.option.5": {
+    "en": "Dont know/would rather not answer",
+    "de-be": "TODO"
+  },
+  "intake.Q14.title.0": {
+    "en": "Do you have one of the following allergies that can cause respiratory symptoms?",
+    "de-be": "Haben Sie eine oder mehrere der folgenden Allergien?"
+  },
+  "intake.Q14.helpGroup.text.0": {
+    "en": "Why are we asking this?",
+    "de-be": "Warum fragen wir das?"
+  },
+  "intake.Q14.helpGroup.text.1": {
+    "en": "Certain allergies provoke the same symptoms as respiratory infections.",
+    "de-be": "Manche Allergien ergeben dieselben Beschwerden wie Atemwegsinfektionen."
+  },
+  "intake.Q14.helpGroup.text.2": {
+    "en": "How should I answer this question?",
+    "de-be": "Wie soll ich das beantworten?"
+  },
+  "intake.Q14.helpGroup.text.3": {
+    "en": "Multiple answers are possible, mark all that apply.",
+    "de-be": "Mehrere Antworten sind möglich; kreuzen Sie daher alle Alternativen an, die relevant sind."
+  },
+  "intake.Q14.rg.7tXM.text.0": {
+    "en": "Select all options that apply",
+    "de-be": "Mehrere Antworten möglich"
+  },
+  "intake.Q14.rg.mcg.option.0": {
+    "en": "Hay fever",
+    "de-be": "Heuschnupfen"
+  },
+  "intake.Q14.rg.mcg.option.1": {
+    "en": "Allergy against house dust mite",
+    "de-be": "Allergie gegen Hausstaubmilben"
+  },
+  "intake.Q14.rg.mcg.option.2": {
+    "en": "Allergy against domestic animals or pets",
+    "de-be": "Allergie gegen (Haus-)Tiere"
+  },
+  "intake.Q14.rg.mcg.option.3": {
+    "en": "Other allergies that cause respiratory symptoms (e.g. sneezing, runny eyes)",
+    "de-be": "Eine andere Allergie, von der ich Erkältungsbeschwerden (laufende Nase, tränende Augen) bekomme"
+  },
+  "intake.Q14.rg.mcg.option.4": {
+    "en": "I do not have an allergy that causes respiratory symptoms",
+    "de-be": "Nein, ich habe keine Allergie, von der ich Erkältungsbeschwerden bekomme"
+  },
+  "intake.Q15.title.0": {
+    "en": "Do you follow a special diet?",
+    "de-be": "TODO"
+  },
+  "intake.Q15.rg.mVmB.text.0": {
+    "en": "Select all options that apply",
+    "de-be": "TODO"
+  },
+  "intake.Q15.rg.mcg.option.0": {
+    "en": "No special diet",
+    "de-be": "TODO"
+  },
+  "intake.Q15.rg.mcg.option.1": {
+    "en": "Vegetarian",
+    "de-be": "TODO"
+  },
+  "intake.Q15.rg.mcg.option.2": {
+    "en": "Veganism",
+    "de-be": "TODO"
+  },
+  "intake.Q15.rg.mcg.option.3": {
+    "en": "Low-calorie",
+    "de-be": "TODO"
+  },
+  "intake.Q15.rg.mcg.option.4": {
+    "en": "Other",
+    "de-be": "TODO"
+  },
+  "intake.Q26.title.0": {
+    "en": "Are you taking or do you plan to take this winter homeopathic medicine in order to prevent COVID-19?",
+    "de-be": "TODO"
+  },
+  "intake.Q26.helpGroup.text.0": {
+    "en": "Why are we asking this?",
+    "de-be": "Warum fragen wir das?"
+  },
+  "intake.Q26.helpGroup.text.1": {
+    "en": "We are interested in knowing more about your health-related habits",
+    "de-be": "TODO"
+  },
+  "intake.Q26.rg.scg.option.0": {
+    "en": "Yes",
+    "de-be": "TODO"
+  },
+  "intake.Q26.rg.scg.option.1": {
+    "en": "No",
+    "de-be": "TODO"
+  },
+  "intake.Q26.rg.scg.option.2": {
+    "en": "I don't know",
+    "de-be": "Das weiß ich nicht"
+  },
+  "intake.Q26.rg.scg.option.3": {
+    "en": "I don't want to answer",
+    "de-be": "TODO"
+  },
+  "intake.Q17.title.0": {
+    "en": "Where did you first hear about the platform?",
+    "de-be": "Wo haben Sie von der Plattform gehört?"
+  },
+  "intake.Q17.helpGroup.text.0": {
+    "en": "Why are we asking this?",
+    "de-be": "Warum fragen wir das?"
+  },
+  "intake.Q17.helpGroup.text.1": {
+    "en": "We would like to know how you found out about our website infectieradar.be.",
+    "de-be": "Wir möchten wissen, wie Sie infectieradar.be gefunden haben."
+  },
+  "intake.Q17.rg.hIai.text.0": {
+    "en": "Select all options that apply",
+    "de-be": "Mehrere Antworten möglich"
+  },
+  "intake.Q17.rg.mcg.option.0": {
+    "en": "Radio or television",
+    "de-be": "Im Rundfunk oder Fernsehen"
+  },
+  "intake.Q17.rg.mcg.option.1": {
+    "en": "In the newspaper or in a magazine",
+    "de-be": "In der Zeitung oder Zeitschrift"
+  },
+  "intake.Q17.rg.mcg.option.2": {
+    "en": "The internet (a website, link, a search engine)",
+    "de-be": "Über das Internet (Website, News-Website, Suchmaschine)"
+  },
+  "intake.Q17.rg.mcg.option.3": {
+    "en": "By poster",
+    "de-be": "Von einem Plakat"
+  },
+  "intake.Q17.rg.mcg.option.4": {
+    "en": "Via family or friends",
+    "de-be": "Über Freunde und/oder Familie"
+  },
+  "intake.Q17.rg.mcg.option.5": {
+    "en": "Via school or work",
+    "de-be": "Über die Schule oder die Arbeit"
+  },
+  "intake.Q17.rg.mcg.option.6": {
+    "en": "Other",
+    "de-be": "Andere"
+  },
+  "intake.surveyEnd.title.0": {
+    "en": "Thank you! This was all for now, please submit (push « send ») your responses. Please come back or continue reporting symptoms you experience during the last week.",
+    "de-be": "Vielen Dank! Das war die letzte Frage. Falls Sie neue Beschwerden haben, können Sie nach dem Abspeichern die Fragen erneut beantworten."
+  }
+}

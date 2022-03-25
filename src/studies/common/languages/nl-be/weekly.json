@@ -1,0 +1,1574 @@
+{
+  "weekly.name.0": {
+    "en": "Weekly questionnaire",
+    "nl-be": "TODO"
+  },
+  "weekly.description.0": {
+    "en": "Please also report if you had no complaints.",
+    "nl-be": "TODO"
+  },
+  "weekly.typicalDuration.0": {
+    "en": "Duration 1-5 minutes",
+    "nl-be": "TODO"
+  },
+  "weekly.Q1.title.0": {
+    "en": "Have you had any of the following symptoms since your last questionnaire (or in the past week, if this the first tie you are taking this questionnaire)?",
+    "nl-be": "TODO"
+  },
+  "weekly.Q1.helpGroup.text.0": {
+    "en": "Why are we asking this question?",
+    "nl-be": "Waarom vragen we dit?"
+  },
+  "weekly.Q1.helpGroup.text.1": {
+    "en": "The most important part of this study is about following up on the symptoms you have reported.",
+    "nl-be": "Het belangrijkste onderdeel van deze enquête is het opvolgen van de door u gerapporteerde symptomen."
+  },
+  "weekly.Q1.helpGroup.text.2": {
+    "en": "How should I answer this question?",
+    "nl-be": "Hoe moet ik deze vraag beantwoorden?"
+  },
+  "weekly.Q1.helpGroup.text.3": {
+    "en": "If you suffer from chronic illness, only indicate symptoms that have changed. For example, if you experience chronic shortness of breath, only mark this symptom if it has recently gotten worse. Multiple answers possible.",
+    "nl-be": "Voor mensen met chronische (langdurige) ziekten, vink alleen veranderingen in symptomen aan. Dus als u bijvoorbeeld chronische kortademigheid heeft, vink dit vakje dan alleen aan als dit recentelijk erger is geworden. Meerdere antwoorden mogelijk."
+  },
+  "weekly.Q1.rg.cGJZ.text.0": {
+    "en": "Multiple answers possible. If you suffer from chronic illness, only indicate symptoms that have changed. For example, if you experience chronic shortness of breath, only mark this symptom if it has recently gotten worse.",
+    "nl-be": "Meerdere antwoorden mogelijk. Voor mensen met chronische (langdurige) ziekten, vink alleen veranderingen in symptomen aan. Dus als u bijvoorbeeld chronische kortademigheid heeft, vink dit vakje dan alleen aan als dit recentelijk erger is geworden."
+  },
+  "weekly.Q1.rg.mcg.option.0": {
+    "en": "No symptoms",
+    "nl-be": "TODO"
+  },
+  "weekly.Q1.rg.mcg.option.1": {
+    "en": "Fever",
+    "nl-be": "TODO"
+  },
+  "weekly.Q1.rg.mcg.option.2": {
+    "en": "Chills",
+    "nl-be": "TODO"
+  },
+  "weekly.Q1.rg.mcg.option.3": {
+    "en": "Runny or blocked nose",
+    "nl-be": "TODO"
+  },
+  "weekly.Q1.rg.mcg.option.4": {
+    "en": "Sneezing",
+    "nl-be": "TODO"
+  },
+  "weekly.Q1.rg.mcg.option.5": {
+    "en": "Sore throat",
+    "nl-be": "TODO"
+  },
+  "weekly.Q1.rg.mcg.option.6": {
+    "en": "Cough",
+    "nl-be": "TODO"
+  },
+  "weekly.Q1.rg.mcg.option.7": {
+    "en": "Shortness of breath",
+    "nl-be": "TODO"
+  },
+  "weekly.Q1.rg.mcg.option.8": {
+    "en": "Headache",
+    "nl-be": "TODO"
+  },
+  "weekly.Q1.rg.mcg.option.9": {
+    "en": "Muscle/joint pain",
+    "nl-be": "TODO"
+  },
+  "weekly.Q1.rg.mcg.option.10": {
+    "en": "Chest pain",
+    "nl-be": "TODO"
+  },
+  "weekly.Q1.rg.mcg.option.11": {
+    "en": "Feeling tired or exhausted (malaise)",
+    "nl-be": "TODO"
+  },
+  "weekly.Q1.rg.mcg.option.12": {
+    "en": "Loss of appetite",
+    "nl-be": "TODO"
+  },
+  "weekly.Q1.rg.mcg.option.13": {
+    "en": "Coloured sputum/phlegm",
+    "nl-be": "TODO"
+  },
+  "weekly.Q1.rg.mcg.option.14": {
+    "en": "Watery, bloodshot eyes",
+    "nl-be": "TODO"
+  },
+  "weekly.Q1.rg.mcg.option.15": {
+    "en": "Nausea",
+    "nl-be": "TODO"
+  },
+  "weekly.Q1.rg.mcg.option.16": {
+    "en": "Vomiting",
+    "nl-be": "TODO"
+  },
+  "weekly.Q1.rg.mcg.option.17": {
+    "en": "Diarrhoea (at least three times a day)",
+    "nl-be": "TODO"
+  },
+  "weekly.Q1.rg.mcg.option.18": {
+    "en": "Stomach ache",
+    "nl-be": "TODO"
+  },
+  "weekly.Q1.rg.mcg.option.19": {
+    "en": "Loss of smell",
+    "nl-be": "TODO"
+  },
+  "weekly.Q1.rg.mcg.option.20": {
+    "en": "Loss of taste",
+    "nl-be": "TODO"
+  },
+  "weekly.Q1.rg.mcg.option.21": {
+    "en": "Nose bleed",
+    "nl-be": "TODO"
+  },
+  "weekly.Q1.rg.mcg.option.22": {
+    "en": "Rash",
+    "nl-be": "TODO"
+  },
+  "weekly.Q1.rg.mcg.option.23": {
+    "en": "Other",
+    "nl-be": "TODO"
+  },
+  "weekly.HS.Q2.title.0": {
+    "en": "When you filled in the previous questionnaire, you indicated that you were still sick. Are the symptoms you are  reporting now from the same timeframe as the symptoms you reported the last time?",
+    "nl-be": "In uw laatste vragenlijst gaf u aan nog steeds ziek te zijn. Behoren de symptomen die u nu meldt tot dezelfde klachtenperiode als de symptomen die u de vorige keer al gemeld heeft?"
+  },
+  "weekly.HS.Q2.helpGroup.text.0": {
+    "en": "Why are we asking this question?",
+    "nl-be": "Waarom vragen we dit? "
+  },
+  "weekly.HS.Q2.helpGroup.text.1": {
+    "en": "To speed up the completion of the rest of the questionnaire.",
+    "nl-be": "Om het invullen van de rest van de vragenlijst te versnellen."
+  },
+  "weekly.HS.Q2.helpGroup.text.2": {
+    "en": "How should I answer this question?",
+    "nl-be": "Hoe moet ik deze vraag beantwoorden?"
+  },
+  "weekly.HS.Q2.helpGroup.text.3": {
+    "en": "If you think that the complaints you are indicating today are caused by the same infection or the same problem (the same period during which you experienced the complaints), answer 'yes'.",
+    "nl-be": "Als u denkt dat de klachten die u vandaag raporteert nog worden veroorzaakt door dezelfde infectie/probleem (dezelfde klachtenperiode), beantwoord dan de vraag met 'Ja'."
+  },
+  "weekly.HS.Q2.rg.scg.option.0": {
+    "en": "Yes",
+    "nl-be": "Ja"
+  },
+  "weekly.HS.Q2.rg.scg.option.1": {
+    "en": "No",
+    "nl-be": "Nee"
+  },
+  "weekly.HS.Q2.rg.scg.option.2": {
+    "en": "I don’t know/can’t remember",
+    "nl-be": "Ik weet het niet (meer)"
+  },
+  "weekly.HS.Q2.rg.scg.option.3": {
+    "en": "This does not apply to me",
+    "nl-be": "Dit geldt niet voor mij"
+  },
+  "weekly.HS.Qcov3.title.0": {
+    "en": "In the 14 days before your symptoms started, have you been in close contact with someone for whom an antigenic or PCR test has confirmed that they have COVID-19?",
+    "nl-be": "TODO"
+  },
+  "weekly.HS.Qcov3.helpGroup.text.0": {
+    "en": "Why are we asking this question?",
+    "nl-be": "Waarom vragen we dit?"
+  },
+  "weekly.HS.Qcov3.helpGroup.text.1": {
+    "en": "In  order to study how the coronavirus spreads within the general population.",
+    "nl-be": "Om te onderzoeken hoe COVID-19 zich verspreidt in de algemene bevolking."
+  },
+  "weekly.HS.Qcov3.rg.scg.option.0": {
+    "en": "Yes",
+    "nl-be": "Ja"
+  },
+  "weekly.HS.Qcov3.rg.scg.option.1": {
+    "en": "No",
+    "nl-be": "Nee"
+  },
+  "weekly.HS.Qcov3.rg.scg.option.2": {
+    "en": "I don’t know/can’t remember",
+    "nl-be": "Nee, ik weet het niet (meer)"
+  },
+  "weekly.HS.Qcov3b.title.0": {
+    "en": "Was this person or one of these persons a member of your household?",
+    "nl-be": "Behoort deze persoon of één van deze personen tot uw huishouden?"
+  },
+  "weekly.HS.Qcov3b.helpGroup.text.0": {
+    "en": "Why are we asking this question?",
+    "nl-be": "Waarom vragen we dit?"
+  },
+  "weekly.HS.Qcov3b.helpGroup.text.1": {
+    "en": "The coronavirus and influenza spread quickly indoors.",
+    "nl-be": "COVID-19 en griep verspreiden zich zeer binnenshuis."
+  },
+  "weekly.HS.Qcov3b.helpGroup.text.2": {
+    "en": "How should I answer this question?",
+    "nl-be": "Hoe moet ik deze vraag beantwoorden?"
+  },
+  "weekly.HS.Qcov3b.helpGroup.text.3": {
+    "en": "A member of the household is defined as a person (not necessary a family member) who lives at the same address as you, and who shares the kitchen, living room, family room or dining room.",
+    "nl-be": "Een lid van het huishouden wordt gedefinieerd als iemand (niet noodzakelijk verwant) die op hetzelfde adres woont als u en die de kookgelegenheid, woonkamer, zitkamer of eethoek deelt."
+  },
+  "weekly.HS.Qcov3b.rg.scg.option.0": {
+    "en": "Yes",
+    "nl-be": "Ja"
+  },
+  "weekly.HS.Qcov3b.rg.scg.option.1": {
+    "en": "No",
+    "nl-be": "Nee"
+  },
+  "weekly.HS.Qcov3b.rg.scg.option.2": {
+    "en": "I don’t know",
+    "nl-be": "Nee, ik weet het niet"
+  },
+  "weekly.HS.Q3.title.0": {
+    "en": "On what day did you begin feeling the first symptoms? If you do not recall the exact date, please give an approximate date.",
+    "nl-be": "Op welke dag verschenen de eerste symptomen? Als u de exacte datum niet meer weet, selecteer dan een geschatte datum."
+  },
+  "weekly.HS.Q3.helpGroup.text.0": {
+    "en": "Why are we asking this question?",
+    "nl-be": "Waarom vragen we dit?"
+  },
+  "weekly.HS.Q3.helpGroup.text.1": {
+    "en": "This question will help us to determine how many people are experiencing symptoms per day/week.",
+    "nl-be": "Dit helpt ons vast te stellen hoeveel mensen er klachten krijgen per dag/week."
+  },
+  "weekly.HS.Q3.helpGroup.text.2": {
+    "en": "How should I answer this question?",
+    "nl-be": "Hoe moet ik deze vraag beantwoorden?"
+  },
+  "weekly.HS.Q3.helpGroup.text.3": {
+    "en": "Answer as precisely as possible.",
+    "nl-be": "Wees alsjeblieft zo nauwkeurig mogelijk."
+  },
+  "weekly.HS.Q3.rg.scg.dateInput.0": {
+    "en": "Choose date",
+    "nl-be": "Kies een datum"
+  },
+  "weekly.HS.Q3.rg.scg.option.1": {
+    "en": "I don't know/can't remember",
+    "nl-be": "TODO"
+  },
+  "weekly.HS.Q4.title.0": {
+    "en": "When did your symptoms end?",
+    "nl-be": "Op welke dag waren je symptomen/klachten weer verdwenen?"
+  },
+  "weekly.HS.Q4.helpGroup.text.0": {
+    "en": "Why are we asking this question?",
+    "nl-be": "Waarom vragen we dit?"
+  },
+  "weekly.HS.Q4.helpGroup.text.1": {
+    "en": "We can use the first and last dates of the complaints to calculate how long your complaints lasted. ",
+    "nl-be": "Op basis van de eerste en laatste dag van klachten kunnen we uitrekenen hoelang u last heeft gehad van (deze) klachten."
+  },
+  "weekly.HS.Q4.helpGroup.text.2": {
+    "en": "How should I answer this question?",
+    "nl-be": "Hoe moet ik deze vraag beantwoorden?"
+  },
+  "weekly.HS.Q4.helpGroup.text.3": {
+    "en": "Answer as precisely as possible.",
+    "nl-be": "Wees alstublieft zo nauwkeurig mogelijk."
+  },
+  "weekly.HS.Q4.rg.scg.dateInput.0": {
+    "en": "Choose date",
+    "nl-be": "Kies een datum"
+  },
+  "weekly.HS.Q4.rg.scg.option.1": {
+    "en": "I don't know/can't remember",
+    "nl-be": "TODO"
+  },
+  "weekly.HS.Q4.rg.scg.option.2": {
+    "en": "I am still ill",
+    "nl-be": "Ik heb nog steeds klachten."
+  },
+  "weekly.HS.Q5.title.0": {
+    "en": "Did your symptoms develop suddenly over a few hours?",
+    "nl-be": "Kwamen uw symptomen/klachten plotseling opzetten? (binnen enkele uren)"
+  },
+  "weekly.HS.Q5.helpGroup.text.0": {
+    "en": "Why are we asking this question?",
+    "nl-be": "Waarom vragen we dit?"
+  },
+  "weekly.HS.Q5.helpGroup.text.1": {
+    "en": "The sudden onset of symptoms (within a few hours) is linked to the coronavirus and influenza.",
+    "nl-be": "Dat klachten plotseling (binnen een paar uur) opzetten is gelinkt aan COVID-19 en griep."
+  },
+  "weekly.HS.Q5.helpGroup.text.2": {
+    "en": "How should I answer this question?",
+    "nl-be": "Hoe moet ik deze vraag beantwoorden?"
+  },
+  "weekly.HS.Q5.helpGroup.text.3": {
+    "en": "Answer “yes” if your symptoms appeared within a few hours, and not gradually over a period of several days.",
+    "nl-be": "Beantwoord de vraag met Ja wanneer de klachten binnen enkele uren kwamen opzetten, in plaats van een geleidelijke ontwikkeling over een aantal dagen."
+  },
+  "weekly.HS.Q5.rg.scg.option.0": {
+    "en": "Yes",
+    "nl-be": "Ja"
+  },
+  "weekly.HS.Q5.rg.scg.option.1": {
+    "en": "No",
+    "nl-be": "Nee"
+  },
+  "weekly.HS.Q5.rg.scg.option.2": {
+    "en": "I don’t know/can’t remember",
+    "nl-be": "Ik weet het niet (meer)"
+  },
+  "weekly.HS.Q6.title.0": {
+    "en": "On what day did your fever start? If you do not recall the exact date, please give an approximate date.",
+    "nl-be": "Op welke dag kwam de koorts opzetten? Als u de dag niet precies weet, selecteer dan een geschatte datum"
+  },
+  "weekly.HS.Q6.helpGroup.text.0": {
+    "en": "Why are we asking this question?",
+    "nl-be": "Waarom vragen we dit?"
+  },
+  "weekly.HS.Q6.helpGroup.text.1": {
+    "en": "Fever is an important diagnostic symptom, so we would like to know when the fever appeared.",
+    "nl-be": "Koorts is belangrijk voor een diagnose, daarom willen we graag weten wanneer de koorts is begonnen."
+  },
+  "weekly.HS.Q6.helpGroup.text.2": {
+    "en": "How should I answer this question?",
+    "nl-be": "Hoe moet ik deze vraag beantwoorden?"
+  },
+  "weekly.HS.Q6.helpGroup.text.3": {
+    "en": "Answer as precisely as possible.",
+    "nl-be": "Wees alstublieft zo nauwkeurig mogelijk."
+  },
+  "weekly.HS.Q6.rg.scg.dateInput.0": {
+    "en": "Choose date",
+    "nl-be": "Kies een datum"
+  },
+  "weekly.HS.Q6.rg.scg.option.1": {
+    "en": "I don’t know/can’t remember",
+    "nl-be": "Ik weet het niet (meer)"
+  },
+  "weekly.HS.Q6b.title.0": {
+    "en": "Did your fever develop suddenly over a few hours?",
+    "nl-be": "Kwam de koorts plotseling (binnen een paar uur) opzetten?"
+  },
+  "weekly.HS.Q6b.helpGroup.text.0": {
+    "en": "Why are we asking this question?",
+    "nl-be": "Waarom vragen we dit?"
+  },
+  "weekly.HS.Q6b.helpGroup.text.1": {
+    "en": "The sudden onset of symptoms (within a few hours) is linked to the coronavirus and influenza.",
+    "nl-be": "Dat klachten plotseling (binnen een paar uur) opzetten is gelinkt aan COVID-19 en griep."
+  },
+  "weekly.HS.Q6b.helpGroup.text.2": {
+    "en": "How should I answer this question?",
+    "nl-be": "Hoe moet ik deze vraag beantwoorden?"
+  },
+  "weekly.HS.Q6b.helpGroup.text.3": {
+    "en": "Answer “yes” if your symptoms appeared within a few hours, and not gradually over a period of several days.",
+    "nl-be": "Beantwoord de vraag met Ja wanneer de klachten binnen enkele uren kwamen opzetten, in plaats van een geleidelijke ontwikkeling over een aantal dagen."
+  },
+  "weekly.HS.Q6b.rg.scg.option.0": {
+    "en": "Yes",
+    "nl-be": "Ja"
+  },
+  "weekly.HS.Q6b.rg.scg.option.1": {
+    "en": "No",
+    "nl-be": "Nee"
+  },
+  "weekly.HS.Q6b.rg.scg.option.2": {
+    "en": "I don’t know/can’t remember",
+    "nl-be": "Dat weet ik niet (meer)"
+  },
+  "weekly.HS.Q6c.title.0": {
+    "en": "Did you take your temperature?",
+    "nl-be": "Heeft u uw temperatuur gemeten na het verschijnen van de symptomen?"
+  },
+  "weekly.HS.Q6c.helpGroup.text.0": {
+    "en": "Why are we asking this question?",
+    "nl-be": "Waarom vragen we dit?"
+  },
+  "weekly.HS.Q6c.helpGroup.text.1": {
+    "en": "If you have taken your temperature, we would like to know the highest body temperature you have measured.",
+    "nl-be": "Indien u de koorts heeft gemeten, willen we graag de hoogst gemeten temperatuur weten."
+  },
+  "weekly.HS.Q6c.helpGroup.text.2": {
+    "en": "How should I answer it?",
+    "nl-be": "TODO"
+  },
+  "weekly.HS.Q6c.helpGroup.text.3": {
+    "en": "Answer yes, if you took your temperature using a thermometer.",
+    "nl-be": "TODO"
+  },
+  "weekly.HS.Q6c.rg.scg.option.0": {
+    "en": "Yes",
+    "nl-be": "Ja"
+  },
+  "weekly.HS.Q6c.rg.scg.option.1": {
+    "en": "No",
+    "nl-be": "Nee"
+  },
+  "weekly.HS.Q6c.rg.scg.option.2": {
+    "en": "I don’t know/can’t remember",
+    "nl-be": "Ik weet het niet (meer)"
+  },
+  "weekly.HS.Q6d.title.0": {
+    "en": "What was your highest temperature measured?",
+    "nl-be": "Wat is uw hoogst gemeten lichaamstemperatuur?"
+  },
+  "weekly.HS.Q6d.helpGroup.text.0": {
+    "en": "Why are we asking this question?",
+    "nl-be": "Waarom vragen we dit?"
+  },
+  "weekly.HS.Q6d.helpGroup.text.1": {
+    "en": "Certain infectious diseases cause a raised temperature.",
+    "nl-be": "Bepaalde infectieziekten veroorzaken een hoge temperatuur."
+  },
+  "weekly.HS.Q6d.helpGroup.text.2": {
+    "en": "How should I answer this question?",
+    "nl-be": "Hoe moet ik deze vraag beantwoorden?"
+  },
+  "weekly.HS.Q6d.helpGroup.text.3": {
+    "en": "Please indicate the highest temperature you measured during the period in which you experienced your symptoms.",
+    "nl-be": "Geef de hoogste temperatuur die u gemeten heeft tijdens uw klachtenperiode."
+  },
+  "weekly.HS.Q6d.rg.scg.option.0": {
+    "en": "Below 37.0°C",
+    "nl-be": "Onder de 37,0°C"
+  },
+  "weekly.HS.Q6d.rg.scg.option.1": {
+    "en": "37.0°C - 37.4°C",
+    "nl-be": "37,0°C - 37,4°C"
+  },
+  "weekly.HS.Q6d.rg.scg.option.2": {
+    "en": "37.5°C - 37.9°C",
+    "nl-be": "37,5°C - 37,9°C"
+  },
+  "weekly.HS.Q6d.rg.scg.option.3": {
+    "en": "38.0°C - 38.9°C",
+    "nl-be": "38,0°C - 38,9°C"
+  },
+  "weekly.HS.Q6d.rg.scg.option.4": {
+    "en": "39.0°C - 39.9°C",
+    "nl-be": "39,0°C - 39,9°C"
+  },
+  "weekly.HS.Q6d.rg.scg.option.5": {
+    "en": "40.0°C or more",
+    "nl-be": "40,0°C of meer"
+  },
+  "weekly.HS.Q6d.rg.scg.option.6": {
+    "en": "I don't know/can't remember",
+    "nl-be": "Ik weet het niet (meer)"
+  },
+  "weekly.HS.Q36.title.0": {
+    "en": "Thank you for all these information. They will help us to estimate the frequency of symptoms among general population. You can stop here. If you have a little more time, we propose you to answer further questions about your symptoms and care. Do you accept to answer to these additional questions?",
+    "nl-be": "TODO"
+  },
+  "weekly.HS.Q36.helpGroup.text.0": {
+    "en": "Why are we asking this question?",
+    "nl-be": "Waarom vragen we dit?"
+  },
+  "weekly.HS.Q36.helpGroup.text.1": {
+    "en": "We want to know if you are willing to answer the follow-up questions. Your answers to the follow-up questions may assist our research.",
+    "nl-be": "We willen weten of je bereid bent de vervolgvragen te beantwoorden. Uw antwoorden op de vervolgvragen kunnen ons onderzoek helpen."
+  },
+  "weekly.HS.Q36.rg.scg.option.0": {
+    "en": "Yes",
+    "nl-be": "Ja"
+  },
+  "weekly.HS.Q36.rg.scg.option.1": {
+    "en": "No",
+    "nl-be": "Nee"
+  },
+  "weekly.EX.Q7.title.0": {
+    "en": "Because of your symptoms, did you VISIT (see face to face or teleconsultation) any medical services?",
+    "nl-be": "TODO"
+  },
+  "weekly.EX.Q7.helpGroup.text.0": {
+    "en": "Why are we asking this?",
+    "nl-be": "Waarom vragen we dit?"
+  },
+  "weekly.EX.Q7.helpGroup.text.1": {
+    "en": "To find out whether people contact the health services because of their symptoms.",
+    "nl-be": "Om uit te zoeken welk percentage van mensen met bepaalde klachten medische hulp zoeken."
+  },
+  "weekly.EX.Q7.helpGroup.text.2": {
+    "en": "How should I answer it?",
+    "nl-be": "TODO"
+  },
+  "weekly.EX.Q7.helpGroup.text.3": {
+    "en": "Tick all of those that apply. If you are due to see attend, then tick the final option.",
+    "nl-be": "TODO"
+  },
+  "weekly.EX.Q7.rg.DTpM.text.0": {
+    "en": "Multiple answers possible",
+    "nl-be": "Meerdere antwoorden mogelijk"
+  },
+  "weekly.EX.Q7.rg.mcg.option.0": {
+    "en": "No",
+    "nl-be": "TODO"
+  },
+  "weekly.EX.Q7.rg.mcg.option.1": {
+    "en": "GP or GP's practice nurse",
+    "nl-be": "TODO"
+  },
+  "weekly.EX.Q7.rg.mcg.option.2": {
+    "en": "Hospital admission",
+    "nl-be": "TODO"
+  },
+  "weekly.EX.Q7.rg.mcg.option.3": {
+    "en": "Hospital accident & emergency department / out of hours service",
+    "nl-be": "TODO"
+  },
+  "weekly.EX.Q7.rg.mcg.option.4": {
+    "en": "Other medical services",
+    "nl-be": "TODO"
+  },
+  "weekly.EX.Q7.rg.mcg.option.5": {
+    "en": "No, but I have an appointment scheduled",
+    "nl-be": "TODO"
+  },
+  "weekly.EX.Q7b.title.0": {
+    "en": "How soon after your symptoms appeared did you first VISIT this medical service?",
+    "nl-be": "TODO"
+  },
+  "weekly.EX.Q7b.helpGroup.text.0": {
+    "en": "Why are we asking this?",
+    "nl-be": "TODO"
+  },
+  "weekly.EX.Q7b.helpGroup.text.1": {
+    "en": "To find out how quickly people with symptoms are seen by the health services.",
+    "nl-be": "TODO"
+  },
+  "weekly.EX.Q7b.helpGroup.text.2": {
+    "en": "How should I answer it?",
+    "nl-be": "TODO"
+  },
+  "weekly.EX.Q7b.helpGroup.text.3": {
+    "en": "Only record the time until your FIRST contact with the health services.",
+    "nl-be": "TODO"
+  },
+  "weekly.EX.Q7b.rg.sFcN.text.0": {
+    "en": "Select the correct number of days",
+    "nl-be": "TODO"
+  },
+  "weekly.EX.Q7b.rg.mat.header.col0.text.0": {
+    "en": "Medical Service",
+    "nl-be": "TODO"
+  },
+  "weekly.EX.Q7b.rg.mat.r1.col0.label.0": {
+    "en": "GP or GP'r practice nurse",
+    "nl-be": "TODO"
+  },
+  "weekly.EX.Q7b.rg.mat.r1.col1.option.0": {
+    "en": "Same day",
+    "nl-be": "TODO"
+  },
+  "weekly.EX.Q7b.rg.mat.r1.col1.option.1": {
+    "en": "1 day",
+    "nl-be": "TODO"
+  },
+  "weekly.EX.Q7b.rg.mat.r1.col1.option.2": {
+    "en": "2 days",
+    "nl-be": "TODO"
+  },
+  "weekly.EX.Q7b.rg.mat.r1.col1.option.3": {
+    "en": "3 days",
+    "nl-be": "TODO"
+  },
+  "weekly.EX.Q7b.rg.mat.r1.col1.option.4": {
+    "en": "4 days",
+    "nl-be": "TODO"
+  },
+  "weekly.EX.Q7b.rg.mat.r1.col1.option.5": {
+    "en": "5 - 7 days",
+    "nl-be": "TODO"
+  },
+  "weekly.EX.Q7b.rg.mat.r1.col1.option.6": {
+    "en": "More than 7 days",
+    "nl-be": "TODO"
+  },
+  "weekly.EX.Q7b.rg.mat.r1.col1.option.7": {
+    "en": "I don't know/can't remember",
+    "nl-be": "TODO"
+  },
+  "weekly.EX.Q7b.rg.mat.r2.col0.label.0": {
+    "en": "Hospital accident & department/out of hours service",
+    "nl-be": "TODO"
+  },
+  "weekly.EX.Q7b.rg.mat.r2.col1.option.0": {
+    "en": "Same day",
+    "nl-be": "TODO"
+  },
+  "weekly.EX.Q7b.rg.mat.r2.col1.option.1": {
+    "en": "1 day",
+    "nl-be": "TODO"
+  },
+  "weekly.EX.Q7b.rg.mat.r2.col1.option.2": {
+    "en": "2 days",
+    "nl-be": "TODO"
+  },
+  "weekly.EX.Q7b.rg.mat.r2.col1.option.3": {
+    "en": "3 days",
+    "nl-be": "TODO"
+  },
+  "weekly.EX.Q7b.rg.mat.r2.col1.option.4": {
+    "en": "4 days",
+    "nl-be": "TODO"
+  },
+  "weekly.EX.Q7b.rg.mat.r2.col1.option.5": {
+    "en": "5 - 7 days",
+    "nl-be": "TODO"
+  },
+  "weekly.EX.Q7b.rg.mat.r2.col1.option.6": {
+    "en": "More than 7 days",
+    "nl-be": "TODO"
+  },
+  "weekly.EX.Q7b.rg.mat.r2.col1.option.7": {
+    "en": "I don't know/can't remember",
+    "nl-be": "TODO"
+  },
+  "weekly.EX.Q7b.rg.mat.r3.col0.label.0": {
+    "en": "Hospital admission",
+    "nl-be": "TODO"
+  },
+  "weekly.EX.Q7b.rg.mat.r3.col1.option.0": {
+    "en": "Same day",
+    "nl-be": "TODO"
+  },
+  "weekly.EX.Q7b.rg.mat.r3.col1.option.1": {
+    "en": "1 day",
+    "nl-be": "TODO"
+  },
+  "weekly.EX.Q7b.rg.mat.r3.col1.option.2": {
+    "en": "2 days",
+    "nl-be": "TODO"
+  },
+  "weekly.EX.Q7b.rg.mat.r3.col1.option.3": {
+    "en": "3 days",
+    "nl-be": "TODO"
+  },
+  "weekly.EX.Q7b.rg.mat.r3.col1.option.4": {
+    "en": "4 days",
+    "nl-be": "TODO"
+  },
+  "weekly.EX.Q7b.rg.mat.r3.col1.option.5": {
+    "en": "5 - 7 days",
+    "nl-be": "TODO"
+  },
+  "weekly.EX.Q7b.rg.mat.r3.col1.option.6": {
+    "en": "More than 7 days",
+    "nl-be": "TODO"
+  },
+  "weekly.EX.Q7b.rg.mat.r3.col1.option.7": {
+    "en": "I don't know/can't remember",
+    "nl-be": "TODO"
+  },
+  "weekly.EX.Q7b.rg.mat.r4.col0.label.0": {
+    "en": "Other medical services",
+    "nl-be": "TODO"
+  },
+  "weekly.EX.Q7b.rg.mat.r4.col1.option.0": {
+    "en": "Same day",
+    "nl-be": "TODO"
+  },
+  "weekly.EX.Q7b.rg.mat.r4.col1.option.1": {
+    "en": "1 day",
+    "nl-be": "TODO"
+  },
+  "weekly.EX.Q7b.rg.mat.r4.col1.option.2": {
+    "en": "2 days",
+    "nl-be": "TODO"
+  },
+  "weekly.EX.Q7b.rg.mat.r4.col1.option.3": {
+    "en": "3 days",
+    "nl-be": "TODO"
+  },
+  "weekly.EX.Q7b.rg.mat.r4.col1.option.4": {
+    "en": "4 days",
+    "nl-be": "TODO"
+  },
+  "weekly.EX.Q7b.rg.mat.r4.col1.option.5": {
+    "en": "5 - 7 days",
+    "nl-be": "TODO"
+  },
+  "weekly.EX.Q7b.rg.mat.r4.col1.option.6": {
+    "en": "More than 7 days",
+    "nl-be": "TODO"
+  },
+  "weekly.EX.Q7b.rg.mat.r4.col1.option.7": {
+    "en": "I don't know/can't remember",
+    "nl-be": "TODO"
+  },
+  "weekly.EX.Qcov18.title.0": {
+    "en": "What is the main reason for which you did not consult any health professional for the symptoms you declared today?",
+    "nl-be": "TODO"
+  },
+  "weekly.EX.Qcov18.helpGroup.text.0": {
+    "en": "Why are we asking this question?",
+    "nl-be": "Waarom vragen we dit?"
+  },
+  "weekly.EX.Qcov18.helpGroup.text.1": {
+    "en": "To understand why some people do not consult a doctor.",
+    "nl-be": "Om uit te zoeken waarom sommige mensen geen medische hulp zoeken."
+  },
+  "weekly.EX.Qcov18.helpGroup.text.2": {
+    "en": "How should I answer this question?",
+    "nl-be": "Hoe moet ik deze vraag beantwoorden?"
+  },
+  "weekly.EX.Qcov18.helpGroup.text.3": {
+    "en": "Multiple answers are possible.",
+    "nl-be": "Meerdere antwoorden mogelijk."
+  },
+  "weekly.EX.Qcov18.rg.4opV.text.0": {
+    "en": "Multiple answers possible",
+    "nl-be": "Meerdere antwoorden mogelijk"
+  },
+  "weekly.EX.Qcov18.rg.scg.option.0": {
+    "en": "My symptoms appeared very recently",
+    "nl-be": "Mijn symptomen kwamen recent op."
+  },
+  "weekly.EX.Qcov18.rg.scg.option.1": {
+    "en": "My symptoms are mild",
+    "nl-be": "Mijn symptomen zijn mild."
+  },
+  "weekly.EX.Qcov18.rg.scg.option.2": {
+    "en": "I have these symptoms often",
+    "nl-be": "Ik heb deze symptomen vaker."
+  },
+  "weekly.EX.Qcov18.rg.scg.option.3": {
+    "en": "I think I know what I have and I self-medicate",
+    "nl-be": "Ik denk te weten wat ik heb en gebruik eigen medicatie."
+  },
+  "weekly.EX.Qcov18.rg.scg.option.4": {
+    "en": "I think there is no effective treatment for the disease I have",
+    "nl-be": "Ik denk dat er geen goede behandeling is voor mijn ziekte."
+  },
+  "weekly.EX.Qcov18.rg.scg.option.5": {
+    "en": "It is too hard to get an appointment quickly",
+    "nl-be": "Het is te moeilijk om snel een afspraak te verkrijgen."
+  },
+  "weekly.EX.Qcov18.rg.scg.option.6": {
+    "en": "I do not have time",
+    "nl-be": "Ik heb onvoldoende tijd."
+  },
+  "weekly.EX.Qcov18.rg.scg.option.7": {
+    "en": "For financial reasons",
+    "nl-be": "Omwille van financiële redenen."
+  },
+  "weekly.EX.Qcov18.rg.scg.option.8": {
+    "en": "For fear of consequences if the doctor thinks I have COVID-19",
+    "nl-be": "Omwille van angst voor de gevolgen als de dokter vermoedt dat ik COVID-19 heb."
+  },
+  "weekly.EX.Qcov18.rg.scg.option.9": {
+    "en": "Because I am vaccinated against COVID-19",
+    "nl-be": "TODO"
+  },
+  "weekly.EX.Qcov18.rg.scg.input.10": {
+    "en": "For another reason",
+    "nl-be": "TODO"
+  },
+  "weekly.EX.Qcov18.rg.scg.description.input.10": {
+    "en": "Describe here (optional)",
+    "nl-be": "Beschrijf hier (optioneel in te vullen)"
+  },
+  "weekly.EX.Qcov18.rg.scg.option.11": {
+    "en": "I don't know / I don't want to answer",
+    "nl-be": "Ik weet het niet / ik wil niet antwoorden"
+  },
+  "weekly.EX.Qcov16h.title.0": {
+    "en": "Because of your symptoms, did you undergo a test/analyses to know if you have COVID-19?",
+    "nl-be": "TODO"
+  },
+  "weekly.EX.Qcov16h.helpGroup.text.0": {
+    "en": "Why are we asking this question?",
+    "nl-be": "Waarom vragen we dit?"
+  },
+  "weekly.EX.Qcov16h.helpGroup.text.1": {
+    "en": "We want to know which complaints lead people to get tested for the coronavirus.",
+    "nl-be": "We willen weten voor welke klachten mensen zich laten testen op COVID-19."
+  },
+  "weekly.EX.Qcov16h.rg.scg.option.0": {
+    "en": "Yes",
+    "nl-be": "TODO"
+  },
+  "weekly.EX.Qcov16h.rg.scg.option.1": {
+    "en": "Not yet, I plan to shortly undergo a test",
+    "nl-be": "TODO"
+  },
+  "weekly.EX.Qcov16h.rg.scg.option.2": {
+    "en": "No, I have a prescription but will not undergo a test",
+    "nl-be": "TODO"
+  },
+  "weekly.EX.Qcov16h.rg.scg.option.3": {
+    "en": "No",
+    "nl-be": "Nee"
+  },
+  "weekly.EX.Qcov16i.title.0": {
+    "en": "Which analyse(s) was it?",
+    "nl-be": "TODO"
+  },
+  "weekly.EX.Qcov16i.helpGroup.text.0": {
+    "en": "Why are we asking this question?",
+    "nl-be": "Waarom vragen we dit?"
+  },
+  "weekly.EX.Qcov16i.helpGroup.text.1": {
+    "en": "We are interested in knowing how many people with symptoms have udergone a test",
+    "nl-be": "TODO"
+  },
+  "weekly.EX.Qcov16i.rg.tyZC.text.0": {
+    "en": "Multiple answers possible",
+    "nl-be": "Meerdere antwoorden mogelijk"
+  },
+  "weekly.EX.Qcov16i.rg.mcg.option.0": {
+    "en": "A PCR test (virus search, on a swab in nose or mouth, or a sputum or saliva sample)",
+    "nl-be": "TODO"
+  },
+  "weekly.EX.Qcov16i.rg.mcg.option.1": {
+    "en": "A serological analysis (screening for antibodies against this virus, from a drop of blood at fingertip or a blood sample)",
+    "nl-be": "TODO"
+  },
+  "weekly.EX.Qcov16i.rg.mcg.option.2": {
+    "en": "A rapid antigen detection test on a sample realized in the back of the nose (nasopharyngeal sampling, done by a health professional or a trained person, with a swab inserted to 15 cm into the nose, result obtained in less than one hour)",
+    "nl-be": "TODO"
+  },
+  "weekly.EX.Qcov16i.rg.mcg.option.3": {
+    "en": "A rapid antigen detection test or autotest done on a nasal sample (a swab inserted to 1 - 4 cm into the nostril, sampling that can be done by oneself, result obtained in a few minutes)",
+    "nl-be": "TODO"
+  },
+  "weekly.EX.Qcov16b.title.0": {
+    "en": "Do you know the result of your PCR test? (if several were performed and at least one was positive, chose the “Positive” answer)",
+    "nl-be": "TODO"
+  },
+  "weekly.EX.Qcov16b.helpGroup.text.0": {
+    "en": "Why are we asking this question?",
+    "nl-be": "Waarom vragen we dit?"
+  },
+  "weekly.EX.Qcov16b.helpGroup.text.1": {
+    "en": "We want to understand how the coronavirus is spreading within the population.",
+    "nl-be": "We willen weten hoe COVID-19 zich verspreidt in de bevolking."
+  },
+  "weekly.EX.Qcov16b.rg.scg.option.0": {
+    "en": "Yes, positive for COVID-19",
+    "nl-be": "TODO"
+  },
+  "weekly.EX.Qcov16b.rg.scg.option.1": {
+    "en": "Yes, negative for COVID-19",
+    "nl-be": "TODO"
+  },
+  "weekly.EX.Qcov16b.rg.scg.option.2": {
+    "en": "Yes, the results are inconclusive",
+    "nl-be": "TODO"
+  },
+  "weekly.EX.Qcov16b.rg.scg.option.3": {
+    "en": "No, I have not yet received the test results",
+    "nl-be": "TODO"
+  },
+  "weekly.EX.Qcov16f.title.0": {
+    "en": "Do you know the result of this rapid antigen detection test on nasopharyngeal sample? (if several were performed and at least one was positive, chose the “Positive” answer)",
+    "nl-be": "Heeft u de COVID-19 Rapid testresultaten reeds ontvangen?"
+  },
+  "weekly.EX.Qcov16f.helpGroup.text.0": {
+    "en": "Why are we asking this question?",
+    "nl-be": "Waarom vragen we dit?"
+  },
+  "weekly.EX.Qcov16f.helpGroup.text.1": {
+    "en": "We want to understand how the coronavirus is spreading within the population.",
+    "nl-be": "We willen weten hoe COVID-19 zich verspreidt in de bevolking."
+  },
+  "weekly.EX.Qcov16f.rg.scg.option.0": {
+    "en": "Yes, positive for COVID-19",
+    "nl-be": "TODO"
+  },
+  "weekly.EX.Qcov16f.rg.scg.option.1": {
+    "en": "Yes, negative for COVID-19",
+    "nl-be": "TODO"
+  },
+  "weekly.EX.Qcov16f.rg.scg.option.2": {
+    "en": "Yes, the results are inconclusive",
+    "nl-be": "TODO"
+  },
+  "weekly.EX.Qcov16f.rg.scg.option.3": {
+    "en": "I don't know/can't remember",
+    "nl-be": "Dit wil ik niet aangeven"
+  },
+  "weekly.EX.Qcov16k.title.0": {
+    "en": "Do you know the result of this antigenic test or self-test on nasal sample? (if several were performed and at least one was positive, chose the “Positive” answer)",
+    "nl-be": "TODO"
+  },
+  "weekly.EX.Qcov16k.helpGroup.text.0": {
+    "en": "Why are we asking this question?",
+    "nl-be": "Waarom vragen we dit?"
+  },
+  "weekly.EX.Qcov16k.helpGroup.text.1": {
+    "en": "We want to understand how the coronavirus is spreading within the population.",
+    "nl-be": "We willen weten hoe COVID-19 zich verspreidt in de bevolking."
+  },
+  "weekly.EX.Qcov16k.rg.scg.option.0": {
+    "en": "Yes, positive for COVID-19",
+    "nl-be": "TODO"
+  },
+  "weekly.EX.Qcov16k.rg.scg.option.1": {
+    "en": "Yes, negative for COVID-19",
+    "nl-be": "TODO"
+  },
+  "weekly.EX.Qcov16k.rg.scg.option.2": {
+    "en": "Yes, the results are inconclusive",
+    "nl-be": "TODO"
+  },
+  "weekly.EX.Qcov16k.rg.scg.option.3": {
+    "en": "I don't know/can't remember",
+    "nl-be": "Dit wil ik niet aangeven"
+  },
+  "weekly.EX.Qcov19.title.0": {
+    "en": "Because of your symptoms, did you undergo a test/analyses to know if you have the Flu?",
+    "nl-be": "Heeft u omwille van uw symptomen een test laten uitvoeren voor Griep? "
+  },
+  "weekly.EX.Qcov19.helpGroup.text.0": {
+    "en": "Why are we asking this question?",
+    "nl-be": "Waarom vragen we dit?"
+  },
+  "weekly.EX.Qcov19.helpGroup.text.1": {
+    "en": "We want to know which complaints lead people to get tested for the flu.",
+    "nl-be": "We willen weten voor welke klachten mensen zich laten testen op Griep"
+  },
+  "weekly.EX.Qcov19.rg.scg.option.0": {
+    "en": "Yes, a PCR test based on a swab in nose or mouth, or a sputum or saliva sample",
+    "nl-be": "Ja, een PCR test uitgevoerd op basis van een wattenstaafje in mijn neus of mond"
+  },
+  "weekly.EX.Qcov19.rg.scg.option.1": {
+    "en": "Yes, a rapid detection test (result available in less than an hour)",
+    "nl-be": "TODO"
+  },
+  "weekly.EX.Qcov19.rg.scg.option.2": {
+    "en": "Not yet, I have a prescription and plan to shortly undergo a test",
+    "nl-be": "Nog niet, ik ga binnenkort een test laten uitvoeren"
+  },
+  "weekly.EX.Qcov19.rg.scg.option.3": {
+    "en": "No, I have a prescription but will not undergo a test",
+    "nl-be": "Nee, ik heb een recept maar ik zal geen test ondergaan"
+  },
+  "weekly.EX.Qcov19.rg.scg.option.4": {
+    "en": "No",
+    "nl-be": "Nee"
+  },
+  "weekly.EX.Qcov19b.title.0": {
+    "en": "Have you received the results of your Flu test?",
+    "nl-be": "TODO"
+  },
+  "weekly.EX.Qcov19b.helpGroup.text.0": {
+    "en": "Why are we asking this question?",
+    "nl-be": "Waarom vragen we dit?"
+  },
+  "weekly.EX.Qcov19b.helpGroup.text.1": {
+    "en": "We want to understand how the flu is spreading within the population.",
+    "nl-be": "We willen weten hoe Griep zich verspreidt in de bevolking."
+  },
+  "weekly.EX.Qcov19b.rg.scg.option.0": {
+    "en": "Yes, the test is positive for influenza",
+    "nl-be": "Ja, positief voor Griep"
+  },
+  "weekly.EX.Qcov19b.rg.scg.option.1": {
+    "en": "Yes, the test is negative for influenza",
+    "nl-be": "Ja, negatief voor Griep"
+  },
+  "weekly.EX.Qcov19b.rg.scg.option.2": {
+    "en": "Yes, the results are inconclusive",
+    "nl-be": "Ja, niet-interpreteerbaar resultaat"
+  },
+  "weekly.EX.Qcov19b.rg.scg.option.3": {
+    "en": "No, I have not yet received the test results",
+    "nl-be": "Nee, ik heb nog geen testresultaat"
+  },
+  "weekly.EX.Q9.title.0": {
+    "en": "Did you take medication for these symptoms?",
+    "nl-be": "TODO"
+  },
+  "weekly.EX.Q9.helpGroup.text.0": {
+    "en": "Why are we asking this?",
+    "nl-be": "TODO"
+  },
+  "weekly.EX.Q9.helpGroup.text.1": {
+    "en": "To find out who gets treated, and how effective treatment is.",
+    "nl-be": "TODO"
+  },
+  "weekly.EX.Q9.helpGroup.text.2": {
+    "en": "How should I answer it?",
+    "nl-be": "TODO"
+  },
+  "weekly.EX.Q9.helpGroup.text.3": {
+    "en": "Only record those medications that you used because of this illness. If you are on other medications because of a pre-existing illness then do not record these.",
+    "nl-be": "TODO"
+  },
+  "weekly.EX.Q9.rg.vMc3.text.0": {
+    "en": "Select all options that apply",
+    "nl-be": "TODO"
+  },
+  "weekly.EX.Q9.rg.mcg.option.0": {
+    "en": "No medication",
+    "nl-be": "TODO"
+  },
+  "weekly.EX.Q9.rg.mcg.option.1": {
+    "en": "Pain killers (e.g. paracetamol, lemsip, ibuprofen, aspirin, calpol, etc)",
+    "nl-be": "TODO"
+  },
+  "weekly.EX.Q9.rg.mcg.option.2": {
+    "en": "Cough medication (e.g. expectorants)",
+    "nl-be": "TODO"
+  },
+  "weekly.EX.Q9.rg.mcg.option.3": {
+    "en": "Antivirals against influenza (eg: Tamiflu)",
+    "nl-be": "TODO"
+  },
+  "weekly.EX.Q9.rg.mcg.option.4": {
+    "en": "Antibiotics",
+    "nl-be": "TODO"
+  },
+  "weekly.EX.Q9.rg.mcg.option.5": {
+    "en": "Homeopathy",
+    "nl-be": "TODO"
+  },
+  "weekly.EX.Q9.rg.mcg.option.6": {
+    "en": "Alternative medicine (essential oil, phytotherapy, etc.)",
+    "nl-be": "TODO"
+  },
+  "weekly.EX.Q9.rg.mcg.option.7": {
+    "en": "Other",
+    "nl-be": "TODO"
+  },
+  "weekly.EX.Q9.rg.mcg.option.8": {
+    "en": "I don't know/can't remember",
+    "nl-be": "TODO"
+  },
+  "weekly.EX.Q14.title.0": {
+    "en": "Because of your symptoms, were you hospitalized?",
+    "nl-be": "Bent u vanwege uw klachten opgenomen in het ziekenhuis?"
+  },
+  "weekly.EX.Q14.helpGroup.text.0": {
+    "en": "Why are we asking this question?",
+    "nl-be": "Waarom vragen we dit?"
+  },
+  "weekly.EX.Q14.helpGroup.text.1": {
+    "en": "We want to understand the rates of hospitalization due to symptoms",
+    "nl-be": "We willen inzicht krijgen in het aantal ziekenhuisopnames vanwege symptomen"
+  },
+  "weekly.EX.Q14.rg.scg.option.0": {
+    "en": "Yes",
+    "nl-be": "Ja"
+  },
+  "weekly.EX.Q14.rg.scg.option.1": {
+    "en": "No",
+    "nl-be": "Nee"
+  },
+  "weekly.EX.Q10.title.0": {
+    "en": "Did you change your daily routine because of your illness?",
+    "nl-be": "Heeft u vanwege uw klachten uw dagelijkse bezigheden moeten aanpassen?"
+  },
+  "weekly.EX.Q10.helpGroup.text.0": {
+    "en": "Why are we asking this question?",
+    "nl-be": "Waarom vragen we dit?"
+  },
+  "weekly.EX.Q10.helpGroup.text.1": {
+    "en": "To determine how the symptoms are impacting your daily life.",
+    "nl-be": "Om het effect te bepalen van de klachten op uw dagelijks leven."
+  },
+  "weekly.EX.Q10.helpGroup.text.2": {
+    "en": "How should I answer this question?",
+    "nl-be": "Hoe moet ik deze vraag beantwoorden?"
+  },
+  "weekly.EX.Q10.helpGroup.text.3": {
+    "en": "We want to know if you have missed work or school due to your symptoms, or if you have modified your daily routine in any way (for example, if you were unable to engage in sport activities). If you are a student, and were unable to attend online classes due to your symptoms, you should also select option 2. We are interested in changes due to your symptoms/complaints and not due to any quarantine.",
+    "nl-be": "We willen weten of u afwezig was op uw werk of school als gevolg van uw symptomen, of dat u uw routine (vb: niet kunnen sporten) op een andere manier hebt veranderd. Indien u een student bent en online-lessen niet hebt kunnen volgen als gevolg van uw symptomen, kiest u ook best de tweede optie. We vragen naar veranderingen als gevolg van uw symptomen/klachten, niet omwille van een mogelijke quarantaine."
+  },
+  "weekly.EX.Q10.rg.scg.option.0": {
+    "en": "No, I was able to go about my daily activities as usual",
+    "nl-be": "Nee, ik heb mijn dagelijkse bezigheden zoals normaal kunnen doen"
+  },
+  "weekly.EX.Q10.rg.scg.option.1": {
+    "en": "Yes, but I did not take time off work/school",
+    "nl-be": "Ja, maar ik heb geen vrij genomen van school of werk"
+  },
+  "weekly.EX.Q10.rg.scg.option.2": {
+    "en": "Yes, I took time off school or work",
+    "nl-be": "Ja, ik heb mijn beroep niet kunnen uitoefenen of ben niet naar school kunnen gaan"
+  },
+  "weekly.EX.Q10b.title.0": {
+    "en": "Are you currently still unable to work or attend school due to your symptoms/complaints?",
+    "nl-be": "Kan u op dit moment nog steeds niet werken of school volgen vanwege de symptomen/klachten?"
+  },
+  "weekly.EX.Q10b.helpGroup.text.0": {
+    "en": "Why are we asking this question?",
+    "nl-be": "Waarom vragen we dit?"
+  },
+  "weekly.EX.Q10b.helpGroup.text.1": {
+    "en": "To determine how the symptoms are impacting your daily life.",
+    "nl-be": "Om het effect te bepalen van de klachten op uw dagelijks leven."
+  },
+  "weekly.EX.Q10b.helpGroup.text.2": {
+    "en": "How should I answer this question?",
+    "nl-be": "Hoe moet ik deze vraag beantwoorden?"
+  },
+  "weekly.EX.Q10b.helpGroup.text.3": {
+    "en": "Answer 'yes' if you missed work or school today due to certain symptoms.",
+    "nl-be": "Antwoord 'Ja' als u vanwege klachten vandaag nog niet kan werken of naar school gaan."
+  },
+  "weekly.EX.Q10b.rg.scg.option.0": {
+    "en": "Yes",
+    "nl-be": "Ja"
+  },
+  "weekly.EX.Q10b.rg.scg.option.1": {
+    "en": "No",
+    "nl-be": "Nee"
+  },
+  "weekly.EX.Q10b.rg.scg.option.2": {
+    "en": "Other (I did not have to work or go to school today in any case)",
+    "nl-be": "Andere (ik hoefde vandaag sowieso niet te werken of niet naar school te gaan)"
+  },
+  "weekly.EX.Q10c.title.0": {
+    "en": "For how many days have you been unable to work normally/go to school (when you otherwise would have)?",
+    "nl-be": "Hoeveel dagen hebt u niet normaal kunnen werken of bent u niet naar school geweest (terwijl dat wel had gemoeten)?"
+  },
+  "weekly.EX.Q10c.helpGroup.text.0": {
+    "en": "Why are we asking this question?",
+    "nl-be": "Waarom vragen we dit?"
+  },
+  "weekly.EX.Q10c.helpGroup.text.1": {
+    "en": "To calculate the number of days a person misses work or school due to certain symptoms.",
+    "nl-be": "Om uit te rekenen hoeveel dagen mensen niet kunnen werken/niet naar school gaan vanwege klachten."
+  },
+  "weekly.EX.Q10c.helpGroup.text.2": {
+    "en": "How should I answer this question?",
+    "nl-be": "Hoe moet ik deze vraag beantwoorden?"
+  },
+  "weekly.EX.Q10c.helpGroup.text.3": {
+    "en": "Only count the days that you would otherwise have gone to work or school. Provide as precise an estimate as possible.",
+    "nl-be": "Tel alleen de dagen waar u normaal had moeten werken/school had moeten volgen. Maak een zo goed als mogelijke inschatting."
+  },
+  "weekly.EX.Q10c.rg.ddg.option.0": {
+    "en": "1 day",
+    "nl-be": "1 dag"
+  },
+  "weekly.EX.Q10c.rg.ddg.option.1": {
+    "en": "2 days",
+    "nl-be": "2 dagen"
+  },
+  "weekly.EX.Q10c.rg.ddg.option.2": {
+    "en": "3 days",
+    "nl-be": "3 dagen"
+  },
+  "weekly.EX.Q10c.rg.ddg.option.3": {
+    "en": "4 days",
+    "nl-be": "4 dagen"
+  },
+  "weekly.EX.Q10c.rg.ddg.option.4": {
+    "en": "5 days",
+    "nl-be": "5 dagen"
+  },
+  "weekly.EX.Q10c.rg.ddg.option.5": {
+    "en": "6 to 10 days",
+    "nl-be": "6 to 10 dagen"
+  },
+  "weekly.EX.Q10c.rg.ddg.option.6": {
+    "en": "11 to 15 days",
+    "nl-be": "11 to 15 dagen"
+  },
+  "weekly.EX.Q10c.rg.ddg.option.7": {
+    "en": "More than 15 days",
+    "nl-be": "More than 15 days"
+  },
+  "weekly.EX.Qcov7.title.0": {
+    "en": "Did you begin to follow or increase any of the measures below, due to your symptoms (compared to the period before your symptoms began)?",
+    "nl-be": "Heeft u vanwege uw symtomen deze maatregelen genomen of verstrengd (in vergelijking met de periode voor uw symptomen)?"
+  },
+  "weekly.EX.Qcov7.helpGroup.text.0": {
+    "en": "Why are we asking this question?",
+    "nl-be": "Waarom vragen we dit?"
+  },
+  "weekly.EX.Qcov7.helpGroup.text.1": {
+    "en": "To examine how different measures are being followed.",
+    "nl-be": "Om te onderzoeken hoe verschillende maatregelen worden opgevolgd."
+  },
+  "weekly.EX.Qcov7.helpGroup.text.2": {
+    "en": "How should I answer this question?",
+    "nl-be": "Hoe moet ik deze vraag beantwoorden?"
+  },
+  "weekly.EX.Qcov7.helpGroup.text.3": {
+    "en": "For example, 'Avoid shaking hands': Answer 'yes' if you shake hands less or not at all due to your symptoms; Answer 'No, I am not following this measure' if you continue to shake hands despite your symptoms; Answer 'No, I was already following this measure' if you had already stopped shaking hands before the onset of your symptoms and you did not change this behaviour.",
+    "nl-be": "Bijvoorbeeld 'Handen schudden vermijden': Kies 'Ja', omwille van mijn symptomen heb ik geen of nog minder handen geschud; Kies 'Nee, ik pas deze maatregel niet toe', ik geef nog steeds mensen de hand ook al heb ik symptomen; Kies 'Nee, ik hield me al aan deze maatregel', want ook voor mijn symptomen gaf ik geen handen en heb dit niet aangepast."
+  },
+  "weekly.EX.Qcov7.rg.gU4U.text.0": {
+    "en": "To be completed optionally",
+    "nl-be": "Optioneel in te vullen"
+  },
+  "weekly.EX.Qcov7.rg.v1C0.text.1": {
+    "en": "Regularly wash or disinfect hands",
+    "nl-be": "Regelmatig handen wassen/desinfecteren"
+  },
+  "weekly.EX.Qcov7.rg.likert_1.option.0": {
+    "en": " Yes, I am following this measure now for the first time, or in a stricter way",
+    "nl-be": "Ja, ik pas deze maatregel nu (voor het eerst) of meer (verstrengd) toe"
+  },
+  "weekly.EX.Qcov7.rg.likert_1.option.1": {
+    "en": "No, I was already following this measure",
+    "nl-be": "Nee, ik hield me al aan deze maatregel"
+  },
+  "weekly.EX.Qcov7.rg.likert_1.option.2": {
+    "en": "No, I am not following this measure",
+    "nl-be": "Nee, ik pas deze maatregel niet toe"
+  },
+  "weekly.EX.Qcov7.rg.likert_1.option.3": {
+    "en": "Not applicable",
+    "nl-be": "Nee, ik pas deze maatregel niet toe"
+  },
+  "weekly.EX.Qcov7.rg.nEMR.text.3": {
+    "en": "Cough or sneeze into your elbow",
+    "nl-be": "Niezen en hoesten in uw elleboog"
+  },
+  "weekly.EX.Qcov7.rg.likert_2.option.0": {
+    "en": " Yes, I am following this measure now for the first time, or in a stricter way",
+    "nl-be": "Ja, ik pas deze maatregel nu (voor het eerst) of meer (verstrengd) toe"
+  },
+  "weekly.EX.Qcov7.rg.likert_2.option.1": {
+    "en": "No, I was already following this measure",
+    "nl-be": "Nee, ik hield me al aan deze maatregel"
+  },
+  "weekly.EX.Qcov7.rg.likert_2.option.2": {
+    "en": "No, I am not following this measure",
+    "nl-be": "Nee, ik pas deze maatregel niet toe"
+  },
+  "weekly.EX.Qcov7.rg.likert_2.option.3": {
+    "en": "Not applicable",
+    "nl-be": "Nee, ik pas deze maatregel niet toe"
+  },
+  "weekly.EX.Qcov7.rg.oTIp.text.5": {
+    "en": "Use a disposable tissue",
+    "nl-be": "Wegwerptissues gebruiken"
+  },
+  "weekly.EX.Qcov7.rg.likert_3.option.0": {
+    "en": " Yes, I am following this measure now for the first time, or in a stricter way",
+    "nl-be": "Ja, ik pas deze maatregel nu (voor het eerst) of meer (verstrengd) toe"
+  },
+  "weekly.EX.Qcov7.rg.likert_3.option.1": {
+    "en": "No, I was already following this measure",
+    "nl-be": "Nee, ik hield me al aan deze maatregel"
+  },
+  "weekly.EX.Qcov7.rg.likert_3.option.2": {
+    "en": "No, I am not following this measure",
+    "nl-be": "Nee, ik pas deze maatregel niet toe"
+  },
+  "weekly.EX.Qcov7.rg.likert_3.option.3": {
+    "en": "Not applicable",
+    "nl-be": "Nee, ik pas deze maatregel niet toe"
+  },
+  "weekly.EX.Qcov7.rg.7w6F.text.7": {
+    "en": "Wear a face mask indoors",
+    "nl-be": "Draag mond- en neusbescherming"
+  },
+  "weekly.EX.Qcov7.rg.likert_4a.option.0": {
+    "en": " Yes, I am following this measure now for the first time, or in a stricter way",
+    "nl-be": "Ja, ik pas deze maatregel nu (voor het eerst) of meer (verstrengd) toe"
+  },
+  "weekly.EX.Qcov7.rg.likert_4a.option.1": {
+    "en": "No, I was already following this measure",
+    "nl-be": "Nee, ik hield me al aan deze maatregel"
+  },
+  "weekly.EX.Qcov7.rg.likert_4a.option.2": {
+    "en": "No, I am not following this measure",
+    "nl-be": "Nee, ik pas deze maatregel niet toe"
+  },
+  "weekly.EX.Qcov7.rg.likert_4a.option.3": {
+    "en": "Not applicable",
+    "nl-be": "Nee, ik pas deze maatregel niet toe"
+  },
+  "weekly.EX.Qcov7.rg.vHvi.text.9": {
+    "en": "Wear a face mask outdoors",
+    "nl-be": "Draag mond- en neusbescherming"
+  },
+  "weekly.EX.Qcov7.rg.likert_4b.option.0": {
+    "en": " Yes, I am following this measure now for the first time, or in a stricter way",
+    "nl-be": "Ja, ik pas deze maatregel nu (voor het eerst) of meer (verstrengd) toe"
+  },
+  "weekly.EX.Qcov7.rg.likert_4b.option.1": {
+    "en": "No, I was already following this measure",
+    "nl-be": "Nee, ik hield me al aan deze maatregel"
+  },
+  "weekly.EX.Qcov7.rg.likert_4b.option.2": {
+    "en": "No, I am not following this measure",
+    "nl-be": "Nee, ik pas deze maatregel niet toe"
+  },
+  "weekly.EX.Qcov7.rg.likert_4b.option.3": {
+    "en": "Not applicable",
+    "nl-be": "Nee, ik pas deze maatregel niet toe"
+  },
+  "weekly.EX.Qcov7.rg.ocTu.text.11": {
+    "en": "Avoid shaking hands",
+    "nl-be": "Handen schudden vermijden"
+  },
+  "weekly.EX.Qcov7.rg.likert_5.option.0": {
+    "en": " Yes, I am following this measure now for the first time, or in a stricter way",
+    "nl-be": "Ja, ik pas deze maatregel nu (voor het eerst) of meer (verstrengd) toe"
+  },
+  "weekly.EX.Qcov7.rg.likert_5.option.1": {
+    "en": "No, I was already following this measure",
+    "nl-be": "Nee, ik hield me al aan deze maatregel"
+  },
+  "weekly.EX.Qcov7.rg.likert_5.option.2": {
+    "en": "No, I am not following this measure",
+    "nl-be": "Nee, ik pas deze maatregel niet toe"
+  },
+  "weekly.EX.Qcov7.rg.likert_5.option.3": {
+    "en": "Not applicable",
+    "nl-be": "Nee, ik pas deze maatregel niet toe"
+  },
+  "weekly.EX.Qcov7.rg.ioJs.text.13": {
+    "en": "Stop greeting by hugging and/or kissing on both cheeks",
+    "nl-be": "Niet meer knuffelen of kus op de wang geven"
+  },
+  "weekly.EX.Qcov7.rg.likert_11.option.0": {
+    "en": " Yes, I am following this measure now for the first time, or in a stricter way",
+    "nl-be": "Ja, ik pas deze maatregel nu (voor het eerst) of meer (verstrengd) toe"
+  },
+  "weekly.EX.Qcov7.rg.likert_11.option.1": {
+    "en": "No, I was already following this measure",
+    "nl-be": "Nee, ik hield me al aan deze maatregel"
+  },
+  "weekly.EX.Qcov7.rg.likert_11.option.2": {
+    "en": "No, I am not following this measure",
+    "nl-be": "Nee, ik pas deze maatregel niet toe"
+  },
+  "weekly.EX.Qcov7.rg.likert_11.option.3": {
+    "en": "Not applicable",
+    "nl-be": "Nee, ik pas deze maatregel niet toe"
+  },
+  "weekly.EX.Qcov7.rg.ujsK.text.15": {
+    "en": "Limit your use of public transport",
+    "nl-be": "Gebruik van openbaar vervoer beperken"
+  },
+  "weekly.EX.Qcov7.rg.likert_6.option.0": {
+    "en": " Yes, I am following this measure now for the first time, or in a stricter way",
+    "nl-be": "Ja, ik pas deze maatregel nu (voor het eerst) of meer (verstrengd) toe"
+  },
+  "weekly.EX.Qcov7.rg.likert_6.option.1": {
+    "en": "No, I was already following this measure",
+    "nl-be": "Nee, ik hield me al aan deze maatregel"
+  },
+  "weekly.EX.Qcov7.rg.likert_6.option.2": {
+    "en": "No, I am not following this measure",
+    "nl-be": "Nee, ik pas deze maatregel niet toe"
+  },
+  "weekly.EX.Qcov7.rg.likert_6.option.3": {
+    "en": "Not applicable",
+    "nl-be": "Nee, ik pas deze maatregel niet toe"
+  },
+  "weekly.EX.Qcov7.rg.Ijdr.text.17": {
+    "en": "Avoid busy places and gatherings (supermarket, cinema, stadium)",
+    "nl-be": "Drukke plaatsen mijden (supermarkt, cinema, stadium,...)"
+  },
+  "weekly.EX.Qcov7.rg.likert_7.option.0": {
+    "en": " Yes, I am following this measure now for the first time, or in a stricter way",
+    "nl-be": "Ja, ik pas deze maatregel nu (voor het eerst) of meer (verstrengd) toe"
+  },
+  "weekly.EX.Qcov7.rg.likert_7.option.1": {
+    "en": "No, I was already following this measure",
+    "nl-be": "Nee, ik hield me al aan deze maatregel"
+  },
+  "weekly.EX.Qcov7.rg.likert_7.option.2": {
+    "en": "No, I am not following this measure",
+    "nl-be": "Nee, ik pas deze maatregel niet toe"
+  },
+  "weekly.EX.Qcov7.rg.likert_7.option.3": {
+    "en": "Not applicable",
+    "nl-be": "Nee, ik pas deze maatregel niet toe"
+  },
+  "weekly.EX.Qcov7.rg.t8MS.text.19": {
+    "en": "Stay at home",
+    "nl-be": "Thuis blijven"
+  },
+  "weekly.EX.Qcov7.rg.likert_8.option.0": {
+    "en": " Yes, I am following this measure now for the first time, or in a stricter way",
+    "nl-be": "Ja, ik pas deze maatregel nu (voor het eerst) of meer (verstrengd) toe"
+  },
+  "weekly.EX.Qcov7.rg.likert_8.option.1": {
+    "en": "No, I was already following this measure",
+    "nl-be": "Nee, ik hield me al aan deze maatregel"
+  },
+  "weekly.EX.Qcov7.rg.likert_8.option.2": {
+    "en": "No, I am not following this measure",
+    "nl-be": "Nee, ik pas deze maatregel niet toe"
+  },
+  "weekly.EX.Qcov7.rg.likert_8.option.3": {
+    "en": "Not applicable",
+    "nl-be": "Nee, ik pas deze maatregel niet toe"
+  },
+  "weekly.EX.Qcov7.rg.z4bE.text.21": {
+    "en": "Telework or increase your number of telework days",
+    "nl-be": "Telewerken"
+  },
+  "weekly.EX.Qcov7.rg.likert_9.option.0": {
+    "en": " Yes, I am following this measure now for the first time, or in a stricter way",
+    "nl-be": "Ja, ik pas deze maatregel nu (voor het eerst) of meer (verstrengd) toe"
+  },
+  "weekly.EX.Qcov7.rg.likert_9.option.1": {
+    "en": "No, I was already following this measure",
+    "nl-be": "Nee, ik hield me al aan deze maatregel"
+  },
+  "weekly.EX.Qcov7.rg.likert_9.option.2": {
+    "en": "No, I am not following this measure",
+    "nl-be": "Nee, ik pas deze maatregel niet toe"
+  },
+  "weekly.EX.Qcov7.rg.likert_9.option.3": {
+    "en": "Not applicable",
+    "nl-be": "Nee, ik pas deze maatregel niet toe"
+  },
+  "weekly.EX.Qcov7.rg.Koue.text.23": {
+    "en": "Avoid travel outside your own country or region",
+    "nl-be": "Niet meer naar het buitenland reizen"
+  },
+  "weekly.EX.Qcov7.rg.likert_10.option.0": {
+    "en": " Yes, I am following this measure now for the first time, or in a stricter way",
+    "nl-be": "Ja, ik pas deze maatregel nu (voor het eerst) of meer (verstrengd) toe"
+  },
+  "weekly.EX.Qcov7.rg.likert_10.option.1": {
+    "en": "No, I was already following this measure",
+    "nl-be": "Nee, ik hield me al aan deze maatregel"
+  },
+  "weekly.EX.Qcov7.rg.likert_10.option.2": {
+    "en": "No, I am not following this measure",
+    "nl-be": "Nee, ik pas deze maatregel niet toe"
+  },
+  "weekly.EX.Qcov7.rg.likert_10.option.3": {
+    "en": "Not applicable",
+    "nl-be": "Nee, ik pas deze maatregel niet toe"
+  },
+  "weekly.EX.Qcov7.rg.zuDa.text.25": {
+    "en": "Have your food/shopping delivered by a store or a friend/family member",
+    "nl-be": "Boodschappen aan huis laten leveren (door winkel/familie/vriend)"
+  },
+  "weekly.EX.Qcov7.rg.likert_13.option.0": {
+    "en": " Yes, I am following this measure now for the first time, or in a stricter way",
+    "nl-be": "Ja, ik pas deze maatregel nu (voor het eerst) of meer (verstrengd) toe"
+  },
+  "weekly.EX.Qcov7.rg.likert_13.option.1": {
+    "en": "No, I was already following this measure",
+    "nl-be": "Nee, ik hield me al aan deze maatregel"
+  },
+  "weekly.EX.Qcov7.rg.likert_13.option.2": {
+    "en": "No, I am not following this measure",
+    "nl-be": "Nee, ik pas deze maatregel niet toe"
+  },
+  "weekly.EX.Qcov7.rg.likert_13.option.3": {
+    "en": "Not applicable",
+    "nl-be": "Nee, ik pas deze maatregel niet toe"
+  },
+  "weekly.EX.Qcov7.rg.QSBP.text.27": {
+    "en": "Avoid seeing friends and family",
+    "nl-be": "Ontmoetingen met familie en vrienden beperken"
+  },
+  "weekly.EX.Qcov7.rg.likert_14.option.0": {
+    "en": " Yes, I am following this measure now for the first time, or in a stricter way",
+    "nl-be": "Ja, ik pas deze maatregel nu (voor het eerst) of meer (verstrengd) toe"
+  },
+  "weekly.EX.Qcov7.rg.likert_14.option.1": {
+    "en": "No, I was already following this measure",
+    "nl-be": "Nee, ik hield me al aan deze maatregel"
+  },
+  "weekly.EX.Qcov7.rg.likert_14.option.2": {
+    "en": "No, I am not following this measure",
+    "nl-be": "Nee, ik pas deze maatregel niet toe"
+  },
+  "weekly.EX.Qcov7.rg.likert_14.option.3": {
+    "en": "Not applicable",
+    "nl-be": "Nee, ik pas deze maatregel niet toe"
+  },
+  "weekly.EX.Qcov7.rg.fRla.text.29": {
+    "en": "Avoid being in contact with people over 65 years old or with a chronic disease",
+    "nl-be": "Ontmoetingen met mensen 65+ jaar of met chronische aandoeningen beperken"
+  },
+  "weekly.EX.Qcov7.rg.likert_15.option.0": {
+    "en": " Yes, I am following this measure now for the first time, or in a stricter way",
+    "nl-be": "Ja, ik pas deze maatregel nu (voor het eerst) of meer (verstrengd) toe"
+  },
+  "weekly.EX.Qcov7.rg.likert_15.option.1": {
+    "en": "No, I was already following this measure",
+    "nl-be": "Nee, ik hield me al aan deze maatregel"
+  },
+  "weekly.EX.Qcov7.rg.likert_15.option.2": {
+    "en": "No, I am not following this measure",
+    "nl-be": "Nee, ik pas deze maatregel niet toe"
+  },
+  "weekly.EX.Qcov7.rg.likert_15.option.3": {
+    "en": "Not applicable",
+    "nl-be": "Nee, ik pas deze maatregel niet toe"
+  },
+  "weekly.EX.Qcov7.rg.h3fK.text.31": {
+    "en": "Avoid being in contact with children",
+    "nl-be": "Contact met kinderen beperken"
+  },
+  "weekly.EX.Qcov7.rg.likert_16.option.0": {
+    "en": " Yes, I am following this measure now for the first time, or in a stricter way",
+    "nl-be": "Ja, ik pas deze maatregel nu (voor het eerst) of meer (verstrengd) toe"
+  },
+  "weekly.EX.Qcov7.rg.likert_16.option.1": {
+    "en": "No, I was already following this measure",
+    "nl-be": "Nee, ik hield me al aan deze maatregel"
+  },
+  "weekly.EX.Qcov7.rg.likert_16.option.2": {
+    "en": "No, I am not following this measure",
+    "nl-be": "Nee, ik pas deze maatregel niet toe"
+  },
+  "weekly.EX.Qcov7.rg.likert_16.option.3": {
+    "en": "Not applicable",
+    "nl-be": "Nee, ik pas deze maatregel niet toe"
+  },
+  "weekly.EX.Q11.title.0": {
+    "en": "What do you think is causing your symptoms?",
+    "nl-be": "Heeft u zelf enig idee waar uw symptomen/klachten vandaan komen?"
+  },
+  "weekly.EX.Q11.helpGroup.text.0": {
+    "en": "Why are we asking this question?",
+    "nl-be": "Waarom vragen we dit?"
+  },
+  "weekly.EX.Q11.helpGroup.text.1": {
+    "en": "To see if our assessment of your illness, based on your symptoms, matches what you believe to be the cause. You may have a better idea of the cause of your illness than our computer algorithms.",
+    "nl-be": "Om te achterhalen of onze beoordeling van uw ziekte op basis van uw symptomen overeenkomt met wat u denkt dat de oorzaak is. U heeft misschien een beter idee van de oorzaak van uw ziekte dan onze computeralgoritmen."
+  },
+  "weekly.EX.Q11.helpGroup.text.2": {
+    "en": "How should I answer this question?",
+    "nl-be": "Hoe moet ik deze vraag beantwoorden?"
+  },
+  "weekly.EX.Q11.helpGroup.text.3": {
+    "en": "If you are reasonably sure of the cause of your symptoms, select the appropriate box. Otherwise, select 'No, I Don’t know'.",
+    "nl-be": "Als u redelijk zeker weet wat uw symptomen veroorzaakt, vink dan het juiste vakje aan. Vink anders 'Nee, ik heb geen idee' aan."
+  },
+  "weekly.EX.Q11.rg.scg.option.0": {
+    "en": "Flu or flu-like illness",
+    "nl-be": "TODO"
+  },
+  "weekly.EX.Q11.rg.scg.option.1": {
+    "en": "New coronavirus (COVID-19)",
+    "nl-be": "TODO"
+  },
+  "weekly.EX.Q11.rg.scg.option.2": {
+    "en": "Common cold",
+    "nl-be": "TODO"
+  },
+  "weekly.EX.Q11.rg.scg.option.3": {
+    "en": "Allergy/hay fever",
+    "nl-be": "TODO"
+  },
+  "weekly.EX.Q11.rg.scg.option.4": {
+    "en": "Ashtma",
+    "nl-be": "TODO"
+  },
+  "weekly.EX.Q11.rg.scg.option.5": {
+    "en": "Gastroenteritis complaints or gastric flu",
+    "nl-be": "TODO"
+  },
+  "weekly.EX.Q11.rg.scg.option.6": {
+    "en": "Other",
+    "nl-be": "TODO"
+  },
+  "weekly.EX.Q11.rg.scg.option.7": {
+    "en": "I don't know",
+    "nl-be": "TODO"
+  },
+  "weekly.surveyEnd.title.0": {
+    "en": "Thank you! This was all for now, please submit (push « send ») your responses. We will ask you again next week.",
+    "nl-be": "TODO"
+  }
+}

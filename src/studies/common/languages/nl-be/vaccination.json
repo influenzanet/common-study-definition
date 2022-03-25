@@ -1,0 +1,682 @@
+{
+  "vaccination.name.0": {
+    "en": "Vaccination questionnaire",
+    "nl-be": "TODO"
+  },
+  "vaccination.description.0": {
+    "en": "The purpose of the vaccination questionnaire is to find out more about protection given by the vaccine and monitor vaccination uptake in Italy.",
+    "nl-be": "TODO"
+  },
+  "vaccination.typicalDuration.0": {
+    "en": "Duration 5-10 minutes",
+    "nl-be": "TODO"
+  },
+  "vaccination.Q0.title.0": {
+    "en": "Four weeks ago you received a questionnaire about your vaccination status.  This new questionnaire is to monitor any further changes. Select the option that applies to you.",
+    "nl-be": "TODO"
+  },
+  "vaccination.Q0.rg.scg.option.0": {
+    "en": "In the meantime I received a new vaccine dose, or a new invitation to be vaccinated.",
+    "nl-be": "In de tussentijd kreeg ik een nieuwe dosis van het vaccin of kreeg ik een nieuwe uitnodiging voor een vaccin. "
+  },
+  "vaccination.Q0.rg.scg.option.1": {
+    "en": "In the meantime nothing has changed in terms of vaccination for me.",
+    "nl-be": "In de tussentijd is er er niets veranderd voor mijn vaccinaties. "
+  },
+  "vaccination.Q0.rg.scg.option.2": {
+    "en": "I'm not sure, and would like to take these questions to make sure my information on vaccination is up to date.",
+    "nl-be": "Ik weet het niet meer. Ik zou graag deze vragen beantwoorden zodat mijn informatie volledig is. "
+  },
+  "vaccination.HV.Q9.title.0": {
+    "en": "Did you receive a flu vaccine during the previous flu season (2020-2021)?",
+    "nl-be": "Heeft u in het vorige griepseizoen (2019/2020) een griepvaccin laten toedienen?"
+  },
+  "vaccination.HV.Q9.helpGroup.text.0": {
+    "en": "Why are we asking this?",
+    "nl-be": "Waarom vragen we dit?"
+  },
+  "vaccination.HV.Q9.helpGroup.text.1": {
+    "en": "We would like to study what level of protection the vaccine provides. We would also like to know if there is any protection from vaccines received in previous years.",
+    "nl-be": "We willen graag onderzoeken hoeveel bescherming het vaccin geeft. We willen ook graag weten of er enige bescherming is dankzij vaccins die in voorgaande jaren zijn ontvangen."
+  },
+  "vaccination.HV.Q9.helpGroup.text.2": {
+    "en": "How should I answer this question?",
+    "nl-be": "Hoe moet ik deze vraag beantwoorden?"
+  },
+  "vaccination.HV.Q9.helpGroup.text.3": {
+    "en": "Answer 'yes' if you were vaccinated in autumn/winter 2020-2021.",
+    "nl-be": "Antwoord 'ja' als u het vaccin vorig jaar (herfst / winter van 2020-2021) heeft gekregen."
+  },
+  "vaccination.HV.Q9.rg.scg.option.0": {
+    "en": "Yes",
+    "nl-be": "Ja"
+  },
+  "vaccination.HV.Q9.rg.scg.option.1": {
+    "en": "No",
+    "nl-be": "Nee"
+  },
+  "vaccination.HV.Q9.rg.scg.option.2": {
+    "en": "I don't know/can't remember",
+    "nl-be": "TODO"
+  },
+  "vaccination.HV.Q10.title.0": {
+    "en": "Have you received a flu vaccine this autumn/winter season? (2021-2022)",
+    "nl-be": "Heeft u in het huidige griepseizoen (2020/2021) een griepvaccin laten toedienen?"
+  },
+  "vaccination.HV.Q10.helpGroup.text.0": {
+    "en": "Why are we asking this?",
+    "nl-be": "Waarom vragen we dit?"
+  },
+  "vaccination.HV.Q10.helpGroup.text.1": {
+    "en": "We would like to be able to work out how much protection the vaccine gives.",
+    "nl-be": "We willen de beschermende werking van het vaccin onderzoeken."
+  },
+  "vaccination.HV.Q10.helpGroup.text.2": {
+    "en": "How should I answer it?",
+    "nl-be": "Hoe moet ik deze vraag beantwoorden?"
+  },
+  "vaccination.HV.Q10.helpGroup.text.3": {
+    "en": "Report yes, if you received the vaccine this season, usually in the autumn. If you get vaccinated after filling in this questionnaire, please return to this and update your answer.",
+    "nl-be": "Rapporteer 'ja', als u het vaccin dit seizoen heeft gekregen, meestal in de herfst. Als u zich na het invullen van deze vragenlijst laat vaccineren, rapporteer 'nee' en kies in een volgende vraag voor de optie 'Ik ben van plan om mezelf nog te laten vaccineren'."
+  },
+  "vaccination.HV.Q10.rg.scg.option.0": {
+    "en": "Yes",
+    "nl-be": "TODO"
+  },
+  "vaccination.HV.Q10.rg.scg.option.1": {
+    "en": "No",
+    "nl-be": "TODO"
+  },
+  "vaccination.HV.Q10.rg.scg.option.2": {
+    "en": "I don't know/can't remember",
+    "nl-be": "TODO"
+  },
+  "vaccination.HV.Q10b.title.0": {
+    "en": "When were you vaccinated against flu this season (2021-2022)?",
+    "nl-be": "Wanneer bent u in het huidige griepseizoen (2020/2021) gevaccineerd tegen de griep?"
+  },
+  "vaccination.HV.Q10b.helpGroup.text.0": {
+    "en": "Why are we asking this?",
+    "nl-be": "Waarom vragen we dit?"
+  },
+  "vaccination.HV.Q10b.helpGroup.text.1": {
+    "en": "Knowing when people get vaccinated tells us how the vaccination program is being followed, as well as the effectiveness of the vaccine.",
+    "nl-be": "Weten wanneer mensen worden gevaccineerd, vertelt ons hoe goed het vaccinatieprogramma wordt gevolgd en hoe effectief het vaccin is."
+  },
+  "vaccination.HV.Q10b.helpGroup.text.2": {
+    "en": "How should I answer this question?",
+    "nl-be": "Hoe moet ik deze vraag beantwoorden?"
+  },
+  "vaccination.HV.Q10b.helpGroup.text.3": {
+    "en": "Try to answer as precisely as possible. If you do not know the exact date, provide as close an estimate as possible. For example, if you remember the month, try to recall if it was in the beginning or end of the month. Did any important events take place (such as holidays or birthdays) that may help you to refresh your memory?",
+    "nl-be": "Probeer zo nauwkeurig mogelijk te antwoorden. Als u de precieze datum niet weet, geef dan uw beste schatting. U kunt zich bijvoorbeeld de maand herinneren en vervolgens proberen te herinneren of het aan het begin of het einde van de maand was. Waren er belangrijke gebeurtenissen (bijv. een vakantie of een verjaardag) die u zouden kunnen helpen om uw geheugen op te frissen?"
+  },
+  "vaccination.HV.Q10b.rg.scg.description.dateInput.0": {
+    "en": "Choose date",
+    "nl-be": "Kies datum"
+  },
+  "vaccination.HV.Q10b.rg.scg.option.1": {
+    "en": "I don't know (anymore)",
+    "nl-be": "Dat weet ik niet (meer)"
+  },
+  "vaccination.HV.Q10c.title.0": {
+    "en": "What were your reasons for getting a seasonal influenza vaccination this year?",
+    "nl-be": "TODO"
+  },
+  "vaccination.HV.Q10c.rg.LlBq.text.0": {
+    "en": "Select the options that are most applicable",
+    "nl-be": "Selecteer maximaal 3 opties die het meest van toepassing zijn"
+  },
+  "vaccination.HV.Q10c.rg.mcg.option.0": {
+    "en": "I belong to a risk group (e.g, pregnant, over 65, underlying health condition, etc)",
+    "nl-be": "TODO"
+  },
+  "vaccination.HV.Q10c.rg.mcg.option.1": {
+    "en": "Vaccination decreases my risk of getting influenza",
+    "nl-be": "TODO"
+  },
+  "vaccination.HV.Q10c.rg.mcg.option.2": {
+    "en": "Vaccination decreases the risk of spreading influenza to others",
+    "nl-be": "TODO"
+  },
+  "vaccination.HV.Q10c.rg.mcg.option.3": {
+    "en": "My doctor recommended it",
+    "nl-be": "TODO"
+  },
+  "vaccination.HV.Q10c.rg.mcg.option.4": {
+    "en": "It was recommended in my workplace/school",
+    "nl-be": "TODO"
+  },
+  "vaccination.HV.Q10c.rg.mcg.option.5": {
+    "en": "The vaccine was readily available and vaccine administration was convenient",
+    "nl-be": "TODO"
+  },
+  "vaccination.HV.Q10c.rg.mcg.option.6": {
+    "en": "The vaccine was free (no cost)",
+    "nl-be": "TODO"
+  },
+  "vaccination.HV.Q10c.rg.mcg.option.7": {
+    "en": "I don't want to miss work/school",
+    "nl-be": "TODO"
+  },
+  "vaccination.HV.Q10c.rg.mcg.option.8": {
+    "en": "I always get the vaccine",
+    "nl-be": "TODO"
+  },
+  "vaccination.HV.Q10c.rg.mcg.option.9": {
+    "en": "I try to protect myself against infections, because of the circulation of the pandemic coronavirus",
+    "nl-be": "TODO"
+  },
+  "vaccination.HV.Q10c.rg.mcg.input.10": {
+    "en": "Other reason(s)",
+    "nl-be": "TODO"
+  },
+  "vaccination.HV.Q10c.rg.mcg.description.input.10": {
+    "en": "Describe here (optional)",
+    "nl-be": "Beschrijf hier (optioneel in te vullen)"
+  },
+  "vaccination.HV.Q10d.title.0": {
+    "en": "What were your reasons for NOT getting a seasonal influenza vaccination in seaseon 2020/2021?",
+    "nl-be": "TODO"
+  },
+  "vaccination.HV.Q10d.helpGroup.text.0": {
+    "en": "Why are we asking this?",
+    "nl-be": "TODO"
+  },
+  "vaccination.HV.Q10d.helpGroup.text.1": {
+    "en": "We would like to know why some people get vaccinated and others do not.",
+    "nl-be": "TODO"
+  },
+  "vaccination.HV.Q10d.helpGroup.text.2": {
+    "en": "How should I answer it?",
+    "nl-be": "TODO"
+  },
+  "vaccination.HV.Q10d.helpGroup.text.3": {
+    "en": "Tick all those reasons that were important in your decision.",
+    "nl-be": "TODO"
+  },
+  "vaccination.HV.Q10d.rg.t2y2.text.0": {
+    "en": "Select the options that are most applicable",
+    "nl-be": "Selecteer maximaal 3 opties die het meest van toepassing zijn"
+  },
+  "vaccination.HV.Q10d.rg.mcg.option.0": {
+    "en": "I am planning to be vaccinated, but haven't been yet",
+    "nl-be": "TODO"
+  },
+  "vaccination.HV.Q10d.rg.mcg.option.1": {
+    "en": "I haven't been offered the vaccine",
+    "nl-be": "TODO"
+  },
+  "vaccination.HV.Q10d.rg.mcg.option.2": {
+    "en": "I don't belong to a risk group",
+    "nl-be": "TODO"
+  },
+  "vaccination.HV.Q10d.rg.mcg.option.3": {
+    "en": "It is better to build your own natural immunity against influenza",
+    "nl-be": "TODO"
+  },
+  "vaccination.HV.Q10d.rg.mcg.option.4": {
+    "en": "I doubt that the influenza vaccine is effective",
+    "nl-be": "TODO"
+  },
+  "vaccination.HV.Q10d.rg.mcg.option.5": {
+    "en": "Influenza is a minor illness",
+    "nl-be": "TODO"
+  },
+  "vaccination.HV.Q10d.rg.mcg.option.6": {
+    "en": "I don't think I am likely to get influenza",
+    "nl-be": "TODO"
+  },
+  "vaccination.HV.Q10d.rg.mcg.option.7": {
+    "en": "I believe that influenza vaccine can cause influenza",
+    "nl-be": "TODO"
+  },
+  "vaccination.HV.Q10d.rg.mcg.option.8": {
+    "en": "I am worried that the vaccine is not safe or will cause illness or other adverse events",
+    "nl-be": "TODO"
+  },
+  "vaccination.HV.Q10d.rg.mcg.option.9": {
+    "en": "I don't like having vaccinations",
+    "nl-be": "TODO"
+  },
+  "vaccination.HV.Q10d.rg.mcg.option.10": {
+    "en": "The vaccine is not readily available to me",
+    "nl-be": "TODO"
+  },
+  "vaccination.HV.Q10d.rg.mcg.option.11": {
+    "en": "The vaccine is not free of charge",
+    "nl-be": "TODO"
+  },
+  "vaccination.HV.Q10d.rg.mcg.option.12": {
+    "en": "No particular reason",
+    "nl-be": "TODO"
+  },
+  "vaccination.HV.Q10d.rg.mcg.option.13": {
+    "en": "Although my doctor recommend a vaccine, I do not get one",
+    "nl-be": "TODO"
+  },
+  "vaccination.HV.Q10d.rg.mcg.input.14": {
+    "en": "Other reason(s)",
+    "nl-be": "TODO"
+  },
+  "vaccination.HV.Q10d.rg.mcg.description.input.14": {
+    "en": "Describe here (optional)",
+    "nl-be": "Beschrijf hier (optioneel in te vullen)"
+  },
+  "vaccination.HV.Q35.title.0": {
+    "en": "Have you received a COVID-19 vaccine?",
+    "nl-be": "Bent u reeds gevaccineerd voor COVID-19?"
+  },
+  "vaccination.HV.Q35.helpGroup.text.0": {
+    "en": "Why are we asking this?",
+    "nl-be": "Waarom vragen we dit?"
+  },
+  "vaccination.HV.Q35.helpGroup.text.1": {
+    "en": "We would like to be able to work out how much protection the vaccine gives.",
+    "nl-be": "We willen onderzoeken hoeveel bescherming vaccinatie geeft."
+  },
+  "vaccination.HV.Q35.helpGroup.text.2": {
+    "en": "How should I answer this question?",
+    "nl-be": "Hoe moet ik deze vraag beantwoorden?"
+  },
+  "vaccination.HV.Q35.helpGroup.text.3": {
+    "en": "Report yes, if you received a COVID-19 vaccine (since December 2020).",
+    "nl-be": "Antwoord ja indien u een COVID-19 vaccin heeft ontvangen (sinds december 2020). "
+  },
+  "vaccination.HV.Q35.rg.scg.option.0": {
+    "en": "Yes, I received at least one COVID-19 vaccine",
+    "nl-be": "Ja, ik heb al minstens 1 dosis gekregen."
+  },
+  "vaccination.HV.Q35.rg.scg.option.1": {
+    "en": "No, I did not receive the COVID-19 vaccine",
+    "nl-be": "TODO"
+  },
+  "vaccination.HV.Q35.rg.scg.option.2": {
+    "en": "I don't know/can't remember.",
+    "nl-be": "Ik wens niet te antwoorden."
+  },
+  "vaccination.HV.Q35i.title.0": {
+    "en": "Which COVID-19 vaccine(s) did you receive?",
+    "nl-be": "TODO"
+  },
+  "vaccination.HV.Q35i.helpGroup.text.0": {
+    "en": "Why are we asking this?",
+    "nl-be": "Waarom vragen we dit?"
+  },
+  "vaccination.HV.Q35i.helpGroup.text.1": {
+    "en": "We want to know how many people got vaccinated with what brand",
+    "nl-be": "TODO"
+  },
+  "vaccination.HV.Q35i.helpGroup.text.2": {
+    "en": "How should I answer this question?",
+    "nl-be": "Hoe moet ik deze vraag beantwoorden?"
+  },
+  "vaccination.HV.Q35i.helpGroup.text.3": {
+    "en": "Specify which brand (or brands if you hade more than one type) you got vaccinated with",
+    "nl-be": "TODO"
+  },
+  "vaccination.HV.Q35i.rg.LMsj.text.0": {
+    "en": "Select more than one option if you received different brands",
+    "nl-be": "TODO"
+  },
+  "vaccination.HV.Q35i.rg.mcg.option.0": {
+    "en": "Pfizer/BioNTech",
+    "nl-be": "Pfizer/BioNTech"
+  },
+  "vaccination.HV.Q35i.rg.mcg.option.1": {
+    "en": "Moderna",
+    "nl-be": "Moderna"
+  },
+  "vaccination.HV.Q35i.rg.mcg.option.2": {
+    "en": "AstraZeneca",
+    "nl-be": "AstraZeneca"
+  },
+  "vaccination.HV.Q35i.rg.mcg.option.3": {
+    "en": "Janssen Pharmaceutica (Johnson & Johnson)",
+    "nl-be": "Janssen Pharmaceutica (Johnson & Johnson)"
+  },
+  "vaccination.HV.Q35i.rg.mcg.option.4": {
+    "en": "CureVac",
+    "nl-be": "CureVac"
+  },
+  "vaccination.HV.Q35i.rg.mcg.option.5": {
+    "en": "I Don't know/Can't remember",
+    "nl-be": "Ik weet het niet meer"
+  },
+  "vaccination.HV.Q35c.title.0": {
+    "en": "How many doses of the vaccine did you receive?",
+    "nl-be": "Hoeveel dosissen van het vaccin heeft u reeds ontvangen? "
+  },
+  "vaccination.HV.Q35c.helpGroup.text.0": {
+    "en": "Why are we asking this?",
+    "nl-be": "Waarom vragen we dit?"
+  },
+  "vaccination.HV.Q35c.helpGroup.text.1": {
+    "en": "We would like to be able to work out how much protection a complete vaccination scheme gives.",
+    "nl-be": "We willen onderzoeken hoeveel bescherming een volledige vaccinatie geeft."
+  },
+  "vaccination.HV.Q35c.helpGroup.text.2": {
+    "en": "How should I answer this question?",
+    "nl-be": "Hoe moet ik deze vraag beantwoorden?"
+  },
+  "vaccination.HV.Q35c.helpGroup.text.3": {
+    "en": "Report the number of doses you received (which corresponds to the number of time you were vaccinated against COVID-19 ).",
+    "nl-be": "Rapporteer het aantal dosissen die u reeds ontvangen heeft (dit komt overeen met het aantal keer dat u werd gevaccineerd voor COVID-19). "
+  },
+  "vaccination.HV.Q35c.rg.scg.option.0": {
+    "en": "One",
+    "nl-be": "Eén"
+  },
+  "vaccination.HV.Q35c.rg.scg.option.1": {
+    "en": "Two",
+    "nl-be": "Twee"
+  },
+  "vaccination.HV.Q35c.rg.scg.option.2": {
+    "en": "Three",
+    "nl-be": "TODO"
+  },
+  "vaccination.HV.Q35c.rg.scg.option.3": {
+    "en": "More than three",
+    "nl-be": "TODO"
+  },
+  "vaccination.HV.Q35c.rg.scg.option.4": {
+    "en": "I Don't know/Can't remember",
+    "nl-be": "Ik weet het niet meer"
+  },
+  "vaccination.HV.Q35j.title.0": {
+    "en": "When did you receive your last injection of a vaccine against COVID-19? If you do not know the exact date, provide an estimate.",
+    "nl-be": "TODO"
+  },
+  "vaccination.HV.Q35j.helpGroup.text.0": {
+    "en": "Why are we asking this?",
+    "nl-be": "Waarom vragen we dit?"
+  },
+  "vaccination.HV.Q35j.helpGroup.text.1": {
+    "en": "Knowing when people are vaccinated tells us how well the vaccination program is being carried out.",
+    "nl-be": "Dit vertelt ons hoe de vaccinatie campgane wordt uitgevoerd. "
+  },
+  "vaccination.HV.Q35j.helpGroup.text.2": {
+    "en": "How should I answer this question?",
+    "nl-be": "Hoe moet ik deze vraag beantwoorden?"
+  },
+  "vaccination.HV.Q35j.helpGroup.text.3": {
+    "en": "Please try and answer as accurately as possible. If you do not know the precise date, please give your best estimate of the month and year of vaccination.",
+    "nl-be": "Gelieve zo correct mogelijk te antwoorden. Indien u de exacte datum niet meer weet, geef een zo goed mogelijke schatting van maand en jaar van de vaccinatie. "
+  },
+  "vaccination.HV.Q35j.rg.scg.dateInput.0": {
+    "en": "Choose date",
+    "nl-be": "Kies een datum"
+  },
+  "vaccination.HV.Q35j.rg.scg.option.1": {
+    "en": "I don’t know/can’t remember",
+    "nl-be": "Ik weet het niet (meer)"
+  },
+  "vaccination.HV.Q35k.title.0": {
+    "en": "Do you plan to receive a second injection in the upcoming weeks?",
+    "nl-be": "TODO"
+  },
+  "vaccination.HV.Q35k.helpGroup.text.0": {
+    "en": "Why are we asking this?",
+    "nl-be": "Waarom vragen we dit?"
+  },
+  "vaccination.HV.Q35k.helpGroup.text.1": {
+    "en": "We want to study how long it takes for people to get the second dose after having received the first",
+    "nl-be": "TODO"
+  },
+  "vaccination.HV.Q35k.helpGroup.text.2": {
+    "en": "How should I answer this question?",
+    "nl-be": "Hoe moet ik deze vraag beantwoorden?"
+  },
+  "vaccination.HV.Q35k.helpGroup.text.3": {
+    "en": "Select the option that is most appropriate for your situation",
+    "nl-be": "TODO"
+  },
+  "vaccination.HV.Q35k.rg.scg.option.0": {
+    "en": "Yes",
+    "nl-be": "TODO"
+  },
+  "vaccination.HV.Q35k.rg.scg.option.1": {
+    "en": "No",
+    "nl-be": "TODO"
+  },
+  "vaccination.HV.Q35k.rg.scg.option.2": {
+    "en": "I don't know",
+    "nl-be": "Dat weet ik niet"
+  },
+  "vaccination.HV.Q35l.title.0": {
+    "en": "Why receiving a single injection?",
+    "nl-be": "TODO"
+  },
+  "vaccination.HV.Q35l.helpGroup.text.0": {
+    "en": "Why are we asking this?",
+    "nl-be": "Waarom vragen we dit?"
+  },
+  "vaccination.HV.Q35l.helpGroup.text.1": {
+    "en": "We would like to know the reasons behind the selected option of receiving just one dose",
+    "nl-be": "TODO"
+  },
+  "vaccination.HV.Q35l.helpGroup.text.2": {
+    "en": "How should I answer this question?",
+    "nl-be": "Hoe moet ik deze vraag beantwoorden?"
+  },
+  "vaccination.HV.Q35l.helpGroup.text.3": {
+    "en": "Select the option that is most appropriate for your situation",
+    "nl-be": "TODO"
+  },
+  "vaccination.HV.Q35l.rg.scg.option.0": {
+    "en": "I had COVID-19 before my first injection.",
+    "nl-be": "TODO"
+  },
+  "vaccination.HV.Q35l.rg.scg.option.1": {
+    "en": "I had COVID-19 shortly after my first injection, and have to wait several months to receive the second injection.",
+    "nl-be": "TODO"
+  },
+  "vaccination.HV.Q35l.rg.scg.option.2": {
+    "en": " I received Janssen vaccine, which requires only one injection.",
+    "nl-be": "TODO"
+  },
+  "vaccination.HV.Q35l.rg.scg.option.3": {
+    "en": "A second injection was contraindicated for me by a doctor (I had a severe allergic reaction, or a severe adverse effect after the first injection, or I have a temporary contraindication due to a treatment or a disease).",
+    "nl-be": "TODO"
+  },
+  "vaccination.HV.Q35l.rg.scg.option.4": {
+    "en": "I changed my mind and don’t want to be vaccinated anymore.",
+    "nl-be": "TODO"
+  },
+  "vaccination.HV.Q35l.rg.scg.input.5": {
+    "en": "Other",
+    "nl-be": "Andere"
+  },
+  "vaccination.HV.Q35l.rg.scg.description.input.5": {
+    "en": "Describe here (optional)",
+    "nl-be": "Beschrijf hier (optioneel in te vullen)"
+  },
+  "vaccination.HV.Q35l.rg.scg.option.6": {
+    "en": "I don't know",
+    "nl-be": "Dat weet ik niet"
+  },
+  "vaccination.HV.Q35f.title.0": {
+    "en": "What are your reason(s) for getting a COVID-19 vaccination?",
+    "nl-be": "Wat waren voor u de hoofdredenen om u te laten vaccineren?"
+  },
+  "vaccination.HV.Q35f.helpGroup.text.0": {
+    "en": "Why are we asking this?",
+    "nl-be": "Waarom vragen we dit?"
+  },
+  "vaccination.HV.Q35f.helpGroup.text.1": {
+    "en": "We would like to know the main reasons why people get the vaccine.",
+    "nl-be": "We kennen graag de redenen waarom mensen zich laten vaccineren. "
+  },
+  "vaccination.HV.Q35f.helpGroup.text.2": {
+    "en": "How should I answer this question?",
+    "nl-be": "Hoe moet ik deze vraag beantwoorden?"
+  },
+  "vaccination.HV.Q35f.helpGroup.text.3": {
+    "en": "Please select the options that mattered to take your decision.",
+    "nl-be": "Gelieve de opties aan te duiden die het meest van toepassing zijn voor u. "
+  },
+  "vaccination.HV.Q35f.rg.T5UL.text.0": {
+    "en": "Select the options that are most applicable",
+    "nl-be": "Selecteer maximaal 3 opties die het meest van toepassing zijn"
+  },
+  "vaccination.HV.Q35f.rg.mcg.option.0": {
+    "en": "The vaccination is recommended by public health authorities.",
+    "nl-be": "Vaccinatie is aangeraden door volksgezondheidsinstellingen."
+  },
+  "vaccination.HV.Q35f.rg.mcg.option.1": {
+    "en": "I belong to a group who is at risk of complications in case of COVID-19 (over 65 of age, underlying health condition, obesity, etc.).",
+    "nl-be": "Ik behoor tot een risicogroep voor ernstige COVID-19 (ouder dan 65 jaar, onderliggende gezondheidsrisico's, obesitas, etc.)."
+  },
+  "vaccination.HV.Q35f.rg.mcg.option.2": {
+    "en": "I work in close contact with people at risk of complications in case of COVID-19 (working in a nursing home, health staff…).",
+    "nl-be": "Voor mijn werk heb ik nauw contact met personen die behoren tot de risicogroep voor ernstige COVID-19 (werken in woonzorgcentrum, ziekenhuis, etc.)."
+  },
+  "vaccination.HV.Q35f.rg.mcg.option.3": {
+    "en": "Vaccination decreases my risk of getting COVID-19.",
+    "nl-be": "Door vaccinatie verlaag ik het risico dat ikzelf COVID-19 krijg."
+  },
+  "vaccination.HV.Q35f.rg.mcg.option.4": {
+    "en": "Vaccination decreases the risk of spreading COVID-19 to others.",
+    "nl-be": "Door vaccinatie verlaag ik het risico dat andere personen COVID-19 krijgen."
+  },
+  "vaccination.HV.Q35f.rg.mcg.option.5": {
+    "en": "My doctor recommended it.",
+    "nl-be": "Mijn (huis)arts heeft de vaccinatie aangeraden."
+  },
+  "vaccination.HV.Q35f.rg.mcg.option.6": {
+    "en": "It was recommended in my workplace/school.",
+    "nl-be": "Vaccinatie werd aangeraden/aangeboden door mijn werk/school."
+  },
+  "vaccination.HV.Q35f.rg.mcg.option.7": {
+    "en": "The vaccine was readily available and vaccine administration was convenient.",
+    "nl-be": "Het vaccin was gemakkelijk te verkrijgen en het toedienen gaat vlot."
+  },
+  "vaccination.HV.Q35f.rg.mcg.option.8": {
+    "en": "The vaccine was free (no cost).",
+    "nl-be": "Het vaccin was gratis."
+  },
+  "vaccination.HV.Q35f.rg.mcg.option.9": {
+    "en": "I don’t want to miss work/school.",
+    "nl-be": "Ik wil geen werk/school missen."
+  },
+  "vaccination.HV.Q35f.rg.mcg.option.10": {
+    "en": "I always accept vaccination when it is offered to me.",
+    "nl-be": "Ik haal altijd een vaccin wanneer het me wordt aangeboden"
+  },
+  "vaccination.HV.Q35f.rg.mcg.option.11": {
+    "en": "I have to be vaccinated to work.",
+    "nl-be": "TODO"
+  },
+  "vaccination.HV.Q35f.rg.mcg.option.12": {
+    "en": "To obtain a valid vaccination passport.",
+    "nl-be": "TODO"
+  },
+  "vaccination.HV.Q35f.rg.mcg.input.13": {
+    "en": "Other",
+    "nl-be": "Andere"
+  },
+  "vaccination.HV.Q35f.rg.mcg.description.input.13": {
+    "en": "Describe here (optional)",
+    "nl-be": "Beschrijf hier (optioneel in te vullen)"
+  },
+  "vaccination.HV.Q35m.title.0": {
+    "en": "What were your reasons for NOT getting a COVID-19 vaccination? Select the options that are most applicable.",
+    "nl-be": "TODO"
+  },
+  "vaccination.HV.Q35m.helpGroup.text.0": {
+    "en": "Why are we asking this?",
+    "nl-be": "Waarom vragen we dit?"
+  },
+  "vaccination.HV.Q35m.helpGroup.text.1": {
+    "en": "We would like to know the main reasons why people are declining COVID-19 vaccination.",
+    "nl-be": "We kennen graan de hoofdredenen waarom mensen geen vaccinatie willen. "
+  },
+  "vaccination.HV.Q35m.helpGroup.text.2": {
+    "en": "How should I answer this question?",
+    "nl-be": "Hoe moet ik deze vraag beantwoorden?"
+  },
+  "vaccination.HV.Q35m.helpGroup.text.3": {
+    "en": "Please select the options that mattered to take your decision.",
+    "nl-be": "Gelieve de opties aan te duiden die het meest van toepassing zijn voor u. "
+  },
+  "vaccination.HV.Q35m.rg.nm76.text.0": {
+    "en": "Select the options that are most applicable",
+    "nl-be": "Selecteer maximaal 3 opties die het meest van toepassing zijn"
+  },
+  "vaccination.HV.Q35m.rg.mcg.option.0": {
+    "en": "I am planning to be vaccinated but haven’t been yet",
+    "nl-be": "TODO"
+  },
+  "vaccination.HV.Q35m.rg.mcg.option.1": {
+    "en": "I haven't been offered the vaccine",
+    "nl-be": "TODO"
+  },
+  "vaccination.HV.Q35m.rg.mcg.option.2": {
+    "en": "I have been discouraged from being vaccinated because I am pregnant",
+    "nl-be": "TODO"
+  },
+  "vaccination.HV.Q35m.rg.mcg.option.3": {
+    "en": "I am pregnant and I fear the vaccine could be dangerous for my baby",
+    "nl-be": "TODO"
+  },
+  "vaccination.HV.Q35m.rg.mcg.option.4": {
+    "en": "I don’t belong to a risk group",
+    "nl-be": "TODO"
+  },
+  "vaccination.HV.Q35m.rg.mcg.option.5": {
+    "en": "It is better to build your own natural immunity against COVID-19",
+    "nl-be": "TODO"
+  },
+  "vaccination.HV.Q35m.rg.mcg.option.6": {
+    "en": "I doubt that the COVID-19 vaccine is effective",
+    "nl-be": "TODO"
+  },
+  "vaccination.HV.Q35m.rg.mcg.option.7": {
+    "en": "COVID-19 is a minor illness",
+    "nl-be": "TODO"
+  },
+  "vaccination.HV.Q35m.rg.mcg.option.8": {
+    "en": "Because of COVID-19 pandemic, I avoid seeing doctors or going to the pharmacy",
+    "nl-be": "TODO"
+  },
+  "vaccination.HV.Q35m.rg.mcg.option.9": {
+    "en": "I don't think I am likely to get the COVID-19",
+    "nl-be": "TODO"
+  },
+  "vaccination.HV.Q35m.rg.mcg.option.10": {
+    "en": "I believe that the COVID-19 vaccine can cause COVID-19",
+    "nl-be": "TODO"
+  },
+  "vaccination.HV.Q35m.rg.mcg.option.11": {
+    "en": "I am worried that the vaccine is not safe or will cause illness or other adverse events",
+    "nl-be": "TODO"
+  },
+  "vaccination.HV.Q35m.rg.mcg.option.12": {
+    "en": "I don't like having vaccinations",
+    "nl-be": "TODO"
+  },
+  "vaccination.HV.Q35m.rg.mcg.option.13": {
+    "en": "The vaccine is not readily available to me",
+    "nl-be": "TODO"
+  },
+  "vaccination.HV.Q35m.rg.mcg.option.14": {
+    "en": "I disagree with the current vaccine policy",
+    "nl-be": "TODO"
+  },
+  "vaccination.HV.Q35m.rg.mcg.option.15": {
+    "en": "The vaccine is not free of charge",
+    "nl-be": "TODO"
+  },
+  "vaccination.HV.Q35m.rg.mcg.option.16": {
+    "en": "I don't know",
+    "nl-be": "Dat weet ik niet"
+  },
+  "vaccination.HV.Q35m.rg.mcg.input.17": {
+    "en": "Other reason(s)",
+    "nl-be": "TODO"
+  },
+  "vaccination.HV.Q35m.rg.mcg.description.input.17": {
+    "en": "Describe here (optional)",
+    "nl-be": "Beschrijf hier (optioneel in te vullen)"
+  }
+}
