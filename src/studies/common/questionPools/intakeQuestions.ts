@@ -8,7 +8,7 @@ import { ComponentGenerators } from "case-editor-tools/surveys/utils/componentGe
 import { Item, NumericInputProps } from "case-editor-tools/surveys/types";
 import { SurveyItems } from 'case-editor-tools/surveys';
 import { initMatrixQuestion, ResponseRowCell } from "case-editor-tools/surveys/survey-items";
-import {require_response, text_select_all_apply, } from './helpers';
+import {require_response, text_select_all_apply, text_why_asking, text_how_answer, singleChoicePrefix } from './helpers';
 
 const ResponseEncoding = {
     gender: {
@@ -76,13 +76,7 @@ export class Gender extends Item {
 
     getHelpGroupContent() {
        return [
-            {
-                content: new LanguageMap([
-                    ["id", "intake.Q1.helpGroup.text.0"],
-                    ["en", "Why are we asking this?"],
-                ]),
-                style: [{ key: 'variant', value: 'h5' }],
-            },
+            text_why_asking("intake.Q1.helpGroup.text.0"),
             {
                 content: new LanguageMap([
                     ["id", "intake.Q1.helpGroup.text.1"],
@@ -111,13 +105,7 @@ export class DateOfBirth extends Item {
 
     getHelpGroupContent() {
         return [
-            {
-                content: new LanguageMap([
-                    ["id", "intake.Q2.helpGroup.text.0"],
-                    ["en", "Why are we asking this?"],
-                ]),
-                style: [{ key: 'variant', value: 'h5' }],
-            },
+            text_why_asking("intake.Q2.helpGroup.text.0"),
             {
                 content: new LanguageMap([
                     ["id", "intake.Q2.helpGroup.text.1"],
@@ -205,13 +193,7 @@ export class PostalCode extends Item {
 
     getHelpGroupContent() {
         return [
-            {
-                content: new LanguageMap([
-                    ["id", "intake.Q3.helpGroup.text.0"],
-                    ["en", "Why are we asking this?"],
-                ]),
-                style: [{ key: 'variant', value: 'h5' }],
-            },
+            text_why_asking( "intake.Q3.helpGroup.text.0"),
             {
                 content: new LanguageMap([
                     ["id", "intake.Q3.helpGroup.text.1"],
@@ -219,13 +201,7 @@ export class PostalCode extends Item {
                 ]),
                 style: [{ key: 'variant', value: 'p' }],
             },
-            {
-                content: new LanguageMap([
-                    ["id", "intake.Q3.helpGroup.text.2"],
-                    ["en", "How should I answer this question?"],
-                ]),
-                style: [{ key: 'variant', value: 'h5' }],
-            },
+            text_how_answer("intake.Q3.helpGroup.text.2"),
             {
                 content: new LanguageMap([
                     ["id", "intake.Q3.helpGroup.text.3"],
@@ -402,13 +378,7 @@ export class MainActivity extends Item {
 
     getHelpGroupContent() {
         return [
-            {
-                content: new LanguageMap([
-                    ["id", "intake.Q4.helpGroup.text.0"],
-                    ["en", "Why are we asking this?"],
-                ]),
-                style: [{ key: 'variant', value: 'h5' }],
-            },
+            text_why_asking("intake.Q4.helpGroup.text.0"),
             {
                 content: new LanguageMap([
                     ["id", "intake.Q4.helpGroup.text.1"],
@@ -416,13 +386,7 @@ export class MainActivity extends Item {
                 ]),
                 style: [{ key: 'variant', value: 'p' }],
             },
-            {
-                content: new LanguageMap([
-                    ["id", "intake.Q4.helpGroup.text.2"],
-                    ["en", "How should I answer it?"],
-                ]),
-                style: [{ key: 'variant', value: 'h5' }],
-            },
+            text_how_answer("intake.Q4.helpGroup.text.2"),
             {
                 content: new LanguageMap([
                     ["id", "intake.Q4.helpGroup.text.3"],
@@ -430,7 +394,7 @@ export class MainActivity extends Item {
                 ]),
                 // style: [{ key: 'variant', value: 'p' }],
             },
-        ]
+        ];
     }
 }
 
@@ -519,13 +483,7 @@ export class PostalCodeWork extends Item {
 
     getHelpGroupContent() {
         return [
-            {
-                content: new LanguageMap([
-                    ["id", "intake.Q4b.helpGroup.text.0"],
-                    ["en", "Why are we asking this?"],
-                ]),
-                style: [{ key: 'variant', value: 'h5' }],
-            },
+            text_why_asking("intake.Q4b.helpGroup.text.0"),
             {
                 content: new LanguageMap([
                     ["id", "intake.Q4b.helpGroup.text.1"],
@@ -660,13 +618,7 @@ export class WorkTypeEurostat extends Item {
 
     getHelpGroupContent() {
         return [
-            {
-                content: new LanguageMap([
-                    ["id", "intake.Q4h.helpGroup.text.0"],
-                    ["en", "Why are we asking this?"],
-                ]),
-                style: [{ key: 'variant', value: 'h5' }],
-            },
+            text_why_asking("intake.Q4h.helpGroup.text.0"),
             {
                 content: new LanguageMap([
                     ["id", "intake.Q4h.helpGroup.text.1"],
@@ -674,19 +626,12 @@ export class WorkTypeEurostat extends Item {
                 ]),
                 style: [{ key: 'variant', value: 'p' }],
             },
-            {
-                content: new LanguageMap([
-                    ["id", "intake.Q4h.helpGroup.text.2"],
-                    ["en", "How should I answer this question?"],
-                ]),
-                style: [{ key: 'variant', value: 'h5' }],
-            },
+            text_how_answer("intake.Q4h.helpGroup.text.2"),
             {
                 content: new LanguageMap([
                     ["id", "intake.Q4h.helpGroup.text.3"],
                     ["en", "Please tick the box that most closely resembles your main occupation."],
                 ]),
-                // style: [{ key: 'variant', value: 'p' }],
             },
         ]
     }
@@ -793,13 +738,7 @@ export class WorkTypeEurostat extends Item {
 
     getHelpGroupContent() {
         return [
-            {
-                content: new LanguageMap([
-                    ["id", "intake.Q4d.helpGroup.text.0"],
-                    ["en", "Why are we asking this?"],
-                ]),
-                style: [{ key: 'variant', value: 'h5' }],
-            },
+            text_why_asking( "intake.Q4d.helpGroup.text.0"),
             {
                 content: new LanguageMap([
                     ["id", "intake.Q4d.helpGroup.text.1"],
@@ -807,19 +746,12 @@ export class WorkTypeEurostat extends Item {
                 ]),
                 style: [{ key: 'variant', value: 'p' }],
             },
-            {
-                content: new LanguageMap([
-                    ["id", "intake.Q4d.helpGroup.text.2"],
-                    ["en", "How should I answer it?"],
-                ]),
-                style: [{ key: 'variant', value: 'h5' }],
-            },
+            text_how_answer("intake.Q4d.helpGroup.text.2"),
             {
                 content: new LanguageMap([
                     ["id", "intake.Q4d.helpGroup.text.3"],
                     ["en", "Please choose the box that represents your HIGHEST level of educational achievements. The different option rougly equate to: 1 - no qualifications, 2 - school-leaving exams at around 16 years of age, 3 - school-leaving exams at around 18 years of age, 4 - University degree or equivalent professional qualification, 5 - Higher degree or advanced professional qualification. If you are an adult who is currently undergoing part - time training(e.g.night school) then tick the box that represents your current highest level of education."],
                 ]),
-                // style: [{ key: 'variant', value: 'p' }],
             },
         ];
     }
@@ -900,13 +832,7 @@ export class PeopleMet extends Item {
 
     getHelpGroupContent() {
         return [
-            {
-                content: new LanguageMap([
-                    ["id", "intake.Q5.helpGroup.text.0"],
-                    ["en", "Perché ti facciamo questa domanda?"],
-                ]),
-                style: [{ key: 'variant', value: 'h5' }],
-            },
+            text_why_asking("intake.Q5.helpGroup.text.0"),
             {
                 content: new LanguageMap([
                     ["id", "intake.Q5.helpGroup.text.1"],
@@ -1131,13 +1057,13 @@ export class PeopleAtRisk extends Item {
     getCondition() {
         // CONDITION
         if (this.keyOfAgeGroups) {
-            return   expWithArgs('or',
+            return expWithArgs('or',
                     expWithArgs('responseHasOnlyKeysOtherThan', this.keyOfAgeGroups, [responseGroupKey, matrixKey, 'row0', 'col1'].join('.'), '0'),
                     expWithArgs('responseHasOnlyKeysOtherThan', this.keyOfAgeGroups, [responseGroupKey, matrixKey, 'row1', 'col1'].join('.'), '0'),
                     expWithArgs('responseHasOnlyKeysOtherThan', this.keyOfAgeGroups, [responseGroupKey, matrixKey, 'row2', 'col1'].join('.'), '0'),
                     expWithArgs('responseHasOnlyKeysOtherThan', this.keyOfAgeGroups, [responseGroupKey, matrixKey, 'row3', 'col1'].join('.'), '0'),
                     expWithArgs('responseHasOnlyKeysOtherThan', this.keyOfAgeGroups, [responseGroupKey, matrixKey, 'row4', 'col1'].join('.'), '0'),
-                );
+            );
         }
     }
 
@@ -1180,14 +1106,7 @@ export class PeopleAtRisk extends Item {
 
     getHelpGroupContent() {
         return [
-            {
-                content: new LanguageMap([
-                    ["id", "intake.Q6c.helpGroup.text.0"],
-                    ["en", "Why are we asking this?"],
-                ]),
-                style: [{ key: 'variant', value: 'h5' }],
-            },
-
+            text_why_asking("intake.Q6c.helpGroup.text.0"),
             {
                 content: new LanguageMap([
                     ["id", "intake.Q6c.helpGroup.text.1"],
@@ -1195,13 +1114,7 @@ export class PeopleAtRisk extends Item {
                 ]),
                 style: [{ key: 'variant', value: 'p' }],
             },
-            {
-                content: new LanguageMap([
-                    ["id", "intake.Q6c.helpGroup.text.2"],
-                    ["en", "How should I answer this question?"],
-                ]),
-                style: [{ key: 'variant', value: 'h5' }],
-            },
+            text_how_answer("intake.Q6c.helpGroup.text.2"),
             {
                 content: new LanguageMap([
                     ["id", "intake.Q6c.helpGroup.text.3"],
@@ -1303,13 +1216,7 @@ export class PeopleAtRisk extends Item {
 
     getHelpGroupContent() {
         return [
-            {
-                content: new LanguageMap([
-                    ["id", "intake.Q6b.helpGroup.text.0"],
-                    ["en", "Why are we asking this?"],
-                ]),
-                style: [{ key: 'variant', value: 'h5' }],
-            },
+            text_why_asking("intake.Q6b.helpGroup.text.0"),
             {
                 content: new LanguageMap([
                     ["id", "intake.Q6b.helpGroup.text.1"],
@@ -1317,19 +1224,12 @@ export class PeopleAtRisk extends Item {
                 ]),
                 style: [{ key: 'variant', value: 'p' }],
             },
-            {
-                content: new LanguageMap([
-                    ["id", "intake.Q6b.helpGroup.text.2"],
-                    ["en", "How should I answer this question?"],
-                ]),
-                style: [{ key: 'variant', value: 'h5' }],
-            },
+            text_how_answer( "intake.Q6b.helpGroup.text.2"),
             {
                 content: new LanguageMap([
                     ["id", "intake.Q6b.helpGroup.text.3"],
                     ["en", "If your child attends school, daycare or childcare (even if only one day a week), please count it. Participation in (sport) associations or other extracurricular activities does not count."],
                 ]),
-                // style: [{ key: 'variant', value: 'p' }],
             },
         ];
     }
@@ -1420,13 +1320,7 @@ export class MeansOfTransport extends Item {
 
     getHelpGroupContent() {
         return [
-            {
-                content: new LanguageMap([
-                    ["id", "intake.Q7.helpGroup.text.0"],
-                    ["en", "Why are we asking this?"],
-                ]),
-                style: [{ key: 'variant', value: 'h5' }],
-            },
+            text_why_asking("intake.Q7.helpGroup.text.0"),
             {
                 content: new LanguageMap([
                     ["id", "intake.Q7.helpGroup.text.1"],
@@ -1434,19 +1328,12 @@ export class MeansOfTransport extends Item {
                 ]),
                 style: [{ key: 'variant', value: 'p' }],
             },
-            {
-                content: new LanguageMap([
-                    ["id", "intake.Q7.helpGroup.text.2"],
-                    ["en", "How should I answer this question?"],
-                ]),
-                style: [{ key: 'variant', value: 'h5' }],
-            },
+            text_how_answer("intake.Q7.helpGroup.text.2"),
             {
                 content: new LanguageMap([
                     ["id", "intake.Q7.helpGroup.text.3"],
                     ["en", "Mark the box that best matches the means of transportation you most frequently use."],
                 ]),
-                // style: [{ key: 'variant', value: 'p' }],
             },
         ];
     }
@@ -1519,19 +1406,12 @@ export class CommonColdFrequency extends Item {
 
     getHelpGroupContent() {
         return [
-            {
-                content: new LanguageMap([
-                    ["id", "intake.Q8.helpGroup.text.0"],
-                    ["en", "Why are we asking this?"],
-                ]),
-                style: [{ key: 'variant', value: 'h5' }],
-            },
+            text_why_asking("intake.Q8.helpGroup.text.0"),
             {
                 content: new LanguageMap([
                     ["id", "intake.Q8.helpGroup.text.1"],
                     ["en", "We want to know if some people have an increased risk of infection."],
                 ]),
-                // style: [{ key: 'variant', value: 'p' }],
             },
         ];
     }
@@ -1637,13 +1517,7 @@ export class RegularMedication extends Item {
 
     getHelpGroupContent() {
         return [
-            {
-                content: new LanguageMap([
-                    ["id", "intake.Q11.helpGroup.text.0"],
-                    ["en", "Why are we asking this?"],
-                ]),
-                style: [{ key: 'variant', value: 'h5' }],
-            },
+            text_why_asking("intake.Q11.helpGroup.text.0"),
             {
                 content: new LanguageMap([
                     ["id", "intake.Q11.helpGroup.text.1"],
@@ -1651,13 +1525,7 @@ export class RegularMedication extends Item {
                 ]),
                 style: [{ key: 'variant', value: 'p' }],
             },
-            {
-                content: new LanguageMap([
-                    ["id", "intake.Q11.helpGroup.text.2"],
-                    ["en", "How should I answer it?"],
-                ]),
-                style: [{ key: 'variant', value: 'h5' }],
-            },
+            text_how_answer("intake.Q11.helpGroup.text.2"),
             {
                 content: new LanguageMap([
                     ["id", "intake.Q11.helpGroup.text.3"],
@@ -1669,13 +1537,13 @@ export class RegularMedication extends Item {
 }
 
 function exprIsFemale(keyQGender: string) {
-    return expWithArgs('responseHasKeysAny', keyQGender, [responseGroupKey, singleChoiceKey].join('.'), ResponseEncoding.gender.female)
+    return expWithArgs('responseHasKeysAny', keyQGender, singleChoicePrefix, ResponseEncoding.gender.female)
 }
 
 function exprPregnancyCondition(keyQGender: string, keyQBirthday: string ) {
 
     return expWithArgs('and',
-            expWithArgs('responseHasKeysAny', keyQGender, [responseGroupKey, singleChoiceKey].join('.'), ResponseEncoding.gender.female),
+            expWithArgs('responseHasKeysAny', keyQGender, singleChoicePrefix, ResponseEncoding.gender.female),
             expWithArgs('gte',
                 expWithArgs('dateResponseDiffFromNow', keyQBirthday, [responseGroupKey, '1'].join('.'), 'years', 1),
                 14
@@ -1711,19 +1579,12 @@ export class Pregnancy extends Item {
 
     getHelpGroupContent() {
         return [
-            {
-                content: new LanguageMap([
-                    ["id", "intake.Q12.helpGroup.text.0"],
-                    ["en", "Why are we asking this?"],
-                ]),
-                style: [{ key: 'variant', value: 'h5' }],
-            },
+            text_why_asking("intake.Q12.helpGroup.text.0"),
             {
                 content: new LanguageMap([
                     ["id", "intake.Q12.helpGroup.text.1"],
                     ["en", "Pregnancy is a potential risk factor for severe symptoms in the event of infection."],
                 ]),
-                // style: [{ key: 'variant', value: 'p' }],
             },
         ];
     }
@@ -1800,13 +1661,7 @@ export class PregnancyTrimester extends Item {
 
     getHelpGroupContent() {
         return [
-            {
-                content: new LanguageMap([
-                    ["id", "intake.Q12b.helpGroup.text.0"],
-                    ["en", "Why are we asking this?"],
-                ]),
-                style: [{ key: 'variant', value: 'h5' }],
-            },
+            text_why_asking("intake.Q12b.helpGroup.text.0"),
             {
                 content: new LanguageMap([
                     ["id", "intake.Q12b.helpGroup.text.1"],
@@ -1861,7 +1716,6 @@ export class PregnancyTrimester extends Item {
             ]
         });
     }
-
 }
 
 
@@ -1922,13 +1776,7 @@ export class Smoking extends Item {
 
     getHelpGroupContent() {
         return [
-            {
-                content: new LanguageMap([
-                    ["id", "intake.Q13.helpGroup.text.0"],
-                    ["en", "Why are we asking this?"],
-                ]),
-                style: [{ key: 'variant', value: 'h5' }],
-            },
+            text_why_asking("intake.Q13.helpGroup.text.0"),
             {
                 content: new LanguageMap([
                     ["id", "intake.Q13.helpGroup.text.1"],
@@ -1936,19 +1784,12 @@ export class Smoking extends Item {
                 ]),
                 style: [{ key: 'variant', value: 'p' }],
             },
-            {
-                content: new LanguageMap([
-                    ["id", "intake.Q13.helpGroup.text.2"],
-                    ["en", "How should I answer it?"],
-                ]),
-                style: [{ key: 'variant', value: 'h5' }],
-            },
+            text_how_answer("intake.Q13.helpGroup.text.2"),
             {
                 content: new LanguageMap([
                     ["id", "intake.Q13.helpGroup.text.3"],
                     ["en", "Please, answer as accurately as possible."],
                 ]),
-                // style: [{ key: 'variant', value: 'p' }],
             },
         ];
     }
@@ -1972,7 +1813,9 @@ export class Allergies extends Item {
 
     buildItem() {
 
-        const exclusiveOptionRule = expWithArgs('responseHasKeysAny', this.key, responseGroupKey + '.' + multipleChoiceKey, '5');
+        const noAllergyCode = '5';
+
+        const exclusiveOptionRule = expWithArgs('responseHasKeysAny', this.key, responseGroupKey + '.' + multipleChoiceKey, noAllergyCode);
 
         return SurveyItems.multipleChoice({
             parentKey: this.parentKey,
@@ -2021,7 +1864,7 @@ export class Allergies extends Item {
                     ])
                 },
                 {
-                    key: '5', role: 'option',
+                    key: noAllergyCode, role: 'option',
                     content: new LanguageMap([
                         ["id", "intake.Q14.rg.mcg.option.4"],
                         ["en", "I do not have an allergy that causes respiratory symptoms"],
@@ -2033,13 +1876,7 @@ export class Allergies extends Item {
 
     getHelpGroupContent() {
         return [
-            {
-            content: new LanguageMap([
-                ["id", "intake.Q14.helpGroup.text.0"],
-                ["en", "Why are we asking this?"],
-            ]),
-            style: [{ key: 'variant', value: 'h5' }],
-            },
+            text_why_asking("intake.Q14.helpGroup.text.0"),
             {
                 content: new LanguageMap([
                     ["id", "intake.Q14.helpGroup.text.1"],
@@ -2047,13 +1884,7 @@ export class Allergies extends Item {
                 ]),
                 style: [{ key: 'variant', value: 'p' }],
             },
-            {
-                content: new LanguageMap([
-                    ["id", "intake.Q14.helpGroup.text.2"],
-                    ["en", "How should I answer this question?"],
-                ]),
-                style: [{ key: 'variant', value: 'h5' }],
-            },
+            text_how_answer( "intake.Q14.helpGroup.text.2"),
             {
                 content: new LanguageMap([
                     ["id", "intake.Q14.helpGroup.text.3"],
@@ -2201,19 +2032,12 @@ export class HomeophaticMedicine extends Item {
 
     getHelpGroupContent() {
         return [
-            {
-                content: new LanguageMap([
-                    ["id", "intake.Q26.helpGroup.text.0"],
-                    ["en", "Why are we asking this?"],
-                ]),
-                style: [{ key: 'variant', value: 'h5' }],
-            },
+            text_why_asking("intake.Q26.helpGroup.text.0"),
             {
                 content: new LanguageMap([
                     ["id", "intake.Q26.helpGroup.text.1"],
                     ["en", "We are interested in knowing more about your health-related habits"],
                 ]),
-                // style: [{ key: 'variant', value: 'p' }],
             },
         ];
     }
@@ -2304,19 +2128,12 @@ export class FindOutAboutPlatform extends Item {
 
     getHelpGroupContent() {
         return [
-            {
-                content: new LanguageMap([
-                    ["id", "intake.Q17.helpGroup.text.0"],
-                    ["en", "Why are we asking this?"],
-                ]),
-                style: [{ key: 'variant', value: 'h5' }],
-            },
+            text_why_asking("intake.Q17.helpGroup.text.0"),
             {
                 content: new LanguageMap([
                     ["id", "intake.Q17.helpGroup.text.1"],
                     ["en", "We would like to know how you found out about our website infectieradar.be."],
                 ]),
-                // style: [{ key: 'variant', value: 'p' }],
             },
         ];
     }

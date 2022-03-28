@@ -38,3 +38,23 @@ export function text_select_all_apply(id:string) {
                 ])
         });
 }
+
+export function text_why_asking(id:string) {
+    return {
+        content: new LanguageMap([
+            ["id", id],
+            ["en", "Why are we asking this?"],
+        ]),
+        style: [{ key: 'variant', value: 'h5' }],
+    };
+}
+
+export function text_how_answer(id:string) {
+    return {
+        content: new LanguageMap([
+            ["id", id],
+            ["en", "How should I answer this question?"],
+        ]),
+        style: [{ key: 'variant', value: 'h5' }],
+    };
+}

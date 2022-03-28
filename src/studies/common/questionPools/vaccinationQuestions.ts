@@ -7,9 +7,8 @@ import { multipleChoiceKey, responseGroupKey, singleChoiceKey } from "case-edito
 import { ComponentGenerators } from "case-editor-tools/surveys/utils/componentGenerators";
 import { Item, NumericInputProps } from "case-editor-tools/surveys/types";
 import { SurveyItems } from 'case-editor-tools/surveys';
-import { singleChoicePrefix, text_select_all_apply } from "./helpers";
+import { singleChoicePrefix, text_how_answer, text_select_all_apply, text_why_asking } from "./helpers";
 import { ParticipantFlags } from "../participantFlags";
-import { isTemplateMiddle } from "typescript";
 
 const ResponseEncoding = {
     vacstart: {
@@ -192,14 +191,7 @@ export class FluVaccineLastSeason extends Item {
 
     getHelpGroupContent() {
         return [
-            {
-                content: new LanguageMap([
-                    ["id", "vaccination.HV.Q9.helpGroup.text.0"],
-                    ["en", "Why are we asking this?"],
-                ]),
-                style: [{ key: 'variant', value: 'h5' }],
-            },
-
+            text_why_asking("vaccination.HV.Q9.helpGroup.text.0"),
             {
                 content: new LanguageMap([
                     ["id", "vaccination.HV.Q9.helpGroup.text.1"],
@@ -207,19 +199,12 @@ export class FluVaccineLastSeason extends Item {
                 ]),
                 style: [{ key: 'variant', value: 'p' }],
             },
-            {
-                content: new LanguageMap([
-                    ["id", "vaccination.HV.Q9.helpGroup.text.2"],
-                    ["en", "How should I answer this question?"],
-                ]),
-                style: [{ key: 'variant', value: 'h5' }],
-            },
+            text_how_answer("vaccination.HV.Q9.helpGroup.text.2"),
             {
                 content: new LanguageMap([
                     ["id", "vaccination.HV.Q9.helpGroup.text.3"],
                     ["en", "Answer 'yes' if you were vaccinated in autumn/winter 2020-2021."],
                 ]),
-                // style: [{ key: 'variant', value: 'p' }],
             },
         ];
     }
@@ -283,13 +268,7 @@ export class FluVaccineThisSeason extends Item {
 
     getHelpGroupContent() {
         return [
-            {
-                content: new LanguageMap([
-                    ["id", "vaccination.HV.Q10.helpGroup.text.0"],
-                    ["en", "Why are we asking this?"],
-                ]),
-                style: [{ key: 'variant', value: 'h5' }],
-            },
+            text_why_asking("vaccination.HV.Q10.helpGroup.text.0"),
             {
                 content: new LanguageMap([
                     ["id", "vaccination.HV.Q10.helpGroup.text.1"],
@@ -297,19 +276,12 @@ export class FluVaccineThisSeason extends Item {
                 ]),
                 style: [{ key: 'variant', value: 'p' }],
             },
-            {
-                content: new LanguageMap([
-                    ["id", "vaccination.HV.Q10.helpGroup.text.2"],
-                    ["en", "How should I answer it?"],
-                ]),
-                style: [{ key: 'variant', value: 'h5' }],
-            },
+            text_how_answer("vaccination.HV.Q10.helpGroup.text.2"),
             {
                 content: new LanguageMap([
                     ["id", "vaccination.HV.Q10.helpGroup.text.3"],
                     ["en", "Report yes, if you received the vaccine this season, usually in the autumn. If you get vaccinated after filling in this questionnaire, please return to this and update your answer."],
                 ]),
-                // style: [{ key: 'variant', value: 'p' }],
             },
         ];
     }
@@ -396,13 +368,8 @@ export class FluVaccineThisSeasonWhen extends SubVaccineQuestion {
 
     getHelpGroupContent() {
         return [
-            {
-                content: new LanguageMap([
-                    ["id", "vaccination.HV.Q10b.helpGroup.text.0"],
-                    ["en", "Why are we asking this?"],
-                ]),
-                style: [{ key: 'variant', value: 'h5' }],
-            },
+            text_why_asking("vaccination.HV.Q10b.helpGroup.text.0"),
+
             {
                 content: new LanguageMap([
                     ["id", "vaccination.HV.Q10b.helpGroup.text.1"],
@@ -410,13 +377,7 @@ export class FluVaccineThisSeasonWhen extends SubVaccineQuestion {
                 ]),
                 style: [{ key: 'variant', value: 'p' }],
             },
-            {
-                content: new LanguageMap([
-                    ["id", "vaccination.HV.Q10b.helpGroup.text.2"],
-                    ["en", "How should I answer this question?"],
-                ]),
-                style: [{ key: 'variant', value: 'h5' }],
-            },
+            text_how_answer("vaccination.HV.Q10b.helpGroup.text.2"),
             {
                 content: new LanguageMap([
                     ["id", "vaccination.HV.Q10b.helpGroup.text.3"],
@@ -694,13 +655,7 @@ export class FluVaccineThisSeasonReasonAgainst extends SubVaccineQuestion {
 
     getHelpGroupContent() {
        return [
-            {
-                content: new LanguageMap([
-                    ["id", "vaccination.HV.Q10d.helpGroup.text.0"],
-                    ["en", "Why are we asking this?"],
-                ]),
-                style: [{ key: 'variant', value: 'h5' }],
-            },
+            text_why_asking("vaccination.HV.Q10d.helpGroup.text.0"),
             {
                 content: new LanguageMap([
                     ["id", "vaccination.HV.Q10d.helpGroup.text.1"],
@@ -708,19 +663,12 @@ export class FluVaccineThisSeasonReasonAgainst extends SubVaccineQuestion {
                 ]),
                 style: [{ key: 'variant', value: 'p' }],
             },
-            {
-                content: new LanguageMap([
-                    ["id", "vaccination.HV.Q10d.helpGroup.text.2"],
-                    ["en", "How should I answer it?"],
-                ]),
-                style: [{ key: 'variant', value: 'h5' }],
-            },
+            text_how_answer( "vaccination.HV.Q10d.helpGroup.text.2"),
             {
                 content: new LanguageMap([
                     ["id", "vaccination.HV.Q10d.helpGroup.text.3"],
                     ["en", "Tick all those reasons that were important in your decision."],
                 ]),
-                // style: [{ key: 'variant', value: 'p' }],
             },
         ]
     }
@@ -784,13 +732,7 @@ export class CovidVac extends Item {
 
     getHelpGroupContent() {
         return [
-                {
-                    content: new LanguageMap([
-                        ["id", "vaccination.HV.Q35.helpGroup.text.0"],
-                        ["en", "Why are we asking this?"],
-                    ]),
-                    style: [{ key: 'variant', value: 'h5' }],
-                },
+            text_why_asking("vaccination.HV.Q35.helpGroup.text.0"),
                 {
                     content: new LanguageMap([
                         ["id", "vaccination.HV.Q35.helpGroup.text.1"],
@@ -798,13 +740,7 @@ export class CovidVac extends Item {
                     ]),
                     style: [{ key: 'variant', value: 'p' }],
                 },
-                {
-                    content: new LanguageMap([
-                        ["id", "vaccination.HV.Q35.helpGroup.text.2"],
-                        ["en", "How should I answer this question?"],
-                    ]),
-                    style: [{ key: 'variant', value: 'h5' }],
-                },
+                text_how_answer("vaccination.HV.Q35.helpGroup.text.2"),
                 {
                     content: new LanguageMap([
                         ["id", "vaccination.HV.Q35.helpGroup.text.3"],
@@ -893,13 +829,7 @@ export class CovidVaccineBrand extends SubVaccineQuestion {
 
     getHelpGroupContent() {
         return [
-            {
-                content: new LanguageMap([
-                    ["id", "vaccination.HV.Q35i.helpGroup.text.0"],
-                    ["en", "Why are we asking this?"],
-                ]),
-                style: [{ key: 'variant', value: 'h5' }],
-            },
+            text_why_asking("vaccination.HV.Q35i.helpGroup.text.0"),
             {
                 content: new LanguageMap([
                     ["id", "vaccination.HV.Q35i.helpGroup.text.1"],
@@ -907,19 +837,12 @@ export class CovidVaccineBrand extends SubVaccineQuestion {
                 ]),
                 style: [{ key: 'variant', value: 'p' }],
             },
-            {
-                content: new LanguageMap([
-                    ["id", "vaccination.HV.Q35i.helpGroup.text.2"],
-                    ["en", "How should I answer this question?"],
-                ]),
-                style: [{ key: 'variant', value: 'h5' }],
-            },
+            text_how_answer("vaccination.HV.Q35i.helpGroup.text.2"),
             {
                 content: new LanguageMap([
                     ["id", "vaccination.HV.Q35i.helpGroup.text.3"],
                     ["en", "Specify which brand (or brands if you hade more than one type) you got vaccinated with"],
                 ]),
-                // style: [{ key: 'variant', value: 'p' }],
             },
         ];
     }
@@ -998,13 +921,7 @@ export class CovidVaccineShots extends SubVaccineQuestion {
 
     getHelpGroupContent() {
         return [
-            {
-                content: new LanguageMap([
-                    ["id", "vaccination.HV.Q35c.helpGroup.text.0"],
-                    ["en", "Why are we asking this?"],
-                ]),
-                style: [{ key: 'variant', value: 'h5' }],
-            },
+            text_why_asking("vaccination.HV.Q35c.helpGroup.text.0"),
             {
                 content: new LanguageMap([
                     ["id", "vaccination.HV.Q35c.helpGroup.text.1"],
@@ -1012,19 +929,12 @@ export class CovidVaccineShots extends SubVaccineQuestion {
                 ]),
                 style: [{ key: 'variant', value: 'p' }],
             },
-            {
-                content: new LanguageMap([
-                    ["id", "vaccination.HV.Q35c.helpGroup.text.2"],
-                    ["en", "How should I answer this question?"],
-                ]),
-                style: [{ key: 'variant', value: 'h5' }],
-            },
+            text_how_answer("vaccination.HV.Q35c.helpGroup.text.2"),
             {
                 content: new LanguageMap([
                     ["id", "vaccination.HV.Q35c.helpGroup.text.3"],
                     ["en", "Report the number of doses you received (which corresponds to the number of time you were vaccinated against COVID-19 )."],
                 ]),
-                // style: [{ key: 'variant', value: 'p' }],
             },
         ];
     }
@@ -1087,13 +997,7 @@ export class CovidDateLastVaccine extends SubVaccineQuestion {
 
     getHelpGroupContent() {
         return [
-            {
-                content: new LanguageMap([
-                    ["id", "vaccination.HV.Q35j.helpGroup.text.0"],
-                    ["en", "Why are we asking this?"],
-                ]),
-                style: [{ key: 'variant', value: 'h5' }],
-            },
+            text_why_asking("vaccination.HV.Q35j.helpGroup.text.0"),
             {
                 content: new LanguageMap([
                     ["id", "vaccination.HV.Q35j.helpGroup.text.1"],
@@ -1101,19 +1005,12 @@ export class CovidDateLastVaccine extends SubVaccineQuestion {
                 ]),
                 style: [{ key: 'variant', value: 'p' }],
             },
-            {
-                content: new LanguageMap([
-                    ["id", "vaccination.HV.Q35j.helpGroup.text.2"],
-                    ["en", "How should I answer this question?"],
-                ]),
-                style: [{ key: 'variant', value: 'h5' }],
-            },
+            text_how_answer("vaccination.HV.Q35j.helpGroup.text.2"),
             {
                 content: new LanguageMap([
                     ["id", "vaccination.HV.Q35j.helpGroup.text.3"],
                     ["en", "Please try and answer as accurately as possible. If you do not know the precise date, please give your best estimate of the month and year of vaccination."],
                 ]),
-                // style: [{ key: 'variant', value: 'p' }],
             },
         ];
     }
@@ -1194,13 +1091,7 @@ export class CovidDateLastVaccine extends SubVaccineQuestion {
 
     getHelpGroupContent() {
         return [
-            {
-                content: new LanguageMap([
-                    ["id", "vaccination.HV.Q35k.helpGroup.text.0"],
-                    ["en", "Why are we asking this?"],
-                ]),
-                style: [{ key: 'variant', value: 'h5' }],
-            },
+            text_why_asking("vaccination.HV.Q35k.helpGroup.text.0"),
             {
                 content: new LanguageMap([
                     ["id", "vaccination.HV.Q35k.helpGroup.text.1"],
@@ -1208,13 +1099,7 @@ export class CovidDateLastVaccine extends SubVaccineQuestion {
                 ]),
                 style: [{ key: 'variant', value: 'p' }],
             },
-            {
-                content: new LanguageMap([
-                    ["id", "vaccination.HV.Q35k.helpGroup.text.2"],
-                    ["en", "How should I answer this question?"],
-                ]),
-                style: [{ key: 'variant', value: 'h5' }],
-            },
+            text_how_answer("vaccination.HV.Q35k.helpGroup.text.2"),
             {
                 content: new LanguageMap([
                     ["id", "vaccination.HV.Q35k.helpGroup.text.3"],
@@ -1335,13 +1220,7 @@ export class CovidSecondShotAgainstReason extends SubVaccineQuestion {
 
     getHelpGroupContent() {
         return [
-            {
-                content: new LanguageMap([
-                    ["id", "vaccination.HV.Q35l.helpGroup.text.0"],
-                    ["en", "Why are we asking this?"],
-                ]),
-                style: [{ key: 'variant', value: 'h5' }],
-            },
+            text_why_asking("vaccination.HV.Q35l.helpGroup.text.0"),
             {
                 content: new LanguageMap([
                     ["id", "vaccination.HV.Q35l.helpGroup.text.1"],
@@ -1349,13 +1228,7 @@ export class CovidSecondShotAgainstReason extends SubVaccineQuestion {
                 ]),
                 style: [{ key: 'variant', value: 'p' }],
             },
-            {
-                content: new LanguageMap([
-                    ["id", "vaccination.HV.Q35l.helpGroup.text.2"],
-                    ["en", "How should I answer this question?"],
-                ]),
-                style: [{ key: 'variant', value: 'h5' }],
-            },
+            text_how_answer( "vaccination.HV.Q35l.helpGroup.text.2"),
             {
                 content: new LanguageMap([
                     ["id", "vaccination.HV.Q35l.helpGroup.text.3"],
@@ -1512,13 +1385,7 @@ export class CovidVaccineProReasons extends SubVaccineQuestion {
 
     getHelpGroupContent() {
         return [
-            {
-                content: new LanguageMap([
-                    ["id", "vaccination.HV.Q35f.helpGroup.text.0"],
-                    ["en", "Why are we asking this?"],
-                ]),
-                style: [{ key: 'variant', value: 'h5' }],
-            },
+            text_why_asking("vaccination.HV.Q35f.helpGroup.text.0"),
             {
                 content: new LanguageMap([
                     ["id", "vaccination.HV.Q35f.helpGroup.text.1"],
@@ -1526,19 +1393,12 @@ export class CovidVaccineProReasons extends SubVaccineQuestion {
                 ]),
                 style: [{ key: 'variant', value: 'p' }],
             },
-            {
-                content: new LanguageMap([
-                    ["id", "vaccination.HV.Q35f.helpGroup.text.2"],
-                    ["en", "How should I answer this question?"],
-                ]),
-                style: [{ key: 'variant', value: 'h5' }],
-            },
+            text_how_answer("vaccination.HV.Q35f.helpGroup.text.2"),
             {
                 content: new LanguageMap([
                     ["id", "vaccination.HV.Q35f.helpGroup.text.3"],
                     ["en", "Please select the options that mattered to take your decision."],
                 ]),
-                // style: [{ key: 'variant', value: 'p' }],
             },
         ];
     }
@@ -1714,13 +1574,7 @@ export class CovidVaccineAgainstReasons extends SubVaccineQuestion {
 
     getHelpGroupContent() {
         return [
-            {
-                content: new LanguageMap([
-                    ["id", "vaccination.HV.Q35m.helpGroup.text.0"],
-                    ["en", "Why are we asking this?"],
-                ]),
-                style: [{ key: 'variant', value: 'h5' }],
-            },
+            text_why_asking("vaccination.HV.Q35m.helpGroup.text.0"),
             {
                 content: new LanguageMap([
                     ["id", "vaccination.HV.Q35m.helpGroup.text.1"],
@@ -1728,19 +1582,12 @@ export class CovidVaccineAgainstReasons extends SubVaccineQuestion {
                 ]),
                 style: [{ key: 'variant', value: 'p' }],
             },
-            {
-                content: new LanguageMap([
-                    ["id", "vaccination.HV.Q35m.helpGroup.text.2"],
-                    ["en", "How should I answer this question?"],
-                ]),
-                style: [{ key: 'variant', value: 'h5' }],
-            },
+            text_how_answer("vaccination.HV.Q35m.helpGroup.text.2"),
             {
                 content: new LanguageMap([
                     ["id", "vaccination.HV.Q35m.helpGroup.text.3"],
                     ["en", "Please select the options that mattered to take your decision."],
                 ]),
-                // style: [{ key: 'variant', value: 'p' }],
             },
         ];
     }
