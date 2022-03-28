@@ -5,6 +5,14 @@ import { ItemEditor } from "case-editor-tools/surveys/survey-editor/item-editor"
 import { initDropdownGroup, initLikertScaleItem, initMatrixQuestion, initMultipleChoiceGroup, initSingleChoiceGroup, ResponseRowCell } from "case-editor-tools/surveys/survey-items";
 import { expWithArgs, generateHelpGroupComponent, generateLocStrings, generateTitleComponent } from "case-editor-tools/surveys/utils/simple-generators";
 import { likertScaleKey, matrixKey, multipleChoiceKey, responseGroupKey, singleChoiceKey } from "case-editor-tools/constants/key-definitions";
+import { text_how_answer, text_why_asking } from "./helpers";
+
+const ResponseEncoding = {
+    symptoms: {
+        no_symptom: '0',
+        fever: 1,
+    }
+};
 
 
 /**
@@ -34,13 +42,7 @@ const symptomps = (parentKey: string, isRequired?: boolean, keyOverride?: string
     // INFO POPUP
     editor.setHelpGroupComponent(
         generateHelpGroupComponent([
-            {
-                content: new LanguageMap([
-                    ["id", "weekly.Q1.helpGroup.text.0"],
-                    ["en", "Why are we asking this question?"],
-                ]),
-                style: [{ key: 'variant', value: 'h5' }],
-            },
+            text_why_asking("weekly.Q1.helpGroup.text.0"),
             {
                 content: new LanguageMap([
                     ["id", "weekly.Q1.helpGroup.text.1"],
@@ -48,13 +50,7 @@ const symptomps = (parentKey: string, isRequired?: boolean, keyOverride?: string
                 ]),
                 style: [{ key: 'variant', value: 'p' }],
             },
-            {
-                content: new LanguageMap([
-                    ["id", "weekly.Q1.helpGroup.text.2"],
-                    ["en", "How should I answer this question?"],
-                ]),
-                style: [{ key: 'variant', value: 'h5' }],
-            },
+            text_how_answer("weekly.Q1.helpGroup.text.2"),
             {
                 content: new LanguageMap([
                     ["id", "weekly.Q1.helpGroup.text.3"],
@@ -76,16 +72,19 @@ const symptomps = (parentKey: string, isRequired?: boolean, keyOverride?: string
                 ["en", "Multiple answers possible. If you suffer from chronic illness, only indicate symptoms that have changed. For example, if you experience chronic shortness of breath, only mark this symptom if it has recently gotten worse."],
             ])),
     }, rg?.key);
+
+    const exclusiveOptionRule =  expWithArgs('responseHasKeysAny', editor.getItem().key, responseGroupKey + '.' + multipleChoiceKey, '0');
+
     const rg_inner = initMultipleChoiceGroup(multipleChoiceKey, [
         {
-            key: '0', role: 'option', content: new LanguageMap([
+            key: ResponseEncoding.symptoms.no_symptom, role: 'option', content: new LanguageMap([
                 ["id", "weekly.Q1.rg.mcg.option.0"],
                 ["en", "No symptoms"],
             ])
         },
         {
             key: '1', role: 'option',
-            disabled: expWithArgs('responseHasKeysAny', editor.getItem().key, responseGroupKey + '.' + multipleChoiceKey, '0'),
+            disabled:exclusiveOptionRule,
             content: new LanguageMap([
                 ["id", "weekly.Q1.rg.mcg.option.1"],
                 ["en", "Fever"],
@@ -93,7 +92,7 @@ const symptomps = (parentKey: string, isRequired?: boolean, keyOverride?: string
         },
         {
             key: '2', role: 'option',
-            disabled: expWithArgs('responseHasKeysAny', editor.getItem().key, responseGroupKey + '.' + multipleChoiceKey, '0'),
+            disabled: exclusiveOptionRule,
             content: new LanguageMap([
                 ["id", "weekly.Q1.rg.mcg.option.2"],
                 ["en", "Chills"],
@@ -101,7 +100,7 @@ const symptomps = (parentKey: string, isRequired?: boolean, keyOverride?: string
         },
         {
             key: '3', role: 'option',
-            disabled: expWithArgs('responseHasKeysAny', editor.getItem().key, responseGroupKey + '.' + multipleChoiceKey, '0'),
+            disabled: exclusiveOptionRule,
             content: new LanguageMap([
                 ["id", "weekly.Q1.rg.mcg.option.3"],
                 ["en", "Runny or blocked nose"],
@@ -109,7 +108,7 @@ const symptomps = (parentKey: string, isRequired?: boolean, keyOverride?: string
         },
         {
             key: '4', role: 'option',
-            disabled: expWithArgs('responseHasKeysAny', editor.getItem().key, responseGroupKey + '.' + multipleChoiceKey, '0'),
+            disabled: exclusiveOptionRule,
             content: new LanguageMap([
                 ["id", "weekly.Q1.rg.mcg.option.4"],
                 ["en", "Sneezing"],
@@ -117,7 +116,7 @@ const symptomps = (parentKey: string, isRequired?: boolean, keyOverride?: string
         },
         {
             key: '5', role: 'option',
-            disabled: expWithArgs('responseHasKeysAny', editor.getItem().key, responseGroupKey + '.' + multipleChoiceKey, '0'),
+            disabled: exclusiveOptionRule,
             content: new LanguageMap([
                 ["id", "weekly.Q1.rg.mcg.option.5"],
                 ["en", "Sore throat"],
@@ -125,7 +124,7 @@ const symptomps = (parentKey: string, isRequired?: boolean, keyOverride?: string
         },
         {
             key: '6', role: 'option',
-            disabled: expWithArgs('responseHasKeysAny', editor.getItem().key, responseGroupKey + '.' + multipleChoiceKey, '0'),
+            disabled:exclusiveOptionRule,
             content: new LanguageMap([
                 ["id", "weekly.Q1.rg.mcg.option.6"],
                 ["en", "Cough"],
@@ -133,7 +132,7 @@ const symptomps = (parentKey: string, isRequired?: boolean, keyOverride?: string
         },
         {
             key: '7', role: 'option',
-            disabled: expWithArgs('responseHasKeysAny', editor.getItem().key, responseGroupKey + '.' + multipleChoiceKey, '0'),
+            disabled: exclusiveOptionRule,
             content: new LanguageMap([
                 ["id", "weekly.Q1.rg.mcg.option.7"],
                 ["en", "Shortness of breath"],
@@ -141,7 +140,7 @@ const symptomps = (parentKey: string, isRequired?: boolean, keyOverride?: string
         },
         {
             key: '8', role: 'option',
-            disabled: expWithArgs('responseHasKeysAny', editor.getItem().key, responseGroupKey + '.' + multipleChoiceKey, '0'),
+            disabled: exclusiveOptionRule,
             content: new LanguageMap([
                 ["id", "weekly.Q1.rg.mcg.option.8"],
                 ["en", "Headache"],
@@ -149,7 +148,7 @@ const symptomps = (parentKey: string, isRequired?: boolean, keyOverride?: string
         },
         {
             key: '9', role: 'option',
-            disabled: expWithArgs('responseHasKeysAny', editor.getItem().key, responseGroupKey + '.' + multipleChoiceKey, '0'),
+            disabled: exclusiveOptionRule,
             content: new LanguageMap([
                 ["id", "weekly.Q1.rg.mcg.option.9"],
                 ["en", "Muscle/joint pain"],
@@ -157,7 +156,7 @@ const symptomps = (parentKey: string, isRequired?: boolean, keyOverride?: string
         },
         {
             key: '10', role: 'option',
-            disabled: expWithArgs('responseHasKeysAny', editor.getItem().key, responseGroupKey + '.' + multipleChoiceKey, '0'),
+            disabled: exclusiveOptionRule,
             content: new LanguageMap([
                 ["id", "weekly.Q1.rg.mcg.option.10"],
                 ["en", "Chest pain"],
@@ -165,7 +164,7 @@ const symptomps = (parentKey: string, isRequired?: boolean, keyOverride?: string
         },
         {
             key: '11', role: 'option',
-            disabled: expWithArgs('responseHasKeysAny', editor.getItem().key, responseGroupKey + '.' + multipleChoiceKey, '0'),
+            disabled: exclusiveOptionRule,
             content: new LanguageMap([
                 ["id", "weekly.Q1.rg.mcg.option.11"],
                 ["en", "Feeling tired or exhausted (malaise)"],
@@ -173,7 +172,7 @@ const symptomps = (parentKey: string, isRequired?: boolean, keyOverride?: string
         },
         {
             key: '12', role: 'option',
-            disabled: expWithArgs('responseHasKeysAny', editor.getItem().key, responseGroupKey + '.' + multipleChoiceKey, '0'),
+            disabled: exclusiveOptionRule,
             content: new LanguageMap([
                 ["id", "weekly.Q1.rg.mcg.option.12"],
                 ["en", "Loss of appetite"],
@@ -181,7 +180,7 @@ const symptomps = (parentKey: string, isRequired?: boolean, keyOverride?: string
         },
         {
             key: '13', role: 'option',
-            disabled: expWithArgs('responseHasKeysAny', editor.getItem().key, responseGroupKey + '.' + multipleChoiceKey, '0'),
+            disabled: exclusiveOptionRule,
             content: new LanguageMap([
                 ["id", "weekly.Q1.rg.mcg.option.13"],
                 ["en", "Coloured sputum/phlegm"],
@@ -189,7 +188,7 @@ const symptomps = (parentKey: string, isRequired?: boolean, keyOverride?: string
         },
         {
             key: '14', role: 'option',
-            disabled: expWithArgs('responseHasKeysAny', editor.getItem().key, responseGroupKey + '.' + multipleChoiceKey, '0'),
+            disabled: exclusiveOptionRule,
             content: new LanguageMap([
                 ["id", "weekly.Q1.rg.mcg.option.14"],
                 ["en", "Watery, bloodshot eyes"],
@@ -197,7 +196,7 @@ const symptomps = (parentKey: string, isRequired?: boolean, keyOverride?: string
         },
         {
             key: '15', role: 'option',
-            disabled: expWithArgs('responseHasKeysAny', editor.getItem().key, responseGroupKey + '.' + multipleChoiceKey, '0'),
+            disabled: exclusiveOptionRule,
             content: new LanguageMap([
                 ["id", "weekly.Q1.rg.mcg.option.15"],
                 ["en", "Nausea"],
@@ -205,7 +204,7 @@ const symptomps = (parentKey: string, isRequired?: boolean, keyOverride?: string
         },
         {
             key: '16', role: 'option',
-            disabled: expWithArgs('responseHasKeysAny', editor.getItem().key, responseGroupKey + '.' + multipleChoiceKey, '0'),
+            disabled: exclusiveOptionRule,
             content: new LanguageMap([
                 ["id", "weekly.Q1.rg.mcg.option.16"],
                 ["en", "Vomiting"],
@@ -213,7 +212,7 @@ const symptomps = (parentKey: string, isRequired?: boolean, keyOverride?: string
         },
         {
             key: '17', role: 'option',
-            disabled: expWithArgs('responseHasKeysAny', editor.getItem().key, responseGroupKey + '.' + multipleChoiceKey, '0'),
+            disabled: exclusiveOptionRule,
             content: new LanguageMap([
                 ["id", "weekly.Q1.rg.mcg.option.17"],
                 ["en", "Diarrhoea (at least three times a day)"],
@@ -221,7 +220,7 @@ const symptomps = (parentKey: string, isRequired?: boolean, keyOverride?: string
         },
         {
             key: '18', role: 'option',
-            disabled: expWithArgs('responseHasKeysAny', editor.getItem().key, responseGroupKey + '.' + multipleChoiceKey, '0'),
+            disabled: exclusiveOptionRule,
             content: new LanguageMap([
                 ["id", "weekly.Q1.rg.mcg.option.18"],
                 ["en", "Stomachache"],
@@ -231,7 +230,7 @@ const symptomps = (parentKey: string, isRequired?: boolean, keyOverride?: string
 
         {
             key: '23', role: 'option',
-            disabled: expWithArgs('responseHasKeysAny', editor.getItem().key, responseGroupKey + '.' + multipleChoiceKey, '0'),
+            disabled: exclusiveOptionRule,
             content: new LanguageMap([
                 ["id", "weekly.Q1.rg.mcg.option.19"],
                 ["en", "Loss of smell"],
@@ -239,7 +238,7 @@ const symptomps = (parentKey: string, isRequired?: boolean, keyOverride?: string
         },
         {
             key: '21', role: 'option',
-            disabled: expWithArgs('responseHasKeysAny', editor.getItem().key, responseGroupKey + '.' + multipleChoiceKey, '0'),
+            disabled: exclusiveOptionRule,
             content: new LanguageMap([
                 ["id", "weekly.Q1.rg.mcg.option.20"],
                 ["en", "Loss of taste"],
@@ -247,7 +246,7 @@ const symptomps = (parentKey: string, isRequired?: boolean, keyOverride?: string
         },
         {
             key: '22', role: 'option',
-            disabled: expWithArgs('responseHasKeysAny', editor.getItem().key, responseGroupKey + '.' + multipleChoiceKey, '0'),
+            disabled: exclusiveOptionRule,
             content: new LanguageMap([
                 ["id", "weekly.Q1.rg.mcg.option.21"],
                 ["en", "Nose bleed"],
@@ -255,7 +254,7 @@ const symptomps = (parentKey: string, isRequired?: boolean, keyOverride?: string
         },
         {
             key: '20', role: 'option',
-            disabled: expWithArgs('responseHasKeysAny', editor.getItem().key, responseGroupKey + '.' + multipleChoiceKey, '0'),
+            disabled: exclusiveOptionRule,
             content: new LanguageMap([
                 ["id", "weekly.Q1.rg.mcg.option.22"],
                 ["en", "Rash"],
@@ -263,7 +262,7 @@ const symptomps = (parentKey: string, isRequired?: boolean, keyOverride?: string
         },
         {
             key: '19', role: 'option',
-            disabled: expWithArgs('responseHasKeysAny', editor.getItem().key, responseGroupKey + '.' + multipleChoiceKey, '0'),
+            disabled: exclusiveOptionRule,
             content: new LanguageMap([
                 ["id", "weekly.Q1.rg.mcg.option.23"],
                 ["en", "Other"],
@@ -297,7 +296,7 @@ const hasSymptomsGroup = (parentKey: string, keySymptomsQuestion: string, keyOve
         constructor(parentKey: string, defaultKey: string) {
             super(parentKey, defaultKey);
             this.groupEditor.setCondition(
-                expWithArgs('responseHasOnlyKeysOtherThan', keySymptomsQuestion, [responseGroupKey, multipleChoiceKey].join('.'), '0')
+                expWithArgs('responseHasOnlyKeysOtherThan', keySymptomsQuestion, [responseGroupKey, multipleChoiceKey].join('.'), ResponseEncoding.symptoms.no_symptom)
             );
         }
 
@@ -335,13 +334,7 @@ const sameIllnes = (parentKey: string, isRequired?: boolean, keyOverride?: strin
     // INFO POPUP
     editor.setHelpGroupComponent(
         generateHelpGroupComponent([
-            {
-                content: new LanguageMap([
-                    ["id", "weekly.HS.Q2.helpGroup.text.0"],
-                    ["en", "Why are we asking this question?"],
-                ]),
-                style: [{ key: 'variant', value: 'h5' }],
-            },
+            text_why_asking("weekly.HS.Q2.helpGroup.text.0"),
             {
                 content: new LanguageMap([
                     ["id", "weekly.HS.Q2.helpGroup.text.1"],
@@ -349,13 +342,7 @@ const sameIllnes = (parentKey: string, isRequired?: boolean, keyOverride?: strin
                 ]),
                 style: [{ key: 'variant', value: 'p' }],
             },
-            {
-                content: new LanguageMap([
-                    ["id", "weekly.HS.Q2.helpGroup.text.2"],
-                    ["en", "How should I answer this question?"],
-                ]),
-                style: [{ key: 'variant', value: 'h5' }],
-            },
+            text_how_answer("weekly.HS.Q2.helpGroup.text.2"),
             {
                 content: new LanguageMap([
                     ["id", "weekly.HS.Q2.helpGroup.text.3"],
@@ -414,7 +401,7 @@ const sameIllnes = (parentKey: string, isRequired?: boolean, keyOverride?: strin
 /**
  * PCR TESTED CONTACTS COVID-19: single choice question about contact with PCR tested Covid19 patients
  *
- * @param parentKey full key path of the parent item, required to genrate this item's unique key (e.g. `<surveyKey>.<groupKey>`).
+ * @param parentKey full key path of the parent item, required to generate this item's unique key (e.g. `<surveyKey>.<groupKey>`).
  * @param keySymptomsQuestion reference to the symptom survey
  * @param isRequired if true adds a default "hard" validation to the question to check if it has a response.
  * @param keyOverride use this to override the default key for this item (only last part of the key, parent's key is not influenced).
@@ -439,13 +426,7 @@ const pcrTestedContact = (parentKey: string, isRequired?: boolean, keyOverride?:
     // INFO POPUP
     editor.setHelpGroupComponent(
         generateHelpGroupComponent([
-            {
-                content: new LanguageMap([
-                    ["id", "weekly.HS.Qcov3.helpGroup.text.0"],
-                    ["en", "Why are we asking this question?"],
-                ]),
-                style: [{ key: 'variant', value: 'h5' }],
-            },
+            text_why_asking("weekly.HS.Qcov3.helpGroup.text.0"),
             {
                 content: new LanguageMap([
                     ["id", "weekly.HS.Qcov3.helpGroup.text.1"],
@@ -523,13 +504,7 @@ const pcrHouseholdContact = (parentKey: string, covid19ContactKey: string, isReq
     // INFO POPUP
     editor.setHelpGroupComponent(
         generateHelpGroupComponent([
-            {
-                content: new LanguageMap([
-                    ["id", "weekly.HS.Qcov3b.helpGroup.text.0"],
-                    ["en", "Why are we asking this question?"],
-                ]),
-                style: [{ key: 'variant', value: 'h5' }],
-            },
+            text_why_asking("weekly.HS.Qcov3b.helpGroup.text.0"),
             {
                 content: new LanguageMap([
                     ["id", "weekly.HS.Qcov3b.helpGroup.text.1"],
@@ -537,13 +512,7 @@ const pcrHouseholdContact = (parentKey: string, covid19ContactKey: string, isReq
                 ]),
                 style: [{ key: 'variant', value: 'p' }],
             },
-            {
-                content: new LanguageMap([
-                    ["id", "weekly.HS.Qcov3b.helpGroup.text.2"],
-                    ["en", "How should I answer this question?"],
-                ]),
-                style: [{ key: 'variant', value: 'h5' }],
-            },
+            text_how_answer("weekly.HS.Qcov3b.helpGroup.text.2"),
             {
                 content: new LanguageMap([
                     ["id", "weekly.HS.Qcov3b.helpGroup.text.3"],
@@ -623,13 +592,7 @@ const symptomsStart = (parentKey: string, keySameIllnes: string, isRequired?: bo
     // INFO POPUP
     editor.setHelpGroupComponent(
         generateHelpGroupComponent([
-            {
-                content: new LanguageMap([
-                    ["id", "weekly.HS.Q3.helpGroup.text.0"],
-                    ["en", "Why are we asking this question?"],
-                ]),
-                style: [{ key: 'variant', value: 'h5' }],
-            },
+            text_why_asking( "weekly.HS.Q3.helpGroup.text.0"),
             {
                 content: new LanguageMap([
                     ["id", "weekly.HS.Q3.helpGroup.text.1"],
@@ -637,13 +600,7 @@ const symptomsStart = (parentKey: string, keySameIllnes: string, isRequired?: bo
                 ]),
                 style: [{ key: 'variant', value: 'p' }],
             },
-            {
-                content: new LanguageMap([
-                    ["id", "weekly.HS.Q3.helpGroup.text.2"],
-                    ["en", "How should I answer this question?"],
-                ]),
-                style: [{ key: 'variant', value: 'h5' }],
-            },
+            text_how_answer("weekly.HS.Q3.helpGroup.text.2"),
             {
                 content: new LanguageMap([
                     ["id", "weekly.HS.Q3.helpGroup.text.3"],
@@ -730,13 +687,7 @@ const symptomsEnd = (parentKey: string, keySymptomsStart: string, isRequired?: b
     // INFO POPUP
     editor.setHelpGroupComponent(
         generateHelpGroupComponent([
-            {
-                content: new LanguageMap([
-                    ["id", "weekly.HS.Q4.helpGroup.text.0"],
-                    ["en", "Why are we asking this question?"],
-                ]),
-                style: [{ key: 'variant', value: 'h5' }],
-            },
+            text_why_asking("weekly.HS.Q4.helpGroup.text.0"),
             {
                 content: new LanguageMap([
                     ["id", "weekly.HS.Q4.helpGroup.text.1"],
@@ -744,13 +695,7 @@ const symptomsEnd = (parentKey: string, keySymptomsStart: string, isRequired?: b
                 ]),
                 style: [{ key: 'variant', value: 'p' }],
             },
-            {
-                content: new LanguageMap([
-                    ["id", "weekly.HS.Q4.helpGroup.text.2"],
-                    ["en", "How should I answer this question?"],
-                ]),
-                style: [{ key: 'variant', value: 'h5' }],
-            },
+            text_how_answer("weekly.HS.Q4.helpGroup.text.2"),
             {
                 content: new LanguageMap([
                     ["id", "weekly.HS.Q4.helpGroup.text.3"],
@@ -839,13 +784,7 @@ const symptomsSuddenlyDeveloped = (parentKey: string, isRequired?: boolean, keyO
     // INFO POPUP
     editor.setHelpGroupComponent(
         generateHelpGroupComponent([
-            {
-                content: new LanguageMap([
-                    ["id", "weekly.HS.Q5.helpGroup.text.0"],
-                    ["en", "Why are we asking this question?"],
-                ]),
-                style: [{ key: 'variant', value: 'h5' }],
-            },
+            text_why_asking("weekly.HS.Q5.helpGroup.text.0"),
             {
                 content: new LanguageMap([
                     ["id", "weekly.HS.Q5.helpGroup.text.1"],
@@ -853,13 +792,7 @@ const symptomsSuddenlyDeveloped = (parentKey: string, isRequired?: boolean, keyO
                 ]),
                 style: [{ key: 'variant', value: 'p' }],
             },
-            {
-                content: new LanguageMap([
-                    ["id", "weekly.HS.Q5.helpGroup.text.2"],
-                    ["en", "How should I answer this question?"],
-                ]),
-                style: [{ key: 'variant', value: 'h5' }],
-            },
+            text_how_answer("weekly.HS.Q5.helpGroup.text.2"),
             {
                 content: new LanguageMap([
                     ["id", "weekly.HS.Q5.helpGroup.text.3"],
@@ -1046,13 +979,7 @@ const feverDevelopedSuddenly = (parentKey: string, keySymptomsQuestion: string, 
     // INFO POPUP
     editor.setHelpGroupComponent(
         generateHelpGroupComponent([
-            {
-                content: new LanguageMap([
-                    ["id", "weekly.HS.Q6b.helpGroup.text.0"],
-                    ["en", "Why are we asking this question?"],
-                ]),
-                style: [{ key: 'variant', value: 'h5' }],
-            },
+            text_why_asking("weekly.HS.Q6b.helpGroup.text.0"),
             {
                 content: new LanguageMap([
                     ["id", "weekly.HS.Q6b.helpGroup.text.1"],
@@ -1060,13 +987,7 @@ const feverDevelopedSuddenly = (parentKey: string, keySymptomsQuestion: string, 
                 ]),
                 style: [{ key: 'variant', value: 'p' }],
             },
-            {
-                content: new LanguageMap([
-                    ["id", "weekly.HS.Q6b.helpGroup.text.2"],
-                    ["en", "How should I answer this question?"],
-                ]),
-                style: [{ key: 'variant', value: 'h5' }],
-            },
+            text_how_answer("weekly.HS.Q6b.helpGroup.text.2"),
             {
                 content: new LanguageMap([
                     ["id", "weekly.HS.Q6b.helpGroup.text.3"],
@@ -1144,13 +1065,7 @@ const didUMeasureTemperature = (parentKey: string, keySymptomsQuestion: string, 
     // INFO POPUP
     editor.setHelpGroupComponent(
         generateHelpGroupComponent([
-            {
-                content: new LanguageMap([
-                    ["id", "weekly.HS.Q6c.helpGroup.text.0"],
-                    ["en", "Why are we asking this question?"],
-                ]),
-                style: [{ key: 'variant', value: 'h5' }],
-            },
+            text_why_asking("weekly.HS.Q6c.helpGroup.text.0"),
             {
                 content: new LanguageMap([
                     ["id", "weekly.HS.Q6c.helpGroup.text.1"],
@@ -1158,13 +1073,7 @@ const didUMeasureTemperature = (parentKey: string, keySymptomsQuestion: string, 
                 ]),
                 style: [{ key: 'variant', value: 'p' }],
             },
-            {
-                content: new LanguageMap([
-                    ["id", "weekly.HS.Q6c.helpGroup.text.2"],
-                    ["en", "How should I answer it?"],
-                ]),
-                style: [{ key: 'variant', value: 'h5' }],
-            },
+            text_how_answer("weekly.HS.Q6c.helpGroup.text.2"),
             {
                 content: new LanguageMap([
                     ["id", "weekly.HS.Q6c.helpGroup.text.3"],
@@ -1247,13 +1156,7 @@ const highestTemprerature = (parentKey: string, keySymptomsQuestion: string, key
     // INFO POPUP
     editor.setHelpGroupComponent(
         generateHelpGroupComponent([
-            {
-                content: new LanguageMap([
-                    ["id", "weekly.HS.Q6d.helpGroup.text.0"],
-                    ["en", "Why are we asking this question?"],
-                ]),
-                style: [{ key: 'variant', value: 'h5' }],
-            },
+            text_why_asking("weekly.HS.Q6d.helpGroup.text.0"),
             {
                 content: new LanguageMap([
                     ["id", "weekly.HS.Q6d.helpGroup.text.1"],
@@ -1261,13 +1164,7 @@ const highestTemprerature = (parentKey: string, keySymptomsQuestion: string, key
                 ]),
                 style: [{ key: 'variant', value: 'p' }],
             },
-            {
-                content: new LanguageMap([
-                    ["id", "weekly.HS.Q6d.helpGroup.text.2"],
-                    ["en", "How should I answer this question?"],
-                ]),
-                style: [{ key: 'variant', value: 'h5' }],
-            },
+            text_how_answer("weekly.HS.Q6d.helpGroup.text.2"),
             {
                 content: new LanguageMap([
                     ["id", "weekly.HS.Q6d.helpGroup.text.3"],
@@ -1395,13 +1292,7 @@ const consentForMore = (parentKey: string, isRequired?: boolean, keyOverride?: s
     // INFO POPUP
     editor.setHelpGroupComponent(
         generateHelpGroupComponent([
-            {
-                content: new LanguageMap([
-                    ["id", "weekly.HS.Q36.helpGroup.text.0"],
-                    ["en", "Why are we asking this question?"],
-                ]),
-                style: [{ key: 'variant', value: 'h5' }],
-            },
+            text_why_asking("weekly.HS.Q36.helpGroup.text.0"),
             {
                 content: new LanguageMap([
                     ["id", "weekly.HS.Q36.helpGroup.text.1"],
@@ -1494,19 +1385,12 @@ const symptomImpliedCovidTest = (parentKey: string, isRequired?: boolean, keyOve
     // INFO POPUP
     editor.setHelpGroupComponent(
         generateHelpGroupComponent([
-            {
-                content: new LanguageMap([
-                    ["id", "weekly.EX.Qcov16h.helpGroup.text.0"],
-                    ["en", "Why are we asking this question?"],
-                ]),
-                style: [{ key: 'variant', value: 'h5' }],
-            },
+            text_why_asking("weekly.EX.Qcov16h.helpGroup.text.0"),
             {
                 content: new LanguageMap([
                     ["id", "weekly.EX.Qcov16h.helpGroup.text.1"],
                     ["en", "We want to know which complaints lead people to get tested for the coronavirus."],
                 ]),
-                // style: [{ key: 'variant', value: 'p' }],
             },
         ])
     );
@@ -1590,19 +1474,12 @@ const covidTestType = (parentKey: string, keysymptomImpliedCovidTest?: string, i
     // INFO POPUP
     editor.setHelpGroupComponent(
         generateHelpGroupComponent([
-            {
-                content: new LanguageMap([
-                    ["id", "weekly.EX.Qcov16i.helpGroup.text.0"],
-                    ["en", "Why are we asking this question?"],
-                ]),
-                style: [{ key: 'variant', value: 'h5' }],
-            },
+            text_why_asking("weekly.EX.Qcov16i.helpGroup.text.0"),
             {
                 content: new LanguageMap([
                     ["id", "weekly.EX.Qcov16i.helpGroup.text.1"],
                     ["en", "We are interested in knowing how many people with symptoms have udergone a test"],
                 ]),
-                //style: [{ key: 'variant', value: 'p' }],
             },
         ])
     );
@@ -1692,13 +1569,7 @@ const resultPCRTest = (parentKey: string, testType?: string, isRequired?: boolea
     // INFO POPUP
     editor.setHelpGroupComponent(
         generateHelpGroupComponent([
-            {
-                content: new LanguageMap([
-                    ["id", "weekly.EX.Qcov16b.helpGroup.text.0"],
-                    ["en", "Why are we asking this question?"],
-                ]),
-                style: [{ key: 'variant', value: 'h5' }],
-            },
+            text_why_asking("weekly.EX.Qcov16b.helpGroup.text.0"),
             {
                 content: new LanguageMap([
                     ["id", "weekly.EX.Qcov16b.helpGroup.text.1"],
@@ -1785,13 +1656,7 @@ const resultAntigenicTest = (parentKey: string, testType?: string, isRequired?: 
     // INFO POPUP
     editor.setHelpGroupComponent(
         generateHelpGroupComponent([
-            {
-                content: new LanguageMap([
-                    ["id", "weekly.EX.Qcov16f.helpGroup.text.0"],
-                    ["en", "Why are we asking this question?"],
-                ]),
-                style: [{ key: 'variant', value: 'h5' }],
-            },
+            text_why_asking("weekly.EX.Qcov16f.helpGroup.text.0"),
             {
                 content: new LanguageMap([
                     ["id", "weekly.EX.Qcov16f.helpGroup.text.1"],
@@ -1878,13 +1743,7 @@ const resultRapidAntigenicTest = (parentKey: string, testType?: string, isRequir
     // INFO POPUP
     editor.setHelpGroupComponent(
         generateHelpGroupComponent([
-            {
-                content: new LanguageMap([
-                    ["id", "weekly.EX.Qcov16k.helpGroup.text.0"],
-                    ["en", "Why are we asking this question?"],
-                ]),
-                style: [{ key: 'variant', value: 'h5' }],
-            },
+            text_why_asking("weekly.EX.Qcov16k.helpGroup.text.0"),
             {
                 content: new LanguageMap([
                     ["id", "weekly.EX.Qcov16k.helpGroup.text.1"],
@@ -1968,13 +1827,7 @@ const fluTest = (parentKey: string, isRequired?: boolean, keyOverride?: string):
     // INFO POPUP
     editor.setHelpGroupComponent(
         generateHelpGroupComponent([
-            {
-                content: new LanguageMap([
-                    ["id", "weekly.EX.Qcov19.helpGroup.text.0"],
-                    ["en", "Why are we asking this question?"],
-                ]),
-                style: [{ key: 'variant', value: 'h5' }],
-            },
+            text_why_asking("weekly.EX.Qcov19.helpGroup.text.0"),
             {
                 content: new LanguageMap([
                     ["id", "weekly.EX.Qcov19.helpGroup.text.1"],
@@ -2068,13 +1921,7 @@ const resultFluTest = (parentKey: string, keyFluTest?: string, isRequired?: bool
     // INFO POPUP
     editor.setHelpGroupComponent(
         generateHelpGroupComponent([
-            {
-                content: new LanguageMap([
-                    ["id", "weekly.EX.Qcov19b.helpGroup.text.0"],
-                    ["en", "Why are we asking this question?"],
-                ]),
-                style: [{ key: 'variant', value: 'h5' }],
-            },
+            text_why_asking("weekly.EX.Qcov19b.helpGroup.text.0"),
             {
                 content: new LanguageMap([
                     ["id", "weekly.EX.Qcov19b.helpGroup.text.1"],
@@ -2158,13 +2005,7 @@ const visitedMedicalService = (parentKey: string, isRequired?: boolean, keyOverr
     // INFO POPUP
     editor.setHelpGroupComponent(
         generateHelpGroupComponent([
-            {
-                content: new LanguageMap([
-                    ["id", "weekly.EX.Q7.helpGroup.text.0"],
-                    ["en", "Why are we asking this?"],
-                ]),
-                style: [{ key: 'variant', value: 'h5' }],
-            },
+            text_why_asking("weekly.EX.Q7.helpGroup.text.0"),
             {
                 content: new LanguageMap([
                     ["id", "weekly.EX.Q7.helpGroup.text.1"],
@@ -2172,13 +2013,7 @@ const visitedMedicalService = (parentKey: string, isRequired?: boolean, keyOverr
                 ]),
                 style: [{ key: 'variant', value: 'p' }],
             },
-            {
-                content: new LanguageMap([
-                    ["id", "weekly.EX.Q7.helpGroup.text.2"],
-                    ["en", "How should I answer it?"],
-                ]),
-                style: [{ key: 'variant', value: 'h5' }],
-            },
+            text_how_answer("weekly.EX.Q7.helpGroup.text.2"),
             {
                 content: new LanguageMap([
                     ["id", "weekly.EX.Q7.helpGroup.text.3"],
@@ -2293,13 +2128,7 @@ const visitedMedicalServiceWhen = (parentKey: string, keyVisitedMedicalServ: str
     // INFO POPUP
     editor.setHelpGroupComponent(
         generateHelpGroupComponent([
-            {
-                content: new LanguageMap([
-                    ["id", "weekly.EX.Q7b.helpGroup.text.0"],
-                    ["en", "Why are we asking this?"],
-                ]),
-                style: [{ key: 'variant', value: 'h5' }],
-            },
+            text_why_asking("weekly.EX.Q7b.helpGroup.text.0"),
             {
                 content: new LanguageMap([
                     ["id", "weekly.EX.Q7b.helpGroup.text.1"],
@@ -2307,13 +2136,7 @@ const visitedMedicalServiceWhen = (parentKey: string, keyVisitedMedicalServ: str
                 ]),
                 style: [{ key: 'variant', value: 'p' }],
             },
-            {
-                content: new LanguageMap([
-                    ["id", "weekly.EX.Q7b.helpGroup.text.2"],
-                    ["en", "How should I answer it?"],
-                ]),
-                style: [{ key: 'variant', value: 'h5' }],
-            },
+            text_how_answer("weekly.EX.Q7b.helpGroup.text.2"),
             {
                 content: new LanguageMap([
                     ["id", "weekly.EX.Q7b.helpGroup.text.3"],
@@ -2497,13 +2320,7 @@ const visitedNoMedicalService = (parentKey: string, keyVisitedMedicalServ?: stri
     // INFO POPUP
     editor.setHelpGroupComponent(
         generateHelpGroupComponent([
-            {
-                content: new LanguageMap([
-                    ["id", "weekly.EX.Qcov18.helpGroup.text.0"],
-                    ["en", "Why are we asking this question?"],
-                ]),
-                style: [{ key: 'variant', value: 'h5' }],
-            },
+            text_why_asking("weekly.EX.Qcov18.helpGroup.text.0"),
             {
                 content: new LanguageMap([
                     ["id", "weekly.EX.Qcov18.helpGroup.text.1"],
@@ -2511,13 +2328,8 @@ const visitedNoMedicalService = (parentKey: string, keyVisitedMedicalServ?: stri
                 ]),
                 style: [{ key: 'variant', value: 'p' }],
             },
-            {
-                content: new LanguageMap([
-                    ["id", "weekly.EX.Qcov18.helpGroup.text.2"],
-                    ["en", "How should I answer this question?"],
-                ]),
-                style: [{ key: 'variant', value: 'h5' }],
-            },
+            text_how_answer("weekly.EX.Qcov18.helpGroup.text.2"),
+
             {
                 content: new LanguageMap([
                     ["id", "weekly.EX.Qcov18.helpGroup.text.3"],
@@ -2672,13 +2484,7 @@ const tookMedication = (parentKey: string, isRequired?: boolean, keyOverride?: s
     // INFO POPUP
     editor.setHelpGroupComponent(
         generateHelpGroupComponent([
-            {
-                content: new LanguageMap([
-                    ["id", "weekly.EX.Q9.helpGroup.text.0"],
-                    ["en", "Why are we asking this?"],
-                ]),
-                style: [{ key: 'variant', value: 'h5' }],
-            },
+            text_why_asking("weekly.EX.Q9.helpGroup.text.0"),
             {
                 content: new LanguageMap([
                     ["id", "weekly.EX.Q9.helpGroup.text.1"],
@@ -2686,13 +2492,7 @@ const tookMedication = (parentKey: string, isRequired?: boolean, keyOverride?: s
                 ]),
                 style: [{ key: 'variant', value: 'p' }],
             },
-            {
-                content: new LanguageMap([
-                    ["id", "weekly.EX.Q9.helpGroup.text.2"],
-                    ["en", "How should I answer it?"],
-                ]),
-                style: [{ key: 'variant', value: 'h5' }],
-            },
+            text_how_answer("weekly.EX.Q9.helpGroup.text.2"),
             {
                 content: new LanguageMap([
                     ["id", "weekly.EX.Q9.helpGroup.text.3"],
@@ -2849,13 +2649,7 @@ const hospitalized = (parentKey: string, isRequired?: boolean, keyOverride?: str
     // INFO POPUP
     editor.setHelpGroupComponent(
         generateHelpGroupComponent([
-            {
-                content: new LanguageMap([
-                    ["id", "weekly.EX.Q14.helpGroup.text.0"],
-                    ["en", "Why are we asking this question?"],
-                ]),
-                style: [{ key: 'variant', value: 'h5' }],
-            },
+            text_why_asking("weekly.EX.Q14.helpGroup.text.0"),
             {
                 content: new LanguageMap([
                     ["id", "weekly.EX.Q14.helpGroup.text.1"],
@@ -2925,13 +2719,7 @@ const dailyRoutine = (parentKey: string, isRequired?: boolean, keyOverride?: str
     // INFO POPUP
     editor.setHelpGroupComponent(
         generateHelpGroupComponent([
-            {
-                content: new LanguageMap([
-                    ["id", "weekly.EX.Q10.helpGroup.text.0"],
-                    ["en", "Why are we asking this question?"],
-                ]),
-                style: [{ key: 'variant', value: 'h5' }],
-            },
+            text_why_asking("weekly.EX.Q10.helpGroup.text.0"),
             {
                 content: new LanguageMap([
                     ["id", "weekly.EX.Q10.helpGroup.text.1"],
@@ -2939,13 +2727,7 @@ const dailyRoutine = (parentKey: string, isRequired?: boolean, keyOverride?: str
                 ]),
                 style: [{ key: 'variant', value: 'p' }],
             },
-            {
-                content: new LanguageMap([
-                    ["id", "weekly.EX.Q10.helpGroup.text.2"],
-                    ["en", "How should I answer this question?"],
-                ]),
-                style: [{ key: 'variant', value: 'h5' }],
-            },
+            text_how_answer("weekly.EX.Q10.helpGroup.text.2"),
             {
                 content: new LanguageMap([
                     ["id", "weekly.EX.Q10.helpGroup.text.3"],
@@ -3028,13 +2810,8 @@ const dailyRoutineToday = (parentKey: string, keyDailyRoutine: string, isRequire
     // INFO POPUP
     editor.setHelpGroupComponent(
         generateHelpGroupComponent([
-            {
-                content: new LanguageMap([
-                    ["id", "weekly.EX.Q10b.helpGroup.text.0"],
-                    ["en", "Why are we asking this question?"],
-                ]),
-                style: [{ key: 'variant', value: 'h5' }],
-            },
+            text_why_asking("weekly.EX.Q10b.helpGroup.text.0"),
+
             {
                 content: new LanguageMap([
                     ["id", "weekly.EX.Q10b.helpGroup.text.1"],
@@ -3042,13 +2819,7 @@ const dailyRoutineToday = (parentKey: string, keyDailyRoutine: string, isRequire
                 ]),
                 style: [{ key: 'variant', value: 'p' }],
             },
-            {
-                content: new LanguageMap([
-                    ["id", "weekly.EX.Q10b.helpGroup.text.2"],
-                    ["en", "How should I answer this question?"],
-                ]),
-                style: [{ key: 'variant', value: 'h5' }],
-            },
+            text_how_answer("weekly.EX.Q10b.helpGroup.text.2"),
             {
                 content: new LanguageMap([
                     ["id", "weekly.EX.Q10b.helpGroup.text.3"],
@@ -3129,13 +2900,7 @@ const dailyRoutineDaysMissed = (parentKey: string, keyDailyRoutine: string, isRe
     // INFO POPUP
     editor.setHelpGroupComponent(
         generateHelpGroupComponent([
-            {
-                content: new LanguageMap([
-                    ["id", "weekly.EX.Q10c.helpGroup.text.0"],
-                    ["en", "Why are we asking this question?"],
-                ]),
-                style: [{ key: 'variant', value: 'h5' }],
-            },
+            text_why_asking("weekly.EX.Q10c.helpGroup.text.0"),
             {
                 content: new LanguageMap([
                     ["id", "weekly.EX.Q10c.helpGroup.text.1"],
@@ -3143,13 +2908,7 @@ const dailyRoutineDaysMissed = (parentKey: string, keyDailyRoutine: string, isRe
                 ]),
                 style: [{ key: 'variant', value: 'p' }],
             },
-            {
-                content: new LanguageMap([
-                    ["id", "weekly.EX.Q10c.helpGroup.text.2"],
-                    ["en", "How should I answer this question?"],
-                ]),
-                style: [{ key: 'variant', value: 'h5' }],
-            },
+            text_how_answer("weekly.EX.Q10c.helpGroup.text.2"),
             {
                 content: new LanguageMap([
                     ["id", "weekly.EX.Q10c.helpGroup.text.3"],
@@ -3254,13 +3013,7 @@ const covidHabitsChange = (parentKey: string, isRequired?: boolean, keyOverride?
     // INFO POPUP
     editor.setHelpGroupComponent(
         generateHelpGroupComponent([
-            {
-                content: new LanguageMap([
-                    ["id", "weekly.EX.Qcov7.helpGroup.text.0"],
-                    ["en", "Why are we asking this question?"],
-                ]),
-                style: [{ key: 'variant', value: 'h5' }],
-            },
+            text_why_asking("weekly.EX.Qcov7.helpGroup.text.0"),
             {
                 content: new LanguageMap([
                     ["id", "weekly.EX.Qcov7.helpGroup.text.1"],
@@ -3268,13 +3021,7 @@ const covidHabitsChange = (parentKey: string, isRequired?: boolean, keyOverride?
                 ]),
                 style: [{ key: 'variant', value: 'p' }],
             },
-            {
-                content: new LanguageMap([
-                    ["id", "weekly.EX.Qcov7.helpGroup.text.2"],
-                    ["en", "How should I answer this question?"],
-                ]),
-                style: [{ key: 'variant', value: 'h5' }],
-            },
+            text_how_answer("weekly.EX.Qcov7.helpGroup.text.2"),
             {
                 content: new LanguageMap([
                     ["id", "weekly.EX.Qcov7.helpGroup.text.3"],
