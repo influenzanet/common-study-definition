@@ -1,4 +1,4 @@
-import { LanguageMap } from "../languages"
+import { LanguageMap, _T } from "../languages"
 import { Expression, SurveyItem } from "survey-engine/lib/data_types";
 import { ComponentEditor } from "case-editor-tools/surveys/survey-editor/component-editor";
 import { ItemEditor } from "case-editor-tools/surveys/survey-editor/item-editor";
@@ -39,10 +39,7 @@ export class Gender extends Item {
             itemKey: this.itemKey,
             isRequired: this.isRequired,
             condition: this.condition,
-            questionText: new LanguageMap([
-                ["id", "intake.Q1.title.0"],
-                ["en", "What is your gender?"],
-            ]),
+            questionText: _T("intake.Q1.title.0", "What is your gender?"),
             helpGroupContent: this.getHelpGroupContent(),
             responseOptions: this.getResponses()
         });
@@ -52,24 +49,15 @@ export class Gender extends Item {
        return [
             {
                 key: '0', role: 'option',
-                content: new LanguageMap([
-                    ["id", "intake.Q1.rg.scg.option.0"],
-                    ["en", "Male"],
-                ])
+                content: _T("intake.Q1.rg.scg.option.0", "Male")
             },
             {
                 key: ResponseEncoding.gender.female, role: 'option',
-                content: new LanguageMap([
-                    ["id", "intake.Q1.rg.scg.option.1"],
-                    ["en", "Female"],
-                ])
+                content: _T("intake.Q1.rg.scg.option.1", "Female")
             },
             {
                 key: '2', role: 'option',
-                content: new LanguageMap([
-                    ["id", "intake.Q1.rg.scg.option.2"],
-                    ["en", "Other"],
-                ])
+                content: _T("intake.Q1.rg.scg.option.2", "Other")
             },
         ];
     }
@@ -78,11 +66,7 @@ export class Gender extends Item {
        return [
             text_why_asking("intake.Q1.helpGroup.text.0"),
             {
-                content: new LanguageMap([
-                    ["id", "intake.Q1.helpGroup.text.1"],
-                    ["en", "In order to examine the differences between men and women."],
-
-                ]),
+                content: _T("intake.Q1.helpGroup.text.1", "In order to examine the differences between men and women."),
                 style: [{ key: 'variant', value: 'p' }, { key: 'className', value: 'm-0' }],
             },
         ]
@@ -107,10 +91,7 @@ export class DateOfBirth extends Item {
         return [
             text_why_asking("intake.Q2.helpGroup.text.0"),
             {
-                content: new LanguageMap([
-                    ["id", "intake.Q2.helpGroup.text.1"],
-                    ["en", "In order to examine the differences between age groups."],
-                ]),
+                content: _T("intake.Q2.helpGroup.text.1", "In order to examine the differences between age groups."),
                 // style: [{ key: 'variant', value: 'p' }],
             },
         ]
@@ -123,10 +104,7 @@ export class DateOfBirth extends Item {
 
         // QUESTION TEXT
         editor.setTitleComponent(
-            generateTitleComponent(new LanguageMap([
-                ["id", "intake.Q2.title.0"],
-                ["en", "What is your date of birth (month and year)?"],
-            ]))
+            generateTitleComponent(_T("intake.Q2.title.0", "What is your date of birth (month and year)?"))
         );
 
         editor.setHelpGroupComponent(generateHelpGroupComponent(this.getHelpGroupContent()));
@@ -195,18 +173,12 @@ export class PostalCode extends Item {
         return [
             text_why_asking( "intake.Q3.helpGroup.text.0"),
             {
-                content: new LanguageMap([
-                    ["id", "intake.Q3.helpGroup.text.1"],
-                    ["en", "In order to verify the representativeness of our cohort (the group of participants in this study), and to examine the geographical differences in the spread of the coronavirus and influenza."],
-                ]),
+                content: _T("intake.Q3.helpGroup.text.1", "In order to verify the representativeness of our cohort (the group of participants in this study), and to examine the geographical differences in the spread of the coronavirus and influenza."),
                 style: [{ key: 'variant', value: 'p' }],
             },
             text_how_answer("intake.Q3.helpGroup.text.2"),
             {
-                content: new LanguageMap([
-                    ["id", "intake.Q3.helpGroup.text.3"],
-                    ["en", "Insert the postal code of your place of residence"],
-                ]),
+                content: _T("intake.Q3.helpGroup.text.3", "Insert the postal code of your place of residence"),
                 // style: [{ key: 'variant', value: 'p' }],
             },
         ];
@@ -219,30 +191,18 @@ export class PostalCode extends Item {
             itemKey: this.itemKey,
             isRequired: this.isRequired,
             condition: this.condition,
-            questionText: new LanguageMap([
-                ["id", "intake.Q3.title.0"],
-                ["en", "What is your home postal code?"],
-            ]),
+            questionText: _T("intake.Q3.title.0", "What is your home postal code?"),
             helpGroupContent: this.getHelpGroupContent(),
             responseOptions: [
                 {
                     key: '0', role: 'input',
                     // style: [{ key: 'className', value: 'w-100' }],
-                    content: new LanguageMap([
-                        ["id", "intake.Q3.rg.scg.input.0"],
-                        ["en", "Postal code:"],
-                    ]),
-                    description: new LanguageMap([
-                        ["id", "intake.Q3.rg.scg.description.input.0"],
-                        ["en", "Postal code"],
-                    ])
+                    content: _T("intake.Q3.rg.scg.input.0", "Postal code:"),
+                    description: _T("intake.Q3.rg.scg.description.input.0", "Postal code")
                 },
                 {
                     key: '1', role: 'option',
-                    content: new LanguageMap([
-                        ["id", "intake.Q3.rg.scg.option.1"],
-                        ["en", "I prefer not to answer this question"],
-                    ])
+                    content: _T("intake.Q3.rg.scg.option.1", "I prefer not to answer this question")
                 },
             ],
             customValidations: [
@@ -263,18 +223,12 @@ export class PostalCode extends Item {
             bottomDisplayCompoments: [
                 {
                     role: 'error',
-                    content: generateLocStrings(new LanguageMap([
-                        ["id", "intake.Q3.error.3"],
-                        ["en", "Please enter the digits of your postal code"],
-                    ])),
+                    content: generateLocStrings(_T("intake.Q3.error.3", "Please enter the digits of your postal code")),
                     displayCondition: expWithArgs('not', expWithArgs('getSurveyItemValidation', 'this', 'r2'))
                 },
                 {
                     role: 'error',
-                    content: generateLocStrings(new LanguageMap([
-                        ["id", "intake.Q3.error.4"],
-                        ["en", "Please enter at most 5 digits"],
-                    ])),
+                    content: generateLocStrings(_T("intake.Q3.error.4", "Please enter at most 5 digits")),
                     displayCondition: expWithArgs('not', expWithArgs('getSurveyItemValidation', 'this', 'r2max'))
                 }
             ]
@@ -303,74 +257,44 @@ export class MainActivity extends Item {
             itemKey: this.itemKey,
             isRequired: this.isRequired,
             condition: this.condition,
-            questionText: new LanguageMap([
-                ["id", "intake.Q4.title.0"],
-                ["en", "What is your current professional status?"],
-            ]),
+            questionText: _T("intake.Q4.title.0", "What is your current professional status?"),
             helpGroupContent: this.getHelpGroupContent(),
             responseOptions: [
                 {
                     key: '0', role: 'option',
-                    content: new LanguageMap([
-                        ["id", "intake.Q4.rg.scg.option.0"],
-                        ["en", "Paid employment, full time"],
-                    ])
+                    content: _T("intake.Q4.rg.scg.option.0", "Paid employment, full time")
                 },
                 {
                     key: '1', role: 'option',
-                    content: new LanguageMap([
-                        ["id", "intake.Q4.rg.scg.option.1"],
-                        ["en", "Paid employment, part time"],
-                    ])
+                    content: _T("intake.Q4.rg.scg.option.1", "Paid employment, part time")
                 },
                 {
                     key: '2', role: 'option',
-                    content: new LanguageMap([
-                        ["id", "intake.Q4.rg.scg.option.2"],
-                        ["en", "Self-employed (businessman, farmer, tradesman, etc.)"],
-                    ])
+                    content: _T("intake.Q4.rg.scg.option.2", "Self-employed (businessman, farmer, tradesman, etc.)")
                 },
                 {
                     key: '3', role: 'option',
-                    content: new LanguageMap([
-                        ["id", "intake.Q4.rg.scg.option.3"],
-                        ["en", "Attending daycare/school/college/university"],
-                    ])
+                    content: _T("intake.Q4.rg.scg.option.3", "Attending daycare/school/college/university")
                 },
                 {
                     key: '4', role: 'option',
-                    content: new LanguageMap([
-                        ["id", "intake.Q4.rg.scg.option.4"],
-                        ["en", "Home-maker (e.g. housewife)"],
-                    ])
+                    content: _T("intake.Q4.rg.scg.option.4", "Home-maker (e.g. housewife)")
                 },
                 {
                     key: '5', role: 'option',
-                    content: new LanguageMap([
-                        ["id", "intake.Q4.rg.scg.option.5"],
-                        ["en", "Unemployed"],
-                    ])
+                    content: _T("intake.Q4.rg.scg.option.5", "Unemployed")
                 },
                 {
                     key: '6', role: 'option',
-                    content: new LanguageMap([
-                        ["id", "intake.Q4.rg.scg.option.6"],
-                        ["en", "Long-term sick-leave or parental leave"],
-                    ])
+                    content: _T("intake.Q4.rg.scg.option.6", "Long-term sick-leave or parental leave")
                 },
                 {
                     key: '7', role: 'option',
-                    content: new LanguageMap([
-                        ["id", "intake.Q4.rg.scg.option.7"],
-                        ["en", "Retired"],
-                    ])
+                    content: _T("intake.Q4.rg.scg.option.7", "Retired")
                 },
                 {
                     key: '8', role: 'option',
-                    content: new LanguageMap([
-                        ["id", "intake.Q4.rg.scg.option.8"],
-                        ["en", "Other"],
-                    ])
+                    content: _T("intake.Q4.rg.scg.option.8", "Other")
                 },
             ]
         });
@@ -380,10 +304,7 @@ export class MainActivity extends Item {
         return [
             text_why_asking("intake.Q4.helpGroup.text.0"),
             {
-                content: new LanguageMap([
-                    ["id", "intake.Q4.helpGroup.text.1"],
-                    ["en", "To check how representative our sample is compared to the population as a whole, and to find out whether the chance of getting flu is different for people in different types of occupation."],
-                ]),
+                content: _T("intake.Q4.helpGroup.text.1", "To check how representative our sample is compared to the population as a whole, and to find out whether the chance of getting flu is different for people in different types of occupation."),
                 style: [{ key: 'variant', value: 'p' }],
             },
             text_how_answer("intake.Q4.helpGroup.text.2"),
@@ -411,37 +332,22 @@ export class PostalCodeWork extends Item {
             itemKey: this.itemKey,
             isRequired: this.isRequired,
             condition: this.condition,
-            questionText: new LanguageMap([
-                ["id", "intake.Q4b.title.0"],
-                ["en", "What is the postal code of your school/college/workplace (where you spend the majority of your working/studying time)?"],
-            ]),
+            questionText: _T("intake.Q4b.title.0", "What is the postal code of your school/college/workplace (where you spend the majority of your working/studying time)?"),
             helpGroupContent: this.getHelpGroupContent(),
             responseOptions: [
                 {
                     key: '0', role: 'input',
                     // style: [{ key: 'className', value: 'w-100' }],
-                    content: new LanguageMap([
-                        ["id", "intake.Q4b.rg.scg.input.0"],
-                        ["en", "Postal code"],
-                    ]),
-                    description: new LanguageMap([
-                        ["id", "intake.Q4b.rg.scg.description.input.0"],
-                        ["en", "Postal code"],
-                    ]),
+                    content: _T("intake.Q4b.rg.scg.input.0", "Postal code"),
+                    description: _T("intake.Q4b.rg.scg.description.input.0", "Postal code"),
                 },
                 {
                     key: '1', role: 'option',
-                    content: new LanguageMap([
-                        ["id", "intake.Q4b.rg.scg.option.1"],
-                        ["en", "I don’t know"],
-                    ])
+                    content: _T("intake.Q4b.rg.scg.option.1", "I don’t know")
                 },
                 {
                     key: '2', role: 'option',
-                    content: new LanguageMap([
-                        ["id", "intake.Q4b.rg.scg.option.2"],
-                        ["en", "Not applicable (e.g. don’t have a fixed workplace)"],
-                    ])
+                    content: _T("intake.Q4b.rg.scg.option.2", "Not applicable (e.g. don’t have a fixed workplace)")
                 },
             ],
             customValidations: [
@@ -463,18 +369,12 @@ export class PostalCodeWork extends Item {
             bottomDisplayCompoments: [
                 {
                     role: 'error',
-                    content: generateLocStrings(new LanguageMap([
-                        ["id", "intake.Q4b.error.3"],
-                        ["en", "Please enter the digits of your postal code"],
-                    ])),
+                    content: generateLocStrings(_T("intake.Q4b.error.3", "Please enter the digits of your postal code")),
                     displayCondition: expWithArgs('not', expWithArgs('getSurveyItemValidation', 'this', 'r2'))
                 },
                 {
                     role: 'error',
-                    content: generateLocStrings(new LanguageMap([
-                        ["id", "intake.Q4b.error.4"],
-                        ["en", "Please enter at most 5 digits"],
-                    ])),
+                    content: generateLocStrings(_T("intake.Q4b.error.4", "Please enter at most 5 digits")),
                     displayCondition: expWithArgs('not', expWithArgs('getSurveyItemValidation', 'this', 'r2max'))
                 }
             ]
@@ -485,10 +385,7 @@ export class PostalCodeWork extends Item {
         return [
             text_why_asking("intake.Q4b.helpGroup.text.0"),
             {
-                content: new LanguageMap([
-                    ["id", "intake.Q4b.helpGroup.text.1"],
-                    ["en", "To be able to determine the distance you regularly travel during your movements."],
-                ]),
+                content: _T("intake.Q4b.helpGroup.text.1", "To be able to determine the distance you regularly travel during your movements."),
                 // style: [{ key: 'variant', value: 'p' }],
             },
         ]
@@ -524,93 +421,54 @@ export class WorkTypeEurostat extends Item {
             itemKey: this.itemKey,
             isRequired: this.isRequired,
             condition: this.getCondition(),
-            questionText: new LanguageMap([
-                ["id", "intake.Q3.title.0"],
-                ["en", "What is your home postal code?"],
-            ]),
+            questionText: _T("intake.Q3.title.0", "What is your home postal code?"),
             helpGroupContent: this.getHelpGroupContent(),
             responseOptions: [
                 {
                     key: '2', role: 'option',
-                    content: new LanguageMap([
-                        ["id", "intake.Q4h.rg.scg.option.0"],
-                        ["en", "Services and sales workers (Personal Services Workers, Sales Workers, Personal Care Workers, Protective Services Workers)"],
-                    ])
+                    content: _T("intake.Q4h.rg.scg.option.0", "Services and sales workers (Personal Services Workers, Sales Workers, Personal Care Workers, Protective Services Workers)")
                 },
                 {
                     key: '3', role: 'option',
-                    content: new LanguageMap([
-                        ["id", "intake.Q4h.rg.scg.option.1"],
-                        ["en", "Craft and related trades workers (Handicraft and printing workers, Food processing, wood working, garment and other craft and related trades workers,  Metal, machinery and related trades workers, Electrical and electronic trades workers, Building and related trades workers, excluding electricians)"],
-                    ])
+                    content: _T("intake.Q4h.rg.scg.option.1", "Craft and related trades workers (Handicraft and printing workers, Food processing, wood working, garment and other craft and related trades workers,  Metal, machinery and related trades workers, Electrical and electronic trades workers, Building and related trades workers, excluding electricians)")
                 },
                 {
                     key: '6', role: 'option',
-                    content: new LanguageMap([
-                        ["id", "intake.Q4h.rg.scg.option.2"],
-                        ["en", "Armed forces occupations (Commissioned armed forces officers, Armed forces occupations other ranks, Non-commissioned armed forces officers)"],
-                    ])
+                    content: _T("intake.Q4h.rg.scg.option.2", "Armed forces occupations (Commissioned armed forces officers, Armed forces occupations other ranks, Non-commissioned armed forces officers)")
                 },
                 {
                     key: '7', role: 'option',
-                    content: new LanguageMap([
-                        ["id", "intake.Q4h.rg.scg.option.3"],
-                        ["en", "Managers (Chief Executives, Senior Officials and Legislators, Administrative and Commercial Managers, Production and Specialized Services Managers, Hospitality, Retail and Other Services Managers)"],
-                    ])
+                    content: _T("intake.Q4h.rg.scg.option.3", "Managers (Chief Executives, Senior Officials and Legislators, Administrative and Commercial Managers, Production and Specialized Services Managers, Hospitality, Retail and Other Services Managers)")
                 },
                 {
                     key: '8', role: 'option',
-                    content: new LanguageMap([
-                        ["id", "intake.Q4h.rg.scg.option.4"],
-                        ["en", "Professionals (Science and Engineering Professionals, Health Professionals,  Teaching Professionals, Business and Administration Professionals, Information and Communications Technology Professionals, Legal, Social and Cultural Professionals)"],
-                    ])
+                    content: _T("intake.Q4h.rg.scg.option.4", "Professionals (Science and Engineering Professionals, Health Professionals,  Teaching Professionals, Business and Administration Professionals, Information and Communications Technology Professionals, Legal, Social and Cultural Professionals)")
                 },
                 {
                     key: '9', role: 'option',
-                    content: new LanguageMap([
-                        ["id", "intake.Q4h.rg.scg.option.5"],
-                        ["en", "Technicians and associate professionals (Science and Engineering Associate Professionals, Health Associate Professionals, Business and Administration Associate Professionals, Legal, Social, Cultural and Related Associate Professionals, Information and Communications Technicians)"],
-                    ])
+                    content: _T("intake.Q4h.rg.scg.option.5", "Technicians and associate professionals (Science and Engineering Associate Professionals, Health Associate Professionals, Business and Administration Associate Professionals, Legal, Social, Cultural and Related Associate Professionals, Information and Communications Technicians)")
                 },
                 {
                     key: '10', role: 'option',
-                    content: new LanguageMap([
-                        ["id", "intake.Q4h.rg.scg.option.6"],
-                        ["en", "Clerical support workers (General and Keyboard Clerks, Customer Services Clerks,  Numerical and Material Recording Clerks, Other Clerical Support Workers)"],
-                    ])
+                    content: _T("intake.Q4h.rg.scg.option.6", "Clerical support workers (General and Keyboard Clerks, Customer Services Clerks,  Numerical and Material Recording Clerks, Other Clerical Support Workers)")
                 },
                 {
                     key: '11', role: 'option',
-                    content: new LanguageMap([
-                        ["id", "intake.Q4h.rg.scg.option.7"],
-                        ["en", "Skilled agricultural, forestry and fishery workers"],
-                    ])
+                    content: _T("intake.Q4h.rg.scg.option.7", "Skilled agricultural, forestry and fishery workers")
                 },
                 {
                     key: '12', role: 'option',
-                    content: new LanguageMap([
-                        ["id", "intake.Q4h.rg.scg.option.8"],
-                        ["en", "Plant and machine operators and assemblers (Stationary Plant and Machine Operators, Assemblers, Drivers and Mobile Plant Operators)"],
-                    ])
+                    content: _T("intake.Q4h.rg.scg.option.8", "Plant and machine operators and assemblers (Stationary Plant and Machine Operators, Assemblers, Drivers and Mobile Plant Operators)")
                 },
                 {
                     key: '13', role: 'option',
-                    content: new LanguageMap([
-                        ["id", "intake.Q4h.rg.scg.option.9"],
-                        ["en", "Elementary occupations (Cleaners and Helpers, Agricultural, Forestry and Fishery Labourers, Labourers in Mining, Construction, Manufacturing and Transport, Food Preparation Assistants, Street and Related Sales and Services Workers, Refuse Workers and Other Elementary Workers)"],
-                    ])
+                    content: _T("intake.Q4h.rg.scg.option.9", "Elementary occupations (Cleaners and Helpers, Agricultural, Forestry and Fishery Labourers, Labourers in Mining, Construction, Manufacturing and Transport, Food Preparation Assistants, Street and Related Sales and Services Workers, Refuse Workers and Other Elementary Workers)")
                 },
                 {
                     key: '5', role: 'input',
                     style: [{ key: 'className', value: 'w-100' }],
-                    content: new LanguageMap([
-                        ["id", "intake.Q4h.rg.scg.input.10"],
-                        ["en", "Other"],
-                    ]),
-                    description: new LanguageMap([
-                        ["id", "intake.Q4h.rg.scg.description.input.10"],
-                        ["en", "Describe here (optional)"],
-                    ])
+                    content: _T("intake.Q4h.rg.scg.input.10", "Other"),
+                    description: _T("intake.Q4h.rg.scg.description.input.10", "Describe here (optional)")
                 },
             ]
         });
@@ -620,18 +478,12 @@ export class WorkTypeEurostat extends Item {
         return [
             text_why_asking("intake.Q4h.helpGroup.text.0"),
             {
-                content: new LanguageMap([
-                    ["id", "intake.Q4h.helpGroup.text.1"],
-                    ["en", "To check how representative our sample is compared to the population as a whole and to find out whether the chance of getting COVID-19 or flu are different for people in different types of occupation."],
-                ]),
+                content: _T("intake.Q4h.helpGroup.text.1", "To check how representative our sample is compared to the population as a whole and to find out whether the chance of getting COVID-19 or flu are different for people in different types of occupation."),
                 style: [{ key: 'variant', value: 'p' }],
             },
             text_how_answer("intake.Q4h.helpGroup.text.2"),
             {
-                content: new LanguageMap([
-                    ["id", "intake.Q4h.helpGroup.text.3"],
-                    ["en", "Please tick the box that most closely resembles your main occupation."],
-                ]),
+                content: _T("intake.Q4h.helpGroup.text.3", "Please tick the box that most closely resembles your main occupation."),
             },
         ]
     }
@@ -669,10 +521,7 @@ export class WorkTypeEurostat extends Item {
             itemKey: this.itemKey,
             isRequired: this.isRequired,
             condition: this.getCondition(),
-            questionText: new LanguageMap([
-                ["id", "intake.Q4d.title.0"],
-                ["en", "What is the highest level of formal education/qualification that you have?"],
-            ]),
+            questionText: _T("intake.Q4d.title.0", "What is the highest level of formal education/qualification that you have?"),
             helpGroupContent: this.getHelpGroupContent(),
             topDisplayCompoments: [
                 ComponentGenerators.text({
@@ -687,50 +536,32 @@ export class WorkTypeEurostat extends Item {
                 {
                     key: '0', role: 'option',
                     disabled: expWithArgs('responseHasKeysAny', this.key, responseGroupKey + '.' + multipleChoiceKey, '1', '2', '3', '4', '5'),
-                    content: new LanguageMap([
-                        ["id", "intake.Q4d.rg.mcg.option.0"],
-                        ["en", "I have no formal qualification"],
-                    ])
+                    content: _T("intake.Q4d.rg.mcg.option.0", "I have no formal qualification")
                 },
                 {
                     key: '1', role: 'option',
                     disabled: expWithArgs('responseHasKeysAny',this.key, responseGroupKey + '.' + multipleChoiceKey, '0', '2', '3', '4'),
-                    content: new LanguageMap([
-                        ["id", "intake.Q4d.rg.mcg.option.1"],
-                        ["en", "GCSEs, levels, CSEs or equivalent"],
-                    ])
+                    content: _T("intake.Q4d.rg.mcg.option.1", "GCSEs, levels, CSEs or equivalent")
                 },
                 {
                     key: '2', role: 'option',
                     disabled: expWithArgs('responseHasKeysAny', this.key, responseGroupKey + '.' + multipleChoiceKey, '0', '1', '3', '4'),
-                    content: new LanguageMap([
-                        ["id", "intake.Q4d.rg.mcg.option.2"],
-                        ["en", "A-levels or equivalent (e.g. Higher, NVQ Level3, BTEC)"],
-                    ])
+                    content: _T("intake.Q4d.rg.mcg.option.2", "A-levels or equivalent (e.g. Higher, NVQ Level3, BTEC)")
                 },
                 {
                     key: '3', role: 'option',
                     disabled: expWithArgs('responseHasKeysAny', this.key, responseGroupKey + '.' + multipleChoiceKey, '0', '1', '2', '4'),
-                    content: new LanguageMap([
-                        ["id", "intake.Q4d.rg.mcg.option.3"],
-                        ["en", "Bachelor Degree (BA, BSc) or equivalent"],
-                    ])
+                    content: _T("intake.Q4d.rg.mcg.option.3", "Bachelor Degree (BA, BSc) or equivalent")
                 },
                 {
                     key: '4', role: 'option',
                     disabled: expWithArgs('responseHasKeysAny', this.key, responseGroupKey + '.' + multipleChoiceKey, '0', '1', '2', '3'),
-                    content: new LanguageMap([
-                        ["id", "intake.Q4d.rg.mcg.option.4"],
-                        ["en", "Higher Degree or equivalent (e.g. Masters Degree, PGCE, PhD, Medical Doctorate, Advanced Professional Award)"],
-                    ])
+                    content: _T("intake.Q4d.rg.mcg.option.4", "Higher Degree or equivalent (e.g. Masters Degree, PGCE, PhD, Medical Doctorate, Advanced Professional Award)")
                 },
                 {
                     key: '5', role: 'option',
                     disabled: expWithArgs('responseHasKeysAny', this.key, responseGroupKey + '.' + multipleChoiceKey, '0'),
-                    content: new LanguageMap([
-                        ["id", "intake.Q4d.rg.mcg.option.5"],
-                        ["en", "I am still in education"],
-                    ])
+                    content: _T("intake.Q4d.rg.mcg.option.5", "I am still in education")
                 },
             ]
         });
@@ -740,18 +571,12 @@ export class WorkTypeEurostat extends Item {
         return [
             text_why_asking( "intake.Q4d.helpGroup.text.0"),
             {
-                content: new LanguageMap([
-                    ["id", "intake.Q4d.helpGroup.text.1"],
-                    ["en", "To check how representative our sample is compared to the population of the UK (Italy, Belgium..) as a whole."],
-                ]),
+                content: _T("intake.Q4d.helpGroup.text.1", "To check how representative our sample is compared to the population of the UK (Italy, Belgium..) as a whole."),
                 style: [{ key: 'variant', value: 'p' }],
             },
             text_how_answer("intake.Q4d.helpGroup.text.2"),
             {
-                content: new LanguageMap([
-                    ["id", "intake.Q4d.helpGroup.text.3"],
-                    ["en", "Please choose the box that represents your HIGHEST level of educational achievements. The different option rougly equate to: 1 - no qualifications, 2 - school-leaving exams at around 16 years of age, 3 - school-leaving exams at around 18 years of age, 4 - University degree or equivalent professional qualification, 5 - Higher degree or advanced professional qualification. If you are an adult who is currently undergoing part - time training(e.g.night school) then tick the box that represents your current highest level of education."],
-                ]),
+                content: _T("intake.Q4d.helpGroup.text.3", "Please choose the box that represents your HIGHEST level of educational achievements. The different option rougly equate to: 1 - no qualifications, 2 - school-leaving exams at around 16 years of age, 3 - school-leaving exams at around 18 years of age, 4 - University degree or equivalent professional qualification, 5 - Higher degree or advanced professional qualification. If you are an adult who is currently undergoing part - time training(e.g.night school) then tick the box that represents your current highest level of education."),
             },
         ];
     }
@@ -782,49 +607,31 @@ export class PeopleMet extends Item {
             itemKey: this.itemKey,
             isRequired: this.isRequired,
             condition: this.condition,
-            questionText: new LanguageMap([
-                    ["id", "intake.Q5.title.0"],
-                    ["en", "Except people you meet on public transportation, do you have contact with any of the following during the course of a typical day (so without COVID-19 measures)?"],
-            ]),
+            questionText: _T("intake.Q5.title.0", "Except people you meet on public transportation, do you have contact with any of the following during the course of a typical day (so without COVID-19 measures)?"),
             helpGroupContent: this.getHelpGroupContent(),
             topDisplayCompoments: [ text_select_all_apply("intake.Q5.rg.dwL8.text.0") ],
             responseOptions: [
                 {
                     key: '0', role: 'option',
                     disabled: optionExclusive,
-                    content: new LanguageMap([
-                        ["id", "intake.Q5.rg.mcg.option.0"],
-                        ["en", "More than 10 children or teenagers (without counting your own children)"],
-                    ])
+                    content: _T("intake.Q5.rg.mcg.option.0", "More than 10 children or teenagers (without counting your own children)")
                 },
                 {
                     key: '1', role: 'option',
                     disabled: optionExclusive,
-                    content: new LanguageMap([
-                        ["id", "intake.Q5.rg.mcg.option.1"],
-                        ["en", "More than 10 people aged over 65"],
-                    ])
+                    content: _T("intake.Q5.rg.mcg.option.1", "More than 10 people aged over 65")
                 },
                 {
                     key: '2', role: 'option',
                     disabled: optionExclusive,
-                    content: new LanguageMap([
-                        ["id", "intake.Q5.rg.mcg.option.2"],
-                        ["en", "Patients"],
-                    ])
+                    content: _T("intake.Q5.rg.mcg.option.2", "Patients")
                 }, {
                     key: '3', role: 'option',
                     disabled: optionExclusive,
-                    content: new LanguageMap([
-                        ["id", "intake.Q5.rg.mcg.option.3"],
-                        ["en", "Groups of people (more than 10 individuals at any one time)"],
-                    ])
+                    content: _T("intake.Q5.rg.mcg.option.3", "Groups of people (more than 10 individuals at any one time)")
                 }, {
                     key: '4', role: 'option',
-                    content: new LanguageMap([
-                        ["id", "intake.Q5.rg.mcg.option.4"],
-                        ["en", "None of the above"],
-                    ])
+                    content: _T("intake.Q5.rg.mcg.option.4", "None of the above")
                 },
             ]
         });
@@ -834,24 +641,15 @@ export class PeopleMet extends Item {
         return [
             text_why_asking("intake.Q5.helpGroup.text.0"),
             {
-                content: new LanguageMap([
-                    ["id", "intake.Q5.helpGroup.text.1"],
-                    ["en", "To find out whether you are likely to be exposed to more infection risk than the average person (e.g. work with children, or patients)."],
-                ]),
+                content: _T("intake.Q5.helpGroup.text.1", "To find out whether you are likely to be exposed to more infection risk than the average person (e.g. work with children, or patients)."),
                 style: [{ key: 'variant', value: 'p' }],
             },
             {
-                content: new LanguageMap([
-                    ["id", "intake.Q5.helpGroup.text.2"],
-                    ["en", "Hint:"],
-                ]),
+                content: _T("intake.Q5.helpGroup.text.2", "Hint:"),
                 style: [{ key: 'variant', value: 'h5' }],
             },
             {
-                content: new LanguageMap([
-                    ["id", "intake.Q5.helpGroup.text.3"],
-                    ["en", "Groups of people could include any setting where you come into contact with large numbers of people at once, e.g. a teacher who may contact many children in a day."],
-                ]),
+                content: _T("intake.Q5.helpGroup.text.3", "Groups of people could include any setting where you come into contact with large numbers of people at once, e.g. a teacher who may contact many children in a day."),
             },
         ]
     }
@@ -874,17 +672,11 @@ export class AgeGroups extends Item {
     getHelpGroupContent() {
         return [
             {
-                content: new LanguageMap([
-                    ["id", "intake.Q6.helpGroup.text.0"],
-                    ["en", "Why are we asking this?"],
-                ]),
+                content: _T("intake.Q6.helpGroup.text.0", "Why are we asking this?"),
                 style: [{ key: 'variant', value: 'h5' }],
             },
             {
-                content: new LanguageMap([
-                    ["id", "intake.Q6.helpGroup.text.1"],
-                    ["en", "Members of larger households, or those with children, may more likely get infected than the others."],
-                ]),
+                content: _T("intake.Q6.helpGroup.text.1", "Members of larger households, or those with children, may more likely get infected than the others."),
                 // style: [{ key: 'variant', value: 'p' }],
             },
         ];
@@ -897,10 +689,7 @@ export class AgeGroups extends Item {
 
         // QUESTION TEXT
         editor.setTitleComponent(
-            generateTitleComponent(new LanguageMap([
-                ["id", "intake.Q6.title.0"],
-                ["en", "INCLUDING YOU, how many people in each of the following age groups live in your household?"],
-            ]))
+            generateTitleComponent(_T("intake.Q6.title.0", "INCLUDING YOU, how many people in each of the following age groups live in your household?"))
         );
 
         // INFO POPUP
@@ -948,10 +737,7 @@ export class AgeGroups extends Item {
                 cells: [
                     {
                         key: 'l', role: 'label',
-                        content: new LanguageMap([
-                            ["id", "intake.Q6.rg.mat.row0.l.label.0"],
-                            ["en", "0 - 4 years"],
-                        ])
+                        content: _T("intake.Q6.rg.mat.row0.l.label.0", "0 - 4 years")
                     },
                     { ...ddg }
                 ],
@@ -961,10 +747,7 @@ export class AgeGroups extends Item {
                 cells: [
                     {
                         key: 'l', role: 'label',
-                        content: new LanguageMap([
-                            ["id", "intake.Q6.rg.mat.row1.l.label.0"],
-                            ["en", "5 - 18 years"],
-                        ])
+                        content: _T("intake.Q6.rg.mat.row1.l.label.0", "5 - 18 years")
                     },
                     { ...ddg }
                 ],
@@ -974,10 +757,7 @@ export class AgeGroups extends Item {
                 cells: [
                     {
                         key: 'l', role: 'label',
-                        content: new LanguageMap([
-                            ["id", "intake.Q6.rg.mat.row2.l.label.0"],
-                            ["en", "19 - 44 years"],
-                        ])
+                        content: _T("intake.Q6.rg.mat.row2.l.label.0", "19 - 44 years")
                     },
                     { ...ddg }
                 ]
@@ -987,10 +767,7 @@ export class AgeGroups extends Item {
                 cells: [
                     {
                         key: 'l', role: 'label',
-                        content: new LanguageMap([
-                            ["id", "intake.Q6.rg.mat.row3.l.label.0"],
-                            ["en", "45 - 64 years"],
-                        ])
+                        content: _T("intake.Q6.rg.mat.row3.l.label.0", "45 - 64 years")
                     },
                     { ...ddg }
                 ]
@@ -1000,10 +777,7 @@ export class AgeGroups extends Item {
                 cells: [
                     {
                         key: 'l', role: 'label',
-                        content: new LanguageMap([
-                            ["id", "intake.Q6.rg.mat.row4.l.label.0"],
-                            ["en", "65+"],
-                        ])
+                        content: _T("intake.Q6.rg.mat.row4.l.label.0", "65+")
                     },
                     { ...ddg }
                 ]
@@ -1073,32 +847,20 @@ export class PeopleAtRisk extends Item {
             itemKey: this.itemKey,
             isRequired: this.isRequired,
             condition: this.getCondition(),
-            questionText: new LanguageMap([
-                ["id", "intake.Q6c.title.0"],
-                ["en", "One or several of these people are they at risk of complications in case of flu or COVID-19 (e.g, pregnant, over 65, underlying health condition, obese, etc.)?"],
-            ]),
+            questionText: _T("intake.Q6c.title.0", "One or several of these people are they at risk of complications in case of flu or COVID-19 (e.g, pregnant, over 65, underlying health condition, obese, etc.)?"),
             helpGroupContent: this.getHelpGroupContent(),
             responseOptions: [
                 {
                     key: '1', role: 'option',
-                    content: new LanguageMap([
-                        ["id", "intake.Q6c.rg.scg.option.0"],
-                        ["en", "Yes"],
-                    ])
+                    content: _T("intake.Q6c.rg.scg.option.0", "Yes")
                 },
                 {
                     key: '0', role: 'option',
-                    content: new LanguageMap([
-                        ["id", "intake.Q6c.rg.scg.option.1"],
-                        ["en", "No"],
-                    ])
+                    content: _T("intake.Q6c.rg.scg.option.1", "No")
                 },
                 {
                     key: '2', role: 'option',
-                    content: new LanguageMap([
-                        ["id", "intake.Q6c.rg.scg.option.2"],
-                        ["en", "Don't know/would rather not answer"],
-                    ])
+                    content: _T("intake.Q6c.rg.scg.option.2", "Don't know/would rather not answer")
                 },
             ]
         });
@@ -1108,18 +870,12 @@ export class PeopleAtRisk extends Item {
         return [
             text_why_asking("intake.Q6c.helpGroup.text.0"),
             {
-                content: new LanguageMap([
-                    ["id", "intake.Q6c.helpGroup.text.1"],
-                    ["en", "TODO"],
-                ]),
+                content: _T("intake.Q6c.helpGroup.text.1", "TODO"),
                 style: [{ key: 'variant', value: 'p' }],
             },
             text_how_answer("intake.Q6c.helpGroup.text.2"),
             {
-                content: new LanguageMap([
-                    ["id", "intake.Q6c.helpGroup.text.3"],
-                    ["en", "TODO"],
-                ]),
+                content: _T("intake.Q6c.helpGroup.text.3", "TODO"),
             },
         ]
     }
@@ -1160,18 +916,12 @@ export class PeopleAtRisk extends Item {
             itemKey: this.itemKey,
             isRequired: this.isRequired,
             condition: this.getCondition(),
-            questionText: new LanguageMap([
-                ["id", "intake.Q6b.title.0"],
-                ["en", "How many of the children in your household go to school or day-care?"],
-            ]),
+            questionText: _T("intake.Q6b.title.0", "How many of the children in your household go to school or day-care?"),
             helpGroupContent: this.getHelpGroupContent(),
             responseOptions: [
                 {
                     key: '0', role: 'option',
-                    content: new LanguageMap([
-                        ["id", "intake.Q6b.rg.scg.option.0"],
-                        ["en", "None"],
-                    ])
+                    content: _T("intake.Q6b.rg.scg.option.0", "None")
                 },
                 {
                     key: '1', role: 'option',
@@ -1205,10 +955,7 @@ export class PeopleAtRisk extends Item {
                 },
                 {
                     key: '99', role: 'option',
-                    content: new LanguageMap([
-                        ["id", "intake.Q6b.rg.scg.option.6"],
-                        ["en", "More than 5"],
-                    ])
+                    content: _T("intake.Q6b.rg.scg.option.6", "More than 5")
                 },
             ]
         });
@@ -1218,18 +965,12 @@ export class PeopleAtRisk extends Item {
         return [
             text_why_asking("intake.Q6b.helpGroup.text.0"),
             {
-                content: new LanguageMap([
-                    ["id", "intake.Q6b.helpGroup.text.1"],
-                    ["en", "Attending school, daycare or childcare can increase the risk of contracting the coronavirus or influenza, as well as other similar illnesses. We wish to study this issue."],
-                ]),
+                content: _T("intake.Q6b.helpGroup.text.1", "Attending school, daycare or childcare can increase the risk of contracting the coronavirus or influenza, as well as other similar illnesses. We wish to study this issue."),
                 style: [{ key: 'variant', value: 'p' }],
             },
             text_how_answer( "intake.Q6b.helpGroup.text.2"),
             {
-                content: new LanguageMap([
-                    ["id", "intake.Q6b.helpGroup.text.3"],
-                    ["en", "If your child attends school, daycare or childcare (even if only one day a week), please count it. Participation in (sport) associations or other extracurricular activities does not count."],
-                ]),
+                content: _T("intake.Q6b.helpGroup.text.3", "If your child attends school, daycare or childcare (even if only one day a week), please count it. Participation in (sport) associations or other extracurricular activities does not count."),
             },
         ];
     }
@@ -1256,10 +997,7 @@ export class MeansOfTransport extends Item {
             itemKey: this.itemKey,
             isRequired: this.isRequired,
             condition: this.condition,
-            questionText: new LanguageMap([
-                ["id", "intake.Q3.title.0"],
-                ["en", "What is your home postal code?"],
-            ]),
+            questionText: _T("intake.Q3.title.0", "What is your home postal code?"),
             topDisplayCompoments: [
                 ComponentGenerators.text({
                     className: 'mb-2',
@@ -1273,45 +1011,27 @@ export class MeansOfTransport extends Item {
             responseOptions: [
                 {
                     key: '0', role: 'option',
-                    content: new LanguageMap([
-                        ["id", "intake.Q7.rg.scg.option.0"],
-                        ["en", "Walking"],
-                    ])
+                    content: _T("intake.Q7.rg.scg.option.0", "Walking")
                 },
                 {
                     key: '1', role: 'option',
-                    content: new LanguageMap([
-                        ["id", "intake.Q7.rg.scg.option.1"],
-                        ["en", "Bike"],
-                    ])
+                    content: _T("intake.Q7.rg.scg.option.1", "Bike")
                 },
                 {
                     key: '2', role: 'option',
-                    content: new LanguageMap([
-                        ["id", "intake.Q7.rg.scg.option.2"],
-                        ["en", "Motorbike/scooter"],
-                    ])
+                    content: _T("intake.Q7.rg.scg.option.2", "Motorbike/scooter")
                 },
                 {
                     key: '3', role: 'option',
-                    content: new LanguageMap([
-                        ["id", "intake.Q7.rg.scg.option.3"],
-                        ["en", "Car"],
-                    ])
+                    content: _T("intake.Q7.rg.scg.option.3", "Car")
                 },
                 {
                     key: '4', role: 'option',
-                    content: new LanguageMap([
-                        ["id", "intake.Q7.rg.scg.option.4"],
-                        ["en", "Public transportation (bus, train, tube, etc)"],
-                    ])
+                    content: _T("intake.Q7.rg.scg.option.4", "Public transportation (bus, train, tube, etc)")
                 },
                 {
                     key: '5', role: 'option',
-                    content: new LanguageMap([
-                        ["id", "intake.Q7.rg.scg.option.5"],
-                        ["en", "Other"],
-                    ])
+                    content: _T("intake.Q7.rg.scg.option.5", "Other")
                 },
             ]
         });
@@ -1322,18 +1042,12 @@ export class MeansOfTransport extends Item {
         return [
             text_why_asking("intake.Q7.helpGroup.text.0"),
             {
-                content: new LanguageMap([
-                    ["id", "intake.Q7.helpGroup.text.1"],
-                    ["en", "We want to know if people who regularly use public transportation have a higher risk of infection."],
-                ]),
+                content: _T("intake.Q7.helpGroup.text.1", "We want to know if people who regularly use public transportation have a higher risk of infection."),
                 style: [{ key: 'variant', value: 'p' }],
             },
             text_how_answer("intake.Q7.helpGroup.text.2"),
             {
-                content: new LanguageMap([
-                    ["id", "intake.Q7.helpGroup.text.3"],
-                    ["en", "Mark the box that best matches the means of transportation you most frequently use."],
-                ]),
+                content: _T("intake.Q7.helpGroup.text.3", "Mark the box that best matches the means of transportation you most frequently use."),
             },
         ];
     }
@@ -1352,53 +1066,32 @@ export class CommonColdFrequency extends Item {
             itemKey: this.itemKey,
             isRequired: this.isRequired,
             condition: this.condition,
-            questionText: new LanguageMap([
-                ["id", "intake.Q8.title.0"],
-                ["en", "How often do you have common colds or flu-like diseases?"],
-            ]),
+            questionText: _T("intake.Q8.title.0", "How often do you have common colds or flu-like diseases?"),
             helpGroupContent: this.getHelpGroupContent(),
             responseOptions: [
                 {
                     key: '0', role: 'option',
-                    content: new LanguageMap([
-                        ["id", "intake.Q8.rg.scg.option.0"],
-                        ["en", "Never"],
-                    ])
+                    content: _T("intake.Q8.rg.scg.option.0", "Never")
                 },
                 {
                     key: '1', role: 'option',
-                    content: new LanguageMap([
-                        ["id", "intake.Q8.rg.scg.option.1"],
-                        ["en", "Once or twice a year"],
-                    ])
+                    content: _T("intake.Q8.rg.scg.option.1", "Once or twice a year")
                 },
                 {
                     key: '2', role: 'option',
-                    content: new LanguageMap([
-                        ["id", "intake.Q8.rg.scg.option.2"],
-                        ["en", "Between 3 and 5 times a year"],
-                    ])
+                    content: _T("intake.Q8.rg.scg.option.2", "Between 3 and 5 times a year")
                 },
                 {
                     key: '3', role: 'option',
-                    content: new LanguageMap([
-                        ["id", "intake.Q8.rg.scg.option.3"],
-                        ["en", "Between 6 and 10 times a year"],
-                    ])
+                    content: _T("intake.Q8.rg.scg.option.3", "Between 6 and 10 times a year")
                 },
                 {
                     key: '4', role: 'option',
-                    content: new LanguageMap([
-                        ["id", "intake.Q8.rg.scg.option.4"],
-                        ["en", "More than 10 times a year"],
-                    ])
+                    content: _T("intake.Q8.rg.scg.option.4", "More than 10 times a year")
                 },
                 {
                     key: '5', role: 'option',
-                    content: new LanguageMap([
-                        ["id", "intake.Q8.rg.scg.option.5"],
-                        ["en", "I don't know"],
-                    ])
+                    content: _T("intake.Q8.rg.scg.option.5", "I don't know")
                 },
             ]
         });
@@ -1408,10 +1101,7 @@ export class CommonColdFrequency extends Item {
         return [
             text_why_asking("intake.Q8.helpGroup.text.0"),
             {
-                content: new LanguageMap([
-                    ["id", "intake.Q8.helpGroup.text.1"],
-                    ["en", "We want to know if some people have an increased risk of infection."],
-                ]),
+                content: _T("intake.Q8.helpGroup.text.1", "We want to know if some people have an increased risk of infection."),
             },
         ];
     }
@@ -1433,10 +1123,7 @@ export class RegularMedication extends Item {
             itemKey: this.itemKey,
             isRequired: this.isRequired,
             condition: this.condition,
-            questionText: new LanguageMap([
-                ["id", "intake.Q11.title.0"],
-                ["en", "Do you take regular medication for any of the following medical conditions?"],
-            ]),
+            questionText: _T("intake.Q11.title.0", "Do you take regular medication for any of the following medical conditions?"),
             topDisplayCompoments: [
                 ComponentGenerators.text({
                     className: 'mb-2',
@@ -1450,65 +1137,41 @@ export class RegularMedication extends Item {
             responseOptions: [
                 {
                     key: '0', role: 'option',
-                    content: new LanguageMap([
-                        ["id", "intake.Q11.rg.mcg.option.0"],
-                        ["en", "No"],
-                    ])
+                    content: _T("intake.Q11.rg.mcg.option.0", "No")
                 },
                 {
                     key: '1', role: 'option',
                     disabled: exclusiveOptionRule,
-                    content: new LanguageMap([
-                        ["id", "intake.Q11.rg.mcg.option.1"],
-                        ["en", "Asthma"],
-                    ])
+                    content: _T("intake.Q11.rg.mcg.option.1", "Asthma")
                 }, {
                     key: '2', role: 'option',
                     disabled: exclusiveOptionRule,
-                    content: new LanguageMap([
-                        ["id", "intake.Q11.rg.mcg.option.2"],
-                        ["en", "Diabetes"],
-                    ])
+                    content: _T("intake.Q11.rg.mcg.option.2", "Diabetes")
                 },
                 {
                     key: '3', role: 'option',
                     disabled: exclusiveOptionRule,
-                    content: new LanguageMap([
-                        ["id", "intake.Q11.rg.mcg.option.3"],
-                        ["en", "Chronic lung disorder besides asthma e.g. COPD, emphysema, or other disorders that affect your breathing"],
-                    ])
+                    content: _T("intake.Q11.rg.mcg.option.3", "Chronic lung disorder besides asthma e.g. COPD, emphysema, or other disorders that affect your breathing")
                 },
                 {
                     key: '4', role: 'option',
                     disabled: exclusiveOptionRule,
-                    content: new LanguageMap([
-                        ["id", "intake.Q11.rg.mcg.option.4"],
-                        ["en", "Heart disorder"],
-                    ])
+                    content: _T("intake.Q11.rg.mcg.option.4", "Heart disorder")
                 },
                 {
                     key: '5', role: 'option',
                     disabled: exclusiveOptionRule,
-                    content: new LanguageMap([
-                        ["id", "intake.Q11.rg.mcg.option.5"],
-                        ["en", "Kidney disorder"],
-                    ])
+                    content: _T("intake.Q11.rg.mcg.option.5", "Kidney disorder")
                 },
                 {
                     key: '6', role: 'option',
                     disabled: exclusiveOptionRule,
-                    content: new LanguageMap([
-                        ["id", "intake.Q11.rg.mcg.option.6"],
-                        ["en", "An immunocompromising condition (e.g. splenectomy, organ transplant, acquired immune deficiency, cancer treatment)"],
-                    ])
+                    content: _T("intake.Q11.rg.mcg.option.6", "An immunocompromising condition (e.g. splenectomy, organ transplant, acquired immune deficiency, cancer treatment)")
                 },
                 {
                     key: '7', role: 'option',
                     disabled: exclusiveOptionRule,
-                    content: new LanguageMap([
-                        ["id", "intake.Q11.rg.mcg.option.7"],
-                        ["en", "I would rather not answer"],
-                    ])
+                    content: _T("intake.Q11.rg.mcg.option.7", "I would rather not answer")
                 },
             ]
         });
@@ -1519,10 +1182,7 @@ export class RegularMedication extends Item {
         return [
             text_why_asking("intake.Q11.helpGroup.text.0"),
             {
-                content: new LanguageMap([
-                    ["id", "intake.Q11.helpGroup.text.1"],
-                    ["en", "This question allows us to find out whether you have other medical conditions that may increase your risk of having more severe illness if you are infected."],
-                ]),
+                content: _T("intake.Q11.helpGroup.text.1", "This question allows us to find out whether you have other medical conditions that may increase your risk of having more severe illness if you are infected."),
                 style: [{ key: 'variant', value: 'p' }],
             },
             text_how_answer("intake.Q11.helpGroup.text.2"),
@@ -1581,10 +1241,7 @@ export class Pregnancy extends Item {
         return [
             text_why_asking("intake.Q12.helpGroup.text.0"),
             {
-                content: new LanguageMap([
-                    ["id", "intake.Q12.helpGroup.text.1"],
-                    ["en", "Pregnancy is a potential risk factor for severe symptoms in the event of infection."],
-                ]),
+                content: _T("intake.Q12.helpGroup.text.1", "Pregnancy is a potential risk factor for severe symptoms in the event of infection."),
             },
         ];
     }
@@ -1599,30 +1256,18 @@ export class Pregnancy extends Item {
             itemKey: this.itemKey,
             isRequired: this.isRequired,
             condition: this.getCondition(),
-            questionText: new LanguageMap([
-                ["id", "intake.Q12.title.0"],
-                ["en", "Are you currently pregnant?"],
-            ]),
+            questionText: _T("intake.Q12.title.0", "Are you currently pregnant?"),
             helpGroupContent: this.getHelpGroupContent(),
             responseOptions: [
                 {
                     key: '0', role: 'option',
-                    content: new LanguageMap([
-                        ["id", "intake.Q12.rg.scg.option.0"],
-                        ["en", "Yes"],
-                    ])
+                    content: _T("intake.Q12.rg.scg.option.0", "Yes")
                 }, {
                     key: '1', role: 'option',
-                    content: new LanguageMap([
-                        ["id", "intake.Q12.rg.scg.option.1"],
-                        ["en", "No"],
-                    ])
+                    content: _T("intake.Q12.rg.scg.option.1", "No")
                 }, {
                     key: '2', role: 'option',
-                    content: new LanguageMap([
-                        ["id", "intake.Q12.rg.scg.option.2"],
-                        ["en", "Don't know/would rather not answer"],
-                    ])
+                    content: _T("intake.Q12.rg.scg.option.2", "Don't know/would rather not answer")
                 },
             ]
         });
@@ -1663,10 +1308,7 @@ export class PregnancyTrimester extends Item {
         return [
             text_why_asking("intake.Q12b.helpGroup.text.0"),
             {
-                content: new LanguageMap([
-                    ["id", "intake.Q12b.helpGroup.text.1"],
-                    ["en", "The risk of severe symptoms can vary depending on the pregnancy trimester, but this link has not yet been clearly established."],
-                ]),
+                content: _T("intake.Q12b.helpGroup.text.1", "The risk of severe symptoms can vary depending on the pregnancy trimester, but this link has not yet been clearly established."),
                 // style: [{ key: 'variant', value: 'p' }],
             },
         ]
@@ -1679,39 +1321,24 @@ export class PregnancyTrimester extends Item {
             itemKey: this.itemKey,
             isRequired: this.isRequired,
             condition: this.getCondition(),
-            questionText: new LanguageMap([
-                ["id", "intake.Q12b.title.0"],
-                ["en", "Which trimester of the pregnancy are you in?"],
-            ]),
+            questionText: _T("intake.Q12b.title.0", "Which trimester of the pregnancy are you in?"),
             helpGroupContent: this.getHelpGroupContent(),
             responseOptions: [
                 {
                     key: '0', role: 'option',
-                    content: new LanguageMap([
-                        ["id", "intake.Q12b.rg.scg.option.0"],
-                        ["en", "First trimester (week 1-12)"],
-                    ])
+                    content: _T("intake.Q12b.rg.scg.option.0", "First trimester (week 1-12)")
                 },
                 {
                     key: '1', role: 'option',
-                    content: new LanguageMap([
-                        ["id", "intake.Q12b.rg.scg.option.1"],
-                        ["en", "Second trimester (week 13-28)"],
-                    ])
+                    content: _T("intake.Q12b.rg.scg.option.1", "Second trimester (week 13-28)")
                 },
                 {
                     key: '2', role: 'option',
-                    content: new LanguageMap([
-                        ["id", "intake.Q12b.rg.scg.option.2"],
-                        ["en", "Third trimester (week 29-delivery)"],
-                    ])
+                    content: _T("intake.Q12b.rg.scg.option.2", "Third trimester (week 29-delivery)")
                 },
                 {
                     key: '3', role: 'option',
-                    content: new LanguageMap([
-                        ["id", "intake.Q12b.rg.scg.option.3"],
-                        ["en", "Don't know/would rather not answer"],
-                    ])
+                    content: _T("intake.Q12b.rg.scg.option.3", "Don't know/would rather not answer")
                 },
             ]
         });
@@ -1732,42 +1359,24 @@ export class Smoking extends Item {
             itemKey: this.itemKey,
             isRequired: this.isRequired,
             condition: this.condition,
-            questionText: new LanguageMap([
-                ["id", "intake.Q13.title.0"],
-                ["en", "Do you smoke tobacco?"],
-            ]),
+            questionText: _T("intake.Q13.title.0", "Do you smoke tobacco?"),
             helpGroupContent: this.getHelpGroupContent(),
             responseOptions: [
                 {
                     key: '0', role: 'option',
-                    content: new LanguageMap([
-                        ["id", "intake.Q13.rg.scg.option.0"],
-                        ["en", "No"],
-                    ])
+                    content: _T("intake.Q13.rg.scg.option.0", "No")
                 }, {
                     key: '1', role: 'option',
-                    content: new LanguageMap([
-                        ["id", "intake.Q13.rg.scg.option.1"],
-                        ["en", "Yes, occasionally"],
-                    ])
+                    content: _T("intake.Q13.rg.scg.option.1", "Yes, occasionally")
                 }, {
                     key: '2', role: 'option',
-                    content: new LanguageMap([
-                        ["id", "intake.Q13.rg.scg.option.2"],
-                        ["en", "Yes, daily, fewer than 10 times a day"],
-                    ])
+                    content: _T("intake.Q13.rg.scg.option.2", "Yes, daily, fewer than 10 times a day")
                 }, {
                     key: '3', role: 'option',
-                    content: new LanguageMap([
-                        ["id", "intake.Q13.rg.scg.option.3"],
-                        ["en", "Yes, daily, 10 or more times a day"],
-                    ])
+                    content: _T("intake.Q13.rg.scg.option.3", "Yes, daily, 10 or more times a day")
                 }, {
                     key: '4', role: 'option',
-                    content: new LanguageMap([
-                        ["id", "intake.Q13.rg.scg.option.5"],
-                        ["en", "Dont know/would rather not answer"],
-                    ])
+                    content: _T("intake.Q13.rg.scg.option.5", "Dont know/would rather not answer")
                 },
             ]
         });
@@ -1778,18 +1387,12 @@ export class Smoking extends Item {
         return [
             text_why_asking("intake.Q13.helpGroup.text.0"),
             {
-                content: new LanguageMap([
-                    ["id", "intake.Q13.helpGroup.text.1"],
-                    ["en", "Smoking might make you more likely to get a more severe dose of virus disease. We would like to test this."],
-                ]),
+                content: _T("intake.Q13.helpGroup.text.1", "Smoking might make you more likely to get a more severe dose of virus disease. We would like to test this."),
                 style: [{ key: 'variant', value: 'p' }],
             },
             text_how_answer("intake.Q13.helpGroup.text.2"),
             {
-                content: new LanguageMap([
-                    ["id", "intake.Q13.helpGroup.text.3"],
-                    ["en", "Please, answer as accurately as possible."],
-                ]),
+                content: _T("intake.Q13.helpGroup.text.3", "Please, answer as accurately as possible."),
             },
         ];
     }
@@ -1822,10 +1425,7 @@ export class Allergies extends Item {
             itemKey: this.itemKey,
             isRequired: this.isRequired,
             condition: this.condition,
-            questionText: new LanguageMap([
-                ["id", "intake.Q14.title.0"],
-                ["en", "Do you have one of the following allergies that can cause respiratory symptoms?"],
-            ]),
+            questionText: _T("intake.Q14.title.0", "Do you have one of the following allergies that can cause respiratory symptoms?"),
             helpGroupContent: this.getHelpGroupContent(),
             topDisplayCompoments: [
                 text_select_all_apply("intake.Q14.rg.7tXM.text.0")
@@ -1834,41 +1434,26 @@ export class Allergies extends Item {
                 {
                     key: '1', role: 'option',
                     disabled: exclusiveOptionRule,
-                    content: new LanguageMap([
-                        ["id", "intake.Q14.rg.mcg.option.0"],
-                        ["en", "Hay fever"],
-                    ])
+                    content: _T("intake.Q14.rg.mcg.option.0", "Hay fever")
                 },
                 {
                     key: '2', role: 'option',
                     disabled: exclusiveOptionRule,
-                    content: new LanguageMap([
-                        ["id", "intake.Q14.rg.mcg.option.1"],
-                        ["en", "Allergy against house dust mite"],
-                    ])
+                    content: _T("intake.Q14.rg.mcg.option.1", "Allergy against house dust mite")
                 },
                 {
                     key: '3', role: 'option',
                     disabled: exclusiveOptionRule,
-                    content: new LanguageMap([
-                        ["id", "intake.Q14.rg.mcg.option.2"],
-                        ["en", "Allergy against domestic animals or pets"],
-                    ])
+                    content: _T("intake.Q14.rg.mcg.option.2", "Allergy against domestic animals or pets")
                 },
                 {
                     key: '4', role: 'option',
                     disabled: exclusiveOptionRule,
-                    content: new LanguageMap([
-                        ["id", "intake.Q14.rg.mcg.option.3"],
-                        ["en", "Other allergies that cause respiratory symptoms (e.g. sneezing, runny eyes)"],
-                    ])
+                    content: _T("intake.Q14.rg.mcg.option.3", "Other allergies that cause respiratory symptoms (e.g. sneezing, runny eyes)")
                 },
                 {
                     key: noAllergyCode, role: 'option',
-                    content: new LanguageMap([
-                        ["id", "intake.Q14.rg.mcg.option.4"],
-                        ["en", "I do not have an allergy that causes respiratory symptoms"],
-                    ])
+                    content: _T("intake.Q14.rg.mcg.option.4", "I do not have an allergy that causes respiratory symptoms")
                 },
             ]
         });
@@ -1878,18 +1463,12 @@ export class Allergies extends Item {
         return [
             text_why_asking("intake.Q14.helpGroup.text.0"),
             {
-                content: new LanguageMap([
-                    ["id", "intake.Q14.helpGroup.text.1"],
-                    ["en", "Certain allergies provoke the same symptoms as respiratory infections."],
-                ]),
+                content: _T("intake.Q14.helpGroup.text.1", "Certain allergies provoke the same symptoms as respiratory infections."),
                 style: [{ key: 'variant', value: 'p' }],
             },
             text_how_answer( "intake.Q14.helpGroup.text.2"),
             {
-                content: new LanguageMap([
-                    ["id", "intake.Q14.helpGroup.text.3"],
-                    ["en", "Multiple answers are possible, mark all that apply."],
-                ]),
+                content: _T("intake.Q14.helpGroup.text.3", "Multiple answers are possible, mark all that apply."),
             },
         ];
     }
@@ -1918,48 +1497,30 @@ export class SpecialDiet extends Item {
             itemKey: this.itemKey,
             isRequired: this.isRequired,
             condition: this.condition,
-            questionText: new LanguageMap([
-                ["id", "intake.Q15.title.0"],
-                ["en", "Do you follow a special diet?"],
-            ]),
+            questionText: _T("intake.Q15.title.0", "Do you follow a special diet?"),
             topDisplayCompoments: [
                 text_select_all_apply("intake.Q15.rg.mVmB.text.0")
             ],
             responseOptions: [
                 {
                     key: '0', role: 'option',
-                    content: new LanguageMap([
-                        ["id", "intake.Q15.rg.mcg.option.0"],
-                        ["en", "No special diet"],
-                    ])
+                    content: _T("intake.Q15.rg.mcg.option.0", "No special diet")
                 }, {
                     key: '1', role: 'option',
                     disabled: exclusiveOptionRule,
-                    content: new LanguageMap([
-                        ["id", "intake.Q15.rg.mcg.option.1"],
-                        ["en", "Vegetarian"],
-                    ])
+                    content: _T("intake.Q15.rg.mcg.option.1", "Vegetarian")
                 }, {
                     key: '2', role: 'option',
                     disabled: exclusiveOptionRule,
-                    content: new LanguageMap([
-                        ["id", "intake.Q15.rg.mcg.option.2"],
-                        ["en", "Veganism"],
-                    ])
+                    content: _T("intake.Q15.rg.mcg.option.2", "Veganism")
                 }, {
                     key: '3', role: 'option',
                     disabled: exclusiveOptionRule,
-                    content: new LanguageMap([
-                        ["id", "intake.Q15.rg.mcg.option.3"],
-                        ["en", "Low-calorie"],
-                    ])
+                    content: _T("intake.Q15.rg.mcg.option.3", "Low-calorie")
                 }, {
                     key: '4', role: 'option',
                     disabled: exclusiveOptionRule,
-                    content: new LanguageMap([
-                        ["id", "intake.Q15.rg.mcg.option.4"],
-                        ["en", "Other"],
-                    ])
+                    content: _T("intake.Q15.rg.mcg.option.4", "Other")
                 },
             ]
         });
@@ -1991,39 +1552,24 @@ export class HomeophaticMedicine extends Item {
             itemKey: this.itemKey,
             isRequired: this.isRequired,
             condition: this.condition,
-            questionText: new LanguageMap([
-                ["id", "intake.Q26.title.0"],
-                ["en", "Are you taking or do you plan to take this winter homeopathic medicine in order to prevent COVID-19?"],
-            ]),
+            questionText: _T("intake.Q26.title.0", "Are you taking or do you plan to take this winter homeopathic medicine in order to prevent COVID-19?"),
             helpGroupContent: this.getHelpGroupContent(),
             responseOptions: [
                 {
                     key: '1', role: 'option',
-                    content: new LanguageMap([
-                        ["id", "intake.Q26.rg.scg.option.0"],
-                        ["en", "Yes"],
-                    ])
+                    content: _T("intake.Q26.rg.scg.option.0", "Yes")
                 },
                 {
                     key: '0', role: 'option',
-                    content: new LanguageMap([
-                        ["id", "intake.Q26.rg.scg.option.1"],
-                        ["en", "No"],
-                    ])
+                    content: _T("intake.Q26.rg.scg.option.1", "No")
                 },
                 {
                     key: '2', role: 'option',
-                    content: new LanguageMap([
-                        ["id", "intake.Q26.rg.scg.option.2"],
-                        ["en", "I don't know"],
-                    ])
+                    content: _T("intake.Q26.rg.scg.option.2", "I don't know")
                 },
                 {
                     key: '3', role: 'option',
-                    content: new LanguageMap([
-                        ["id", "intake.Q26.rg.scg.option.3"],
-                        ["en", "I don't want to answer"],
-                    ])
+                    content: _T("intake.Q26.rg.scg.option.3", "I don't want to answer")
                 },
             ]
         });
@@ -2034,10 +1580,7 @@ export class HomeophaticMedicine extends Item {
         return [
             text_why_asking("intake.Q26.helpGroup.text.0"),
             {
-                content: new LanguageMap([
-                    ["id", "intake.Q26.helpGroup.text.1"],
-                    ["en", "We are interested in knowing more about your health-related habits"],
-                ]),
+                content: _T("intake.Q26.helpGroup.text.1", "We are interested in knowing more about your health-related habits"),
             },
         ];
     }
@@ -2064,10 +1607,7 @@ export class FindOutAboutPlatform extends Item {
             itemKey: this.itemKey,
             isRequired: this.isRequired,
             condition: this.condition,
-            questionText: new LanguageMap([
-                ["id", "intake.Q17.title.0"],
-                ["en", "Where did you first hear about the platform?"],
-            ]),
+            questionText: _T("intake.Q17.title.0", "Where did you first hear about the platform?"),
             helpGroupContent: this.getHelpGroupContent(),
             topDisplayCompoments: [
                 text_select_all_apply("intake.Q17.rg.hIai.text.0"),
@@ -2075,52 +1615,31 @@ export class FindOutAboutPlatform extends Item {
             responseOptions: [
                 {
                     key: '0', role: 'option',
-                    content: new LanguageMap([
-                        ["id", "intake.Q17.rg.mcg.option.0"],
-                        ["en", "Radio or television"],
-                    ])
+                    content: _T("intake.Q17.rg.mcg.option.0", "Radio or television")
                 },
                 {
                     key: '1', role: 'option',
-                    content: new LanguageMap([
-                        ["id", "intake.Q17.rg.mcg.option.1"],
-                        ["en", "In the newspaper or in a magazine"],
-                    ])
+                    content: _T("intake.Q17.rg.mcg.option.1", "In the newspaper or in a magazine")
                 },
                 {
                     key: '2', role: 'option',
-                    content: new LanguageMap([
-                        ["id", "intake.Q17.rg.mcg.option.2"],
-                        ["en", "The internet (a website, link, a search engine)"],
-                    ])
+                    content: _T("intake.Q17.rg.mcg.option.2", "The internet (a website, link, a search engine)")
                 },
                 {
                     key: '3', role: 'option',
-                    content: new LanguageMap([
-                        ["id", "intake.Q17.rg.mcg.option.3"],
-                        ["en", "By poster"],
-                    ])
+                    content: _T("intake.Q17.rg.mcg.option.3", "By poster")
                 },
                 {
                     key: '4', role: 'option',
-                    content: new LanguageMap([
-                        ["id", "intake.Q17.rg.mcg.option.4"],
-                        ["en", "Via family or friends"],
-                    ])
+                    content: _T("intake.Q17.rg.mcg.option.4", "Via family or friends")
                 },
                 {
                     key: '5', role: 'option',
-                    content: new LanguageMap([
-                        ["id", "intake.Q17.rg.mcg.option.5"],
-                        ["en", "Via school or work"],
-                    ])
+                    content: _T("intake.Q17.rg.mcg.option.5", "Via school or work")
                 },
                 {
                     key: '99', role: 'option',
-                    content: new LanguageMap([
-                        ["id", "intake.Q17.rg.mcg.option.6"],
-                        ["en", "Other"],
-                    ])
+                    content: _T("intake.Q17.rg.mcg.option.6", "Other")
                 },
             ]
         });
@@ -2130,10 +1649,7 @@ export class FindOutAboutPlatform extends Item {
         return [
             text_why_asking("intake.Q17.helpGroup.text.0"),
             {
-                content: new LanguageMap([
-                    ["id", "intake.Q17.helpGroup.text.1"],
-                    ["en", "We would like to know how you found out about our website infectieradar.be."],
-                ]),
+                content: _T("intake.Q17.helpGroup.text.1", "We would like to know how you found out about our website infectieradar.be."),
             },
         ];
     }
@@ -2147,10 +1663,7 @@ export class FinalText extends Item {
     buildItem() {
         return SurveyItems.surveyEnd(
             this.parentKey,
-            new LanguageMap([
-                ["id", "intake.surveyEnd.title.0"],
-                ["en", "Thank you! This was all for now, please submit (push « send ») your responses. Please come back or continue reporting symptoms you experience during the last week."],
-            ]),
+            _T("intake.surveyEnd.title.0", "Thank you! This was all for now, please submit (push « send ») your responses. Please come back or continue reporting symptoms you experience during the last week."),
             this.condition,
         )
     }

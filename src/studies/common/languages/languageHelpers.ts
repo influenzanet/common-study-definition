@@ -46,3 +46,16 @@ export class LanguageHelpers {
     return "[ERROR] Translation missing";
   }
 }
+
+/**
+ * Language translation entry helper
+ * @param id id of the translations
+ * @param en english base version (This english version is targetting translators more than participants)
+ * @returns 
+ */
+export function _T(id:string, en:string): LanguageMap {
+  return  new LanguageMap([
+          ["id", id],
+          ["en", en],
+      ]);
+}

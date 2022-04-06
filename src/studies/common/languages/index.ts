@@ -1,1 +1,2 @@
-export { LanguageMap } from "./languageHelpers";
+export { LanguageMap, _T } from "./languageHelpers";
+

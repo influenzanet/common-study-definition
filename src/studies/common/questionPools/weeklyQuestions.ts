@@ -1,4 +1,4 @@
-import { LanguageMap } from "../languages"
+import { LanguageMap, _T } from "../languages"
 import { Group, Item } from "case-editor-tools/surveys/types";
 import { ItemEditor } from "case-editor-tools/surveys/survey-editor/item-editor";
 import { initMatrixQuestion,  ResponseRowCell } from "case-editor-tools/surveys/responseTypeGenerators/matrixGroupComponent";
@@ -94,17 +94,17 @@ export class Symptoms extends Item {
             parentKey: this.parentKey,
             itemKey: this.itemKey,
             isRequired: this.isRequired,
-            questionText: new LanguageMap([
-                ["id", "weekly.Q1.title.0"],
-                ["en", "Have you had any of the following symptoms since your last questionnaire (or in the past week, if this the first tie you are taking this questionnaire)?"],
-            ]),
+            questionText: _T(
+                "weekly.Q1.title.0", 
+                "Have you had any of the following symptoms since your last questionnaire (or in the past week, if this the first tie you are taking this questionnaire)?"
+            ),
             helpGroupContent: this.getHelpGroupContent(),
             bottomDisplayCompoments: [
                 ComponentGenerators.text({
-                    'content': new LanguageMap([
-                        ["id", "weekly.Q1.rg.cGJZ.text.0"],
-                        ["en", "Multiple answers possible. If you suffer from chronic illness, only indicate symptoms that have changed. For example, if you experience chronic shortness of breath, only mark this symptom if it has recently gotten worse."],
-                    ]),
+                    content: _T(
+                        "weekly.Q1.rg.cGJZ.text.0", 
+                        "Multiple answers possible. If you suffer from chronic illness, only indicate symptoms that have changed. For example, if you experience chronic shortness of breath, only mark this symptom if it has recently gotten worse."
+                    ),
                 })
             ],
             responseOptions: this.getResponses()
@@ -112,181 +112,117 @@ export class Symptoms extends Item {
     }
 
     getResponses() {
-        const exclusiveOptionRule =  expWithArgs('responseHasKeysAny', this.key, responseGroupKey + '.' + multipleChoiceKey, ResponseEncoding.symptoms.no_symptom);
+        const exclusiveOptionRule =  se.multipleChoice.any(this.key, ResponseEncoding.symptoms.no_symptom);
         const r =  [
             {
-                key: ResponseEncoding.symptoms.no_symptom, role: 'option', content: new LanguageMap([
-                    ["id", "weekly.Q1.rg.mcg.option.0"],
-                    ["en", "No symptoms"],
-                ])
+                key: ResponseEncoding.symptoms.no_symptom, 
+                role: 'option', 
+                content: _T("weekly.Q1.rg.mcg.option.0", "No symptoms"),
             },
             {
                 key: '1', role: 'option',
                 disabled:exclusiveOptionRule,
-                content: new LanguageMap([
-                    ["id", "weekly.Q1.rg.mcg.option.1"],
-                    ["en", "Fever"],
-                ])
+                content: _T( "weekly.Q1.rg.mcg.option.1", "Fever")
             },
             {
                 key: '2', role: 'option',
                 disabled: exclusiveOptionRule,
-                content: new LanguageMap([
-                    ["id", "weekly.Q1.rg.mcg.option.2"],
-                    ["en", "Chills"],
-                ])
+                content: _T("weekly.Q1.rg.mcg.option.2", "Chills")
             },
             {
                 key: '3', role: 'option',
                 disabled: exclusiveOptionRule,
-                content: new LanguageMap([
-                    ["id", "weekly.Q1.rg.mcg.option.3"],
-                    ["en", "Runny or blocked nose"],
-                ])
+                content: _T("weekly.Q1.rg.mcg.option.3", "Runny or blocked nose")
             },
             {
                 key: '4', role: 'option',
                 disabled: exclusiveOptionRule,
-                content: new LanguageMap([
-                    ["id", "weekly.Q1.rg.mcg.option.4"],
-                    ["en", "Sneezing"],
-                ])
+                content: _T("weekly.Q1.rg.mcg.option.4","Sneezing")
             },
             {
                 key: '5', role: 'option',
                 disabled: exclusiveOptionRule,
-                content: new LanguageMap([
-                    ["id", "weekly.Q1.rg.mcg.option.5"],
-                    ["en", "Sore throat"],
-                ])
+                content: _T( "weekly.Q1.rg.mcg.option.5", "Sore throat")
             },
             {
                 key: '6', role: 'option',
                 disabled:exclusiveOptionRule,
-                content: new LanguageMap([
-                    ["id", "weekly.Q1.rg.mcg.option.6"],
-                    ["en", "Cough"],
-                ])
+                content: _T("weekly.Q1.rg.mcg.option.6", "Cough")
             },
             {
                 key: '7', role: 'option',
                 disabled: exclusiveOptionRule,
-                content: new LanguageMap([
-                    ["id", "weekly.Q1.rg.mcg.option.7"],
-                    ["en", "Shortness of breath"],
-                ])
+                content: _T( "weekly.Q1.rg.mcg.option.7", "Shortness of breath")
             },
             {
                 key: '8', role: 'option',
                 disabled: exclusiveOptionRule,
-                content: new LanguageMap([
-                    ["id", "weekly.Q1.rg.mcg.option.8"],
-                    ["en", "Headache"],
-                ])
+                content: _T("weekly.Q1.rg.mcg.option.8", "Headache")
             },
             {
                 key: '9', role: 'option',
                 disabled: exclusiveOptionRule,
-                content: new LanguageMap([
-                    ["id", "weekly.Q1.rg.mcg.option.9"],
-                    ["en", "Muscle/joint pain"],
-                ])
+                content: _T( "weekly.Q1.rg.mcg.option.9", "Muscle/joint pain")
             },
             {
                 key: '10', role: 'option',
                 disabled: exclusiveOptionRule,
-                content: new LanguageMap([
-                    ["id", "weekly.Q1.rg.mcg.option.10"],
-                    ["en", "Chest pain"],
-                ])
+                content: _T( "weekly.Q1.rg.mcg.option.10", "Chest pain")
             },
             {
                 key: '11', role: 'option',
                 disabled: exclusiveOptionRule,
-                content: new LanguageMap([
-                    ["id", "weekly.Q1.rg.mcg.option.11"],
-                    ["en", "Feeling tired or exhausted (malaise)"],
-                ])
+                content: _T("weekly.Q1.rg.mcg.option.11", "Feeling tired or exhausted (malaise)")
             },
             {
                 key: '12', role: 'option',
                 disabled: exclusiveOptionRule,
-                content: new LanguageMap([
-                    ["id", "weekly.Q1.rg.mcg.option.12"],
-                    ["en", "Loss of appetite"],
-                ])
+                content: _T( "weekly.Q1.rg.mcg.option.12", "Loss of appetite")
             },
             {
                 key: '13', role: 'option',
                 disabled: exclusiveOptionRule,
-                content: new LanguageMap([
-                    ["id", "weekly.Q1.rg.mcg.option.13"],
-                    ["en", "Coloured sputum/phlegm"],
-                ])
+                content: _T( "weekly.Q1.rg.mcg.option.13", "Coloured sputum/phlegm")
             },
             {
                 key: '14', role: 'option',
                 disabled: exclusiveOptionRule,
-                content: new LanguageMap([
-                    ["id", "weekly.Q1.rg.mcg.option.14"],
-                    ["en", "Watery, bloodshot eyes"],
-                ])
+                content: _T( "weekly.Q1.rg.mcg.option.14", "Watery, bloodshot eyes")
             },
             {
                 key: '15', role: 'option',
                 disabled: exclusiveOptionRule,
-                content: new LanguageMap([
-                    ["id", "weekly.Q1.rg.mcg.option.15"],
-                    ["en", "Nausea"],
-                ])
+                content: _T("weekly.Q1.rg.mcg.option.15", "Nausea")
             },
             {
                 key: '16', role: 'option',
                 disabled: exclusiveOptionRule,
-                content: new LanguageMap([
-                    ["id", "weekly.Q1.rg.mcg.option.16"],
-                    ["en", "Vomiting"],
-                ])
+                content: _T("weekly.Q1.rg.mcg.option.16",  "Vomiting")
             },
             {
                 key: '17', role: 'option',
                 disabled: exclusiveOptionRule,
-                content: new LanguageMap([
-                    ["id", "weekly.Q1.rg.mcg.option.17"],
-                    ["en", "Diarrhoea (at least three times a day)"],
-                ])
+                content: _T( "weekly.Q1.rg.mcg.option.17", "Diarrhoea (at least three times a day)")
             },
             {
                 key: '18', role: 'option',
                 disabled: exclusiveOptionRule,
-                content: new LanguageMap([
-                    ["id", "weekly.Q1.rg.mcg.option.18"],
-                    ["en", "Stomachache"],
-                ])
+                content: _T( "weekly.Q1.rg.mcg.option.18", "Stomachache")
             },
             {
                 key: '23', role: 'option',
                 disabled: exclusiveOptionRule,
-                content: new LanguageMap([
-                    ["id", "weekly.Q1.rg.mcg.option.19"],
-                    ["en", "Loss of smell"],
-                ])
+                content: _T("weekly.Q1.rg.mcg.option.19", "Loss of smell")
             },
             {
                 key: '21', role: 'option',
                 disabled: exclusiveOptionRule,
-                content: new LanguageMap([
-                    ["id", "weekly.Q1.rg.mcg.option.20"],
-                    ["en", "Loss of taste"],
-                ])
+                content: _T( "weekly.Q1.rg.mcg.option.20", "Loss of taste"),
             },
             {
                 key: '22', role: 'option',
                 disabled: exclusiveOptionRule,
-                content: new LanguageMap([
-                    ["id", "weekly.Q1.rg.mcg.option.21"],
-                    ["en", "Nose bleed"],
-                ])
+                content: _T("weekly.Q1.rg.mcg.option.21","Nose bleed"),
             },
         ];
 
@@ -295,10 +231,7 @@ export class Symptoms extends Item {
             r.push({
                 key: '20', role: 'option',
                 disabled: exclusiveOptionRule,
-                content: new LanguageMap([
-                    ["id", "weekly.Q1.rg.mcg.option.22"],
-                    ["en", "Rash"],
-                ])
+                content: _T( "weekly.Q1.rg.mcg.option.22","Rash")
             });
         }
 
@@ -307,10 +240,7 @@ export class Symptoms extends Item {
             {
                 key: '19', role: 'option',
                 disabled: exclusiveOptionRule,
-                content: new LanguageMap([
-                    ["id", "weekly.Q1.rg.mcg.option.23"],
-                    ["en", "Other"],
-                ]),
+                content: _T( "weekly.Q1.rg.mcg.option.23", "Other"),
             });
         }
 
@@ -321,18 +251,18 @@ export class Symptoms extends Item {
        return [
             text_why_asking("weekly.Q1.helpGroup.text.0"),
             {
-                content: new LanguageMap([
-                    ["id", "weekly.Q1.helpGroup.text.1"],
-                    ["en", "The most important part of this study is about following up on the symptoms you have reported."],
-                ]),
+                content: _T(
+                    "weekly.Q1.helpGroup.text.1", 
+                    "The most important part of this study is about following up on the symptoms you have reported."
+                ),
                 style: [{ key: 'variant', value: 'p' }],
             },
             text_how_answer("weekly.Q1.helpGroup.text.2"),
             {
-                content: new LanguageMap([
-                    ["id", "weekly.Q1.helpGroup.text.3"],
-                    ["en", "If you suffer from chronic illness, only indicate symptoms that have changed. For example, if you experience chronic shortness of breath, only mark this symptom if it has recently gotten worse. Multiple answers possible."],
-                ]),
+                content: _T( 
+                    "weekly.Q1.helpGroup.text.3",
+                    "If you suffer from chronic illness, only indicate symptoms that have changed. For example, if you experience chronic shortness of breath, only mark this symptom if it has recently gotten worse. Multiple answers possible."
+                ),
             },
         ];
     }
@@ -350,7 +280,7 @@ class HasSymptomsGroup extends Group {
     keySymptomsQuestion: string;
 
     getCondition() {
-        return se.responseHasOnlyKeysOtherThan(keySymptomsQuestion, MultipleChoicePrefix, ResponseEncoding.symptoms.no_symptom);
+        return se.responseHasOnlyKeysOtherThan(this.keySymptomsQuestion, MultipleChoicePrefix, ResponseEncoding.symptoms.no_symptom);
     }
 
     constructor(parentKey: string, keySymptomsQuestion: string, defaultKey: string) {
@@ -392,17 +322,17 @@ export class SameIllnes extends Item {
             itemKey: this.itemKey,
             isRequired: this.isRequired,
             condition: this.getCondition(),
-            questionText: new LanguageMap([
-                ["id", "weekly.HS.Q2.title.0"],
-                ["en", "When you filled in the previous questionnaire, you indicated that you were still sick. Are the symptoms you are  reporting now from the same timeframe as the symptoms you reported the last time?"],
-             ]),
+            questionText: _T( 
+                "weekly.HS.Q2.title.0", 
+                "When you filled in the previous questionnaire, you indicated that you were still sick. Are the symptoms you are  reporting now from the same timeframe as the symptoms you reported the last time?"
+                ),
             helpGroupContent: this.getHelpGroupContent(),
             bottomDisplayCompoments: [
                 ComponentGenerators.text({
-                    'content': new LanguageMap([
-                        ["id", "vaccination.Q0.privacy.note"],
-                        ["en", "(**) By selecting one of these options you give your consent to use your historical data to prefill this survey's responses."],
-                    ])
+                    'content': _T( 
+                        "vaccination.Q0.privacy.note",
+                        "(**) By selecting one of these options you give your consent to use your historical data to prefill this survey's responses."
+                    )
                 })
             ],
             responseOptions: this.getResponses()
@@ -413,31 +343,19 @@ export class SameIllnes extends Item {
         return [
             {
                 key: '0', role: 'option',
-                content: new LanguageMap([
-                    ["id", "weekly.HS.Q2.rg.scg.option.0"],
-                    ["en", "Yes"],
-                ])
+                content: _T("weekly.HS.Q2.rg.scg.option.0", "Yes")
             },
             {
                 key: '1', role: 'option',
-                content: new LanguageMap([
-                    ["id", "weekly.HS.Q2.rg.scg.option.1"],
-                    ["en", "No"],
-                ])
+                content: _T("weekly.HS.Q2.rg.scg.option.1", "No")
             },
             {
                 key: '2', role: 'option',
-                content: new LanguageMap([
-                    ["id", "weekly.HS.Q2.rg.scg.option.2"],
-                    ["en", "I don’t know/can’t remember"],
-                ])
+                content: _T("weekly.HS.Q2.rg.scg.option.2", "I don’t know/can’t remember")
             },
             {
                 key: '9', role: 'option',
-                content: new LanguageMap([
-                    ["id", "weekly.HS.Q2.rg.scg.option.3"],
-                    ["en", "This does not apply to me"],
-                ])
+                content: _T("weekly.HS.Q2.rg.scg.option.3", "This does not apply to me")
             },
         ];
     }
@@ -446,23 +364,16 @@ export class SameIllnes extends Item {
         return [
             text_why_asking("weekly.HS.Q2.helpGroup.text.0"),
             {
-                content: new LanguageMap([
-                    ["id", "weekly.HS.Q2.helpGroup.text.1"],
-                    ["en", "To speed up the completion of the rest of the questionnaire."],
-                ]),
+                content: _T("weekly.HS.Q2.helpGroup.text.1", "To speed up the completion of the rest of the questionnaire."),
                 style: [{ key: 'variant', value: 'p' }],
             },
             text_how_answer("weekly.HS.Q2.helpGroup.text.2"),
             {
-                content: new LanguageMap([
-                    ["id", "weekly.HS.Q2.helpGroup.text.3"],
-                    ["en", "If you think that the complaints you are indicating today are caused by the same infection or the same problem (the same period during which you experienced the complaints), answer 'yes'."],
-                ]),
+                content: _T("weekly.HS.Q2.helpGroup.text.3", "If you think that the complaints you are indicating today are caused by the same infection or the same problem (the same period during which you experienced the complaints), answer 'yes'."),
             },
         ];
     }
 }
-
 
 /**
  * SYMPTOMS START
@@ -499,10 +410,10 @@ export class SymptomsStart extends Item {
             itemKey: this.itemKey,
             isRequired: this.isRequired,
             condition: this.getCondition(),
-            questionText: new LanguageMap([
-                ["id", "weekly.HS.Q3.title.0"],
-                ["en", "On what day did you begin feeling the first symptoms? If you do not recall the exact date, please give an approximate date."],
-            ]),
+            questionText: _T( 
+                "weekly.HS.Q3.title.0",
+                "On what day did you begin feeling the first symptoms? If you do not recall the exact date, please give an approximate date."         
+            ),
             helpGroupContent: this.getHelpGroupContent(),
             responseOptions: [
                 {
@@ -511,17 +422,11 @@ export class SymptomsStart extends Item {
                         min: { dtype: 'exp', exp: expWithArgs('timestampWithOffset', -5184000) },
                         max: { dtype: 'exp', exp: expWithArgs('timestampWithOffset', 10) },
                     },
-                    content: new LanguageMap([
-                        ["id", "weekly.HS.Q3.rg.scg.dateInput.0"],
-                        ["en", "Choose date"],
-                    ])
+                    content: _T( "weekly.HS.Q3.rg.scg.dateInput.0", "Choose date"),
                 },
                 {
                     key: '1', role: 'option',
-                    content: new LanguageMap([
-                        ["id", "weekly.HS.Q3.rg.scg.option.1"],
-                        ["en", "I don't know/can't remember"],
-                    ])
+                    content: _T("weekly.HS.Q3.rg.scg.option.1", "I don't know/can't remember"),
                 },
             ]
         });
@@ -535,18 +440,15 @@ export class SymptomsStart extends Item {
         return [
             text_why_asking( "weekly.HS.Q3.helpGroup.text.0"),
             {
-                content: new LanguageMap([
-                    ["id", "weekly.HS.Q3.helpGroup.text.1"],
-                    ["en", "This question will help us to determine how many people are experiencing symptoms per day/week."],
-                ]),
+                content: _T(
+                    "weekly.HS.Q3.helpGroup.text.1", 
+                    "This question will help us to determine how many people are experiencing symptoms per day/week."
+                ),
                 style: [{ key: 'variant', value: 'p' }],
             },
             text_how_answer("weekly.HS.Q3.helpGroup.text.2"),
             {
-                content: new LanguageMap([
-                    ["id", "weekly.HS.Q3.helpGroup.text.3"],
-                    ["en", "Answer as precisely as possible."],
-                ]),
+                content: _T( "weekly.HS.Q3.helpGroup.text.3", "Answer as precisely as possible.")
             },
         ]
     }
@@ -577,12 +479,8 @@ export class SymptomsEnd extends Item {
             itemKey: this.itemKey,
             isRequired: this.isRequired,
             //condition: this.getCondition(),
-            questionText: new LanguageMap([
-                ["id", "weekly.HS.Q4.title.0"],
-                ["en", "When did your symptoms end?"],
-            ]),
+            questionText: _T( "weekly.HS.Q4.title.0", "When did your symptoms end?"),
             helpGroupContent: this.getHelpGroupContent(),
-            
             responseOptions: [
                 {
                     key: '0', role: 'dateInput',
@@ -599,24 +497,15 @@ export class SymptomsEnd extends Item {
                         },
                         max: { dtype: 'exp', exp: expWithArgs('timestampWithOffset', 10) },
                     },
-                    content: new LanguageMap([
-                        ["id", "weekly.HS.Q4.rg.scg.dateInput.0"],
-                        ["en", "Choose date"],
-                    ])
+                    content: _T("weekly.HS.Q4.rg.scg.dateInput.0", "Choose date"),
                 },
                 {
                     key: '1', role: 'option',
-                    content: new LanguageMap([
-                        ["id", "weekly.HS.Q4.rg.scg.option.1"],
-                        ["en", "I don't know/can't remember"],
-                    ])
+                    content: _T( "weekly.HS.Q4.rg.scg.option.1", "I don't know/can't remember")
                 },
                 {
                     key: '2', role: 'option',
-                    content: new LanguageMap([
-                        ["id", "weekly.HS.Q4.rg.scg.option.2"],
-                        ["en", "I am still ill"],
-                    ])
+                    content: _T( "weekly.HS.Q4.rg.scg.option.2", "I am still ill")
                 },
             ]
         });
@@ -626,18 +515,15 @@ export class SymptomsEnd extends Item {
         return [
             text_why_asking("weekly.HS.Q4.helpGroup.text.0"),
             {
-                content: new LanguageMap([
-                    ["id", "weekly.HS.Q4.helpGroup.text.1"],
-                    ["en", "We can use the first and last dates of the complaints to calculate how long your complaints lasted. "],
-                ]),
+                content: _T( 
+                    "weekly.HS.Q4.helpGroup.text.1",
+                    "We can use the first and last dates of the complaints to calculate how long your complaints lasted. "
+                ),
                 style: [{ key: 'variant', value: 'p' }],
             },
             text_how_answer("weekly.HS.Q4.helpGroup.text.2"),
             {
-                content: new LanguageMap([
-                    ["id", "weekly.HS.Q4.helpGroup.text.3"],
-                    ["en", "Answer as precisely as possible."],
-                ]),
+                content: _T( "weekly.HS.Q4.helpGroup.text.3", "Answer as precisely as possible.")
             },
         ];
     }
@@ -663,10 +549,7 @@ export class SymptomsSuddenlyDeveloped extends Item {
             itemKey: this.itemKey,
             isRequired: this.isRequired,
             //condition: this.getCondition(),
-            questionText: new LanguageMap([
-                ["id", "weekly.HS.Q5.title.0"],
-                ["en", "Did your symptoms develop suddenly over a few hours?"],
-            ]),
+            questionText: _T( "weekly.HS.Q5.title.0", "Did your symptoms develop suddenly over a few hours?"),
             helpGroupContent: this.getHelpGroupContent(),
             responseOptions: this.getResponses()
         });
@@ -676,25 +559,16 @@ export class SymptomsSuddenlyDeveloped extends Item {
         return [
             {
                 key: '0', role: 'option',
-                content: new LanguageMap([
-                    ["id", "weekly.HS.Q5.rg.scg.option.0"],
-                    ["en", "Yes"],
-                ])
+                content: _T( "weekly.HS.Q5.rg.scg.option.0", "Yes"),
             },
             {
                 key: '1', role: 'option',
-                content: new LanguageMap([
-                    ["id", "weekly.HS.Q5.rg.scg.option.1"],
-                    ["en", "No"],
-                ])
+                content: _T( "weekly.HS.Q5.rg.scg.option.1", "No"),
+                )
             },
             {
                 key: '2', role: 'option',
-                content: new LanguageMap([
-                    ["id", "weekly.HS.Q5.rg.scg.option.2"],
-                    ["en", "I don’t know/can’t remember"],
-    
-                ])
+                content: _T( "weekly.HS.Q5.rg.scg.option.2", "I don’t know/can’t remember")
             },
         ];
     }
@@ -703,18 +577,12 @@ export class SymptomsSuddenlyDeveloped extends Item {
         return [
             text_why_asking("weekly.HS.Q5.helpGroup.text.0"),
             {
-                content: new LanguageMap([
-                    ["id", "weekly.HS.Q5.helpGroup.text.1"],
-                    ["en", "The sudden onset of symptoms (within a few hours) is linked to the coronavirus and influenza."],
-                ]),
+                content: _T(  "weekly.HS.Q5.helpGroup.text.1", "The sudden onset of symptoms (within a few hours) is linked to the coronavirus and influenza."),
                 style: [{ key: 'variant', value: 'p' }],
             },
             text_how_answer("weekly.HS.Q5.helpGroup.text.2"),
             {
-                content: new LanguageMap([
-                    ["id", "weekly.HS.Q5.helpGroup.text.3"],
-                    ["en", "Answer “yes” if your symptoms appeared within a few hours, and not gradually over a period of several days."],
-                ]),
+                content: _T( "weekly.HS.Q5.helpGroup.text.3", "Answer “yes” if your symptoms appeared within a few hours, and not gradually over a period of several days."),
             },
         ];
     }
@@ -743,10 +611,7 @@ export class FeverStart extends Item {
             itemKey: this.itemKey,
             isRequired: this.isRequired,
             condition: this.getCondition(),
-            questionText: new LanguageMap([
-                ["id", "weekly.HS.Q6.title.0"],
-                ["en", "On what day did your fever start? If you do not recall the exact date, please give an approximate date."],
-            ]),
+            questionText: _T("weekly.HS.Q6.title.0", "On what day did your fever start? If you do not recall the exact date, please give an approximate date."),
             helpGroupContent: this.getHelpGroupContent(),
             responseOptions: [
                 {
@@ -764,18 +629,11 @@ export class FeverStart extends Item {
                         },
                         max: { dtype: 'exp', exp: se.timestampWithOffset({ seconds: 10 }) },
                     },
-                    content: new LanguageMap([
-                        ["id", "weekly.HS.Q6.rg.scg.dateInput.0"],
-                        ["en", "Choose date"],
-                    ])
+                    content: _T("weekly.HS.Q6.rg.scg.dateInput.0", "Choose date")
                 },
                 {
                     key: '2', role: 'option',
-                    content: new LanguageMap([
-                        ["id", "weekly.HS.Q6.rg.scg.option.1"],
-                        ["en", "I don’t know/can’t remember"],
-        
-                    ])
+                    content: _T( "weekly.HS.Q6.rg.scg.option.1", "I don’t know/can’t remember")
                 },
             ]
         });
@@ -784,31 +642,19 @@ export class FeverStart extends Item {
     getHelpGroupContent() {
         return [
             {
-                content: new LanguageMap([
-                    ["id", "weekly.HS.Q6.helpGroup.text.0"],
-                    ["en", "Why are we asking this question?"],
-                ]),
+                content: _T(  "weekly.HS.Q6.helpGroup.text.0", "Why are we asking this question?"),
                 style: [{ key: 'variant', value: 'h5' }],
             },
             {
-                content: new LanguageMap([
-                    ["id", "weekly.HS.Q6.helpGroup.text.1"],
-                    ["en", "Fever is an important diagnostic symptom, so we would like to know when the fever appeared."],
-                ]),
+                content:_T(  "weekly.HS.Q6.helpGroup.text.1", "Fever is an important diagnostic symptom, so we would like to know when the fever appeared."),
                 style: [{ key: 'variant', value: 'p' }],
             },
             {
-                content: new LanguageMap([
-                    ["id", "weekly.HS.Q6.helpGroup.text.2"],
-                    ["en", "How should I answer this question?"],
-                ]),
+                content: _T(  "weekly.HS.Q6.helpGroup.text.2", "How should I answer this question?"),
                 style: [{ key: 'variant', value: 'h5' }],
             },
             {
-                content: new LanguageMap([
-                    ["id", "weekly.HS.Q6.helpGroup.text.3"],
-                    ["en", "Answer as precisely as possible."],
-                ]),
+                content: _T(  "weekly.HS.Q6.helpGroup.text.3", "Answer as precisely as possible."),
                 style: [{ key: 'variant', value: 'p' }],
             },
         ]
@@ -860,11 +706,7 @@ export class FeverDevelopedSuddenly extends SymptomDependentQuestion {
             itemKey: this.itemKey,
             isRequired: this.isRequired,
             condition: this.getCondition(),
-            questionText: new LanguageMap([
-                ["id", "weekly.HS.Q6b.title.0"],
-                ["en", "Did your fever develop suddenly over a few hours?"],
-           
-            ]),
+            questionText: _T(  "weekly.HS.Q6b.title.0" , "Did your fever develop suddenly over a few hours?"),
             helpGroupContent: this.getHelpGroupContent(),
             responseOptions: this.getResponses()
         });
@@ -874,24 +716,15 @@ export class FeverDevelopedSuddenly extends SymptomDependentQuestion {
         return [
             {
                 key: '0', role: 'option',
-                content: new LanguageMap([
-                    ["id", "weekly.HS.Q6b.rg.scg.option.0"],
-                    ["en", "Yes"],
-                ])
+                content: _T(  "weekly.HS.Q6b.rg.scg.option.0", "Yes")
             },
             {
                 key: '1', role: 'option',
-                content: new LanguageMap([
-                    ["id", "weekly.HS.Q6b.rg.scg.option.1"],
-                    ["en", "No"],
-                ])
+                content: _T(  "weekly.HS.Q6b.rg.scg.option.1",  "No")
             },
             {
                 key: '3', role: 'option',
-                content: new LanguageMap([
-                    ["id", "weekly.HS.Q6b.rg.scg.option.2"],
-                    ["en", "I don’t know/can’t remember"],
-                ])
+                content: _T(  "weekly.HS.Q6b.rg.scg.option.2", "I don’t know/can’t remember")
             },
         ];
     }
@@ -900,18 +733,12 @@ export class FeverDevelopedSuddenly extends SymptomDependentQuestion {
         return [
             text_why_asking("weekly.HS.Q6b.helpGroup.text.0"),
             {
-                content: new LanguageMap([
-                    ["id", "weekly.HS.Q6b.helpGroup.text.1"],
-                    ["en", "The sudden onset of symptoms (within a few hours) is linked to the coronavirus and influenza."],
-                ]),
+                content: _T("weekly.HS.Q6b.helpGroup.text.1", "The sudden onset of symptoms (within a few hours) is linked to the coronavirus and influenza."),
                 style: [{ key: 'variant', value: 'p' }],
             },
             text_how_answer("weekly.HS.Q6b.helpGroup.text.2"),
             {
-                content: new LanguageMap([
-                    ["id", "weekly.HS.Q6b.helpGroup.text.3"],
-                    ["en", "Answer “yes” if your symptoms appeared within a few hours, and not gradually over a period of several days."],
-                ]),
+                content: _T("weekly.HS.Q6b.helpGroup.text.3", "Answer “yes” if your symptoms appeared within a few hours, and not gradually over a period of several days."),
             },
         ];
     }
@@ -937,10 +764,7 @@ export class DidUMeasureTemperature extends SymptomDependentQuestion {
             itemKey: this.itemKey,
             isRequired: this.isRequired,
             condition: this.getCondition(),
-            questionText: new LanguageMap([
-                ["id", "weekly.HS.Q6c.title.0"],
-                ["en", "Did you take your temperature?"],
-            ]),
+            questionText: _T("weekly.HS.Q6c.title.0", "Did you take your temperature?"),
             helpGroupContent: this.getHelpGroupContent(),
             responseOptions: this.getResponses()
         });
@@ -950,24 +774,15 @@ export class DidUMeasureTemperature extends SymptomDependentQuestion {
         return  [
             {
                 key: ResponseEncoding.measure_temp.yes, role: 'option',
-                content: new LanguageMap([
-                    ["id", "weekly.HS.Q6c.rg.scg.option.0"],
-                    ["en", "Yes"],
-                ])
+                content: _T("weekly.HS.Q6c.rg.scg.option.0", "Yes")
             },
             {
                 key: ResponseEncoding.measure_temp.no, role: 'option',
-                content: new LanguageMap([
-                    ["id", "weekly.HS.Q6c.rg.scg.option.1"],
-                    ["en", "No"],
-                ])
+                content: _T("weekly.HS.Q6c.rg.scg.option.1", "No")
             },
             {
                 key: ResponseEncoding.measure_temp.dont_know, role: 'option',
-                content: new LanguageMap([
-                    ["id", "weekly.HS.Q6c.rg.scg.option.2"],
-                    ["en", "I don’t know/can’t remember"],
-                ])
+                content: _T("weekly.HS.Q6c.rg.scg.option.2", "I don’t know/can’t remember")
             },
         ]
     }
@@ -976,18 +791,12 @@ export class DidUMeasureTemperature extends SymptomDependentQuestion {
         return [
             text_why_asking("weekly.HS.Q6c.helpGroup.text.0"),
             {
-                content: new LanguageMap([
-                    ["id", "weekly.HS.Q6c.helpGroup.text.1"],
-                    ["en", "If you have taken your temperature, we would like to know the highest body temperature you have measured."],
-                ]),
+                content: _T("weekly.HS.Q6c.helpGroup.text.1", "If you have taken your temperature, we would like to know the highest body temperature you have measured."),
                 style: [{ key: 'variant', value: 'p' }],
             },
             text_how_answer("weekly.HS.Q6c.helpGroup.text.2"),
             {
-                content: new LanguageMap([
-                    ["id", "weekly.HS.Q6c.helpGroup.text.3"],
-                    ["en", "Answer yes, if you took your temperature using a thermometer."],
-                ]),
+                content: _T("weekly.HS.Q6c.helpGroup.text.3", "Answer yes, if you took your temperature using a thermometer."),
             },
         ];
     }
@@ -1029,10 +838,7 @@ export class HighestTemprerature extends SymptomDependentQuestion {
             itemKey: this.itemKey,
             isRequired: this.isRequired,
             condition: this.getCondition(),
-            questionText: new LanguageMap([
-                ["id", "weekly.HS.Q6d.title.0"],
-                ["en", "What was your highest temperature measured?"],
-            ]),
+            questionText: _T("weekly.HS.Q6d.title.0", "What was your highest temperature measured?"),
             helpGroupContent: this.getHelpGroupContent(),
             responseOptions: this.getResponses()
         });
@@ -1042,52 +848,30 @@ export class HighestTemprerature extends SymptomDependentQuestion {
         return  [
             {
                 key: '0', role: 'option',
-                content: new LanguageMap([
-                    ["id", "weekly.HS.Q6d.rg.scg.option.0"],
-                    ["en", "Below 37.0°C"],
-                ])
+                content: _T("weekly.HS.Q6d.rg.scg.option.0", "Below 37.0°C")
             },
             {
                 key: '1', role: 'option',
-                content: new LanguageMap([
-                    ["id", "weekly.HS.Q6d.rg.scg.option.1"],
-                    ["en", "37.0°C - 37.4°C"],
-    
-                ])
+                content: _T("weekly.HS.Q6d.rg.scg.option.1", "37.0°C - 37.4°C")
             },
             {
                 key: '2', role: 'option',
-                content: new LanguageMap([
-                    ["id", "weekly.HS.Q6d.rg.scg.option.2"],
-                    ["en", "37.5°C - 37.9°C"],
-                ])
+                content: _T("weekly.HS.Q6d.rg.scg.option.2", "37.5°C - 37.9°C")
             },
             {
                 key: '3', role: 'option',
-                content: new LanguageMap([
-                    ["id", "weekly.HS.Q6d.rg.scg.option.3"],
-                    ["en", "38.0°C - 38.9°C"],
-                ])
+                content: _T("weekly.HS.Q6d.rg.scg.option.3", "38.0°C - 38.9°C")
             },
             {
                 key: '4', role: 'option',
-                content: new LanguageMap([
-                    ["id", "weekly.HS.Q6d.rg.scg.option.4"],
-                    ["en", "39.0°C - 39.9°C"],
-                ])
+                content: _T("weekly.HS.Q6d.rg.scg.option.4", "39.0°C - 39.9°C")
             }, {
                 key: '5', role: 'option',
-                content: new LanguageMap([
-                    ["id", "weekly.HS.Q6d.rg.scg.option.5"],
-                    ["en", "40.0°C or more"],
-                ])
+                content: _T("weekly.HS.Q6d.rg.scg.option.5", "40.0°C or more")
             },
             {
                 key: '6', role: 'option',
-                content: new LanguageMap([
-                    ["id", "weekly.HS.Q6d.rg.scg.option.6"],
-                    ["en", "I don't know/can't remember"],
-                ])
+                content: _T("weekly.HS.Q6d.rg.scg.option.6", "I don't know/can't remember")
             },
         ];
     }
@@ -1096,18 +880,12 @@ export class HighestTemprerature extends SymptomDependentQuestion {
         return [
             text_why_asking("weekly.HS.Q6d.helpGroup.text.0"),
             {
-                content: new LanguageMap([
-                    ["id", "weekly.HS.Q6d.helpGroup.text.1"],
-                    ["en", "Certain infectious diseases cause a raised temperature."],
-                ]),
+                content: _T("weekly.HS.Q6d.helpGroup.text.1", "Certain infectious diseases cause a raised temperature."),
                 style: [{ key: 'variant', value: 'p' }],
             },
             text_how_answer("weekly.HS.Q6d.helpGroup.text.2"),
             {
-                content: new LanguageMap([
-                    ["id", "weekly.HS.Q6d.helpGroup.text.3"],
-                    ["en", "Please indicate the highest temperature you measured during the period in which you experienced your symptoms."],
-                ]),
+                content: _T("weekly.HS.Q6d.helpGroup.text.3", "Please indicate the highest temperature you measured during the period in which you experienced your symptoms."),
             },
         ];
     }
@@ -1176,11 +954,7 @@ export class ConsentForMore extends Item {
             itemKey: this.itemKey,
             isRequired: this.isRequired,
             //condition: this.getCondition(),
-            questionText: new LanguageMap([
-                ["id", "weekly.HS.Q36.title.0"],
-                ["en", "Thank you for all these information. They will help us to estimate the frequency of symptoms among general population. You can stop here. If you have a little more time, we propose you to answer further questions about your symptoms and care. Do you accept to answer to these additional questions?"],
-    
-            ]),
+            questionText: _T("weekly.HS.Q36.title.0", "Thank you for all these information. They will help us to estimate the frequency of symptoms among general population. You can stop here. If you have a little more time, we propose you to answer further questions about your symptoms and care. Do you accept to answer to these additional questions?"),
             helpGroupContent: this.getHelpGroupContent(),
             responseOptions: this.getResponses()
         });
@@ -1189,18 +963,11 @@ export class ConsentForMore extends Item {
     getResponses() {
         return  [
             {
-                key: ResponseEncoding.consent_more.yes, role: 'option', content: new LanguageMap([
-                    ["id", "weekly.HS.Q36.rg.scg.option.0"],
-                    ["en", "Yes"],
-    
-                ])
+                key: ResponseEncoding.consent_more.yes, role: 'option', content: _T("weekly.HS.Q36.rg.scg.option.0", "Yes")
             },
             {
                 key: ResponseEncoding.consent_more.no, role: 'option',
-                content: new LanguageMap([
-                    ["id", "weekly.HS.Q36.rg.scg.option.1"],
-                    ["en", "No"],
-                ])
+                content: _T("weekly.HS.Q36.rg.scg.option.1", "No")
             }
         ];
     }
@@ -1209,10 +976,7 @@ export class ConsentForMore extends Item {
         return [
             text_why_asking("weekly.HS.Q36.helpGroup.text.0"),
             {
-                content: new LanguageMap([
-                    ["id", "weekly.HS.Q36.helpGroup.text.1"],
-                    ["en", "We want to know if you are willing to answer the follow-up questions. Your answers to the follow-up questions may assist our research."],
-                ]),
+                content: _T("weekly.HS.Q36.helpGroup.text.1", "We want to know if you are willing to answer the follow-up questions. Your answers to the follow-up questions may assist our research."),
             },
         ];
     }
@@ -1267,11 +1031,7 @@ export class SymptomImpliedCovidTest extends Item {
             itemKey: this.itemKey,
             isRequired: this.isRequired,
             //condition: this.getCondition(),
-            questionText: new LanguageMap([
-                ["id", "weekly.EX.Qcov16h.title.0"],
-                ["en", "Because of your symptoms, did you undergo a test/analyses to know if you have COVID-19?"],
-           
-            ]),
+            questionText: _T("weekly.EX.Qcov16h.title.0", "Because of your symptoms, did you undergo a test/analyses to know if you have COVID-19?"),
             helpGroupContent: this.getHelpGroupContent(),
             responseOptions: this.getResponses()
         });
@@ -1281,31 +1041,19 @@ export class SymptomImpliedCovidTest extends Item {
         return [
             {
                 key: ResponseEncoding.symptom_test.yes, role: 'option',
-                content: new LanguageMap([
-                    ["id", "weekly.EX.Qcov16h.rg.scg.option.0"],
-                    ["en", "Yes"],
-                ])
+                content: _T("weekly.EX.Qcov16h.rg.scg.option.0", "Yes")
             },
             {
                 key: ResponseEncoding.symptom_test.not_yet, role: 'option',
-                content: new LanguageMap([
-                    ["id", "weekly.EX.Qcov16h.rg.scg.option.1"],
-                    ["en", "Not yet, I plan to shortly undergo a test"],
-                ])
+                content: _T("weekly.EX.Qcov16h.rg.scg.option.1", "Not yet, I plan to shortly undergo a test")
             },
             {
                 key: ResponseEncoding.symptom_test.no_wont, role: 'option',
-                content: new LanguageMap([
-                    ["id", "weekly.EX.Qcov16h.rg.scg.option.2"],
-                    ["en", "No, I have a prescription but will not undergo a test"],
-                ])
+                content: _T("weekly.EX.Qcov16h.rg.scg.option.2", "No, I have a prescription but will not undergo a test")
             },
             {
                 key: ResponseEncoding.symptom_test.no, role: 'option',
-                content: new LanguageMap([
-                    ["id", "weekly.EX.Qcov16h.rg.scg.option.3"],
-                    ["en", "No"],
-                ])
+                content: _T("weekly.EX.Qcov16h.rg.scg.option.3", "No")
             },
         ];
     }
@@ -1314,10 +1062,7 @@ export class SymptomImpliedCovidTest extends Item {
         return [
             text_why_asking("weekly.EX.Qcov16h.helpGroup.text.0"),
             {
-                content: new LanguageMap([
-                    ["id", "weekly.EX.Qcov16h.helpGroup.text.1"],
-                    ["en", "We want to know which complaints lead people to get tested for the coronavirus."],
-                ]),
+                content: _T("weekly.EX.Qcov16h.helpGroup.text.1", "We want to know which complaints lead people to get tested for the coronavirus."),
             },
         ];
     }
@@ -1355,10 +1100,7 @@ export class CovidTestType extends Item {
             itemKey: this.itemKey,
             isRequired: this.isRequired,
             condition: this.getCondition(),
-            questionText: new LanguageMap([
-                ["id", "weekly.EX.Qcov16i.title.0"],
-                ["en", "Which analyse(s) was it?"],
-            ]),
+            questionText: _T("weekly.EX.Qcov16i.title.0", "Which analyse(s) was it?"),
             helpGroupContent: this.getHelpGroupContent(),
             topDisplayCompoments: [
                 text_select_all_apply("weekly.EX.Qcov16i.rg.tyZC.text.0")
@@ -1371,31 +1113,19 @@ export class CovidTestType extends Item {
         return [
             {
                 key: ResponseEncoding.test_type.pcr, role: 'option',
-                content: new LanguageMap([
-                    ["id", "weekly.EX.Qcov16i.rg.mcg.option.0"],
-                    ["en", "A PCR test (virus search, on a swab in nose or mouth, or a sputum or saliva sample)"],
-                ])
+                content: _T("weekly.EX.Qcov16i.rg.mcg.option.0", "A PCR test (virus search, on a swab in nose or mouth, or a sputum or saliva sample)")
             },
             {
                 key: ResponseEncoding.test_type.sero, role: 'option',
-                content: new LanguageMap([
-                    ["id", "weekly.EX.Qcov16i.rg.mcg.option.1"],
-                    ["en", "A serological analysis (screening for antibodies against this virus, from a drop of blood at fingertip or a blood sample)"],
-                ])
+                content: _T("weekly.EX.Qcov16i.rg.mcg.option.1", "A serological analysis (screening for antibodies against this virus, from a drop of blood at fingertip or a blood sample)")
             },
             {
                 key: ResponseEncoding.test_type.antigenic, role: 'option',
-                content: new LanguageMap([
-                    ["id", "weekly.EX.Qcov16i.rg.mcg.option.2"],
-                    ["en", "A rapid antigen detection test on a sample realized in the back of the nose (nasopharyngeal sampling, done by a health professional or a trained person, with a swab inserted to 15 cm into the nose, result obtained in less than one hour)"],
-                ])
+                content: _T("weekly.EX.Qcov16i.rg.mcg.option.2", "A rapid antigen detection test on a sample realized in the back of the nose (nasopharyngeal sampling, done by a health professional or a trained person, with a swab inserted to 15 cm into the nose, result obtained in less than one hour)")
             },
             {
                 key: ResponseEncoding.test_type.antigenic_nasal, role: 'option',
-                content: new LanguageMap([
-                    ["id", "weekly.EX.Qcov16i.rg.mcg.option.3"],
-                    ["en", "A rapid antigen detection test or autotest done on a nasal sample (a swab inserted to 1 - 4 cm into the nostril, sampling that can be done by oneself, result obtained in a few minutes)"],
-                ])
+                content: _T("weekly.EX.Qcov16i.rg.mcg.option.3", "A rapid antigen detection test or autotest done on a nasal sample (a swab inserted to 1 - 4 cm into the nostril, sampling that can be done by oneself, result obtained in a few minutes)")
             },
         ];
     }
@@ -1404,10 +1134,7 @@ export class CovidTestType extends Item {
         return [
             text_why_asking("weekly.EX.Qcov16i.helpGroup.text.0"),
             {
-                content: new LanguageMap([
-                    ["id", "weekly.EX.Qcov16i.helpGroup.text.1"],
-                    ["en", "We are interested in knowing how many people with symptoms have udergone a test"],
-                ]),
+                content: _T("weekly.EX.Qcov16i.helpGroup.text.1", "We are interested in knowing how many people with symptoms have udergone a test"),
             },
         ];
     }
@@ -1460,11 +1187,7 @@ export class ResultPCRTest extends TestTypeDependentQuestion {
             itemKey: this.itemKey,
             isRequired: this.isRequired,
             condition: this.getCondition(),
-            questionText: new LanguageMap([
-                ["id", "weekly.EX.Qcov16b.title.0"],
-                ["en", "Do you know the result of your PCR test? (if several were performed and at least one was positive, chose the “Positive” answer)"],
-    
-            ]),
+            questionText: _T("weekly.EX.Qcov16b.title.0", "Do you know the result of your PCR test? (if several were performed and at least one was positive, chose the “Positive” answer)"),
             helpGroupContent: this.getHelpGroupContent(),
            
             responseOptions: this.getResponses()
@@ -1475,31 +1198,19 @@ export class ResultPCRTest extends TestTypeDependentQuestion {
         return [
             {
                 key: '1', role: 'option',
-                content: new LanguageMap([
-                    ["id", "weekly.EX.Qcov16b.rg.scg.option.0"],
-                    ["en", "Yes, positive for COVID-19"],
-                ])
+                content: _T("weekly.EX.Qcov16b.rg.scg.option.0", "Yes, positive for COVID-19")
             },
             {
                 key: '2', role: 'option',
-                content: new LanguageMap([
-                    ["id", "weekly.EX.Qcov16b.rg.scg.option.1"],
-                    ["en", "Yes, negative for COVID-19"],
-                ])
+                content: _T("weekly.EX.Qcov16b.rg.scg.option.1", "Yes, negative for COVID-19")
             },
             {
                 key: '3', role: 'option',
-                content: new LanguageMap([
-                    ["id", "weekly.EX.Qcov16b.rg.scg.option.2"],
-                    ["en", "Yes, the results are inconclusive"],
-                ])
+                content: _T("weekly.EX.Qcov16b.rg.scg.option.2", "Yes, the results are inconclusive")
             },
             {
                 key: '4', role: 'option',
-                content: new LanguageMap([
-                    ["id", "weekly.EX.Qcov16b.rg.scg.option.3"],
-                    ["en", "No, I have not yet received the test results"],
-                ])
+                content: _T("weekly.EX.Qcov16b.rg.scg.option.3", "No, I have not yet received the test results")
             },
         ]; 
     }
@@ -1508,10 +1219,7 @@ export class ResultPCRTest extends TestTypeDependentQuestion {
         return [
             text_why_asking("weekly.EX.Qcov16b.helpGroup.text.0"),
             {
-                content: new LanguageMap([
-                    ["id", "weekly.EX.Qcov16b.helpGroup.text.1"],
-                    ["en", "We want to understand how the coronavirus is spreading within the population."],
-                ]),
+                content: _T("weekly.EX.Qcov16b.helpGroup.text.1", "We want to understand how the coronavirus is spreading within the population."),
                 //style: [{ key: 'variant', value: 'p' }],
             },
         ];
@@ -1544,10 +1252,7 @@ export class ResultAntigenicTest extends TestTypeDependentQuestion {
             itemKey: this.itemKey,
             isRequired: this.isRequired,
             condition: this.getCondition(),
-            questionText: new LanguageMap([
-                ["id", "weekly.EX.Qcov16f.title.0"],
-                ["en", "Do you know the result of this rapid antigen detection test on nasopharyngeal sample? (if several were performed and at least one was positive, chose the “Positive” answer)"],
-            ]),
+            questionText: _T("weekly.EX.Qcov16f.title.0", "Do you know the result of this rapid antigen detection test on nasopharyngeal sample? (if several were performed and at least one was positive, chose the “Positive” answer)"),
             helpGroupContent: this.getHelpGroupContent(),
             /*bottomDisplayCompoments: [
                 ComponentGenerators.text({
@@ -1564,31 +1269,19 @@ export class ResultAntigenicTest extends TestTypeDependentQuestion {
         return  [
             {
                 key: '1', role: 'option',
-                content: new LanguageMap([
-                    ["id", "weekly.EX.Qcov16f.rg.scg.option.0"],
-                    ["en", "Yes, positive for COVID-19"],
-                ])
+                content: _T("weekly.EX.Qcov16f.rg.scg.option.0", "Yes, positive for COVID-19")
             },
             {
                 key: '2', role: 'option',
-                content: new LanguageMap([
-                    ["id", "weekly.EX.Qcov16f.rg.scg.option.1"],
-                    ["en", "Yes, negative for COVID-19"],
-                ])
+                content: _T("weekly.EX.Qcov16f.rg.scg.option.1", "Yes, negative for COVID-19")
             },
             {
                 key: '3', role: 'option',
-                content: new LanguageMap([
-                    ["id", "weekly.EX.Qcov16f.rg.scg.option.2"],
-                    ["en", "Yes, the results are inconclusive"],
-                ])
+                content: _T("weekly.EX.Qcov16f.rg.scg.option.2", "Yes, the results are inconclusive")
             },
             {
                 key: '99', role: 'option',
-                content: new LanguageMap([
-                    ["id", "weekly.EX.Qcov16f.rg.scg.option.3"],
-                    ["en", "I don't know / I don't want to answer"],
-                ]),
+                content: _T("weekly.EX.Qcov16f.rg.scg.option.3", "I don't know / I don't want to answer"),
             },
         ];
     }
@@ -1597,10 +1290,7 @@ export class ResultAntigenicTest extends TestTypeDependentQuestion {
         return [
             text_why_asking("weekly.EX.Qcov16f.helpGroup.text.0"),
             {
-                content: new LanguageMap([
-                    ["id", "weekly.EX.Qcov16f.helpGroup.text.1"],
-                    ["en", "We want to understand how the coronavirus is spreading within the population."],
-                ]),
+                content: _T("weekly.EX.Qcov16f.helpGroup.text.1", "We want to understand how the coronavirus is spreading within the population."),
             },
         ];
     }
@@ -1632,10 +1322,7 @@ export class ResultRapidAntigenicTest extends TestTypeDependentQuestion {
             itemKey: this.itemKey,
             isRequired: this.isRequired,
             condition: this.getCondition(),
-            questionText: new LanguageMap([
-                ["id", "weekly.EX.Qcov16k.title.0"],
-                ["en", "Do you know the result of this antigenic test or self-test on nasal sample? (if several were performed and at least one was positive, chose the “Positive” answer)"],
-            ]),
+            questionText: _T("weekly.EX.Qcov16k.title.0", "Do you know the result of this antigenic test or self-test on nasal sample? (if several were performed and at least one was positive, chose the “Positive” answer)"),
             helpGroupContent: this.getHelpGroupContent(),
             responseOptions: this.getResponses()
         });
@@ -1645,31 +1332,19 @@ export class ResultRapidAntigenicTest extends TestTypeDependentQuestion {
         return [
             {
                 key: '1', role: 'option',
-                content: new LanguageMap([
-                    ["id", "weekly.EX.Qcov16k.rg.scg.option.0"],
-                    ["en", "Yes, positive for COVID-19"],
-                ])
+                content: _T("weekly.EX.Qcov16k.rg.scg.option.0", "Yes, positive for COVID-19")
             },
             {
                 key: '2', role: 'option',
-                content: new LanguageMap([
-                    ["id", "weekly.EX.Qcov16k.rg.scg.option.1"],
-                    ["en", "Yes, negative for COVID-19"],
-                ])
+                content: _T("weekly.EX.Qcov16k.rg.scg.option.1", "Yes, negative for COVID-19")
             },
             {
                 key: '3', role: 'option',
-                content: new LanguageMap([
-                    ["id", "weekly.EX.Qcov16k.rg.scg.option.2"],
-                    ["en", "Yes, the results are inconclusive"],
-                ])
+                content: _T("weekly.EX.Qcov16k.rg.scg.option.2", "Yes, the results are inconclusive")
             },
             {
                 key: '99', role: 'option',
-                content: new LanguageMap([
-                    ["id", "weekly.EX.Qcov16k.rg.scg.option.3"],
-                    ["en", "I don't know / I don't want to answer"],
-                ]),
+                content: _T("weekly.EX.Qcov16k.rg.scg.option.3", "I don't know / I don't want to answer"),
             },
         ];
     }
@@ -1678,10 +1353,7 @@ export class ResultRapidAntigenicTest extends TestTypeDependentQuestion {
         return [
             text_why_asking("weekly.EX.Qcov16k.helpGroup.text.0"),
             {
-                content: new LanguageMap([
-                    ["id", "weekly.EX.Qcov16k.helpGroup.text.1"],
-                    ["en", "We want to understand how the coronavirus is spreading within the population."],
-                ]),
+                content: _T("weekly.EX.Qcov16k.helpGroup.text.1", "We want to understand how the coronavirus is spreading within the population."),
             },
         ];
     }
@@ -1702,10 +1374,7 @@ export class FluTest extends Item {
             itemKey: this.itemKey,
             isRequired: this.isRequired,
             //condition: this.getCondition(),
-            questionText: new LanguageMap([
-                ["id", "weekly.EX.Qcov19.title.0"],
-                ["en", "Because of your symptoms, did you undergo a test/analyses to know if you have the Flu?"],
-            ]),
+            questionText: _T("weekly.EX.Qcov19.title.0", "Because of your symptoms, did you undergo a test/analyses to know if you have the Flu?"),
             helpGroupContent: this.getHelpGroupContent(),
             responseOptions: this.getResponses()
         });
@@ -1716,38 +1385,23 @@ export class FluTest extends Item {
         return [
             {
                 key: codes.yes, role: 'option',
-                content: new LanguageMap([
-                    ["id", "weekly.EX.Qcov19.rg.scg.option.0"],
-                    ["en", "Yes, a PCR test based on a swab in nose or mouth, or a sputum or saliva sample"],
-                ])
+                content: _T("weekly.EX.Qcov19.rg.scg.option.0", "Yes, a PCR test based on a swab in nose or mouth, or a sputum or saliva sample")
             },
             {
                 key: codes.yes_antigenic, role: 'option',
-                content: new LanguageMap([
-                    ["id", "weekly.EX.Qcov19.rg.scg.option.1"],
-                    ["en", "Yes, a rapid detection test (result available in less than an hour)"],
-                ])
+                content: _T("weekly.EX.Qcov19.rg.scg.option.1", "Yes, a rapid detection test (result available in less than an hour)")
             },
             {
                 key: codes.plan, role: 'option',
-                content: new LanguageMap([
-                    ["id", "weekly.EX.Qcov19.rg.scg.option.2"],
-                    ["en", "Not yet, I have a prescription and plan to shortly undergo a test"],
-                ])
+                content: _T("weekly.EX.Qcov19.rg.scg.option.2", "Not yet, I have a prescription and plan to shortly undergo a test")
             },
             {
                 key: codes.wontgo, role: 'option',
-                content: new LanguageMap([
-                    ["id", "weekly.EX.Qcov19.rg.scg.option.3"],
-                    ["en", "No, I have a prescription but will not undergo a test"],
-                ])
+                content: _T("weekly.EX.Qcov19.rg.scg.option.3", "No, I have a prescription but will not undergo a test")
             },
             {
                 key: codes.no, role: 'option',
-                content: new LanguageMap([
-                    ["id", "weekly.EX.Qcov19.rg.scg.option.4"],
-                    ["en", "No"],
-                ])
+                content: _T("weekly.EX.Qcov19.rg.scg.option.4", "No")
             },
         ];
     }
@@ -1756,10 +1410,7 @@ export class FluTest extends Item {
         return [
             text_why_asking("weekly.EX.Qcov19.helpGroup.text.0"),
             {
-                content: new LanguageMap([
-                    ["id", "weekly.EX.Qcov19.helpGroup.text.1"],
-                    ["en", "We want to know which complaints lead people to get tested for the flu."],
-                ]),
+                content: _T("weekly.EX.Qcov19.helpGroup.text.1", "We want to know which complaints lead people to get tested for the flu."),
                 // style: [{ key: 'variant', value: 'p' }],
             },
         ]
@@ -1795,11 +1446,7 @@ export class VacStart extends Item {
             itemKey: this.itemKey,
             isRequired: this.isRequired,
             condition: this.getCondition(),
-            questionText: new LanguageMap([
-                ["id", "weekly.EX.Qcov19b.title.0"],
-                ["en", "Have you received the results of your Flu test?"],
-    
-            ]),
+            questionText: _T("weekly.EX.Qcov19b.title.0", "Have you received the results of your Flu test?"),
             helpGroupContent: this.getHelpGroupContent(),
             responseOptions: this.getResponses()
         });
@@ -1809,31 +1456,19 @@ export class VacStart extends Item {
         return [
             {
                 key: '1', role: 'option',
-                content: new LanguageMap([
-                    ["id", "weekly.EX.Qcov19b.rg.scg.option.0"],
-                    ["en", "Yes, the test is positive for influenza"],
-                ])
+                content: _T("weekly.EX.Qcov19b.rg.scg.option.0", "Yes, the test is positive for influenza")
             },
             {
                 key: '2', role: 'option',
-                content: new LanguageMap([
-                    ["id", "weekly.EX.Qcov19b.rg.scg.option.1"],
-                    ["en", "Yes, the test is negative for influenza"],
-                ])
+                content: _T("weekly.EX.Qcov19b.rg.scg.option.1", "Yes, the test is negative for influenza")
             },
             {
                 key: '3', role: 'option',
-                content: new LanguageMap([
-                    ["id", "weekly.EX.Qcov19b.rg.scg.option.2"],
-                    ["en", "Yes, the results are inconclusive"],
-                ])
+                content: _T("weekly.EX.Qcov19b.rg.scg.option.2", "Yes, the results are inconclusive")
             },
             {
                 key: '4', role: 'option',
-                content: new LanguageMap([
-                    ["id", "weekly.EX.Qcov19b.rg.scg.option.3"],
-                    ["en", "No, I have not yet received the test results"],
-                ])
+                content: _T("weekly.EX.Qcov19b.rg.scg.option.3", "No, I have not yet received the test results")
             },
         ];
     }
@@ -1842,10 +1477,7 @@ export class VacStart extends Item {
         return [
             text_why_asking("weekly.EX.Qcov19b.helpGroup.text.0"),
             {
-                content: new LanguageMap([
-                    ["id", "weekly.EX.Qcov19b.helpGroup.text.1"],
-                    ["en", "We want to understand how the flu is spreading within the population."],
-                ]),
+                content: _T("weekly.EX.Qcov19b.helpGroup.text.1", "We want to understand how the flu is spreading within the population."),
                 //style: [{ key: 'variant', value: 'p' }],
             },
         ];
@@ -1872,11 +1504,7 @@ export class VisitedMedicalService extends Item {
             itemKey: this.itemKey,
             isRequired: this.isRequired,
             //condition: this.getCondition(),
-            questionText: new LanguageMap([
-                ["id", "weekly.EX.Q7.title.0"],
-                ["en", "Because of your symptoms, did you VISIT (see face to face or teleconsultation) any medical services?"],
-    
-            ]),
+            questionText: _T("weekly.EX.Q7.title.0", "Because of your symptoms, did you VISIT (see face to face or teleconsultation) any medical services?"),
             helpGroupContent: this.getHelpGroupContent(),
             bottomDisplayCompoments: [
                 text_select_all_apply("weekly.EX.Q7.rg.DTpM.text.0")
@@ -1902,50 +1530,32 @@ export class VisitedMedicalService extends Item {
             {
                 key: codes.no, role: 'option',
                 disabled: exclusiveNo,
-                content: new LanguageMap([
-                    ["id", "weekly.EX.Q7.rg.mcg.option.0"],
-                    ["en", "No"],
-                ])
+                content: _T("weekly.EX.Q7.rg.mcg.option.0", "No")
             },
             {
                 key: codes.gp, role: 'option',
                 disabled: exclusiveOther,
-                content: new LanguageMap([
-                    ["id", "weekly.EX.Q7.rg.mcg.option.1"],
-                    ["en", "GP or GP's practice nurse"],
-                ])
+                content: _T("weekly.EX.Q7.rg.mcg.option.1", "GP or GP's practice nurse")
             },
             {
                 key: codes.hospital, role: 'option',
                 disabled: exclusiveOther,
-                content: new LanguageMap([
-                    ["id", "weekly.EX.Q7.rg.mcg.option.2"],
-                    ["en", "Hospital admission"],
-                ])
+                content: _T("weekly.EX.Q7.rg.mcg.option.2", "Hospital admission")
             },
             {
                 key: codes.emergency, role: 'option',
                 disabled: exclusiveOther,
-                content: new LanguageMap([
-                    ["id", "weekly.EX.Q7.rg.mcg.option.3"],
-                    ["en", "Hospital accident & emergency department / out of hours service"],
-                ])
+                content: _T("weekly.EX.Q7.rg.mcg.option.3", "Hospital accident & emergency department / out of hours service")
             },
             {
                 key: codes.other, role: 'option',
                 disabled: exclusiveOther,
-                content: new LanguageMap([
-                    ["id", "weekly.EX.Q7.rg.mcg.option.4"],
-                    ["en", "Other medical services"],
-                ])
+                content: _T("weekly.EX.Q7.rg.mcg.option.4", "Other medical services")
             },
             {
                 key: codes.plan, role: 'option',
                 disabled: exclusivePlan,
-                content: new LanguageMap([
-                    ["id", "weekly.EX.Q7.rg.mcg.option.5"],
-                    ["en", "No, but I have an appointment scheduled"],
-                ])
+                content: _T("weekly.EX.Q7.rg.mcg.option.5", "No, but I have an appointment scheduled")
             },
         ];
     }
@@ -1954,18 +1564,12 @@ export class VisitedMedicalService extends Item {
         return [
             text_why_asking("weekly.EX.Q7.helpGroup.text.0"),
             {
-                content: new LanguageMap([
-                    ["id", "weekly.EX.Q7.helpGroup.text.1"],
-                    ["en", "To find out whether people contact the health services because of their symptoms."],
-                ]),
+                content: _T("weekly.EX.Q7.helpGroup.text.1", "To find out whether people contact the health services because of their symptoms."),
                 style: [{ key: 'variant', value: 'p' }],
             },
             text_how_answer("weekly.EX.Q7.helpGroup.text.2"),
             {
-                content: new LanguageMap([
-                    ["id", "weekly.EX.Q7.helpGroup.text.3"],
-                    ["en", "Tick all of those that apply. If you are due to see attend, then tick the final option."],
-                ]),
+                content: _T("weekly.EX.Q7.helpGroup.text.3", "Tick all of those that apply. If you are due to see attend, then tick the final option."),
             },
         ];
     }
@@ -2003,10 +1607,7 @@ export class VisitedMedicalServiceWhen extends Item {
         editor.setVersion(1);
 
         editor.setTitleComponent(
-            generateTitleComponent(new LanguageMap([
-                ["id", "weekly.EX.Q7b.title.0"],
-                ["en", "How soon after your symptoms appeared did you first VISIT this medical service?"],
-            ]))
+            generateTitleComponent(_T("weekly.EX.Q7b.title.0", "How soon after your symptoms appeared did you first VISIT this medical service?"))
         );
     
         // CONDITION
@@ -2030,53 +1631,28 @@ export class VisitedMedicalServiceWhen extends Item {
         const ddOptions: ResponseRowCell = {
             key: 'col1', role: 'dropDownGroup', items: [
                 {
-                    key: '0', role: 'option', content: new LanguageMap([
-                        ["id", "weekly.EX.Q7b.rg.mat.r1.col1.option.0"],
-                        ["en", "Same day"],
-                    ]),
+                    key: '0', role: 'option', content: _T("weekly.EX.Q7b.rg.mat.r1.col1.option.0", "Same day"),
                 },
                 {
-                    key: '1', role: 'option', content: new LanguageMap([
-                        ["id", "weekly.EX.Q7b.rg.mat.r1.col1.option.1"],
-                        ["en", "1 day"],
-                    ]),
+                    key: '1', role: 'option', content: _T("weekly.EX.Q7b.rg.mat.r1.col1.option.1", "1 day"),
                 },
                 {
-                    key: '2', role: 'option', content: new LanguageMap([
-                        ["id", "weekly.EX.Q7b.rg.mat.r1.col1.option.2"],
-                        ["en", "2 days"],
-    
-                    ]),
+                    key: '2', role: 'option', content: _T("weekly.EX.Q7b.rg.mat.r1.col1.option.2", "2 days"),
                 },
                 {
-                    key: '3', role: 'option', content: new LanguageMap([
-                        ["id", "weekly.EX.Q7b.rg.mat.r1.col1.option.3"],
-                        ["en", "3 days"],
-                    ]),
+                    key: '3', role: 'option', content: _T("weekly.EX.Q7b.rg.mat.r1.col1.option.3", "3 days"),
                 },
                 {
-                    key: '4', role: 'option', content: new LanguageMap([
-                        ["id", "weekly.EX.Q7b.rg.mat.r1.col1.option.4"],
-                        ["en", "4 days"],
-                    ]),
+                    key: '4', role: 'option', content: _T("weekly.EX.Q7b.rg.mat.r1.col1.option.4", "4 days"),
                 },
                 {
-                    key: '5', role: 'option', content: new LanguageMap([
-                        ["id", "weekly.EX.Q7b.rg.mat.r1.col1.option.5"],
-                        ["en", "5 - 7 days"],
-                    ]),
+                    key: '5', role: 'option', content: _T("weekly.EX.Q7b.rg.mat.r1.col1.option.5", "5 - 7 days"),
                 },
                 {
-                    key: '6', role: 'option', content: new LanguageMap([
-                        ["id", "weekly.EX.Q7b.rg.mat.r1.col1.option.6"],
-                        ["en", "More than 7 days"],
-                    ]),
+                    key: '6', role: 'option', content: _T("weekly.EX.Q7b.rg.mat.r1.col1.option.6", "More than 7 days"),
                 },
                 {
-                    key: '7', role: 'option', content: new LanguageMap([
-                        ["id", "weekly.EX.Q7b.rg.mat.r1.col1.option.7"],
-                        ["en", "I don't know/can't remember"],
-                    ]),
+                    key: '7', role: 'option', content: _T("weekly.EX.Q7b.rg.mat.r1.col1.option.7", "I don't know/can't remember"),
                 },
             ]
         };
@@ -2091,10 +1667,7 @@ export class VisitedMedicalServiceWhen extends Item {
             {
                 key: 'header', role: 'headerRow', cells: [
                     {
-                        key: 'col0', role: 'text', content: new LanguageMap([
-                            ["id", "weekly.EX.Q7b.rg.mat.header.col0.text.0"],
-                            ["en", "Medical Service"],
-                        ]),
+                        key: 'col0', role: 'text', content: _T("weekly.EX.Q7b.rg.mat.header.col0.text.0", "Medical Service"),
                     },
                     {
                         key: 'col1', role: 'text'
@@ -2104,10 +1677,7 @@ export class VisitedMedicalServiceWhen extends Item {
             {
                 key: 'r1', role: 'responseRow', cells: [
                     {
-                        key: 'col0', role: 'label', content: new LanguageMap([
-                            ["id", "weekly.EX.Q7b.rg.mat.r1.col0.label.0"],
-                            ["en", "GP or GP'r practice nurse"],
-                        ]),
+                        key: 'col0', role: 'label', content: _T("weekly.EX.Q7b.rg.mat.r1.col0.label.0", "GP or GP'r practice nurse"),
                     },
                     { ...ddOptions }
                 ],
@@ -2116,10 +1686,7 @@ export class VisitedMedicalServiceWhen extends Item {
             {
                 key: 'r2', role: 'responseRow', cells: [
                     {
-                        key: 'col0', role: 'label', content: new LanguageMap([
-                            ["id", "weekly.EX.Q7b.rg.mat.r2.col0.label.0"],
-                            ["en", "Hospital accident & department/out of hours service"],
-                        ]),
+                        key: 'col0', role: 'label', content: _T("weekly.EX.Q7b.rg.mat.r2.col0.label.0", "Hospital accident & department/out of hours service"),
                     },
                     { ...ddOptions }
                 ],
@@ -2128,10 +1695,7 @@ export class VisitedMedicalServiceWhen extends Item {
             {
                 key: 'r3', role: 'responseRow', cells: [
                     {
-                        key: 'col0', role: 'label', content: new LanguageMap([
-                            ["id", "weekly.EX.Q7b.rg.mat.r3.col0.label.0"],
-                            ["en", "Hospital admission"],
-                        ]),
+                        key: 'col0', role: 'label', content: _T("weekly.EX.Q7b.rg.mat.r3.col0.label.0", "Hospital admission"),
                     },
                     { ...ddOptions }
                 ],
@@ -2140,10 +1704,7 @@ export class VisitedMedicalServiceWhen extends Item {
             {
                 key: 'r4', role: 'responseRow', cells: [
                     {
-                        key: 'col0', role: 'label', content: new LanguageMap([
-                            ["id", "weekly.EX.Q7b.rg.mat.r4.col0.label.0"],
-                            ["en", "Other medical services"],
-                        ]),
+                        key: 'col0', role: 'label', content: _T("weekly.EX.Q7b.rg.mat.r4.col0.label.0", "Other medical services"),
                     },
                     { ...ddOptions }
                 ],
@@ -2165,18 +1726,12 @@ export class VisitedMedicalServiceWhen extends Item {
         return [
             text_why_asking("weekly.EX.Q7b.helpGroup.text.0"),
             {
-                content: new LanguageMap([
-                    ["id", "weekly.EX.Q7b.helpGroup.text.1"],
-                    ["en", "To find out how quickly people with symptoms are seen by the health services."],
-                ]),
+                content: _T("weekly.EX.Q7b.helpGroup.text.1", "To find out how quickly people with symptoms are seen by the health services."),
                 style: [{ key: 'variant', value: 'p' }],
             },
             text_how_answer("weekly.EX.Q7b.helpGroup.text.2"),
             {
-                content: new LanguageMap([
-                    ["id", "weekly.EX.Q7b.helpGroup.text.3"],
-                    ["en", "Only record the time until your FIRST contact with the health services."],
-                ]),
+                content: _T("weekly.EX.Q7b.helpGroup.text.3", "Only record the time until your FIRST contact with the health services."),
             },
         ]
     }
@@ -2214,10 +1769,7 @@ export class WhyVisitedNoMedicalService extends Item {
             itemKey: this.itemKey,
             isRequired: this.isRequired,
             condition: this.getCondition(),
-            questionText: new LanguageMap([
-                ["id", "weekly.EX.Qcov18.title.0"],
-                ["en", "What is the main reason for which you did not consult any health professional for the symptoms you declared today?"],
-            ]),
+            questionText: _T("weekly.EX.Qcov18.title.0", "What is the main reason for which you did not consult any health professional for the symptoms you declared today?"),
             helpGroupContent: this.getHelpGroupContent(),
             /*bottomDisplayCompoments: [
                 ComponentGenerators.text({
@@ -2234,92 +1786,53 @@ export class WhyVisitedNoMedicalService extends Item {
         return  [
             {
                 key: '1', role: 'option',
-                content: new LanguageMap([
-                    ["id", "weekly.EX.Qcov18.rg.scg.option.0"],
-                    ["en", "My symptoms appeared very recently"],
-                ])
+                content: _T("weekly.EX.Qcov18.rg.scg.option.0", "My symptoms appeared very recently")
             },
             {
                 key: '2', role: 'option',
-                content: new LanguageMap([
-                    ["id", "weekly.EX.Qcov18.rg.scg.option.1"],
-                    ["en", "My symptoms are mild"],
-                ])
+                content: _T("weekly.EX.Qcov18.rg.scg.option.1", "My symptoms are mild")
             },
             {
                 key: '3', role: 'option',
-                content: new LanguageMap([
-                    ["id", "weekly.EX.Qcov18.rg.scg.option.2"],
-                    ["en", "I have these symptoms often"],
-                ])
+                content: _T("weekly.EX.Qcov18.rg.scg.option.2", "I have these symptoms often")
             },
             {
                 key: '4', role: 'option',
-                content: new LanguageMap([
-                    ["id", "weekly.EX.Qcov18.rg.scg.option.3"],
-                    ["en", "I think I know what I have and I self-medicate"],
-                ])
+                content: _T("weekly.EX.Qcov18.rg.scg.option.3", "I think I know what I have and I self-medicate")
             },
             {
                 key: '5', role: 'option',
-                content: new LanguageMap([
-                    ["id", "weekly.EX.Qcov18.rg.scg.option.4"],
-                    ["en", "I think there is no effective treatment for the disease I have"],
-                ])
+                content: _T("weekly.EX.Qcov18.rg.scg.option.4", "I think there is no effective treatment for the disease I have")
             },
             {
                 key: '6', role: 'option',
-                content: new LanguageMap([
-                    ["id", "weekly.EX.Qcov18.rg.scg.option.5"],
-                    ["en", "It is too hard to get an appointment quickly"],
-                ])
+                content: _T("weekly.EX.Qcov18.rg.scg.option.5", "It is too hard to get an appointment quickly")
             },
             {
                 key: '7', role: 'option',
-                content: new LanguageMap([
-                    ["id", "weekly.EX.Qcov18.rg.scg.option.6"],
-                    ["en", "I do not have time"],
-                ])
+                content: _T("weekly.EX.Qcov18.rg.scg.option.6", "I do not have time")
             },
             {
                 key: '8', role: 'option',
-                content: new LanguageMap([
-                    ["id", "weekly.EX.Qcov18.rg.scg.option.7"],
-                    ["en", "For financial reasons"],
-                ])
+                content: _T("weekly.EX.Qcov18.rg.scg.option.7", "For financial reasons")
             },
             {
                 key: '9', role: 'option',
-                content: new LanguageMap([
-                    ["id", "weekly.EX.Qcov18.rg.scg.option.8"],
-                    ["en", "For fear of consequences if the doctor thinks I have COVID-19"],
-                ])
+                content: _T("weekly.EX.Qcov18.rg.scg.option.8", "For fear of consequences if the doctor thinks I have COVID-19")
             },
             {
                 key: '11', role: 'option',
-                content: new LanguageMap([
-                    ["id", "weekly.EX.Qcov18.rg.scg.option.9"],
-                    ["en", "Because I am vaccinated against COVID-19"],
-                ])
+                content: _T("weekly.EX.Qcov18.rg.scg.option.9", "Because I am vaccinated against COVID-19")
             },
             {
                 key: '10', role: 'input',
                 style: [{ key: 'className', value: 'w-100' }],
-                content: new LanguageMap([
-                    ["id", "weekly.EX.Qcov18.rg.scg.input.10"],
-                    ["en", "For another reason"],
-                ]),
-                description: new LanguageMap([
-                    ["id", "weekly.EX.Qcov18.rg.scg.description.input.10"],
-                    ["en", "Describe here (optional)"],
-                ])
+                content: _T("weekly.EX.Qcov18.rg.scg.input.10", "For another reason"),
+                description: _T("weekly.EX.Qcov18.rg.scg.description.input.10", "Describe here (optional)")
             },
             {
                 key: '99', role: 'option',
-                content: new LanguageMap([
-                    ["id", "weekly.EX.Qcov18.rg.scg.option.11"],
-                    ["en", "I don't know / I don't want to answer"],
-                ])
+                content: _T("weekly.EX.Qcov18.rg.scg.option.11", "I don't know / I don't want to answer")
             },
         ];
     }
@@ -2328,19 +1841,13 @@ export class WhyVisitedNoMedicalService extends Item {
         return [
             text_why_asking("weekly.EX.Qcov18.helpGroup.text.0"),
             {
-                content: new LanguageMap([
-                    ["id", "weekly.EX.Qcov18.helpGroup.text.1"],
-                    ["en", "To understand why some people do not consult a doctor."],
-                ]),
+                content: _T("weekly.EX.Qcov18.helpGroup.text.1", "To understand why some people do not consult a doctor."),
                 style: [{ key: 'variant', value: 'p' }],
             },
             text_how_answer("weekly.EX.Qcov18.helpGroup.text.2"),
 
             {
-                content: new LanguageMap([
-                    ["id", "weekly.EX.Qcov18.helpGroup.text.3"],
-                    ["en", "Multiple answers are possible."],
-                ]),
+                content: _T("weekly.EX.Qcov18.helpGroup.text.3", "Multiple answers are possible."),
             },
         ]
     }
@@ -2367,10 +1874,7 @@ export class TookMedication extends Item {
             itemKey: this.itemKey,
             isRequired: this.isRequired,
             //condition: this.getCondition(),
-            questionText: new LanguageMap([
-                ["id", "weekly.EX.Q9.title.0"],
-                ["en", "Did you take medication for these symptoms?"],
-            ]),
+            questionText: _T("weekly.EX.Q9.title.0", "Did you take medication for these symptoms?"),
             helpGroupContent: this.getHelpGroupContent(),
             topDisplayCompoments: [
                 text_select_all_apply("weekly.EX.Q9.rg.vMc3.text.0")
@@ -2398,92 +1902,61 @@ export class TookMedication extends Item {
                 key: no_medication,
                 role: 'option',
                 disabled: exclusiveDontKnow,
-                content: new LanguageMap([
-                    ["id", "weekly.EX.Q9.rg.mcg.option.0"],
-                    ["en", "No medication"],
-                ])
+                content: _T("weekly.EX.Q9.rg.mcg.option.0", "No medication")
             },
             {
                 key: '1',
                 role: 'option',
                 disabled: exclusiveOther,
-                content: new LanguageMap([
-                    ["id", "weekly.EX.Q9.rg.mcg.option.1"],
-                    ["en", "Pain killers (e.g. paracetamol, lemsip, ibuprofen, aspirin, calpol, etc)"],
-                ])
+                content: _T("weekly.EX.Q9.rg.mcg.option.1", "Pain killers (e.g. paracetamol, lemsip, ibuprofen, aspirin, calpol, etc)")
             },
             {
                 key: '2',
                 role: 'option',
                 disabled: exclusiveOther,
-                content: new LanguageMap([
-                    ["id", "weekly.EX.Q9.rg.mcg.option.2"],
-                    ["en", "Cough medication (e.g. expectorants)"],
-                ])
+                content: _T("weekly.EX.Q9.rg.mcg.option.2", "Cough medication (e.g. expectorants)")
             },/*
             {
                 key: '9',
                 role: 'option',
                 disabled: exclusiveOther,
-                content: new LanguageMap([
-                    ["id", "hecfaecb"],
-                    ["en", "Hayfever medication"],
-    
-                ])
+                content: _T("hecfaecb", "Hayfever medication")
             }, */
             {
                 key: '3',
                 role: 'option',
                 disabled: exclusiveOther,
-                content: new LanguageMap([
-                    ["id", "weekly.EX.Q9.rg.mcg.option.3"],
-                    ["en", "Antivirals against influenza (eg: Tamiflu)"],
-                ])
+                content: _T("weekly.EX.Q9.rg.mcg.option.3", "Antivirals against influenza (eg: Tamiflu)")
             },
             {
                 key: '4',
                 role: 'option',
                 disabled: exclusiveOther,
-                content: new LanguageMap([
-                    ["id", "weekly.EX.Q9.rg.mcg.option.4"],
-                    ["en", "Antibiotics"],
-                ])
+                content: _T("weekly.EX.Q9.rg.mcg.option.4", "Antibiotics")
             },
             {
                 key: '7',
                 role: 'option',
                 disabled: exclusiveOther,
-                content: new LanguageMap([
-                    ["id", "weekly.EX.Q9.rg.mcg.option.5"],
-                    ["en", "Homeopathy"],
-                ])
+                content: _T("weekly.EX.Q9.rg.mcg.option.5", "Homeopathy")
             },
             {
                 key: '8',
                 role: 'option',
                 disabled: exclusiveOther,
-                content: new LanguageMap([
-                    ["id", "weekly.EX.Q9.rg.mcg.option.6"],
-                    ["en", "Alternative medicine (essential oil, phytotherapy, etc.)"],
-                ])
+                content: _T("weekly.EX.Q9.rg.mcg.option.6", "Alternative medicine (essential oil, phytotherapy, etc.)")
             },
             {
                 key: '5',
                 role: 'option',
                 disabled: exclusiveOther,
-                content: new LanguageMap([
-                    ["id", "weekly.EX.Q9.rg.mcg.option.7"],
-                    ["en", "Other"],
-                ])
+                content: _T("weekly.EX.Q9.rg.mcg.option.7", "Other")
             },
             {
                 key: dont_know,
                 role: 'option',
                 disabled: exclusiveNo,
-                content: new LanguageMap([
-                    ["id", "weekly.EX.Q9.rg.mcg.option.8"],
-                    ["en", "I don't know/can't remember"],
-                ])
+                content: _T("weekly.EX.Q9.rg.mcg.option.8", "I don't know/can't remember")
             },
         
         ];
@@ -2493,18 +1966,12 @@ export class TookMedication extends Item {
         return [
             text_why_asking("weekly.EX.Q9.helpGroup.text.0"),
             {
-                content: new LanguageMap([
-                    ["id", "weekly.EX.Q9.helpGroup.text.1"],
-                    ["en", "To find out who gets treated, and how effective treatment is."],
-                ]),
+                content: _T("weekly.EX.Q9.helpGroup.text.1", "To find out who gets treated, and how effective treatment is."),
                 style: [{ key: 'variant', value: 'p' }],
             },
             text_how_answer("weekly.EX.Q9.helpGroup.text.2"),
             {
-                content: new LanguageMap([
-                    ["id", "weekly.EX.Q9.helpGroup.text.3"],
-                    ["en", "Only record those medications that you used because of this illness. If you are on other medications because of a pre-existing illness then do not record these."],
-                ]),
+                content: _T("weekly.EX.Q9.helpGroup.text.3", "Only record those medications that you used because of this illness. If you are on other medications because of a pre-existing illness then do not record these."),
                 // style: [{ key: 'variant', value: 'p' }],
             },
         ];
@@ -2533,10 +2000,7 @@ export class Hospitalized extends Item {
             itemKey: this.itemKey,
             isRequired: this.isRequired,
             //condition: this.getCondition(),
-            questionText: new LanguageMap([
-                ["id", "weekly.EX.Q14.title.0"],
-                ["en", "Because of your symptoms, were you hospitalized?"],
-            ]),
+            questionText: _T("weekly.EX.Q14.title.0", "Because of your symptoms, were you hospitalized?"),
             helpGroupContent: this.getHelpGroupContent(),
             responseOptions: this.getResponses()
         });
@@ -2545,18 +2009,11 @@ export class Hospitalized extends Item {
     getResponses() {
         return  [
             {
-                key: '1', role: 'option', content: new LanguageMap([
-                    ["id", "weekly.EX.Q14.rg.scg.option.0"],
-                    ["en", "Yes"],
-    
-                ])
+                key: '1', role: 'option', content: _T("weekly.EX.Q14.rg.scg.option.0", "Yes")
             },
             {
                 key: '0', role: 'option',
-                content: new LanguageMap([
-                    ["id", "weekly.EX.Q14.rg.scg.option.1"],
-                    ["en", "No"],
-                ])
+                content: _T("weekly.EX.Q14.rg.scg.option.1", "No")
             }
         ];
     }
@@ -2565,10 +2022,7 @@ export class Hospitalized extends Item {
         return [
             text_why_asking("weekly.EX.Q14.helpGroup.text.0"),
             {
-                content: new LanguageMap([
-                    ["id", "weekly.EX.Q14.helpGroup.text.1"],
-                    ["en", "We want to understand the rates of hospitalization due to symptoms"],
-                ]),
+                content: _T("weekly.EX.Q14.helpGroup.text.1", "We want to understand the rates of hospitalization due to symptoms"),
                 //style: [{ key: 'variant', value: 'p' }],
             },
         ];
@@ -2595,10 +2049,7 @@ export class DailyRoutine extends Item {
             itemKey: this.itemKey,
             isRequired: this.isRequired,
             //condition: this.getCondition(),
-            questionText: new LanguageMap([
-                ["id", "weekly.EX.Q10.title.0"],
-                ["en", "Did you change your daily routine because of your illness?"],
-            ]),
+            questionText: _T("weekly.EX.Q10.title.0", "Did you change your daily routine because of your illness?"),
             helpGroupContent: this.getHelpGroupContent(),
             responseOptions: this.getResponses()
         });
@@ -2612,26 +2063,17 @@ export class DailyRoutine extends Item {
             {
                 key: codes.no,
                 role: 'option',
-                content: new LanguageMap([
-                    ["id", "weekly.EX.Q10.rg.scg.option.0"],
-                    ["en", "No, I was able to go about my daily activities as usual"],
-                ])
+                content: _T("weekly.EX.Q10.rg.scg.option.0", "No, I was able to go about my daily activities as usual")
             },
             {
                 key: codes.yes,
                 role: 'option',
-                content: new LanguageMap([
-                    ["id", "weekly.EX.Q10.rg.scg.option.1"],
-                    ["en", "Yes, but I did not take time off work/school"],
-                ])
+                content: _T("weekly.EX.Q10.rg.scg.option.1", "Yes, but I did not take time off work/school")
             },
             {
                 key: codes.off,
                 role: 'option',
-                content: new LanguageMap([
-                    ["id", "weekly.EX.Q10.rg.scg.option.2"],
-                    ["en", "Yes, I took time off school or work"],
-                ])
+                content: _T("weekly.EX.Q10.rg.scg.option.2", "Yes, I took time off school or work")
             },
         ];
     }
@@ -2640,18 +2082,12 @@ export class DailyRoutine extends Item {
         return [
             text_why_asking("weekly.EX.Q10.helpGroup.text.0"),
             {
-                content: new LanguageMap([
-                    ["id", "weekly.EX.Q10.helpGroup.text.1"],
-                    ["en", "To determine how the symptoms are impacting your daily life."],
-                ]),
+                content: _T("weekly.EX.Q10.helpGroup.text.1", "To determine how the symptoms are impacting your daily life."),
                 style: [{ key: 'variant', value: 'p' }],
             },
             text_how_answer("weekly.EX.Q10.helpGroup.text.2"),
             {
-                content: new LanguageMap([
-                    ["id", "weekly.EX.Q10.helpGroup.text.3"],
-                    ["en", "We want to know if you have missed work or school due to your symptoms, or if you have modified your daily routine in any way (for example, if you were unable to engage in sport activities). If you are a student, and were unable to attend online classes due to your symptoms, you should also select option 2. We are interested in changes due to your symptoms/complaints and not due to any quarantine."],
-                ]),
+                content: _T("weekly.EX.Q10.helpGroup.text.3", "We want to know if you have missed work or school due to your symptoms, or if you have modified your daily routine in any way (for example, if you were unable to engage in sport activities). If you are a student, and were unable to attend online classes due to your symptoms, you should also select option 2. We are interested in changes due to your symptoms/complaints and not due to any quarantine."),
             },
         ];
     }
@@ -2679,10 +2115,7 @@ export class DailyRoutineToday extends Item {
             itemKey: this.itemKey,
             isRequired: this.isRequired,
             condition: this.getCondition(),
-            questionText: new LanguageMap([
-                ["id", "weekly.EX.Q10b.title.0"],
-                ["en", "Are you currently still unable to work or attend school due to your symptoms/complaints?"],
-            ]),
+            questionText: _T("weekly.EX.Q10b.title.0", "Are you currently still unable to work or attend school due to your symptoms/complaints?"),
             helpGroupContent: this.getHelpGroupContent(),
             responseOptions: this.getResponses()
         });
@@ -2693,26 +2126,17 @@ export class DailyRoutineToday extends Item {
             {
                 key: '0',
                 role: 'option',
-                content: new LanguageMap([
-                    ["id", "weekly.EX.Q10b.rg.scg.option.0"],
-                    ["en", "Yes"],
-                ])
+                content: _T("weekly.EX.Q10b.rg.scg.option.0", "Yes")
             },
             {
                 key: '1',
                 role: 'option',
-                content: new LanguageMap([
-                    ["id", "weekly.EX.Q10b.rg.scg.option.1"],
-                    ["en", "No"],
-                ])
+                content: _T("weekly.EX.Q10b.rg.scg.option.1", "No")
             },
             {
                 key: '3',
                 role: 'option',
-                content: new LanguageMap([
-                    ["id", "weekly.EX.Q10b.rg.scg.option.2"],
-                    ["en", "Other (I did not have to work or go to school today in any case)"],
-                ])
+                content: _T("weekly.EX.Q10b.rg.scg.option.2", "Other (I did not have to work or go to school today in any case)")
             },
         ];
     }
@@ -2722,18 +2146,12 @@ export class DailyRoutineToday extends Item {
             text_why_asking("weekly.EX.Q10b.helpGroup.text.0"),
 
             {
-                content: new LanguageMap([
-                    ["id", "weekly.EX.Q10b.helpGroup.text.1"],
-                    ["en", "To determine how the symptoms are impacting your daily life."],
-                ]),
+                content: _T("weekly.EX.Q10b.helpGroup.text.1", "To determine how the symptoms are impacting your daily life."),
                 style: [{ key: 'variant', value: 'p' }],
             },
             text_how_answer("weekly.EX.Q10b.helpGroup.text.2"),
             {
-                content: new LanguageMap([
-                    ["id", "weekly.EX.Q10b.helpGroup.text.3"],
-                    ["en", "Answer 'yes' if you missed work or school today due to certain symptoms."],
-                ]),
+                content: _T("weekly.EX.Q10b.helpGroup.text.3", "Answer 'yes' if you missed work or school today due to certain symptoms."),
                 // style: [{ key: 'variant', value: 'p' }],
             },
         ];
@@ -2769,10 +2187,7 @@ export class DailyRoutineDaysMissed extends Item {
             itemKey: this.itemKey,
             isRequired: this.isRequired,
             condition: this.getCondition(),
-            questionText: new LanguageMap([
-                ["id", "weekly.EX.Q10c.title.0"],
-                ["en", "For how many days have you been unable to work normally/go to school (when you otherwise would have)?"],
-            ]),
+            questionText: _T("weekly.EX.Q10c.title.0", "For how many days have you been unable to work normally/go to school (when you otherwise would have)?"),
             helpGroupContent: this.getHelpGroupContent(),
             /*bottomDisplayCompoments: [
                 ComponentGenerators.text({
@@ -2788,52 +2203,28 @@ export class DailyRoutineDaysMissed extends Item {
     getResponses() {
         return [
             {
-                key: '0', role: 'option', content: new LanguageMap([
-                    ["id", "weekly.EX.Q10c.rg.ddg.option.0"],
-                    ["en", "1 day"],
-                ]),
+                key: '0', role: 'option', content: _T("weekly.EX.Q10c.rg.ddg.option.0", "1 day"),
             },
             {
-                key: '1', role: 'option', content: new LanguageMap([
-                    ["id", "weekly.EX.Q10c.rg.ddg.option.1"],
-                    ["en", "2 days"],
-                ]),
+                key: '1', role: 'option', content: _T("weekly.EX.Q10c.rg.ddg.option.1", "2 days"),
             },
             {
-                key: '2', role: 'option', content: new LanguageMap([
-                    ["id", "weekly.EX.Q10c.rg.ddg.option.2"],
-                    ["en", "3 days"],
-                ]),
+                key: '2', role: 'option', content: _T("weekly.EX.Q10c.rg.ddg.option.2", "3 days"),
             },
             {
-                key: '3', role: 'option', content: new LanguageMap([
-                    ["id", "weekly.EX.Q10c.rg.ddg.option.3"],
-                    ["en", "4 days"],
-                ]),
+                key: '3', role: 'option', content: _T("weekly.EX.Q10c.rg.ddg.option.3", "4 days"),
             },
             {
-                key: '4', role: 'option', content: new LanguageMap([
-                    ["id", "weekly.EX.Q10c.rg.ddg.option.4"],
-                    ["en", "5 days"],
-                ]),
+                key: '4', role: 'option', content: _T("weekly.EX.Q10c.rg.ddg.option.4", "5 days"),
             },
             {
-                key: '5', role: 'option', content: new LanguageMap([
-                    ["id", "weekly.EX.Q10c.rg.ddg.option.5"],
-                    ["en", "6 to 10 days"],
-                ]),
+                key: '5', role: 'option', content: _T("weekly.EX.Q10c.rg.ddg.option.5", "6 to 10 days"),
             },
             {
-                key: '6', role: 'option', content: new LanguageMap([
-                    ["id", "weekly.EX.Q10c.rg.ddg.option.6"],
-                    ["en", "11 to 15 days"],
-                ]),
+                key: '6', role: 'option', content: _T("weekly.EX.Q10c.rg.ddg.option.6", "11 to 15 days"),
             },
             {
-                key: '7', role: 'option', content: new LanguageMap([
-                    ["id", "weekly.EX.Q10c.rg.ddg.option.7"],
-                    ["en", "More than 15 days"],
-                ]),
+                key: '7', role: 'option', content: _T("weekly.EX.Q10c.rg.ddg.option.7", "More than 15 days"),
             },
         ];
     }
@@ -2842,18 +2233,12 @@ export class DailyRoutineDaysMissed extends Item {
         return [
             text_why_asking("weekly.EX.Q10c.helpGroup.text.0"),
             {
-                content: new LanguageMap([
-                    ["id", "weekly.EX.Q10c.helpGroup.text.1"],
-                    ["en", "To calculate the number of days a person misses work or school due to certain symptoms."],
-                ]),
+                content: _T("weekly.EX.Q10c.helpGroup.text.1", "To calculate the number of days a person misses work or school due to certain symptoms."),
                 style: [{ key: 'variant', value: 'p' }],
             },
             text_how_answer("weekly.EX.Q10c.helpGroup.text.2"),
             {
-                content: new LanguageMap([
-                    ["id", "weekly.EX.Q10c.helpGroup.text.3"],
-                    ["en", "Only count the days that you would otherwise have gone to work or school. Provide as precise an estimate as possible."],
-                ]),
+                content: _T("weekly.EX.Q10c.helpGroup.text.3", "Only count the days that you would otherwise have gone to work or school. Provide as precise an estimate as possible."),
                 // style: [{ key: 'variant', value: 'p' }],
             },
         ];
@@ -2881,10 +2266,7 @@ export class DailyRoutineDaysMissed extends Item {
     
     // QUESTION TEXT
     editor.setTitleComponent(
-        generateTitleComponent(new LanguageMap([
-            ["id", "weekly.EX.Qcov7.title.0"],
-            ["en", "Did you begin to follow or increase any of the measures below, due to your symptoms (compared to the period before your symptoms began)?"],
-        ]))
+        generateTitleComponent(_T("weekly.EX.Qcov7.title.0", "Did you begin to follow or increase any of the measures below, due to your symptoms (compared to the period before your symptoms began)?"))
     );
     
     // INFO POPUP
@@ -2897,20 +2279,12 @@ export class DailyRoutineDaysMissed extends Item {
         role: 'text',
         style: [{ key: 'className', value: 'mb-2' }],
         content: generateLocStrings(
-            new LanguageMap([
-                ["id", "weekly.EX.Qcov7.rg.gU4U.text.0"],
-                ["en", "To be completed optionally"],
-            ])),
+            _T("weekly.EX.Qcov7.rg.gU4U.text.0", "To be completed optionally")),
     }, rg?.key);
 
     const likertOptions = this.getScaleOptions();
 
-    const _T = function(id:string, en:string) {
-        return  new LanguageMap([
-                ["id", id],
-                ["en", en],
-            ]);
-    }
+    
 
     const addLikertItem = (rowKey:string, lang:Map<string,string>, className:string) => {
         editor.addExistingResponseComponent({
@@ -2962,28 +2336,16 @@ export class DailyRoutineDaysMissed extends Item {
     getScaleOptions() {
         return [
             {
-                key: "1", content: new LanguageMap([
-                    ["id", "weekly.EX.Qcov7.rg.likert_1.option.0"],
-                    ["en", " Yes, I am following this measure now for the first time, or in a stricter way"],
-                ])
+                key: "1", content: _T("weekly.EX.Qcov7.rg.likert_1.option.0", " Yes, I am following this measure now for the first time, or in a stricter way")
             },
             {
-                key: "2", content: new LanguageMap([
-                    ["id", "weekly.EX.Qcov7.rg.likert_1.option.1"],
-                    ["en", "No, I was already following this measure"],
-                ])
+                key: "2", content: _T("weekly.EX.Qcov7.rg.likert_1.option.1", "No, I was already following this measure")
             },
             {
-                key: "0", content: new LanguageMap([
-                    ["id", "weekly.EX.Qcov7.rg.likert_1.option.2"],
-                    ["en", "No, I am not following this measure"],
-                ])
+                key: "0", content: _T("weekly.EX.Qcov7.rg.likert_1.option.2", "No, I am not following this measure")
             },
             {
-                key: "3", content: new LanguageMap([
-                    ["id", "weekly.EX.Qcov7.rg.likert_1.option.3"],
-                    ["en", "Not applicable"],
-                ])
+                key: "3", content: _T("weekly.EX.Qcov7.rg.likert_1.option.3", "Not applicable")
             }
         ];
     }
@@ -2992,18 +2354,12 @@ export class DailyRoutineDaysMissed extends Item {
         return [
             text_why_asking("weekly.EX.Qcov7.helpGroup.text.0"),
             {
-                content: new LanguageMap([
-                    ["id", "weekly.EX.Qcov7.helpGroup.text.1"],
-                    ["en", "To examine how different measures are being followed."],
-                ]),
+                content: _T("weekly.EX.Qcov7.helpGroup.text.1", "To examine how different measures are being followed."),
                 style: [{ key: 'variant', value: 'p' }],
             },
             text_how_answer("weekly.EX.Qcov7.helpGroup.text.2"),
             {
-                content: new LanguageMap([
-                    ["id", "weekly.EX.Qcov7.helpGroup.text.3"],
-                    ["en", "For example, 'Avoid shaking hands': Answer 'yes' if you shake hands less or not at all due to your symptoms; Answer 'No, I am not following this measure' if you continue to shake hands despite your symptoms; Answer 'No, I was already following this measure' if you had already stopped shaking hands before the onset of your symptoms and you did not change this behaviour."],
-                ]),
+                content: _T("weekly.EX.Qcov7.helpGroup.text.3", "For example, 'Avoid shaking hands': Answer 'yes' if you shake hands less or not at all due to your symptoms; Answer 'No, I am not following this measure' if you continue to shake hands despite your symptoms; Answer 'No, I was already following this measure' if you had already stopped shaking hands before the onset of your symptoms and you did not change this behaviour."),
                 // style: [{ key: 'variant', value: 'p' }],
             },
         ];
@@ -3030,10 +2386,7 @@ export class CauseOfSymptoms extends Item {
             itemKey: this.itemKey,
             isRequired: this.isRequired,
             //condition: this.getCondition(),
-            questionText: new LanguageMap([
-                ["id", "weekly.EX.Q11.title.0"],
-                ["en", "What do you think is causing your symptoms?"],
-            ]),
+            questionText: _T("weekly.EX.Q11.title.0", "What do you think is causing your symptoms?"),
             //helpGroupContent: this.getHelpGroupContent(),
             /*bottomDisplayCompoments: [
                 ComponentGenerators.text({
@@ -3050,59 +2403,35 @@ export class CauseOfSymptoms extends Item {
         return  [
             {
                 key: '0', role: 'option',
-                content: new LanguageMap([
-                    ["id", "weekly.EX.Q11.rg.scg.option.0"],
-                    ["en", "Flu or flu-like illness"],
-                ])
+                content: _T("weekly.EX.Q11.rg.scg.option.0", "Flu or flu-like illness")
             },
             {
                 key: '9', role: 'option',
-                content: new LanguageMap([
-                    ["id", "weekly.EX.Q11.rg.scg.option.1"],
-                    ["en", "New coronavirus (COVID-19)"],
-                ])
+                content: _T("weekly.EX.Q11.rg.scg.option.1", "New coronavirus (COVID-19)")
             },
             {
                 key: '1', role: 'option',
-                content: new LanguageMap([
-                    ["id", "weekly.EX.Q11.rg.scg.option.2"],
-                    ["en", "Common cold"],
-                ])
+                content: _T("weekly.EX.Q11.rg.scg.option.2", "Common cold")
             },
             {
                 key: '2', role: 'option',
-                content: new LanguageMap([
-                    ["id", "weekly.EX.Q11.rg.scg.option.3"],
-                    ["en", "Allergy/hay fever"],
-                ])
+                content: _T("weekly.EX.Q11.rg.scg.option.3", "Allergy/hay fever")
             },
             {
                 key: '6', role: 'option',
-                content: new LanguageMap([
-                    ["id", "weekly.EX.Q11.rg.scg.option.4"],
-                    ["en", "Ashtma"],
-                ])
+                content: _T("weekly.EX.Q11.rg.scg.option.4", "Ashtma")
             },
             {
                 key: '3', role: 'option',
-                content: new LanguageMap([
-                    ["id", "weekly.EX.Q11.rg.scg.option.5"],
-                    ["en", "Gastroenteritis complaints or gastric flu"],
-                ])
+                content: _T("weekly.EX.Q11.rg.scg.option.5", "Gastroenteritis complaints or gastric flu")
             },
             {
                 key: '4', role: 'option',
-                content: new LanguageMap([
-                    ["id", "weekly.EX.Q11.rg.scg.option.6"],
-                    ["en", "Other"],
-                ])
+                content: _T("weekly.EX.Q11.rg.scg.option.6", "Other")
             },
             {
                 key: '5', role: 'option',
-                content: new LanguageMap([
-                    ["id", "weekly.EX.Q11.rg.scg.option.7"],
-                    ["en", "I don't know"],
-                ])
+                content: _T("weekly.EX.Q11.rg.scg.option.7", "I don't know")
             },
         ];
     }
@@ -3110,31 +2439,19 @@ export class CauseOfSymptoms extends Item {
     getHelpGroupContent() {
         return [
             {
-                content: new LanguageMap([
-                    ["id", "weekly.EX.Q11.helpGroup.text.0"],
-                    ["en", "Why are we asking this question?"],
-                ]),
+                content: _T("weekly.EX.Q11.helpGroup.text.0", "Why are we asking this question?"),
                 style: [{ key: 'variant', value: 'h5' }],
             },
             {
-                content: new LanguageMap([
-                    ["id", "weekly.EX.Q11.helpGroup.text.1"],
-                    ["en", "To see if our assessment of your illness, based on your symptoms, matches what you believe to be the cause. You may have a better idea of the cause of your illness than our computer algorithms."],
-                ]),
+                content: _T("weekly.EX.Q11.helpGroup.text.1", "To see if our assessment of your illness, based on your symptoms, matches what you believe to be the cause. You may have a better idea of the cause of your illness than our computer algorithms."),
                 style: [{ key: 'variant', value: 'p' }],
             },
             {
-                content: new LanguageMap([
-                    ["id", "weekly.EX.Q11.helpGroup.text.2"],
-                    ["en", "How should I answer this question?"],
-                ]),
+                content: _T("weekly.EX.Q11.helpGroup.text.2", "How should I answer this question?"),
                 style: [{ key: 'variant', value: 'h5' }],
             },
             {
-                content: new LanguageMap([
-                    ["id", "weekly.EX.Q11.helpGroup.text.3"],
-                    ["en", "If you are reasonably sure of the cause of your symptoms, select the appropriate box. Otherwise, select 'No, I Don’t know'."],
-                ]),
+                content: _T("weekly.EX.Q11.helpGroup.text.3", "If you are reasonably sure of the cause of your symptoms, select the appropriate box. Otherwise, select 'No, I Don’t know'."),
                 // style: [{ key: 'variant', value: 'p' }],
             },
         ];
