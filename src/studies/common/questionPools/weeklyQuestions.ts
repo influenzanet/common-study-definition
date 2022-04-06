@@ -1,19 +1,73 @@
 import { LanguageMap } from "../languages"
-import { SurveyItem } from "survey-engine/lib/data_types";
-import { Group } from "case-editor-tools/surveys/types";
+import { Group, Item } from "case-editor-tools/surveys/types";
 import { ItemEditor } from "case-editor-tools/surveys/survey-editor/item-editor";
-import { initDropdownGroup, initLikertScaleItem, initMatrixQuestion, initMultipleChoiceGroup, initSingleChoiceGroup, ResponseRowCell } from "case-editor-tools/surveys/survey-items";
+import { initMatrixQuestion,  ResponseRowCell } from "case-editor-tools/surveys/responseTypeGenerators/matrixGroupComponent";
+import { initLikertScaleItem } from "case-editor-tools/surveys/responseTypeGenerators/likertGroupComponents";
 import { expWithArgs, generateHelpGroupComponent, generateLocStrings, generateTitleComponent } from "case-editor-tools/surveys/utils/simple-generators";
-import { likertScaleKey, matrixKey, multipleChoiceKey, responseGroupKey, singleChoiceKey } from "case-editor-tools/constants/key-definitions";
-import { text_how_answer, text_why_asking } from "./helpers";
+import { likertScaleKey, matrixKey, multipleChoiceKey, responseGroupKey } from "case-editor-tools/constants/key-definitions";
+import { MultipleChoicePrefix, singleChoicePrefix, text_how_answer, text_select_all_apply, text_why_asking, require_response } from "./helpers";
+import { SurveyItems } from 'case-editor-tools/surveys';
+import { ComponentGenerators } from "case-editor-tools/surveys/utils/componentGenerators";
+import { StudyEngine as se } from "case-editor-tools/expression-utils/studyEngineExpressions";
+import { Expression } from "survey-engine/lib/data_types";
 
 const ResponseEncoding = {
     symptoms: {
         no_symptom: '0',
-        fever: 1,
+        fever: '1',
+    },
+    same_illness: {
+        'yes': '0',
+        'no': '1',
+        'dontknow': '2',
+        'notapply': '9'
+    },
+    symptoms_start: {
+        'date_input': '0',
+        'dont_know': '1'
+    },
+    measure_temp: {
+        'yes': '0',
+        'no':'1',
+        'dont_know': '2'
+    },
+    consent_more: {
+        "yes": "1",
+        "no": "0"
+    },
+    symptom_test: {
+        "yes": "1",
+        "not_yet": "2",
+        "no_wont": "3",
+        "no": "0"
+    },
+    test_type: {
+        "pcr": "1",
+        "sero": "2",
+        "antigenic": "3",
+        "antigenic_nasal": "4"
+    },
+    flu_test: {
+        "yes": "1",
+        "yes_antigenic": "5",
+        "plan": "3",
+        "wontgo": "4",
+        "no": "0"
+    },
+    visit_medical: {
+        "no": "0",
+        "gp": "1",
+        "hospital": "2",
+        "emergency": "3",
+        "other": "4",
+        "plan": "5"
+    },
+    daily_routine: {
+        "no": "0",
+        "yes": "1",
+        "off": "2"
     }
 };
-
 
 /**
  * SYMPTOMS: multiple choice question about allergies
@@ -22,26 +76,249 @@ const ResponseEncoding = {
  * @param isRequired if true adds a default "hard" validation to the question to check if it has a response.
  * @param keyOverride use this to override the default key for this item (only last part of the key, parent's key is not influenced).
  */
-const symptomps = (parentKey: string, isRequired?: boolean, keyOverride?: string): SurveyItem => {
-    const defaultKey = 'Q1'
-    const itemKey = [parentKey, keyOverride ? keyOverride : defaultKey].join('.');
-    const editor = new ItemEditor(undefined, { itemKey: itemKey, isGroup: false });
-    editor.setVersion(1);
+export class Symptoms extends Item {
 
-    // QUESTION TEXT
-    editor.setTitleComponent(
-        generateTitleComponent(new LanguageMap([
-            ["id", "weekly.Q1.title.0"],
-            ["en", "Have you had any of the following symptoms since your last questionnaire (or in the past week, if this the first tie you are taking this questionnaire)?"],
-        ]))
-    );
+    useRash: boolean;
 
-    // CONDITION
-    // none
+    useOther: boolean;
 
-    // INFO POPUP
-    editor.setHelpGroupComponent(
-        generateHelpGroupComponent([
+    constructor(parentKey: string, isRequired?: boolean, keyOverride?:string) {
+        super(parentKey, keyOverride ? keyOverride: 'Q1');
+        this.isRequired = isRequired;
+        this.useRash = false;
+        this.useOther = false;
+    }
+
+    buildItem() {
+        return SurveyItems.multipleChoice({
+            parentKey: this.parentKey,
+            itemKey: this.itemKey,
+            isRequired: this.isRequired,
+            questionText: new LanguageMap([
+                ["id", "weekly.Q1.title.0"],
+                ["en", "Have you had any of the following symptoms since your last questionnaire (or in the past week, if this the first tie you are taking this questionnaire)?"],
+            ]),
+            helpGroupContent: this.getHelpGroupContent(),
+            bottomDisplayCompoments: [
+                ComponentGenerators.text({
+                    'content': new LanguageMap([
+                        ["id", "weekly.Q1.rg.cGJZ.text.0"],
+                        ["en", "Multiple answers possible. If you suffer from chronic illness, only indicate symptoms that have changed. For example, if you experience chronic shortness of breath, only mark this symptom if it has recently gotten worse."],
+                    ]),
+                })
+            ],
+            responseOptions: this.getResponses()
+        });
+    }
+
+    getResponses() {
+        const exclusiveOptionRule =  expWithArgs('responseHasKeysAny', this.key, responseGroupKey + '.' + multipleChoiceKey, ResponseEncoding.symptoms.no_symptom);
+        const r =  [
+            {
+                key: ResponseEncoding.symptoms.no_symptom, role: 'option', content: new LanguageMap([
+                    ["id", "weekly.Q1.rg.mcg.option.0"],
+                    ["en", "No symptoms"],
+                ])
+            },
+            {
+                key: '1', role: 'option',
+                disabled:exclusiveOptionRule,
+                content: new LanguageMap([
+                    ["id", "weekly.Q1.rg.mcg.option.1"],
+                    ["en", "Fever"],
+                ])
+            },
+            {
+                key: '2', role: 'option',
+                disabled: exclusiveOptionRule,
+                content: new LanguageMap([
+                    ["id", "weekly.Q1.rg.mcg.option.2"],
+                    ["en", "Chills"],
+                ])
+            },
+            {
+                key: '3', role: 'option',
+                disabled: exclusiveOptionRule,
+                content: new LanguageMap([
+                    ["id", "weekly.Q1.rg.mcg.option.3"],
+                    ["en", "Runny or blocked nose"],
+                ])
+            },
+            {
+                key: '4', role: 'option',
+                disabled: exclusiveOptionRule,
+                content: new LanguageMap([
+                    ["id", "weekly.Q1.rg.mcg.option.4"],
+                    ["en", "Sneezing"],
+                ])
+            },
+            {
+                key: '5', role: 'option',
+                disabled: exclusiveOptionRule,
+                content: new LanguageMap([
+                    ["id", "weekly.Q1.rg.mcg.option.5"],
+                    ["en", "Sore throat"],
+                ])
+            },
+            {
+                key: '6', role: 'option',
+                disabled:exclusiveOptionRule,
+                content: new LanguageMap([
+                    ["id", "weekly.Q1.rg.mcg.option.6"],
+                    ["en", "Cough"],
+                ])
+            },
+            {
+                key: '7', role: 'option',
+                disabled: exclusiveOptionRule,
+                content: new LanguageMap([
+                    ["id", "weekly.Q1.rg.mcg.option.7"],
+                    ["en", "Shortness of breath"],
+                ])
+            },
+            {
+                key: '8', role: 'option',
+                disabled: exclusiveOptionRule,
+                content: new LanguageMap([
+                    ["id", "weekly.Q1.rg.mcg.option.8"],
+                    ["en", "Headache"],
+                ])
+            },
+            {
+                key: '9', role: 'option',
+                disabled: exclusiveOptionRule,
+                content: new LanguageMap([
+                    ["id", "weekly.Q1.rg.mcg.option.9"],
+                    ["en", "Muscle/joint pain"],
+                ])
+            },
+            {
+                key: '10', role: 'option',
+                disabled: exclusiveOptionRule,
+                content: new LanguageMap([
+                    ["id", "weekly.Q1.rg.mcg.option.10"],
+                    ["en", "Chest pain"],
+                ])
+            },
+            {
+                key: '11', role: 'option',
+                disabled: exclusiveOptionRule,
+                content: new LanguageMap([
+                    ["id", "weekly.Q1.rg.mcg.option.11"],
+                    ["en", "Feeling tired or exhausted (malaise)"],
+                ])
+            },
+            {
+                key: '12', role: 'option',
+                disabled: exclusiveOptionRule,
+                content: new LanguageMap([
+                    ["id", "weekly.Q1.rg.mcg.option.12"],
+                    ["en", "Loss of appetite"],
+                ])
+            },
+            {
+                key: '13', role: 'option',
+                disabled: exclusiveOptionRule,
+                content: new LanguageMap([
+                    ["id", "weekly.Q1.rg.mcg.option.13"],
+                    ["en", "Coloured sputum/phlegm"],
+                ])
+            },
+            {
+                key: '14', role: 'option',
+                disabled: exclusiveOptionRule,
+                content: new LanguageMap([
+                    ["id", "weekly.Q1.rg.mcg.option.14"],
+                    ["en", "Watery, bloodshot eyes"],
+                ])
+            },
+            {
+                key: '15', role: 'option',
+                disabled: exclusiveOptionRule,
+                content: new LanguageMap([
+                    ["id", "weekly.Q1.rg.mcg.option.15"],
+                    ["en", "Nausea"],
+                ])
+            },
+            {
+                key: '16', role: 'option',
+                disabled: exclusiveOptionRule,
+                content: new LanguageMap([
+                    ["id", "weekly.Q1.rg.mcg.option.16"],
+                    ["en", "Vomiting"],
+                ])
+            },
+            {
+                key: '17', role: 'option',
+                disabled: exclusiveOptionRule,
+                content: new LanguageMap([
+                    ["id", "weekly.Q1.rg.mcg.option.17"],
+                    ["en", "Diarrhoea (at least three times a day)"],
+                ])
+            },
+            {
+                key: '18', role: 'option',
+                disabled: exclusiveOptionRule,
+                content: new LanguageMap([
+                    ["id", "weekly.Q1.rg.mcg.option.18"],
+                    ["en", "Stomachache"],
+                ])
+            },
+            {
+                key: '23', role: 'option',
+                disabled: exclusiveOptionRule,
+                content: new LanguageMap([
+                    ["id", "weekly.Q1.rg.mcg.option.19"],
+                    ["en", "Loss of smell"],
+                ])
+            },
+            {
+                key: '21', role: 'option',
+                disabled: exclusiveOptionRule,
+                content: new LanguageMap([
+                    ["id", "weekly.Q1.rg.mcg.option.20"],
+                    ["en", "Loss of taste"],
+                ])
+            },
+            {
+                key: '22', role: 'option',
+                disabled: exclusiveOptionRule,
+                content: new LanguageMap([
+                    ["id", "weekly.Q1.rg.mcg.option.21"],
+                    ["en", "Nose bleed"],
+                ])
+            },
+        ];
+
+        if(this.useRash) {
+
+            r.push({
+                key: '20', role: 'option',
+                disabled: exclusiveOptionRule,
+                content: new LanguageMap([
+                    ["id", "weekly.Q1.rg.mcg.option.22"],
+                    ["en", "Rash"],
+                ])
+            });
+        }
+
+        if(this.useOther) {
+            r.push(
+            {
+                key: '19', role: 'option',
+                disabled: exclusiveOptionRule,
+                content: new LanguageMap([
+                    ["id", "weekly.Q1.rg.mcg.option.23"],
+                    ["en", "Other"],
+                ]),
+            });
+        }
+
+        return r;
+    }
+
+    getHelpGroupContent() {
+       return [
             text_why_asking("weekly.Q1.helpGroup.text.0"),
             {
                 content: new LanguageMap([
@@ -56,231 +333,9 @@ const symptomps = (parentKey: string, isRequired?: boolean, keyOverride?: string
                     ["id", "weekly.Q1.helpGroup.text.3"],
                     ["en", "If you suffer from chronic illness, only indicate symptoms that have changed. For example, if you experience chronic shortness of breath, only mark this symptom if it has recently gotten worse. Multiple answers possible."],
                 ]),
-                // style: [{ key: 'variant', value: 'p' }],
             },
-        ])
-    );
-
-    // RESPONSE PART
-    const rg = editor.addNewResponseComponent({ role: 'responseGroup' });
-    editor.addExistingResponseComponent({
-        role: 'text',
-        style: [{ key: 'className', value: 'mb-2' }],
-        content: generateLocStrings(
-            new LanguageMap([
-                ["id", "weekly.Q1.rg.cGJZ.text.0"],
-                ["en", "Multiple answers possible. If you suffer from chronic illness, only indicate symptoms that have changed. For example, if you experience chronic shortness of breath, only mark this symptom if it has recently gotten worse."],
-            ])),
-    }, rg?.key);
-
-    const exclusiveOptionRule =  expWithArgs('responseHasKeysAny', editor.getItem().key, responseGroupKey + '.' + multipleChoiceKey, '0');
-
-    const rg_inner = initMultipleChoiceGroup(multipleChoiceKey, [
-        {
-            key: ResponseEncoding.symptoms.no_symptom, role: 'option', content: new LanguageMap([
-                ["id", "weekly.Q1.rg.mcg.option.0"],
-                ["en", "No symptoms"],
-            ])
-        },
-        {
-            key: '1', role: 'option',
-            disabled:exclusiveOptionRule,
-            content: new LanguageMap([
-                ["id", "weekly.Q1.rg.mcg.option.1"],
-                ["en", "Fever"],
-            ])
-        },
-        {
-            key: '2', role: 'option',
-            disabled: exclusiveOptionRule,
-            content: new LanguageMap([
-                ["id", "weekly.Q1.rg.mcg.option.2"],
-                ["en", "Chills"],
-            ])
-        },
-        {
-            key: '3', role: 'option',
-            disabled: exclusiveOptionRule,
-            content: new LanguageMap([
-                ["id", "weekly.Q1.rg.mcg.option.3"],
-                ["en", "Runny or blocked nose"],
-            ])
-        },
-        {
-            key: '4', role: 'option',
-            disabled: exclusiveOptionRule,
-            content: new LanguageMap([
-                ["id", "weekly.Q1.rg.mcg.option.4"],
-                ["en", "Sneezing"],
-            ])
-        },
-        {
-            key: '5', role: 'option',
-            disabled: exclusiveOptionRule,
-            content: new LanguageMap([
-                ["id", "weekly.Q1.rg.mcg.option.5"],
-                ["en", "Sore throat"],
-            ])
-        },
-        {
-            key: '6', role: 'option',
-            disabled:exclusiveOptionRule,
-            content: new LanguageMap([
-                ["id", "weekly.Q1.rg.mcg.option.6"],
-                ["en", "Cough"],
-            ])
-        },
-        {
-            key: '7', role: 'option',
-            disabled: exclusiveOptionRule,
-            content: new LanguageMap([
-                ["id", "weekly.Q1.rg.mcg.option.7"],
-                ["en", "Shortness of breath"],
-            ])
-        },
-        {
-            key: '8', role: 'option',
-            disabled: exclusiveOptionRule,
-            content: new LanguageMap([
-                ["id", "weekly.Q1.rg.mcg.option.8"],
-                ["en", "Headache"],
-            ])
-        },
-        {
-            key: '9', role: 'option',
-            disabled: exclusiveOptionRule,
-            content: new LanguageMap([
-                ["id", "weekly.Q1.rg.mcg.option.9"],
-                ["en", "Muscle/joint pain"],
-            ])
-        },
-        {
-            key: '10', role: 'option',
-            disabled: exclusiveOptionRule,
-            content: new LanguageMap([
-                ["id", "weekly.Q1.rg.mcg.option.10"],
-                ["en", "Chest pain"],
-            ])
-        },
-        {
-            key: '11', role: 'option',
-            disabled: exclusiveOptionRule,
-            content: new LanguageMap([
-                ["id", "weekly.Q1.rg.mcg.option.11"],
-                ["en", "Feeling tired or exhausted (malaise)"],
-            ])
-        },
-        {
-            key: '12', role: 'option',
-            disabled: exclusiveOptionRule,
-            content: new LanguageMap([
-                ["id", "weekly.Q1.rg.mcg.option.12"],
-                ["en", "Loss of appetite"],
-            ])
-        },
-        {
-            key: '13', role: 'option',
-            disabled: exclusiveOptionRule,
-            content: new LanguageMap([
-                ["id", "weekly.Q1.rg.mcg.option.13"],
-                ["en", "Coloured sputum/phlegm"],
-            ])
-        },
-        {
-            key: '14', role: 'option',
-            disabled: exclusiveOptionRule,
-            content: new LanguageMap([
-                ["id", "weekly.Q1.rg.mcg.option.14"],
-                ["en", "Watery, bloodshot eyes"],
-            ])
-        },
-        {
-            key: '15', role: 'option',
-            disabled: exclusiveOptionRule,
-            content: new LanguageMap([
-                ["id", "weekly.Q1.rg.mcg.option.15"],
-                ["en", "Nausea"],
-            ])
-        },
-        {
-            key: '16', role: 'option',
-            disabled: exclusiveOptionRule,
-            content: new LanguageMap([
-                ["id", "weekly.Q1.rg.mcg.option.16"],
-                ["en", "Vomiting"],
-            ])
-        },
-        {
-            key: '17', role: 'option',
-            disabled: exclusiveOptionRule,
-            content: new LanguageMap([
-                ["id", "weekly.Q1.rg.mcg.option.17"],
-                ["en", "Diarrhoea (at least three times a day)"],
-            ])
-        },
-        {
-            key: '18', role: 'option',
-            disabled: exclusiveOptionRule,
-            content: new LanguageMap([
-                ["id", "weekly.Q1.rg.mcg.option.18"],
-                ["en", "Stomachache"],
-            ])
-        },
-
-
-        {
-            key: '23', role: 'option',
-            disabled: exclusiveOptionRule,
-            content: new LanguageMap([
-                ["id", "weekly.Q1.rg.mcg.option.19"],
-                ["en", "Loss of smell"],
-            ])
-        },
-        {
-            key: '21', role: 'option',
-            disabled: exclusiveOptionRule,
-            content: new LanguageMap([
-                ["id", "weekly.Q1.rg.mcg.option.20"],
-                ["en", "Loss of taste"],
-            ])
-        },
-        {
-            key: '22', role: 'option',
-            disabled: exclusiveOptionRule,
-            content: new LanguageMap([
-                ["id", "weekly.Q1.rg.mcg.option.21"],
-                ["en", "Nose bleed"],
-            ])
-        },
-        {
-            key: '20', role: 'option',
-            disabled: exclusiveOptionRule,
-            content: new LanguageMap([
-                ["id", "weekly.Q1.rg.mcg.option.22"],
-                ["en", "Rash"],
-            ])
-        },
-        {
-            key: '19', role: 'option',
-            disabled: exclusiveOptionRule,
-            content: new LanguageMap([
-                ["id", "weekly.Q1.rg.mcg.option.23"],
-                ["en", "Other"],
-            ]),
-        },
-    ]);
-    editor.addExistingResponseComponent(rg_inner, rg?.key);
-
-    // VALIDATIONs
-    if (isRequired) {
-        editor.addValidation({
-            key: 'r1',
-            type: 'hard',
-            rule: expWithArgs('hasResponse', itemKey, responseGroupKey)
-        });
+        ];
     }
-
-    return editor.getItem();
 }
 
 /**
@@ -290,20 +345,23 @@ const symptomps = (parentKey: string, isRequired?: boolean, keyOverride?: string
  * @param keySymptomsQuestion reference to the symptom survey
  * @param keyOverride use this to override the default key for this item (only last part of the key, parent's key is not influenced).
  */
-const hasSymptomsGroup = (parentKey: string, keySymptomsQuestion: string, keyOverride?: string): Group => {
+class HasSymptomsGroup extends Group {
 
-    class HasSymptomsGroup extends Group {
-        constructor(parentKey: string, defaultKey: string) {
-            super(parentKey, defaultKey);
-            this.groupEditor.setCondition(
-                expWithArgs('responseHasOnlyKeysOtherThan', keySymptomsQuestion, [responseGroupKey, multipleChoiceKey].join('.'), ResponseEncoding.symptoms.no_symptom)
-            );
-        }
+    keySymptomsQuestion: string;
 
-        buildGroup() {}
+    getCondition() {
+        return se.responseHasOnlyKeysOtherThan(keySymptomsQuestion, MultipleChoicePrefix, ResponseEncoding.symptoms.no_symptom);
     }
 
-    return new HasSymptomsGroup(parentKey, 'HS');
+    constructor(parentKey: string, keySymptomsQuestion: string, defaultKey: string) {
+        super(parentKey, defaultKey);
+        this.keySymptomsQuestion = keySymptomsQuestion;
+        this.groupEditor.setCondition(this.getCondition());
+    }
+
+    buildGroup() {
+
+    }
 }
 
 /**
@@ -313,27 +371,79 @@ const hasSymptomsGroup = (parentKey: string, keySymptomsQuestion: string, keyOve
  * @param isRequired if true adds a default "hard" validation to the question to check if it has a response.
  * @param keyOverride use this to override the default key for this item (only last part of the key, parent's key is not influenced).
  */
-const sameIllnes = (parentKey: string, isRequired?: boolean, keyOverride?: string): SurveyItem => {
-    const defaultKey = 'Q2'
-    const itemKey = [parentKey, keyOverride ? keyOverride : defaultKey].join('.');
-    const editor = new ItemEditor(undefined, { itemKey: itemKey, isGroup: false });
-    editor.setVersion(1);
+export class SameIllnes extends Item {
 
-    // QUESTION TEXT
-    editor.setTitleComponent(
-        generateTitleComponent(new LanguageMap([
-            ["id", "weekly.HS.Q2.title.0"],
-            ["en", "When you filled in the previous questionnaire, you indicated that you were still sick. Are the symptoms you are  reporting now from the same timeframe as the symptoms you reported the last time?"],
-        ]))
-    );
+    constructor(parentKey: string, isRequired?: boolean, keyOverride?:string) {
+        super(parentKey, keyOverride ? keyOverride: 'Q2');
+        this.isRequired = isRequired;
+    }
 
-    // CONDITION
-    const hadOngoingSymptomsLastWeek = expWithArgs('eq', expWithArgs('getAttribute', expWithArgs('getAttribute', expWithArgs('getContext'), 'participantFlags'), 'prev'), "1");
-    editor.setCondition(hadOngoingSymptomsLastWeek);
+    getCondition() {
+        const hadOngoingSymptomsLastWeek = expWithArgs('eq', 
+                    expWithArgs('getAttribute', expWithArgs('getAttribute', expWithArgs('getContext'), 'participantFlags'), 'prev'), 
+                    "1"
+              );
+        return hadOngoingSymptomsLastWeek;
+    }
 
-    // INFO POPUP
-    editor.setHelpGroupComponent(
-        generateHelpGroupComponent([
+    buildItem() {
+        return SurveyItems.multipleChoice({
+            parentKey: this.parentKey,
+            itemKey: this.itemKey,
+            isRequired: this.isRequired,
+            condition: this.getCondition(),
+            questionText: new LanguageMap([
+                ["id", "weekly.HS.Q2.title.0"],
+                ["en", "When you filled in the previous questionnaire, you indicated that you were still sick. Are the symptoms you are  reporting now from the same timeframe as the symptoms you reported the last time?"],
+             ]),
+            helpGroupContent: this.getHelpGroupContent(),
+            bottomDisplayCompoments: [
+                ComponentGenerators.text({
+                    'content': new LanguageMap([
+                        ["id", "vaccination.Q0.privacy.note"],
+                        ["en", "(**) By selecting one of these options you give your consent to use your historical data to prefill this survey's responses."],
+                    ])
+                })
+            ],
+            responseOptions: this.getResponses()
+        });
+    }
+
+    getResponses() {
+        return [
+            {
+                key: '0', role: 'option',
+                content: new LanguageMap([
+                    ["id", "weekly.HS.Q2.rg.scg.option.0"],
+                    ["en", "Yes"],
+                ])
+            },
+            {
+                key: '1', role: 'option',
+                content: new LanguageMap([
+                    ["id", "weekly.HS.Q2.rg.scg.option.1"],
+                    ["en", "No"],
+                ])
+            },
+            {
+                key: '2', role: 'option',
+                content: new LanguageMap([
+                    ["id", "weekly.HS.Q2.rg.scg.option.2"],
+                    ["en", "I don’t know/can’t remember"],
+                ])
+            },
+            {
+                key: '9', role: 'option',
+                content: new LanguageMap([
+                    ["id", "weekly.HS.Q2.rg.scg.option.3"],
+                    ["en", "This does not apply to me"],
+                ])
+            },
+        ];
+    }
+
+    getHelpGroupContent() {
+        return [
             text_why_asking("weekly.HS.Q2.helpGroup.text.0"),
             {
                 content: new LanguageMap([
@@ -349,249 +459,80 @@ const sameIllnes = (parentKey: string, isRequired?: boolean, keyOverride?: strin
                     ["en", "If you think that the complaints you are indicating today are caused by the same infection or the same problem (the same period during which you experienced the complaints), answer 'yes'."],
                 ]),
             },
-        ])
-    );
-
-    // RESPONSE PART
-    const rg = editor.addNewResponseComponent({ role: 'responseGroup' });
-    const rg_inner = initSingleChoiceGroup(singleChoiceKey, [
-        {
-            key: '0', role: 'option',
-            content: new LanguageMap([
-                ["id", "weekly.HS.Q2.rg.scg.option.0"],
-                ["en", "Yes"],
-            ])
-        },
-        {
-            key: '1', role: 'option',
-            content: new LanguageMap([
-                ["id", "weekly.HS.Q2.rg.scg.option.1"],
-                ["en", "No"],
-            ])
-        },
-        {
-            key: '2', role: 'option',
-            content: new LanguageMap([
-                ["id", "weekly.HS.Q2.rg.scg.option.2"],
-                ["en", "I don’t know/can’t remember"],
-            ])
-        },
-        {
-            key: '9', role: 'option',
-            content: new LanguageMap([
-                ["id", "weekly.HS.Q2.rg.scg.option.3"],
-                ["en", "This does not apply to me"],
-            ])
-        },
-    ]);
-    editor.addExistingResponseComponent(rg_inner, rg?.key);
-
-    // VALIDATIONs
-    if (isRequired) {
-        editor.addValidation({
-            key: 'r1',
-            type: 'hard',
-            rule: expWithArgs('hasResponse', itemKey, responseGroupKey)
-        });
+        ];
     }
-
-    return editor.getItem();
 }
 
-/**
- * PCR TESTED CONTACTS COVID-19: single choice question about contact with PCR tested Covid19 patients
- *
- * @param parentKey full key path of the parent item, required to generate this item's unique key (e.g. `<surveyKey>.<groupKey>`).
- * @param keySymptomsQuestion reference to the symptom survey
- * @param isRequired if true adds a default "hard" validation to the question to check if it has a response.
- * @param keyOverride use this to override the default key for this item (only last part of the key, parent's key is not influenced).
- */
-const pcrTestedContact = (parentKey: string, isRequired?: boolean, keyOverride?: string): SurveyItem => {
-    const defaultKey = 'Qcov3'
-    const itemKey = [parentKey, keyOverride ? keyOverride : defaultKey].join('.');
-    const editor = new ItemEditor(undefined, { itemKey: itemKey, isGroup: false });
-    editor.setVersion(1);
-
-    // QUESTION TEXT
-    editor.setTitleComponent(
-        generateTitleComponent(new LanguageMap([
-            ["id", "weekly.HS.Qcov3.title.0"],
-            ["en", "In the 14 days before your symptoms started, have you been in close contact with someone for whom an antigenic or PCR test has confirmed that they have COVID-19?"],
-        ]))
-    );
-
-    // CONDITION
-    // none
-
-    // INFO POPUP
-    editor.setHelpGroupComponent(
-        generateHelpGroupComponent([
-            text_why_asking("weekly.HS.Qcov3.helpGroup.text.0"),
-            {
-                content: new LanguageMap([
-                    ["id", "weekly.HS.Qcov3.helpGroup.text.1"],
-                    ["en", "In  order to study how the coronavirus spreads within the general population."],
-                ]),
-            },
-        ])
-    );
-
-    // RESPONSE PART
-    const rg = editor.addNewResponseComponent({ role: 'responseGroup' });
-    const rg_inner = initSingleChoiceGroup(singleChoiceKey, [
-        {
-            key: '1', role: 'option', content: new LanguageMap([
-                ["id", "weekly.HS.Qcov3.rg.scg.option.0"],
-                ["en", "Yes"],
-
-            ])
-        },
-        {
-            key: '0', role: 'option',
-            content: new LanguageMap([
-                ["id", "weekly.HS.Qcov3.rg.scg.option.1"],
-                ["en", "No"],
-            ])
-        },
-        {
-            key: '2', role: 'option',
-            content: new LanguageMap([
-                ["id", "weekly.HS.Qcov3.rg.scg.option.2"],
-                ["en", "I don’t know/can’t remember"],
-            ])
-        },
-    ]);
-    editor.addExistingResponseComponent(rg_inner, rg?.key);
-
-    // VALIDATIONs
-    if (isRequired) {
-        editor.addValidation({
-            key: 'r1',
-            type: 'hard',
-            rule: expWithArgs('hasResponse', itemKey, responseGroupKey)
-        });
-    }
-
-    return editor.getItem();
-}
-
-/**
- * HOUSEHOLD PCR TESTED CONTACT COVID-19: single choice question about household contacts who are PCR tested Covid19 patients
- *
- * @param parentKey full key path of the parent item, required to genrate this item's unique key (e.g. `<surveyKey>.<groupKey>`).
- * @param isRequired if true adds a default "hard" validation to the question to check if it has a response.
- * @param keyOverride use this to override the default key for this item (only last part of the key, parent's key is not influenced).
- */
-const pcrHouseholdContact = (parentKey: string, covid19ContactKey: string, isRequired?: boolean, keyOverride?: string): SurveyItem => {
-    const defaultKey = 'Qcov3b'
-    const itemKey = [parentKey, keyOverride ? keyOverride : defaultKey].join('.');
-    const editor = new ItemEditor(undefined, { itemKey: itemKey, isGroup: false });
-    editor.setVersion(1);
-
-    // QUESTION TEXT
-    editor.setTitleComponent(
-        generateTitleComponent(new LanguageMap([
-            ["id", "weekly.HS.Qcov3b.title.0"],
-            ["en", "Was this person or one of these persons a member of your household?"],
-        ]))
-    );
-
-    // CONDITION
-    editor.setCondition(
-        expWithArgs('responseHasKeysAny', covid19ContactKey, [responseGroupKey, singleChoiceKey].join('.'), '1'),
-    );
-
-    // INFO POPUP
-    editor.setHelpGroupComponent(
-        generateHelpGroupComponent([
-            text_why_asking("weekly.HS.Qcov3b.helpGroup.text.0"),
-            {
-                content: new LanguageMap([
-                    ["id", "weekly.HS.Qcov3b.helpGroup.text.1"],
-                    ["en", "The coronavirus and influenza spread quickly indoors."],
-                ]),
-                style: [{ key: 'variant', value: 'p' }],
-            },
-            text_how_answer("weekly.HS.Qcov3b.helpGroup.text.2"),
-            {
-                content: new LanguageMap([
-                    ["id", "weekly.HS.Qcov3b.helpGroup.text.3"],
-                    ["en", "A member of the household is defined as a person (not necessary a family member) who lives at the same address as you, and who shares the kitchen, living room, family room or dining room."],
-                ]),
-            },
-        ])
-    );
-
-    // RESPONSE PART
-    const rg = editor.addNewResponseComponent({ role: 'responseGroup' });
-    const rg_inner = initSingleChoiceGroup(singleChoiceKey, [
-        {
-            key: '1', role: 'option', content: new LanguageMap([
-                ["id", "weekly.HS.Qcov3b.rg.scg.option.0"],
-                ["en", "Yes"],
-
-            ])
-        },
-        {
-            key: '0', role: 'option',
-            content: new LanguageMap([
-                ["id", "weekly.HS.Qcov3b.rg.scg.option.1"],
-                ["en", "No"],
-            ])
-        },
-        {
-            key: '2', role: 'option',
-            content: new LanguageMap([
-                ["id", "weekly.HS.Qcov3b.rg.scg.option.2"],
-                ["en", "I don’t know"],
-            ])
-        },
-    ]);
-    editor.addExistingResponseComponent(rg_inner, rg?.key);
-
-    // VALIDATIONs
-    if (isRequired) {
-        editor.addValidation({
-            key: 'r1',
-            type: 'hard',
-            rule: expWithArgs('hasResponse', itemKey, responseGroupKey)
-        });
-    }
-
-    return editor.getItem();
-}
 
 /**
  * SYMPTOMS START
  *
  * @param parentKey full key path of the parent item, required to genrate this item's unique key (e.g. `<surveyKey>.<groupKey>`).
- * @param keySameIllnes reference to same illnes question
+ * @param keySameIllnes reference to 'same illness' question
  * @param isRequired if true adds a default "hard" validation to the question to check if it has a response.
  * @param keyOverride use this to override the default key for this item (only last part of the key, parent's key is not influenced).
  */
-const symptomsStart = (parentKey: string, keySameIllnes: string, isRequired?: boolean, keyOverride?: string): SurveyItem => {
-    const defaultKey = 'Q3'
-    const itemKey = [parentKey, keyOverride ? keyOverride : defaultKey].join('.');
-    const editor = new ItemEditor(undefined, { itemKey: itemKey, isGroup: false });
-    editor.setVersion(1);
+export class SymptomsStart extends Item {
 
-    // QUESTION TEXT
-    editor.setTitleComponent(
-        generateTitleComponent(new LanguageMap([
-            ["id", "weekly.HS.Q3.title.0"],
-            ["en", "On what day did you begin feeling the first symptoms? If you do not recall the exact date, please give an approximate date."],
-        ]))
-    );
+    keySameIllnes: string;
 
-    // CONDITION
-    editor.setCondition(
-        expWithArgs('not', expWithArgs('responseHasKeysAny', keySameIllnes, [responseGroupKey, singleChoiceKey].join('.'), '0', '9'))
-    );
+    constructor(parentKey: string, keySameIllnes: string, isRequired?: boolean, keyOverride?:string) {
+        super(parentKey, keyOverride ? keyOverride: 'Q3');
+        this.isRequired = isRequired;
+        this.keySameIllnes = keySameIllnes;
+    }
 
+    getCondition() {
+        const codes = ResponseEncoding.same_illness;
+        return expWithArgs('not', 
+            expWithArgs('responseHasKeysAny', this.keySameIllnes, singleChoicePrefix, codes.yes, codes.notapply)
+        );
+    }
+    
+    buildItem() {
 
-    // INFO POPUP
-    editor.setHelpGroupComponent(
-        generateHelpGroupComponent([
+        const date_input_key = ResponseEncoding.symptoms_start.date_input;
+    
+
+        return SurveyItems.singleChoice({
+            parentKey: this.parentKey,
+            itemKey: this.itemKey,
+            isRequired: this.isRequired,
+            condition: this.getCondition(),
+            questionText: new LanguageMap([
+                ["id", "weekly.HS.Q3.title.0"],
+                ["en", "On what day did you begin feeling the first symptoms? If you do not recall the exact date, please give an approximate date."],
+            ]),
+            helpGroupContent: this.getHelpGroupContent(),
+            responseOptions: [
+                {
+                    key: date_input_key, role: 'dateInput',
+                    optionProps: {
+                        min: { dtype: 'exp', exp: expWithArgs('timestampWithOffset', -5184000) },
+                        max: { dtype: 'exp', exp: expWithArgs('timestampWithOffset', 10) },
+                    },
+                    content: new LanguageMap([
+                        ["id", "weekly.HS.Q3.rg.scg.dateInput.0"],
+                        ["en", "Choose date"],
+                    ])
+                },
+                {
+                    key: '1', role: 'option',
+                    content: new LanguageMap([
+                        ["id", "weekly.HS.Q3.rg.scg.option.1"],
+                        ["en", "I don't know/can't remember"],
+                    ])
+                },
+            ]
+        });
+    }
+
+    getResponses() {
+        return ;
+    }
+
+    getHelpGroupContent() {
+        return [
             text_why_asking( "weekly.HS.Q3.helpGroup.text.0"),
             {
                 content: new LanguageMap([
@@ -607,57 +548,10 @@ const symptomsStart = (parentKey: string, keySameIllnes: string, isRequired?: bo
                     ["en", "Answer as precisely as possible."],
                 ]),
             },
-        ])
-    );
-
-    // RESPONSE PART
-    const rg = editor.addNewResponseComponent({ role: 'responseGroup' });
-
-    const rg_inner = initSingleChoiceGroup(singleChoiceKey, [
-        {
-            key: '0', role: 'dateInput',
-            optionProps: {
-                min: { dtype: 'exp', exp: expWithArgs('timestampWithOffset', -5184000) },
-                max: { dtype: 'exp', exp: expWithArgs('timestampWithOffset', 10) },
-            },
-            content: new LanguageMap([
-                ["id", "weekly.HS.Q3.rg.scg.dateInput.0"],
-                ["en", "Choose date"],
-            ])
-        },
-        {
-            key: '1', role: 'option',
-            content: new LanguageMap([
-                ["id", "weekly.HS.Q3.rg.scg.option.1"],
-                ["en", "I don't know/can't remember"],
-            ])
-        },
-    ]);
-    editor.addExistingResponseComponent(rg_inner, rg?.key);
-
-    /* editor.addExistingResponseComponent({
-        key: '0', role: 'dateInput',
-        properties: {
-            min: { dtype: 'exp', exp: expWithArgs('timestampWithOffset', -5184000) },
-            max: { dtype: 'exp', exp: expWithArgs('timestampWithOffset', 10) },
-        },
-        description: generateLocStrings(new LanguageMap([
-            ["id", "geehdhfc"],
-            ["en", "Choose date"],
-        ]))
-    }, rg?.key); */
-
-    // VALIDATIONs
-    if (isRequired) {
-        editor.addValidation({
-            key: 'r1',
-            type: 'hard',
-            rule: expWithArgs('hasResponse', itemKey, responseGroupKey)
-        });
+        ]
     }
-
-    return editor.getItem();
 }
+
 
 /**
  * SYMPTOMS END
@@ -667,26 +561,69 @@ const symptomsStart = (parentKey: string, keySameIllnes: string, isRequired?: bo
  * @param isRequired if true adds a default "hard" validation to the question to check if it has a response.
  * @param keyOverride use this to override the default key for this item (only last part of the key, parent's key is not influenced).
  */
-const symptomsEnd = (parentKey: string, keySymptomsStart: string, isRequired?: boolean, keyOverride?: string): SurveyItem => {
-    const defaultKey = 'Q4'
-    const itemKey = [parentKey, keyOverride ? keyOverride : defaultKey].join('.');
-    const editor = new ItemEditor(undefined, { itemKey: itemKey, isGroup: false });
-    editor.setVersion(1);
+export class SymptomsEnd extends Item {
 
-    // QUESTION TEXT
-    editor.setTitleComponent(
-        generateTitleComponent(new LanguageMap([
-            ["id", "weekly.HS.Q4.title.0"],
-            ["en", "When did your symptoms end?"],
-        ]))
-    );
+    keySymptomsStart: string;
 
-    // CONDITION
-    // None
+    constructor(parentKey: string, keySymptomsStart: string, isRequired?: boolean, keyOverride?:string) {
+        super(parentKey, keyOverride ? keyOverride: 'Q4');
+        this.isRequired = isRequired;
+        this.keySymptomsStart = keySymptomsStart;
+    }
+    
+    buildItem() {
+        return SurveyItems.singleChoice({
+            parentKey: this.parentKey,
+            itemKey: this.itemKey,
+            isRequired: this.isRequired,
+            //condition: this.getCondition(),
+            questionText: new LanguageMap([
+                ["id", "weekly.HS.Q4.title.0"],
+                ["en", "When did your symptoms end?"],
+            ]),
+            helpGroupContent: this.getHelpGroupContent(),
+            
+            responseOptions: [
+                {
+                    key: '0', role: 'dateInput',
+                    optionProps: {
+                        min: {
+                            dtype: 'exp', exp: {
+                                name: 'getAttribute',
+                                data: [
+                                    { dtype: 'exp', exp: expWithArgs('getResponseItem', this.keySymptomsStart, singleChoicePrefix) },
+                                    { str: 'value', dtype: 'str' }
+                                ],
+                                returnType: 'int',
+                            }
+                        },
+                        max: { dtype: 'exp', exp: expWithArgs('timestampWithOffset', 10) },
+                    },
+                    content: new LanguageMap([
+                        ["id", "weekly.HS.Q4.rg.scg.dateInput.0"],
+                        ["en", "Choose date"],
+                    ])
+                },
+                {
+                    key: '1', role: 'option',
+                    content: new LanguageMap([
+                        ["id", "weekly.HS.Q4.rg.scg.option.1"],
+                        ["en", "I don't know/can't remember"],
+                    ])
+                },
+                {
+                    key: '2', role: 'option',
+                    content: new LanguageMap([
+                        ["id", "weekly.HS.Q4.rg.scg.option.2"],
+                        ["en", "I am still ill"],
+                    ])
+                },
+            ]
+        });
+    }
 
-    // INFO POPUP
-    editor.setHelpGroupComponent(
-        generateHelpGroupComponent([
+    getHelpGroupContent() {
+        return [
             text_why_asking("weekly.HS.Q4.helpGroup.text.0"),
             {
                 content: new LanguageMap([
@@ -702,59 +639,8 @@ const symptomsEnd = (parentKey: string, keySymptomsStart: string, isRequired?: b
                     ["en", "Answer as precisely as possible."],
                 ]),
             },
-        ])
-    );
-
-    // RESPONSE PART
-    const rg = editor.addNewResponseComponent({ role: 'responseGroup' });
-    const rg_inner = initSingleChoiceGroup(singleChoiceKey, [
-        {
-            key: '0', role: 'dateInput',
-            optionProps: {
-                min: {
-                    dtype: 'exp', exp: {
-                        name: 'getAttribute',
-                        data: [
-                            { dtype: 'exp', exp: expWithArgs('getResponseItem', keySymptomsStart, [responseGroupKey, singleChoiceKey, '0'].join('.')) },
-                            { str: 'value', dtype: 'str' }
-                        ],
-                        returnType: 'int',
-                    }
-                },
-                max: { dtype: 'exp', exp: expWithArgs('timestampWithOffset', 10) },
-            },
-            content: new LanguageMap([
-                ["id", "weekly.HS.Q4.rg.scg.dateInput.0"],
-                ["en", "Choose date"],
-            ])
-        },
-        {
-            key: '1', role: 'option',
-            content: new LanguageMap([
-                ["id", "weekly.HS.Q4.rg.scg.option.1"],
-                ["en", "I don't know/can't remember"],
-            ])
-        },
-        {
-            key: '2', role: 'option',
-            content: new LanguageMap([
-                ["id", "weekly.HS.Q4.rg.scg.option.2"],
-                ["en", "I am still ill"],
-            ])
-        },
-    ]);
-    editor.addExistingResponseComponent(rg_inner, rg?.key);
-
-    // VALIDATIONs
-    if (isRequired) {
-        editor.addValidation({
-            key: 'r1',
-            type: 'hard',
-            rule: expWithArgs('hasResponse', itemKey, responseGroupKey)
-        });
+        ];
     }
-
-    return editor.getItem();
 }
 
 /**
@@ -764,26 +650,57 @@ const symptomsEnd = (parentKey: string, keySymptomsStart: string, isRequired?: b
  * @param isRequired if true adds a default "hard" validation to the question to check if it has a response.
  * @param keyOverride use this to override the default key for this item (only last part of the key, parent's key is not influenced).
  */
-const symptomsSuddenlyDeveloped = (parentKey: string, isRequired?: boolean, keyOverride?: string): SurveyItem => {
-    const defaultKey = 'Q5';
-    const itemKey = [parentKey, keyOverride ? keyOverride : defaultKey].join('.');
-    const editor = new ItemEditor(undefined, { itemKey: itemKey, isGroup: false });
-    editor.setVersion(1);
+export class SymptomsSuddenlyDeveloped extends Item {
 
-    // QUESTION TEXT
-    editor.setTitleComponent(
-        generateTitleComponent(new LanguageMap([
-            ["id", "weekly.HS.Q5.title.0"],
-            ["en", "Did your symptoms develop suddenly over a few hours?"],
-        ]))
-    );
+    constructor(parentKey: string, isRequired?: boolean, keyOverride?:string) {
+        super(parentKey, keyOverride ? keyOverride: 'Q5');
+        this.isRequired = isRequired;
+    }
+    
+    buildItem() {
+        return SurveyItems.singleChoice({
+            parentKey: this.parentKey,
+            itemKey: this.itemKey,
+            isRequired: this.isRequired,
+            //condition: this.getCondition(),
+            questionText: new LanguageMap([
+                ["id", "weekly.HS.Q5.title.0"],
+                ["en", "Did your symptoms develop suddenly over a few hours?"],
+            ]),
+            helpGroupContent: this.getHelpGroupContent(),
+            responseOptions: this.getResponses()
+        });
+    }
 
-    // CONDITION
-    // None
+    getResponses() {
+        return [
+            {
+                key: '0', role: 'option',
+                content: new LanguageMap([
+                    ["id", "weekly.HS.Q5.rg.scg.option.0"],
+                    ["en", "Yes"],
+                ])
+            },
+            {
+                key: '1', role: 'option',
+                content: new LanguageMap([
+                    ["id", "weekly.HS.Q5.rg.scg.option.1"],
+                    ["en", "No"],
+                ])
+            },
+            {
+                key: '2', role: 'option',
+                content: new LanguageMap([
+                    ["id", "weekly.HS.Q5.rg.scg.option.2"],
+                    ["en", "I don’t know/can’t remember"],
+    
+                ])
+            },
+        ];
+    }
 
-    // INFO POPUP
-    editor.setHelpGroupComponent(
-        generateHelpGroupComponent([
+    getHelpGroupContent() {
+        return [
             text_why_asking("weekly.HS.Q5.helpGroup.text.0"),
             {
                 content: new LanguageMap([
@@ -798,81 +715,74 @@ const symptomsSuddenlyDeveloped = (parentKey: string, isRequired?: boolean, keyO
                     ["id", "weekly.HS.Q5.helpGroup.text.3"],
                     ["en", "Answer “yes” if your symptoms appeared within a few hours, and not gradually over a period of several days."],
                 ]),
-                // style: [{ key: 'variant', value: 'p' }],
             },
-        ])
-    );
+        ];
+    }
+}
 
-    // RESPONSE PART
-    const rg = editor.addNewResponseComponent({ role: 'responseGroup' });
-    const rg_inner = initSingleChoiceGroup(singleChoiceKey, [
-        {
-            key: '0', role: 'option',
-            content: new LanguageMap([
-                ["id", "weekly.HS.Q5.rg.scg.option.0"],
-                ["en", "Yes"],
-            ])
-        },
-        {
-            key: '1', role: 'option',
-            content: new LanguageMap([
-                ["id", "weekly.HS.Q5.rg.scg.option.1"],
-                ["en", "No"],
-            ])
-        },
-        {
-            key: '2', role: 'option',
-            content: new LanguageMap([
-                ["id", "weekly.HS.Q5.rg.scg.option.2"],
-                ["en", "I don’t know/can’t remember"],
 
-            ])
-        },
-    ]);
-    editor.addExistingResponseComponent(rg_inner, rg?.key);
+export class FeverStart extends Item {
+    keySymptomsQuestion: string
+    keySymptomStart: string
 
-    // VALIDATIONs
-    if (isRequired) {
-        editor.addValidation({
-            key: 'r1',
-            type: 'hard',
-            rule: expWithArgs('hasResponse', itemKey, responseGroupKey)
+    constructor(parentKey: string, keySymptomsQuestion: string, keySymptomStart: string, isRequired?: boolean, keyOverride?:string) {
+        super(parentKey, keyOverride ? keyOverride: '');
+        this.isRequired = isRequired;
+        this.keySymptomsQuestion = keySymptomsQuestion;
+        this.keySymptomStart = keySymptomStart;
+    }
+
+    getCondition() {
+        return se.responseHasKeysAny(this.keySymptomsQuestion, MultipleChoicePrefix, ResponseEncoding.symptoms.fever);
+    }
+    
+    buildItem() {
+        const date_input_key = ResponseEncoding.symptoms_start.date_input;
+        return SurveyItems.singleChoice({
+            parentKey: this.parentKey,
+            itemKey: this.itemKey,
+            isRequired: this.isRequired,
+            condition: this.getCondition(),
+            questionText: new LanguageMap([
+                ["id", "weekly.HS.Q6.title.0"],
+                ["en", "On what day did your fever start? If you do not recall the exact date, please give an approximate date."],
+            ]),
+            helpGroupContent: this.getHelpGroupContent(),
+            responseOptions: [
+                {
+                    key: '1', role: 'dateInput',
+                    optionProps: {
+                        min: {
+                            dtype: 'exp', exp: {
+                                name: 'getAttribute',
+                                data: [
+                                    { dtype: 'exp', exp: expWithArgs('getResponseItem', this.keySymptomStart, [singleChoicePrefix, date_input_key].join('.')) },
+                                    { str: 'value', dtype: 'str' }
+                                ],
+                                returnType: 'int',
+                            }
+                        },
+                        max: { dtype: 'exp', exp: se.timestampWithOffset({ seconds: 10 }) },
+                    },
+                    content: new LanguageMap([
+                        ["id", "weekly.HS.Q6.rg.scg.dateInput.0"],
+                        ["en", "Choose date"],
+                    ])
+                },
+                {
+                    key: '2', role: 'option',
+                    content: new LanguageMap([
+                        ["id", "weekly.HS.Q6.rg.scg.option.1"],
+                        ["en", "I don’t know/can’t remember"],
+        
+                    ])
+                },
+            ]
         });
     }
 
-    return editor.getItem();
-}
-
-/**
- * FEVER START
- *
- * @param parentKey full key path of the parent item, required to genrate this item's unique key (e.g. `<surveyKey>.<groupKey>`).
- * @param isRequired if true adds a default "hard" validation to the question to check if it has a response.
- * @param keyOverride use this to override the default key for this item (only last part of the key, parent's key is not influenced).
- */
-const feverStart = (parentKey: string, keySymptomsQuestion: string, keySymptomStart: string, isRequired?: boolean, keyOverride?: string): SurveyItem => {
-    const defaultKey = 'a';
-    const itemKey = [parentKey, keyOverride ? keyOverride : defaultKey].join('.');
-    const editor = new ItemEditor(undefined, { itemKey: itemKey, isGroup: false });
-    editor.setVersion(1);
-
-    // QUESTION TEXT
-    editor.setTitleComponent(
-        generateTitleComponent(new LanguageMap([
-            ["id", "weekly.HS.Q6.title.0"],
-            ["en", "On what day did your fever start? If you do not recall the exact date, please give an approximate date."],
-
-        ]))
-    )
-
-    // CONDITION
-    editor.setCondition(
-        expWithArgs('responseHasKeysAny', keySymptomsQuestion, [responseGroupKey, multipleChoiceKey].join('.'), '1')
-    );
-
-    // INFO POPUP
-    editor.setHelpGroupComponent(
-        generateHelpGroupComponent([
+    getHelpGroupContent() {
+        return [
             {
                 content: new LanguageMap([
                     ["id", "weekly.HS.Q6.helpGroup.text.0"],
@@ -901,54 +811,29 @@ const feverStart = (parentKey: string, keySymptomsQuestion: string, keySymptomSt
                 ]),
                 style: [{ key: 'variant', value: 'p' }],
             },
-        ])
-    );
+        ]
+    }
+}
 
-    // RESPONSE PART
-    const rg = editor.addNewResponseComponent({ role: 'responseGroup' });
-    const rg_inner = initSingleChoiceGroup(singleChoiceKey, [
-        {
-            key: '1', role: 'dateInput',
-            optionProps: {
-                min: {
-                    dtype: 'exp', exp: {
-                        name: 'getAttribute',
-                        data: [
-                            { dtype: 'exp', exp: expWithArgs('getResponseItem', keySymptomStart, [responseGroupKey,  singleChoiceKey, '0'].join('.')) },
-                            { str: 'value', dtype: 'str' }
-                        ],
-                        returnType: 'int',
-                    }
-                },
-                max: { dtype: 'exp', exp: expWithArgs('timestampWithOffset', 10) },
-            },
-            content: new LanguageMap([
-                ["id", "weekly.HS.Q6.rg.scg.dateInput.0"],
-                ["en", "Choose date"],
-            ])
-        },
-        {
-            key: '2', role: 'option',
-            content: new LanguageMap([
-                ["id", "weekly.HS.Q6.rg.scg.option.1"],
-                ["en", "I don’t know/can’t remember"],
-
-            ])
-        },
-    ]);
-    editor.addExistingResponseComponent(rg_inner, rg?.key);
-
-    // VALIDATIONs
-    if (isRequired) {
-        editor.addValidation({
-            key: 'r1',
-            type: 'hard',
-            rule: expWithArgs('hasResponse', itemKey, responseGroupKey)
-        });
+abstract class SymptomDependentQuestion extends Item {
+    
+    keySymptomsQuestion: string;
+    
+    constructor(defaultKey: string, parentKey: string, keySymptomsQuestion: string, isRequired?: boolean, keyOverride?:string) {
+        super(parentKey, keyOverride ? keyOverride: defaultKey);
+        this.isRequired = isRequired;
+        this.keySymptomsQuestion = keySymptomsQuestion;
     }
 
-    return editor.getItem();
+    abstract getTriggerSymptoms(): Array<string>;
+
+    getCondition() {
+        const symptoms = this.getTriggerSymptoms();
+        return se.multipleChoice.any(this.keySymptomsQuestion, ...symptoms);
+        //expWithArgs('responseHasKeysAny', keySymptomsQuestion, [responseGroupKey, multipleChoiceKey].join('.'), '1')
+    }
 }
+
 
 /**
  * FEVER DEVELOPED SUDDENLY
@@ -957,28 +842,62 @@ const feverStart = (parentKey: string, keySymptomsQuestion: string, keySymptomSt
  * @param isRequired if true adds a default "hard" validation to the question to check if it has a response.
  * @param keyOverride use this to override the default key for this item (only last part of the key, parent's key is not influenced).
  */
-const feverDevelopedSuddenly = (parentKey: string, keySymptomsQuestion: string, isRequired?: boolean, keyOverride?: string): SurveyItem => {
-    const defaultKey = 'b';
-    const itemKey = [parentKey, keyOverride ? keyOverride : defaultKey].join('.');
-    const editor = new ItemEditor(undefined, { itemKey: itemKey, isGroup: false });
-    editor.setVersion(1);
+export class FeverDevelopedSuddenly extends SymptomDependentQuestion {
 
-    // QUESTION TEXT
-    editor.setTitleComponent(
-        generateTitleComponent(new LanguageMap([
-            ["id", "weekly.HS.Q6b.title.0"],
-            ["en", "Did your fever develop suddenly over a few hours?"],
-        ]))
-    );
+    constructor(parentKey: string, keySymptomsQuestion: string, isRequired?: boolean, keyOverride?:string) {
+        super('b', parentKey, keySymptomsQuestion, isRequired, keyOverride );
+    }
 
-    // CONDITION
-    editor.setCondition(
-        expWithArgs('responseHasKeysAny', keySymptomsQuestion, [responseGroupKey, multipleChoiceKey].join('.'), '1')
-    );
+    getTriggerSymptoms() {
+        return [
+            ResponseEncoding.symptoms.fever
+        ];
+    }
 
-    // INFO POPUP
-    editor.setHelpGroupComponent(
-        generateHelpGroupComponent([
+    buildItem() {
+        return SurveyItems.singleChoice({
+            parentKey: this.parentKey,
+            itemKey: this.itemKey,
+            isRequired: this.isRequired,
+            condition: this.getCondition(),
+            questionText: new LanguageMap([
+                ["id", "weekly.HS.Q6b.title.0"],
+                ["en", "Did your fever develop suddenly over a few hours?"],
+           
+            ]),
+            helpGroupContent: this.getHelpGroupContent(),
+            responseOptions: this.getResponses()
+        });
+    }
+
+    getResponses() {
+        return [
+            {
+                key: '0', role: 'option',
+                content: new LanguageMap([
+                    ["id", "weekly.HS.Q6b.rg.scg.option.0"],
+                    ["en", "Yes"],
+                ])
+            },
+            {
+                key: '1', role: 'option',
+                content: new LanguageMap([
+                    ["id", "weekly.HS.Q6b.rg.scg.option.1"],
+                    ["en", "No"],
+                ])
+            },
+            {
+                key: '3', role: 'option',
+                content: new LanguageMap([
+                    ["id", "weekly.HS.Q6b.rg.scg.option.2"],
+                    ["en", "I don’t know/can’t remember"],
+                ])
+            },
+        ];
+    }
+
+    getHelpGroupContent() {
+        return [
             text_why_asking("weekly.HS.Q6b.helpGroup.text.0"),
             {
                 content: new LanguageMap([
@@ -994,77 +913,67 @@ const feverDevelopedSuddenly = (parentKey: string, keySymptomsQuestion: string, 
                     ["en", "Answer “yes” if your symptoms appeared within a few hours, and not gradually over a period of several days."],
                 ]),
             },
-        ])
-    );
+        ];
+    }
+}
 
-    // RESPONSE PART
-    const rg = editor.addNewResponseComponent({ role: 'responseGroup' });
-    const rg_inner = initSingleChoiceGroup(singleChoiceKey, [
-        {
-            key: '0', role: 'option',
-            content: new LanguageMap([
-                ["id", "weekly.HS.Q6b.rg.scg.option.0"],
-                ["en", "Yes"],
-            ])
-        },
-        {
-            key: '1', role: 'option',
-            content: new LanguageMap([
-                ["id", "weekly.HS.Q6b.rg.scg.option.1"],
-                ["en", "No"],
-            ])
-        },
-        {
-            key: '3', role: 'option',
-            content: new LanguageMap([
-                ["id", "weekly.HS.Q6b.rg.scg.option.2"],
-                ["en", "I don’t know/can’t remember"],
-            ])
-        },
-    ]);
-    editor.addExistingResponseComponent(rg_inner, rg?.key);
 
-    // VALIDATIONs
-    if (isRequired) {
-        editor.addValidation({
-            key: 'r1',
-            type: 'hard',
-            rule: expWithArgs('hasResponse', itemKey, responseGroupKey)
+export class DidUMeasureTemperature extends SymptomDependentQuestion {
+
+    constructor(parentKey: string, keySymptomsQuestion: string, isRequired?: boolean, keyOverride?:string) {
+        super('c', parentKey, keySymptomsQuestion, isRequired, keyOverride );
+    }
+
+    getTriggerSymptoms() {
+        return [
+            ResponseEncoding.symptoms.fever
+        ];
+    }
+
+    
+    buildItem() {
+        return SurveyItems.singleChoice({
+            parentKey: this.parentKey,
+            itemKey: this.itemKey,
+            isRequired: this.isRequired,
+            condition: this.getCondition(),
+            questionText: new LanguageMap([
+                ["id", "weekly.HS.Q6c.title.0"],
+                ["en", "Did you take your temperature?"],
+            ]),
+            helpGroupContent: this.getHelpGroupContent(),
+            responseOptions: this.getResponses()
         });
     }
 
-    return editor.getItem();
-}
+    getResponses() {
+        return  [
+            {
+                key: ResponseEncoding.measure_temp.yes, role: 'option',
+                content: new LanguageMap([
+                    ["id", "weekly.HS.Q6c.rg.scg.option.0"],
+                    ["en", "Yes"],
+                ])
+            },
+            {
+                key: ResponseEncoding.measure_temp.no, role: 'option',
+                content: new LanguageMap([
+                    ["id", "weekly.HS.Q6c.rg.scg.option.1"],
+                    ["en", "No"],
+                ])
+            },
+            {
+                key: ResponseEncoding.measure_temp.dont_know, role: 'option',
+                content: new LanguageMap([
+                    ["id", "weekly.HS.Q6c.rg.scg.option.2"],
+                    ["en", "I don’t know/can’t remember"],
+                ])
+            },
+        ]
+    }
 
-/**
- * DID YOU MEASURE TEMPERATURE
- *
- * @param parentKey full key path of the parent item, required to genrate this item's unique key (e.g. `<surveyKey>.<groupKey>`).
- * @param isRequired if true adds a default "hard" validation to the question to check if it has a response.
- * @param keyOverride use this to override the default key for this item (only last part of the key, parent's key is not influenced).
- */
-const didUMeasureTemperature = (parentKey: string, keySymptomsQuestion: string, isRequired?: boolean, keyOverride?: string): SurveyItem => {
-    const defaultKey = 'c';
-    const itemKey = [parentKey, keyOverride ? keyOverride : defaultKey].join('.');
-    const editor = new ItemEditor(undefined, { itemKey: itemKey, isGroup: false });
-    editor.setVersion(1);
-
-    // QUESTION TEXT
-    editor.setTitleComponent(
-        generateTitleComponent(new LanguageMap([
-            ["id", "weekly.HS.Q6c.title.0"],
-            ["en", "Did you take your temperature?"],
-        ]))
-    );
-
-    // CONDITION
-    editor.setCondition(
-        expWithArgs('responseHasKeysAny', keySymptomsQuestion, [responseGroupKey, multipleChoiceKey].join('.'), '1')
-    );
-
-    // INFO POPUP
-    editor.setHelpGroupComponent(
-        generateHelpGroupComponent([
+    getHelpGroupContent() {
+        return [
             text_why_asking("weekly.HS.Q6c.helpGroup.text.0"),
             {
                 content: new LanguageMap([
@@ -1079,48 +988,9 @@ const didUMeasureTemperature = (parentKey: string, keySymptomsQuestion: string, 
                     ["id", "weekly.HS.Q6c.helpGroup.text.3"],
                     ["en", "Answer yes, if you took your temperature using a thermometer."],
                 ]),
-                // style: [{ key: 'variant', value: 'p' }],
             },
-        ])
-    );
-
-    // RESPONSE PART
-    const rg = editor.addNewResponseComponent({ role: 'responseGroup' });
-    const rg_inner = initSingleChoiceGroup(singleChoiceKey, [
-        {
-            key: '0', role: 'option',
-            content: new LanguageMap([
-                ["id", "weekly.HS.Q6c.rg.scg.option.0"],
-                ["en", "Yes"],
-            ])
-        },
-        {
-            key: '1', role: 'option',
-            content: new LanguageMap([
-                ["id", "weekly.HS.Q6c.rg.scg.option.1"],
-                ["en", "No"],
-            ])
-        },
-        {
-            key: '2', role: 'option',
-            content: new LanguageMap([
-                ["id", "weekly.HS.Q6c.rg.scg.option.2"],
-                ["en", "I don’t know/can’t remember"],
-            ])
-        },
-    ]);
-    editor.addExistingResponseComponent(rg_inner, rg?.key);
-
-    // VALIDATIONs
-    if (isRequired) {
-        editor.addValidation({
-            key: 'r1',
-            type: 'hard',
-            rule: expWithArgs('hasResponse', itemKey, responseGroupKey)
-        });
+        ];
     }
-
-    return editor.getItem();
 }
 
 /**
@@ -1131,31 +1001,99 @@ const didUMeasureTemperature = (parentKey: string, keySymptomsQuestion: string, 
  * @param isRequired if true adds a default "hard" validation to the question to check if it has a response.
  * @param keyOverride use this to override the default key for this item (only last part of the key, parent's key is not influenced).
  */
-const highestTemprerature = (parentKey: string, keySymptomsQuestion: string, keyDidYouMeasureTemperature: string, isRequired?: boolean, keyOverride?: string): SurveyItem => {
-    const defaultKey = 'd';
-    const itemKey = [parentKey, keyOverride ? keyOverride : defaultKey].join('.');
-    const editor = new ItemEditor(undefined, { itemKey: itemKey, isGroup: false });
-    editor.setVersion(1);
+export class HighestTemprerature extends SymptomDependentQuestion {
 
-    // QUESTION TEXT
-    editor.setTitleComponent(
-        generateTitleComponent(new LanguageMap([
-            ["id", "weekly.HS.Q6d.title.0"],
-            ["en", "What was your highest temperature measured?"],
-        ]))
-    );
+    keyDidYouMeasureTemperature: string;
 
-    // CONDITION
-    editor.setCondition(
-        expWithArgs('and',
-            expWithArgs('responseHasKeysAny', keyDidYouMeasureTemperature, [responseGroupKey, singleChoiceKey].join('.'), '0'),
-            expWithArgs('responseHasKeysAny', keySymptomsQuestion, [responseGroupKey, multipleChoiceKey].join('.'), '1')
+    constructor(parentKey: string, keySymptomsQuestion: string, keyDidYouMeasureTemperature: string, isRequired?: boolean, keyOverride?:string) {
+        super('d', parentKey, keySymptomsQuestion, isRequired, keyOverride );
+        this.keyDidYouMeasureTemperature = keyDidYouMeasureTemperature;
+    }
+
+    getCondition() {
+        return se.and(
+            se.singleChoice.any(this.keyDidYouMeasureTemperature, ResponseEncoding.measure_temp.yes),
+            super.getCondition()
         )
-    );
+    }
 
-    // INFO POPUP
-    editor.setHelpGroupComponent(
-        generateHelpGroupComponent([
+    getTriggerSymptoms() {
+        return [
+            ResponseEncoding.symptoms.fever
+        ];
+    }
+    
+    buildItem() {
+        return SurveyItems.singleChoice({
+            parentKey: this.parentKey,
+            itemKey: this.itemKey,
+            isRequired: this.isRequired,
+            condition: this.getCondition(),
+            questionText: new LanguageMap([
+                ["id", "weekly.HS.Q6d.title.0"],
+                ["en", "What was your highest temperature measured?"],
+            ]),
+            helpGroupContent: this.getHelpGroupContent(),
+            responseOptions: this.getResponses()
+        });
+    }
+
+    getResponses() {
+        return  [
+            {
+                key: '0', role: 'option',
+                content: new LanguageMap([
+                    ["id", "weekly.HS.Q6d.rg.scg.option.0"],
+                    ["en", "Below 37.0°C"],
+                ])
+            },
+            {
+                key: '1', role: 'option',
+                content: new LanguageMap([
+                    ["id", "weekly.HS.Q6d.rg.scg.option.1"],
+                    ["en", "37.0°C - 37.4°C"],
+    
+                ])
+            },
+            {
+                key: '2', role: 'option',
+                content: new LanguageMap([
+                    ["id", "weekly.HS.Q6d.rg.scg.option.2"],
+                    ["en", "37.5°C - 37.9°C"],
+                ])
+            },
+            {
+                key: '3', role: 'option',
+                content: new LanguageMap([
+                    ["id", "weekly.HS.Q6d.rg.scg.option.3"],
+                    ["en", "38.0°C - 38.9°C"],
+                ])
+            },
+            {
+                key: '4', role: 'option',
+                content: new LanguageMap([
+                    ["id", "weekly.HS.Q6d.rg.scg.option.4"],
+                    ["en", "39.0°C - 39.9°C"],
+                ])
+            }, {
+                key: '5', role: 'option',
+                content: new LanguageMap([
+                    ["id", "weekly.HS.Q6d.rg.scg.option.5"],
+                    ["en", "40.0°C or more"],
+                ])
+            },
+            {
+                key: '6', role: 'option',
+                content: new LanguageMap([
+                    ["id", "weekly.HS.Q6d.rg.scg.option.6"],
+                    ["en", "I don't know/can't remember"],
+                ])
+            },
+        ];
+    }
+
+    getHelpGroupContent() {
+        return [
             text_why_asking("weekly.HS.Q6d.helpGroup.text.0"),
             {
                 content: new LanguageMap([
@@ -1171,101 +1109,50 @@ const highestTemprerature = (parentKey: string, keySymptomsQuestion: string, key
                     ["en", "Please indicate the highest temperature you measured during the period in which you experienced your symptoms."],
                 ]),
             },
-        ])
-    );
-
-    // RESPONSE PART
-    const rg = editor.addNewResponseComponent({ role: 'responseGroup' });
-    const rg_inner = initSingleChoiceGroup(singleChoiceKey, [
-        {
-            key: '0', role: 'option',
-            content: new LanguageMap([
-                ["id", "weekly.HS.Q6d.rg.scg.option.0"],
-                ["en", "Below 37.0°C"],
-            ])
-        },
-        {
-            key: '1', role: 'option',
-            content: new LanguageMap([
-                ["id", "weekly.HS.Q6d.rg.scg.option.1"],
-                ["en", "37.0°C - 37.4°C"],
-
-            ])
-        },
-        {
-            key: '2', role: 'option',
-            content: new LanguageMap([
-                ["id", "weekly.HS.Q6d.rg.scg.option.2"],
-                ["en", "37.5°C - 37.9°C"],
-            ])
-        },
-        {
-            key: '3', role: 'option',
-            content: new LanguageMap([
-                ["id", "weekly.HS.Q6d.rg.scg.option.3"],
-                ["en", "38.0°C - 38.9°C"],
-            ])
-        },
-        {
-            key: '4', role: 'option',
-            content: new LanguageMap([
-                ["id", "weekly.HS.Q6d.rg.scg.option.4"],
-                ["en", "39.0°C - 39.9°C"],
-            ])
-        }, {
-            key: '5', role: 'option',
-            content: new LanguageMap([
-                ["id", "weekly.HS.Q6d.rg.scg.option.5"],
-                ["en", "40.0°C or more"],
-            ])
-        },
-        {
-            key: '6', role: 'option',
-            content: new LanguageMap([
-                ["id", "weekly.HS.Q6d.rg.scg.option.6"],
-                ["en", "I don't know/can't remember"],
-            ])
-        },
-    ]);
-    editor.addExistingResponseComponent(rg_inner, rg?.key);
-
-    // VALIDATIONs
-    if (isRequired) {
-        editor.addValidation({
-            key: 'r1',
-            type: 'hard',
-            rule: expWithArgs('hasResponse', itemKey, responseGroupKey)
-        });
+        ];
     }
-
-    return editor.getItem();
 }
 
-const getFullFeverGroup = (parentKey: string, keySymptomsQuestion: string, keySymptomStart: string, isRequired?: boolean, keyOverride?: string): SurveyItem => {
-    const defaultKey = 'Q6';
-    const itemKey = [parentKey, keyOverride ? keyOverride : defaultKey].join('.');
-    const editor = new ItemEditor(undefined, { itemKey: itemKey, isGroup: true });
-    editor.setVersion(1);
+export class FeverGroup extends Group {
+    
+    keySymptomsQuestion: string
+    
+    keySymptomStart: string
 
-    editor.setSelectionMethod({ name: 'sequential' });
-    editor.setCondition(
-        expWithArgs('responseHasKeysAny', keySymptomsQuestion, [responseGroupKey, multipleChoiceKey].join('.'), '1')
-    );
+    isRequired?: boolean;
 
-    // Fever Start
-    editor.addSurveyItem(feverStart(itemKey, keySymptomsQuestion, keySymptomStart, isRequired));
+    getCondition() {
+        return se.multipleChoice.any(this.keySymptomsQuestion, ResponseEncoding.symptoms.fever);
+    }
+    
+    constructor(parentKey: string, keySymptomsQuestion: string, keySymptomStart: string, isRequired?: boolean, keyOverride?: string) {
+        const defaultKey = 'Q6';
+        super(parentKey, keyOverride ? keyOverride : defaultKey);
 
-    // Developed Suddenly
-    editor.addSurveyItem(feverDevelopedSuddenly(itemKey, keySymptomsQuestion, isRequired));
+        this.keySymptomsQuestion = keySymptomsQuestion;
+        this.keySymptomStart = keySymptomStart;
+        this.isRequired = isRequired;
+        this.groupEditor.setCondition(this.getCondition());
 
-    // Did you take temperature
-    const Q_tempTaken = didUMeasureTemperature(itemKey, keySymptomsQuestion, isRequired);
-    editor.addSurveyItem(Q_tempTaken);
+    }
 
-    // What was the highest
-    editor.addSurveyItem(highestTemprerature(itemKey, keySymptomsQuestion, Q_tempTaken.key, isRequired));
+    buildItems() {
 
-    return editor.getItem();
+        const measure = new DidUMeasureTemperature(this.key, this.keySymptomsQuestion, this.isRequired);
+        return [
+            new FeverStart(this.key, this.keySymptomsQuestion, this.keySymptomStart, this.isRequired),
+            new FeverDevelopedSuddenly(this.key, this.keySymptomsQuestion, this.isRequired),
+            measure,
+            new HighestTemprerature(this.key, this.keySymptomsQuestion, measure.key, this.isRequired )
+        ];
+    }
+
+
+    buildGroup() {
+        this.buildItems().forEach(item=>{
+            this.addItem(item.get());
+        })
+    }
 }
 
 /**
@@ -1276,63 +1163,59 @@ const getFullFeverGroup = (parentKey: string, keySymptomsQuestion: string, keySy
  * @param isRequired if true adds a default "hard" validation to the question to check if it has a response.
  * @param keyOverride use this to override the default key for this item (only last part of the key, parent's key is not influenced).
  */
-const consentForMore = (parentKey: string, isRequired?: boolean, keyOverride?: string): SurveyItem => {
-    const defaultKey = 'Q36'
-    const itemKey = [parentKey, keyOverride ? keyOverride : defaultKey].join('.');
-    const editor = new ItemEditor(undefined, { itemKey: itemKey, isGroup: false });
+export class ConsentForMore extends Item {
 
-    // QUESTION TEXT
-    editor.setTitleComponent(
-        generateTitleComponent(new LanguageMap([
-            ["id", "weekly.HS.Q36.title.0"],
-            ["en", "Thank you for all these information. They will help us to estimate the frequency of symptoms among general population. You can stop here. If you have a little more time, we propose you to answer further questions about your symptoms and care. Do you accept to answer to these additional questions?"],
-        ]))
-    );
+    constructor(parentKey: string, isRequired?: boolean, keyOverride?:string) {
+        super(parentKey, keyOverride ? keyOverride: 'Q36');
+        this.isRequired = isRequired;
+    }
+    
+    buildItem() {
+        return SurveyItems.singleChoice({
+            parentKey: this.parentKey,
+            itemKey: this.itemKey,
+            isRequired: this.isRequired,
+            //condition: this.getCondition(),
+            questionText: new LanguageMap([
+                ["id", "weekly.HS.Q36.title.0"],
+                ["en", "Thank you for all these information. They will help us to estimate the frequency of symptoms among general population. You can stop here. If you have a little more time, we propose you to answer further questions about your symptoms and care. Do you accept to answer to these additional questions?"],
+    
+            ]),
+            helpGroupContent: this.getHelpGroupContent(),
+            responseOptions: this.getResponses()
+        });
+    }
 
-    // INFO POPUP
-    editor.setHelpGroupComponent(
-        generateHelpGroupComponent([
+    getResponses() {
+        return  [
+            {
+                key: ResponseEncoding.consent_more.yes, role: 'option', content: new LanguageMap([
+                    ["id", "weekly.HS.Q36.rg.scg.option.0"],
+                    ["en", "Yes"],
+    
+                ])
+            },
+            {
+                key: ResponseEncoding.consent_more.no, role: 'option',
+                content: new LanguageMap([
+                    ["id", "weekly.HS.Q36.rg.scg.option.1"],
+                    ["en", "No"],
+                ])
+            }
+        ];
+    }
+
+    getHelpGroupContent() {
+        return [
             text_why_asking("weekly.HS.Q36.helpGroup.text.0"),
             {
                 content: new LanguageMap([
                     ["id", "weekly.HS.Q36.helpGroup.text.1"],
                     ["en", "We want to know if you are willing to answer the follow-up questions. Your answers to the follow-up questions may assist our research."],
                 ]),
-                //style: [{ key: 'variant', value: 'p' }],
             },
-        ])
-    );
-
-    // RESPONSE PART
-    const rg = editor.addNewResponseComponent({ role: 'responseGroup' });
-    const rg_inner = initSingleChoiceGroup(singleChoiceKey, [
-        {
-            key: '1', role: 'option', content: new LanguageMap([
-                ["id", "weekly.HS.Q36.rg.scg.option.0"],
-                ["en", "Yes"],
-
-            ])
-        },
-        {
-            key: '0', role: 'option',
-            content: new LanguageMap([
-                ["id", "weekly.HS.Q36.rg.scg.option.1"],
-                ["en", "No"],
-            ])
-        }
-    ]);
-    editor.addExistingResponseComponent(rg_inner, rg?.key);
-
-    // VALIDATIONs
-    if (isRequired) {
-        editor.addValidation({
-            key: 'r1',
-            type: 'hard',
-            rule: expWithArgs('hasResponse', itemKey, responseGroupKey)
-        });
+        ];
     }
-
-    return editor.getItem();
 }
 
 /**
@@ -1342,20 +1225,26 @@ const consentForMore = (parentKey: string, isRequired?: boolean, keyOverride?: s
  * @param userConsentForSymptoms reference to the symptom survey
  * @param keyOverride use this to override the default key for this item (only last part of the key, parent's key is not influenced).
  */
-const hasMoreGroup = (parentKey: string, consentForMoreKey: string, keyOverride?: string): Group => {
+ class HasMoreGroup extends Group {
 
-    class HasMoreGroup extends Group {
-        constructor(parentKey: string, defaultKey: string) {
-            super(parentKey, defaultKey);
-            this.groupEditor.setCondition(
-                expWithArgs('responseHasKeysAny', consentForMoreKey, [responseGroupKey, singleChoiceKey].join('.'), '1'),
-            );
-        }
+    consentForMoreKey : string;
 
-        buildGroup() { }
+    getCondition() {
+        return se.singleChoice.any(this.consentForMoreKey, ResponseEncoding.consent_more.yes)
+    }
+     
+    constructor(parentKey: string, consentForMoreKey: string, keyOverride?: string) {
+        const defaultKey = 'EX';
+        super(parentKey, keyOverride ? keyOverride: defaultKey);
+        this.consentForMoreKey = consentForMoreKey;
+        this.groupEditor.setCondition(
+            this.getCondition()
+        );
     }
 
-    return new HasMoreGroup(parentKey, 'EX');
+    buildGroup() { 
+
+    }
 }
 
 /**
@@ -1365,26 +1254,64 @@ const hasMoreGroup = (parentKey: string, consentForMoreKey: string, keyOverride?
  * @param isRequired if true adds a default "hard" validation to the question to check if it has a response.
  * @param keyOverride use this to override the default key for this item (only last part of the key, parent's key is not influenced).
  */
-const symptomImpliedCovidTest = (parentKey: string, isRequired?: boolean, keyOverride?: string): SurveyItem => {
-    const defaultKey = 'Qcov16h'
-    const itemKey = [parentKey, keyOverride ? keyOverride : defaultKey].join('.');
-    const editor = new ItemEditor(undefined, { itemKey: itemKey, isGroup: false });
-    editor.setVersion(1);
+export class SymptomImpliedCovidTest extends Item {
 
-    // QUESTION TEXT
-    editor.setTitleComponent(
-        generateTitleComponent(new LanguageMap([
-            ["id", "weekly.EX.Qcov16h.title.0"],
-            ["en", "Because of your symptoms, did you undergo a test/analyses to know if you have COVID-19?"],
-        ]))
-    );
+    constructor(parentKey: string, isRequired?: boolean, keyOverride?:string) {
+        super(parentKey, keyOverride ? keyOverride: 'Qcov16h');
+        this.isRequired = isRequired;
+    }
+    
+    buildItem() {
+        return SurveyItems.singleChoice({
+            parentKey: this.parentKey,
+            itemKey: this.itemKey,
+            isRequired: this.isRequired,
+            //condition: this.getCondition(),
+            questionText: new LanguageMap([
+                ["id", "weekly.EX.Qcov16h.title.0"],
+                ["en", "Because of your symptoms, did you undergo a test/analyses to know if you have COVID-19?"],
+           
+            ]),
+            helpGroupContent: this.getHelpGroupContent(),
+            responseOptions: this.getResponses()
+        });
+    }
 
-    // CONDITION
-    // none
+    getResponses() {
+        return [
+            {
+                key: ResponseEncoding.symptom_test.yes, role: 'option',
+                content: new LanguageMap([
+                    ["id", "weekly.EX.Qcov16h.rg.scg.option.0"],
+                    ["en", "Yes"],
+                ])
+            },
+            {
+                key: ResponseEncoding.symptom_test.not_yet, role: 'option',
+                content: new LanguageMap([
+                    ["id", "weekly.EX.Qcov16h.rg.scg.option.1"],
+                    ["en", "Not yet, I plan to shortly undergo a test"],
+                ])
+            },
+            {
+                key: ResponseEncoding.symptom_test.no_wont, role: 'option',
+                content: new LanguageMap([
+                    ["id", "weekly.EX.Qcov16h.rg.scg.option.2"],
+                    ["en", "No, I have a prescription but will not undergo a test"],
+                ])
+            },
+            {
+                key: ResponseEncoding.symptom_test.no, role: 'option',
+                content: new LanguageMap([
+                    ["id", "weekly.EX.Qcov16h.rg.scg.option.3"],
+                    ["en", "No"],
+                ])
+            },
+        ];
+    }
 
-    // INFO POPUP
-    editor.setHelpGroupComponent(
-        generateHelpGroupComponent([
+    getHelpGroupContent() {
+        return [
             text_why_asking("weekly.EX.Qcov16h.helpGroup.text.0"),
             {
                 content: new LanguageMap([
@@ -1392,55 +1319,10 @@ const symptomImpliedCovidTest = (parentKey: string, isRequired?: boolean, keyOve
                     ["en", "We want to know which complaints lead people to get tested for the coronavirus."],
                 ]),
             },
-        ])
-    );
-
-    // RESPONSE PART
-    const rg = editor.addNewResponseComponent({ role: 'responseGroup' });
-
-    const rg_inner = initSingleChoiceGroup(singleChoiceKey, [
-        {
-            key: '1', role: 'option',
-            content: new LanguageMap([
-                ["id", "weekly.EX.Qcov16h.rg.scg.option.0"],
-                ["en", "Yes"],
-            ])
-        },
-        {
-            key: '2', role: 'option',
-            content: new LanguageMap([
-                ["id", "weekly.EX.Qcov16h.rg.scg.option.1"],
-                ["en", "Not yet, I plan to shortly undergo a test"],
-            ])
-        },
-        {
-            key: '3', role: 'option',
-            content: new LanguageMap([
-                ["id", "weekly.EX.Qcov16h.rg.scg.option.2"],
-                ["en", "No, I have a prescription but will not undergo a test"],
-            ])
-        },
-        {
-            key: '0', role: 'option',
-            content: new LanguageMap([
-                ["id", "weekly.EX.Qcov16h.rg.scg.option.3"],
-                ["en", "No"],
-            ])
-        },
-    ]);
-    editor.addExistingResponseComponent(rg_inner, rg?.key);
-
-    // VALIDATIONs
-    if (isRequired) {
-        editor.addValidation({
-            key: 'r1',
-            type: 'hard',
-            rule: expWithArgs('hasResponse', itemKey, responseGroupKey)
-        });
+        ];
     }
-
-    return editor.getItem();
 }
+
 
 /**
  * TEST TYPE
@@ -1450,30 +1332,76 @@ const symptomImpliedCovidTest = (parentKey: string, isRequired?: boolean, keyOve
  * @param isRequired if true adds a default "hard" validation to the question to check if it has a response.
  * @param keyOverride use this to override the default key for this item (only last part of the key, parent's key is not influenced).
  */
-const covidTestType = (parentKey: string, keysymptomImpliedCovidTest?: string, isRequired?: boolean, keyOverride?: string): SurveyItem => {
-    const defaultKey = 'Qcov16i'
-    const itemKey = [parentKey, keyOverride ? keyOverride : defaultKey].join('.');
-    const editor = new ItemEditor(undefined, { itemKey: itemKey, isGroup: false });
-    editor.setVersion(1);
+export class CovidTestType extends Item {
 
-    // QUESTION TEXT
-    editor.setTitleComponent(
-        generateTitleComponent(new LanguageMap([
-            ["id", "weekly.EX.Qcov16i.title.0"],
-            ["en", "Which analyse(s) was it?"],
-        ]))
-    );
+    keysymptomImpliedCovidTest: string;
 
-    // CONDITION
-    editor.setCondition(
+    constructor(parentKey: string,  keysymptomImpliedCovidTest: string, isRequired?: boolean, keyOverride?:string) {
+        super(parentKey, keyOverride ? keyOverride: 'Qcov16i');
+        this.isRequired = isRequired;
+        this.keysymptomImpliedCovidTest = keysymptomImpliedCovidTest;
+    }
+
+    getCondition() {
         // FIXME: in case keysymptomImpliedCovidTest chnges type eg: single -> multiple, this will break unless
         // singleChoiceKey is changed to multipleChoiceKey
-        expWithArgs('responseHasKeysAny', keysymptomImpliedCovidTest, responseGroupKey + '.' + singleChoiceKey, '1'),
-    );
+        return  se.responseHasKeysAny(this.keysymptomImpliedCovidTest, singleChoicePrefix, ResponseEncoding.symptom_test.yes);
+        //expWithArgs('responseHasKeysAny', keysymptomImpliedCovidTest, responseGroupKey + '.' + singleChoiceKey, '1'),
+    }
+    
+    buildItem() {
+        return SurveyItems.multipleChoice({
+            parentKey: this.parentKey,
+            itemKey: this.itemKey,
+            isRequired: this.isRequired,
+            condition: this.getCondition(),
+            questionText: new LanguageMap([
+                ["id", "weekly.EX.Qcov16i.title.0"],
+                ["en", "Which analyse(s) was it?"],
+            ]),
+            helpGroupContent: this.getHelpGroupContent(),
+            topDisplayCompoments: [
+                text_select_all_apply("weekly.EX.Qcov16i.rg.tyZC.text.0")
+            ],
+            responseOptions: this.getResponses()
+        });
+    }
 
-    // INFO POPUP
-    editor.setHelpGroupComponent(
-        generateHelpGroupComponent([
+    getResponses() {
+        return [
+            {
+                key: ResponseEncoding.test_type.pcr, role: 'option',
+                content: new LanguageMap([
+                    ["id", "weekly.EX.Qcov16i.rg.mcg.option.0"],
+                    ["en", "A PCR test (virus search, on a swab in nose or mouth, or a sputum or saliva sample)"],
+                ])
+            },
+            {
+                key: ResponseEncoding.test_type.sero, role: 'option',
+                content: new LanguageMap([
+                    ["id", "weekly.EX.Qcov16i.rg.mcg.option.1"],
+                    ["en", "A serological analysis (screening for antibodies against this virus, from a drop of blood at fingertip or a blood sample)"],
+                ])
+            },
+            {
+                key: ResponseEncoding.test_type.antigenic, role: 'option',
+                content: new LanguageMap([
+                    ["id", "weekly.EX.Qcov16i.rg.mcg.option.2"],
+                    ["en", "A rapid antigen detection test on a sample realized in the back of the nose (nasopharyngeal sampling, done by a health professional or a trained person, with a swab inserted to 15 cm into the nose, result obtained in less than one hour)"],
+                ])
+            },
+            {
+                key: ResponseEncoding.test_type.antigenic_nasal, role: 'option',
+                content: new LanguageMap([
+                    ["id", "weekly.EX.Qcov16i.rg.mcg.option.3"],
+                    ["en", "A rapid antigen detection test or autotest done on a nasal sample (a swab inserted to 1 - 4 cm into the nostril, sampling that can be done by oneself, result obtained in a few minutes)"],
+                ])
+            },
+        ];
+    }
+
+    getHelpGroupContent() {
+        return [
             text_why_asking("weekly.EX.Qcov16i.helpGroup.text.0"),
             {
                 content: new LanguageMap([
@@ -1481,94 +1409,103 @@ const covidTestType = (parentKey: string, keysymptomImpliedCovidTest?: string, i
                     ["en", "We are interested in knowing how many people with symptoms have udergone a test"],
                 ]),
             },
-        ])
-    );
+        ];
+    }
+}
 
-    // RESPONSE PART
-    const rg = editor.addNewResponseComponent({ role: 'responseGroup' });
-    editor.addExistingResponseComponent({
-        role: 'text',
-        content: generateLocStrings(
-            new LanguageMap([
-                ["id", "weekly.EX.Qcov16i.rg.tyZC.text.0"],
-                ["en", "Multiple answers possible"],
-            ])),
-        style: [{ key: 'className', value: 'mb-1' }]
-    }, rg?.key);
-    const rg_inner = initMultipleChoiceGroup(multipleChoiceKey, [
-        {
-            key: '1', role: 'option',
-            content: new LanguageMap([
-                ["id", "weekly.EX.Qcov16i.rg.mcg.option.0"],
-                ["en", "A PCR test (virus search, on a swab in nose or mouth, or a sputum or saliva sample)"],
-            ])
-        },
-        {
-            key: '2', role: 'option',
-            content: new LanguageMap([
-                ["id", "weekly.EX.Qcov16i.rg.mcg.option.1"],
-                ["en", "A serological analysis (screening for antibodies against this virus, from a drop of blood at fingertip or a blood sample)"],
-            ])
-        },
-        {
-            key: '3', role: 'option',
-            content: new LanguageMap([
-                ["id", "weekly.EX.Qcov16i.rg.mcg.option.2"],
-                ["en", "A rapid antigen detection test on a sample realized in the back of the nose (nasopharyngeal sampling, done by a health professional or a trained person, with a swab inserted to 15 cm into the nose, result obtained in less than one hour)"],
-            ])
-        },
-        {
-            key: '4', role: 'option',
-            content: new LanguageMap([
-                ["id", "weekly.EX.Qcov16i.rg.mcg.option.3"],
-                ["en", "A rapid antigen detection test or autotest done on a nasal sample (a swab inserted to 1 - 4 cm into the nostril, sampling that can be done by oneself, result obtained in a few minutes)"],
-            ])
-        },
-    ]);
-    editor.addExistingResponseComponent(rg_inner, rg?.key);
 
-    // VALIDATIONs
-    if (isRequired) {
-        editor.addValidation({
-            key: 'r1',
-            type: 'hard',
-            rule: expWithArgs('hasResponse', itemKey, responseGroupKey)
-        });
+abstract class TestTypeDependentQuestion extends Item {
+    
+    keyTestType: string;
+    
+    constructor(defaultKey: string, parentKey: string, keyTestType: string, isRequired?: boolean, keyOverride?:string) {
+        super(parentKey, keyOverride ? keyOverride: defaultKey);
+        this.isRequired = isRequired;
+        this.keyTestType = keyTestType;
     }
 
-    return editor.getItem();
+    abstract getTriggerTests(): Array<string>;
+
+    getCondition() {
+        const test_types = this.getTriggerTests();
+        return se.multipleChoice.any(this.keyTestType, ...test_types);
+        //expWithArgs('responseHasKeysAny', keySymptomsQuestion, [responseGroupKey, multipleChoiceKey].join('.'), '1')
+    }
 }
+
 
 /**
  * RESULT COVID-19 PCR TEST: result COVID-19 test
  *
  * @param parentKey full key path of the parent item, required to genrate this item's unique key (e.g. `<surveyKey>.<groupKey>`).
- * @param keysymptomImpliedCovidTest key to the answer of Qcov16
+ * @param keyTestType key to the answer of Qcov16
  * @param isRequired if true adds a default "hard" validation to the question to check if it has a response.
  * @param keyOverride use this to override the default key for this item (only last part of the key, parent's key is not influenced).
  */
-const resultPCRTest = (parentKey: string, testType?: string, isRequired?: boolean, keyOverride?: string): SurveyItem => {
-    const defaultKey = 'Qcov16b'
-    const itemKey = [parentKey, keyOverride ? keyOverride : defaultKey].join('.');
-    const editor = new ItemEditor(undefined, { itemKey: itemKey, isGroup: false });
-    editor.setVersion(1);
+export class ResultPCRTest extends TestTypeDependentQuestion {
 
-    // QUESTION TEXT
-    editor.setTitleComponent(
-        generateTitleComponent(new LanguageMap([
-            ["id", "weekly.EX.Qcov16b.title.0"],
-            ["en", "Do you know the result of your PCR test? (if several were performed and at least one was positive, chose the “Positive” answer)"],
-        ]))
-    );
+    constructor(parentKey: string, keyTestType: string, isRequired?: boolean, keyOverride?:string) {
+        super('Qcov16b', parentKey, keyTestType, isRequired, keyOverride );
+    }
 
-    // CONDITION
-    editor.setCondition(
-        expWithArgs('responseHasKeysAny', testType, responseGroupKey + '.' + multipleChoiceKey, '1'),
-    );
+    getTriggerTests() {
+        return [
+            ResponseEncoding.test_type.pcr
+        ]
+    }
+    
+    buildItem() {
+        return SurveyItems.singleChoice({
+            parentKey: this.parentKey,
+            itemKey: this.itemKey,
+            isRequired: this.isRequired,
+            condition: this.getCondition(),
+            questionText: new LanguageMap([
+                ["id", "weekly.EX.Qcov16b.title.0"],
+                ["en", "Do you know the result of your PCR test? (if several were performed and at least one was positive, chose the “Positive” answer)"],
+    
+            ]),
+            helpGroupContent: this.getHelpGroupContent(),
+           
+            responseOptions: this.getResponses()
+        });
+    }
 
-    // INFO POPUP
-    editor.setHelpGroupComponent(
-        generateHelpGroupComponent([
+    getResponses() {
+        return [
+            {
+                key: '1', role: 'option',
+                content: new LanguageMap([
+                    ["id", "weekly.EX.Qcov16b.rg.scg.option.0"],
+                    ["en", "Yes, positive for COVID-19"],
+                ])
+            },
+            {
+                key: '2', role: 'option',
+                content: new LanguageMap([
+                    ["id", "weekly.EX.Qcov16b.rg.scg.option.1"],
+                    ["en", "Yes, negative for COVID-19"],
+                ])
+            },
+            {
+                key: '3', role: 'option',
+                content: new LanguageMap([
+                    ["id", "weekly.EX.Qcov16b.rg.scg.option.2"],
+                    ["en", "Yes, the results are inconclusive"],
+                ])
+            },
+            {
+                key: '4', role: 'option',
+                content: new LanguageMap([
+                    ["id", "weekly.EX.Qcov16b.rg.scg.option.3"],
+                    ["en", "No, I have not yet received the test results"],
+                ])
+            },
+        ]; 
+    }
+
+    getHelpGroupContent() {
+        return [
             text_why_asking("weekly.EX.Qcov16b.helpGroup.text.0"),
             {
                 content: new LanguageMap([
@@ -1577,256 +1514,246 @@ const resultPCRTest = (parentKey: string, testType?: string, isRequired?: boolea
                 ]),
                 //style: [{ key: 'variant', value: 'p' }],
             },
-        ])
-    );
-
-    // RESPONSE PART
-    const rg = editor.addNewResponseComponent({ role: 'responseGroup' });
-    const rg_inner = initSingleChoiceGroup(singleChoiceKey, [
-        {
-            key: '1', role: 'option',
-            content: new LanguageMap([
-                ["id", "weekly.EX.Qcov16b.rg.scg.option.0"],
-                ["en", "Yes, positive for COVID-19"],
-            ])
-        },
-        {
-            key: '2', role: 'option',
-            content: new LanguageMap([
-                ["id", "weekly.EX.Qcov16b.rg.scg.option.1"],
-                ["en", "Yes, negative for COVID-19"],
-            ])
-        },
-        {
-            key: '3', role: 'option',
-            content: new LanguageMap([
-                ["id", "weekly.EX.Qcov16b.rg.scg.option.2"],
-                ["en", "Yes, the results are inconclusive"],
-            ])
-        },
-        {
-            key: '4', role: 'option',
-            content: new LanguageMap([
-                ["id", "weekly.EX.Qcov16b.rg.scg.option.3"],
-                ["en", "No, I have not yet received the test results"],
-            ])
-        },
-    ]);
-    editor.addExistingResponseComponent(rg_inner, rg?.key);
-
-    // VALIDATIONs
-    if (isRequired) {
-        editor.addValidation({
-            key: 'r1',
-            type: 'hard',
-            rule: expWithArgs('hasResponse', itemKey, responseGroupKey)
-        });
+        ];
     }
-
-    return editor.getItem();
 }
 
 /**
  * RESULT COVID-19 RAPID TEST: result COVID-19 rapid test
  *
  * @param parentKey full key path of the parent item, required to genrate this item's unique key (e.g. `<surveyKey>.<groupKey>`).
- * @param keysymptomImpliedCovidTest key to the answer of Qcov16
+ * @param keyTestType key to the answer of test type
  * @param isRequired if true adds a default "hard" validation to the question to check if it has a response.
  * @param keyOverride use this to override the default key for this item (only last part of the key, parent's key is not influenced).
  */
-const resultAntigenicTest = (parentKey: string, testType?: string, isRequired?: boolean, keyOverride?: string): SurveyItem => {
-    const defaultKey = 'Qcov16f'
-    const itemKey = [parentKey, keyOverride ? keyOverride : defaultKey].join('.');
-    const editor = new ItemEditor(undefined, { itemKey: itemKey, isGroup: false });
-    editor.setVersion(1);
+export class ResultAntigenicTest extends TestTypeDependentQuestion {
 
-    // QUESTION TEXT
-    editor.setTitleComponent(
-        generateTitleComponent(new LanguageMap([
-            ["id", "weekly.EX.Qcov16f.title.0"],
-            ["en", "Do you know the result of this rapid antigen detection test on nasopharyngeal sample? (if several were performed and at least one was positive, chose the “Positive” answer)"],
-        ]))
-    );
+    constructor(parentKey: string, keyTestType: string, isRequired?: boolean, keyOverride?:string) {
+        super('Qcov16f', parentKey, keyTestType, isRequired, keyOverride );
+    }
 
-    // CONDITION
-    editor.setCondition(
-        expWithArgs('responseHasKeysAny', testType, responseGroupKey + '.' + multipleChoiceKey, '3'),
-    );
+    getTriggerTests() {
+        return [
+            ResponseEncoding.test_type.antigenic
+        ]
+    }
+    
+    buildItem() {
+        return SurveyItems.singleChoice({
+            parentKey: this.parentKey,
+            itemKey: this.itemKey,
+            isRequired: this.isRequired,
+            condition: this.getCondition(),
+            questionText: new LanguageMap([
+                ["id", "weekly.EX.Qcov16f.title.0"],
+                ["en", "Do you know the result of this rapid antigen detection test on nasopharyngeal sample? (if several were performed and at least one was positive, chose the “Positive” answer)"],
+            ]),
+            helpGroupContent: this.getHelpGroupContent(),
+            /*bottomDisplayCompoments: [
+                ComponentGenerators.text({
+                    'content': new LanguageMap([
+                    ])
+                })
+            ],
+            */
+            responseOptions: this.getResponses()
+        });
+    }
 
-    // INFO POPUP
-    editor.setHelpGroupComponent(
-        generateHelpGroupComponent([
+    getResponses() {
+        return  [
+            {
+                key: '1', role: 'option',
+                content: new LanguageMap([
+                    ["id", "weekly.EX.Qcov16f.rg.scg.option.0"],
+                    ["en", "Yes, positive for COVID-19"],
+                ])
+            },
+            {
+                key: '2', role: 'option',
+                content: new LanguageMap([
+                    ["id", "weekly.EX.Qcov16f.rg.scg.option.1"],
+                    ["en", "Yes, negative for COVID-19"],
+                ])
+            },
+            {
+                key: '3', role: 'option',
+                content: new LanguageMap([
+                    ["id", "weekly.EX.Qcov16f.rg.scg.option.2"],
+                    ["en", "Yes, the results are inconclusive"],
+                ])
+            },
+            {
+                key: '99', role: 'option',
+                content: new LanguageMap([
+                    ["id", "weekly.EX.Qcov16f.rg.scg.option.3"],
+                    ["en", "I don't know / I don't want to answer"],
+                ]),
+            },
+        ];
+    }
+
+    getHelpGroupContent() {
+        return [
             text_why_asking("weekly.EX.Qcov16f.helpGroup.text.0"),
             {
                 content: new LanguageMap([
                     ["id", "weekly.EX.Qcov16f.helpGroup.text.1"],
                     ["en", "We want to understand how the coronavirus is spreading within the population."],
                 ]),
-                //style: [{ key: 'variant', value: 'p' }],
             },
-        ])
-    );
-
-    // RESPONSE PART
-    const rg = editor.addNewResponseComponent({ role: 'responseGroup' });
-    const rg_inner = initSingleChoiceGroup(singleChoiceKey, [
-        {
-            key: '1', role: 'option',
-            content: new LanguageMap([
-                ["id", "weekly.EX.Qcov16f.rg.scg.option.0"],
-                ["en", "Yes, positive for COVID-19"],
-            ])
-        },
-        {
-            key: '2', role: 'option',
-            content: new LanguageMap([
-                ["id", "weekly.EX.Qcov16f.rg.scg.option.1"],
-                ["en", "Yes, negative for COVID-19"],
-            ])
-        },
-        {
-            key: '3', role: 'option',
-            content: new LanguageMap([
-                ["id", "weekly.EX.Qcov16f.rg.scg.option.2"],
-                ["en", "Yes, the results are inconclusive"],
-            ])
-        },
-        {
-            key: '99', role: 'option',
-            content: new LanguageMap([
-                ["id", "weekly.EX.Qcov16f.rg.scg.option.3"],
-                ["en", "I don't know / I don't want to answer"],
-            ]),
-        },
-    ]);
-    editor.addExistingResponseComponent(rg_inner, rg?.key);
-
-    // VALIDATIONs
-    if (isRequired) {
-        editor.addValidation({
-            key: 'r1',
-            type: 'hard',
-            rule: expWithArgs('hasResponse', itemKey, responseGroupKey)
-        });
+        ];
     }
-
-    return editor.getItem();
 }
 
 /**
  * RESULT COVID-19 RAPID TEST: result COVID-19 rapid test
  *
  * @param parentKey full key path of the parent item, required to genrate this item's unique key (e.g. `<surveyKey>.<groupKey>`).
- * @param keysymptomImpliedCovidTest key to the answer of Qcov16
+ * @param keyTestType key to the answer of Qcov16
  * @param isRequired if true adds a default "hard" validation to the question to check if it has a response.
  * @param keyOverride use this to override the default key for this item (only last part of the key, parent's key is not influenced).
  */
-const resultRapidAntigenicTest = (parentKey: string, testType?: string, isRequired?: boolean, keyOverride?: string): SurveyItem => {
-    const defaultKey = 'Qcov16k'
-    const itemKey = [parentKey, keyOverride ? keyOverride : defaultKey].join('.');
-    const editor = new ItemEditor(undefined, { itemKey: itemKey, isGroup: false });
-    editor.setVersion(1);
+export class ResultRapidAntigenicTest extends TestTypeDependentQuestion {
 
-    // QUESTION TEXT
-    editor.setTitleComponent(
-        generateTitleComponent(new LanguageMap([
-            ["id", "weekly.EX.Qcov16k.title.0"],
-            ["en", "Do you know the result of this antigenic test or self-test on nasal sample? (if several were performed and at least one was positive, chose the “Positive” answer)"],
-        ]))
-    );
+    constructor(parentKey: string, keyTestType: string, isRequired?: boolean, keyOverride?:string) {
+        super('Qcov16k', parentKey, keyTestType, isRequired, keyOverride );
+    }
 
-    // CONDITION
-    editor.setCondition(
-        expWithArgs('responseHasKeysAny', testType, responseGroupKey + '.' + multipleChoiceKey, '4'),
-    );
+    getTriggerTests() {
+        return [
+            ResponseEncoding.test_type.antigenic_nasal
+        ];
+    }
+    
+    buildItem() {
+        return SurveyItems.singleChoice({
+            parentKey: this.parentKey,
+            itemKey: this.itemKey,
+            isRequired: this.isRequired,
+            condition: this.getCondition(),
+            questionText: new LanguageMap([
+                ["id", "weekly.EX.Qcov16k.title.0"],
+                ["en", "Do you know the result of this antigenic test or self-test on nasal sample? (if several were performed and at least one was positive, chose the “Positive” answer)"],
+            ]),
+            helpGroupContent: this.getHelpGroupContent(),
+            responseOptions: this.getResponses()
+        });
+    }
 
-    // INFO POPUP
-    editor.setHelpGroupComponent(
-        generateHelpGroupComponent([
+    getResponses() {
+        return [
+            {
+                key: '1', role: 'option',
+                content: new LanguageMap([
+                    ["id", "weekly.EX.Qcov16k.rg.scg.option.0"],
+                    ["en", "Yes, positive for COVID-19"],
+                ])
+            },
+            {
+                key: '2', role: 'option',
+                content: new LanguageMap([
+                    ["id", "weekly.EX.Qcov16k.rg.scg.option.1"],
+                    ["en", "Yes, negative for COVID-19"],
+                ])
+            },
+            {
+                key: '3', role: 'option',
+                content: new LanguageMap([
+                    ["id", "weekly.EX.Qcov16k.rg.scg.option.2"],
+                    ["en", "Yes, the results are inconclusive"],
+                ])
+            },
+            {
+                key: '99', role: 'option',
+                content: new LanguageMap([
+                    ["id", "weekly.EX.Qcov16k.rg.scg.option.3"],
+                    ["en", "I don't know / I don't want to answer"],
+                ]),
+            },
+        ];
+    }
+
+    getHelpGroupContent() {
+        return [
             text_why_asking("weekly.EX.Qcov16k.helpGroup.text.0"),
             {
                 content: new LanguageMap([
                     ["id", "weekly.EX.Qcov16k.helpGroup.text.1"],
                     ["en", "We want to understand how the coronavirus is spreading within the population."],
                 ]),
-                //style: [{ key: 'variant', value: 'p' }],
             },
-        ])
-    );
+        ];
+    }
+}
 
-    // RESPONSE PART
-    const rg = editor.addNewResponseComponent({ role: 'responseGroup' });
-    const rg_inner = initSingleChoiceGroup(singleChoiceKey, [
-        {
-            key: '1', role: 'option',
-            content: new LanguageMap([
-                ["id", "weekly.EX.Qcov16k.rg.scg.option.0"],
-                ["en", "Yes, positive for COVID-19"],
-            ])
-        },
-        {
-            key: '2', role: 'option',
-            content: new LanguageMap([
-                ["id", "weekly.EX.Qcov16k.rg.scg.option.1"],
-                ["en", "Yes, negative for COVID-19"],
-            ])
-        },
-        {
-            key: '3', role: 'option',
-            content: new LanguageMap([
-                ["id", "weekly.EX.Qcov16k.rg.scg.option.2"],
-                ["en", "Yes, the results are inconclusive"],
-            ])
-        },
-        {
-            key: '99', role: 'option',
-            content: new LanguageMap([
-                ["id", "weekly.EX.Qcov16k.rg.scg.option.3"],
-                ["en", "I don't know / I don't want to answer"],
+
+
+export class FluTest extends Item {
+
+    constructor(parentKey: string, isRequired?: boolean, keyOverride?:string) {
+        super(parentKey, keyOverride ? keyOverride: 'Qcov19');
+        this.isRequired = isRequired;
+    }
+    
+    buildItem() {
+        return SurveyItems.singleChoice({
+            parentKey: this.parentKey,
+            itemKey: this.itemKey,
+            isRequired: this.isRequired,
+            //condition: this.getCondition(),
+            questionText: new LanguageMap([
+                ["id", "weekly.EX.Qcov19.title.0"],
+                ["en", "Because of your symptoms, did you undergo a test/analyses to know if you have the Flu?"],
             ]),
-        },
-    ]);
-    editor.addExistingResponseComponent(rg_inner, rg?.key);
-
-    // VALIDATIONs
-    if (isRequired) {
-        editor.addValidation({
-            key: 'r1',
-            type: 'hard',
-            rule: expWithArgs('hasResponse', itemKey, responseGroupKey)
+            helpGroupContent: this.getHelpGroupContent(),
+            responseOptions: this.getResponses()
         });
     }
 
-    return editor.getItem();
-}
+    getResponses() {
+        const codes = ResponseEncoding.flu_test;
+        return [
+            {
+                key: codes.yes, role: 'option',
+                content: new LanguageMap([
+                    ["id", "weekly.EX.Qcov19.rg.scg.option.0"],
+                    ["en", "Yes, a PCR test based on a swab in nose or mouth, or a sputum or saliva sample"],
+                ])
+            },
+            {
+                key: codes.yes_antigenic, role: 'option',
+                content: new LanguageMap([
+                    ["id", "weekly.EX.Qcov19.rg.scg.option.1"],
+                    ["en", "Yes, a rapid detection test (result available in less than an hour)"],
+                ])
+            },
+            {
+                key: codes.plan, role: 'option',
+                content: new LanguageMap([
+                    ["id", "weekly.EX.Qcov19.rg.scg.option.2"],
+                    ["en", "Not yet, I have a prescription and plan to shortly undergo a test"],
+                ])
+            },
+            {
+                key: codes.wontgo, role: 'option',
+                content: new LanguageMap([
+                    ["id", "weekly.EX.Qcov19.rg.scg.option.3"],
+                    ["en", "No, I have a prescription but will not undergo a test"],
+                ])
+            },
+            {
+                key: codes.no, role: 'option',
+                content: new LanguageMap([
+                    ["id", "weekly.EX.Qcov19.rg.scg.option.4"],
+                    ["en", "No"],
+                ])
+            },
+        ];
+    }
 
-/**
- * SYMPTOM IMPLIED FLU TEST PERFORMED
- *
- * @param parentKey full key path of the parent item, required to genrate this item's unique key (e.g. `<surveyKey>.<groupKey>`).
- * @param isRequired if true adds a default "hard" validation to the question to check if it has a response.
- * @param keyOverride use this to override the default key for this item (only last part of the key, parent's key is not influenced).
- */
-const fluTest = (parentKey: string, isRequired?: boolean, keyOverride?: string): SurveyItem => {
-    const defaultKey = 'Qcov19'
-    const itemKey = [parentKey, keyOverride ? keyOverride : defaultKey].join('.');
-    const editor = new ItemEditor(undefined, { itemKey: itemKey, isGroup: false });
-    editor.setVersion(1);
-
-    // QUESTION TEXT
-    editor.setTitleComponent(
-        generateTitleComponent(new LanguageMap([
-            ["id", "weekly.EX.Qcov19.title.0"],
-            ["en", "Because of your symptoms, did you undergo a test/analyses to know if you have the Flu?"],
-        ]))
-    );
-
-    // CONDITION
-    // none
-
-    // INFO POPUP
-    editor.setHelpGroupComponent(
-        generateHelpGroupComponent([
+    getHelpGroupContent() {
+        return [
             text_why_asking("weekly.EX.Qcov19.helpGroup.text.0"),
             {
                 content: new LanguageMap([
@@ -1835,60 +1762,8 @@ const fluTest = (parentKey: string, isRequired?: boolean, keyOverride?: string):
                 ]),
                 // style: [{ key: 'variant', value: 'p' }],
             },
-        ])
-    );
-
-    // RESPONSE PART
-    const rg = editor.addNewResponseComponent({ role: 'responseGroup' });
-    const rg_inner = initSingleChoiceGroup(singleChoiceKey, [
-        {
-            key: '1', role: 'option',
-            content: new LanguageMap([
-                ["id", "weekly.EX.Qcov19.rg.scg.option.0"],
-                ["en", "Yes, a PCR test based on a swab in nose or mouth, or a sputum or saliva sample"],
-            ])
-        },
-        {
-            key: '5', role: 'option',
-            content: new LanguageMap([
-                ["id", "weekly.EX.Qcov19.rg.scg.option.1"],
-                ["en", "Yes, a rapid detection test (result available in less than an hour)"],
-            ])
-        },
-        {
-            key: '3', role: 'option',
-            content: new LanguageMap([
-                ["id", "weekly.EX.Qcov19.rg.scg.option.2"],
-                ["en", "Not yet, I have a prescription and plan to shortly undergo a test"],
-            ])
-        },
-        {
-            key: '4', role: 'option',
-            content: new LanguageMap([
-                ["id", "weekly.EX.Qcov19.rg.scg.option.3"],
-                ["en", "No, I have a prescription but will not undergo a test"],
-            ])
-        },
-        {
-            key: '0', role: 'option',
-            content: new LanguageMap([
-                ["id", "weekly.EX.Qcov19.rg.scg.option.4"],
-                ["en", "No"],
-            ])
-        },
-    ]);
-    editor.addExistingResponseComponent(rg_inner, rg?.key);
-
-    // VALIDATIONs
-    if (isRequired) {
-        editor.addValidation({
-            key: 'r1',
-            type: 'hard',
-            rule: expWithArgs('hasResponse', itemKey, responseGroupKey)
-        });
+        ]
     }
-
-    return editor.getItem();
 }
 
 /**
@@ -1899,28 +1774,72 @@ const fluTest = (parentKey: string, isRequired?: boolean, keyOverride?: string):
  * @param isRequired if true adds a default "hard" validation to the question to check if it has a response.
  * @param keyOverride use this to override the default key for this item (only last part of the key, parent's key is not influenced).
  */
-const resultFluTest = (parentKey: string, keyFluTest?: string, isRequired?: boolean, keyOverride?: string): SurveyItem => {
-    const defaultKey = 'Qcov19b'
-    const itemKey = [parentKey, keyOverride ? keyOverride : defaultKey].join('.');
-    const editor = new ItemEditor(undefined, { itemKey: itemKey, isGroup: false });
-    editor.setVersion(1);
+export class VacStart extends Item {
+    
+    keyFluTest: string
 
-    // QUESTION TEXT
-    editor.setTitleComponent(
-        generateTitleComponent(new LanguageMap([
-            ["id", "weekly.EX.Qcov19b.title.0"],
-            ["en", "Have you received the results of your Flu test?"],
-        ]))
-    );
+    constructor(parentKey: string, keyFluTest: string, isRequired?: boolean, keyOverride?:string) {
+        super(parentKey, keyOverride ? keyOverride: 'Qcov19b');
+        this.isRequired = isRequired;
+        this.keyFluTest = keyFluTest;
+    }
 
-    // CONDITION
-    editor.setCondition(
-        expWithArgs('responseHasKeysAny', keyFluTest, responseGroupKey + '.' + singleChoiceKey, '1', '5'),
-    );
+    getCondition() {
+        const codes = ResponseEncoding.flu_test;
+        return  se.responseHasKeysAny(this.keyFluTest,  codes.yes, codes.yes_antigenic );
+    }
+     
+    buildItem() {
+        return SurveyItems.singleChoice({
+            parentKey: this.parentKey,
+            itemKey: this.itemKey,
+            isRequired: this.isRequired,
+            condition: this.getCondition(),
+            questionText: new LanguageMap([
+                ["id", "weekly.EX.Qcov19b.title.0"],
+                ["en", "Have you received the results of your Flu test?"],
+    
+            ]),
+            helpGroupContent: this.getHelpGroupContent(),
+            responseOptions: this.getResponses()
+        });
+    }
 
-    // INFO POPUP
-    editor.setHelpGroupComponent(
-        generateHelpGroupComponent([
+    getResponses() {
+        return [
+            {
+                key: '1', role: 'option',
+                content: new LanguageMap([
+                    ["id", "weekly.EX.Qcov19b.rg.scg.option.0"],
+                    ["en", "Yes, the test is positive for influenza"],
+                ])
+            },
+            {
+                key: '2', role: 'option',
+                content: new LanguageMap([
+                    ["id", "weekly.EX.Qcov19b.rg.scg.option.1"],
+                    ["en", "Yes, the test is negative for influenza"],
+                ])
+            },
+            {
+                key: '3', role: 'option',
+                content: new LanguageMap([
+                    ["id", "weekly.EX.Qcov19b.rg.scg.option.2"],
+                    ["en", "Yes, the results are inconclusive"],
+                ])
+            },
+            {
+                key: '4', role: 'option',
+                content: new LanguageMap([
+                    ["id", "weekly.EX.Qcov19b.rg.scg.option.3"],
+                    ["en", "No, I have not yet received the test results"],
+                ])
+            },
+        ];
+    }
+
+    getHelpGroupContent() {
+        return [
             text_why_asking("weekly.EX.Qcov19b.helpGroup.text.0"),
             {
                 content: new LanguageMap([
@@ -1929,53 +1848,8 @@ const resultFluTest = (parentKey: string, keyFluTest?: string, isRequired?: bool
                 ]),
                 //style: [{ key: 'variant', value: 'p' }],
             },
-        ])
-    );
-
-    // RESPONSE PART
-    const rg = editor.addNewResponseComponent({ role: 'responseGroup' });
-    const rg_inner = initSingleChoiceGroup(singleChoiceKey, [
-        {
-            key: '1', role: 'option',
-            content: new LanguageMap([
-                ["id", "weekly.EX.Qcov19b.rg.scg.option.0"],
-                ["en", "Yes, the test is positive for influenza"],
-            ])
-        },
-        {
-            key: '2', role: 'option',
-            content: new LanguageMap([
-                ["id", "weekly.EX.Qcov19b.rg.scg.option.1"],
-                ["en", "Yes, the test is negative for influenza"],
-            ])
-        },
-        {
-            key: '3', role: 'option',
-            content: new LanguageMap([
-                ["id", "weekly.EX.Qcov19b.rg.scg.option.2"],
-                ["en", "Yes, the results are inconclusive"],
-            ])
-        },
-        {
-            key: '4', role: 'option',
-            content: new LanguageMap([
-                ["id", "weekly.EX.Qcov19b.rg.scg.option.3"],
-                ["en", "No, I have not yet received the test results"],
-            ])
-        },
-    ]);
-    editor.addExistingResponseComponent(rg_inner, rg?.key);
-
-    // VALIDATIONs
-    if (isRequired) {
-        editor.addValidation({
-            key: 'r1',
-            type: 'hard',
-            rule: expWithArgs('hasResponse', itemKey, responseGroupKey)
-        });
+        ];
     }
-
-    return editor.getItem();
 }
 
 /**
@@ -1985,26 +1859,99 @@ const resultFluTest = (parentKey: string, keyFluTest?: string, isRequired?: bool
  * @param isRequired if true adds a default "hard" validation to the question to check if it has a response.
  * @param keyOverride use this to override the default key for this item (only last part of the key, parent's key is not influenced).
  */
-const visitedMedicalService = (parentKey: string, isRequired?: boolean, keyOverride?: string): SurveyItem => {
-    const defaultKey = 'Q7';
-    const itemKey = [parentKey, keyOverride ? keyOverride : defaultKey].join('.');
-    const editor = new ItemEditor(undefined, { itemKey: itemKey, isGroup: false });
-    editor.setVersion(1);
+export class VisitedMedicalService extends Item {
 
-    // QUESTION TEXT
-    editor.setTitleComponent(
-        generateTitleComponent(new LanguageMap([
-            ["id", "weekly.EX.Q7.title.0"],
-            ["en", "Because of your symptoms, did you VISIT (see face to face or teleconsultation) any medical services?"],
-        ]))
-    );
+    constructor(parentKey: string, isRequired?: boolean, keyOverride?:string) {
+        super(parentKey, keyOverride ? keyOverride: 'Q7');
+        this.isRequired = isRequired;
+    }
+    
+    buildItem() {
+        return SurveyItems.singleChoice({
+            parentKey: this.parentKey,
+            itemKey: this.itemKey,
+            isRequired: this.isRequired,
+            //condition: this.getCondition(),
+            questionText: new LanguageMap([
+                ["id", "weekly.EX.Q7.title.0"],
+                ["en", "Because of your symptoms, did you VISIT (see face to face or teleconsultation) any medical services?"],
+    
+            ]),
+            helpGroupContent: this.getHelpGroupContent(),
+            bottomDisplayCompoments: [
+                text_select_all_apply("weekly.EX.Q7.rg.DTpM.text.0")
+            ],
+            
+            responseOptions: this.getResponses()
+        });
+    }
 
-    // CONDITION
-    // None
+    getResponses() {
 
-    // INFO POPUP
-    editor.setHelpGroupComponent(
-        generateHelpGroupComponent([
+        const codes = ResponseEncoding.visit_medical;
+
+        // All response except no
+        const exclusiveNo = se.responseHasOnlyKeysOtherThan(this.key, MultipleChoicePrefix, codes.no);
+        
+        // All response except planned visit
+        const exclusivePlan = se.responseHasOnlyKeysOtherThan(this.key, MultipleChoicePrefix, codes.plan);
+        
+        const exclusiveOther = se.multipleChoice.any(this.key, codes.no, codes.plan);
+
+        return [
+            {
+                key: codes.no, role: 'option',
+                disabled: exclusiveNo,
+                content: new LanguageMap([
+                    ["id", "weekly.EX.Q7.rg.mcg.option.0"],
+                    ["en", "No"],
+                ])
+            },
+            {
+                key: codes.gp, role: 'option',
+                disabled: exclusiveOther,
+                content: new LanguageMap([
+                    ["id", "weekly.EX.Q7.rg.mcg.option.1"],
+                    ["en", "GP or GP's practice nurse"],
+                ])
+            },
+            {
+                key: codes.hospital, role: 'option',
+                disabled: exclusiveOther,
+                content: new LanguageMap([
+                    ["id", "weekly.EX.Q7.rg.mcg.option.2"],
+                    ["en", "Hospital admission"],
+                ])
+            },
+            {
+                key: codes.emergency, role: 'option',
+                disabled: exclusiveOther,
+                content: new LanguageMap([
+                    ["id", "weekly.EX.Q7.rg.mcg.option.3"],
+                    ["en", "Hospital accident & emergency department / out of hours service"],
+                ])
+            },
+            {
+                key: codes.other, role: 'option',
+                disabled: exclusiveOther,
+                content: new LanguageMap([
+                    ["id", "weekly.EX.Q7.rg.mcg.option.4"],
+                    ["en", "Other medical services"],
+                ])
+            },
+            {
+                key: codes.plan, role: 'option',
+                disabled: exclusivePlan,
+                content: new LanguageMap([
+                    ["id", "weekly.EX.Q7.rg.mcg.option.5"],
+                    ["en", "No, but I have an appointment scheduled"],
+                ])
+            },
+        ];
+    }
+
+    getHelpGroupContent() {
+        return [
             text_why_asking("weekly.EX.Q7.helpGroup.text.0"),
             {
                 content: new LanguageMap([
@@ -2020,82 +1967,8 @@ const visitedMedicalService = (parentKey: string, isRequired?: boolean, keyOverr
                     ["en", "Tick all of those that apply. If you are due to see attend, then tick the final option."],
                 ]),
             },
-        ])
-    );
-
-    // RESPONSE PART
-    const rg = editor.addNewResponseComponent({ role: 'responseGroup' });
-    editor.addExistingResponseComponent({
-        role: 'text',
-        style: [{ key: 'className', value: 'mb-2' }],
-        content: generateLocStrings(
-            new LanguageMap([
-                ["id", "weekly.EX.Q7.rg.DTpM.text.0"],
-                ["en", "Multiple answers possible"],
-            ])),
-    }, rg?.key);
-    const rg_inner = initMultipleChoiceGroup(multipleChoiceKey, [
-        {
-            key: '0', role: 'option',
-            disabled: expWithArgs('responseHasOnlyKeysOtherThan', editor.getItem().key, responseGroupKey + '.' + multipleChoiceKey, '0'),
-            content: new LanguageMap([
-                ["id", "weekly.EX.Q7.rg.mcg.option.0"],
-                ["en", "No"],
-            ])
-        },
-        {
-            key: '1', role: 'option',
-            disabled: expWithArgs('responseHasKeysAny', editor.getItem().key, responseGroupKey + '.' + multipleChoiceKey, '0', '5'),
-            content: new LanguageMap([
-                ["id", "weekly.EX.Q7.rg.mcg.option.1"],
-                ["en", "GP or GP's practice nurse"],
-            ])
-        },
-        {
-            key: '2', role: 'option',
-            disabled: expWithArgs('responseHasKeysAny', editor.getItem().key, responseGroupKey + '.' + multipleChoiceKey, '0', '5'),
-            content: new LanguageMap([
-                ["id", "weekly.EX.Q7.rg.mcg.option.2"],
-                ["en", "Hospital admission"],
-            ])
-        },
-        {
-            key: '3', role: 'option',
-            disabled: expWithArgs('responseHasKeysAny', editor.getItem().key, responseGroupKey + '.' + multipleChoiceKey, '0', '5'),
-            content: new LanguageMap([
-                ["id", "weekly.EX.Q7.rg.mcg.option.3"],
-                ["en", "Hospital accident & emergency department / out of hours service"],
-            ])
-        },
-        {
-            key: '4', role: 'option',
-            disabled: expWithArgs('responseHasKeysAny', editor.getItem().key, responseGroupKey + '.' + multipleChoiceKey, '0', '5'),
-            content: new LanguageMap([
-                ["id", "weekly.EX.Q7.rg.mcg.option.4"],
-                ["en", "Other medical services"],
-            ])
-        },
-        {
-            key: '5', role: 'option',
-            disabled: expWithArgs('responseHasOnlyKeysOtherThan', editor.getItem().key, responseGroupKey + '.' + multipleChoiceKey, '5'),
-            content: new LanguageMap([
-                ["id", "weekly.EX.Q7.rg.mcg.option.5"],
-                ["en", "No, but I have an appointment scheduled"],
-            ])
-        },
-    ]);
-    editor.addExistingResponseComponent(rg_inner, rg?.key);
-
-    // VALIDATIONs
-    if (isRequired) {
-        editor.addValidation({
-            key: 'r1',
-            type: 'hard',
-            rule: expWithArgs('hasResponse', itemKey, responseGroupKey)
-        });
+        ];
     }
-
-    return editor.getItem();
 }
 
 /**
@@ -2106,28 +1979,190 @@ const visitedMedicalService = (parentKey: string, isRequired?: boolean, keyOverr
  * @param isRequired if true adds a default "hard" validation to the question to check if it has a response.
  * @param keyOverride use this to override the default key for this item (only last part of the key, parent's key is not influenced).
  */
-const visitedMedicalServiceWhen = (parentKey: string, keyVisitedMedicalServ: string, isRequired?: boolean, keyOverride?: string): SurveyItem => {
-    const defaultKey = 'Q7b';
-    const itemKey = [parentKey, keyOverride ? keyOverride : defaultKey].join('.');
-    const editor = new ItemEditor(undefined, { itemKey: itemKey, isGroup: false });
-    editor.setVersion(1);
 
-    // QUESTION TEXT
-    editor.setTitleComponent(
-        generateTitleComponent(new LanguageMap([
-            ["id", "weekly.EX.Q7b.title.0"],
-            ["en", "How soon after your symptoms appeared did you first VISIT this medical service?"],
-        ]))
-    );
+export class VisitedMedicalServiceWhen extends Item {
 
-    // CONDITION
-    editor.setCondition(
-        expWithArgs('responseHasOnlyKeysOtherThan', keyVisitedMedicalServ, [responseGroupKey, multipleChoiceKey].join('.'), '0', '5')
-    );
+    keyVisitedMedicalServ: string
 
-    // INFO POPUP
-    editor.setHelpGroupComponent(
-        generateHelpGroupComponent([
+    constructor(parentKey: string, keyVisitedMedicalServ: string, isRequired?: boolean, keyOverride?:string) {
+        super(parentKey, keyOverride ? keyOverride: 'Q7b');
+        this.isRequired = isRequired;
+        this.keyVisitedMedicalServ = keyVisitedMedicalServ;
+    }
+
+    getCondition() {
+        const codes = ResponseEncoding.visit_medical;
+        return se.responseHasOnlyKeysOtherThan(this.keyVisitedMedicalServ, codes.no, codes.other);
+        //expWithArgs('responseHasOnlyKeysOtherThan', keyVisitedMedicalServ, [responseGroupKey, multipleChoiceKey].join('.'), '0', '5')
+    }
+     
+    buildItem() {
+
+        const itemKey = this.key;
+        const editor = new ItemEditor(undefined, { itemKey: itemKey, isGroup: false });
+        editor.setVersion(1);
+
+        editor.setTitleComponent(
+            generateTitleComponent(new LanguageMap([
+                ["id", "weekly.EX.Q7b.title.0"],
+                ["en", "How soon after your symptoms appeared did you first VISIT this medical service?"],
+            ]))
+        );
+    
+        // CONDITION
+        editor.setCondition(this.getCondition());
+    
+        // INFO POPUP
+        editor.setHelpGroupComponent( generateHelpGroupComponent(this.getHelpGroupContent())  );
+    
+        // RESPONSE PART
+        const rg = editor.addNewResponseComponent({ role: 'responseGroup' });
+        
+        editor.addExistingResponseComponent({
+            role: 'text',
+            content: generateLocStrings(
+                new LanguageMap([
+                    ["id", "weekly.EX.Q7b.rg.sFcN.text.0"],
+                    ["en", 'Select the correct number of days'],
+                ])),
+        }, rg?.key);
+
+        const ddOptions: ResponseRowCell = {
+            key: 'col1', role: 'dropDownGroup', items: [
+                {
+                    key: '0', role: 'option', content: new LanguageMap([
+                        ["id", "weekly.EX.Q7b.rg.mat.r1.col1.option.0"],
+                        ["en", "Same day"],
+                    ]),
+                },
+                {
+                    key: '1', role: 'option', content: new LanguageMap([
+                        ["id", "weekly.EX.Q7b.rg.mat.r1.col1.option.1"],
+                        ["en", "1 day"],
+                    ]),
+                },
+                {
+                    key: '2', role: 'option', content: new LanguageMap([
+                        ["id", "weekly.EX.Q7b.rg.mat.r1.col1.option.2"],
+                        ["en", "2 days"],
+    
+                    ]),
+                },
+                {
+                    key: '3', role: 'option', content: new LanguageMap([
+                        ["id", "weekly.EX.Q7b.rg.mat.r1.col1.option.3"],
+                        ["en", "3 days"],
+                    ]),
+                },
+                {
+                    key: '4', role: 'option', content: new LanguageMap([
+                        ["id", "weekly.EX.Q7b.rg.mat.r1.col1.option.4"],
+                        ["en", "4 days"],
+                    ]),
+                },
+                {
+                    key: '5', role: 'option', content: new LanguageMap([
+                        ["id", "weekly.EX.Q7b.rg.mat.r1.col1.option.5"],
+                        ["en", "5 - 7 days"],
+                    ]),
+                },
+                {
+                    key: '6', role: 'option', content: new LanguageMap([
+                        ["id", "weekly.EX.Q7b.rg.mat.r1.col1.option.6"],
+                        ["en", "More than 7 days"],
+                    ]),
+                },
+                {
+                    key: '7', role: 'option', content: new LanguageMap([
+                        ["id", "weekly.EX.Q7b.rg.mat.r1.col1.option.7"],
+                        ["en", "I don't know/can't remember"],
+                    ]),
+                },
+            ]
+        };
+    
+        const visits = ResponseEncoding.visit_medical;
+
+        const displayCondition = (code:string) => {
+            return se.multipleChoice.any(this.keyVisitedMedicalServ, code);
+        }
+
+        const rg_inner = initMatrixQuestion(matrixKey, [
+            {
+                key: 'header', role: 'headerRow', cells: [
+                    {
+                        key: 'col0', role: 'text', content: new LanguageMap([
+                            ["id", "weekly.EX.Q7b.rg.mat.header.col0.text.0"],
+                            ["en", "Medical Service"],
+                        ]),
+                    },
+                    {
+                        key: 'col1', role: 'text'
+                    },
+                ]
+            },
+            {
+                key: 'r1', role: 'responseRow', cells: [
+                    {
+                        key: 'col0', role: 'label', content: new LanguageMap([
+                            ["id", "weekly.EX.Q7b.rg.mat.r1.col0.label.0"],
+                            ["en", "GP or GP'r practice nurse"],
+                        ]),
+                    },
+                    { ...ddOptions }
+                ],
+                displayCondition: displayCondition(visits.gp)
+            },
+            {
+                key: 'r2', role: 'responseRow', cells: [
+                    {
+                        key: 'col0', role: 'label', content: new LanguageMap([
+                            ["id", "weekly.EX.Q7b.rg.mat.r2.col0.label.0"],
+                            ["en", "Hospital accident & department/out of hours service"],
+                        ]),
+                    },
+                    { ...ddOptions }
+                ],
+                displayCondition: displayCondition(visits.emergency)
+            },
+            {
+                key: 'r3', role: 'responseRow', cells: [
+                    {
+                        key: 'col0', role: 'label', content: new LanguageMap([
+                            ["id", "weekly.EX.Q7b.rg.mat.r3.col0.label.0"],
+                            ["en", "Hospital admission"],
+                        ]),
+                    },
+                    { ...ddOptions }
+                ],
+                displayCondition: displayCondition(visits.hospital)
+            },
+            {
+                key: 'r4', role: 'responseRow', cells: [
+                    {
+                        key: 'col0', role: 'label', content: new LanguageMap([
+                            ["id", "weekly.EX.Q7b.rg.mat.r4.col0.label.0"],
+                            ["en", "Other medical services"],
+                        ]),
+                    },
+                    { ...ddOptions }
+                ],
+                displayCondition: displayCondition(visits.other)
+            },
+        ]);
+        editor.addExistingResponseComponent(rg_inner, rg?.key);
+    
+        // VALIDATIONs
+        if (this.isRequired) {
+            require_response(editor, this.key, responseGroupKey);
+        }
+    
+        return editor.getItem();
+       
+    }
+
+    getHelpGroupContent() {
+        return [
             text_why_asking("weekly.EX.Q7b.helpGroup.text.0"),
             {
                 content: new LanguageMap([
@@ -2143,148 +2178,8 @@ const visitedMedicalServiceWhen = (parentKey: string, keyVisitedMedicalServ: str
                     ["en", "Only record the time until your FIRST contact with the health services."],
                 ]),
             },
-        ])
-    );
-
-    // RESPONSE PART
-    const rg = editor.addNewResponseComponent({ role: 'responseGroup' });
-    editor.addExistingResponseComponent({
-        role: 'text',
-        content: generateLocStrings(
-            new LanguageMap([
-                ["id", "weekly.EX.Q7b.rg.sFcN.text.0"],
-                ["en", 'Select the correct number of days'],
-            ])),
-    }, rg?.key);
-    const ddOptions: ResponseRowCell = {
-        key: 'col1', role: 'dropDownGroup', items: [
-            {
-                key: '0', role: 'option', content: new LanguageMap([
-                    ["id", "weekly.EX.Q7b.rg.mat.r1.col1.option.0"],
-                    ["en", "Same day"],
-                ]),
-            },
-            {
-                key: '1', role: 'option', content: new LanguageMap([
-                    ["id", "weekly.EX.Q7b.rg.mat.r1.col1.option.1"],
-                    ["en", "1 day"],
-                ]),
-            },
-            {
-                key: '2', role: 'option', content: new LanguageMap([
-                    ["id", "weekly.EX.Q7b.rg.mat.r1.col1.option.2"],
-                    ["en", "2 days"],
-
-                ]),
-            },
-            {
-                key: '3', role: 'option', content: new LanguageMap([
-                    ["id", "weekly.EX.Q7b.rg.mat.r1.col1.option.3"],
-                    ["en", "3 days"],
-                ]),
-            },
-            {
-                key: '4', role: 'option', content: new LanguageMap([
-                    ["id", "weekly.EX.Q7b.rg.mat.r1.col1.option.4"],
-                    ["en", "4 days"],
-                ]),
-            },
-            {
-                key: '5', role: 'option', content: new LanguageMap([
-                    ["id", "weekly.EX.Q7b.rg.mat.r1.col1.option.5"],
-                    ["en", "5 - 7 days"],
-                ]),
-            },
-            {
-                key: '6', role: 'option', content: new LanguageMap([
-                    ["id", "weekly.EX.Q7b.rg.mat.r1.col1.option.6"],
-                    ["en", "More than 7 days"],
-                ]),
-            },
-            {
-                key: '7', role: 'option', content: new LanguageMap([
-                    ["id", "weekly.EX.Q7b.rg.mat.r1.col1.option.7"],
-                    ["en", "I don't know/can't remember"],
-                ]),
-            },
         ]
-    };
-
-    const rg_inner = initMatrixQuestion(matrixKey, [
-        {
-            key: 'header', role: 'headerRow', cells: [
-                {
-                    key: 'col0', role: 'text', content: new LanguageMap([
-                        ["id", "weekly.EX.Q7b.rg.mat.header.col0.text.0"],
-                        ["en", "Medical Service"],
-                    ]),
-                },
-                {
-                    key: 'col1', role: 'text'
-                },
-            ]
-        },
-        {
-            key: 'r1', role: 'responseRow', cells: [
-                {
-                    key: 'col0', role: 'label', content: new LanguageMap([
-                        ["id", "weekly.EX.Q7b.rg.mat.r1.col0.label.0"],
-                        ["en", "GP or GP'r practice nurse"],
-                    ]),
-                },
-                { ...ddOptions }
-            ],
-            displayCondition: expWithArgs('responseHasKeysAny', keyVisitedMedicalServ, [responseGroupKey, multipleChoiceKey].join('.'), '1')
-        },
-        {
-            key: 'r2', role: 'responseRow', cells: [
-                {
-                    key: 'col0', role: 'label', content: new LanguageMap([
-                        ["id", "weekly.EX.Q7b.rg.mat.r2.col0.label.0"],
-                        ["en", "Hospital accident & department/out of hours service"],
-                    ]),
-                },
-                { ...ddOptions }
-            ],
-            displayCondition: expWithArgs('responseHasKeysAny', keyVisitedMedicalServ, [responseGroupKey, multipleChoiceKey].join('.'), '3')
-        },
-        {
-            key: 'r3', role: 'responseRow', cells: [
-                {
-                    key: 'col0', role: 'label', content: new LanguageMap([
-                        ["id", "weekly.EX.Q7b.rg.mat.r3.col0.label.0"],
-                        ["en", "Hospital admission"],
-                    ]),
-                },
-                { ...ddOptions }
-            ],
-            displayCondition: expWithArgs('responseHasKeysAny', keyVisitedMedicalServ, [responseGroupKey, multipleChoiceKey].join('.'), '2')
-        },
-        {
-            key: 'r4', role: 'responseRow', cells: [
-                {
-                    key: 'col0', role: 'label', content: new LanguageMap([
-                        ["id", "weekly.EX.Q7b.rg.mat.r4.col0.label.0"],
-                        ["en", "Other medical services"],
-                    ]),
-                },
-                { ...ddOptions }
-            ],
-            displayCondition: expWithArgs('responseHasKeysAny', keyVisitedMedicalServ, [responseGroupKey, multipleChoiceKey].join('.'), '4')
-        },
-    ]);
-    editor.addExistingResponseComponent(rg_inner, rg?.key);
-
-    // VALIDATIONs
-    if (isRequired) {
-        editor.addValidation({
-            key: 'r1',
-            type: 'hard',
-            rule: expWithArgs('hasResponse', itemKey, responseGroupKey)
-        });
     }
-
-    return editor.getItem();
 }
 
 /**
@@ -2296,30 +2191,141 @@ const visitedMedicalServiceWhen = (parentKey: string, keyVisitedMedicalServ: str
  * @param isRequired if true adds a default "hard" validation to the question to check if it has a response.
  * @param keyOverride use this to override the default key for this item (only last part of the key, parent's key is not influenced).
  */
-const visitedNoMedicalService = (parentKey: string, keyVisitedMedicalServ?: string, isRequired?: boolean, keyOverride?: string): SurveyItem => {
-    const defaultKey = 'Qcov18';
-    const itemKey = [parentKey, keyOverride ? keyOverride : defaultKey].join('.');
-    const editor = new ItemEditor(undefined, { itemKey: itemKey, isGroup: false });
-    editor.setVersion(1);
 
-    // QUESTION TEXT
-    editor.setTitleComponent(
-        generateTitleComponent(new LanguageMap([
-            ["id", "weekly.EX.Qcov18.title.0"],
-            ["en", "What is the main reason for which you did not consult any health professional for the symptoms you declared today?"],
-        ]))
-    );
+export class WhyVisitedNoMedicalService extends Item {
 
-    // CONDITION
-    editor.setCondition(
-        expWithArgs('and',
-            expWithArgs('responseHasKeysAny', keyVisitedMedicalServ, [responseGroupKey, multipleChoiceKey].join('.'), '0'),
-        )
-    );
+    keyVisitedMedicalServ: string
 
-    // INFO POPUP
-    editor.setHelpGroupComponent(
-        generateHelpGroupComponent([
+    constructor(parentKey: string, keyVisitedMedicalServ: string, isRequired?: boolean, keyOverride?:string) {
+        super(parentKey, keyOverride ? keyOverride: 'Qcov18');
+        this.isRequired = isRequired;
+        this.keyVisitedMedicalServ = keyVisitedMedicalServ;
+    }
+
+    getCondition() {
+        const codes = ResponseEncoding.visit_medical;
+        return se.responseHasOnlyKeysOtherThan(this.keyVisitedMedicalServ, codes.no);
+    }
+
+     
+    buildItem() {
+        return SurveyItems.singleChoice({
+            parentKey: this.parentKey,
+            itemKey: this.itemKey,
+            isRequired: this.isRequired,
+            condition: this.getCondition(),
+            questionText: new LanguageMap([
+                ["id", "weekly.EX.Qcov18.title.0"],
+                ["en", "What is the main reason for which you did not consult any health professional for the symptoms you declared today?"],
+            ]),
+            helpGroupContent: this.getHelpGroupContent(),
+            /*bottomDisplayCompoments: [
+                ComponentGenerators.text({
+                    'content': new LanguageMap([
+                    ])
+                })
+            ],
+            */
+            responseOptions: this.getResponses()
+        });
+    }
+
+    getResponses() {
+        return  [
+            {
+                key: '1', role: 'option',
+                content: new LanguageMap([
+                    ["id", "weekly.EX.Qcov18.rg.scg.option.0"],
+                    ["en", "My symptoms appeared very recently"],
+                ])
+            },
+            {
+                key: '2', role: 'option',
+                content: new LanguageMap([
+                    ["id", "weekly.EX.Qcov18.rg.scg.option.1"],
+                    ["en", "My symptoms are mild"],
+                ])
+            },
+            {
+                key: '3', role: 'option',
+                content: new LanguageMap([
+                    ["id", "weekly.EX.Qcov18.rg.scg.option.2"],
+                    ["en", "I have these symptoms often"],
+                ])
+            },
+            {
+                key: '4', role: 'option',
+                content: new LanguageMap([
+                    ["id", "weekly.EX.Qcov18.rg.scg.option.3"],
+                    ["en", "I think I know what I have and I self-medicate"],
+                ])
+            },
+            {
+                key: '5', role: 'option',
+                content: new LanguageMap([
+                    ["id", "weekly.EX.Qcov18.rg.scg.option.4"],
+                    ["en", "I think there is no effective treatment for the disease I have"],
+                ])
+            },
+            {
+                key: '6', role: 'option',
+                content: new LanguageMap([
+                    ["id", "weekly.EX.Qcov18.rg.scg.option.5"],
+                    ["en", "It is too hard to get an appointment quickly"],
+                ])
+            },
+            {
+                key: '7', role: 'option',
+                content: new LanguageMap([
+                    ["id", "weekly.EX.Qcov18.rg.scg.option.6"],
+                    ["en", "I do not have time"],
+                ])
+            },
+            {
+                key: '8', role: 'option',
+                content: new LanguageMap([
+                    ["id", "weekly.EX.Qcov18.rg.scg.option.7"],
+                    ["en", "For financial reasons"],
+                ])
+            },
+            {
+                key: '9', role: 'option',
+                content: new LanguageMap([
+                    ["id", "weekly.EX.Qcov18.rg.scg.option.8"],
+                    ["en", "For fear of consequences if the doctor thinks I have COVID-19"],
+                ])
+            },
+            {
+                key: '11', role: 'option',
+                content: new LanguageMap([
+                    ["id", "weekly.EX.Qcov18.rg.scg.option.9"],
+                    ["en", "Because I am vaccinated against COVID-19"],
+                ])
+            },
+            {
+                key: '10', role: 'input',
+                style: [{ key: 'className', value: 'w-100' }],
+                content: new LanguageMap([
+                    ["id", "weekly.EX.Qcov18.rg.scg.input.10"],
+                    ["en", "For another reason"],
+                ]),
+                description: new LanguageMap([
+                    ["id", "weekly.EX.Qcov18.rg.scg.description.input.10"],
+                    ["en", "Describe here (optional)"],
+                ])
+            },
+            {
+                key: '99', role: 'option',
+                content: new LanguageMap([
+                    ["id", "weekly.EX.Qcov18.rg.scg.option.11"],
+                    ["en", "I don't know / I don't want to answer"],
+                ])
+            },
+        ];
+    }
+
+    getHelpGroupContent() {
+        return [
             text_why_asking("weekly.EX.Qcov18.helpGroup.text.0"),
             {
                 content: new LanguageMap([
@@ -2336,125 +2342,8 @@ const visitedNoMedicalService = (parentKey: string, keyVisitedMedicalServ?: stri
                     ["en", "Multiple answers are possible."],
                 ]),
             },
-        ])
-    );
-
-    // RESPONSE PART
-    const rg = editor.addNewResponseComponent({ role: 'responseGroup' });
-    editor.addExistingResponseComponent({
-        role: 'text',
-        style: [{ key: 'className', value: 'mb-2' }],
-        content: generateLocStrings(
-            new LanguageMap([
-                ["id", "weekly.EX.Qcov18.rg.4opV.text.0"],
-                ["en", "Multiple answers possible"],
-            ])),
-    }, rg?.key);
-
-    const rg_inner = initSingleChoiceGroup(singleChoiceKey, [
-        {
-            key: '1', role: 'option',
-            content: new LanguageMap([
-                ["id", "weekly.EX.Qcov18.rg.scg.option.0"],
-                ["en", "My symptoms appeared very recently"],
-            ])
-        },
-        {
-            key: '2', role: 'option',
-            content: new LanguageMap([
-                ["id", "weekly.EX.Qcov18.rg.scg.option.1"],
-                ["en", "My symptoms are mild"],
-            ])
-        },
-        {
-            key: '3', role: 'option',
-            content: new LanguageMap([
-                ["id", "weekly.EX.Qcov18.rg.scg.option.2"],
-                ["en", "I have these symptoms often"],
-            ])
-        },
-        {
-            key: '4', role: 'option',
-            content: new LanguageMap([
-                ["id", "weekly.EX.Qcov18.rg.scg.option.3"],
-                ["en", "I think I know what I have and I self-medicate"],
-            ])
-        },
-        {
-            key: '5', role: 'option',
-            content: new LanguageMap([
-                ["id", "weekly.EX.Qcov18.rg.scg.option.4"],
-                ["en", "I think there is no effective treatment for the disease I have"],
-            ])
-        },
-        {
-            key: '6', role: 'option',
-            content: new LanguageMap([
-                ["id", "weekly.EX.Qcov18.rg.scg.option.5"],
-                ["en", "It is too hard to get an appointment quickly"],
-            ])
-        },
-        {
-            key: '7', role: 'option',
-            content: new LanguageMap([
-                ["id", "weekly.EX.Qcov18.rg.scg.option.6"],
-                ["en", "I do not have time"],
-            ])
-        },
-        {
-            key: '8', role: 'option',
-            content: new LanguageMap([
-                ["id", "weekly.EX.Qcov18.rg.scg.option.7"],
-                ["en", "For financial reasons"],
-            ])
-        },
-        {
-            key: '9', role: 'option',
-            content: new LanguageMap([
-                ["id", "weekly.EX.Qcov18.rg.scg.option.8"],
-                ["en", "For fear of consequences if the doctor thinks I have COVID-19"],
-            ])
-        },
-        {
-            key: '11', role: 'option',
-            content: new LanguageMap([
-                ["id", "weekly.EX.Qcov18.rg.scg.option.9"],
-                ["en", "Because I am vaccinated against COVID-19"],
-            ])
-        },
-        {
-            key: '10', role: 'input',
-            style: [{ key: 'className', value: 'w-100' }],
-            content: new LanguageMap([
-                ["id", "weekly.EX.Qcov18.rg.scg.input.10"],
-                ["en", "For another reason"],
-            ]),
-            description: new LanguageMap([
-                ["id", "weekly.EX.Qcov18.rg.scg.description.input.10"],
-                ["en", "Describe here (optional)"],
-            ])
-        },
-        {
-            key: '99', role: 'option',
-            content: new LanguageMap([
-                ["id", "weekly.EX.Qcov18.rg.scg.option.11"],
-                ["en", "I don't know / I don't want to answer"],
-            ])
-        },
-    ]);
-    editor.addExistingResponseComponent(rg_inner, rg?.key);
-
-
-    // VALIDATIONs
-    if (isRequired) {
-        editor.addValidation({
-            key: 'r1',
-            type: 'hard',
-            rule: expWithArgs('hasResponse', itemKey, responseGroupKey)
-        });
+        ]
     }
-
-    return editor.getItem();
 }
 
 /**
@@ -2464,26 +2353,144 @@ const visitedNoMedicalService = (parentKey: string, keyVisitedMedicalServ?: stri
  * @param isRequired if true adds a default "hard" validation to the question to check if it has a response.
  * @param keyOverride use this to override the default key for this item (only last part of the key, parent's key is not influenced).
  */
-const tookMedication = (parentKey: string, isRequired?: boolean, keyOverride?: string): SurveyItem => {
-    const defaultKey = 'Q9';
-    const itemKey = [parentKey, keyOverride ? keyOverride : defaultKey].join('.');
-    const editor = new ItemEditor(undefined, { itemKey: itemKey, isGroup: false });
-    editor.setVersion(1);
+export class TookMedication extends Item {
 
-    // QUESTION TEXT
-    editor.setTitleComponent(
-        generateTitleComponent(new LanguageMap([
-            ["id", "weekly.EX.Q9.title.0"],
-            ["en", "Did you take medication for these symptoms?"],
-        ]))
-    );
+    constructor(parentKey: string, isRequired?: boolean, keyOverride?:string) {
+        super(parentKey, keyOverride ? keyOverride: 'xx');
+        this.isRequired = isRequired;
+    }
 
-    // CONDITION
-    // None
+    
+    buildItem() {
+        return SurveyItems.singleChoice({
+            parentKey: this.parentKey,
+            itemKey: this.itemKey,
+            isRequired: this.isRequired,
+            //condition: this.getCondition(),
+            questionText: new LanguageMap([
+                ["id", "weekly.EX.Q9.title.0"],
+                ["en", "Did you take medication for these symptoms?"],
+            ]),
+            helpGroupContent: this.getHelpGroupContent(),
+            topDisplayCompoments: [
+                text_select_all_apply("weekly.EX.Q9.rg.vMc3.text.0")
+            ],
+            responseOptions: this.getResponses()
+        });
+    }
 
-    // INFO POPUP
-    editor.setHelpGroupComponent(
-        generateHelpGroupComponent([
+    getResponses() {
+
+        const no_medication = '0';
+        const dont_know = '6';
+
+        // Exclusive with 'No' response
+        const exclusiveNo = se.responseHasKeysAny(this.key, MultipleChoicePrefix, no_medication);
+
+        // Exclusive Conditon for all other options : except No and Dont know
+        const exclusiveOther = se.responseHasKeysAny(this.key, MultipleChoicePrefix, no_medication, dont_know)
+
+        // Exclusive with Dont know response
+        const exclusiveDontKnow = se.responseHasKeysAny(this.key, MultipleChoicePrefix, dont_know);
+
+        return [
+            {
+                key: no_medication,
+                role: 'option',
+                disabled: exclusiveDontKnow,
+                content: new LanguageMap([
+                    ["id", "weekly.EX.Q9.rg.mcg.option.0"],
+                    ["en", "No medication"],
+                ])
+            },
+            {
+                key: '1',
+                role: 'option',
+                disabled: exclusiveOther,
+                content: new LanguageMap([
+                    ["id", "weekly.EX.Q9.rg.mcg.option.1"],
+                    ["en", "Pain killers (e.g. paracetamol, lemsip, ibuprofen, aspirin, calpol, etc)"],
+                ])
+            },
+            {
+                key: '2',
+                role: 'option',
+                disabled: exclusiveOther,
+                content: new LanguageMap([
+                    ["id", "weekly.EX.Q9.rg.mcg.option.2"],
+                    ["en", "Cough medication (e.g. expectorants)"],
+                ])
+            },/*
+            {
+                key: '9',
+                role: 'option',
+                disabled: exclusiveOther,
+                content: new LanguageMap([
+                    ["id", "hecfaecb"],
+                    ["en", "Hayfever medication"],
+    
+                ])
+            }, */
+            {
+                key: '3',
+                role: 'option',
+                disabled: exclusiveOther,
+                content: new LanguageMap([
+                    ["id", "weekly.EX.Q9.rg.mcg.option.3"],
+                    ["en", "Antivirals against influenza (eg: Tamiflu)"],
+                ])
+            },
+            {
+                key: '4',
+                role: 'option',
+                disabled: exclusiveOther,
+                content: new LanguageMap([
+                    ["id", "weekly.EX.Q9.rg.mcg.option.4"],
+                    ["en", "Antibiotics"],
+                ])
+            },
+            {
+                key: '7',
+                role: 'option',
+                disabled: exclusiveOther,
+                content: new LanguageMap([
+                    ["id", "weekly.EX.Q9.rg.mcg.option.5"],
+                    ["en", "Homeopathy"],
+                ])
+            },
+            {
+                key: '8',
+                role: 'option',
+                disabled: exclusiveOther,
+                content: new LanguageMap([
+                    ["id", "weekly.EX.Q9.rg.mcg.option.6"],
+                    ["en", "Alternative medicine (essential oil, phytotherapy, etc.)"],
+                ])
+            },
+            {
+                key: '5',
+                role: 'option',
+                disabled: exclusiveOther,
+                content: new LanguageMap([
+                    ["id", "weekly.EX.Q9.rg.mcg.option.7"],
+                    ["en", "Other"],
+                ])
+            },
+            {
+                key: dont_know,
+                role: 'option',
+                disabled: exclusiveNo,
+                content: new LanguageMap([
+                    ["id", "weekly.EX.Q9.rg.mcg.option.8"],
+                    ["en", "I don't know/can't remember"],
+                ])
+            },
+        
+        ];
+    }
+
+    getHelpGroupContent() {
+        return [
             text_why_asking("weekly.EX.Q9.helpGroup.text.0"),
             {
                 content: new LanguageMap([
@@ -2500,127 +2507,11 @@ const tookMedication = (parentKey: string, isRequired?: boolean, keyOverride?: s
                 ]),
                 // style: [{ key: 'variant', value: 'p' }],
             },
-        ])
-    );
-
-    // RESPONSE PART
-    const rg = editor.addNewResponseComponent({ role: 'responseGroup' });
-    editor.addExistingResponseComponent({
-        role: 'text',
-        content: generateLocStrings(
-            new LanguageMap([
-                ["id", "weekly.EX.Q9.rg.vMc3.text.0"],
-                ["en", 'Select all options that apply'],
-            ])),
-        style: [{ key: 'className', value: 'mb-1' }]
-    }, rg?.key);
-    const rg_inner = initMultipleChoiceGroup(multipleChoiceKey, [
-        {
-            key: '0',
-            role: 'option',
-            disabled: expWithArgs('responseHasKeysAny', editor.getItem().key, responseGroupKey + '.' + multipleChoiceKey, '6'),
-            content: new LanguageMap([
-                ["id", "weekly.EX.Q9.rg.mcg.option.0"],
-                ["en", "No medication"],
-            ])
-        },
-        {
-            key: '1',
-            role: 'option',
-            disabled: expWithArgs('responseHasKeysAny', editor.getItem().key, responseGroupKey + '.' + multipleChoiceKey, '0', '6'),
-            content: new LanguageMap([
-                ["id", "weekly.EX.Q9.rg.mcg.option.1"],
-                ["en", "Pain killers (e.g. paracetamol, lemsip, ibuprofen, aspirin, calpol, etc)"],
-            ])
-        },
-        {
-            key: '2',
-            role: 'option',
-            disabled: expWithArgs('responseHasKeysAny', editor.getItem().key, responseGroupKey + '.' + multipleChoiceKey, '0', '6'),
-            content: new LanguageMap([
-                ["id", "weekly.EX.Q9.rg.mcg.option.2"],
-                ["en", "Cough medication (e.g. expectorants)"],
-            ])
-        },/*
-        {
-            key: '9',
-            role: 'option',
-            disabled: expWithArgs('responseHasKeysAny', editor.getItem().key, responseGroupKey + '.' + multipleChoiceKey, '0', '6'),
-            content: new LanguageMap([
-                ["id", "hecfaecb"],
-                ["en", "Hayfever medication"],
-
-            ])
-        }, */
-        {
-            key: '3',
-            role: 'option',
-            disabled: expWithArgs('responseHasKeysAny', editor.getItem().key, responseGroupKey + '.' + multipleChoiceKey, '0', '6'),
-            content: new LanguageMap([
-                ["id", "weekly.EX.Q9.rg.mcg.option.3"],
-                ["en", "Antivirals against influenza (eg: Tamiflu)"],
-            ])
-        },
-        {
-            key: '4',
-            role: 'option',
-            disabled: expWithArgs('responseHasKeysAny', editor.getItem().key, responseGroupKey + '.' + multipleChoiceKey, '0', '6'),
-            content: new LanguageMap([
-                ["id", "weekly.EX.Q9.rg.mcg.option.4"],
-                ["en", "Antibiotics"],
-            ])
-        },
-        {
-            key: '7',
-            role: 'option',
-            disabled: expWithArgs('responseHasKeysAny', editor.getItem().key, responseGroupKey + '.' + multipleChoiceKey, '0', '6'),
-            content: new LanguageMap([
-                ["id", "weekly.EX.Q9.rg.mcg.option.5"],
-                ["en", "Homeopathy"],
-            ])
-        },
-        {
-            key: '8',
-            role: 'option',
-            disabled: expWithArgs('responseHasKeysAny', editor.getItem().key, responseGroupKey + '.' + multipleChoiceKey, '0', '6'),
-            content: new LanguageMap([
-                ["id", "weekly.EX.Q9.rg.mcg.option.6"],
-                ["en", "Alternative medicine (essential oil, phytotherapy, etc.)"],
-            ])
-        },
-        {
-            key: '5',
-            role: 'option',
-            disabled: expWithArgs('responseHasKeysAny', editor.getItem().key, responseGroupKey + '.' + multipleChoiceKey, '0', '6'),
-            content: new LanguageMap([
-                ["id", "weekly.EX.Q9.rg.mcg.option.7"],
-                ["en", "Other"],
-            ])
-        },
-        {
-            key: '6',
-            role: 'option',
-            disabled: expWithArgs('responseHasKeysAny', editor.getItem().key, responseGroupKey + '.' + multipleChoiceKey, '0'),
-            content: new LanguageMap([
-                ["id", "weekly.EX.Q9.rg.mcg.option.8"],
-                ["en", "I don't know/can't remember"],
-            ])
-        },
-
-    ]);
-    editor.addExistingResponseComponent(rg_inner, rg?.key);
-
-    // VALIDATIONs
-    if (isRequired) {
-        editor.addValidation({
-            key: 'r1',
-            type: 'hard',
-            rule: expWithArgs('hasResponse', itemKey, responseGroupKey)
-        });
+        ];
     }
-
-    return editor.getItem();
 }
+
+
 
 /**
  * HOSPITALIZED BECAUSE OF SYMPTOMS: single choice question to check if symptoms lead to hospitalization
@@ -2629,26 +2520,49 @@ const tookMedication = (parentKey: string, isRequired?: boolean, keyOverride?: s
  * @param isRequired if true adds a default "hard" validation to the question to check if it has a response.
  * @param keyOverride use this to override the default key for this item (only last part of the key, parent's key is not influenced).
  */
-const hospitalized = (parentKey: string, isRequired?: boolean, keyOverride?: string): SurveyItem => {
-    const defaultKey = 'Q14'
-    const itemKey = [parentKey, keyOverride ? keyOverride : defaultKey].join('.');
-    const editor = new ItemEditor(undefined, { itemKey: itemKey, isGroup: false });
-    editor.setVersion(1);
+export class Hospitalized extends Item {
 
-    // QUESTION TEXT
-    editor.setTitleComponent(
-        generateTitleComponent(new LanguageMap([
-            ["id", "weekly.EX.Q14.title.0"],
-            ["en", "Because of your symptoms, were you hospitalized?"],
-        ]))
-    );
+    constructor(parentKey: string, isRequired?: boolean, keyOverride?:string) {
+        super(parentKey, keyOverride ? keyOverride: 'Q14');
+        this.isRequired = isRequired;
+    }
+    
+    buildItem() {
+        return SurveyItems.singleChoice({
+            parentKey: this.parentKey,
+            itemKey: this.itemKey,
+            isRequired: this.isRequired,
+            //condition: this.getCondition(),
+            questionText: new LanguageMap([
+                ["id", "weekly.EX.Q14.title.0"],
+                ["en", "Because of your symptoms, were you hospitalized?"],
+            ]),
+            helpGroupContent: this.getHelpGroupContent(),
+            responseOptions: this.getResponses()
+        });
+    }
 
-    // CONDITION
-    // None
+    getResponses() {
+        return  [
+            {
+                key: '1', role: 'option', content: new LanguageMap([
+                    ["id", "weekly.EX.Q14.rg.scg.option.0"],
+                    ["en", "Yes"],
+    
+                ])
+            },
+            {
+                key: '0', role: 'option',
+                content: new LanguageMap([
+                    ["id", "weekly.EX.Q14.rg.scg.option.1"],
+                    ["en", "No"],
+                ])
+            }
+        ];
+    }
 
-    // INFO POPUP
-    editor.setHelpGroupComponent(
-        generateHelpGroupComponent([
+    getHelpGroupContent() {
+        return [
             text_why_asking("weekly.EX.Q14.helpGroup.text.0"),
             {
                 content: new LanguageMap([
@@ -2657,39 +2571,8 @@ const hospitalized = (parentKey: string, isRequired?: boolean, keyOverride?: str
                 ]),
                 //style: [{ key: 'variant', value: 'p' }],
             },
-        ])
-    );
-
-    // RESPONSE PART
-    const rg = editor.addNewResponseComponent({ role: 'responseGroup' });
-    const rg_inner = initSingleChoiceGroup(singleChoiceKey, [
-        {
-            key: '1', role: 'option', content: new LanguageMap([
-                ["id", "weekly.EX.Q14.rg.scg.option.0"],
-                ["en", "Yes"],
-
-            ])
-        },
-        {
-            key: '0', role: 'option',
-            content: new LanguageMap([
-                ["id", "weekly.EX.Q14.rg.scg.option.1"],
-                ["en", "No"],
-            ])
-        }
-    ]);
-    editor.addExistingResponseComponent(rg_inner, rg?.key);
-
-    // VALIDATIONs
-    if (isRequired) {
-        editor.addValidation({
-            key: 'r1',
-            type: 'hard',
-            rule: expWithArgs('hasResponse', itemKey, responseGroupKey)
-        });
+        ];
     }
-
-    return editor.getItem();
 }
 
 /**
@@ -2699,26 +2582,62 @@ const hospitalized = (parentKey: string, isRequired?: boolean, keyOverride?: str
  * @param isRequired if true adds a default "hard" validation to the question to check if it has a response.
  * @param keyOverride use this to override the default key for this item (only last part of the key, parent's key is not influenced).
  */
-const dailyRoutine = (parentKey: string, isRequired?: boolean, keyOverride?: string): SurveyItem => {
-    const defaultKey = 'Q10';
-    const itemKey = [parentKey, keyOverride ? keyOverride : defaultKey].join('.');
-    const editor = new ItemEditor(undefined, { itemKey: itemKey, isGroup: false });
-    editor.setVersion(1);
+export class DailyRoutine extends Item {
 
-    // QUESTION TEXT
-    editor.setTitleComponent(
-        generateTitleComponent(new LanguageMap([
-            ["id", "weekly.EX.Q10.title.0"],
-            ["en", "Did you change your daily routine because of your illness?"],
-        ]))
-    );
+    constructor(parentKey: string, isRequired?: boolean, keyOverride?:string) {
+        super(parentKey, keyOverride ? keyOverride: 'Q10');
+        this.isRequired = isRequired;
+    }
+    
+    buildItem() {
+        return SurveyItems.singleChoice({
+            parentKey: this.parentKey,
+            itemKey: this.itemKey,
+            isRequired: this.isRequired,
+            //condition: this.getCondition(),
+            questionText: new LanguageMap([
+                ["id", "weekly.EX.Q10.title.0"],
+                ["en", "Did you change your daily routine because of your illness?"],
+            ]),
+            helpGroupContent: this.getHelpGroupContent(),
+            responseOptions: this.getResponses()
+        });
+    }
 
-    // CONDITION
-    // None
+    getResponses() {
 
-    // INFO POPUP
-    editor.setHelpGroupComponent(
-        generateHelpGroupComponent([
+        const codes = ResponseEncoding.daily_routine;
+
+        return [
+            {
+                key: codes.no,
+                role: 'option',
+                content: new LanguageMap([
+                    ["id", "weekly.EX.Q10.rg.scg.option.0"],
+                    ["en", "No, I was able to go about my daily activities as usual"],
+                ])
+            },
+            {
+                key: codes.yes,
+                role: 'option',
+                content: new LanguageMap([
+                    ["id", "weekly.EX.Q10.rg.scg.option.1"],
+                    ["en", "Yes, but I did not take time off work/school"],
+                ])
+            },
+            {
+                key: codes.off,
+                role: 'option',
+                content: new LanguageMap([
+                    ["id", "weekly.EX.Q10.rg.scg.option.2"],
+                    ["en", "Yes, I took time off school or work"],
+                ])
+            },
+        ];
+    }
+
+    getHelpGroupContent() {
+        return [
             text_why_asking("weekly.EX.Q10.helpGroup.text.0"),
             {
                 content: new LanguageMap([
@@ -2733,83 +2652,73 @@ const dailyRoutine = (parentKey: string, isRequired?: boolean, keyOverride?: str
                     ["id", "weekly.EX.Q10.helpGroup.text.3"],
                     ["en", "We want to know if you have missed work or school due to your symptoms, or if you have modified your daily routine in any way (for example, if you were unable to engage in sport activities). If you are a student, and were unable to attend online classes due to your symptoms, you should also select option 2. We are interested in changes due to your symptoms/complaints and not due to any quarantine."],
                 ]),
-                // style: [{ key: 'variant', value: 'p' }],
             },
-        ])
-    );
+        ];
+    }
+}
 
-    // RESPONSE PART
-    const rg = editor.addNewResponseComponent({ role: 'responseGroup' });
-    const rg_inner = initSingleChoiceGroup(singleChoiceKey, [
-        {
-            key: '0',
-            role: 'option',
-            content: new LanguageMap([
-                ["id", "weekly.EX.Q10.rg.scg.option.0"],
-                ["en", "No, I was able to go about my daily activities as usual"],
-            ])
-        },
-        {
-            key: '1',
-            role: 'option',
-            content: new LanguageMap([
-                ["id", "weekly.EX.Q10.rg.scg.option.1"],
-                ["en", "Yes, but I did not take time off work/school"],
-            ])
-        },
-        {
-            key: '2',
-            role: 'option',
-            content: new LanguageMap([
-                ["id", "weekly.EX.Q10.rg.scg.option.2"],
-                ["en", "Yes, I took time off school or work"],
-            ])
-        },
-    ]);
-    editor.addExistingResponseComponent(rg_inner, rg?.key);
 
-    // VALIDATIONs
-    if (isRequired) {
-        editor.addValidation({
-            key: 'r1',
-            type: 'hard',
-            rule: expWithArgs('hasResponse', itemKey, responseGroupKey)
+export class DailyRoutineToday extends Item {
+
+    keyDailyRoutine: string;
+
+    constructor(parentKey: string, keyDailyRoutine:string, isRequired?: boolean, keyOverride?:string) {
+        super(parentKey, keyOverride ? keyOverride: 'Q10b');
+        this.isRequired = isRequired;
+        this.keyDailyRoutine = keyDailyRoutine;
+    }
+
+    getCondition() {
+        return se.singleChoice.any(this.keyDailyRoutine, ResponseEncoding.daily_routine.off);
+        //expWithArgs('responseHasKeysAny', keyDailyRoutine, [responseGroupKey, singleChoiceKey].join('.'), '2')
+    }
+    
+    buildItem() {
+        return SurveyItems.singleChoice({
+            parentKey: this.parentKey,
+            itemKey: this.itemKey,
+            isRequired: this.isRequired,
+            condition: this.getCondition(),
+            questionText: new LanguageMap([
+                ["id", "weekly.EX.Q10b.title.0"],
+                ["en", "Are you currently still unable to work or attend school due to your symptoms/complaints?"],
+            ]),
+            helpGroupContent: this.getHelpGroupContent(),
+            responseOptions: this.getResponses()
         });
     }
 
-    return editor.getItem();
-}
+    getResponses() {
+        return [
+            {
+                key: '0',
+                role: 'option',
+                content: new LanguageMap([
+                    ["id", "weekly.EX.Q10b.rg.scg.option.0"],
+                    ["en", "Yes"],
+                ])
+            },
+            {
+                key: '1',
+                role: 'option',
+                content: new LanguageMap([
+                    ["id", "weekly.EX.Q10b.rg.scg.option.1"],
+                    ["en", "No"],
+                ])
+            },
+            {
+                key: '3',
+                role: 'option',
+                content: new LanguageMap([
+                    ["id", "weekly.EX.Q10b.rg.scg.option.2"],
+                    ["en", "Other (I did not have to work or go to school today in any case)"],
+                ])
+            },
+        ];
+    }
 
-/**
- * DAILY ROUTINE TODAY
- *
- * @param parentKey full key path of the parent item, required to genrate this item's unique key (e.g. `<surveyKey>.<groupKey>`).
- * @param keyDailyRoutine: reference to question if participant missed work/school
- * @param isRequired if true adds a default "hard" validation to the question to check if it has a response.
- * @param keyOverride use this to override the default key for this item (only last part of the key, parent's key is not influenced).
- */
-const dailyRoutineToday = (parentKey: string, keyDailyRoutine: string, isRequired?: boolean, keyOverride?: string): SurveyItem => {
-    const defaultKey = 'Q10b';
-    const itemKey = [parentKey, keyOverride ? keyOverride : defaultKey].join('.');
-    const editor = new ItemEditor(undefined, { itemKey: itemKey, isGroup: false });
-    editor.setVersion(1);
-
-    // QUESTION TEXT
-    editor.setTitleComponent(
-        generateTitleComponent(new LanguageMap([
-            ["id", "weekly.EX.Q10b.title.0"],
-            ["en", "Are you currently still unable to work or attend school due to your symptoms/complaints?"],
-        ]))
-    );
-
-    // CONDITION
-    editor.setCondition(
-        expWithArgs('responseHasKeysAny', keyDailyRoutine, [responseGroupKey, singleChoiceKey].join('.'), '2')
-    );
-
-    // INFO POPUP
-    editor.setHelpGroupComponent(
-        generateHelpGroupComponent([
+    getHelpGroupContent() {
+        return [
             text_why_asking("weekly.EX.Q10b.helpGroup.text.0"),
 
             {
@@ -2827,48 +2736,8 @@ const dailyRoutineToday = (parentKey: string, keyDailyRoutine: string, isRequire
                 ]),
                 // style: [{ key: 'variant', value: 'p' }],
             },
-        ])
-    );
-
-    // RESPONSE PART
-    const rg = editor.addNewResponseComponent({ role: 'responseGroup' });
-    const rg_inner = initSingleChoiceGroup(singleChoiceKey, [
-        {
-            key: '0',
-            role: 'option',
-            content: new LanguageMap([
-                ["id", "weekly.EX.Q10b.rg.scg.option.0"],
-                ["en", "Yes"],
-            ])
-        },
-        {
-            key: '1',
-            role: 'option',
-            content: new LanguageMap([
-                ["id", "weekly.EX.Q10b.rg.scg.option.1"],
-                ["en", "No"],
-            ])
-        },
-        {
-            key: '3',
-            role: 'option',
-            content: new LanguageMap([
-                ["id", "weekly.EX.Q10b.rg.scg.option.2"],
-                ["en", "Other (I did not have to work or go to school today in any case)"],
-            ])
-        },
-    ]);
-    editor.addExistingResponseComponent(rg_inner, rg?.key);
-    // VALIDATIONs
-    if (isRequired) {
-        editor.addValidation({
-            key: 'r1',
-            type: 'hard',
-            rule: expWithArgs('hasResponse', itemKey, responseGroupKey)
-        });
+        ];
     }
-
-    return editor.getItem();
 }
 
 /**
@@ -2879,27 +2748,98 @@ const dailyRoutineToday = (parentKey: string, keyDailyRoutine: string, isRequire
  * @param isRequired if true adds a default "hard" validation to the question to check if it has a response.
  * @param keyOverride use this to override the default key for this item (only last part of the key, parent's key is not influenced).
  */
-const dailyRoutineDaysMissed = (parentKey: string, keyDailyRoutine: string, isRequired?: boolean, keyOverride?: string): SurveyItem => {
-    const defaultKey = 'Q10c'
-    const itemKey = [parentKey, keyOverride ? keyOverride : defaultKey].join('.');
-    const editor = new ItemEditor(undefined, { itemKey: itemKey, isGroup: false });
+export class DailyRoutineDaysMissed extends Item {
 
-    // QUESTION TEXT
-    editor.setTitleComponent(
-        generateTitleComponent(new LanguageMap([
-            ["id", "weekly.EX.Q10c.title.0"],
-            ["en", "For how many days have you been unable to work normally/go to school (when you otherwise would have)?"],
-        ]))
-    );
+    keyDailyRoutine: string;
 
-    // CONDITION
-    editor.setCondition(
-        expWithArgs('responseHasKeysAny', keyDailyRoutine, [responseGroupKey, singleChoiceKey].join('.'), '2')
-    );
+    constructor(parentKey: string, keyDailyRoutine:string, isRequired?: boolean, keyOverride?:string) {
+        super(parentKey, keyOverride ? keyOverride: 'Q10c');
+        this.isRequired = isRequired;
+        this.keyDailyRoutine = keyDailyRoutine;
+    }
 
-    // INFO POPUP
-    editor.setHelpGroupComponent(
-        generateHelpGroupComponent([
+    getCondition() {
+        return se.singleChoice.any(this.keyDailyRoutine, ResponseEncoding.daily_routine.off);
+        //expWithArgs('responseHasKeysAny', keyDailyRoutine, [responseGroupKey, singleChoiceKey].join('.'), '2')
+    }
+    
+    buildItem() {
+        return SurveyItems.dropDown({
+            parentKey: this.parentKey,
+            itemKey: this.itemKey,
+            isRequired: this.isRequired,
+            condition: this.getCondition(),
+            questionText: new LanguageMap([
+                ["id", "weekly.EX.Q10c.title.0"],
+                ["en", "For how many days have you been unable to work normally/go to school (when you otherwise would have)?"],
+            ]),
+            helpGroupContent: this.getHelpGroupContent(),
+            /*bottomDisplayCompoments: [
+                ComponentGenerators.text({
+                    'content': new LanguageMap([
+                    ])
+                })
+            ],
+            */
+            responseOptions: this.getResponses()
+        });
+    }
+
+    getResponses() {
+        return [
+            {
+                key: '0', role: 'option', content: new LanguageMap([
+                    ["id", "weekly.EX.Q10c.rg.ddg.option.0"],
+                    ["en", "1 day"],
+                ]),
+            },
+            {
+                key: '1', role: 'option', content: new LanguageMap([
+                    ["id", "weekly.EX.Q10c.rg.ddg.option.1"],
+                    ["en", "2 days"],
+                ]),
+            },
+            {
+                key: '2', role: 'option', content: new LanguageMap([
+                    ["id", "weekly.EX.Q10c.rg.ddg.option.2"],
+                    ["en", "3 days"],
+                ]),
+            },
+            {
+                key: '3', role: 'option', content: new LanguageMap([
+                    ["id", "weekly.EX.Q10c.rg.ddg.option.3"],
+                    ["en", "4 days"],
+                ]),
+            },
+            {
+                key: '4', role: 'option', content: new LanguageMap([
+                    ["id", "weekly.EX.Q10c.rg.ddg.option.4"],
+                    ["en", "5 days"],
+                ]),
+            },
+            {
+                key: '5', role: 'option', content: new LanguageMap([
+                    ["id", "weekly.EX.Q10c.rg.ddg.option.5"],
+                    ["en", "6 to 10 days"],
+                ]),
+            },
+            {
+                key: '6', role: 'option', content: new LanguageMap([
+                    ["id", "weekly.EX.Q10c.rg.ddg.option.6"],
+                    ["en", "11 to 15 days"],
+                ]),
+            },
+            {
+                key: '7', role: 'option', content: new LanguageMap([
+                    ["id", "weekly.EX.Q10c.rg.ddg.option.7"],
+                    ["en", "More than 15 days"],
+                ]),
+            },
+        ];
+    }
+
+    getHelpGroupContent() {
+        return [
             text_why_asking("weekly.EX.Q10c.helpGroup.text.0"),
             {
                 content: new LanguageMap([
@@ -2916,89 +2856,29 @@ const dailyRoutineDaysMissed = (parentKey: string, keyDailyRoutine: string, isRe
                 ]),
                 // style: [{ key: 'variant', value: 'p' }],
             },
-        ])
-    );
-
-    const ddOptions = initDropdownGroup('ddg', [
-        {
-            key: '0', role: 'option', content: new LanguageMap([
-                ["id", "weekly.EX.Q10c.rg.ddg.option.0"],
-                ["en", "1 day"],
-            ]),
-        },
-        {
-            key: '1', role: 'option', content: new LanguageMap([
-                ["id", "weekly.EX.Q10c.rg.ddg.option.1"],
-                ["en", "2 days"],
-            ]),
-        },
-        {
-            key: '2', role: 'option', content: new LanguageMap([
-                ["id", "weekly.EX.Q10c.rg.ddg.option.2"],
-                ["en", "3 days"],
-            ]),
-        },
-        {
-            key: '3', role: 'option', content: new LanguageMap([
-                ["id", "weekly.EX.Q10c.rg.ddg.option.3"],
-                ["en", "4 days"],
-            ]),
-        },
-        {
-            key: '4', role: 'option', content: new LanguageMap([
-                ["id", "weekly.EX.Q10c.rg.ddg.option.4"],
-                ["en", "5 days"],
-            ]),
-        },
-        {
-            key: '5', role: 'option', content: new LanguageMap([
-                ["id", "weekly.EX.Q10c.rg.ddg.option.5"],
-                ["en", "6 to 10 days"],
-            ]),
-        },
-        {
-            key: '6', role: 'option', content: new LanguageMap([
-                ["id", "weekly.EX.Q10c.rg.ddg.option.6"],
-                ["en", "11 to 15 days"],
-            ]),
-        },
-        {
-            key: '7', role: 'option', content: new LanguageMap([
-                ["id", "weekly.EX.Q10c.rg.ddg.option.7"],
-                ["en", "More than 15 days"],
-            ]),
-        },
-    ]);
-
-    const rg = editor.addNewResponseComponent({ role: 'responseGroup' });
-    editor.addExistingResponseComponent(ddOptions, rg?.key);
-
-    // VALIDATIONs
-    if (isRequired) {
-        editor.addValidation({
-            key: 'r1',
-            type: 'hard',
-            rule: expWithArgs('hasResponse', itemKey, responseGroupKey)
-        });
+        ];
     }
-
-    return editor.getItem();
 }
+
 
 /**
  * COVID-19 Personal Habits Changes: likert scale question about changes in personal habits after experiencing covid symptoms
  *
  * @param parentKey full key path of the parent item, required to genrate this item's unique key (e.g. `<surveyKey>.<groupKey>`).
- * @param keySymptomsQuestion reference to the symptom survey
  * @param isRequired if true adds a default "hard" validation to the question to check if it has a response.
  * @param keyOverride use this to override the default key for this item (only last part of the key, parent's key is not influenced).
  */
-const covidHabitsChange = (parentKey: string, isRequired?: boolean, keyOverride?: string): SurveyItem => {
-    const defaultKey = 'Qcov7'
-    const itemKey = [parentKey, keyOverride ? keyOverride : defaultKey].join('.');
-    const editor = new ItemEditor(undefined, { itemKey: itemKey, isGroup: false });
-    editor.setVersion(1);
+ export class CovidHabitsChange extends Item {
 
+    constructor(parentKey: string, isRequired?: boolean, keyOverride?:string) {
+        super(parentKey, keyOverride ? keyOverride: 'Qcov7');
+        this.isRequired = isRequired;
+    }
+    
+    buildItem() {
+
+    const editor = new ItemEditor(undefined, { itemKey: this.key, isGroup: false });
+    
     // QUESTION TEXT
     editor.setTitleComponent(
         generateTitleComponent(new LanguageMap([
@@ -3006,13 +2886,110 @@ const covidHabitsChange = (parentKey: string, isRequired?: boolean, keyOverride?
             ["en", "Did you begin to follow or increase any of the measures below, due to your symptoms (compared to the period before your symptoms began)?"],
         ]))
     );
-
-    // CONDITION
-    // none
-
+    
     // INFO POPUP
-    editor.setHelpGroupComponent(
-        generateHelpGroupComponent([
+    editor.setHelpGroupComponent(generateHelpGroupComponent(this.getHelpGroupContent()));
+
+    // RESPONSE PART
+    
+    const rg = editor.addNewResponseComponent({ role: 'responseGroup' });
+    editor.addExistingResponseComponent({
+        role: 'text',
+        style: [{ key: 'className', value: 'mb-2' }],
+        content: generateLocStrings(
+            new LanguageMap([
+                ["id", "weekly.EX.Qcov7.rg.gU4U.text.0"],
+                ["en", "To be completed optionally"],
+            ])),
+    }, rg?.key);
+
+    const likertOptions = this.getScaleOptions();
+
+    const _T = function(id:string, en:string) {
+        return  new LanguageMap([
+                ["id", id],
+                ["en", en],
+            ]);
+    }
+
+    const addLikertItem = (rowKey:string, lang:Map<string,string>, className:string) => {
+        editor.addExistingResponseComponent({
+            role: 'text',
+            style: [{ key: 'className', value:  className}, { key: 'variant', value: 'h5' }],
+            content: generateLocStrings(lang),
+        }, rg?.key);
+        editor.addExistingResponseComponent(initLikertScaleItem(likertScaleKey + '_' + rowKey, likertOptions), rg?.key);
+    };
+
+    addLikertItem('1', _T("weekly.EX.Qcov7.rg.v1C0.text.1", 'Regularly wash or disinfect hands'), 'mb-1 fw-bold');
+ 
+    const style = 'mb-1 border-top border-1 border-grey-7 pt-1 mt-2 fw-bold';
+
+    addLikertItem('2', _T("weekly.EX.Qcov7.rg.nEMR.text.3", 'Cough or sneeze into your elbow'), style);
+
+    addLikertItem('3', _T("weekly.EX.Qcov7.rg.oTIp.text.5", 'Use a disposable tissue'), style);
+
+    addLikertItem('4a', _T("weekly.EX.Qcov7.rg.7w6F.text.7", "Wear a face mask indoors"), style);
+
+    addLikertItem('4b', _T("weekly.EX.Qcov7.rg.vHvi.text.9", "Wear a face mask outdoors"), style);
+
+    addLikertItem('5', _T("weekly.EX.Qcov7.rg.ocTu.text.11", "Avoid shaking hands"), style);
+
+    addLikertItem('11', _T("weekly.EX.Qcov7.rg.ioJs.text.13", "Stop greeting by hugging and/or kissing on both cheeks"), style);
+
+    addLikertItem('6', _T("weekly.EX.Qcov7.rg.ujsK.text.15", "Limit your use of public transport"), style);
+
+    addLikertItem('7',_T("weekly.EX.Qcov7.rg.Ijdr.text.17", "Avoid busy places and gatherings (supermarket, cinema, stadium)"), style);
+
+    addLikertItem('8',_T("weekly.EX.Qcov7.rg.t8MS.text.19", "Stay at home"), style);
+
+    addLikertItem('9',_T("weekly.EX.Qcov7.rg.z4bE.text.21", "Telework or increase your number of telework days"), style);
+
+    addLikertItem('10',_T("weekly.EX.Qcov7.rg.Koue.text.23", "Avoid travel outside your own country or region"), style);
+
+    addLikertItem('13',_T("weekly.EX.Qcov7.rg.zuDa.text.25", "Have your food/shopping delivered by a store or a friend/family member"), style);
+
+    addLikertItem('14',_T("weekly.EX.Qcov7.rg.QSBP.text.27", "Avoid seeing friends and family"), style);
+
+    addLikertItem('15',_T("weekly.EX.Qcov7.rg.fRla.text.29", "Avoid being in contact with people over 65 years old or with a chronic disease"), style);
+
+    addLikertItem('16',_T("weekly.EX.Qcov7.rg.h3fK.text.31", "Avoid being in contact with children"), style);
+
+    return editor.getItem();
+
+    }
+
+    getScaleOptions() {
+        return [
+            {
+                key: "1", content: new LanguageMap([
+                    ["id", "weekly.EX.Qcov7.rg.likert_1.option.0"],
+                    ["en", " Yes, I am following this measure now for the first time, or in a stricter way"],
+                ])
+            },
+            {
+                key: "2", content: new LanguageMap([
+                    ["id", "weekly.EX.Qcov7.rg.likert_1.option.1"],
+                    ["en", "No, I was already following this measure"],
+                ])
+            },
+            {
+                key: "0", content: new LanguageMap([
+                    ["id", "weekly.EX.Qcov7.rg.likert_1.option.2"],
+                    ["en", "No, I am not following this measure"],
+                ])
+            },
+            {
+                key: "3", content: new LanguageMap([
+                    ["id", "weekly.EX.Qcov7.rg.likert_1.option.3"],
+                    ["en", "Not applicable"],
+                ])
+            }
+        ];
+    }
+
+    getHelpGroupContent() {
+        return [
             text_why_asking("weekly.EX.Qcov7.helpGroup.text.0"),
             {
                 content: new LanguageMap([
@@ -3029,231 +3006,8 @@ const covidHabitsChange = (parentKey: string, isRequired?: boolean, keyOverride?
                 ]),
                 // style: [{ key: 'variant', value: 'p' }],
             },
-        ])
-    );
-
-
-    // RESPONSE PART
-    const likertOptions = [
-        {
-            key: "1", content: new LanguageMap([
-                ["id", "weekly.EX.Qcov7.rg.likert_1.option.0"],
-                ["en", " Yes, I am following this measure now for the first time, or in a stricter way"],
-            ])
-        },
-        {
-            key: "2", content: new LanguageMap([
-                ["id", "weekly.EX.Qcov7.rg.likert_1.option.1"],
-                ["en", "No, I was already following this measure"],
-            ])
-        },
-        {
-            key: "0", content: new LanguageMap([
-                ["id", "weekly.EX.Qcov7.rg.likert_1.option.2"],
-                ["en", "No, I am not following this measure"],
-            ])
-        },
-        {
-            key: "3", content: new LanguageMap([
-                ["id", "weekly.EX.Qcov7.rg.likert_1.option.3"],
-                ["en", "Not applicable"],
-            ])
-        }
-    ];
-
-    const rg = editor.addNewResponseComponent({ role: 'responseGroup' });
-    editor.addExistingResponseComponent({
-        role: 'text',
-        style: [{ key: 'className', value: 'mb-2' }],
-        content: generateLocStrings(
-            new LanguageMap([
-                ["id", "weekly.EX.Qcov7.rg.gU4U.text.0"],
-                ["en", "To be completed optionally"],
-            ])),
-    }, rg?.key);
-
-    editor.addExistingResponseComponent({
-        role: 'text',
-        style: [{ key: 'className', value: 'mb-1 fw-bold' }, { key: 'variant', value: 'h5' }],
-        content: generateLocStrings(
-            new LanguageMap([
-                ["id", "weekly.EX.Qcov7.rg.v1C0.text.1"],
-                ["en", 'Regularly wash or disinfect hands'],
-            ])),
-    }, rg?.key);
-    editor.addExistingResponseComponent(initLikertScaleItem(likertScaleKey + '_1', likertOptions), rg?.key);
-
-    editor.addExistingResponseComponent({
-        role: 'text',
-        style: [{ key: 'className', value: 'mb-1 border-top border-1 border-grey-7 pt-1 mt-2 fw-bold' }, { key: 'variant', value: 'h5' }],
-        content: generateLocStrings(
-            new LanguageMap([
-                ["id", "weekly.EX.Qcov7.rg.nEMR.text.3"],
-                ["en", 'Cough or sneeze into your elbow'],
-            ])),
-    }, rg?.key);
-    editor.addExistingResponseComponent(initLikertScaleItem(likertScaleKey + '_2', likertOptions), rg?.key);
-
-    editor.addExistingResponseComponent({
-        role: 'text',
-        style: [{ key: 'className', value: 'mb-1 border-top border-1 border-grey-7 pt-1 mt-2 fw-bold' }, { key: 'variant', value: 'h5' }],
-        content: generateLocStrings(
-            new LanguageMap([
-                ["id", "weekly.EX.Qcov7.rg.oTIp.text.5"],
-                ["en", 'Use a disposable tissue'],
-            ])),
-    }, rg?.key);
-    editor.addExistingResponseComponent(initLikertScaleItem(likertScaleKey + '_3', likertOptions), rg?.key);
-
-    editor.addExistingResponseComponent({
-        role: 'text',
-        style: [{ key: 'className', value: 'mb-1 border-top border-1 border-grey-7 pt-1 mt-2 fw-bold' }, { key: 'variant', value: 'h5' }],
-        content: generateLocStrings(
-            new LanguageMap([
-                ["id", "weekly.EX.Qcov7.rg.7w6F.text.7"],
-                ["en", "Wear a face mask indoors"],
-            ])),
-    }, rg?.key);
-    editor.addExistingResponseComponent(initLikertScaleItem(likertScaleKey + '_4a', likertOptions), rg?.key);
-
-    editor.addExistingResponseComponent({
-        role: 'text',
-        style: [{ key: 'className', value: 'mb-1 border-top border-1 border-grey-7 pt-1 mt-2 fw-bold' }, { key: 'variant', value: 'h5' }],
-        content: generateLocStrings(
-            new LanguageMap([
-                ["id", "weekly.EX.Qcov7.rg.vHvi.text.9"],
-                ["en", "Wear a face mask outdoors"],
-            ])),
-    }, rg?.key);
-    editor.addExistingResponseComponent(initLikertScaleItem(likertScaleKey + '_4b', likertOptions), rg?.key);
-
-    editor.addExistingResponseComponent({
-        role: 'text',
-        style: [{ key: 'className', value: 'mb-1 border-top border-1 border-grey-7 pt-1 mt-2 fw-bold' }, { key: 'variant', value: 'h5' }],
-        content: generateLocStrings(
-            new LanguageMap([
-                ["id", "weekly.EX.Qcov7.rg.ocTu.text.11"],
-                ["en", "Avoid shaking hands"],
-            ])),
-    }, rg?.key);
-    editor.addExistingResponseComponent(initLikertScaleItem(likertScaleKey + '_5', likertOptions), rg?.key);
-
-    editor.addExistingResponseComponent({
-        role: 'text',
-        style: [{ key: 'className', value: 'mb-1 border-top border-1 border-grey-7 pt-1 mt-2 fw-bold' }, { key: 'variant', value: 'h5' }],
-        content: generateLocStrings(
-            new LanguageMap([
-                ["id", "weekly.EX.Qcov7.rg.ioJs.text.13"],
-                ["en", "Stop greeting by hugging and/or kissing on both cheeks"],
-            ])),
-    }, rg?.key);
-    editor.addExistingResponseComponent(initLikertScaleItem(likertScaleKey + '_11', likertOptions), rg?.key);
-
-    editor.addExistingResponseComponent({
-        role: 'text',
-        style: [{ key: 'className', value: 'mb-1 border-top border-1 border-grey-7 pt-1 mt-2 fw-bold' }, { key: 'variant', value: 'h5' }],
-        content: generateLocStrings(
-            new LanguageMap([
-                ["id", "weekly.EX.Qcov7.rg.ujsK.text.15"],
-                ["en", "Limit your use of public transport"],
-            ])),
-    }, rg?.key);
-    editor.addExistingResponseComponent(initLikertScaleItem(likertScaleKey + '_6', likertOptions), rg?.key);
-
-
-    editor.addExistingResponseComponent({
-        role: 'text',
-        style: [{ key: 'className', value: 'mb-1 border-top border-1 border-grey-7 pt-1 mt-2 fw-bold' }, { key: 'variant', value: 'h5' }],
-        content: generateLocStrings(
-            new LanguageMap([
-                ["id", "weekly.EX.Qcov7.rg.Ijdr.text.17"],
-                ["en", "Avoid busy places and gatherings (supermarket, cinema, stadium)"],
-            ])),
-    }, rg?.key);
-    editor.addExistingResponseComponent(initLikertScaleItem(likertScaleKey + '_7', likertOptions), rg?.key);
-
-
-    editor.addExistingResponseComponent({
-        role: 'text',
-        style: [{ key: 'className', value: 'mb-1 border-top border-1 border-grey-7 pt-1 mt-2 fw-bold' }, { key: 'variant', value: 'h5' }],
-        content: generateLocStrings(
-            new LanguageMap([
-                ["id", "weekly.EX.Qcov7.rg.t8MS.text.19"],
-                ["en", "Stay at home"],
-            ])),
-    }, rg?.key);
-    editor.addExistingResponseComponent(initLikertScaleItem(likertScaleKey + '_8', likertOptions), rg?.key);
-
-    editor.addExistingResponseComponent({
-        role: 'text',
-        style: [{ key: 'className', value: 'mb-1 border-top border-1 border-grey-7 pt-1 mt-2 fw-bold' }, { key: 'variant', value: 'h5' }],
-        content: generateLocStrings(
-            new LanguageMap([
-                ["id", "weekly.EX.Qcov7.rg.z4bE.text.21"],
-                ["en", "Telework or increase your number of telework days"],
-            ])),
-    }, rg?.key);
-    editor.addExistingResponseComponent(initLikertScaleItem(likertScaleKey + '_9', likertOptions), rg?.key);
-
-    editor.addExistingResponseComponent({
-        role: 'text',
-        style: [{ key: 'className', value: 'mb-1 border-top border-1 border-grey-7 pt-1 mt-2 fw-bold' }, { key: 'variant', value: 'h5' }],
-        content: generateLocStrings(
-            new LanguageMap([
-                ["id", "weekly.EX.Qcov7.rg.Koue.text.23"],
-                ["en", "Avoid travel outside your own country or region"],
-            ])),
-    }, rg?.key);
-    editor.addExistingResponseComponent(initLikertScaleItem(likertScaleKey + '_10', likertOptions), rg?.key);
-
-    editor.addExistingResponseComponent({
-        role: 'text',
-        style: [{ key: 'className', value: 'mb-1 border-top border-1 border-grey-7 pt-1 mt-2 fw-bold' }, { key: 'variant', value: 'h5' }],
-        content: generateLocStrings(
-            new LanguageMap([
-                ["id", "weekly.EX.Qcov7.rg.zuDa.text.25"],
-                ["en", "Have your food/shopping delivered by a store or a friend/family member"],
-            ])),
-    }, rg?.key);
-    editor.addExistingResponseComponent(initLikertScaleItem(likertScaleKey + '_13', likertOptions), rg?.key);
-
-    editor.addExistingResponseComponent({
-        role: 'text',
-        style: [{ key: 'className', value: 'mb-1 border-top border-1 border-grey-7 pt-1 mt-2 fw-bold' }, { key: 'variant', value: 'h5' }],
-        content: generateLocStrings(
-            new LanguageMap([
-                ["id", "weekly.EX.Qcov7.rg.QSBP.text.27"],
-                ["en", "Avoid seeing friends and family"],
-            ])),
-    }, rg?.key);
-    editor.addExistingResponseComponent(initLikertScaleItem(likertScaleKey + '_14', likertOptions), rg?.key);
-
-    editor.addExistingResponseComponent({
-        role: 'text',
-        style: [{ key: 'className', value: 'mb-1 border-top border-1 border-grey-7 pt-1 mt-2 fw-bold' }, { key: 'variant', value: 'h5' }],
-        content: generateLocStrings(
-            new LanguageMap([
-                ["id", "weekly.EX.Qcov7.rg.fRla.text.29"],
-                ["en", "Avoid being in contact with people over 65 years old or with a chronic disease"],
-            ])),
-    }, rg?.key);
-    editor.addExistingResponseComponent(initLikertScaleItem(likertScaleKey + '_15', likertOptions), rg?.key);
-
-    editor.addExistingResponseComponent({
-        role: 'text',
-        style: [{ key: 'className', value: 'mb-1 border-top border-1 border-grey-7 pt-1 mt-2 fw-bold' }, { key: 'variant', value: 'h5' }],
-        content: generateLocStrings(
-            new LanguageMap([
-                ["id", "weekly.EX.Qcov7.rg.h3fK.text.31"],
-                ["en", "Avoid being in contact with children"],
-            ])),
-    }, rg?.key);
-    editor.addExistingResponseComponent(initLikertScaleItem(likertScaleKey + '_16', likertOptions), rg?.key);
-
-    // VALIDATIONs
-    // None
-
-    return editor.getItem();
+        ];
+    }
 }
 
 /**
@@ -3263,26 +3017,98 @@ const covidHabitsChange = (parentKey: string, isRequired?: boolean, keyOverride?
  * @param isRequired if true adds a default "hard" validation to the question to check if it has a response.
  * @param keyOverride use this to override the default key for this item (only last part of the key, parent's key is not influenced).
  */
-const causeOfSymptoms = (parentKey: string, isRequired?: boolean, keyOverride?: string): SurveyItem => {
-    const defaultKey = 'Q11';
-    const itemKey = [parentKey, keyOverride ? keyOverride : defaultKey].join('.');
-    const editor = new ItemEditor(undefined, { itemKey: itemKey, isGroup: false });
-    editor.setVersion(1);
+export class CauseOfSymptoms extends Item {
 
-    // QUESTION TEXT
-    editor.setTitleComponent(
-        generateTitleComponent(new LanguageMap([
-            ["id", "weekly.EX.Q11.title.0"],
-            ["en", "What do you think is causing your symptoms?"],
-        ]))
-    );
+    constructor(parentKey: string, isRequired?: boolean, keyOverride?:string) {
+        super(parentKey, keyOverride ? keyOverride: 'Q11');
+        this.isRequired = isRequired;
+    }
 
-    // CONDITION
-    // None
+    buildItem() {
+        return SurveyItems.singleChoice({
+            parentKey: this.parentKey,
+            itemKey: this.itemKey,
+            isRequired: this.isRequired,
+            //condition: this.getCondition(),
+            questionText: new LanguageMap([
+                ["id", "weekly.EX.Q11.title.0"],
+                ["en", "What do you think is causing your symptoms?"],
+            ]),
+            //helpGroupContent: this.getHelpGroupContent(),
+            /*bottomDisplayCompoments: [
+                ComponentGenerators.text({
+                    'content': new LanguageMap([
+                    ])
+                })
+            ],
+            */
+            responseOptions: this.getResponses()
+        });
+    }
 
-    // INFO POPUP
-    editor.setHelpGroupComponent(
-        generateHelpGroupComponent([
+    getResponses() {
+        return  [
+            {
+                key: '0', role: 'option',
+                content: new LanguageMap([
+                    ["id", "weekly.EX.Q11.rg.scg.option.0"],
+                    ["en", "Flu or flu-like illness"],
+                ])
+            },
+            {
+                key: '9', role: 'option',
+                content: new LanguageMap([
+                    ["id", "weekly.EX.Q11.rg.scg.option.1"],
+                    ["en", "New coronavirus (COVID-19)"],
+                ])
+            },
+            {
+                key: '1', role: 'option',
+                content: new LanguageMap([
+                    ["id", "weekly.EX.Q11.rg.scg.option.2"],
+                    ["en", "Common cold"],
+                ])
+            },
+            {
+                key: '2', role: 'option',
+                content: new LanguageMap([
+                    ["id", "weekly.EX.Q11.rg.scg.option.3"],
+                    ["en", "Allergy/hay fever"],
+                ])
+            },
+            {
+                key: '6', role: 'option',
+                content: new LanguageMap([
+                    ["id", "weekly.EX.Q11.rg.scg.option.4"],
+                    ["en", "Ashtma"],
+                ])
+            },
+            {
+                key: '3', role: 'option',
+                content: new LanguageMap([
+                    ["id", "weekly.EX.Q11.rg.scg.option.5"],
+                    ["en", "Gastroenteritis complaints or gastric flu"],
+                ])
+            },
+            {
+                key: '4', role: 'option',
+                content: new LanguageMap([
+                    ["id", "weekly.EX.Q11.rg.scg.option.6"],
+                    ["en", "Other"],
+                ])
+            },
+            {
+                key: '5', role: 'option',
+                content: new LanguageMap([
+                    ["id", "weekly.EX.Q11.rg.scg.option.7"],
+                    ["en", "I don't know"],
+                ])
+            },
+        ];
+    }
+
+    getHelpGroupContent() {
+        return [
             {
                 content: new LanguageMap([
                     ["id", "weekly.EX.Q11.helpGroup.text.0"],
@@ -3311,116 +3137,6 @@ const causeOfSymptoms = (parentKey: string, isRequired?: boolean, keyOverride?: 
                 ]),
                 // style: [{ key: 'variant', value: 'p' }],
             },
-        ])
-    );
-
-    // RESPONSE PART
-    const rg = editor.addNewResponseComponent({ role: 'responseGroup' });
-    const rg_inner = initSingleChoiceGroup(singleChoiceKey, [
-        {
-            key: '0', role: 'option',
-            content: new LanguageMap([
-                ["id", "weekly.EX.Q11.rg.scg.option.0"],
-                ["en", "Flu or flu-like illness"],
-            ])
-        },
-        {
-            key: '9', role: 'option',
-            content: new LanguageMap([
-                ["id", "weekly.EX.Q11.rg.scg.option.1"],
-                ["en", "New coronavirus (COVID-19)"],
-            ])
-        },
-        {
-            key: '1', role: 'option',
-            content: new LanguageMap([
-                ["id", "weekly.EX.Q11.rg.scg.option.2"],
-                ["en", "Common cold"],
-            ])
-        },
-        {
-            key: '2', role: 'option',
-            content: new LanguageMap([
-                ["id", "weekly.EX.Q11.rg.scg.option.3"],
-                ["en", "Allergy/hay fever"],
-            ])
-        },
-        {
-            key: '6', role: 'option',
-            content: new LanguageMap([
-                ["id", "weekly.EX.Q11.rg.scg.option.4"],
-                ["en", "Ashtma"],
-            ])
-        },
-        {
-            key: '3', role: 'option',
-            content: new LanguageMap([
-                ["id", "weekly.EX.Q11.rg.scg.option.5"],
-                ["en", "Gastroenteritis complaints or gastric flu"],
-            ])
-        },
-        {
-            key: '4', role: 'option',
-            content: new LanguageMap([
-                ["id", "weekly.EX.Q11.rg.scg.option.6"],
-                ["en", "Other"],
-            ])
-        },
-        {
-            key: '5', role: 'option',
-            content: new LanguageMap([
-                ["id", "weekly.EX.Q11.rg.scg.option.7"],
-                ["en", "I don't know"],
-            ])
-        },
-    ]);
-    editor.addExistingResponseComponent(rg_inner, rg?.key);
-
-    // VALIDATIONs
-    if (isRequired) {
-        editor.addValidation({
-            key: 'r1',
-            type: 'hard',
-            rule: expWithArgs('hasResponse', itemKey, responseGroupKey)
-        });
+        ];
     }
-
-    return editor.getItem();
-}
-
-export const WeeklyQuestions = {
-    causeOfSymptoms,
-    covidHabitsChange,
-    dailyRoutine,
-    dailyRoutineToday,
-    dailyRoutineDaysMissed,
-    feverGroup: {
-        all: getFullFeverGroup,
-        feverStart,
-        feverDevelopedSuddenly,
-        didUMeasureTemperature,
-        highestTemprerature,
-    },
-    consentForMore,
-    hasMoreGroup,
-    fluTest,
-    hasSymptomsGroup,
-    hospitalized,
-    pcrHouseholdContact,
-    pcrTestedContact,
-    resultFluTest,
-    resultPCRTest,
-    resultAntigenicTest,
-    resultRapidAntigenicTest,
-    sameIllnes,
-    symptomImpliedCovidTest,
-    covidTestType,
-    symptomps,
-    symptomsStart,
-    symptomsEnd,
-    symptomsSuddenlyDeveloped,
-    tookMedication,
-    visitedMedicalService,
-    visitedMedicalServiceWhen,
-    visitedNoMedicalService
 }

@@ -2,12 +2,17 @@ import { ItemEditor } from "case-editor-tools/surveys/survey-editor/item-editor"
 import { expWithArgs } from "case-editor-tools/surveys/utils/simple-generators";
 import { ComponentGenerators } from "case-editor-tools/surveys/utils/componentGenerators";
 import { LanguageMap } from "../languages"
-import { responseGroupKey, singleChoiceKey } from "case-editor-tools/constants/key-definitions";
+import { responseGroupKey, singleChoiceKey, multipleChoiceKey } from "case-editor-tools/constants/key-definitions";
 
 /**
  * Single choice key prefix (rg.scg)
  */
 export const singleChoicePrefix = [responseGroupKey, singleChoiceKey].join('.');
+
+/**
+ * Multiple choice key prefix (rg.scg)
+ */
+ export const MultipleChoicePrefix = [responseGroupKey, multipleChoiceKey].join('.');
 
 /**
  * Validation constraint
