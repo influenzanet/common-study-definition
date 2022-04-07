@@ -1,11 +1,8 @@
-import { LanguageMap, _T } from "../languages"
-import { SurveyItem } from "survey-engine/lib/data_types";
+import { _T } from "../languages"
 import { Group } from "case-editor-tools/surveys/types";
-import { ItemEditor } from "case-editor-tools/surveys/survey-editor/item-editor";
-import { expWithArgs, generateHelpGroupComponent, generateLocStrings, generateTitleComponent } from "case-editor-tools/surveys/utils/simple-generators";
-import { multipleChoiceKey, responseGroupKey, singleChoiceKey } from "case-editor-tools/constants/key-definitions";
+import { expWithArgs} from "case-editor-tools/surveys/utils/simple-generators";
 import { ComponentGenerators } from "case-editor-tools/surveys/utils/componentGenerators";
-import { Item, NumericInputProps } from "case-editor-tools/surveys/types";
+import { Item } from "case-editor-tools/surveys/types";
 import { SurveyItems } from 'case-editor-tools/surveys';
 import { singleChoicePrefix, text_how_answer, text_select_all_apply, text_why_asking } from "./helpers";
 import { ParticipantFlags } from "../participantFlags";
@@ -53,7 +50,7 @@ export class VacStart extends Item {
             isRequired: this.isRequired,
             condition: this.getCondition(),
             questionText: _T(
-                "vaccination.Q0.title.0", 
+                "vaccination.Q0.title.0",
                 "Four weeks ago you received a questionnaire about your vaccination status.  This new questionnaire is to monitor any further changes. Select the option that applies to you."
                 ),
             //helpGroupContent: this.getHelpGroupContent(),
@@ -78,7 +75,7 @@ export class VacStart extends Item {
             {
                 key: '1', role: 'option',
                 content: _T(
-                    "vaccination.Q0.rg.scg.option.0", 
+                    "vaccination.Q0.rg.scg.option.0",
                     "In the meantime I received a new vaccine dose, or a new invitation to be vaccinated. (**)")
             },
             {
@@ -175,7 +172,7 @@ export class FluVaccineLastSeason extends Item {
             text_why_asking("vaccination.HV.Q9.helpGroup.text.0"),
             {
                 content: _T(
-                    "vaccination.HV.Q9.helpGroup.text.1", 
+                    "vaccination.HV.Q9.helpGroup.text.1",
                     "We would like to study what level of protection the vaccine provides. We would also like to know if there is any protection from vaccines received in previous years."),
                 style: [{ key: 'variant', value: 'p' }],
             },
