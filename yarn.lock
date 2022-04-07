@@ -7,10 +7,10 @@
   resolved "https://registry.yarnpkg.com/@types/node/-/node-16.11.26.tgz#63d204d136c9916fb4dcd1b50f9740fe86884e47"
   integrity sha512-GZ7bu5A6+4DtG7q9GsoHXy3ALcgeIHP4NnL0Vv2wu0uUB/yQex26v0tf6/na1mm0+bS9Uw+0DFex7aaKr2qawQ==
 
-case-editor-tools@^1.0.0-beta.12:
-  version "1.0.5"
-  resolved "https://registry.yarnpkg.com/case-editor-tools/-/case-editor-tools-1.0.5.tgz#730e436dab1ac5ea35f0184fe2c4ee29bef2c103"
-  integrity sha512-WzQnCRELnYlekHe5hATFUiUtsUV9IGKlO9IXxRkA329M3etZJOpMGQCEGOOZLXXuFw/h5ZQXIpmr7GAT1eFK0g==
+case-editor-tools@^1.0.7:
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/case-editor-tools/-/case-editor-tools-1.0.7.tgz#d1deb0f13e38228dcadd9c5f6b081cd1129a699d"
+  integrity sha512-R7sG6+/eYu/+Xt7Au35h1EVQFM2J41Z9WeivJ+7aIv5j274o//LniKoGsjCz4buREWTaDm7Luyz5Rq72rpB+sw==
   dependencies:
     survey-engine "^1.1.3"
 
@@ -18,13 +18,6 @@ moment@2.24.0:
   version "2.24.0"
   resolved "https://registry.yarnpkg.com/moment/-/moment-2.24.0.tgz#0d055d53f5052aa653c9f6eb68bb5d12bf5c2b5b"
   integrity sha512-bV7f+6l2QigeBBZSM/6yTNq4P2fNpSWj/0e7jQcy87A8e7o2nAfP/34/2ky5Vw4B9S446EtIhodAzkFCcR4dQg==
-
-survey-engine@^0.10.0:
-  version "0.10.0"
-  resolved "https://registry.yarnpkg.com/survey-engine/-/survey-engine-0.10.0.tgz#e9c9cdb2de38c33a9ec824d180b611d0d1321d6e"
-  integrity sha512-xGgbbLPZVeG7N2NbnWVnOx3bRTG0gB8PWupQnwj5KVJJQB9+voXZXK3671qwR1NAiUlVwD3rd2KTnTqH90DK4g==
-  dependencies:
-    moment "2.24.0"
 
 survey-engine@^1.1.3:
   version "1.1.4"
