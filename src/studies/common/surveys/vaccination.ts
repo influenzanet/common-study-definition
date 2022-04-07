@@ -1,80 +1,76 @@
-import { LanguageMap } from "../languages"
-import { SurveyItem, Expression, ExpressionName, ExpressionArg, SurveyGroupItem } from "survey-engine/lib/data_types";
-import { SurveyDefinition } from "case-editor-tools/surveys/types";
-import { VaccinationQuestions as CommonPoolVaccination } from "../questionPools/vaccinationQuestions";
+import { _T } from "../languages"
+import { ExpressionName, SurveyGroupItem } from "survey-engine/data_types";
+import {  SurveyDefinition } from "case-editor-tools/surveys/types";
+import  * as pool  from "../questionPools/vaccinationQuestions";
+import { ItemBuilder } from "../../../tools/items";
+export class VaccinationDef extends SurveyDefinition {
 
-class VaccinationDef extends SurveyDefinition {
-
-    items: SurveyItem[];
+    items: ItemBuilder[];
 
     constructor() {
         super({
             surveyKey: 'vaccination',
-            name: new LanguageMap([
-                ["id", "vaccination.name.0"],
-                ["en", "Vaccination questionnaire"],
-            ]),
-            description: new LanguageMap([
-                ["id", "vaccination.description.0"],
-                ["en", "The purpose of the vaccination questionnaire is to find out more about protection given by the vaccine and monitor vaccination uptake in Italy."],
-            ]),
-            durationText: new LanguageMap([
-                ["id", "vaccination.typicalDuration.0"],
-                ["en", "Duration 5-10 minutes"],
-            ])
+            name: _T( "vaccination.name.0", "Vaccination questionnaire"),
+            description: _T(
+                "vaccination.description.0",
+                 "The purpose of the vaccination questionnaire is to find out more about protection given by the vaccine and monitor vaccination uptake in Italy.",
+            ),
+            durationText: _T(
+                "vaccination.typicalDuration.0", "Duration 5-10 minutes"
+            )
         });
 
         this.items = [];
 
         const rootKey = this.key
 
-        const Q_vacStart = CommonPoolVaccination.vacStart(rootKey, true);
+        const Q_vacStart = new pool.VacStart(rootKey, true);
         this.items.push(Q_vacStart);
 
         // // -------> VACCINATION GROUP
-        const hasVaccineGroup = CommonPoolVaccination.hasVacGroup(rootKey, Q_vacStart.key);
+        const hasVaccineGroup = pool.hasVacGroup(rootKey, Q_vacStart.key);
         const hasVaccineGroupKey = hasVaccineGroup.key;
 
-        const Q_flu_vaccine_last_season = CommonPoolVaccination.fluVaccineLastSeason(hasVaccineGroup.key, true);
-        hasVaccineGroup.addItem(Q_flu_vaccine_last_season);
+        const Q_flu_vaccine_last_season = new pool.FluVaccineLastSeason(hasVaccineGroup.key, true);
+        hasVaccineGroup.addItem(Q_flu_vaccine_last_season.get());
 
-        const Q_flu_vaccine_this_season = CommonPoolVaccination.fluVaccineThisSeason(hasVaccineGroup.key, true);
-        hasVaccineGroup.addItem(Q_flu_vaccine_this_season);
+        const Q_flu_vaccine_this_season = new pool.FluVaccineThisSeason(hasVaccineGroup.key, true);
+        hasVaccineGroup.addItem(Q_flu_vaccine_this_season.get());
 
-        const Q_flu_vaccine_this_season_when = CommonPoolVaccination.fluVaccineThisSeasonWhen(hasVaccineGroup.key, Q_flu_vaccine_this_season.key, true);
-        hasVaccineGroup.addItem(Q_flu_vaccine_this_season_when);
+        const Q_flu_vaccine_this_season_when = new pool.FluVaccineThisSeasonWhen(hasVaccineGroup.key, Q_flu_vaccine_this_season.key, true);
+        hasVaccineGroup.addItem(Q_flu_vaccine_this_season_when.get());
 
-        const Q_flu_vaccine_this_season_reasons_for = CommonPoolVaccination.fluVaccineThisSeasonReasonFor(hasVaccineGroup.key, Q_flu_vaccine_this_season.key, true);
-        hasVaccineGroup.addItem(Q_flu_vaccine_this_season_reasons_for);
+        const Q_flu_vaccine_this_season_reasons_for = new pool.FluVaccineThisSeasonReasonFor(hasVaccineGroup.key, Q_flu_vaccine_this_season.key, true);
+        hasVaccineGroup.addItem(Q_flu_vaccine_this_season_reasons_for.get());
 
-        const Q_flu_vaccine_this_season_reasons_against = CommonPoolVaccination.fluVaccineThisSeasonReasonAgainst(hasVaccineGroup.key, Q_flu_vaccine_this_season.key, true);
-        hasVaccineGroup.addItem(Q_flu_vaccine_this_season_reasons_against);
+        const Q_flu_vaccine_this_season_reasons_against = new pool.FluVaccineThisSeasonReasonAgainst(hasVaccineGroup.key, Q_flu_vaccine_this_season.key, true);
+        hasVaccineGroup.addItem(Q_flu_vaccine_this_season_reasons_against.get());
 
-        const Q_vac = CommonPoolVaccination.vac(hasVaccineGroupKey, true);
-        hasVaccineGroup.addItem(Q_vac);
+        const Q_covidVac = new pool.CovidVac(hasVaccineGroupKey, true);
+        hasVaccineGroup.addItem(Q_covidVac.get());
 
-        const Q_vaccineBrand = CommonPoolVaccination.vaccineBrand(hasVaccineGroupKey, Q_vac.key, true);
-        hasVaccineGroup.addItem(Q_vaccineBrand);
+        const Q_vaccineBrand = new pool.CovidVaccineBrand(hasVaccineGroupKey, Q_covidVac.key, true);
+        hasVaccineGroup.addItem(Q_vaccineBrand.get());
 
-        const Q_vaccineShots = CommonPoolVaccination.vaccineShots(hasVaccineGroupKey, Q_vac.key, true);
-        hasVaccineGroup.addItem(Q_vaccineShots);
+        const Q_vaccineShots = new pool.CovidVaccineShots(hasVaccineGroupKey, Q_covidVac.key, true);
+        hasVaccineGroup.addItem(Q_vaccineShots.get());
 
-        const Q_dateLastVaccine = CommonPoolVaccination.dateLastVaccine(hasVaccineGroupKey, Q_vac.key, Q_vaccineShots.key, true);
-        hasVaccineGroup.addItem(Q_dateLastVaccine);
+        const Q_dateLastVaccine = new pool.CovidDateLastVaccine(hasVaccineGroupKey, Q_covidVac.key, true);
+        hasVaccineGroup.addItem(Q_dateLastVaccine.get());
 
-        const Q_secondShotPlan = CommonPoolVaccination.secondShotPlan(hasVaccineGroupKey, Q_vac.key, Q_vaccineShots.key, true);
-        hasVaccineGroup.addItem(Q_secondShotPlan);
+        const Q_secondShotPlan = new pool.CovidSecondShotPlan(hasVaccineGroupKey, Q_covidVac.key, Q_vaccineShots.key, true);
+        hasVaccineGroup.addItem(Q_secondShotPlan.get());
 
-        const Q_secondShotContra = CommonPoolVaccination.secondShotContra(hasVaccineGroupKey, Q_vac.key, Q_secondShotPlan.key, true);
-        hasVaccineGroup.addItem(Q_secondShotContra);
+        const Q_secondShotContra = new pool.CovidSecondShotAgainstReason(hasVaccineGroupKey, Q_covidVac.key, Q_secondShotPlan.key, true);
+        hasVaccineGroup.addItem(Q_secondShotContra.get());
 
-        const Q_vaccinePro = CommonPoolVaccination.vaccinePro(hasVaccineGroupKey, Q_vac.key, true);
-        hasVaccineGroup.addItem(Q_vaccinePro);
+        const Q_vaccinePro = new pool.CovidVaccineProReasons(hasVaccineGroupKey, Q_covidVac.key, true);
+        hasVaccineGroup.addItem(Q_vaccinePro.get());
 
-        const Q_vaccineContra = CommonPoolVaccination.vaccineContra(hasVaccineGroupKey, Q_vac.key, true);
-        hasVaccineGroup.addItem(Q_vaccineContra);
+        const Q_vaccineContra = new pool.CovidVaccineAgainstReasons(hasVaccineGroupKey, Q_covidVac.key, true);
+        hasVaccineGroup.addItem(Q_vaccineContra.get());
 
-        this.items.push(hasVaccineGroup.get());
+        this.items.push(hasVaccineGroup);
 
         const prefillRules = []
         for (const item of (<SurveyGroupItem>hasVaccineGroup.get()).items) {
@@ -94,9 +90,7 @@ class VaccinationDef extends SurveyDefinition {
 
     buildSurvey() {
         for (const item of this.items) {
-            this.addItem(item);
+            this.addItem(item.get());
         }
     }
 }
-
-export const Vaccination = new VaccinationDef();

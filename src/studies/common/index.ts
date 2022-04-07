@@ -1,17 +1,45 @@
 import { Study } from "case-editor-tools/types/study";
-import { studyRules } from "./rules";
-import { Intake } from "./surveys/intake";
-import { Weekly } from "./surveys/weekly";
-import { Vaccination } from "./surveys/vaccination";
+import { StudyRulesBuilder } from "./rules";
+import { IntakeDef } from "./surveys/intake";
+import { WeeklyDef } from "./surveys/weekly";
+import { VaccinationDef } from "./surveys/vaccination";
+import { SurveyDefinition } from "case-editor-tools/surveys/types";
+import { StudyRules } from "case-editor-tools/types/studyRules";
+import { StudyBuilder } from "../../tools/study";
+import { SurveyKeys } from "./keys";
 
+export class CommonStudyBuilder extends StudyBuilder {
 
-export const CommonStudy: Study = {
-    studyKey: 'common',
-    outputFolderName: 'common',
-    surveys: [
-        Intake,
-        Weekly,
-        Vaccination
-    ],
-    studyRules: studyRules,
+    constructor() {
+        super('common');
+
+    }
+
+    build() {
+
+        const intake = new IntakeDef();
+        const weekly = new WeeklyDef();
+        const vacc = new VaccinationDef();
+
+        this.surveys = [
+            intake,
+            weekly,
+            vacc
+        ];
+
+        // Keys inform the rules builder of the key of all dependent questions
+        const keys: SurveyKeys = {
+            intakeKey: intake.key,
+            intakeBirthDateKey: intake.getBirthDateKey(),
+            weeklyKey: weekly.key,
+            weeklySameIllnessKey: weekly.getSameIllnessKey(),
+            vacKey: vacc.key,
+        };
+
+        const builder = new StudyRulesBuilder(keys);
+
+        this.studyRules = builder.build();
+
+    }
+
 }
