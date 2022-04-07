@@ -7,29 +7,7 @@ import { SurveyItems } from 'case-editor-tools/surveys';
 import { singleChoicePrefix, text_how_answer, text_select_all_apply, text_why_asking } from "./helpers";
 import { ParticipantFlags } from "../participantFlags";
 
-const ResponseEncoding = {
-    vacstart: {
-        'nothing_changed': '2'
-    },
-    flu_vaccine_season: {
-        'yes': '0',
-        'no': '1',
-    },
-    flu_vaccine_last: {
-        'yes': '0',
-        'no':'1'
-    },
-    covid_vac: {
-        'yes': '1',
-        'no': '0',
-    },
-    covid_vac_shots: {
-        'one': '1',
-        'dontknow': '99',
-    }
-
-};
-
+import { VaccinationResponses as ResponseEncoding } from "../responses/vaccination";
 
 export class VacStart extends Item {
 
@@ -99,7 +77,7 @@ export class VacStart extends Item {
  * @param keyVacStart reference to the vac survey
  * @param keyOverride use this to override the default key for this item (only last part of the key, parent's key is not influenced).
  */
-const hasVacGroup = (parentKey: string, keyVacStart: string, keyOverride?: string): Group => {
+export const hasVacGroup = (parentKey: string, keyVacStart: string, keyOverride?: string): Group => {
 
     const flagVac = ParticipantFlags.vaccinationCompleted;
     class HasVacGroup extends Group {
@@ -584,7 +562,8 @@ export class CovidVac extends Item {
 /**
  * Covid VACCINE BRAND: Which vaccine was provided
  *
- * @param parentKey full key path of the parent item, required to genrate this item's unique key (e.g. `<surveyKey>.<groupKey>`).
+ * @param parentKey full key path of the parent item, required to generate this item's unique key (e.g. `<surveyKey>.<groupKey>`).
+ * @param keyVac Covid vaccination question key
  * @param isRequired if true adds a default "hard" validation to the question to check if it has a response.
  * @param keyOverride use this to override the default key for this item (only last part of the key, parent's key is not influenced).
  */
@@ -655,6 +634,7 @@ export class CovidVaccineBrand extends SubVaccineQuestion {
  * VACCINE SHOTS: How many times has the participant been vaccinated
  *
  * @param parentKey full key path of the parent item, required to genrate this item's unique key (e.g. `<surveyKey>.<groupKey>`).
+ * @param keyVac Covid vaccination question key
  * @param isRequired if true adds a default "hard" validation to the question to check if it has a response.
  * @param keyOverride use this to override the default key for this item (only last part of the key, parent's key is not influenced).
  */

@@ -9,70 +9,13 @@ import { MultipleChoicePrefix, singleChoicePrefix, text_how_answer, text_select_
 import { SurveyItems } from 'case-editor-tools/surveys';
 import { ComponentGenerators } from "case-editor-tools/surveys/utils/componentGenerators";
 import { StudyEngine as se } from "case-editor-tools/expression-utils/studyEngineExpressions";
-import { Expression } from "survey-engine/lib/data_types";
 
-const ResponseEncoding = {
-    symptoms: {
-        no_symptom: '0',
-        fever: '1',
-    },
-    same_illness: {
-        'yes': '0',
-        'no': '1',
-        'dontknow': '2',
-        'notapply': '9'
-    },
-    symptoms_start: {
-        'date_input': '0',
-        'dont_know': '1'
-    },
-    measure_temp: {
-        'yes': '0',
-        'no':'1',
-        'dont_know': '2'
-    },
-    consent_more: {
-        "yes": "1",
-        "no": "0"
-    },
-    symptom_test: {
-        "yes": "1",
-        "not_yet": "2",
-        "no_wont": "3",
-        "no": "0"
-    },
-    test_type: {
-        "pcr": "1",
-        "sero": "2",
-        "antigenic": "3",
-        "antigenic_nasal": "4"
-    },
-    flu_test: {
-        "yes": "1",
-        "yes_antigenic": "5",
-        "plan": "3",
-        "wontgo": "4",
-        "no": "0"
-    },
-    visit_medical: {
-        "no": "0",
-        "gp": "1",
-        "hospital": "2",
-        "emergency": "3",
-        "other": "4",
-        "plan": "5"
-    },
-    daily_routine: {
-        "no": "0",
-        "yes": "1",
-        "off": "2"
-    }
-};
+import { WeeklyResponses as ResponseEncoding } from "../responses/weekly";
 
 /**
  * SYMPTOMS: multiple choice question about allergies
  *
- * @param parentKey full key path of the parent item, required to genrate this item's unique key (e.g. `<surveyKey>.<groupKey>`).
+ * @param parentKey full key path of the parent item, required to generate this item's unique key (e.g. `<surveyKey>.<groupKey>`).
  * @param isRequired if true adds a default "hard" validation to the question to check if it has a response.
  * @param keyOverride use this to override the default key for this item (only last part of the key, parent's key is not influenced).
  */
@@ -275,7 +218,7 @@ export class Symptoms extends Item {
  * @param keySymptomsQuestion reference to the symptom survey
  * @param keyOverride use this to override the default key for this item (only last part of the key, parent's key is not influenced).
  */
-class HasSymptomsGroup extends Group {
+export class SymptomsGroup extends Group {
 
     keySymptomsQuestion: string;
 
@@ -283,8 +226,9 @@ class HasSymptomsGroup extends Group {
         return se.responseHasOnlyKeysOtherThan(this.keySymptomsQuestion, MultipleChoicePrefix, ResponseEncoding.symptoms.no_symptom);
     }
 
-    constructor(parentKey: string, keySymptomsQuestion: string, defaultKey: string) {
-        super(parentKey, defaultKey);
+    constructor(parentKey: string, keySymptomsQuestion: string, defaultKey?: string) {
+
+        super(parentKey, defaultKey ? defaultKey : 'HS');
         this.keySymptomsQuestion = keySymptomsQuestion;
         this.groupEditor.setCondition(this.getCondition());
     }
@@ -372,6 +316,126 @@ export class SameIllnes extends Item {
                 content: _T("weekly.HS.Q2.helpGroup.text.3", "If you think that the complaints you are indicating today are caused by the same infection or the same problem (the same period during which you experienced the complaints), answer 'yes'."),
             },
         ];
+    }
+}
+
+
+/**
+ * PCR TESTED CONTACTS COVID-19: single choice question about contact with PCR tested Covid19 patients
+ *
+ * @param parentKey full key path of the parent item, required to generate this item's unique key (e.g. `<surveyKey>.<groupKey>`).
+ * @param isRequired if true adds a default "hard" validation to the question to check if it has a response.
+ * @param keyOverride use this to override the default key for this item (only last part of the key, parent's key is not influenced).
+ */
+ export class PcrTestedContact extends Item {
+
+    constructor(parentKey: string, isRequired?: boolean, keyOverride?:string) {
+        super(parentKey, keyOverride ? keyOverride: 'Qcov3');
+        this.isRequired = isRequired;
+    }
+
+    buildItem() {
+        return SurveyItems.singleChoice({
+            parentKey: this.parentKey,
+            itemKey: this.itemKey,
+            isRequired: this.isRequired,
+            //condition: this.getCondition(),
+            questionText: _T(
+                "weekly.HS.Qcov3.title.0",
+                 "In the 14 days before your symptoms started, have you been in close contact with someone for whom an antigenic or PCR test has confirmed that they have COVID-19?"
+            ),
+            helpGroupContent: this.getHelpGroupContent(),
+            responseOptions: this.getResponses()
+        });
+    }
+
+    getResponses() {
+        const codes = ResponseEncoding.pcr_contacts;
+        return [
+            {
+                key: codes.yes, role: 'option', content: _T("weekly.HS.Qcov3.rg.scg.option.0", "Yes")
+            },
+            {
+                key: codes.no, role: 'option',
+                content: _T( "weekly.HS.Qcov3.rg.scg.option.1",  "No")
+            },
+            {
+                key: codes.dont_know, role: 'option',
+                content: _T( "weekly.HS.Qcov3.rg.scg.option.2",  "I don’t know/can’t remember")
+            },
+        ];
+    }
+
+    getHelpGroupContent() {
+        return [
+            text_why_asking("weekly.HS.Qcov3.helpGroup.text.0"),
+            {
+                content: _T( "weekly.HS.Qcov3.helpGroup.text.1", "In  order to study how the coronavirus spreads within the general population.")
+            },
+        ];
+    }
+}
+
+export class PcrHouseholdContact extends Item {
+
+    covid19ContactKey: string
+
+    constructor(parentKey: string, covid19ContactKey: string, isRequired?: boolean, keyOverride?:string) {
+        super(parentKey, keyOverride ? keyOverride: 'Qcov3b');
+        this.isRequired = isRequired;
+        this.covid19ContactKey = covid19ContactKey;
+    }
+
+    getCondition() {
+        return se.responseHasKeysAny(this.covid19ContactKey, singleChoicePrefix, ResponseEncoding.pcr_contacts.yes);
+        // expWithArgs('responseHasKeysAny', covid19ContactKey, [responseGroupKey, singleChoiceKey].join('.'), '1')
+    }
+
+    buildItem() {
+        return SurveyItems.singleChoice({
+            parentKey: this.parentKey,
+            itemKey: this.itemKey,
+            isRequired: this.isRequired,
+            condition: this.getCondition(),
+            questionText: _T(
+                "weekly.HS.Qcov3b.title.0", "Was this person or one of these persons a member of your household?"
+            ),
+            helpGroupContent: this.getHelpGroupContent(),
+            responseOptions: this.getResponses()
+        });
+    }
+
+    getResponses() {
+        return [
+            {
+                key: '1', role: 'option', content: _T("weekly.HS.Qcov3b.rg.scg.option.0",  "Yes")
+            },
+            {
+                key: '0', role: 'option',
+                content: _T( "weekly.HS.Qcov3b.rg.scg.option.1",  "No")
+            },
+            {
+                key: '2', role: 'option',
+                content: _T( "weekly.HS.Qcov3b.rg.scg.option.2", "I don’t know")
+            },
+        ];
+    }
+
+    getHelpGroupContent() {
+        return [
+            text_why_asking("weekly.HS.Qcov3b.helpGroup.text.0"),
+            {
+                content: _T( "weekly.HS.Qcov3b.helpGroup.text.1", "The coronavirus and influenza spread quickly indoors."),
+                style: [{ key: 'variant', value: 'p' }],
+            },
+            text_how_answer("weekly.HS.Qcov3b.helpGroup.text.2"),
+            {
+                content: _T(
+                    "weekly.HS.Qcov3b.helpGroup.text.3",
+                    "A member of the household is defined as a person (not necessary a family member) who lives at the same address as you, and who shares the kitchen, living room, family room or dining room."
+                ),
+            },
+        ]
     }
 }
 
@@ -991,7 +1055,7 @@ export class ConsentForMore extends Item {
  * @param userConsentForSymptoms reference to the symptom survey
  * @param keyOverride use this to override the default key for this item (only last part of the key, parent's key is not influenced).
  */
- class HasMoreGroup extends Group {
+export class HasMoreGroup extends Group {
 
     consentForMoreKey : string;
 
@@ -1420,7 +1484,7 @@ export class FluTest extends Item {
  * @param isRequired if true adds a default "hard" validation to the question to check if it has a response.
  * @param keyOverride use this to override the default key for this item (only last part of the key, parent's key is not influenced).
  */
-export class VacStart extends Item {
+export class ResultFluTest extends Item {
 
     keyFluTest: string
 
@@ -2424,5 +2488,22 @@ export class CauseOfSymptoms extends Item {
                 content: _T("weekly.EX.Q11.helpGroup.text.3", "If you are reasonably sure of the cause of your symptoms, select the appropriate box. Otherwise, select 'No, I Don’t know'."),
             },
         ];
+    }
+}
+
+export class SurveyEnd extends Item {
+    constructor(parentKey: string, keyOverride?:string) {
+        super(parentKey, keyOverride ? keyOverride : 'surveyEnd');
+    }
+
+    buildItem() {
+        return SurveyItems.surveyEnd(
+            this.parentKey,
+            _T(
+                "weekly.surveyEnd.title.0",
+                "Thank you! This was all for now, please submit (push « send ») your responses. We will ask you again next week."
+            ),
+            this.condition,
+        )
     }
 }

@@ -1,5 +1,4 @@
 import {  _T, _T_any } from "../languages"
-import { Expression } from "survey-engine/lib/data_types";
 import { ComponentEditor } from "case-editor-tools/surveys/survey-editor/component-editor";
 import { ItemEditor } from "case-editor-tools/surveys/survey-editor/item-editor";
 import { expWithArgs, generateHelpGroupComponent, generateLocStrings, generateTitleComponent } from "case-editor-tools/surveys/utils/simple-generators";
@@ -10,15 +9,7 @@ import { SurveyItems } from 'case-editor-tools/surveys';
 import { initMatrixQuestion,  ResponseRowCell } from "case-editor-tools/surveys/responseTypeGenerators/matrixGroupComponent";
 import {require_response, text_select_all_apply, text_why_asking, text_how_answer, singleChoicePrefix, MultipleChoicePrefix } from './helpers';
 import { StudyEngine as se } from "case-editor-tools/expression-utils/studyEngineExpressions";
-
-const ResponseEncoding = {
-    gender: {
-        'female': '1'
-    },
-    pregnancy: {
-        'yes': '0',
-    }
-};
+import { IntakeResponses as ResponseEncoding } from "../responses/intake";
 
 /**
  * GENDER: Single choice question about gender
@@ -49,7 +40,7 @@ export class Gender extends Item {
     getResponses() {
        return [
             {
-                key: '0', role: 'option',
+                key: ResponseEncoding.gender.male, role: 'option',
                 content: _T("intake.Q1.rg.scg.option.0", "Male")
             },
             {
@@ -57,7 +48,7 @@ export class Gender extends Item {
                 content: _T("intake.Q1.rg.scg.option.1", "Female")
             },
             {
-                key: '2', role: 'option',
+                key: ResponseEncoding.gender.other, role: 'option',
                 content: _T("intake.Q1.rg.scg.option.2", "Other")
             },
         ];
@@ -109,7 +100,7 @@ export class DateOfBirth extends Item {
 
         editor.setHelpGroupComponent(generateHelpGroupComponent(this.getHelpGroupContent()));
 
-        const dateInputKey = '1';
+        const dateInputKey = ResponseEncoding.birthDate.date;
 
         // RESPONSE PART
         const rg = editor.addNewResponseComponent({ role: 'responseGroup' });
@@ -250,6 +241,8 @@ export class MainActivity extends Item {
     }
 
     buildItem() {
+        const codes = ResponseEncoding.main_activity;
+
         return SurveyItems.singleChoice({
             parentKey: this.parentKey,
             itemKey: this.itemKey,
@@ -259,39 +252,39 @@ export class MainActivity extends Item {
             helpGroupContent: this.getHelpGroupContent(),
             responseOptions: [
                 {
-                    key: '0', role: 'option',
+                    key: codes.fulltime, role: 'option',
                     content: _T("intake.Q4.rg.scg.option.0", "Paid employment, full time")
                 },
                 {
-                    key: '1', role: 'option',
+                    key: codes.partial, role: 'option',
                     content: _T("intake.Q4.rg.scg.option.1", "Paid employment, part time")
                 },
                 {
-                    key: '2', role: 'option',
+                    key: codes.self, role: 'option',
                     content: _T("intake.Q4.rg.scg.option.2", "Self-employed (businessman, farmer, tradesman, etc.)")
                 },
                 {
-                    key: '3', role: 'option',
+                    key: codes.student, role: 'option',
                     content: _T("intake.Q4.rg.scg.option.3", "Attending daycare/school/college/university")
                 },
                 {
-                    key: '4', role: 'option',
+                    key: codes.home, role: 'option',
                     content: _T("intake.Q4.rg.scg.option.4", "Home-maker (e.g. housewife)")
                 },
                 {
-                    key: '5', role: 'option',
+                    key: codes.unemployed, role: 'option',
                     content: _T("intake.Q4.rg.scg.option.5", "Unemployed")
                 },
                 {
-                    key: '6', role: 'option',
+                    key: codes.sick, role: 'option',
                     content: _T("intake.Q4.rg.scg.option.6", "Long-term sick-leave or parental leave")
                 },
                 {
-                    key: '7', role: 'option',
+                    key: codes.retired, role: 'option',
                     content: _T("intake.Q4.rg.scg.option.7", "Retired")
                 },
                 {
-                    key: '8', role: 'option',
+                    key: codes.other, role: 'option',
                     content: _T("intake.Q4.rg.scg.option.8", "Other")
                 },
             ]
@@ -321,10 +314,20 @@ export class MainActivity extends Item {
 
 export class PostalCodeWork extends Item {
 
-    constructor(parentKey: string, isRequired?: boolean, keyOverride?:string) {
+    keyMainActivity: string;
+
+    constructor(parentKey: string, keyMainActivity: string, isRequired?: boolean, keyOverride?:string) {
         super(parentKey, keyOverride ? keyOverride: 'Q4b');
         this.isRequired = isRequired;
+        this.keyMainActivity = keyMainActivity;
     }
+
+    getCondition() {
+        const codes = ResponseEncoding.main_activity;
+        return se.singleChoice.any(this.keyMainActivity, codes.fulltime, codes.partial, codes.self, codes.student )
+        //expWithArgs('responseHasKeysAny', keyMainActivity, [responseGroupKey, singleChoiceKey].join('.'), '0', '1', '2', '3')
+    }
+
 
     buildItem() {
         return SurveyItems.singleChoice({
