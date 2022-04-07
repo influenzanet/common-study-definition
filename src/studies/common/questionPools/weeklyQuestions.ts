@@ -1,4 +1,4 @@
-import { LanguageMap, _T } from "../languages"
+import { _T } from "../languages"
 import { Group, Item } from "case-editor-tools/surveys/types";
 import { ItemEditor } from "case-editor-tools/surveys/survey-editor/item-editor";
 import { initMatrixQuestion,  ResponseRowCell } from "case-editor-tools/surveys/responseTypeGenerators/matrixGroupComponent";
@@ -95,14 +95,14 @@ export class Symptoms extends Item {
             itemKey: this.itemKey,
             isRequired: this.isRequired,
             questionText: _T(
-                "weekly.Q1.title.0", 
+                "weekly.Q1.title.0",
                 "Have you had any of the following symptoms since your last questionnaire (or in the past week, if this the first tie you are taking this questionnaire)?"
             ),
             helpGroupContent: this.getHelpGroupContent(),
             bottomDisplayCompoments: [
                 ComponentGenerators.text({
                     content: _T(
-                        "weekly.Q1.rg.cGJZ.text.0", 
+                        "weekly.Q1.rg.cGJZ.text.0",
                         "Multiple answers possible. If you suffer from chronic illness, only indicate symptoms that have changed. For example, if you experience chronic shortness of breath, only mark this symptom if it has recently gotten worse."
                     ),
                 })
@@ -115,8 +115,8 @@ export class Symptoms extends Item {
         const exclusiveOptionRule =  se.multipleChoice.any(this.key, ResponseEncoding.symptoms.no_symptom);
         const r =  [
             {
-                key: ResponseEncoding.symptoms.no_symptom, 
-                role: 'option', 
+                key: ResponseEncoding.symptoms.no_symptom,
+                role: 'option',
                 content: _T("weekly.Q1.rg.mcg.option.0", "No symptoms"),
             },
             {
@@ -252,14 +252,14 @@ export class Symptoms extends Item {
             text_why_asking("weekly.Q1.helpGroup.text.0"),
             {
                 content: _T(
-                    "weekly.Q1.helpGroup.text.1", 
+                    "weekly.Q1.helpGroup.text.1",
                     "The most important part of this study is about following up on the symptoms you have reported."
                 ),
                 style: [{ key: 'variant', value: 'p' }],
             },
             text_how_answer("weekly.Q1.helpGroup.text.2"),
             {
-                content: _T( 
+                content: _T(
                     "weekly.Q1.helpGroup.text.3",
                     "If you suffer from chronic illness, only indicate symptoms that have changed. For example, if you experience chronic shortness of breath, only mark this symptom if it has recently gotten worse. Multiple answers possible."
                 ),
@@ -309,8 +309,8 @@ export class SameIllnes extends Item {
     }
 
     getCondition() {
-        const hadOngoingSymptomsLastWeek = expWithArgs('eq', 
-                    expWithArgs('getAttribute', expWithArgs('getAttribute', expWithArgs('getContext'), 'participantFlags'), 'prev'), 
+        const hadOngoingSymptomsLastWeek = expWithArgs('eq',
+                    expWithArgs('getAttribute', expWithArgs('getAttribute', expWithArgs('getContext'), 'participantFlags'), 'prev'),
                     "1"
               );
         return hadOngoingSymptomsLastWeek;
@@ -322,14 +322,14 @@ export class SameIllnes extends Item {
             itemKey: this.itemKey,
             isRequired: this.isRequired,
             condition: this.getCondition(),
-            questionText: _T( 
-                "weekly.HS.Q2.title.0", 
+            questionText: _T(
+                "weekly.HS.Q2.title.0",
                 "When you filled in the previous questionnaire, you indicated that you were still sick. Are the symptoms you are  reporting now from the same timeframe as the symptoms you reported the last time?"
                 ),
             helpGroupContent: this.getHelpGroupContent(),
             bottomDisplayCompoments: [
                 ComponentGenerators.text({
-                    'content': _T( 
+                    'content': _T(
                         "vaccination.Q0.privacy.note",
                         "(**) By selecting one of these options you give your consent to use your historical data to prefill this survey's responses."
                     )
@@ -395,24 +395,24 @@ export class SymptomsStart extends Item {
 
     getCondition() {
         const codes = ResponseEncoding.same_illness;
-        return expWithArgs('not', 
+        return expWithArgs('not',
             expWithArgs('responseHasKeysAny', this.keySameIllnes, singleChoicePrefix, codes.yes, codes.notapply)
         );
     }
-    
+
     buildItem() {
 
         const date_input_key = ResponseEncoding.symptoms_start.date_input;
-    
+
 
         return SurveyItems.singleChoice({
             parentKey: this.parentKey,
             itemKey: this.itemKey,
             isRequired: this.isRequired,
             condition: this.getCondition(),
-            questionText: _T( 
+            questionText: _T(
                 "weekly.HS.Q3.title.0",
-                "On what day did you begin feeling the first symptoms? If you do not recall the exact date, please give an approximate date."         
+                "On what day did you begin feeling the first symptoms? If you do not recall the exact date, please give an approximate date."
             ),
             helpGroupContent: this.getHelpGroupContent(),
             responseOptions: [
@@ -441,7 +441,7 @@ export class SymptomsStart extends Item {
             text_why_asking( "weekly.HS.Q3.helpGroup.text.0"),
             {
                 content: _T(
-                    "weekly.HS.Q3.helpGroup.text.1", 
+                    "weekly.HS.Q3.helpGroup.text.1",
                     "This question will help us to determine how many people are experiencing symptoms per day/week."
                 ),
                 style: [{ key: 'variant', value: 'p' }],
@@ -472,7 +472,7 @@ export class SymptomsEnd extends Item {
         this.isRequired = isRequired;
         this.keySymptomsStart = keySymptomsStart;
     }
-    
+
     buildItem() {
         return SurveyItems.singleChoice({
             parentKey: this.parentKey,
@@ -515,7 +515,7 @@ export class SymptomsEnd extends Item {
         return [
             text_why_asking("weekly.HS.Q4.helpGroup.text.0"),
             {
-                content: _T( 
+                content: _T(
                     "weekly.HS.Q4.helpGroup.text.1",
                     "We can use the first and last dates of the complaints to calculate how long your complaints lasted. "
                 ),
@@ -542,7 +542,7 @@ export class SymptomsSuddenlyDeveloped extends Item {
         super(parentKey, keyOverride ? keyOverride: 'Q5');
         this.isRequired = isRequired;
     }
-    
+
     buildItem() {
         return SurveyItems.singleChoice({
             parentKey: this.parentKey,
@@ -564,7 +564,6 @@ export class SymptomsSuddenlyDeveloped extends Item {
             {
                 key: '1', role: 'option',
                 content: _T( "weekly.HS.Q5.rg.scg.option.1", "No"),
-                )
             },
             {
                 key: '2', role: 'option',
@@ -603,7 +602,7 @@ export class FeverStart extends Item {
     getCondition() {
         return se.responseHasKeysAny(this.keySymptomsQuestion, MultipleChoicePrefix, ResponseEncoding.symptoms.fever);
     }
-    
+
     buildItem() {
         const date_input_key = ResponseEncoding.symptoms_start.date_input;
         return SurveyItems.singleChoice({
@@ -611,7 +610,10 @@ export class FeverStart extends Item {
             itemKey: this.itemKey,
             isRequired: this.isRequired,
             condition: this.getCondition(),
-            questionText: _T("weekly.HS.Q6.title.0", "On what day did your fever start? If you do not recall the exact date, please give an approximate date."),
+            questionText: _T(
+                "weekly.HS.Q6.title.0",
+                "On what day did your fever start? If you do not recall the exact date, please give an approximate date."
+            ),
             helpGroupContent: this.getHelpGroupContent(),
             responseOptions: [
                 {
@@ -662,9 +664,9 @@ export class FeverStart extends Item {
 }
 
 abstract class SymptomDependentQuestion extends Item {
-    
+
     keySymptomsQuestion: string;
-    
+
     constructor(defaultKey: string, parentKey: string, keySymptomsQuestion: string, isRequired?: boolean, keyOverride?:string) {
         super(parentKey, keyOverride ? keyOverride: defaultKey);
         this.isRequired = isRequired;
@@ -757,7 +759,7 @@ export class DidUMeasureTemperature extends SymptomDependentQuestion {
         ];
     }
 
-    
+
     buildItem() {
         return SurveyItems.singleChoice({
             parentKey: this.parentKey,
@@ -831,7 +833,7 @@ export class HighestTemprerature extends SymptomDependentQuestion {
             ResponseEncoding.symptoms.fever
         ];
     }
-    
+
     buildItem() {
         return SurveyItems.singleChoice({
             parentKey: this.parentKey,
@@ -892,9 +894,9 @@ export class HighestTemprerature extends SymptomDependentQuestion {
 }
 
 export class FeverGroup extends Group {
-    
+
     keySymptomsQuestion: string
-    
+
     keySymptomStart: string
 
     isRequired?: boolean;
@@ -902,7 +904,7 @@ export class FeverGroup extends Group {
     getCondition() {
         return se.multipleChoice.any(this.keySymptomsQuestion, ResponseEncoding.symptoms.fever);
     }
-    
+
     constructor(parentKey: string, keySymptomsQuestion: string, keySymptomStart: string, isRequired?: boolean, keyOverride?: string) {
         const defaultKey = 'Q6';
         super(parentKey, keyOverride ? keyOverride : defaultKey);
@@ -947,7 +949,7 @@ export class ConsentForMore extends Item {
         super(parentKey, keyOverride ? keyOverride: 'Q36');
         this.isRequired = isRequired;
     }
-    
+
     buildItem() {
         return SurveyItems.singleChoice({
             parentKey: this.parentKey,
@@ -996,7 +998,7 @@ export class ConsentForMore extends Item {
     getCondition() {
         return se.singleChoice.any(this.consentForMoreKey, ResponseEncoding.consent_more.yes)
     }
-     
+
     constructor(parentKey: string, consentForMoreKey: string, keyOverride?: string) {
         const defaultKey = 'EX';
         super(parentKey, keyOverride ? keyOverride: defaultKey);
@@ -1006,7 +1008,7 @@ export class ConsentForMore extends Item {
         );
     }
 
-    buildGroup() { 
+    buildGroup() {
 
     }
 }
@@ -1024,7 +1026,7 @@ export class SymptomImpliedCovidTest extends Item {
         super(parentKey, keyOverride ? keyOverride: 'Qcov16h');
         this.isRequired = isRequired;
     }
-    
+
     buildItem() {
         return SurveyItems.singleChoice({
             parentKey: this.parentKey,
@@ -1093,7 +1095,7 @@ export class CovidTestType extends Item {
         return  se.responseHasKeysAny(this.keysymptomImpliedCovidTest, singleChoicePrefix, ResponseEncoding.symptom_test.yes);
         //expWithArgs('responseHasKeysAny', keysymptomImpliedCovidTest, responseGroupKey + '.' + singleChoiceKey, '1'),
     }
-    
+
     buildItem() {
         return SurveyItems.multipleChoice({
             parentKey: this.parentKey,
@@ -1142,9 +1144,9 @@ export class CovidTestType extends Item {
 
 
 abstract class TestTypeDependentQuestion extends Item {
-    
+
     keyTestType: string;
-    
+
     constructor(defaultKey: string, parentKey: string, keyTestType: string, isRequired?: boolean, keyOverride?:string) {
         super(parentKey, keyOverride ? keyOverride: defaultKey);
         this.isRequired = isRequired;
@@ -1180,7 +1182,7 @@ export class ResultPCRTest extends TestTypeDependentQuestion {
             ResponseEncoding.test_type.pcr
         ]
     }
-    
+
     buildItem() {
         return SurveyItems.singleChoice({
             parentKey: this.parentKey,
@@ -1189,7 +1191,7 @@ export class ResultPCRTest extends TestTypeDependentQuestion {
             condition: this.getCondition(),
             questionText: _T("weekly.EX.Qcov16b.title.0", "Do you know the result of your PCR test? (if several were performed and at least one was positive, chose the “Positive” answer)"),
             helpGroupContent: this.getHelpGroupContent(),
-           
+
             responseOptions: this.getResponses()
         });
     }
@@ -1212,7 +1214,7 @@ export class ResultPCRTest extends TestTypeDependentQuestion {
                 key: '4', role: 'option',
                 content: _T("weekly.EX.Qcov16b.rg.scg.option.3", "No, I have not yet received the test results")
             },
-        ]; 
+        ];
     }
 
     getHelpGroupContent() {
@@ -1245,7 +1247,7 @@ export class ResultAntigenicTest extends TestTypeDependentQuestion {
             ResponseEncoding.test_type.antigenic
         ]
     }
-    
+
     buildItem() {
         return SurveyItems.singleChoice({
             parentKey: this.parentKey,
@@ -1254,13 +1256,6 @@ export class ResultAntigenicTest extends TestTypeDependentQuestion {
             condition: this.getCondition(),
             questionText: _T("weekly.EX.Qcov16f.title.0", "Do you know the result of this rapid antigen detection test on nasopharyngeal sample? (if several were performed and at least one was positive, chose the “Positive” answer)"),
             helpGroupContent: this.getHelpGroupContent(),
-            /*bottomDisplayCompoments: [
-                ComponentGenerators.text({
-                    'content': new LanguageMap([
-                    ])
-                })
-            ],
-            */
             responseOptions: this.getResponses()
         });
     }
@@ -1315,7 +1310,7 @@ export class ResultRapidAntigenicTest extends TestTypeDependentQuestion {
             ResponseEncoding.test_type.antigenic_nasal
         ];
     }
-    
+
     buildItem() {
         return SurveyItems.singleChoice({
             parentKey: this.parentKey,
@@ -1367,7 +1362,7 @@ export class FluTest extends Item {
         super(parentKey, keyOverride ? keyOverride: 'Qcov19');
         this.isRequired = isRequired;
     }
-    
+
     buildItem() {
         return SurveyItems.singleChoice({
             parentKey: this.parentKey,
@@ -1426,7 +1421,7 @@ export class FluTest extends Item {
  * @param keyOverride use this to override the default key for this item (only last part of the key, parent's key is not influenced).
  */
 export class VacStart extends Item {
-    
+
     keyFluTest: string
 
     constructor(parentKey: string, keyFluTest: string, isRequired?: boolean, keyOverride?:string) {
@@ -1439,7 +1434,7 @@ export class VacStart extends Item {
         const codes = ResponseEncoding.flu_test;
         return  se.responseHasKeysAny(this.keyFluTest,  codes.yes, codes.yes_antigenic );
     }
-     
+
     buildItem() {
         return SurveyItems.singleChoice({
             parentKey: this.parentKey,
@@ -1497,7 +1492,7 @@ export class VisitedMedicalService extends Item {
         super(parentKey, keyOverride ? keyOverride: 'Q7');
         this.isRequired = isRequired;
     }
-    
+
     buildItem() {
         return SurveyItems.singleChoice({
             parentKey: this.parentKey,
@@ -1509,7 +1504,7 @@ export class VisitedMedicalService extends Item {
             bottomDisplayCompoments: [
                 text_select_all_apply("weekly.EX.Q7.rg.DTpM.text.0")
             ],
-            
+
             responseOptions: this.getResponses()
         });
     }
@@ -1520,10 +1515,10 @@ export class VisitedMedicalService extends Item {
 
         // All response except no
         const exclusiveNo = se.responseHasOnlyKeysOtherThan(this.key, MultipleChoicePrefix, codes.no);
-        
+
         // All response except planned visit
         const exclusivePlan = se.responseHasOnlyKeysOtherThan(this.key, MultipleChoicePrefix, codes.plan);
-        
+
         const exclusiveOther = se.multipleChoice.any(this.key, codes.no, codes.plan);
 
         return [
@@ -1599,7 +1594,7 @@ export class VisitedMedicalServiceWhen extends Item {
         return se.responseHasOnlyKeysOtherThan(this.keyVisitedMedicalServ, codes.no, codes.other);
         //expWithArgs('responseHasOnlyKeysOtherThan', keyVisitedMedicalServ, [responseGroupKey, multipleChoiceKey].join('.'), '0', '5')
     }
-     
+
     buildItem() {
 
         const itemKey = this.key;
@@ -1609,24 +1604,21 @@ export class VisitedMedicalServiceWhen extends Item {
         editor.setTitleComponent(
             generateTitleComponent(_T("weekly.EX.Q7b.title.0", "How soon after your symptoms appeared did you first VISIT this medical service?"))
         );
-    
+
         // CONDITION
         editor.setCondition(this.getCondition());
-    
+
         // INFO POPUP
         editor.setHelpGroupComponent( generateHelpGroupComponent(this.getHelpGroupContent())  );
-    
+
         // RESPONSE PART
         const rg = editor.addNewResponseComponent({ role: 'responseGroup' });
-        
-        editor.addExistingResponseComponent({
-            role: 'text',
-            content: generateLocStrings(
-                new LanguageMap([
-                    ["id", "weekly.EX.Q7b.rg.sFcN.text.0"],
-                    ["en", 'Select the correct number of days'],
-                ])),
-        }, rg?.key);
+
+        editor.addExistingResponseComponent(
+            ComponentGenerators.text({
+             content:  _T("weekly.EX.Q7b.rg.sFcN.text.0", 'Select the correct number of days')
+            })
+        , rg?.key);
 
         const ddOptions: ResponseRowCell = {
             key: 'col1', role: 'dropDownGroup', items: [
@@ -1656,7 +1648,7 @@ export class VisitedMedicalServiceWhen extends Item {
                 },
             ]
         };
-    
+
         const visits = ResponseEncoding.visit_medical;
 
         const displayCondition = (code:string) => {
@@ -1712,14 +1704,14 @@ export class VisitedMedicalServiceWhen extends Item {
             },
         ]);
         editor.addExistingResponseComponent(rg_inner, rg?.key);
-    
+
         // VALIDATIONs
         if (this.isRequired) {
             require_response(editor, this.key, responseGroupKey);
         }
-    
+
         return editor.getItem();
-       
+
     }
 
     getHelpGroupContent() {
@@ -1762,7 +1754,7 @@ export class WhyVisitedNoMedicalService extends Item {
         return se.responseHasOnlyKeysOtherThan(this.keyVisitedMedicalServ, codes.no);
     }
 
-     
+
     buildItem() {
         return SurveyItems.singleChoice({
             parentKey: this.parentKey,
@@ -1771,13 +1763,6 @@ export class WhyVisitedNoMedicalService extends Item {
             condition: this.getCondition(),
             questionText: _T("weekly.EX.Qcov18.title.0", "What is the main reason for which you did not consult any health professional for the symptoms you declared today?"),
             helpGroupContent: this.getHelpGroupContent(),
-            /*bottomDisplayCompoments: [
-                ComponentGenerators.text({
-                    'content': new LanguageMap([
-                    ])
-                })
-            ],
-            */
             responseOptions: this.getResponses()
         });
     }
@@ -1867,7 +1852,7 @@ export class TookMedication extends Item {
         this.isRequired = isRequired;
     }
 
-    
+
     buildItem() {
         return SurveyItems.singleChoice({
             parentKey: this.parentKey,
@@ -1958,7 +1943,7 @@ export class TookMedication extends Item {
                 disabled: exclusiveNo,
                 content: _T("weekly.EX.Q9.rg.mcg.option.8", "I don't know/can't remember")
             },
-        
+
         ];
     }
 
@@ -1993,7 +1978,7 @@ export class Hospitalized extends Item {
         super(parentKey, keyOverride ? keyOverride: 'Q14');
         this.isRequired = isRequired;
     }
-    
+
     buildItem() {
         return SurveyItems.singleChoice({
             parentKey: this.parentKey,
@@ -2023,7 +2008,6 @@ export class Hospitalized extends Item {
             text_why_asking("weekly.EX.Q14.helpGroup.text.0"),
             {
                 content: _T("weekly.EX.Q14.helpGroup.text.1", "We want to understand the rates of hospitalization due to symptoms"),
-                //style: [{ key: 'variant', value: 'p' }],
             },
         ];
     }
@@ -2042,7 +2026,7 @@ export class DailyRoutine extends Item {
         super(parentKey, keyOverride ? keyOverride: 'Q10');
         this.isRequired = isRequired;
     }
-    
+
     buildItem() {
         return SurveyItems.singleChoice({
             parentKey: this.parentKey,
@@ -2108,7 +2092,7 @@ export class DailyRoutineToday extends Item {
         return se.singleChoice.any(this.keyDailyRoutine, ResponseEncoding.daily_routine.off);
         //expWithArgs('responseHasKeysAny', keyDailyRoutine, [responseGroupKey, singleChoiceKey].join('.'), '2')
     }
-    
+
     buildItem() {
         return SurveyItems.singleChoice({
             parentKey: this.parentKey,
@@ -2180,7 +2164,7 @@ export class DailyRoutineDaysMissed extends Item {
         return se.singleChoice.any(this.keyDailyRoutine, ResponseEncoding.daily_routine.off);
         //expWithArgs('responseHasKeysAny', keyDailyRoutine, [responseGroupKey, singleChoiceKey].join('.'), '2')
     }
-    
+
     buildItem() {
         return SurveyItems.dropDown({
             parentKey: this.parentKey,
@@ -2189,13 +2173,6 @@ export class DailyRoutineDaysMissed extends Item {
             condition: this.getCondition(),
             questionText: _T("weekly.EX.Q10c.title.0", "For how many days have you been unable to work normally/go to school (when you otherwise would have)?"),
             helpGroupContent: this.getHelpGroupContent(),
-            /*bottomDisplayCompoments: [
-                ComponentGenerators.text({
-                    'content': new LanguageMap([
-                    ])
-                })
-            ],
-            */
             responseOptions: this.getResponses()
         });
     }
@@ -2259,21 +2236,21 @@ export class DailyRoutineDaysMissed extends Item {
         super(parentKey, keyOverride ? keyOverride: 'Qcov7');
         this.isRequired = isRequired;
     }
-    
+
     buildItem() {
 
     const editor = new ItemEditor(undefined, { itemKey: this.key, isGroup: false });
-    
+
     // QUESTION TEXT
     editor.setTitleComponent(
         generateTitleComponent(_T("weekly.EX.Qcov7.title.0", "Did you begin to follow or increase any of the measures below, due to your symptoms (compared to the period before your symptoms began)?"))
     );
-    
+
     // INFO POPUP
     editor.setHelpGroupComponent(generateHelpGroupComponent(this.getHelpGroupContent()));
 
     // RESPONSE PART
-    
+
     const rg = editor.addNewResponseComponent({ role: 'responseGroup' });
     editor.addExistingResponseComponent({
         role: 'text',
@@ -2284,7 +2261,7 @@ export class DailyRoutineDaysMissed extends Item {
 
     const likertOptions = this.getScaleOptions();
 
-    
+
 
     const addLikertItem = (rowKey:string, lang:Map<string,string>, className:string) => {
         editor.addExistingResponseComponent({
@@ -2296,7 +2273,7 @@ export class DailyRoutineDaysMissed extends Item {
     };
 
     addLikertItem('1', _T("weekly.EX.Qcov7.rg.v1C0.text.1", 'Regularly wash or disinfect hands'), 'mb-1 fw-bold');
- 
+
     const style = 'mb-1 border-top border-1 border-grey-7 pt-1 mt-2 fw-bold';
 
     addLikertItem('2', _T("weekly.EX.Qcov7.rg.nEMR.text.3", 'Cough or sneeze into your elbow'), style);
@@ -2387,14 +2364,7 @@ export class CauseOfSymptoms extends Item {
             isRequired: this.isRequired,
             //condition: this.getCondition(),
             questionText: _T("weekly.EX.Q11.title.0", "What do you think is causing your symptoms?"),
-            //helpGroupContent: this.getHelpGroupContent(),
-            /*bottomDisplayCompoments: [
-                ComponentGenerators.text({
-                    'content': new LanguageMap([
-                    ])
-                })
-            ],
-            */
+            helpGroupContent: this.getHelpGroupContent(),
             responseOptions: this.getResponses()
         });
     }
@@ -2452,7 +2422,6 @@ export class CauseOfSymptoms extends Item {
             },
             {
                 content: _T("weekly.EX.Q11.helpGroup.text.3", "If you are reasonably sure of the cause of your symptoms, select the appropriate box. Otherwise, select 'No, I Don’t know'."),
-                // style: [{ key: 'variant', value: 'p' }],
             },
         ];
     }

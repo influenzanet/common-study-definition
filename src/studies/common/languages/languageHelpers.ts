@@ -51,11 +51,17 @@ export class LanguageHelpers {
  * Language translation entry helper
  * @param id id of the translations
  * @param en english base version (This english version is targetting translators more than participants)
- * @returns 
+ * @returns
  */
 export function _T(id:string, en:string): LanguageMap {
   return  new LanguageMap([
           ["id", id],
           ["en", en],
       ]);
+}
+
+export function _T_any(en:string) {
+    return new LanguageMap([
+        ["any", en]
+    ]);
 }

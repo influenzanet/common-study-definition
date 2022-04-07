@@ -1,14 +1,15 @@
-import { LanguageMap, _T } from "../languages"
-import { Expression, SurveyItem } from "survey-engine/lib/data_types";
+import {  _T, _T_any } from "../languages"
+import { Expression } from "survey-engine/lib/data_types";
 import { ComponentEditor } from "case-editor-tools/surveys/survey-editor/component-editor";
 import { ItemEditor } from "case-editor-tools/surveys/survey-editor/item-editor";
 import { expWithArgs, generateHelpGroupComponent, generateLocStrings, generateTitleComponent } from "case-editor-tools/surveys/utils/simple-generators";
 import { matrixKey, multipleChoiceKey, responseGroupKey, singleChoiceKey } from "case-editor-tools/constants/key-definitions";
 import { ComponentGenerators } from "case-editor-tools/surveys/utils/componentGenerators";
-import { Item, NumericInputProps } from "case-editor-tools/surveys/types";
+import { Item } from "case-editor-tools/surveys/types";
 import { SurveyItems } from 'case-editor-tools/surveys';
-import { initMatrixQuestion, ResponseRowCell } from "case-editor-tools/surveys/survey-items";
-import {require_response, text_select_all_apply, text_why_asking, text_how_answer, singleChoicePrefix } from './helpers';
+import { initMatrixQuestion,  ResponseRowCell } from "case-editor-tools/surveys/responseTypeGenerators/matrixGroupComponent";
+import {require_response, text_select_all_apply, text_why_asking, text_how_answer, singleChoicePrefix, MultipleChoicePrefix } from './helpers';
+import { StudyEngine as se } from "case-editor-tools/expression-utils/studyEngineExpressions";
 
 const ResponseEncoding = {
     gender: {
@@ -92,7 +93,6 @@ export class DateOfBirth extends Item {
             text_why_asking("intake.Q2.helpGroup.text.0"),
             {
                 content: _T("intake.Q2.helpGroup.text.1", "In order to examine the differences between age groups."),
-                // style: [{ key: 'variant', value: 'p' }],
             },
         ]
     }
@@ -113,6 +113,7 @@ export class DateOfBirth extends Item {
 
         // RESPONSE PART
         const rg = editor.addNewResponseComponent({ role: 'responseGroup' });
+
         const dateInputEditor = new ComponentEditor(undefined, {
             key: dateInputKey,
             role: 'dateInput'
@@ -132,10 +133,8 @@ export class DateOfBirth extends Item {
             displayCondition: expWithArgs('isDefined',
                 expWithArgs('getResponseItem', editor.getItem().key, [responseGroupKey, dateInputKey].join('.'))
             ),
-            content: Array.from(new LanguageMap([
-                ["id", "intake.Q2.rg.feedback.text.1"],
-                ["en", ' years old'],
-            ])).map(([code, str]) => {
+            content: Array.from(_T("intake.Q2.rg.feedback.text.1", "years old"),
+            ).map(([code, str]) => {
                 return {
                     code: code, parts: [
                         { dtype: 'exp', exp: expWithArgs('dateResponseDiffFromNow', editor.getItem().key, [responseGroupKey, dateInputKey].join('.'), 'years', 1) },
@@ -179,7 +178,6 @@ export class PostalCode extends Item {
             text_how_answer("intake.Q3.helpGroup.text.2"),
             {
                 content: _T("intake.Q3.helpGroup.text.3", "Insert the postal code of your place of residence"),
-                // style: [{ key: 'variant', value: 'p' }],
             },
         ];
     }
@@ -304,16 +302,18 @@ export class MainActivity extends Item {
         return [
             text_why_asking("intake.Q4.helpGroup.text.0"),
             {
-                content: _T("intake.Q4.helpGroup.text.1", "To check how representative our sample is compared to the population as a whole, and to find out whether the chance of getting flu is different for people in different types of occupation."),
+                content: _T(
+                    "intake.Q4.helpGroup.text.1",
+                    "To check how representative our sample is compared to the population as a whole, and to find out whether the chance of getting flu is different for people in different types of occupation."
+                ),
                 style: [{ key: 'variant', value: 'p' }],
             },
             text_how_answer("intake.Q4.helpGroup.text.2"),
             {
-                content: new LanguageMap([
-                    ["id", "intake.Q4.helpGroup.text.3"],
-                    ["en", 'Please, tick the box that most closely resembles your main occupation. For pre-school children who don\'t go to daycare tick the "other" box.'],
-                ]),
-                // style: [{ key: 'variant', value: 'p' }],
+                content: _T(
+                    "intake.Q4.helpGroup.text.3",
+                    "Please, tick the box that most closely resembles your main occupation. For pre-school children who don\'t go to daycare tick the \"other\" box.",
+                ),
             },
         ];
     }
@@ -386,7 +386,6 @@ export class PostalCodeWork extends Item {
             text_why_asking("intake.Q4b.helpGroup.text.0"),
             {
                 content: _T("intake.Q4b.helpGroup.text.1", "To be able to determine the distance you regularly travel during your movements."),
-                // style: [{ key: 'variant', value: 'p' }],
             },
         ]
     }
@@ -526,10 +525,7 @@ export class WorkTypeEurostat extends Item {
             topDisplayCompoments: [
                 ComponentGenerators.text({
                     className: "mb-2",
-                    content: new LanguageMap([
-                        ["id", "intake.Q4d.rg.nUk7.text.0"],
-                        ["en", 'Select all options that apply'],
-                    ]),
+                    content: _T("intake.Q4d.rg.nUk7.text.0", 'Select all options that apply'),
                 })
             ],
             responseOptions: [
@@ -576,7 +572,9 @@ export class WorkTypeEurostat extends Item {
             },
             text_how_answer("intake.Q4d.helpGroup.text.2"),
             {
-                content: _T("intake.Q4d.helpGroup.text.3", "Please choose the box that represents your HIGHEST level of educational achievements. The different option rougly equate to: 1 - no qualifications, 2 - school-leaving exams at around 16 years of age, 3 - school-leaving exams at around 18 years of age, 4 - University degree or equivalent professional qualification, 5 - Higher degree or advanced professional qualification. If you are an adult who is currently undergoing part - time training(e.g.night school) then tick the box that represents your current highest level of education."),
+                content: _T(
+                    "intake.Q4d.helpGroup.text.3",
+                    "Please choose the box that represents your HIGHEST level of educational achievements. The different option rougly equate to: 1 - no qualifications, 2 - school-leaving exams at around 16 years of age, 3 - school-leaving exams at around 18 years of age, 4 - University degree or equivalent professional qualification, 5 - Higher degree or advanced professional qualification. If you are an adult who is currently undergoing part - time training(e.g.night school) then tick the box that represents your current highest level of education."),
             },
         ];
     }
@@ -677,7 +675,6 @@ export class AgeGroups extends Item {
             },
             {
                 content: _T("intake.Q6.helpGroup.text.1", "Members of larger households, or those with children, may more likely get infected than the others."),
-                // style: [{ key: 'variant', value: 'p' }],
             },
         ];
     }
@@ -703,30 +700,20 @@ export class AgeGroups extends Item {
             key: 'col1', role: 'dropDownGroup',
             items: [
                 {
-                    key: '0', role: 'option', content: new LanguageMap([
-                        ["any", "0"],
-                    ])
+                    key: '0', role: 'option',
+                    content: _T_any("0"),
                 },
                 {
-                    key: '1', role: 'option', content: new LanguageMap([
-                        ["any", "1"],
-                    ]),
+                    key: '1', role: 'option', content: _T_any("1"),
+
                 }, {
-                    key: '2', role: 'option', content: new LanguageMap([
-                        ["any", "2"],
-                    ]),
+                    key: '2', role: 'option', content: _T_any("2"),
                 }, {
-                    key: '3', role: 'option', content: new LanguageMap([
-                        ["any", "3"],
-                    ]),
+                    key: '3', role: 'option', content: _T_any("3"),
                 }, {
-                    key: '4', role: 'option', content: new LanguageMap([
-                        ["any", "4"],
-                    ]),
+                    key: '4', role: 'option', content: _T_any("4"),
                 }, {
-                    key: '5', role: 'option', content: new LanguageMap([
-                        ["any", "5+"],
-                    ]),
+                    key: '5', role: 'option', content: _T_any("5+"),
                 },
             ]
         };
@@ -925,33 +912,23 @@ export class PeopleAtRisk extends Item {
                 },
                 {
                     key: '1', role: 'option',
-                    content: new LanguageMap([
-                        ["any", "1"],
-                    ])
+                    content: _T_any("1")
                 },
                 {
                     key: '2', role: 'option',
-                    content: new LanguageMap([
-                        ["any", "2"],
-                    ])
+                    content: _T_any("2")
                 },
                 {
                     key: '3', role: 'option',
-                    content: new LanguageMap([
-                        ["any", "3"],
-                    ])
+                    content: _T_any("3")
                 },
                 {
                     key: '4', role: 'option',
-                    content: new LanguageMap([
-                        ["any", "4"],
-                    ])
+                    content: _T_any( "4")
                 },
                 {
                     key: '5', role: 'option',
-                    content: new LanguageMap([
-                        ["any", "5"],
-                    ])
+                    content: _T_any("5")
                 },
                 {
                     key: '99', role: 'option',
@@ -980,7 +957,7 @@ export class PeopleAtRisk extends Item {
 /**
  * MEANS OF TRANSPORT: single choice about main means of transport
  *
- * @param parentKey full key path of the parent item, required to genrate this item's unique key (e.g. `<surveyKey>.<groupKey>`).
+ * @param parentKey full key path of the parent item, required to generate this item's unique key (e.g. `<surveyKey>.<groupKey>`).
  * @param isRequired if true adds a default "hard" validation to the question to check if it has a response.
  * @param keyOverride use this to override the default key for this item (only last part of the key, parent's key is not influenced).
  */
@@ -1001,10 +978,7 @@ export class MeansOfTransport extends Item {
             topDisplayCompoments: [
                 ComponentGenerators.text({
                     className: 'mb-2',
-                    content: new LanguageMap([
-                        ["id", "intake.Q7.rg.9JtQ.text.0"],
-                        ["en", 'Please select the transportation means you use the most.'],
-                    ])
+                    content: _T("intake.Q7.rg.9JtQ.text.0", "Please select the transportation means you use the most."),
                 })
             ],
             helpGroupContent: this.getHelpGroupContent(),
@@ -1127,10 +1101,7 @@ export class RegularMedication extends Item {
             topDisplayCompoments: [
                 ComponentGenerators.text({
                     className: 'mb-2',
-                    'content':new LanguageMap([
-                        ["id", "intake.Q11.rg.hYo0.text.0"],
-                        ["en", 'Select all options that apply'],
-                    ])
+                    'content':_T( "intake.Q11.rg.hYo0.text.0", 'Select all options that apply')
                 })
             ],
             helpGroupContent: this.getHelpGroupContent(),
@@ -1187,10 +1158,7 @@ export class RegularMedication extends Item {
             },
             text_how_answer("intake.Q11.helpGroup.text.2"),
             {
-                content: new LanguageMap([
-                    ["id", "intake.Q11.helpGroup.text.3"],
-                    ["en", 'Only answer "yes" if you take regular medication for your medical problem. If, for instance, you only occasionally take an asthma inhaler, then do not answer "yes" for asthma.'],
-                ]),
+                content: _T("intake.Q11.helpGroup.text.3", 'Only answer "yes" if you take regular medication for your medical problem. If, for instance, you only occasionally take an asthma inhaler, then do not answer "yes" for asthma.')
             }
         ]
     }
@@ -1309,7 +1277,6 @@ export class PregnancyTrimester extends Item {
             text_why_asking("intake.Q12b.helpGroup.text.0"),
             {
                 content: _T("intake.Q12b.helpGroup.text.1", "The risk of severe symptoms can vary depending on the pregnancy trimester, but this link has not yet been clearly established."),
-                // style: [{ key: 'variant', value: 'p' }],
             },
         ]
     }
@@ -1418,7 +1385,7 @@ export class Allergies extends Item {
 
         const noAllergyCode = '5';
 
-        const exclusiveOptionRule = expWithArgs('responseHasKeysAny', this.key, responseGroupKey + '.' + multipleChoiceKey, noAllergyCode);
+        const exclusiveOptionRule = expWithArgs('responseHasKeysAny', this.key, MultipleChoicePrefix, noAllergyCode);
 
         return SurveyItems.multipleChoice({
             parentKey: this.parentKey,
