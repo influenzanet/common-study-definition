@@ -573,6 +573,7 @@ export class CovidVaccineBrand extends SubVaccineQuestion {
         const key= keyOverride ? keyOverride: 'Q35i';
         super(key, parentKey, keyvac);
         this.isRequired = isRequired;
+        this.triggerResponse = ResponseEncoding.covid_vac.yes;
     }
 
     buildItem() {
@@ -644,7 +645,7 @@ export class CovidVaccineShots extends SubVaccineQuestion {
         const key= keyOverride ? keyOverride: 'Q35c';
         super(key, parentKey, keyvac);
         this.isRequired = isRequired;
-        this.triggerResponse =ResponseEncoding.covid_vac.yes;
+        this.triggerResponse = ResponseEncoding.covid_vac.yes;
     }
 
     buildItem() {
@@ -778,6 +779,7 @@ export class CovidDateLastVaccine extends SubVaccineQuestion {
     constructor(parentKey: string, keyVac?: string, keyVaccineShots?: string, isRequired?: boolean, keyOverride?: string) {
         super(keyOverride ? keyOverride: 'Q35k', parentKey, keyVac);
         this.keyVaccineShots = keyVaccineShots;
+        this.triggerResponse = ResponseEncoding.covid_vac.yes;
         this.isRequired = isRequired;
     }
 
@@ -855,6 +857,7 @@ export class CovidSecondShotAgainstReason extends SubVaccineQuestion {
     constructor(parentKey: string, keyVac?: string, keyVaccineShots?: string, isRequired?: boolean, keyOverride?: string) {
         super(keyOverride ? keyOverride: 'Q35l', parentKey, keyVac);
         this.isRequired = isRequired;
+        this.triggerResponse = ResponseEncoding.covid_vac.yes;
         this.keyVaccineShots = keyVaccineShots;
     }
 
