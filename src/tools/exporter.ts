@@ -3,15 +3,23 @@ import { Study } from "case-editor-tools/types/study";
 import { generateFilesForStudy } from 'case-editor-tools/exporter';
 import { writeFileSync } from "fs";
 
+
+const usage = () => {
+    Logger.log("Expected command line arguments:")
+    Logger.log("   - study=<studyKey>")
+};
+
 const readStudyKey = () => {
     if (process.argv.length < 3) {
         Logger.criticalError('Not enough arguments provided.')
+        usage();
         process.exit(-1)
     }
     const args = process.argv.slice(2);
     const studyKeyArg = args.filter(arg => arg.includes("study="));
     if (!studyKeyArg || studyKeyArg.length < 1) {
         Logger.criticalError('Argument "study=<studyKey> is missing.')
+        usage();
         process.exit(1)
     }
 
