@@ -20,8 +20,11 @@ import { IntakeResponses as ResponseEncoding } from "../responses/intake";
  */
 export class Gender extends Item {
 
-    constructor(parentKey: string, isRequired?: boolean, keyOverride?:string) {
+    useOther: boolean;
+
+    constructor(parentKey: string, isRequired?: boolean, keyOverride?:string, useOther?:boolean) {
         super(parentKey, keyOverride ? keyOverride: 'Q1');
+        this.useOther = useOther ?? true;
         this.isRequired = isRequired;
     }
 
@@ -38,6 +41,15 @@ export class Gender extends Item {
     }
 
     getResponses() {
+
+       const t = [];
+       if(this.useOther) {
+        t.push({
+            key: ResponseEncoding.gender.other, role: 'option',
+            content: _T("intake.Q1.rg.scg.option.2", "Other")
+        });
+       }
+
        return [
             {
                 key: ResponseEncoding.gender.male, role: 'option',
@@ -47,10 +59,7 @@ export class Gender extends Item {
                 key: ResponseEncoding.gender.female, role: 'option',
                 content: _T("intake.Q1.rg.scg.option.1", "Female")
             },
-            {
-                key: ResponseEncoding.gender.other, role: 'option',
-                content: _T("intake.Q1.rg.scg.option.2", "Other")
-            },
+            ...t
         ];
     }
 
@@ -588,7 +597,7 @@ export class WorkTypeEurostat extends Item {
 /**
  * PEOPLE MET: multiple choice for person groups you met
  *
- * @param parentKey full key path of the parent item, required to genrate this item's unique key (e.g. `<surveyKey>.<groupKey>`).
+ * @param parentKey full key path of the parent item, required to generate this item's unique key (e.g. `<surveyKey>.<groupKey>`).
  * @param isRequired if true adds a default "hard" validation to the question to check if it has a response.
  * @param keyOverride use this to override the default key for this item (only last part of the key, parent's key is not influenced).
  */
