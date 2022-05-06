@@ -31,18 +31,11 @@
     "en": "Did you receive a flu vaccine during the previous flu season (2020-2021)?",
     "fr": "Avez-vous été vacciné(e) contre la grippe lors de la dernière saison automne/hiver (2018-2019) ?"
   },
-  "vaccination.HV.Q9.helpGroup.text.0": {
-    "en": "Why are we asking this?",
-    "fr": "Pourquoi demandons-nous cela ?"
-  },
   "vaccination.HV.Q9.helpGroup.text.1": {
     "en": "We would like to study what level of protection the vaccine provides. We would also like to know if there is any protection from vaccines received in previous years.",
     "fr": "Nous aimerions savoir à quel point la protection par le vaccin fonctionne. Nous aimerions aussi savoir si il y a une certaine protection par les vaccins reçus au cours des années précédentes."
   },
-  "vaccination.HV.Q9.helpGroup.text.2": {
-    "en": "How should I answer this question?",
-    "fr": "Comment dois-je répondre ?"
-  },
+
   "vaccination.HV.Q9.helpGroup.text.3": {
     "en": "Answer 'yes' if you were vaccinated in autumn/winter 2020-2021.",
     "fr": "Répondez « oui » si vous avez été vacciné cette saison, habituellement à l'automne. Si vous vous faites vacciner après avoir rempli ce questionnaire, merci de revenir et corriger votre réponse."
@@ -63,17 +56,9 @@
     "en": "Have you received a flu vaccine this autumn/winter season? (2021-2022)",
     "fr": "Avez-vous été vacciné(e) contre la grippe cette année? (automne/hiver 2021-2022)"
   },
-  "vaccination.HV.Q10.helpGroup.text.0": {
-    "en": "Why are we asking this?",
-    "fr": "Pourquoi demandons-nous cela ?"
-  },
   "vaccination.HV.Q10.helpGroup.text.1": {
     "en": "We would like to be able to work out how much protection the vaccine gives.",
     "fr": "Nous aimerions savoir à quel point la protection par le vaccin fonctionne."
-  },
-  "vaccination.HV.Q10.helpGroup.text.2": {
-    "en": "How should I answer it?",
-    "fr": "Comment dois-je répondre ?"
   },
   "vaccination.HV.Q10.helpGroup.text.3": {
     "en": "Report yes, if you received the vaccine this season, usually in the autumn. If you get vaccinated after filling in this questionnaire, please return to this and update your answer.",
@@ -95,17 +80,9 @@
     "en": "When were you vaccinated against flu this season (2021-2022)?",
     "fr": "Quand avez-vous été vacciné contre la grippe cette saison (2021-2022) ?"
   },
-  "vaccination.HV.Q10b.helpGroup.text.0": {
-    "en": "Why are we asking this?",
-    "fr": "Pourquoi demandons-nous cela ?"
-  },
   "vaccination.HV.Q10b.helpGroup.text.1": {
     "en": "Knowing when people get vaccinated tells us how the vaccination program is being followed, as well as the effectiveness of the vaccine.",
     "fr": "Savoir quand les gens sont vaccinés nous permet d'évaluer le succès des campagnes de vaccination."
-  },
-  "vaccination.HV.Q10b.helpGroup.text.2": {
-    "en": "How should I answer this question?",
-    "fr": "Comment dois-je répondre ?"
   },
   "vaccination.HV.Q10b.helpGroup.text.3": {
     "en": "Try to answer as precisely as possible. If you do not know the exact date, provide as close an estimate as possible. For example, if you remember the month, try to recall if it was in the beginning or end of the month. Did any important events take place (such as holidays or birthdays) that may help you to refresh your memory?",
@@ -179,17 +156,9 @@
     "en": "What were your reasons for NOT getting a seasonal influenza vaccination in seaseon 2020/2021?",
     "fr": "Quelles étaient vos raisons pour ne pas vous faire vacciner contre la grippe saisonnière cette année?"
   },
-  "vaccination.HV.Q10d.helpGroup.text.0": {
-    "en": "Why are we asking this?",
-    "fr": "Pourquoi demandons-nous cela ?"
-  },
   "vaccination.HV.Q10d.helpGroup.text.1": {
     "en": "We would like to know why some people get vaccinated and others do not.",
     "fr": "Nous aimerions savoir pourquoi certaines personnes se font vacciner et d'autres pas."
-  },
-  "vaccination.HV.Q10d.helpGroup.text.2": {
-    "en": "How should I answer it?",
-    "fr": "Comment dois-je répondre ?"
   },
   "vaccination.HV.Q10d.helpGroup.text.3": {
     "en": "Tick all those reasons that were important in your decision.",
@@ -267,16 +236,8 @@
     "en": "Have you received a COVID-19 vaccine?",
     "fr": "TODO"
   },
-  "vaccination.HV.Q35.helpGroup.text.0": {
-    "en": "Why are we asking this?",
-    "fr": "TODO"
-  },
   "vaccination.HV.Q35.helpGroup.text.1": {
     "en": "We would like to be able to work out how much protection the vaccine gives.",
-    "fr": "TODO"
-  },
-  "vaccination.HV.Q35.helpGroup.text.2": {
-    "en": "How should I answer this question?",
     "fr": "TODO"
   },
   "vaccination.HV.Q35.helpGroup.text.3": {
@@ -299,16 +260,8 @@
     "en": "Which COVID-19 vaccine(s) did you receive?",
     "fr": "TODO"
   },
-  "vaccination.HV.Q35i.helpGroup.text.0": {
-    "en": "Why are we asking this?",
-    "fr": "TODO"
-  },
   "vaccination.HV.Q35i.helpGroup.text.1": {
     "en": "We want to know how many people got vaccinated with what brand",
-    "fr": "TODO"
-  },
-  "vaccination.HV.Q35i.helpGroup.text.2": {
-    "en": "How should I answer this question?",
     "fr": "TODO"
   },
   "vaccination.HV.Q35i.helpGroup.text.3": {
@@ -347,16 +300,8 @@
     "en": "How many doses of the vaccine did you receive?",
     "fr": "TODO"
   },
-  "vaccination.HV.Q35c.helpGroup.text.0": {
-    "en": "Why are we asking this?",
-    "fr": "TODO"
-  },
   "vaccination.HV.Q35c.helpGroup.text.1": {
     "en": "We would like to be able to work out how much protection a complete vaccination scheme gives.",
-    "fr": "TODO"
-  },
-  "vaccination.HV.Q35c.helpGroup.text.2": {
-    "en": "How should I answer this question?",
     "fr": "TODO"
   },
   "vaccination.HV.Q35c.helpGroup.text.3": {
@@ -387,16 +332,8 @@
     "en": "When did you receive your last injection of a vaccine against COVID-19? If you do not know the exact date, provide an estimate.",
     "fr": "TODO"
   },
-  "vaccination.HV.Q35j.helpGroup.text.0": {
-    "en": "Why are we asking this?",
-    "fr": "TODO"
-  },
   "vaccination.HV.Q35j.helpGroup.text.1": {
     "en": "Knowing when people are vaccinated tells us how well the vaccination program is being carried out.",
-    "fr": "TODO"
-  },
-  "vaccination.HV.Q35j.helpGroup.text.2": {
-    "en": "How should I answer this question?",
     "fr": "TODO"
   },
   "vaccination.HV.Q35j.helpGroup.text.3": {
@@ -415,16 +352,8 @@
     "en": "Do you plan to receive a second injection in the upcoming weeks?",
     "fr": "TODO"
   },
-  "vaccination.HV.Q35k.helpGroup.text.0": {
-    "en": "Why are we asking this?",
-    "fr": "TODO"
-  },
   "vaccination.HV.Q35k.helpGroup.text.1": {
     "en": "We want to study how long it takes for people to get the second dose after having received the first",
-    "fr": "TODO"
-  },
-  "vaccination.HV.Q35k.helpGroup.text.2": {
-    "en": "How should I answer this question?",
     "fr": "TODO"
   },
   "vaccination.HV.Q35k.helpGroup.text.3": {
@@ -447,16 +376,8 @@
     "en": "Why receiving a single injection?",
     "fr": "TODO"
   },
-  "vaccination.HV.Q35l.helpGroup.text.0": {
-    "en": "Why are we asking this?",
-    "fr": "TODO"
-  },
   "vaccination.HV.Q35l.helpGroup.text.1": {
     "en": "We would like to know the reasons behind the selected option of receiving just one dose",
-    "fr": "TODO"
-  },
-  "vaccination.HV.Q35l.helpGroup.text.2": {
-    "en": "How should I answer this question?",
     "fr": "TODO"
   },
   "vaccination.HV.Q35l.helpGroup.text.3": {
@@ -499,16 +420,8 @@
     "en": "What are your reason(s) for getting a COVID-19 vaccination?",
     "fr": "TODO"
   },
-  "vaccination.HV.Q35f.helpGroup.text.0": {
-    "en": "Why are we asking this?",
-    "fr": "TODO"
-  },
   "vaccination.HV.Q35f.helpGroup.text.1": {
     "en": "We would like to know the main reasons why people get the vaccine.",
-    "fr": "TODO"
-  },
-  "vaccination.HV.Q35f.helpGroup.text.2": {
-    "en": "How should I answer this question?",
     "fr": "TODO"
   },
   "vaccination.HV.Q35f.helpGroup.text.3": {
@@ -583,16 +496,8 @@
     "en": "What were your reasons for NOT getting a COVID-19 vaccination? Select the options that are most applicable.",
     "fr": "TODO"
   },
-  "vaccination.HV.Q35m.helpGroup.text.0": {
-    "en": "Why are we asking this?",
-    "fr": "TODO"
-  },
   "vaccination.HV.Q35m.helpGroup.text.1": {
     "en": "We would like to know the main reasons why people are declining COVID-19 vaccination.",
-    "fr": "TODO"
-  },
-  "vaccination.HV.Q35m.helpGroup.text.2": {
-    "en": "How should I answer this question?",
     "fr": "TODO"
   },
   "vaccination.HV.Q35m.helpGroup.text.3": {

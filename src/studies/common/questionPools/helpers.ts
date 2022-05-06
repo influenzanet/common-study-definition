@@ -30,27 +30,36 @@ export function require_response(editor: ItemEditor, itemKey: string, responseGr
 
 /**
  * Text component for "select all options apply"
- * @param id
+ * @param id id of the translation to override the default common text
  * @returns
  */
 export function text_select_all_apply(id:string) {
     return ComponentGenerators.text({
             className: "mb-2",
-            content:
-                _T(id, 'Select all options that apply')
+            content: _T(id, 'Select all options that apply', 'common.select_all_apply')
         });
 }
 
+/**
+ * Text component for "why are we asking this" part
+ * @param id id of the translation to override the default common text
+ * @returns
+ */
 export function text_why_asking(id:string) {
     return {
-        content: _T(id, "Why are we asking this?"),
+        content: _T(id, "Why are we asking this?", "common.why_are_we_asking"),
         style: [{ key: 'variant', value: 'h5' }],
     };
 }
 
+/**
+ * Text component for "How should I answer this question?" part
+ * @param id id of the translation to override the default common text
+ * @returns
+ */
 export function text_how_answer(id:string) {
     return {
-        content: _T( id, "How should I answer this question?"),
+        content: _T( id, "How should I answer this question?", "common.how_should_i_answer"),
         style: [{ key: 'variant', value: 'h5' }],
     };
 }

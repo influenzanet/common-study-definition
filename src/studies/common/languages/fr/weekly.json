@@ -15,16 +15,8 @@
     "en": "Have you had any of the following symptoms since your last questionnaire (or in the past week, if this the first tie you are taking this questionnaire)?",
     "fr": "TODO"
   },
-  "weekly.Q1.helpGroup.text.0": {
-    "en": "Why are we asking this question?",
-    "fr": "TODO"
-  },
   "weekly.Q1.helpGroup.text.1": {
     "en": "The most important part of this study is about following up on the symptoms you have reported.",
-    "fr": "TODO"
-  },
-  "weekly.Q1.helpGroup.text.2": {
-    "en": "How should I answer this question?",
     "fr": "TODO"
   },
   "weekly.Q1.helpGroup.text.3": {
@@ -135,17 +127,9 @@
     "en": "When you filled in the previous questionnaire, you indicated that you were still sick. Are the symptoms you are  reporting now from the same timeframe as the symptoms you reported the last time?",
     "fr": "Lors de votre dernière visite, vous aviez déclaré être toujours malade. Est-ce que les symptômes que vous rapportez aujourd'hui font partie du même épisode de maladie ?"
   },
-  "weekly.HS.Q2.helpGroup.text.0": {
-    "en": "Why are we asking this question?",
-    "fr": "Pourquoi demandons-nous cela ?"
-  },
   "weekly.HS.Q2.helpGroup.text.1": {
     "en": "To speed up the completion of the rest of the questionnaire.",
     "fr": "TODO"
-  },
-  "weekly.HS.Q2.helpGroup.text.2": {
-    "en": "How should I answer this question?",
-    "fr": "Comment devez-vous répondre ?"
   },
   "weekly.HS.Q2.helpGroup.text.3": {
     "en": "If you think that the complaints you are indicating today are caused by the same infection or the same problem (the same period during which you experienced the complaints), answer 'yes'.",
@@ -171,10 +155,6 @@
     "en": "In the 14 days before your symptoms started, have you been in close contact with someone for whom an antigenic or PCR test has confirmed that they have COVID-19?",
     "fr": "TODO"
   },
-  "weekly.HS.Qcov3.helpGroup.text.0": {
-    "en": "Why are we asking this question?",
-    "fr": "TODO"
-  },
   "weekly.HS.Qcov3.helpGroup.text.1": {
     "en": "In  order to study how the coronavirus spreads within the general population.",
     "fr": "TODO"
@@ -195,16 +175,8 @@
     "en": "Was this person or one of these persons a member of your household?",
     "fr": "TODO"
   },
-  "weekly.HS.Qcov3b.helpGroup.text.0": {
-    "en": "Why are we asking this question?",
-    "fr": "TODO"
-  },
   "weekly.HS.Qcov3b.helpGroup.text.1": {
     "en": "The coronavirus and influenza spread quickly indoors.",
-    "fr": "TODO"
-  },
-  "weekly.HS.Qcov3b.helpGroup.text.2": {
-    "en": "How should I answer this question?",
     "fr": "TODO"
   },
   "weekly.HS.Qcov3b.helpGroup.text.3": {
@@ -227,17 +199,9 @@
     "en": "On what day did you begin feeling the first symptoms? If you do not recall the exact date, please give an approximate date.",
     "fr": "Quand les premiers symptômes sont-ils apparus ?"
   },
-  "weekly.HS.Q3.helpGroup.text.0": {
-    "en": "Why are we asking this question?",
-    "fr": "Pourquoi demandons-nous cela ?"
-  },
   "weekly.HS.Q3.helpGroup.text.1": {
     "en": "This question will help us to determine how many people are experiencing symptoms per day/week.",
     "fr": "Pour nous aider à travailler sur le nombre de cas de grippe qui se déclarent chaque jour."
-  },
-  "weekly.HS.Q3.helpGroup.text.2": {
-    "en": "How should I answer this question?",
-    "fr": "Comment dois-je répondre?"
   },
   "weekly.HS.Q3.helpGroup.text.3": {
     "en": "Answer as precisely as possible.",
@@ -255,17 +219,9 @@
     "en": "When did your symptoms end?",
     "fr": "Quand vos symptômes ont-ils disparu ?"
   },
-  "weekly.HS.Q4.helpGroup.text.0": {
-    "en": "Why are we asking this question?",
-    "fr": "Pourquoi demandons-nous cela ?"
-  },
   "weekly.HS.Q4.helpGroup.text.1": {
     "en": "We can use the first and last dates of the complaints to calculate how long your complaints lasted. ",
     "fr": "En utilisant les dates de début et de fin des symptômes, nous pouvons travailler sur la durée des infections respiratoires."
-  },
-  "weekly.HS.Q4.helpGroup.text.2": {
-    "en": "How should I answer this question?",
-    "fr": "Comment dois-je répondre?"
   },
   "weekly.HS.Q4.helpGroup.text.3": {
     "en": "Answer as precisely as possible.",
@@ -287,17 +243,9 @@
     "en": "Did your symptoms develop suddenly over a few hours?",
     "fr": "Est-ce que vos symptômes se sont déclarés soudainement, en l'espace de quelques heures ?"
   },
-  "weekly.HS.Q5.helpGroup.text.0": {
-    "en": "Why are we asking this question?",
-    "fr": "Pourquoi demandons-nous cela ?"
-  },
   "weekly.HS.Q5.helpGroup.text.1": {
     "en": "The sudden onset of symptoms (within a few hours) is linked to the coronavirus and influenza.",
     "fr": "L'apparition soudaine des symptômes est considéré comme commune pour la grippe."
-  },
-  "weekly.HS.Q5.helpGroup.text.2": {
-    "en": "How should I answer this question?",
-    "fr": "Comment dois-je répondre?"
   },
   "weekly.HS.Q5.helpGroup.text.3": {
     "en": "Answer “yes” if your symptoms appeared within a few hours, and not gradually over a period of several days.",
@@ -319,17 +267,9 @@
     "en": "On what day did your fever start? If you do not recall the exact date, please give an approximate date.",
     "fr": "Quand est-ce que votre fièvre a commencé ?"
   },
-  "weekly.HS.Q6.helpGroup.text.0": {
-    "en": "Why are we asking this question?",
-    "fr": "Pourquoi demandons-nous cela ?"
-  },
   "weekly.HS.Q6.helpGroup.text.1": {
     "en": "Fever is an important diagnostic symptom, so we would like to know when the fever appeared.",
     "fr": "La fièvre est très importante pour le diagnostic de la grippe. Nous voulons donc savoir quand cela a commencé."
-  },
-  "weekly.HS.Q6.helpGroup.text.2": {
-    "en": "How should I answer this question?",
-    "fr": "Comment dois-je répondre?"
   },
   "weekly.HS.Q6.helpGroup.text.3": {
     "en": "Answer as precisely as possible.",
@@ -347,17 +287,9 @@
     "en": "Did your fever develop suddenly over a few hours?",
     "fr": "Est-ce que votre fièvre s'est déclarée soudainement, en l'espace de quelques heures ?"
   },
-  "weekly.HS.Q6b.helpGroup.text.0": {
-    "en": "Why are we asking this question?",
-    "fr": "Pourquoi demandons-nous cela ?"
-  },
   "weekly.HS.Q6b.helpGroup.text.1": {
     "en": "The sudden onset of symptoms (within a few hours) is linked to the coronavirus and influenza.",
     "fr": "La grippe est souvent associée à une apparition soudaine de fièvre."
-  },
-  "weekly.HS.Q6b.helpGroup.text.2": {
-    "en": "How should I answer this question?",
-    "fr": "Comment dois-je répondre?"
   },
   "weekly.HS.Q6b.helpGroup.text.3": {
     "en": "Answer “yes” if your symptoms appeared within a few hours, and not gradually over a period of several days.",
@@ -379,17 +311,9 @@
     "en": "Did you take your temperature?",
     "fr": "Avez-vous pris votre température ?"
   },
-  "weekly.HS.Q6c.helpGroup.text.0": {
-    "en": "Why are we asking this question?",
-    "fr": "Pourquoi demandons-nous cela ?"
-  },
   "weekly.HS.Q6c.helpGroup.text.1": {
     "en": "If you have taken your temperature, we would like to know the highest body temperature you have measured.",
     "fr": "La grippe est souvent associée à une température élevée. Cependant tout le monde ne prend pas sa température lorsqu'il est malade."
-  },
-  "weekly.HS.Q6c.helpGroup.text.2": {
-    "en": "How should I answer it?",
-    "fr": "Comment dois-je répondre?"
   },
   "weekly.HS.Q6c.helpGroup.text.3": {
     "en": "Answer yes, if you took your temperature using a thermometer.",
@@ -411,17 +335,9 @@
     "en": "What was your highest temperature measured?",
     "fr": "Quel a été votre température mesurée la plus élevée ?"
   },
-  "weekly.HS.Q6d.helpGroup.text.0": {
-    "en": "Why are we asking this question?",
-    "fr": "Pourquoi demandons-nous cela ?"
-  },
   "weekly.HS.Q6d.helpGroup.text.1": {
     "en": "Certain infectious diseases cause a raised temperature.",
     "fr": "La grippe provoque souvent une température élevée."
-  },
-  "weekly.HS.Q6d.helpGroup.text.2": {
-    "en": "How should I answer this question?",
-    "fr": "Comment dois-je répondre?"
   },
   "weekly.HS.Q6d.helpGroup.text.3": {
     "en": "Please indicate the highest temperature you measured during the period in which you experienced your symptoms.",
@@ -459,10 +375,6 @@
     "en": "Thank you for all these information. They will help us to estimate the frequency of symptoms among general population. You can stop here. If you have a little more time, we propose you to answer further questions about your symptoms and care. Do you accept to answer to these additional questions?",
     "fr": "TODO"
   },
-  "weekly.HS.Q36.helpGroup.text.0": {
-    "en": "Why are we asking this question?",
-    "fr": "TODO"
-  },
   "weekly.HS.Q36.helpGroup.text.1": {
     "en": "We want to know if you are willing to answer the follow-up questions. Your answers to the follow-up questions may assist our research.",
     "fr": "TODO"
@@ -479,17 +391,9 @@
     "en": "Because of your symptoms, did you VISIT (see face to face or teleconsultation) any medical services?",
     "fr": "TODO"
   },
-  "weekly.EX.Q7.helpGroup.text.0": {
-    "en": "Why are we asking this?",
-    "fr": "Pourquoi demandons-nous cela ?"
-  },
   "weekly.EX.Q7.helpGroup.text.1": {
     "en": "To find out whether people contact the health services because of their symptoms.",
     "fr": "Pour savoir si la population entre en contact avec les services de santé en raison de ses symptômes."
-  },
-  "weekly.EX.Q7.helpGroup.text.2": {
-    "en": "How should I answer it?",
-    "fr": "Comment dois-je répondre ?"
   },
   "weekly.EX.Q7.helpGroup.text.3": {
     "en": "Tick all of those that apply. If you are due to see attend, then tick the final option.",
@@ -527,17 +431,9 @@
     "en": "How soon after your symptoms appeared did you first VISIT this medical service?",
     "fr": "Combien de temps après que vos symptômes soient apparus avez-vous visité un service médical ?"
   },
-  "weekly.EX.Q7b.helpGroup.text.0": {
-    "en": "Why are we asking this?",
-    "fr": "Pourquoi demandons-nous cela ?"
-  },
   "weekly.EX.Q7b.helpGroup.text.1": {
     "en": "To find out how quickly people with symptoms are seen by the health services.",
     "fr": "Pour savoir à quelle vitesse les personnes présentant des symptômes sont vus par les services de santé."
-  },
-  "weekly.EX.Q7b.helpGroup.text.2": {
-    "en": "How should I answer it?",
-    "fr": "Comment dois-je répondre ?"
   },
   "weekly.EX.Q7b.helpGroup.text.3": {
     "en": "Only record the time until your FIRST contact with the health services.",
@@ -699,16 +595,8 @@
     "en": "What is the main reason for which you did not consult any health professional for the symptoms you declared today?",
     "fr": "TODO"
   },
-  "weekly.EX.Qcov18.helpGroup.text.0": {
-    "en": "Why are we asking this question?",
-    "fr": "TODO"
-  },
   "weekly.EX.Qcov18.helpGroup.text.1": {
     "en": "To understand why some people do not consult a doctor.",
-    "fr": "TODO"
-  },
-  "weekly.EX.Qcov18.helpGroup.text.2": {
-    "en": "How should I answer this question?",
     "fr": "TODO"
   },
   "weekly.EX.Qcov18.helpGroup.text.3": {
@@ -775,10 +663,6 @@
     "en": "Because of your symptoms, did you undergo a test/analyses to know if you have COVID-19?",
     "fr": "TODO"
   },
-  "weekly.EX.Qcov16h.helpGroup.text.0": {
-    "en": "Why are we asking this question?",
-    "fr": "TODO"
-  },
   "weekly.EX.Qcov16h.helpGroup.text.1": {
     "en": "We want to know which complaints lead people to get tested for the coronavirus.",
     "fr": "TODO"
@@ -801,10 +685,6 @@
   },
   "weekly.EX.Qcov16i.title.0": {
     "en": "Which analyse(s) was it?",
-    "fr": "TODO"
-  },
-  "weekly.EX.Qcov16i.helpGroup.text.0": {
-    "en": "Why are we asking this question?",
     "fr": "TODO"
   },
   "weekly.EX.Qcov16i.helpGroup.text.1": {
@@ -835,10 +715,6 @@
     "en": "Do you know the result of your PCR test? (if several were performed and at least one was positive, chose the “Positive” answer)",
     "fr": "TODO"
   },
-  "weekly.EX.Qcov16b.helpGroup.text.0": {
-    "en": "Why are we asking this question?",
-    "fr": "TODO"
-  },
   "weekly.EX.Qcov16b.helpGroup.text.1": {
     "en": "We want to understand how the coronavirus is spreading within the population.",
     "fr": "TODO"
@@ -861,10 +737,6 @@
   },
   "weekly.EX.Qcov16f.title.0": {
     "en": "Do you know the result of this rapid antigen detection test on nasopharyngeal sample? (if several were performed and at least one was positive, chose the “Positive” answer)",
-    "fr": "TODO"
-  },
-  "weekly.EX.Qcov16f.helpGroup.text.0": {
-    "en": "Why are we asking this question?",
     "fr": "TODO"
   },
   "weekly.EX.Qcov16f.helpGroup.text.1": {
@@ -891,10 +763,6 @@
     "en": "Do you know the result of this antigenic test or self-test on nasal sample? (if several were performed and at least one was positive, chose the “Positive” answer)",
     "fr": "TODO"
   },
-  "weekly.EX.Qcov16k.helpGroup.text.0": {
-    "en": "Why are we asking this question?",
-    "fr": "TODO"
-  },
   "weekly.EX.Qcov16k.helpGroup.text.1": {
     "en": "We want to understand how the coronavirus is spreading within the population.",
     "fr": "TODO"
@@ -917,10 +785,6 @@
   },
   "weekly.EX.Qcov19.title.0": {
     "en": "Because of your symptoms, did you undergo a test/analyses to know if you have the Flu?",
-    "fr": "TODO"
-  },
-  "weekly.EX.Qcov19.helpGroup.text.0": {
-    "en": "Why are we asking this question?",
     "fr": "TODO"
   },
   "weekly.EX.Qcov19.helpGroup.text.1": {
@@ -951,10 +815,6 @@
     "en": "Have you received the results of your Flu test?",
     "fr": "TODO"
   },
-  "weekly.EX.Qcov19b.helpGroup.text.0": {
-    "en": "Why are we asking this question?",
-    "fr": "TODO"
-  },
   "weekly.EX.Qcov19b.helpGroup.text.1": {
     "en": "We want to understand how the flu is spreading within the population.",
     "fr": "TODO"
@@ -979,25 +839,13 @@
     "en": "Did you take medication for these symptoms?",
     "fr": "Avez-vous pris des médicaments pour ces symptômes?"
   },
-  "weekly.EX.Q9.helpGroup.text.0": {
-    "en": "Why are we asking this?",
-    "fr": "Pourquoi demandons-nous cela ?"
-  },
   "weekly.EX.Q9.helpGroup.text.1": {
     "en": "To find out who gets treated, and how effective treatment is.",
     "fr": "Pour savoir qui se fait soigner, et si le traitement est efficace."
   },
-  "weekly.EX.Q9.helpGroup.text.2": {
-    "en": "How should I answer it?",
-    "fr": "Comment devez-vous répondre ?"
-  },
   "weekly.EX.Q9.helpGroup.text.3": {
     "en": "Only record those medications that you used because of this illness. If you are on other medications because of a pre-existing illness then do not record these.",
     "fr": "Ne saisissez que les médicaments que vous pris en raison de cette épisode de maladie. Si vous avez pris d'autres médicaments pour une maladie préexistante, alors ne les enregistrez pas."
-  },
-  "weekly.EX.Q9.rg.vMc3.text.0": {
-    "en": "Select all options that apply",
-    "fr": "sélectionnez toutes les options applicables"
   },
   "weekly.EX.Q9.rg.mcg.option.0": {
     "en": "No medication",
@@ -1039,10 +887,6 @@
     "en": "Because of your symptoms, were you hospitalized?",
     "fr": "TODO"
   },
-  "weekly.EX.Q14.helpGroup.text.0": {
-    "en": "Why are we asking this question?",
-    "fr": "TODO"
-  },
   "weekly.EX.Q14.helpGroup.text.1": {
     "en": "We want to understand the rates of hospitalization due to symptoms",
     "fr": "TODO"
@@ -1059,16 +903,8 @@
     "en": "Did you change your daily routine because of your illness?",
     "fr": "TODO"
   },
-  "weekly.EX.Q10.helpGroup.text.0": {
-    "en": "Why are we asking this question?",
-    "fr": "TODO"
-  },
   "weekly.EX.Q10.helpGroup.text.1": {
     "en": "To determine how the symptoms are impacting your daily life.",
-    "fr": "TODO"
-  },
-  "weekly.EX.Q10.helpGroup.text.2": {
-    "en": "How should I answer this question?",
     "fr": "TODO"
   },
   "weekly.EX.Q10.helpGroup.text.3": {
@@ -1091,16 +927,8 @@
     "en": "Are you currently still unable to work or attend school due to your symptoms/complaints?",
     "fr": "TODO"
   },
-  "weekly.EX.Q10b.helpGroup.text.0": {
-    "en": "Why are we asking this question?",
-    "fr": "TODO"
-  },
   "weekly.EX.Q10b.helpGroup.text.1": {
     "en": "To determine how the symptoms are impacting your daily life.",
-    "fr": "TODO"
-  },
-  "weekly.EX.Q10b.helpGroup.text.2": {
-    "en": "How should I answer this question?",
     "fr": "TODO"
   },
   "weekly.EX.Q10b.helpGroup.text.3": {
@@ -1123,16 +951,8 @@
     "en": "For how many days have you been unable to work normally/go to school (when you otherwise would have)?",
     "fr": "TODO"
   },
-  "weekly.EX.Q10c.helpGroup.text.0": {
-    "en": "Why are we asking this question?",
-    "fr": "TODO"
-  },
   "weekly.EX.Q10c.helpGroup.text.1": {
     "en": "To calculate the number of days a person misses work or school due to certain symptoms.",
-    "fr": "TODO"
-  },
-  "weekly.EX.Q10c.helpGroup.text.2": {
-    "en": "How should I answer this question?",
     "fr": "TODO"
   },
   "weekly.EX.Q10c.helpGroup.text.3": {
@@ -1175,16 +995,8 @@
     "en": "Did you begin to follow or increase any of the measures below, due to your symptoms (compared to the period before your symptoms began)?",
     "fr": "TODO"
   },
-  "weekly.EX.Qcov7.helpGroup.text.0": {
-    "en": "Why are we asking this question?",
-    "fr": "TODO"
-  },
   "weekly.EX.Qcov7.helpGroup.text.1": {
     "en": "To examine how different measures are being followed.",
-    "fr": "TODO"
-  },
-  "weekly.EX.Qcov7.helpGroup.text.2": {
-    "en": "How should I answer this question?",
     "fr": "TODO"
   },
   "weekly.EX.Qcov7.helpGroup.text.3": {
@@ -1519,17 +1331,9 @@
     "en": "What do you think is causing your symptoms?",
     "fr": "Quelle est selon vous l'origine de vos symptômes ?"
   },
-  "weekly.EX.Q11.helpGroup.text.0": {
-    "en": "Why are we asking this question?",
-    "fr": "Pourquoi demandons-nous cela ?"
-  },
   "weekly.EX.Q11.helpGroup.text.1": {
     "en": "To see if our assessment of your illness, based on your symptoms, matches what you believe to be the cause. You may have a better idea of the cause of your illness than our computer algorithms.",
     "fr": "Pour nous aider à trouver si notre évaluation de votre maladie en fonction de vos symptômes correspond à ce que vous croyez en être la cause. Vous pourriez avoir une meilleure idée de ce qui est la cause de votre maladie que nos algorithmes informatiques."
-  },
-  "weekly.EX.Q11.helpGroup.text.2": {
-    "en": "How should I answer this question?",
-    "fr": "Comment devez-vous répondre ?"
   },
   "weekly.EX.Q11.helpGroup.text.3": {
     "en": "If you are reasonably sure of the cause of your symptoms, select the appropriate box. Otherwise, select 'No, I Don’t know'.",

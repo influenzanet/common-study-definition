@@ -1,0 +1,14 @@
+{
+    "common.select_all_apply": {
+      "en": "Select all options that apply",
+      "fr": "Sélectionnez toutes les réponses appropriées"
+    },
+    "common.why_are_we_asking": {
+        "en": "Why are we asking this?",
+        "fr": "Pourquoi demandons-nous cela ?"
+    },
+    "common.how_should_i_answer": {
+        "en":"How should I answer this question?",
+        "fr":"Comment dois-je répondre"
+    }
+}
