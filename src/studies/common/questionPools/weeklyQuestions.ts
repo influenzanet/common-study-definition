@@ -9,8 +9,9 @@ import { MultipleChoicePrefix, singleChoicePrefix, text_how_answer, text_select_
 import { SurveyItems } from 'case-editor-tools/surveys';
 import { ComponentGenerators } from "case-editor-tools/surveys/utils/componentGenerators";
 import { StudyEngine as se } from "case-editor-tools/expression-utils/studyEngineExpressions";
-
 import { WeeklyResponses as ResponseEncoding } from "../responses/weekly";
+import { ItemProps } from "./types";
+
 
 /**
  * SYMPTOMS: multiple choice question about allergies
@@ -25,9 +26,9 @@ export class Symptoms extends Item {
 
     useOther: boolean;
 
-    constructor(parentKey: string, isRequired?: boolean, keyOverride?:string) {
-        super(parentKey, keyOverride ? keyOverride: 'Q1');
-        this.isRequired = isRequired;
+    constructor(props: ItemProps) {
+        super(props.parentKey, props.keyOverride ? props.keyOverride: 'Q1');
+        this.isRequired = props.isRequired;
         this.useRash = false;
         this.useOther = false;
     }
@@ -211,6 +212,12 @@ export class Symptoms extends Item {
     }
 }
 
+interface SymptomsGroupProps {
+    parentKey: string
+    keySymptomsQuestion: string
+    defaultKey?: string
+}
+
 /**
  * GROUP DEPENDING ON IF ANY SYMPTOMS PRESENT
  *
@@ -226,10 +233,10 @@ export class SymptomsGroup extends Group {
         return se.responseHasOnlyKeysOtherThan(this.keySymptomsQuestion, MultipleChoicePrefix, ResponseEncoding.symptoms.no_symptom);
     }
 
-    constructor(parentKey: string, keySymptomsQuestion: string, defaultKey?: string) {
+    constructor(props:SymptomsGroupProps) {
 
-        super(parentKey, defaultKey ? defaultKey : 'HS');
-        this.keySymptomsQuestion = keySymptomsQuestion;
+        super(props.parentKey, props.defaultKey ? props.defaultKey : 'HS');
+        this.keySymptomsQuestion = props.keySymptomsQuestion;
         this.groupEditor.setCondition(this.getCondition());
     }
 
@@ -247,9 +254,9 @@ export class SymptomsGroup extends Group {
  */
 export class SameIllnes extends Item {
 
-    constructor(parentKey: string, isRequired?: boolean, keyOverride?:string) {
-        super(parentKey, keyOverride ? keyOverride: 'Q2');
-        this.isRequired = isRequired;
+    constructor(props: ItemProps) {
+        super(props.parentKey, props.keyOverride ? props.keyOverride: 'Q2');
+        this.isRequired = props.isRequired;
     }
 
     getCondition() {
@@ -329,9 +336,9 @@ export class SameIllnes extends Item {
  */
  export class PcrTestedContact extends Item {
 
-    constructor(parentKey: string, isRequired?: boolean, keyOverride?:string) {
-        super(parentKey, keyOverride ? keyOverride: 'Qcov3');
-        this.isRequired = isRequired;
+    constructor(props: ItemProps) {
+        super(props.parentKey, props.keyOverride ? props.keyOverride: 'Qcov3');
+        this.isRequired = props.isRequired;
     }
 
     buildItem() {
@@ -376,14 +383,17 @@ export class SameIllnes extends Item {
     }
 }
 
-export class PcrHouseholdContact extends Item {
+interface PcrCovidProps extends ItemProps {
+    covid19ContactKey: string
+}
 
+export class PcrHouseholdContact extends Item {
     covid19ContactKey: string
 
-    constructor(parentKey: string, covid19ContactKey: string, isRequired?: boolean, keyOverride?:string) {
-        super(parentKey, keyOverride ? keyOverride: 'Qcov3b');
-        this.isRequired = isRequired;
-        this.covid19ContactKey = covid19ContactKey;
+    constructor(props: PcrCovidProps) {
+        super(props.parentKey, props.keyOverride ? props.keyOverride: 'Qcov3b');
+        this.isRequired = props.isRequired;
+        this.covid19ContactKey = props.covid19ContactKey;
     }
 
     getCondition() {
@@ -439,28 +449,33 @@ export class PcrHouseholdContact extends Item {
     }
 }
 
+interface SameIllnessProps extends ItemProps {
+    keySameIllness: string;
+}
+
+
 /**
  * SYMPTOMS START
  *
  * @param parentKey full key path of the parent item, required to genrate this item's unique key (e.g. `<surveyKey>.<groupKey>`).
- * @param keySameIllnes reference to 'same illness' question
+ * @param keySameIllness reference to 'same illness' question
  * @param isRequired if true adds a default "hard" validation to the question to check if it has a response.
  * @param keyOverride use this to override the default key for this item (only last part of the key, parent's key is not influenced).
  */
 export class SymptomsStart extends Item {
 
-    keySameIllnes: string;
+    keySameIllness: string;
 
-    constructor(parentKey: string, keySameIllnes: string, isRequired?: boolean, keyOverride?:string) {
-        super(parentKey, keyOverride ? keyOverride: 'Q3');
-        this.isRequired = isRequired;
-        this.keySameIllnes = keySameIllnes;
+    constructor(props: SameIllnessProps) {
+        super(props.parentKey, props.keyOverride ? props.keyOverride: 'Q3');
+        this.isRequired = props.isRequired;
+        this.keySameIllness = props.keySameIllness;
     }
 
     getCondition() {
         const codes = ResponseEncoding.same_illness;
         return expWithArgs('not',
-            expWithArgs('responseHasKeysAny', this.keySameIllnes, singleChoicePrefix, codes.yes, codes.notapply)
+            expWithArgs('responseHasKeysAny', this.keySameIllness, singleChoicePrefix, codes.yes, codes.notapply)
         );
     }
 
@@ -518,6 +533,10 @@ export class SymptomsStart extends Item {
     }
 }
 
+interface SymptomStartProps extends ItemProps {
+    keySymptomsStart: string
+}
+
 
 /**
  * SYMPTOMS END
@@ -531,10 +550,10 @@ export class SymptomsEnd extends Item {
 
     keySymptomsStart: string;
 
-    constructor(parentKey: string, keySymptomsStart: string, isRequired?: boolean, keyOverride?:string) {
-        super(parentKey, keyOverride ? keyOverride: 'Q4');
-        this.isRequired = isRequired;
-        this.keySymptomsStart = keySymptomsStart;
+    constructor(props: SymptomStartProps) {
+        super(props.parentKey, props.keyOverride ? props.keyOverride: 'Q4');
+        this.isRequired = props.isRequired;
+        this.keySymptomsStart = props.keySymptomsStart;
     }
 
     buildItem() {
@@ -602,9 +621,9 @@ export class SymptomsEnd extends Item {
  */
 export class SymptomsSuddenlyDeveloped extends Item {
 
-    constructor(parentKey: string, isRequired?: boolean, keyOverride?:string) {
-        super(parentKey, keyOverride ? keyOverride: 'Q5');
-        this.isRequired = isRequired;
+    constructor(props: ItemProps) {
+        super(props.parentKey, props.keyOverride ? props.keyOverride: 'Q5');
+        this.isRequired = props.isRequired;
     }
 
     buildItem() {
@@ -651,16 +670,20 @@ export class SymptomsSuddenlyDeveloped extends Item {
     }
 }
 
+interface SymptomsAndStartProps extends ItemProps {
+    keySymptomsQuestion: string
+    keySymptomStart: string
+}
 
 export class FeverStart extends Item {
     keySymptomsQuestion: string
     keySymptomStart: string
 
-    constructor(parentKey: string, keySymptomsQuestion: string, keySymptomStart: string, isRequired?: boolean, keyOverride?:string) {
-        super(parentKey, keyOverride ? keyOverride: '');
-        this.isRequired = isRequired;
-        this.keySymptomsQuestion = keySymptomsQuestion;
-        this.keySymptomStart = keySymptomStart;
+    constructor(props: SymptomsAndStartProps) {
+        super(props.parentKey, props.keyOverride ? props.keyOverride: '');
+        this.isRequired = props.isRequired;
+        this.keySymptomsQuestion = props.keySymptomsQuestion;
+        this.keySymptomStart = props.keySymptomStart;
     }
 
     getCondition() {
@@ -727,14 +750,18 @@ export class FeverStart extends Item {
     }
 }
 
+interface SymptomDependentProps extends ItemProps {
+    keySymptomsQuestion: string
+}
+
 abstract class SymptomDependentQuestion extends Item {
 
     keySymptomsQuestion: string;
 
-    constructor(defaultKey: string, parentKey: string, keySymptomsQuestion: string, isRequired?: boolean, keyOverride?:string) {
-        super(parentKey, keyOverride ? keyOverride: defaultKey);
-        this.isRequired = isRequired;
-        this.keySymptomsQuestion = keySymptomsQuestion;
+    constructor(defaultKey: string, props:SymptomDependentProps ) {
+        super(props.parentKey, props.keyOverride ? props.keyOverride: defaultKey);
+        this.isRequired = props.isRequired;
+        this.keySymptomsQuestion = props.keySymptomsQuestion;
     }
 
     abstract getTriggerSymptoms(): Array<string>;
@@ -756,8 +783,8 @@ abstract class SymptomDependentQuestion extends Item {
  */
 export class FeverDevelopedSuddenly extends SymptomDependentQuestion {
 
-    constructor(parentKey: string, keySymptomsQuestion: string, isRequired?: boolean, keyOverride?:string) {
-        super('b', parentKey, keySymptomsQuestion, isRequired, keyOverride );
+    constructor(props: SymptomDependentProps) {
+        super('b', props );
     }
 
     getTriggerSymptoms() {
@@ -813,8 +840,8 @@ export class FeverDevelopedSuddenly extends SymptomDependentQuestion {
 
 export class DidUMeasureTemperature extends SymptomDependentQuestion {
 
-    constructor(parentKey: string, keySymptomsQuestion: string, isRequired?: boolean, keyOverride?:string) {
-        super('c', parentKey, keySymptomsQuestion, isRequired, keyOverride );
+    constructor(props: SymptomDependentProps) {
+        super('c', props );
     }
 
     getTriggerSymptoms() {
@@ -868,6 +895,10 @@ export class DidUMeasureTemperature extends SymptomDependentQuestion {
     }
 }
 
+interface TemperatureProps extends SymptomDependentProps {
+    keyDidYouMeasureTemperature: string
+}
+
 /**
  * HIGHEST TEMPERATURE
  *
@@ -880,9 +911,9 @@ export class HighestTemprerature extends SymptomDependentQuestion {
 
     keyDidYouMeasureTemperature: string;
 
-    constructor(parentKey: string, keySymptomsQuestion: string, keyDidYouMeasureTemperature: string, isRequired?: boolean, keyOverride?:string) {
-        super('d', parentKey, keySymptomsQuestion, isRequired, keyOverride );
-        this.keyDidYouMeasureTemperature = keyDidYouMeasureTemperature;
+    constructor(props: TemperatureProps) {
+        super('d', props );
+        this.keyDidYouMeasureTemperature = props.keyDidYouMeasureTemperature;
     }
 
     getCondition() {
@@ -969,25 +1000,25 @@ export class FeverGroup extends Group {
         return se.multipleChoice.any(this.keySymptomsQuestion, ResponseEncoding.symptoms.fever);
     }
 
-    constructor(parentKey: string, keySymptomsQuestion: string, keySymptomStart: string, isRequired?: boolean, keyOverride?: string) {
+    constructor(props: SymptomsAndStartProps) {
         const defaultKey = 'Q6';
-        super(parentKey, keyOverride ? keyOverride : defaultKey);
+        super(props.parentKey, props.keyOverride ? props.keyOverride : defaultKey);
 
-        this.keySymptomsQuestion = keySymptomsQuestion;
-        this.keySymptomStart = keySymptomStart;
-        this.isRequired = isRequired;
+        this.keySymptomsQuestion = props.keySymptomsQuestion;
+        this.keySymptomStart = props.keySymptomStart;
+        this.isRequired = props.isRequired;
         this.groupEditor.setCondition(this.getCondition());
 
     }
 
     buildItems() {
 
-        const measure = new DidUMeasureTemperature(this.key, this.keySymptomsQuestion, this.isRequired);
+        const measure = new DidUMeasureTemperature({parentKey: this.key, keySymptomsQuestion: this.keySymptomsQuestion, isRequired: this.isRequired});
         return [
-            new FeverStart(this.key, this.keySymptomsQuestion, this.keySymptomStart, this.isRequired),
-            new FeverDevelopedSuddenly(this.key, this.keySymptomsQuestion, this.isRequired),
+            new FeverStart({parentKey: this.key, keySymptomsQuestion: this.keySymptomsQuestion, keySymptomStart: this.keySymptomStart, isRequired: this.isRequired}),
+            new FeverDevelopedSuddenly({parentKey: this.key, keySymptomsQuestion: this.keySymptomsQuestion, isRequired: this.isRequired}),
             measure,
-            new HighestTemprerature(this.key, this.keySymptomsQuestion, measure.key, this.isRequired )
+            new HighestTemprerature({parentKey: this.key, keySymptomsQuestion:this.keySymptomsQuestion, keyDidYouMeasureTemperature: measure.key, isRequired: this.isRequired})
         ];
     }
 
@@ -1009,9 +1040,9 @@ export class FeverGroup extends Group {
  */
 export class ConsentForMore extends Item {
 
-    constructor(parentKey: string, isRequired?: boolean, keyOverride?:string) {
-        super(parentKey, keyOverride ? keyOverride: 'Q36');
-        this.isRequired = isRequired;
+    constructor(props: ItemProps) {
+        super(props.parentKey, props.keyOverride ? props.keyOverride: 'Q36');
+        this.isRequired = props.isRequired;
     }
 
     buildItem() {
@@ -1048,6 +1079,10 @@ export class ConsentForMore extends Item {
     }
 }
 
+interface HasMoreGroupProps extends ItemProps {
+    consentForMoreKey: string;
+}
+
 /**
  * GROUP DEPENDING ON IF ANY SYMPTOMS PRESENT AND USER WANTS TO ANSWER MORE QUESTIONS
  *
@@ -1063,10 +1098,10 @@ export class HasMoreGroup extends Group {
         return se.singleChoice.any(this.consentForMoreKey, ResponseEncoding.consent_more.yes)
     }
 
-    constructor(parentKey: string, consentForMoreKey: string, keyOverride?: string) {
+    constructor(props: HasMoreGroupProps) {
         const defaultKey = 'EX';
-        super(parentKey, keyOverride ? keyOverride: defaultKey);
-        this.consentForMoreKey = consentForMoreKey;
+        super(props.parentKey, props.keyOverride ? props.keyOverride: defaultKey);
+        this.consentForMoreKey = props.consentForMoreKey;
         this.groupEditor.setCondition(
             this.getCondition()
         );
@@ -1086,9 +1121,9 @@ export class HasMoreGroup extends Group {
  */
 export class SymptomImpliedCovidTest extends Item {
 
-    constructor(parentKey: string, isRequired?: boolean, keyOverride?:string) {
-        super(parentKey, keyOverride ? keyOverride: 'Qcov16h');
-        this.isRequired = isRequired;
+    constructor(props: ItemProps) {
+        super(props.parentKey, props.keyOverride ? props.keyOverride: 'Qcov16h');
+        this.isRequired = props.isRequired;
     }
 
     buildItem() {
@@ -1134,6 +1169,10 @@ export class SymptomImpliedCovidTest extends Item {
     }
 }
 
+interface CovidTestQuestionProps extends ItemProps {
+    keySymptomImpliedCovidTest: string;
+}
+
 
 /**
  * TEST TYPE
@@ -1145,18 +1184,18 @@ export class SymptomImpliedCovidTest extends Item {
  */
 export class CovidTestType extends Item {
 
-    keysymptomImpliedCovidTest: string;
+    keySymptomImpliedCovidTest: string;
 
-    constructor(parentKey: string,  keysymptomImpliedCovidTest: string, isRequired?: boolean, keyOverride?:string) {
-        super(parentKey, keyOverride ? keyOverride: 'Qcov16i');
-        this.isRequired = isRequired;
-        this.keysymptomImpliedCovidTest = keysymptomImpliedCovidTest;
+    constructor(props: CovidTestQuestionProps) {
+        super(props.parentKey, props.keyOverride ? props.keyOverride: 'Qcov16i');
+        this.isRequired = props.isRequired;
+        this.keySymptomImpliedCovidTest = props.keySymptomImpliedCovidTest;
     }
 
     getCondition() {
         // FIXME: in case keysymptomImpliedCovidTest chnges type eg: single -> multiple, this will break unless
         // singleChoiceKey is changed to multipleChoiceKey
-        return  se.responseHasKeysAny(this.keysymptomImpliedCovidTest, singleChoicePrefix, ResponseEncoding.symptom_test.yes);
+        return  se.responseHasKeysAny(this.keySymptomImpliedCovidTest, singleChoicePrefix, ResponseEncoding.symptom_test.yes);
         //expWithArgs('responseHasKeysAny', keysymptomImpliedCovidTest, responseGroupKey + '.' + singleChoiceKey, '1'),
     }
 
@@ -1206,15 +1245,18 @@ export class CovidTestType extends Item {
     }
 }
 
+interface TestTypeProps extends ItemProps {
+    keyTestType: string
+}
 
 abstract class TestTypeDependentQuestion extends Item {
 
     keyTestType: string;
 
-    constructor(defaultKey: string, parentKey: string, keyTestType: string, isRequired?: boolean, keyOverride?:string) {
-        super(parentKey, keyOverride ? keyOverride: defaultKey);
-        this.isRequired = isRequired;
-        this.keyTestType = keyTestType;
+    constructor(defaultKey: string, props: TestTypeProps) {
+        super(props.parentKey, props.keyOverride ? props.keyOverride: defaultKey);
+        this.isRequired = props.isRequired;
+        this.keyTestType = props.keyTestType;
     }
 
     abstract getTriggerTests(): Array<string>;
@@ -1237,8 +1279,8 @@ abstract class TestTypeDependentQuestion extends Item {
  */
 export class ResultPCRTest extends TestTypeDependentQuestion {
 
-    constructor(parentKey: string, keyTestType: string, isRequired?: boolean, keyOverride?:string) {
-        super('Qcov16b', parentKey, keyTestType, isRequired, keyOverride );
+    constructor(props: TestTypeProps) {
+        super('Qcov16b', props );
     }
 
     getTriggerTests() {
@@ -1302,8 +1344,8 @@ export class ResultPCRTest extends TestTypeDependentQuestion {
  */
 export class ResultAntigenicTest extends TestTypeDependentQuestion {
 
-    constructor(parentKey: string, keyTestType: string, isRequired?: boolean, keyOverride?:string) {
-        super('Qcov16f', parentKey, keyTestType, isRequired, keyOverride );
+    constructor(props: TestTypeProps) {
+        super('Qcov16f', props );
     }
 
     getTriggerTests() {
@@ -1365,8 +1407,8 @@ export class ResultAntigenicTest extends TestTypeDependentQuestion {
  */
 export class ResultRapidAntigenicTest extends TestTypeDependentQuestion {
 
-    constructor(parentKey: string, keyTestType: string, isRequired?: boolean, keyOverride?:string) {
-        super('Qcov16k', parentKey, keyTestType, isRequired, keyOverride );
+    constructor(props: TestTypeProps) {
+        super('Qcov16k', props );
     }
 
     getTriggerTests() {
@@ -1422,9 +1464,9 @@ export class ResultRapidAntigenicTest extends TestTypeDependentQuestion {
 
 export class FluTest extends Item {
 
-    constructor(parentKey: string, isRequired?: boolean, keyOverride?:string) {
-        super(parentKey, keyOverride ? keyOverride: 'Qcov19');
-        this.isRequired = isRequired;
+    constructor(props: ItemProps) {
+        super(props.parentKey, props.keyOverride ? props.keyOverride: 'Qcov19');
+        this.isRequired = props.isRequired;
     }
 
     buildItem() {
@@ -1476,6 +1518,11 @@ export class FluTest extends Item {
     }
 }
 
+interface ResultFluTestProps extends ItemProps {
+    keyFluTest: string
+
+}
+
 /**
  * RESULT FLU PCR TEST: result flu test
  *
@@ -1488,10 +1535,10 @@ export class ResultFluTest extends Item {
 
     keyFluTest: string
 
-    constructor(parentKey: string, keyFluTest: string, isRequired?: boolean, keyOverride?:string) {
-        super(parentKey, keyOverride ? keyOverride: 'Qcov19b');
-        this.isRequired = isRequired;
-        this.keyFluTest = keyFluTest;
+    constructor(props: ResultFluTestProps) {
+        super(props.parentKey, props.keyOverride ? props.keyOverride: 'Qcov19b');
+        this.isRequired = props.isRequired;
+        this.keyFluTest = props.keyFluTest;
     }
 
     getCondition() {
@@ -1552,9 +1599,9 @@ export class ResultFluTest extends Item {
  */
 export class VisitedMedicalService extends Item {
 
-    constructor(parentKey: string, isRequired?: boolean, keyOverride?:string) {
-        super(parentKey, keyOverride ? keyOverride: 'Q7');
-        this.isRequired = isRequired;
+    constructor(props: ItemProps) {
+        super(props.parentKey, props.keyOverride ? props.keyOverride: 'Q7');
+        this.isRequired = props.isRequired;
     }
 
     buildItem() {
@@ -1634,6 +1681,12 @@ export class VisitedMedicalService extends Item {
     }
 }
 
+interface VisitedMedicalServiceProps extends ItemProps {
+    keyVisitedMedicalServ: string
+
+}
+
+
 /**
  * WHEN VISITED MEDICAL SERVICE
  *
@@ -1647,10 +1700,10 @@ export class VisitedMedicalServiceWhen extends Item {
 
     keyVisitedMedicalServ: string
 
-    constructor(parentKey: string, keyVisitedMedicalServ: string, isRequired?: boolean, keyOverride?:string) {
-        super(parentKey, keyOverride ? keyOverride: 'Q7b');
-        this.isRequired = isRequired;
-        this.keyVisitedMedicalServ = keyVisitedMedicalServ;
+    constructor(props: VisitedMedicalServiceProps) {
+        super(props.parentKey, props.keyOverride ? props.keyOverride: 'Q7b');
+        this.isRequired = props.isRequired;
+        this.keyVisitedMedicalServ = props.keyVisitedMedicalServ;
     }
 
     getCondition() {
@@ -1807,10 +1860,10 @@ export class WhyVisitedNoMedicalService extends Item {
 
     keyVisitedMedicalServ: string
 
-    constructor(parentKey: string, keyVisitedMedicalServ: string, isRequired?: boolean, keyOverride?:string) {
-        super(parentKey, keyOverride ? keyOverride: 'Qcov18');
-        this.isRequired = isRequired;
-        this.keyVisitedMedicalServ = keyVisitedMedicalServ;
+    constructor(props: VisitedMedicalServiceProps) {
+        super(props.parentKey, props.keyOverride ? props.keyOverride: 'Qcov18');
+        this.isRequired = props.isRequired;
+        this.keyVisitedMedicalServ = props.keyVisitedMedicalServ;
     }
 
     getCondition() {
@@ -1911,9 +1964,9 @@ export class WhyVisitedNoMedicalService extends Item {
  */
 export class TookMedication extends Item {
 
-    constructor(parentKey: string, isRequired?: boolean, keyOverride?:string) {
-        super(parentKey, keyOverride ? keyOverride: 'xx');
-        this.isRequired = isRequired;
+    constructor(props: ItemProps) {
+        super(props.parentKey, props.keyOverride ? props.keyOverride: 'Q9');
+        this.isRequired = props.isRequired;
     }
 
 
@@ -2038,9 +2091,9 @@ export class TookMedication extends Item {
  */
 export class Hospitalized extends Item {
 
-    constructor(parentKey: string, isRequired?: boolean, keyOverride?:string) {
-        super(parentKey, keyOverride ? keyOverride: 'Q14');
-        this.isRequired = isRequired;
+    constructor(props: ItemProps) {
+        super(props.parentKey, props.keyOverride ? props.keyOverride: 'Q14');
+        this.isRequired = props.isRequired;
     }
 
     buildItem() {
@@ -2086,9 +2139,9 @@ export class Hospitalized extends Item {
  */
 export class DailyRoutine extends Item {
 
-    constructor(parentKey: string, isRequired?: boolean, keyOverride?:string) {
-        super(parentKey, keyOverride ? keyOverride: 'Q10');
-        this.isRequired = isRequired;
+    constructor(props: ItemProps) {
+        super(props.parentKey, props.keyOverride ? props.keyOverride: 'Q10');
+        this.isRequired = props.isRequired;
     }
 
     buildItem() {
@@ -2141,15 +2194,18 @@ export class DailyRoutine extends Item {
     }
 }
 
+interface DailyRoutineProps extends ItemProps {
+    keyDailyRoutine: string;
+}
 
 export class DailyRoutineToday extends Item {
 
     keyDailyRoutine: string;
 
-    constructor(parentKey: string, keyDailyRoutine:string, isRequired?: boolean, keyOverride?:string) {
-        super(parentKey, keyOverride ? keyOverride: 'Q10b');
-        this.isRequired = isRequired;
-        this.keyDailyRoutine = keyDailyRoutine;
+    constructor(props: DailyRoutineProps) {
+        super(props.parentKey, props.keyOverride ? props.keyOverride: 'Q10b');
+        this.isRequired = props.isRequired;
+        this.keyDailyRoutine = props.keyDailyRoutine;
     }
 
     getCondition() {
@@ -2218,10 +2274,10 @@ export class DailyRoutineDaysMissed extends Item {
 
     keyDailyRoutine: string;
 
-    constructor(parentKey: string, keyDailyRoutine:string, isRequired?: boolean, keyOverride?:string) {
-        super(parentKey, keyOverride ? keyOverride: 'Q10c');
-        this.isRequired = isRequired;
-        this.keyDailyRoutine = keyDailyRoutine;
+    constructor(props: DailyRoutineProps) {
+        super(props.parentKey, props.keyOverride ? props.keyOverride: 'Q10c');
+        this.isRequired = props.isRequired;
+        this.keyDailyRoutine = props.keyDailyRoutine;
     }
 
     getCondition() {
@@ -2296,9 +2352,9 @@ export class DailyRoutineDaysMissed extends Item {
  */
  export class CovidHabitsChange extends Item {
 
-    constructor(parentKey: string, isRequired?: boolean, keyOverride?:string) {
-        super(parentKey, keyOverride ? keyOverride: 'Qcov7');
-        this.isRequired = isRequired;
+    constructor(props: ItemProps) {
+        super(props.parentKey, props.keyOverride ? props.keyOverride: 'Qcov7');
+        this.isRequired = props.isRequired;
     }
 
     buildItem() {
@@ -2416,9 +2472,9 @@ export class DailyRoutineDaysMissed extends Item {
  */
 export class CauseOfSymptoms extends Item {
 
-    constructor(parentKey: string, isRequired?: boolean, keyOverride?:string) {
-        super(parentKey, keyOverride ? keyOverride: 'Q11');
-        this.isRequired = isRequired;
+    constructor(props: ItemProps) {
+        super(props.parentKey, props.keyOverride ? props.keyOverride: 'Q11');
+        this.isRequired = props.isRequired;
     }
 
     buildItem() {
@@ -2492,8 +2548,8 @@ export class CauseOfSymptoms extends Item {
 }
 
 export class SurveyEnd extends Item {
-    constructor(parentKey: string, keyOverride?:string) {
-        super(parentKey, keyOverride ? keyOverride : 'surveyEnd');
+    constructor(props: ItemProps) {
+        super(props.parentKey, props.keyOverride ? props.keyOverride : 'surveyEnd');
     }
 
     buildItem() {

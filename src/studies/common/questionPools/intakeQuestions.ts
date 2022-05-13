@@ -4,12 +4,18 @@ import { ItemEditor } from "case-editor-tools/surveys/survey-editor/item-editor"
 import { expWithArgs, generateHelpGroupComponent, generateLocStrings, generateTitleComponent } from "case-editor-tools/surveys/utils/simple-generators";
 import { matrixKey, multipleChoiceKey, responseGroupKey, singleChoiceKey } from "case-editor-tools/constants/key-definitions";
 import { ComponentGenerators } from "case-editor-tools/surveys/utils/componentGenerators";
-import { Item } from "case-editor-tools/surveys/types";
+import { Item, OptionDef } from "case-editor-tools/surveys/types";
 import { SurveyItems } from 'case-editor-tools/surveys';
 import { initMatrixQuestion,  ResponseRowCell } from "case-editor-tools/surveys/responseTypeGenerators/matrixGroupComponent";
 import {require_response, text_select_all_apply, text_why_asking, text_how_answer, singleChoicePrefix, MultipleChoicePrefix } from './helpers';
 import { StudyEngine as se } from "case-editor-tools/expression-utils/studyEngineExpressions";
 import { IntakeResponses as ResponseEncoding } from "../responses/intake";
+import { ItemProps } from "./types";
+
+
+interface GenderProps extends ItemProps {
+    useOther?:boolean
+}
 
 /**
  * GENDER: Single choice question about gender
@@ -22,10 +28,10 @@ export class Gender extends Item {
 
     useOther: boolean;
 
-    constructor(parentKey: string, isRequired?: boolean, keyOverride?:string, useOther?:boolean) {
-        super(parentKey, keyOverride ? keyOverride: 'Q1');
-        this.useOther = useOther ?? true;
-        this.isRequired = isRequired;
+    constructor(props:GenderProps ) {
+        super(props.parentKey, props.keyOverride ? props.keyOverride: 'Q1');
+        this.useOther = props.useOther ?? true;
+        this.isRequired = props.isRequired;
     }
 
     buildItem() {
@@ -40,7 +46,7 @@ export class Gender extends Item {
         });
     }
 
-    getResponses() {
+    getResponses(): OptionDef[] {
 
        const t = [];
        if(this.useOther) {
@@ -83,9 +89,9 @@ export class Gender extends Item {
  */
 export class DateOfBirth extends Item {
 
-    constructor(parentKey: string, isRequired?: boolean) {
-        super(parentKey, 'Q2');
-        this.isRequired = isRequired;
+    constructor(props: ItemProps) {
+        super(props.parentKey, props.keyOverride ? props.keyOverride : 'Q2');
+        this.isRequired = props.isRequired;
     }
 
     getHelpGroupContent() {
@@ -163,9 +169,9 @@ export class DateOfBirth extends Item {
  */
 export class PostalCode extends Item {
 
-    constructor(parentKey: string, isRequired?: boolean, keyOverride?:string) {
-        super(parentKey, keyOverride ? keyOverride: 'Q3');
-        this.isRequired = isRequired;
+    constructor(props: ItemProps) {
+        super(props.parentKey, props.keyOverride ? props.keyOverride: 'Q3');
+        this.isRequired = props.isRequired;
     }
 
     getHelpGroupContent() {
@@ -244,9 +250,9 @@ export class PostalCode extends Item {
  */
 export class MainActivity extends Item {
 
-    constructor(parentKey: string, isRequired?: boolean, keyOverride?:string) {
-        super(parentKey, keyOverride ? keyOverride: 'Q4');
-        this.isRequired = isRequired;
+    constructor(props: ItemProps) {
+        super(props.parentKey, props.keyOverride ? props.keyOverride: 'Q4');
+        this.isRequired = props.isRequired;
     }
 
     buildItem() {
@@ -321,14 +327,18 @@ export class MainActivity extends Item {
     }
 }
 
+interface MainActivityProps extends ItemProps {
+    keyMainActivity: string;
+
+}
 export class PostalCodeWork extends Item {
 
     keyMainActivity: string;
 
-    constructor(parentKey: string, keyMainActivity: string, isRequired?: boolean, keyOverride?:string) {
-        super(parentKey, keyOverride ? keyOverride: 'Q4b');
-        this.isRequired = isRequired;
-        this.keyMainActivity = keyMainActivity;
+    constructor(props: MainActivityProps) {
+        super(props.parentKey, props.keyOverride ? props.keyOverride: 'Q4b');
+        this.isRequired = props.isRequired;
+        this.keyMainActivity = props.keyMainActivity;
     }
 
     getCondition() {
@@ -414,10 +424,10 @@ export class WorkTypeEurostat extends Item {
 
     keyMainActivity?: string;
 
-    constructor(parentKey: string, keyMainActivity: string, isRequired?: boolean, keyOverride?:string) {
-        super(parentKey, keyOverride ? keyOverride: 'Q4h');
-        this.isRequired = isRequired;
-        this.keyMainActivity = keyMainActivity;
+    constructor(props: MainActivityProps) {
+        super(props.parentKey, props.keyOverride ? props.keyOverride: 'Q4h');
+        this.isRequired = props.isRequired;
+        this.keyMainActivity = props.keyMainActivity;
     }
 
     getCondition() {
@@ -432,7 +442,7 @@ export class WorkTypeEurostat extends Item {
             itemKey: this.itemKey,
             isRequired: this.isRequired,
             condition: this.getCondition(),
-            questionText: _T("intake.Q3.title.0", "What is your home postal code?"),
+            questionText: _T("intake.Q4h.title.0", "Which of the following descriptions most closely matches with your main occupation? "),
             helpGroupContent: this.getHelpGroupContent(),
             responseOptions: [
                 {
@@ -500,6 +510,11 @@ export class WorkTypeEurostat extends Item {
     }
 }
 
+interface EducationProps extends ItemProps {
+    keyQBirthday?: string
+
+}
+
 /**
  * HIGHEST EDUCATION: single choice about what is the highest level of formal education
  *
@@ -512,10 +527,10 @@ export class WorkTypeEurostat extends Item {
 
     keyQBirthday?: string
 
-    constructor(parentKey: string, keyQBirthday:string, isRequired?: boolean, keyOverride?:string) {
-        super(parentKey, keyOverride ? keyOverride: 'Q4d');
-        this.isRequired = isRequired;
-        this.keyQBirthday = keyQBirthday;
+    constructor(props: EducationProps) {
+        super(props.parentKey, props.keyOverride ? props.keyOverride: 'Q4d');
+        this.isRequired = props.isRequired;
+        this.keyQBirthday = props.keyQBirthday;
     }
 
     getCondition() {
@@ -540,39 +555,43 @@ export class WorkTypeEurostat extends Item {
                     content: _T("intake.Q4d.rg.nUk7.text.0", 'Select all options that apply'),
                 })
             ],
-            responseOptions: [
-                {
-                    key: '0', role: 'option',
-                    disabled: expWithArgs('responseHasKeysAny', this.key, responseGroupKey + '.' + multipleChoiceKey, '1', '2', '3', '4', '5'),
-                    content: _T("intake.Q4d.rg.mcg.option.0", "I have no formal qualification")
-                },
-                {
-                    key: '1', role: 'option',
-                    disabled: expWithArgs('responseHasKeysAny',this.key, responseGroupKey + '.' + multipleChoiceKey, '0', '2', '3', '4'),
-                    content: _T("intake.Q4d.rg.mcg.option.1", "GCSEs, levels, CSEs or equivalent")
-                },
-                {
-                    key: '2', role: 'option',
-                    disabled: expWithArgs('responseHasKeysAny', this.key, responseGroupKey + '.' + multipleChoiceKey, '0', '1', '3', '4'),
-                    content: _T("intake.Q4d.rg.mcg.option.2", "A-levels or equivalent (e.g. Higher, NVQ Level3, BTEC)")
-                },
-                {
-                    key: '3', role: 'option',
-                    disabled: expWithArgs('responseHasKeysAny', this.key, responseGroupKey + '.' + multipleChoiceKey, '0', '1', '2', '4'),
-                    content: _T("intake.Q4d.rg.mcg.option.3", "Bachelor Degree (BA, BSc) or equivalent")
-                },
-                {
-                    key: '4', role: 'option',
-                    disabled: expWithArgs('responseHasKeysAny', this.key, responseGroupKey + '.' + multipleChoiceKey, '0', '1', '2', '3'),
-                    content: _T("intake.Q4d.rg.mcg.option.4", "Higher Degree or equivalent (e.g. Masters Degree, PGCE, PhD, Medical Doctorate, Advanced Professional Award)")
-                },
-                {
-                    key: '5', role: 'option',
-                    disabled: expWithArgs('responseHasKeysAny', this.key, responseGroupKey + '.' + multipleChoiceKey, '0'),
-                    content: _T("intake.Q4d.rg.mcg.option.5", "I am still in education")
-                },
-            ]
+            responseOptions: this.getResponses()
         });
+    }
+
+    getResponses(): OptionDef[] {
+       return [
+            {
+                key: '0', role: 'option',
+                disabled: expWithArgs('responseHasKeysAny', this.key, responseGroupKey + '.' + multipleChoiceKey, '1', '2', '3', '4', '5'),
+                content: _T("intake.Q4d.rg.mcg.option.0", "I have no formal qualification")
+            },
+            {
+                key: '1', role: 'option',
+                disabled: expWithArgs('responseHasKeysAny',this.key, responseGroupKey + '.' + multipleChoiceKey, '0', '2', '3', '4'),
+                content: _T("intake.Q4d.rg.mcg.option.1", "GCSEs, levels, CSEs or equivalent")
+            },
+            {
+                key: '2', role: 'option',
+                disabled: expWithArgs('responseHasKeysAny', this.key, responseGroupKey + '.' + multipleChoiceKey, '0', '1', '3', '4'),
+                content: _T("intake.Q4d.rg.mcg.option.2", "A-levels or equivalent (e.g. Higher, NVQ Level3, BTEC)")
+            },
+            {
+                key: '3', role: 'option',
+                disabled: expWithArgs('responseHasKeysAny', this.key, responseGroupKey + '.' + multipleChoiceKey, '0', '1', '2', '4'),
+                content: _T("intake.Q4d.rg.mcg.option.3", "Bachelor Degree (BA, BSc) or equivalent")
+            },
+            {
+                key: '4', role: 'option',
+                disabled: expWithArgs('responseHasKeysAny', this.key, responseGroupKey + '.' + multipleChoiceKey, '0', '1', '2', '3'),
+                content: _T("intake.Q4d.rg.mcg.option.4", "Higher Degree or equivalent (e.g. Masters Degree, PGCE, PhD, Medical Doctorate, Advanced Professional Award)")
+            },
+            {
+                key: '5', role: 'option',
+                disabled: expWithArgs('responseHasKeysAny', this.key, responseGroupKey + '.' + multipleChoiceKey, '0'),
+                content: _T("intake.Q4d.rg.mcg.option.5", "I am still in education")
+            },
+        ];
     }
 
     getHelpGroupContent() {
@@ -603,14 +622,13 @@ export class WorkTypeEurostat extends Item {
  */
 export class PeopleMet extends Item {
 
-    constructor(parentKey: string, isRequired?: boolean, keyOverride?:string) {
-        super(parentKey, keyOverride ? keyOverride: 'Q5');
-        this.isRequired = isRequired;
+    constructor(props: ItemProps) {
+        super(props.parentKey, props.keyOverride ? props.keyOverride: 'Q5');
+        this.isRequired = props.isRequired;
     }
 
     buildItem() {
 
-        const optionExclusive = expWithArgs('responseHasKeysAny',this.key, responseGroupKey + '.' + multipleChoiceKey, '4');
 
         return SurveyItems.multipleChoice({
             parentKey: this.parentKey,
@@ -620,31 +638,38 @@ export class PeopleMet extends Item {
             questionText: _T("intake.Q5.title.0", "Except people you meet on public transportation, do you have contact with any of the following during the course of a typical day (so without COVID-19 measures)?"),
             helpGroupContent: this.getHelpGroupContent(),
             topDisplayCompoments: [ text_select_all_apply("intake.Q5.rg.dwL8.text.0") ],
-            responseOptions: [
-                {
-                    key: '0', role: 'option',
-                    disabled: optionExclusive,
-                    content: _T("intake.Q5.rg.mcg.option.0", "More than 10 children or teenagers (without counting your own children)")
-                },
-                {
-                    key: '1', role: 'option',
-                    disabled: optionExclusive,
-                    content: _T("intake.Q5.rg.mcg.option.1", "More than 10 people aged over 65")
-                },
-                {
-                    key: '2', role: 'option',
-                    disabled: optionExclusive,
-                    content: _T("intake.Q5.rg.mcg.option.2", "Patients")
-                }, {
-                    key: '3', role: 'option',
-                    disabled: optionExclusive,
-                    content: _T("intake.Q5.rg.mcg.option.3", "Groups of people (more than 10 individuals at any one time)")
-                }, {
-                    key: '4', role: 'option',
-                    content: _T("intake.Q5.rg.mcg.option.4", "None of the above")
-                },
-            ]
+            responseOptions: this.getResponses(),
         });
+
+    }
+
+    getResponses(): OptionDef[] {
+        const optionExclusive = expWithArgs('responseHasKeysAny',this.key, responseGroupKey + '.' + multipleChoiceKey, '4');
+
+        return [
+            {
+                key: '0', role: 'option',
+                disabled: optionExclusive,
+                content: _T("intake.Q5.rg.mcg.option.0", "More than 10 children or teenagers (without counting your own children)")
+            },
+            {
+                key: '1', role: 'option',
+                disabled: optionExclusive,
+                content: _T("intake.Q5.rg.mcg.option.1", "More than 10 people aged over 65")
+            },
+            {
+                key: '2', role: 'option',
+                disabled: optionExclusive,
+                content: _T("intake.Q5.rg.mcg.option.2", "Patients")
+            }, {
+                key: '3', role: 'option',
+                disabled: optionExclusive,
+                content: _T("intake.Q5.rg.mcg.option.3", "Groups of people (more than 10 individuals at any one time)")
+            }, {
+                key: '4', role: 'option',
+                content: _T("intake.Q5.rg.mcg.option.4", "None of the above")
+            },
+        ];
     }
 
     getHelpGroupContent() {
@@ -655,7 +680,7 @@ export class PeopleMet extends Item {
                 style: [{ key: 'variant', value: 'p' }],
             },
             {
-                content: _T("intake.Q5.helpGroup.text.2", "Hint:"),
+                content: _T("intake.Q5.helpGroup.text.2", "Hint:", "common.why_are_we_asking"),
                 style: [{ key: 'variant', value: 'h5' }],
             },
             {
@@ -674,9 +699,9 @@ export class PeopleMet extends Item {
  */
 export class AgeGroups extends Item {
 
-    constructor(parentKey: string, isRequired?: boolean, keyOverride?:string) {
-        super(parentKey, keyOverride ? keyOverride: 'Q6');
-        this.isRequired = isRequired;
+    constructor(props: ItemProps) {
+        super(props.parentKey, props.keyOverride ? props.keyOverride: 'Q6');
+        this.isRequired = props.isRequired;
     }
 
     getHelpGroupContent() {
@@ -809,6 +834,10 @@ export class AgeGroups extends Item {
 
 }
 
+interface AgeGroupsProps extends ItemProps {
+    keyOfAgeGroups?: string
+}
+
 
 /**
  * PEOPLE AT RISK: single choice about people at risk among contacts
@@ -821,10 +850,10 @@ export class PeopleAtRisk extends Item {
 
     keyOfAgeGroups?: string
 
-    constructor(parentKey: string, keyOfAgeGroups?: string, isRequired?: boolean, keyOverride?:string) {
-        super(parentKey, keyOverride ? keyOverride: 'Q6c');
-        this.keyOfAgeGroups = keyOfAgeGroups;
-        this.isRequired = isRequired;
+    constructor(props: AgeGroupsProps) {
+        super(props.parentKey, props.keyOverride ? props.keyOverride: 'Q6c');
+        this.keyOfAgeGroups = props.keyOfAgeGroups;
+        this.isRequired = props.isRequired;
     }
 
     getCondition() {
@@ -894,10 +923,10 @@ export class PeopleAtRisk extends Item {
 
     keyOfAgeGroups?: string
 
-    constructor(parentKey: string, keyOfAgeGroups?: string, isRequired?: boolean, keyOverride?:string) {
-        super(parentKey, keyOverride ? keyOverride: 'Q6b');
-        this.keyOfAgeGroups = keyOfAgeGroups;
-        this.isRequired = isRequired;
+    constructor(props: AgeGroupsProps) {
+        super(props.parentKey, props.keyOverride ? props.keyOverride: 'Q6b');
+        this.keyOfAgeGroups = props.keyOfAgeGroups;
+        this.isRequired = props.isRequired;
     }
 
     getCondition() {
@@ -917,37 +946,41 @@ export class PeopleAtRisk extends Item {
             condition: this.getCondition(),
             questionText: _T("intake.Q6b.title.0", "How many of the children in your household go to school or day-care?"),
             helpGroupContent: this.getHelpGroupContent(),
-            responseOptions: [
-                {
-                    key: '0', role: 'option',
-                    content: _T("intake.Q6b.rg.scg.option.0", "None")
-                },
-                {
-                    key: '1', role: 'option',
-                    content: _T_any("1")
-                },
-                {
-                    key: '2', role: 'option',
-                    content: _T_any("2")
-                },
-                {
-                    key: '3', role: 'option',
-                    content: _T_any("3")
-                },
-                {
-                    key: '4', role: 'option',
-                    content: _T_any( "4")
-                },
-                {
-                    key: '5', role: 'option',
-                    content: _T_any("5")
-                },
-                {
-                    key: '99', role: 'option',
-                    content: _T("intake.Q6b.rg.scg.option.6", "More than 5")
-                },
-            ]
+            responseOptions: this.getResponses(),
         });
+    }
+
+    getResponses(): OptionDef[] {
+        return [
+            {
+                key: '0', role: 'option',
+                content: _T("intake.Q6b.rg.scg.option.0", "None")
+            },
+            {
+                key: '1', role: 'option',
+                content: _T_any("1")
+            },
+            {
+                key: '2', role: 'option',
+                content: _T_any("2")
+            },
+            {
+                key: '3', role: 'option',
+                content: _T_any("3")
+            },
+            {
+                key: '4', role: 'option',
+                content: _T_any( "4")
+            },
+            {
+                key: '5', role: 'option',
+                content: _T_any("5")
+            },
+            {
+                key: '99', role: 'option',
+                content: _T("intake.Q6b.rg.scg.option.6", "More than 5")
+            },
+        ];
     }
 
     getHelpGroupContent() {
@@ -975,9 +1008,9 @@ export class PeopleAtRisk extends Item {
  */
 export class MeansOfTransport extends Item {
 
-    constructor(parentKey: string, isRequired?: boolean, keyOverride?:string) {
-        super(parentKey, keyOverride ? keyOverride: 'Q7');
-        this.isRequired = isRequired;
+    constructor(props: ItemProps) {
+        super(props.parentKey, props.keyOverride ? props.keyOverride: 'Q7');
+        this.isRequired = props.isRequired;
     }
 
     buildItem() {
@@ -1041,9 +1074,9 @@ export class MeansOfTransport extends Item {
 
 export class CommonColdFrequency extends Item {
 
-    constructor(parentKey: string, isRequired?: boolean, keyOverride?:string) {
-        super(parentKey, keyOverride ? keyOverride: 'Q8');
-        this.isRequired = isRequired;
+    constructor(props: ItemProps) {
+        super(props.parentKey, props.keyOverride ? props.keyOverride: 'Q8');
+        this.isRequired = props.isRequired;
     }
 
     buildItem() {
@@ -1054,33 +1087,37 @@ export class CommonColdFrequency extends Item {
             condition: this.condition,
             questionText: _T("intake.Q8.title.0", "How often do you have common colds or flu-like diseases?"),
             helpGroupContent: this.getHelpGroupContent(),
-            responseOptions: [
-                {
-                    key: '0', role: 'option',
-                    content: _T("intake.Q8.rg.scg.option.0", "Never")
-                },
-                {
-                    key: '1', role: 'option',
-                    content: _T("intake.Q8.rg.scg.option.1", "Once or twice a year")
-                },
-                {
-                    key: '2', role: 'option',
-                    content: _T("intake.Q8.rg.scg.option.2", "Between 3 and 5 times a year")
-                },
-                {
-                    key: '3', role: 'option',
-                    content: _T("intake.Q8.rg.scg.option.3", "Between 6 and 10 times a year")
-                },
-                {
-                    key: '4', role: 'option',
-                    content: _T("intake.Q8.rg.scg.option.4", "More than 10 times a year")
-                },
-                {
-                    key: '5', role: 'option',
-                    content: _T("intake.Q8.rg.scg.option.5", "I don't know")
-                },
-            ]
+            responseOptions: this.getResponses()
         });
+    }
+
+    getResponses(): OptionDef[] {
+        return [
+            {
+                key: '0', role: 'option',
+                content: _T("intake.Q8.rg.scg.option.0", "Never")
+            },
+            {
+                key: '1', role: 'option',
+                content: _T("intake.Q8.rg.scg.option.1", "Once or twice a year")
+            },
+            {
+                key: '2', role: 'option',
+                content: _T("intake.Q8.rg.scg.option.2", "Between 3 and 5 times a year")
+            },
+            {
+                key: '3', role: 'option',
+                content: _T("intake.Q8.rg.scg.option.3", "Between 6 and 10 times a year")
+            },
+            {
+                key: '4', role: 'option',
+                content: _T("intake.Q8.rg.scg.option.4", "More than 10 times a year")
+            },
+            {
+                key: '5', role: 'option',
+                content: _T("intake.Q8.rg.scg.option.5", "I don't know")
+            },
+        ];
     }
 
     getHelpGroupContent() {
@@ -1095,15 +1132,12 @@ export class CommonColdFrequency extends Item {
 
 export class RegularMedication extends Item {
 
-    constructor(parentKey: string, isRequired?: boolean, keyOverride?:string) {
-        super(parentKey, keyOverride ? keyOverride: 'Q11');
-        this.isRequired = isRequired;
+    constructor(props: ItemProps) {
+        super(props.parentKey, props.keyOverride ? props.keyOverride: 'Q11');
+        this.isRequired = props.isRequired;
     }
 
     buildItem() {
-
-        const exclusiveOptionRule = expWithArgs('responseHasKeysAny', this.key, responseGroupKey + '.' + multipleChoiceKey, '0');
-
         return SurveyItems.multipleChoice({
             parentKey: this.parentKey,
             itemKey: this.itemKey,
@@ -1117,48 +1151,54 @@ export class RegularMedication extends Item {
                 })
             ],
             helpGroupContent: this.getHelpGroupContent(),
-            responseOptions: [
-                {
-                    key: '0', role: 'option',
-                    content: _T("intake.Q11.rg.mcg.option.0", "No")
-                },
-                {
-                    key: '1', role: 'option',
-                    disabled: exclusiveOptionRule,
-                    content: _T("intake.Q11.rg.mcg.option.1", "Asthma")
-                }, {
-                    key: '2', role: 'option',
-                    disabled: exclusiveOptionRule,
-                    content: _T("intake.Q11.rg.mcg.option.2", "Diabetes")
-                },
-                {
-                    key: '3', role: 'option',
-                    disabled: exclusiveOptionRule,
-                    content: _T("intake.Q11.rg.mcg.option.3", "Chronic lung disorder besides asthma e.g. COPD, emphysema, or other disorders that affect your breathing")
-                },
-                {
-                    key: '4', role: 'option',
-                    disabled: exclusiveOptionRule,
-                    content: _T("intake.Q11.rg.mcg.option.4", "Heart disorder")
-                },
-                {
-                    key: '5', role: 'option',
-                    disabled: exclusiveOptionRule,
-                    content: _T("intake.Q11.rg.mcg.option.5", "Kidney disorder")
-                },
-                {
-                    key: '6', role: 'option',
-                    disabled: exclusiveOptionRule,
-                    content: _T("intake.Q11.rg.mcg.option.6", "An immunocompromising condition (e.g. splenectomy, organ transplant, acquired immune deficiency, cancer treatment)")
-                },
-                {
-                    key: '7', role: 'option',
-                    disabled: exclusiveOptionRule,
-                    content: _T("intake.Q11.rg.mcg.option.7", "I would rather not answer")
-                },
-            ]
+            responseOptions: this.getResponses(),
         });
 
+    }
+
+    getResponses(): OptionDef[] {
+        const exclusiveOptionRule = expWithArgs('responseHasKeysAny', this.key, responseGroupKey + '.' + multipleChoiceKey, '0');
+
+        return [
+            {
+                key: '0', role: 'option',
+                content: _T("intake.Q11.rg.mcg.option.0", "No")
+            },
+            {
+                key: '1', role: 'option',
+                disabled: exclusiveOptionRule,
+                content: _T("intake.Q11.rg.mcg.option.1", "Asthma")
+            }, {
+                key: '2', role: 'option',
+                disabled: exclusiveOptionRule,
+                content: _T("intake.Q11.rg.mcg.option.2", "Diabetes")
+            },
+            {
+                key: '3', role: 'option',
+                disabled: exclusiveOptionRule,
+                content: _T("intake.Q11.rg.mcg.option.3", "Chronic lung disorder besides asthma e.g. COPD, emphysema, or other disorders that affect your breathing")
+            },
+            {
+                key: '4', role: 'option',
+                disabled: exclusiveOptionRule,
+                content: _T("intake.Q11.rg.mcg.option.4", "Heart disorder")
+            },
+            {
+                key: '5', role: 'option',
+                disabled: exclusiveOptionRule,
+                content: _T("intake.Q11.rg.mcg.option.5", "Kidney disorder")
+            },
+            {
+                key: '6', role: 'option',
+                disabled: exclusiveOptionRule,
+                content: _T("intake.Q11.rg.mcg.option.6", "An immunocompromising condition (e.g. splenectomy, organ transplant, acquired immune deficiency, cancer treatment)")
+            },
+            {
+                key: '7', role: 'option',
+                disabled: exclusiveOptionRule,
+                content: _T("intake.Q11.rg.mcg.option.7", "I would rather not answer")
+            },
+        ];
     }
 
     getHelpGroupContent() {
@@ -1195,11 +1235,15 @@ function exprPregnancyCondition(keyQGender: string, keyQBirthday: string ) {
     );
 }
 
+interface PregnancyProps extends ItemProps {
+    keyQGender: string;
+    keyQBirthday: string;
+}
 
 /**
- * PREGNANCY: single choice question about pregrancy
+ * PREGNANCY: single choice question about pregnancy
  *
- * @param parentKey full key path of the parent item, required to genrate this item's unique key (e.g. `<surveyKey>.<groupKey>`).
+ * @param parentKey full key path of the parent item, required to generate this item's unique key (e.g. `<surveyKey>.<groupKey>`).
  * @param keyQGender reference to the survey item about gender
  * @param keyQBirthday reference to the survey item about birthday
  * @param isRequired if true adds a default "hard" validation to the question to check if it has a response.
@@ -1210,11 +1254,11 @@ export class Pregnancy extends Item {
     keyQGender: string;
     keyQBirthday: string;
 
-    constructor(parentKey: string,  keyQGender: string, keyQBirthday: string, isRequired?: boolean, keyOverride?:string) {
-        super(parentKey, keyOverride ? keyOverride: 'Q12');
-        this.isRequired = isRequired;
-        this.keyQGender = keyQGender;
-        this.keyQBirthday = keyQBirthday;
+    constructor(props: PregnancyProps) {
+        super(props.parentKey, props.keyOverride ? props.keyOverride: 'Q12');
+        this.isRequired = props.isRequired;
+        this.keyQGender = props.keyQGender;
+        this.keyQBirthday = props.keyQBirthday;
     }
 
     getHelpGroupContent() {
@@ -1238,20 +1282,28 @@ export class Pregnancy extends Item {
             condition: this.getCondition(),
             questionText: _T("intake.Q12.title.0", "Are you currently pregnant?"),
             helpGroupContent: this.getHelpGroupContent(),
-            responseOptions: [
-                {
-                    key: '0', role: 'option',
-                    content: _T("intake.Q12.rg.scg.option.0", "Yes")
-                }, {
-                    key: '1', role: 'option',
-                    content: _T("intake.Q12.rg.scg.option.1", "No")
-                }, {
-                    key: '2', role: 'option',
-                    content: _T("intake.Q12.rg.scg.option.2", "Don't know/would rather not answer")
-                },
-            ]
+            responseOptions: this.getResponses(),
         });
     }
+
+    getResponses(): OptionDef[] {
+        return [
+            {
+                key: '0', role: 'option',
+                content: _T("intake.Q12.rg.scg.option.0", "Yes")
+            }, {
+                key: '1', role: 'option',
+                content: _T("intake.Q12.rg.scg.option.1", "No")
+            }, {
+                key: '2', role: 'option',
+                content: _T("intake.Q12.rg.scg.option.2", "Don't know/would rather not answer")
+            },
+        ];
+    }
+}
+
+interface PregnancyTrimesterProps extends PregnancyProps {
+    keyQPregnancy: string
 }
 
 /**
@@ -1269,12 +1321,12 @@ export class PregnancyTrimester extends Item {
     keyQPregnancy: string
 
 
-    constructor(parentKey: string, keyQGender: string, keyQBirthday: string, keyQPregnancy: string, isRequired?: boolean, keyOverride?:string) {
-        super(parentKey, keyOverride ? keyOverride: 'Q12b');
-        this.isRequired = isRequired;
-        this.keyQGender = keyQGender;
-        this.keyQBirthday = keyQBirthday;
-        this.keyQPregnancy = keyQPregnancy;
+    constructor(props: PregnancyTrimesterProps) {
+        super(props.parentKey, props.keyOverride ? props.keyOverride: 'Q12b');
+        this.isRequired = props.isRequired;
+        this.keyQGender = props.keyQGender;
+        this.keyQBirthday = props.keyQBirthday;
+        this.keyQPregnancy = props.keyQPregnancy;
     }
 
     getCondition() {
@@ -1302,34 +1354,38 @@ export class PregnancyTrimester extends Item {
             condition: this.getCondition(),
             questionText: _T("intake.Q12b.title.0", "Which trimester of the pregnancy are you in?"),
             helpGroupContent: this.getHelpGroupContent(),
-            responseOptions: [
-                {
-                    key: '0', role: 'option',
-                    content: _T("intake.Q12b.rg.scg.option.0", "First trimester (week 1-12)")
-                },
-                {
-                    key: '1', role: 'option',
-                    content: _T("intake.Q12b.rg.scg.option.1", "Second trimester (week 13-28)")
-                },
-                {
-                    key: '2', role: 'option',
-                    content: _T("intake.Q12b.rg.scg.option.2", "Third trimester (week 29-delivery)")
-                },
-                {
-                    key: '3', role: 'option',
-                    content: _T("intake.Q12b.rg.scg.option.3", "Don't know/would rather not answer")
-                },
-            ]
+            responseOptions: this.getResponses(),
         });
+    }
+
+    getResponses() : OptionDef[] {
+        return [
+            {
+                key: '0', role: 'option',
+                content: _T("intake.Q12b.rg.scg.option.0", "First trimester (week 1-12)")
+            },
+            {
+                key: '1', role: 'option',
+                content: _T("intake.Q12b.rg.scg.option.1", "Second trimester (week 13-28)")
+            },
+            {
+                key: '2', role: 'option',
+                content: _T("intake.Q12b.rg.scg.option.2", "Third trimester (week 29-delivery)")
+            },
+            {
+                key: '3', role: 'option',
+                content: _T("intake.Q12b.rg.scg.option.3", "Don't know/would rather not answer")
+            },
+        ];
     }
 }
 
 
 export class Smoking extends Item {
 
-    constructor(parentKey: string, isRequired?: boolean, keyOverride?:string) {
-        super(parentKey, keyOverride ? keyOverride: 'Q13');
-        this.isRequired = isRequired;
+    constructor(props: ItemProps) {
+        super(props.parentKey, props.keyOverride ? props.keyOverride: 'Q13');
+        this.isRequired = props.isRequired;
     }
 
     buildItem() {
@@ -1340,26 +1396,30 @@ export class Smoking extends Item {
             condition: this.condition,
             questionText: _T("intake.Q13.title.0", "Do you smoke tobacco?"),
             helpGroupContent: this.getHelpGroupContent(),
-            responseOptions: [
-                {
-                    key: '0', role: 'option',
-                    content: _T("intake.Q13.rg.scg.option.0", "No")
-                }, {
-                    key: '1', role: 'option',
-                    content: _T("intake.Q13.rg.scg.option.1", "Yes, occasionally")
-                }, {
-                    key: '2', role: 'option',
-                    content: _T("intake.Q13.rg.scg.option.2", "Yes, daily, fewer than 10 times a day")
-                }, {
-                    key: '3', role: 'option',
-                    content: _T("intake.Q13.rg.scg.option.3", "Yes, daily, 10 or more times a day")
-                }, {
-                    key: '4', role: 'option',
-                    content: _T("intake.Q13.rg.scg.option.5", "Dont know/would rather not answer")
-                },
-            ]
+            responseOptions: this.getResponses(),
         });
 
+    }
+
+    getResponses(): OptionDef[] {
+        return [
+            {
+                key: '0', role: 'option',
+                content: _T("intake.Q13.rg.scg.option.0", "No")
+            }, {
+                key: '1', role: 'option',
+                content: _T("intake.Q13.rg.scg.option.1", "Yes, occasionally")
+            }, {
+                key: '2', role: 'option',
+                content: _T("intake.Q13.rg.scg.option.2", "Yes, daily, fewer than 10 times a day")
+            }, {
+                key: '3', role: 'option',
+                content: _T("intake.Q13.rg.scg.option.3", "Yes, daily, 10 or more times a day")
+            }, {
+                key: '4', role: 'option',
+                content: _T("intake.Q13.rg.scg.option.5", "Dont know/would rather not answer")
+            },
+        ];
     }
 
     getHelpGroupContent() {
@@ -1388,16 +1448,12 @@ export class Smoking extends Item {
  */
 export class Allergies extends Item {
 
-    constructor(parentKey: string, isRequired?: boolean, keyOverride?:string) {
-        super(parentKey, keyOverride ? keyOverride: 'Q14');
-        this.isRequired = isRequired;
+    constructor(props: ItemProps) {
+        super(props.parentKey, props.keyOverride ? props.keyOverride: 'Q14');
+        this.isRequired = props.isRequired;
     }
 
     buildItem() {
-
-        const noAllergyCode = '5';
-
-        const exclusiveOptionRule = expWithArgs('responseHasKeysAny', this.key, MultipleChoicePrefix, noAllergyCode);
 
         return SurveyItems.multipleChoice({
             parentKey: this.parentKey,
@@ -1409,33 +1465,41 @@ export class Allergies extends Item {
             topDisplayCompoments: [
                 text_select_all_apply("intake.Q14.rg.7tXM.text.0")
             ],
-            responseOptions: [
-                {
-                    key: '1', role: 'option',
-                    disabled: exclusiveOptionRule,
-                    content: _T("intake.Q14.rg.mcg.option.0", "Hay fever")
-                },
-                {
-                    key: '2', role: 'option',
-                    disabled: exclusiveOptionRule,
-                    content: _T("intake.Q14.rg.mcg.option.1", "Allergy against house dust mite")
-                },
-                {
-                    key: '3', role: 'option',
-                    disabled: exclusiveOptionRule,
-                    content: _T("intake.Q14.rg.mcg.option.2", "Allergy against domestic animals or pets")
-                },
-                {
-                    key: '4', role: 'option',
-                    disabled: exclusiveOptionRule,
-                    content: _T("intake.Q14.rg.mcg.option.3", "Other allergies that cause respiratory symptoms (e.g. sneezing, runny eyes)")
-                },
-                {
-                    key: noAllergyCode, role: 'option',
-                    content: _T("intake.Q14.rg.mcg.option.4", "I do not have an allergy that causes respiratory symptoms")
-                },
-            ]
+            responseOptions: this.getResponses()
         });
+    }
+
+    getResponses() : OptionDef[] {
+
+        const noAllergyCode = '5';
+
+        const exclusiveOptionRule = expWithArgs('responseHasKeysAny', this.key, MultipleChoicePrefix, noAllergyCode);
+        return [
+            {
+                key: '1', role: 'option',
+                disabled: exclusiveOptionRule,
+                content: _T("intake.Q14.rg.mcg.option.0", "Hay fever")
+            },
+            {
+                key: '2', role: 'option',
+                disabled: exclusiveOptionRule,
+                content: _T("intake.Q14.rg.mcg.option.1", "Allergy against house dust mite")
+            },
+            {
+                key: '3', role: 'option',
+                disabled: exclusiveOptionRule,
+                content: _T("intake.Q14.rg.mcg.option.2", "Allergy against domestic animals or pets")
+            },
+            {
+                key: '4', role: 'option',
+                disabled: exclusiveOptionRule,
+                content: _T("intake.Q14.rg.mcg.option.3", "Other allergies that cause respiratory symptoms (e.g. sneezing, runny eyes)")
+            },
+            {
+                key: noAllergyCode, role: 'option',
+                content: _T("intake.Q14.rg.mcg.option.4", "I do not have an allergy that causes respiratory symptoms")
+            },
+        ]
     }
 
     getHelpGroupContent() {
@@ -1456,20 +1520,18 @@ export class Allergies extends Item {
 /**
  * SPACIAL DIET: multiple choice question about special diet
  *
- * @param parentKey full key path of the parent item, required to genrate this item's unique key (e.g. `<surveyKey>.<groupKey>`).
+ * @param parentKey full key path of the parent item, required to generate this item's unique key (e.g. `<surveyKey>.<groupKey>`).
  * @param isRequired if true adds a default "hard" validation to the question to check if it has a response.
  * @param keyOverride use this to override the default key for this item (only last part of the key, parent's key is not influenced).
  */
 export class SpecialDiet extends Item {
 
-    constructor(parentKey: string, isRequired?: boolean, keyOverride?:string) {
-        super(parentKey, keyOverride ? keyOverride: 'Q15');
-        this.isRequired = isRequired;
+    constructor(props: ItemProps) {
+        super(props.parentKey, props.keyOverride ? props.keyOverride: 'Q15');
+        this.isRequired = props.isRequired;
     }
 
     buildItem() {
-
-        const exclusiveOptionRule = expWithArgs('responseHasKeysAny', this.key, responseGroupKey + '.' + multipleChoiceKey, '0');
 
         return SurveyItems.singleChoice({
             parentKey: this.parentKey,
@@ -1480,36 +1542,45 @@ export class SpecialDiet extends Item {
             topDisplayCompoments: [
                 text_select_all_apply("intake.Q15.rg.mVmB.text.0")
             ],
-            responseOptions: [
-                {
-                    key: '0', role: 'option',
-                    content: _T("intake.Q15.rg.mcg.option.0", "No special diet")
-                }, {
-                    key: '1', role: 'option',
-                    disabled: exclusiveOptionRule,
-                    content: _T("intake.Q15.rg.mcg.option.1", "Vegetarian")
-                }, {
-                    key: '2', role: 'option',
-                    disabled: exclusiveOptionRule,
-                    content: _T("intake.Q15.rg.mcg.option.2", "Veganism")
-                }, {
-                    key: '3', role: 'option',
-                    disabled: exclusiveOptionRule,
-                    content: _T("intake.Q15.rg.mcg.option.3", "Low-calorie")
-                }, {
-                    key: '4', role: 'option',
-                    disabled: exclusiveOptionRule,
-                    content: _T("intake.Q15.rg.mcg.option.4", "Other")
-                },
-            ]
+            responseOptions: this.getResponses(),
         });
+    }
+
+    getResponses(): OptionDef[] {
+
+        const exclusiveOptionRule = expWithArgs('responseHasKeysAny', this.key, responseGroupKey + '.' + multipleChoiceKey, '0');
+
+        return [
+            {
+                key: '0', role: 'option',
+                content: _T("intake.Q15.rg.mcg.option.0", "No special diet")
+            },
+            {
+                key: '1', role: 'option',
+                disabled: exclusiveOptionRule,
+                content: _T("intake.Q15.rg.mcg.option.1", "Vegetarian")
+            },
+            {
+                key: '2', role: 'option',
+                disabled: exclusiveOptionRule,
+                content: _T("intake.Q15.rg.mcg.option.2", "Veganism")
+            },
+            {
+                key: '3', role: 'option',
+                disabled: exclusiveOptionRule,
+                content: _T("intake.Q15.rg.mcg.option.3", "Low-calorie")
+            },
+            {
+                key: '4', role: 'option',
+                disabled: exclusiveOptionRule,
+                content: _T("intake.Q15.rg.mcg.option.4", "Other")
+            },
+        ];
     }
 
     getHelpGroupContent() {
     }
 }
-
-
 
 /**
  * HOEMOPATHIC MEDICINE: single choice question about homeopathy
@@ -1520,9 +1591,9 @@ export class SpecialDiet extends Item {
  */
 export class HomeophaticMedicine extends Item {
 
-    constructor(parentKey: string, isRequired?: boolean, keyOverride?:string) {
-        super(parentKey, keyOverride ? keyOverride: 'Q26');
-        this.isRequired = isRequired;
+    constructor(props: ItemProps) {
+        super(props.parentKey, props.keyOverride ? props.keyOverride: 'Q26');
+        this.isRequired = props.isRequired;
     }
 
     buildItem() {
@@ -1533,26 +1604,30 @@ export class HomeophaticMedicine extends Item {
             condition: this.condition,
             questionText: _T("intake.Q26.title.0", "Are you taking or do you plan to take this winter homeopathic medicine in order to prevent COVID-19?"),
             helpGroupContent: this.getHelpGroupContent(),
-            responseOptions: [
-                {
-                    key: '1', role: 'option',
-                    content: _T("intake.Q26.rg.scg.option.0", "Yes")
-                },
-                {
-                    key: '0', role: 'option',
-                    content: _T("intake.Q26.rg.scg.option.1", "No")
-                },
-                {
-                    key: '2', role: 'option',
-                    content: _T("intake.Q26.rg.scg.option.2", "I don't know")
-                },
-                {
-                    key: '3', role: 'option',
-                    content: _T("intake.Q26.rg.scg.option.3", "I don't want to answer")
-                },
-            ]
+            responseOptions:this.getResponses()
         });
 
+    }
+
+    getResponses():OptionDef[] {
+       return [
+            {
+                key: '1', role: 'option',
+                content: _T("intake.Q26.rg.scg.option.0", "Yes")
+            },
+            {
+                key: '0', role: 'option',
+                content: _T("intake.Q26.rg.scg.option.1", "No")
+            },
+            {
+                key: '2', role: 'option',
+                content: _T("intake.Q26.rg.scg.option.2", "I don't know")
+            },
+            {
+                key: '3', role: 'option',
+                content: _T("intake.Q26.rg.scg.option.3", "I don't want to answer")
+            },
+        ]
     }
 
     getHelpGroupContent() {
@@ -1575,9 +1650,9 @@ export class HomeophaticMedicine extends Item {
  */
 export class FindOutAboutPlatform extends Item {
 
-    constructor(parentKey: string, isRequired?: boolean, keyOverride?:string) {
-        super(parentKey, keyOverride ? keyOverride: 'Q17');
-        this.isRequired = isRequired;
+    constructor(props: ItemProps) {
+        super(props.parentKey, props.keyOverride ? props.keyOverride: 'Q17');
+        this.isRequired = props.isRequired;
     }
 
     buildItem() {
@@ -1591,37 +1666,44 @@ export class FindOutAboutPlatform extends Item {
             topDisplayCompoments: [
                 text_select_all_apply("intake.Q17.rg.hIai.text.0"),
             ],
-            responseOptions: [
-                {
-                    key: '0', role: 'option',
-                    content: _T("intake.Q17.rg.mcg.option.0", "Radio or television")
-                },
-                {
-                    key: '1', role: 'option',
-                    content: _T("intake.Q17.rg.mcg.option.1", "In the newspaper or in a magazine")
-                },
-                {
-                    key: '2', role: 'option',
-                    content: _T("intake.Q17.rg.mcg.option.2", "The internet (a website, link, a search engine)")
-                },
-                {
-                    key: '3', role: 'option',
-                    content: _T("intake.Q17.rg.mcg.option.3", "By poster")
-                },
-                {
-                    key: '4', role: 'option',
-                    content: _T("intake.Q17.rg.mcg.option.4", "Via family or friends")
-                },
-                {
-                    key: '5', role: 'option',
-                    content: _T("intake.Q17.rg.mcg.option.5", "Via school or work")
-                },
-                {
-                    key: '99', role: 'option',
-                    content: _T("intake.Q17.rg.mcg.option.6", "Other")
-                },
-            ]
+            responseOptions: this.getReponses()
         });
+    }
+
+    getReponses(): OptionDef[] {
+
+        const codes = ResponseEncoding.find_about;
+
+        return [
+            {
+                key: codes.radio, role: 'option',
+                content: _T("intake.Q17.rg.mcg.option.0", "Radio or television")
+            },
+            {
+                key: codes.newspaper, role: 'option',
+                content: _T("intake.Q17.rg.mcg.option.1", "In the newspaper or in a magazine")
+            },
+            {
+                key: codes.internet, role: 'option',
+                content: _T("intake.Q17.rg.mcg.option.2", "The internet (a website, link, a search engine)")
+            },
+            {
+                key: codes.poster, role: 'option',
+                content: _T("intake.Q17.rg.mcg.option.3", "By poster")
+            },
+            {
+                key: codes.family, role: 'option',
+                content: _T("intake.Q17.rg.mcg.option.4", "Via family or friends")
+            },
+            {
+                key: codes.work, role: 'option',
+                content: _T("intake.Q17.rg.mcg.option.5", "Via school or work")
+            },
+            {
+                key: '99', role: 'option',
+                content: _T("intake.Q17.rg.mcg.option.6", "Other")
+            },
+        ];
     }
 
     getHelpGroupContent() {

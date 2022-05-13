@@ -8,12 +8,13 @@ import { singleChoicePrefix, text_how_answer, text_select_all_apply, text_why_as
 import { ParticipantFlags } from "../participantFlags";
 
 import { VaccinationResponses as ResponseEncoding } from "../responses/vaccination";
+import { ItemProps, GroupProps } from "./types";
 
 export class VacStart extends Item {
 
-    constructor(parentKey: string, isRequired?: boolean, keyOverride?:string) {
-        super(parentKey, keyOverride ? keyOverride: 'Q0');
-        this.isRequired = isRequired;
+    constructor(props: ItemProps) {
+        super(props.parentKey, props.keyOverride ? props.keyOverride: 'Q0');
+        this.isRequired = props.isRequired;
     }
 
     getCondition() {
@@ -68,6 +69,9 @@ export class VacStart extends Item {
     }
 }
 
+interface VacGroupProps extends GroupProps {
+    keyVacStart: string
+}
 
 
 /**
@@ -77,7 +81,7 @@ export class VacStart extends Item {
  * @param keyVacStart reference to the vac survey
  * @param keyOverride use this to override the default key for this item (only last part of the key, parent's key is not influenced).
  */
-export const hasVacGroup = (parentKey: string, keyVacStart: string, keyOverride?: string): Group => {
+export const hasVacGroup = (props: VacGroupProps): Group => {
 
     const flagVac = ParticipantFlags.vaccinationCompleted;
     class HasVacGroup extends Group {
@@ -85,7 +89,7 @@ export const hasVacGroup = (parentKey: string, keyVacStart: string, keyOverride?
             super(parentKey, defaultKey);
             this.groupEditor.setCondition(
                 expWithArgs('or',
-                    expWithArgs('responseHasOnlyKeysOtherThan', keyVacStart, singleChoicePrefix, ResponseEncoding.vacstart.nothing_changed),
+                    expWithArgs('responseHasOnlyKeysOtherThan', props.keyVacStart, singleChoicePrefix, ResponseEncoding.vacstart.nothing_changed),
                     expWithArgs('not',
                         expWithArgs('eq',
                             expWithArgs('getAttribute', expWithArgs('getAttribute', expWithArgs('getContext'), 'participantFlags'), flagVac.key ),
@@ -99,7 +103,7 @@ export const hasVacGroup = (parentKey: string, keyVacStart: string, keyOverride?
         buildGroup() { }
     }
 
-    return new HasVacGroup(parentKey, 'HV');
+    return new HasVacGroup(props.parentKey, 'HV');
 }
 
 /**
@@ -111,9 +115,9 @@ export const hasVacGroup = (parentKey: string, keyVacStart: string, keyOverride?
  */
 export class FluVaccineLastSeason extends Item {
 
-    constructor(parentKey: string, isRequired?: boolean, keyOverride?:string) {
-        super(parentKey, keyOverride ? keyOverride: 'Q9');
-        this.isRequired = isRequired;
+    constructor(props:ItemProps) {
+        super(props.parentKey, props.keyOverride ? props.keyOverride: 'Q9');
+        this.isRequired = props.isRequired;
     }
 
     buildItem() {
@@ -166,15 +170,15 @@ export class FluVaccineLastSeason extends Item {
 /**
  * FLU VACCINE THIS SEASON: single choice about this season's vaccine
  *
- * @param parentKey full key path of the parent item, required to genrate this item's unique key (e.g. `<surveyKey>.<groupKey>`).
+ * @param parentKey full key path of the parent item, required to generate this item's unique key (e.g. `<surveyKey>.<groupKey>`).
  * @param isRequired if true adds a default "hard" validation to the question to check if it has a response.
  * @param keyOverride use this to override the default key for this item (only last part of the key, parent's key is not influenced).
  */
 export class FluVaccineThisSeason extends Item {
 
-    constructor(parentKey: string, isRequired?: boolean, keyOverride?:string) {
-        super(parentKey, keyOverride ? keyOverride: 'Q10');
-        this.isRequired = isRequired;
+    constructor(props: ItemProps) {
+        super(props.parentKey, props.keyOverride ? props.keyOverride: 'Q10');
+        this.isRequired = props.isRequired;
     }
 
     buildItem() {
@@ -227,15 +231,20 @@ class QuestionException extends Error {
     }
 }
 
+interface SubVaccineQuestionProps extends Omit<ItemProps, 'keyOverride'> {
+    itemKey:string
+    triggerQuestion: string;
+}
+
 abstract class SubVaccineQuestion extends Item {
 
     triggerQuestion?: string;
     triggerResponse?: string;
 
-    constructor(itemKey:string, parentKey: string, triggerQuestion?: string, isRequired?: boolean) {
-        super(parentKey, itemKey);
-        this.isRequired = isRequired;
-        this.triggerQuestion = triggerQuestion;
+    constructor(props: SubVaccineQuestionProps) {
+        super(props.parentKey, props.itemKey);
+        this.isRequired =  props.isRequired;
+        this.triggerQuestion =  props.triggerQuestion;
     }
 
 
@@ -250,6 +259,10 @@ abstract class SubVaccineQuestion extends Item {
     }
 }
 
+interface FluVaccineProps extends ItemProps {
+    keyFluVaccineThisSeason: string
+}
+
 /**
  * WHEN RECEIVED FLU VACCINE THIS SEASON: single choice about this season's vaccine
  *
@@ -260,9 +273,10 @@ abstract class SubVaccineQuestion extends Item {
  */
 export class FluVaccineThisSeasonWhen extends SubVaccineQuestion {
 
-    constructor( parentKey: string, keyFluVaccineThisSeason: string, isRequired?: boolean, keyOverride?:string) {
-        const itemKey = keyOverride ? keyOverride : 'Q10b';
-        super(itemKey, parentKey, keyFluVaccineThisSeason, isRequired );
+    constructor( props: FluVaccineProps) {
+        const itemKey = props.keyOverride ? props.keyOverride : 'Q10b';
+        const p = { parentKey: props.parentKey, itemKey: itemKey, triggerQuestion:props.keyFluVaccineThisSeason, isRequired: props.isRequired};
+        super(p);
         this.triggerResponse = ResponseEncoding.flu_vaccine_season.yes;
     }
 
@@ -319,9 +333,11 @@ export class FluVaccineThisSeasonWhen extends SubVaccineQuestion {
  */
 export class FluVaccineThisSeasonReasonFor extends SubVaccineQuestion {
 
-    constructor( parentKey: string, keyFluVaccineThisSeason: string, isRequired?: boolean, keyOverride?:string) {
-        const itemKey = keyOverride ? keyOverride : 'Q10c';
-        super(itemKey, parentKey, keyFluVaccineThisSeason, isRequired );
+    constructor( props: FluVaccineProps ) {
+
+        const itemKey = props.keyOverride ? props.keyOverride : 'Q10c';
+        const p = { parentKey: props.parentKey, itemKey: itemKey, triggerQuestion:props.keyFluVaccineThisSeason, isRequired: props.isRequired};
+        super(p);
         this.triggerResponse = ResponseEncoding.flu_vaccine_season.yes;
     }
 
@@ -395,16 +411,18 @@ export class FluVaccineThisSeasonReasonFor extends SubVaccineQuestion {
 /**
  *  REASONS AGAINST FLU VACCINE THIS SEASON: multiple choice
  *
- * @param parentKey full key path of the parent item, required to genrate this item's unique key (e.g. `<surveyKey>.<groupKey>`).
+ * @param parentKey full key path of the parent item, required to generate this item's unique key (e.g. `<surveyKey>.<groupKey>`).
  * @param keyFluVaccineThisSeason full key of the question about if you received flu vaccine this year, if set, dependency is applied
  * @param isRequired if true adds a default "hard" validation to the question to check if it has a response.
  * @param keyOverride use this to override the default key for this item (only last part of the key, parent's key is not influenced).
  */
 export class FluVaccineThisSeasonReasonAgainst extends SubVaccineQuestion {
 
-    constructor( parentKey: string, keyFluVaccineThisSeason: string, isRequired?: boolean, keyOverride?:string) {
-        const itemKey = keyOverride ? keyOverride : 'Q10d';
-        super(itemKey, parentKey, keyFluVaccineThisSeason, isRequired );
+    constructor( props: FluVaccineProps) {
+
+        const itemKey = props.keyOverride ? props.keyOverride : 'Q10d';
+        const p = { parentKey: props.parentKey, itemKey: itemKey, triggerQuestion:props.keyFluVaccineThisSeason, isRequired: props.isRequired};
+        super(p);
         this.triggerResponse = ResponseEncoding.flu_vaccine_season.no;
     }
 
@@ -507,9 +525,9 @@ export class FluVaccineThisSeasonReasonAgainst extends SubVaccineQuestion {
  */
 export class CovidVac extends Item {
 
-    constructor(parentKey: string, isRequired?: boolean, keyOverride?:string) {
-        super(parentKey, keyOverride ? keyOverride: 'Q35');
-        this.isRequired = isRequired;
+    constructor(props: ItemProps) {
+        super(props.parentKey, props.keyOverride ? props.keyOverride: 'Q35');
+        this.isRequired = props.isRequired;
     }
 
     buildItem() {
@@ -559,6 +577,10 @@ export class CovidVac extends Item {
 }
 
 
+interface CovidVacProps extends ItemProps {
+    keyVac: string // Dependent question Covid Vaccination question key
+}
+
 /**
  * Covid VACCINE BRAND: Which vaccine was provided
  *
@@ -569,10 +591,10 @@ export class CovidVac extends Item {
  */
 export class CovidVaccineBrand extends SubVaccineQuestion {
 
-    constructor(parentKey: string, keyvac?: string, isRequired?: boolean, keyOverride?:string) {
-        const key= keyOverride ? keyOverride: 'Q35i';
-        super(key, parentKey, keyvac);
-        this.isRequired = isRequired;
+    constructor(props: CovidVacProps) {
+        const key= props.keyOverride ? props.keyOverride: 'Q35i';
+        const p = {itemKey: key, parentKey: props.parentKey, triggerQuestion: props.keyVac, isRequired: props.isRequired}
+        super(p);
         this.triggerResponse = ResponseEncoding.covid_vac.yes;
     }
 
@@ -641,10 +663,10 @@ export class CovidVaccineBrand extends SubVaccineQuestion {
  */
 export class CovidVaccineShots extends SubVaccineQuestion {
 
-    constructor(parentKey: string, keyvac?: string, isRequired?: boolean, keyOverride?:string) {
-        const key= keyOverride ? keyOverride: 'Q35c';
-        super(key, parentKey, keyvac);
-        this.isRequired = isRequired;
+    constructor(props: CovidVacProps) {
+        const key = props.keyOverride ? props.keyOverride: 'Q35c';
+        const p = {itemKey: key, parentKey: props.parentKey, triggerQuestion: props.keyVac, isRequired: props.isRequired}
+        super(p);
         this.triggerResponse = ResponseEncoding.covid_vac.yes;
     }
 
@@ -711,10 +733,11 @@ export class CovidVaccineShots extends SubVaccineQuestion {
  */
 export class CovidDateLastVaccine extends SubVaccineQuestion {
 
-    constructor(parentKey: string, keyvac?: string, isRequired?: boolean, keyOverride?:string) {
-        const key= keyOverride ? keyOverride: 'Q35j';
-        super(key, parentKey, keyvac);
-        this.isRequired = isRequired;
+    constructor(props: CovidVacProps) {
+
+        const key = props.keyOverride ? props.keyOverride: 'Q35j';
+        const p = {itemKey: key, parentKey: props.parentKey, triggerQuestion: props.keyVac, isRequired: props.isRequired}
+        super(p);
         this.triggerResponse =ResponseEncoding.covid_vac.yes;
     }
 
@@ -761,6 +784,11 @@ export class CovidDateLastVaccine extends SubVaccineQuestion {
     }
 }
 
+
+interface CovidSecondVacProps extends CovidVacProps {
+    keyVaccineShots?: string // Key for number of Vaccine Short question
+}
+
 /**
  * SECOND SHOT: single choice question about second shot planned
  */
@@ -768,6 +796,7 @@ export class CovidDateLastVaccine extends SubVaccineQuestion {
  export class CovidSecondShotPlan extends SubVaccineQuestion {
 
     keyVaccineShots?:string;
+
     /**
     * @param parentKey full key path of the parent item, required to genrate this item's unique key (e.g. `<surveyKey>.<groupKey>`).
     * @param keyVac Question about Covid Vaccination status
@@ -776,11 +805,13 @@ export class CovidDateLastVaccine extends SubVaccineQuestion {
     * @param keyOverride use this to override the default key for this item (only last part of the key, parent's key is not influenced).
     */
 
-    constructor(parentKey: string, keyVac?: string, keyVaccineShots?: string, isRequired?: boolean, keyOverride?: string) {
-        super(keyOverride ? keyOverride: 'Q35k', parentKey, keyVac);
-        this.keyVaccineShots = keyVaccineShots;
+    constructor(props: CovidSecondVacProps) {
+
+        const key = props.keyOverride ? props.keyOverride: 'Q35k';
+        const p = {itemKey: key, parentKey: props.parentKey, triggerQuestion: props.keyVac, isRequired: props.isRequired}
+        super(p);
+        this.keyVaccineShots = props.keyVaccineShots;
         this.triggerResponse = ResponseEncoding.covid_vac.yes;
-        this.isRequired = isRequired;
     }
 
     getCondition() {
@@ -847,18 +878,19 @@ export class CovidSecondShotAgainstReason extends SubVaccineQuestion {
     keyVaccineShots?:string;
 
     /**
-    * @param parentKey full key path of the parent item, required to genrate this item's unique key (e.g. `<surveyKey>.<groupKey>`).
+    * @param parentKey full key path of the parent item, required to generate this item's unique key (e.g. `<surveyKey>.<groupKey>`).
     * @param keyVac Question about Covid Vaccination status
     * @param keyVaccineShots question key about vaccination shots count
     * @param isRequired if true adds a default "hard" validation to the question to check if it has a response.
     * @param keyOverride use this to override the default key for this item (only last part of the key, parent's key is not influenced).
     */
 
-    constructor(parentKey: string, keyVac?: string, keyVaccineShots?: string, isRequired?: boolean, keyOverride?: string) {
-        super(keyOverride ? keyOverride: 'Q35l', parentKey, keyVac);
-        this.isRequired = isRequired;
-        this.triggerResponse = ResponseEncoding.covid_vac.yes;
-        this.keyVaccineShots = keyVaccineShots;
+     constructor(props: CovidSecondVacProps) {
+        const key = props.keyOverride ? props.keyOverride: 'Q35l';
+        const p = {itemKey: key, parentKey: props.parentKey, triggerQuestion: props.keyVac, isRequired: props.isRequired}
+        super(p);
+        this.keyVaccineShots = props.keyVaccineShots;
+       this.triggerResponse = ResponseEncoding.covid_vac.yes;
     }
 
     getCondition() {
@@ -946,10 +978,10 @@ export class CovidVaccineProReasons extends SubVaccineQuestion {
     * @param isRequired if true adds a default "hard" validation to the question to check if it has a response.
     * @param keyOverride use this to override the default key for this item (only last part of the key, parent's key is not influenced).
      */
-    constructor(parentKey: string, keyvac?: string, isRequired?: boolean, keyOverride?:string) {
-        const key= keyOverride ? keyOverride: 'Q35f';
-        super(key, parentKey, keyvac);
-        this.isRequired = isRequired;
+    constructor(props: CovidVacProps) {
+        const key = props.keyOverride ? props.keyOverride: 'Q35f';
+        const p = {itemKey: key, parentKey: props.parentKey, triggerQuestion: props.keyVac, isRequired: props.isRequired}
+        super(p);
         this.triggerResponse = ResponseEncoding.covid_vac.yes;
     }
 
@@ -1054,10 +1086,10 @@ export class CovidVaccineAgainstReasons extends SubVaccineQuestion {
     * @param isRequired if true adds a default "hard" validation to the question to check if it has a response.
     * @param keyOverride use this to override the default key for this item (only last part of the key, parent's key is not influenced).
      */
-    constructor(parentKey: string, keyvac?: string, isRequired?: boolean, keyOverride?:string) {
-        const key= keyOverride ? keyOverride: 'Q35m';
-        super(key, parentKey, keyvac);
-        this.isRequired = isRequired;
+     constructor(props: CovidVacProps) {
+        const key = props.keyOverride ? props.keyOverride: 'Q35m';
+        const p = {itemKey: key, parentKey: props.parentKey, triggerQuestion: props.keyVac, isRequired: props.isRequired}
+        super(p);
         this.triggerResponse = ResponseEncoding.covid_vac.no;
     }
 
