@@ -12,6 +12,9 @@ import { StudyEngine as se } from "case-editor-tools/expression-utils/studyEngin
 import { WeeklyResponses as ResponseEncoding } from "../responses/weekly";
 import { ItemProps } from "./types";
 
+interface SymptomsProps extends ItemProps {
+    useRash: boolean;
+}
 
 /**
  * SYMPTOMS: multiple choice question about allergies
@@ -21,16 +24,12 @@ import { ItemProps } from "./types";
  * @param keyOverride use this to override the default key for this item (only last part of the key, parent's key is not influenced).
  */
 export class Symptoms extends Item {
-
     useRash: boolean;
 
-    useOther: boolean;
-
-    constructor(props: ItemProps) {
+    constructor(props: SymptomsProps) {
         super(props.parentKey, props.keyOverride ? props.keyOverride: 'Q1');
         this.isRequired = props.isRequired;
-        this.useRash = false;
-        this.useOther = false;
+        this.useRash = props.useRash;
     }
 
     buildItem() {
@@ -179,14 +178,12 @@ export class Symptoms extends Item {
             });
         }
 
-        if(this.useOther) {
-            r.push(
-            {
-                key: '19', role: 'option',
-                disabled: exclusiveOptionRule,
-                content: _T( "weekly.Q1.rg.mcg.option.23", "Other"),
-            });
-        }
+        r.push(
+        {
+            key: '19', role: 'option',
+            disabled: exclusiveOptionRule,
+            content: _T( "weekly.Q1.rg.mcg.option.23", "Other"),
+        });
 
         return r;
     }
