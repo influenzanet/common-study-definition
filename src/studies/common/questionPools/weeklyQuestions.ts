@@ -145,7 +145,7 @@ export class Symptoms extends Item {
             {
                 key: '17', role: 'option',
                 disabled: exclusiveOptionRule,
-                content: _T( "weekly.Q1.rg.mcg.option.17", "Diarrhoea (at least three times a day)")
+                content: _T( "weekly.Q1.rg.mcg.option.17", "Diarrhoea")
             },
             {
                 key: '18', role: 'option',
@@ -2432,6 +2432,8 @@ export class DailyRoutineDaysMissed extends Item {
     addLikertItem('10',_T("weekly.EX.Qcov7.rg.Koue.text.23", "Avoid travel outside your own country or region"), style);
 
     addLikertItem('13',_T("weekly.EX.Qcov7.rg.zuDa.text.25", "Have your food/shopping delivered by a store or a friend/family member"), style);
+
+    //addLikertItem('18',_T("weekly.EX.Qcov7.rg.zuDa.text.25", "Isolate from people living in your home"), style);
 
     addLikertItem('14',_T("weekly.EX.Qcov7.rg.QSBP.text.27", "Avoid seeing friends and family"), style);
 

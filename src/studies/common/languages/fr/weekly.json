@@ -1,7 +1,7 @@
 {
   "weekly.name.0": {
     "en": "Weekly questionnaire",
-    "fr": "TODO"
+    "fr": "Questionnaire hebdomadaire"
   },
   "weekly.description.0": {
     "en": "Please also report if you had no complaints.",
@@ -13,99 +13,99 @@
   },
   "weekly.Q1.title.0": {
     "en": "Have you had any of the following symptoms since your last questionnaire (or in the past week, if this the first tie you are taking this questionnaire)?",
-    "fr": "TODO"
+    "fr": "Depuis votre dernière déclaration (ou dans les sept derniers jours, si cela est votre première visite de la saison), avez-vous eu certains des symptômes suivants ? Si vous présentez ces symptômes de façon chronique et qu’ils n’ont pas changé, ne les déclarez pas. (Sélectionnez toutes les options qui s'appliquent) "
   },
   "weekly.Q1.helpGroup.text.1": {
     "en": "The most important part of this study is about following up on the symptoms you have reported.",
-    "fr": "TODO"
+    "fr": "Le but principal de ce questionnaire est de suivre les symptômes des participants. Merci de déclarer vos symptômes, même si vous pensez qu'ils ne sont pas dus à la grippe."
   },
   "weekly.Q1.helpGroup.text.3": {
     "en": "If you suffer from chronic illness, only indicate symptoms that have changed. For example, if you experience chronic shortness of breath, only mark this symptom if it has recently gotten worse. Multiple answers possible.",
-    "fr": "TODO"
+    "fr": "Pour les personnes qui ont des maladies chroniques, signalez-nous uniquement les symptômes qui ont changé. Par exemple si vous avez des rhumatismes, ne cochez la case « Douleurs articulaires » que si celles-ci se sont récemment aggravées ou sont différentes de celles que vous ressentez habituellement."
   },
   "weekly.Q1.rg.cGJZ.text.0": {
     "en": "Multiple answers possible. If you suffer from chronic illness, only indicate symptoms that have changed. For example, if you experience chronic shortness of breath, only mark this symptom if it has recently gotten worse.",
-    "fr": "TODO"
+    "fr": "Plusieurs réponses sont possibles"
   },
   "weekly.Q1.rg.mcg.option.0": {
     "en": "No symptoms",
-    "fr": "TODO"
+    "fr": "Pas de symptôme"
   },
   "weekly.Q1.rg.mcg.option.1": {
     "en": "Fever",
-    "fr": "TODO"
+    "fr": "Fièvre"
   },
   "weekly.Q1.rg.mcg.option.2": {
     "en": "Chills",
-    "fr": "TODO"
+    "fr": "Frissons"
   },
   "weekly.Q1.rg.mcg.option.3": {
     "en": "Runny or blocked nose",
-    "fr": "TODO"
+    "fr": "Nez qui coule ou bouché"
   },
   "weekly.Q1.rg.mcg.option.4": {
     "en": "Sneezing",
-    "fr": "TODO"
+    "fr": "Éternuements"
   },
   "weekly.Q1.rg.mcg.option.5": {
     "en": "Sore throat",
-    "fr": "TODO"
+    "fr": "Maux de gorge"
   },
   "weekly.Q1.rg.mcg.option.6": {
     "en": "Cough",
-    "fr": "TODO"
+    "fr": "Toux"
   },
   "weekly.Q1.rg.mcg.option.7": {
     "en": "Shortness of breath",
-    "fr": "TODO"
+    "fr": "Essoufflement"
   },
   "weekly.Q1.rg.mcg.option.8": {
     "en": "Headache",
-    "fr": "TODO"
+    "fr": "Maux de tête"
   },
   "weekly.Q1.rg.mcg.option.9": {
     "en": "Muscle/joint pain",
-    "fr": "TODO"
+    "fr": "Douleurs musculaires\/articulaires"
   },
   "weekly.Q1.rg.mcg.option.10": {
     "en": "Chest pain",
-    "fr": "TODO"
+    "fr": "Douleur thoracique"
   },
   "weekly.Q1.rg.mcg.option.11": {
     "en": "Feeling tired or exhausted (malaise)",
-    "fr": "TODO"
+    "fr": "Fatigue ou épuisement (malaise)"
   },
   "weekly.Q1.rg.mcg.option.12": {
     "en": "Loss of appetite",
-    "fr": "TODO"
+    "fr": "Perte d'appétit"
   },
   "weekly.Q1.rg.mcg.option.13": {
     "en": "Coloured sputum/phlegm",
-    "fr": "TODO"
+    "fr": "Expectorations (crachats) colorées"
   },
   "weekly.Q1.rg.mcg.option.14": {
     "en": "Watery, bloodshot eyes",
-    "fr": "TODO"
+    "fr": "Yeux larmoyants ou injectés de sang"
   },
   "weekly.Q1.rg.mcg.option.15": {
     "en": "Nausea",
-    "fr": "TODO"
+    "fr": "Nausées"
   },
   "weekly.Q1.rg.mcg.option.16": {
     "en": "Vomiting",
-    "fr": "TODO"
+    "fr": "Vomissements"
   },
   "weekly.Q1.rg.mcg.option.17": {
-    "en": "Diarrhoea (at least three times a day)",
-    "fr": "TODO"
+    "en": "Diarrhoea",
+    "fr": "Diarrhée"
   },
   "weekly.Q1.rg.mcg.option.18": {
     "en": "Stomach ache",
-    "fr": "TODO"
+    "fr": "Maux d'estomac"
   },
   "weekly.Q1.rg.mcg.option.19": {
     "en": "Loss of smell",
-    "fr": "TODO"
+    "fr": "Perte d’odorat"
   },
   "weekly.Q1.rg.mcg.option.20": {
     "en": "Loss of taste",
