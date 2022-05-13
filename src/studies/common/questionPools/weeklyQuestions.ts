@@ -243,13 +243,13 @@ export class SymptomsGroup extends Group {
 }
 
 /**
- * SAME ILLNES
+ * SAME ILLNESS
  *
- * @param parentKey full key path of the parent item, required to genrate this item's unique key (e.g. `<surveyKey>.<groupKey>`).
+ * @param parentKey full key path of the parent item, required to generate this item's unique key (e.g. `<surveyKey>.<groupKey>`).
  * @param isRequired if true adds a default "hard" validation to the question to check if it has a response.
  * @param keyOverride use this to override the default key for this item (only last part of the key, parent's key is not influenced).
  */
-export class SameIllnes extends Item {
+export class SameIllness extends Item {
 
     constructor(props: ItemProps) {
         super(props.parentKey, props.keyOverride ? props.keyOverride: 'Q2');
@@ -447,14 +447,14 @@ export class PcrHouseholdContact extends Item {
 }
 
 interface SameIllnessProps extends ItemProps {
-    keySameIllness: string;
+    keySameIllness: string; // reference to 'same illness' question
 }
 
 
 /**
  * SYMPTOMS START
  *
- * @param parentKey full key path of the parent item, required to genrate this item's unique key (e.g. `<surveyKey>.<groupKey>`).
+ * @param parentKey full key path of the parent item, required to generate this item's unique key (e.g. `<surveyKey>.<groupKey>`).
  * @param keySameIllness reference to 'same illness' question
  * @param isRequired if true adds a default "hard" validation to the question to check if it has a response.
  * @param keyOverride use this to override the default key for this item (only last part of the key, parent's key is not influenced).
@@ -861,17 +861,18 @@ export class DidUMeasureTemperature extends SymptomDependentQuestion {
     }
 
     getResponses() {
+        const codes = ResponseEncoding.measure_temp;
         return  [
             {
-                key: ResponseEncoding.measure_temp.yes, role: 'option',
+                key: codes.yes, role: 'option',
                 content: _T("weekly.HS.Q6c.rg.scg.option.0", "Yes")
             },
             {
-                key: ResponseEncoding.measure_temp.no, role: 'option',
+                key: codes.no, role: 'option',
                 content: _T("weekly.HS.Q6c.rg.scg.option.1", "No")
             },
             {
-                key: ResponseEncoding.measure_temp.dont_know, role: 'option',
+                key: codes.dont_know, role: 'option',
                 content: _T("weekly.HS.Q6c.rg.scg.option.2", "I don’t know/can’t remember")
             },
         ]
@@ -1952,6 +1953,11 @@ export class WhyVisitedNoMedicalService extends Item {
     }
 }
 
+interface TookMedicationProps extends ItemProps {
+    useHayFever?: boolean;
+}
+
+
 /**
  * TOOK ANY MEDICATION
  *
@@ -1961,9 +1967,12 @@ export class WhyVisitedNoMedicalService extends Item {
  */
 export class TookMedication extends Item {
 
-    constructor(props: ItemProps) {
+    useHayFever: boolean;
+
+    constructor(props: TookMedicationProps) {
         super(props.parentKey, props.keyOverride ? props.keyOverride: 'Q9');
         this.isRequired = props.isRequired;
+        this.useHayFever = props.useHayFever ?? false;
     }
 
 
@@ -1996,7 +2005,7 @@ export class TookMedication extends Item {
         // Exclusive with Dont know response
         const exclusiveDontKnow = se.responseHasKeysAny(this.key, MultipleChoicePrefix, dont_know);
 
-        return [
+        const r = [
             {
                 key: no_medication,
                 role: 'option',
@@ -2014,14 +2023,19 @@ export class TookMedication extends Item {
                 role: 'option',
                 disabled: exclusiveOther,
                 content: _T("weekly.EX.Q9.rg.mcg.option.2", "Cough medication (e.g. expectorants)")
-            },/*
-            {
+            },
+        ];
+
+        if(this.useHayFever) {
+            r.push({
                 key: '9',
                 role: 'option',
                 disabled: exclusiveOther,
                 content: _T("hecfaecb", "Hayfever medication")
-            }, */
-            {
+            });
+        }
+
+        const rest = [    {
                 key: '3',
                 role: 'option',
                 disabled: exclusiveOther,
@@ -2057,8 +2071,10 @@ export class TookMedication extends Item {
                 disabled: exclusiveNo,
                 content: _T("weekly.EX.Q9.rg.mcg.option.8", "I don't know/can't remember")
             },
-
         ];
+
+        r.push(...rest);
+        return r;
     }
 
     getHelpGroupContent() {

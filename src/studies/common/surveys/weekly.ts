@@ -22,7 +22,7 @@ export class WeeklyDef extends SurveyDefinition {
         const rootKey = this.key
 
         // Symptoms Q1
-        const Q_symptoms = new pool.Symptoms({parentKey: rootKey, isRequired: true});
+        const Q_symptoms = new pool.Symptoms({parentKey: rootKey, isRequired: true, useRash: false});
         this.items.push(Q_symptoms);
 
         // // -------> HAS SYMPTOMS GROUP
@@ -30,7 +30,7 @@ export class WeeklyDef extends SurveyDefinition {
         const hasSymptomGroupKey = hasSymptomGroup.key;
 
         // // Q2 same illnes --------------------------------------
-        const Q_same_illnes = new pool.SameIllnes({parentKey: hasSymptomGroupKey, isRequired: true});
+        const Q_same_illnes = new pool.SameIllness({parentKey: hasSymptomGroupKey, isRequired: true});
         hasSymptomGroup.addItem(Q_same_illnes.get());
         this.Q_same_illnes = Q_same_illnes;
 
