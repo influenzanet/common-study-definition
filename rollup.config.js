@@ -13,14 +13,14 @@ const config = {
   input: [
     "src/**/*.ts"
   ],
-  output: [
-    {
+  output:
+  {
       //file: packageJson.main,
       dir: 'build',
       format: "cjs",
-      sourcemap: true
-    },
-  ],
+      sourcemap: true,
+      chunkFileNames: '[name].js',
+  },
   plugins: [
     del({
       targets: 'build/*'
