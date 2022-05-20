@@ -1,10 +1,10 @@
-import { _T } from "../languages"
-import { Group, Item } from "case-editor-tools/surveys/types";
+import { LanguageMap, _T } from "../languages"
+import { Group, Item, OptionDef } from "case-editor-tools/surveys/types";
 import { ItemEditor } from "case-editor-tools/surveys/survey-editor/item-editor";
 import { initMatrixQuestion,  ResponseRowCell } from "case-editor-tools/surveys/responseTypeGenerators/matrixGroupComponent";
 import { initLikertScaleItem } from "case-editor-tools/surveys/responseTypeGenerators/likertGroupComponents";
 import { expWithArgs, generateHelpGroupComponent, generateLocStrings, generateTitleComponent } from "case-editor-tools/surveys/utils/simple-generators";
-import { likertScaleKey, matrixKey, multipleChoiceKey, responseGroupKey } from "case-editor-tools/constants/key-definitions";
+import { likertScaleKey, matrixKey, responseGroupKey } from "case-editor-tools/constants/key-definitions";
 import { MultipleChoicePrefix, singleChoicePrefix, text_how_answer, text_select_all_apply, text_why_asking, require_response } from "./helpers";
 import { SurveyItems } from 'case-editor-tools/surveys';
 import { ComponentGenerators } from "case-editor-tools/surveys/utils/componentGenerators";
@@ -218,7 +218,7 @@ interface SymptomsGroupProps {
 /**
  * GROUP DEPENDING ON IF ANY SYMPTOMS PRESENT
  *
- * @param parentKey full key path of the parent item, required to genrate this item's unique key (e.g. `<surveyKey>.<groupKey>`).
+ * @param parentKey full key path of the parent item, required to generate this item's unique key (e.g. `<surveyKey>.<groupKey>`).
  * @param keySymptomsQuestion reference to the symptom survey
  * @param keyOverride use this to override the default key for this item (only last part of the key, parent's key is not influenced).
  */
@@ -796,7 +796,7 @@ export class FeverDevelopedSuddenly extends SymptomDependentQuestion {
             itemKey: this.itemKey,
             isRequired: this.isRequired,
             condition: this.getCondition(),
-            questionText: _T(  "weekly.HS.Q6b.title.0" , "Did your fever develop suddenly over a few hours?"),
+            questionText: _T("weekly.HS.Q6b.title.0" , "Did your fever develop suddenly over a few hours?"),
             helpGroupContent: this.getHelpGroupContent(),
             responseOptions: this.getResponses()
         });
@@ -2139,6 +2139,10 @@ export class Hospitalized extends Item {
             {
                 content: _T("weekly.EX.Q14.helpGroup.text.1", "We want to understand the rates of hospitalization due to symptoms"),
             },
+            text_how_answer("weekly.Q14.helGroup.how_answer"),
+            {
+                content: _T("weekly.EX.Q14.helpGroup.text.2", "Answer yes only if the hospitalization is related to your current symptoms and not if it was planned before or related to an accident.")
+            }
         ];
     }
 }
@@ -2355,7 +2359,6 @@ export class DailyRoutineDaysMissed extends Item {
     }
 }
 
-
 /**
  * COVID-19 Personal Habits Changes: likert scale question about changes in personal habits after experiencing covid symptoms
  *
@@ -2372,78 +2375,92 @@ export class DailyRoutineDaysMissed extends Item {
 
     buildItem() {
 
-    const editor = new ItemEditor(undefined, { itemKey: this.key, isGroup: false });
+        const editor = new ItemEditor(undefined, { itemKey: this.key, isGroup: false });
 
-    // QUESTION TEXT
-    editor.setTitleComponent(
-        generateTitleComponent(_T("weekly.EX.Qcov7.title.0", "Did you begin to follow or increase any of the measures below, due to your symptoms (compared to the period before your symptoms began)?"))
-    );
+        // QUESTION TEXT
+        editor.setTitleComponent(
+            generateTitleComponent(_T("weekly.EX.Qcov7.title.0", "Did you begin to follow or increase any of the measures below, due to your symptoms (compared to the period before your symptoms began)?"))
+        );
 
-    // INFO POPUP
-    editor.setHelpGroupComponent(generateHelpGroupComponent(this.getHelpGroupContent()));
+        // INFO POPUP
+        editor.setHelpGroupComponent(generateHelpGroupComponent(this.getHelpGroupContent()));
 
-    // RESPONSE PART
+        // RESPONSE PART
 
-    const rg = editor.addNewResponseComponent({ role: 'responseGroup' });
-    editor.addExistingResponseComponent({
-        role: 'text',
-        style: [{ key: 'className', value: 'mb-2' }],
-        content: generateLocStrings(
-            _T("weekly.EX.Qcov7.rg.gU4U.text.0", "To be completed optionally")),
-    }, rg?.key);
-
-    const likertOptions = this.getScaleOptions();
-
-
-
-    const addLikertItem = (rowKey:string, lang:Map<string,string>, className:string) => {
+        const rg = editor.addNewResponseComponent({ role: 'responseGroup' });
         editor.addExistingResponseComponent({
             role: 'text',
-            style: [{ key: 'className', value:  className}, { key: 'variant', value: 'h5' }],
-            content: generateLocStrings(lang),
+            style: [{ key: 'className', value: 'mb-2' }],
+            content: generateLocStrings(_T("weekly.EX.Qcov7.rg.gU4U.text.0", "To be completed optionally")),
         }, rg?.key);
-        editor.addExistingResponseComponent(initLikertScaleItem(likertScaleKey + '_' + rowKey, likertOptions), rg?.key);
-    };
 
-    addLikertItem('1', _T("weekly.EX.Qcov7.rg.v1C0.text.1", 'Regularly wash or disinfect hands'), 'mb-1 fw-bold');
+        const likertOptions = this.getScaleOptions();
 
-    const style = 'mb-1 border-top border-1 border-grey-7 pt-1 mt-2 fw-bold';
+        const row_style = 'mb-1 border-top border-1 border-grey-7 pt-1 mt-2 fw-bold';
+        const first_row_style = 'mb-1 fw-bold';
+        const items = this.getOptionItems();
 
-    addLikertItem('2', _T("weekly.EX.Qcov7.rg.nEMR.text.3", 'Cough or sneeze into your elbow'), style);
+        var first = true;
+        items.forEach((lang, rowKey) =>{
 
-    addLikertItem('3', _T("weekly.EX.Qcov7.rg.oTIp.text.5", 'Use a disposable tissue'), style);
+            const className = first ? first_row_style  : row_style;
 
-    addLikertItem('4a', _T("weekly.EX.Qcov7.rg.7w6F.text.7", "Wear a face mask indoors"), style);
+            editor.addExistingResponseComponent({
+                role: 'text',
+                style: [{ key: 'className', value:  className}, { key: 'variant', value: 'h5' }],
+                content: generateLocStrings(lang),
+            }, rg?.key);
+            editor.addExistingResponseComponent(initLikertScaleItem(likertScaleKey + '_' + rowKey, likertOptions), rg?.key);
 
-    addLikertItem('4b', _T("weekly.EX.Qcov7.rg.vHvi.text.9", "Wear a face mask outdoors"), style);
+            if(first) {
+                first = false;
+            }
 
-    addLikertItem('5', _T("weekly.EX.Qcov7.rg.ocTu.text.11", "Avoid shaking hands"), style);
+        });
 
-    addLikertItem('11', _T("weekly.EX.Qcov7.rg.ioJs.text.13", "Stop greeting by hugging and/or kissing on both cheeks"), style);
-
-    addLikertItem('6', _T("weekly.EX.Qcov7.rg.ujsK.text.15", "Limit your use of public transport"), style);
-
-    addLikertItem('7',_T("weekly.EX.Qcov7.rg.Ijdr.text.17", "Avoid busy places and gatherings (supermarket, cinema, stadium)"), style);
-
-    addLikertItem('8',_T("weekly.EX.Qcov7.rg.t8MS.text.19", "Stay at home"), style);
-
-    addLikertItem('9',_T("weekly.EX.Qcov7.rg.z4bE.text.21", "Telework or increase your number of telework days"), style);
-
-    addLikertItem('10',_T("weekly.EX.Qcov7.rg.Koue.text.23", "Avoid travel outside your own country or region"), style);
-
-    addLikertItem('13',_T("weekly.EX.Qcov7.rg.zuDa.text.25", "Have your food/shopping delivered by a store or a friend/family member"), style);
-
-    //addLikertItem('18',_T("weekly.EX.Qcov7.rg.zuDa.text.25", "Isolate from people living in your home"), style);
-
-    addLikertItem('14',_T("weekly.EX.Qcov7.rg.QSBP.text.27", "Avoid seeing friends and family"), style);
-
-    addLikertItem('15',_T("weekly.EX.Qcov7.rg.fRla.text.29", "Avoid being in contact with people over 65 years old or with a chronic disease"), style);
-
-    addLikertItem('16',_T("weekly.EX.Qcov7.rg.h3fK.text.31", "Avoid being in contact with children"), style);
-
-    return editor.getItem();
+        return editor.getItem();
 
     }
+
+    getOptionItems(): Map<string, LanguageMap> {
+
+       return new Map([
+            ['1',  _T("weekly.EX.Qcov7.rg.v1C0.text.1", 'Regularly wash or disinfect hands') ],
+            ['2', _T("weekly.EX.Qcov7.rg.nEMR.text.3", 'Cough or sneeze into your elbow') ],
+            ['3', _T("weekly.EX.Qcov7.rg.oTIp.text.5", 'Use a disposable tissue')],
+
+            ['4a', _T("weekly.EX.Qcov7.rg.7w6F.text.7", "Wear a face mask indoors")],
+
+            ['4b', _T("weekly.EX.Qcov7.rg.vHvi.text.9", "Wear a face mask outdoors")],
+
+            ['5', _T("weekly.EX.Qcov7.rg.ocTu.text.11", "Avoid shaking hands")],
+
+            ['11', _T("weekly.EX.Qcov7.rg.ioJs.text.13", "Stop greeting by hugging and/or kissing on both cheeks")],
+
+            ['6', _T("weekly.EX.Qcov7.rg.ujsK.text.15", "Limit your use of public transport")],
+
+            ['7',_T("weekly.EX.Qcov7.rg.Ijdr.text.17", "Avoid busy places and gatherings (supermarket, cinema, stadium)")],
+
+            ['8',_T("weekly.EX.Qcov7.rg.t8MS.text.19", "Stay at home")],
+
+            ['9',_T("weekly.EX.Qcov7.rg.z4bE.text.21", "Telework or increase your number of telework days")],
+
+            ['10',_T("weekly.EX.Qcov7.rg.Koue.text.23", "Avoid travel outside your own country or region")],
+
+            ['13',_T("weekly.EX.Qcov7.rg.zuDa.text.25", "Have your food/shopping delivered by a store or a friend/family member")],
+
+            //['18',_T("weekly.EX.Qcov7.rg.isolate_at_home", "Isolate from people living in your home")],
+
+            ['14',_T("weekly.EX.Qcov7.rg.QSBP.text.27", "Avoid seeing friends and family")],
+
+            ['15',_T("weekly.EX.Qcov7.rg.fRla.text.29", "Avoid being in contact with people over 65 years old or with a chronic disease")],
+
+            ['16',_T("weekly.EX.Qcov7.rg.h3fK.text.31", "Avoid being in contact with children")],
+        ]
+       );
+
+    }
+
 
     getScaleOptions() {
         return [
@@ -2504,7 +2521,7 @@ export class CauseOfSymptoms extends Item {
         });
     }
 
-    getResponses() {
+    getResponses():Array<OptionDef> {
         return  [
             {
                 key: '0', role: 'option',
