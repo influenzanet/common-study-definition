@@ -550,10 +550,7 @@ interface EducationProps extends ItemProps {
             questionText: _T("intake.Q4d.title.0", "What is the highest level of formal education/qualification that you have?"),
             helpGroupContent: this.getHelpGroupContent(),
             topDisplayCompoments: [
-                ComponentGenerators.text({
-                    className: "mb-2",
-                    content: _T("intake.Q4d.rg.nUk7.text.0", 'Select all options that apply'),
-                })
+                text_select_all_apply("intake.Q4d.rg.nUk7.text.0")
             ],
             responseOptions: this.getResponses()
         });
@@ -706,10 +703,7 @@ export class AgeGroups extends Item {
 
     getHelpGroupContent() {
         return [
-            {
-                content: _T("intake.Q6.helpGroup.text.0", "Why are we asking this?"),
-                style: [{ key: 'variant', value: 'h5' }],
-            },
+            text_why_asking("intake.Q6.helpGroup.text.0"),
             {
                 content: _T("intake.Q6.helpGroup.text.1", "Members of larger households, or those with children, may more likely get infected than the others."),
             },
@@ -1145,10 +1139,7 @@ export class RegularMedication extends Item {
             condition: this.condition,
             questionText: _T("intake.Q11.title.0", "Do you take regular medication for any of the following medical conditions?"),
             topDisplayCompoments: [
-                ComponentGenerators.text({
-                    className: 'mb-2',
-                    'content':_T( "intake.Q11.rg.hYo0.text.0", 'Select all options that apply')
-                })
+                text_select_all_apply("intake.Q11.rg.hYo0.text.0")
             ],
             helpGroupContent: this.getHelpGroupContent(),
             responseOptions: this.getResponses(),

@@ -5,7 +5,7 @@ import { initMatrixQuestion,  ResponseRowCell } from "case-editor-tools/surveys/
 import { initLikertScaleItem } from "case-editor-tools/surveys/responseTypeGenerators/likertGroupComponents";
 import { expWithArgs, generateHelpGroupComponent, generateLocStrings, generateTitleComponent } from "case-editor-tools/surveys/utils/simple-generators";
 import { likertScaleKey, matrixKey, responseGroupKey } from "case-editor-tools/constants/key-definitions";
-import { MultipleChoicePrefix, singleChoicePrefix, text_how_answer, text_select_all_apply, text_why_asking, require_response } from "./helpers";
+import { MultipleChoicePrefix, singleChoicePrefix, text_how_answer, text_select_all_apply, text_why_asking, require_response, trans_select_all_apply } from "./helpers";
 import { SurveyItems } from 'case-editor-tools/surveys';
 import { ComponentGenerators } from "case-editor-tools/surveys/utils/componentGenerators";
 import { StudyEngine as se } from "case-editor-tools/expression-utils/studyEngineExpressions";
@@ -727,18 +727,13 @@ export class FeverStart extends Item {
 
     getHelpGroupContent() {
         return [
-            {
-                content: _T(  "weekly.HS.Q6.helpGroup.text.0", "Why are we asking this question?"),
-                style: [{ key: 'variant', value: 'h5' }],
-            },
+            text_why_asking( "weekly.HS.Q6.helpGroup.text.0"),
             {
                 content:_T(  "weekly.HS.Q6.helpGroup.text.1", "Fever is an important diagnostic symptom, so we would like to know when the fever appeared."),
                 style: [{ key: 'variant', value: 'p' }],
             },
-            {
-                content: _T(  "weekly.HS.Q6.helpGroup.text.2", "How should I answer this question?"),
-                style: [{ key: 'variant', value: 'h5' }],
-            },
+            text_how_answer("weekly.HS.Q6.helpGroup.text.2"),
+
             {
                 content: _T(  "weekly.HS.Q6.helpGroup.text.3", "Answer as precisely as possible."),
                 style: [{ key: 'variant', value: 'p' }],
@@ -1945,9 +1940,8 @@ export class WhyVisitedNoMedicalService extends Item {
                 style: [{ key: 'variant', value: 'p' }],
             },
             text_how_answer("weekly.EX.Qcov18.helpGroup.text.2"),
-
             {
-                content: _T("weekly.EX.Qcov18.helpGroup.text.3", "Multiple answers are possible."),
+                content: trans_select_all_apply("weekly.EX.Qcov18.helpGroup.text.3"),
             },
         ]
     }

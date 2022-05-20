@@ -3,6 +3,7 @@ import { expWithArgs } from "case-editor-tools/surveys/utils/simple-generators";
 import { ComponentGenerators } from "case-editor-tools/surveys/utils/componentGenerators";
 import { LanguageMap, _T } from "../languages"
 import { responseGroupKey, singleChoiceKey, multipleChoiceKey } from "case-editor-tools/constants/key-definitions";
+import { ItemComponent } from "survey-engine/data_types";
 
 /**
  * Single choice key prefix (rg.scg)
@@ -36,8 +37,18 @@ export function require_response(editor: ItemEditor, itemKey: string, responseGr
 export function text_select_all_apply(id:string) {
     return ComponentGenerators.text({
             className: "mb-2",
-            content: _T(id, 'Select all options that apply', 'common.select_all_apply')
+            content: trans_select_all_apply(id)
         });
+}
+
+/**
+ * LocalizedText for "select all options that apply"
+ * This function can be used in HelperGroup (text_select_all_apply return a component not handled here)
+ * @param id
+ * @returns
+ */
+export function trans_select_all_apply(id:string): LanguageMap {
+    return _T(id, 'Select all options that apply', 'common.select_all_apply');
 }
 
 /**
