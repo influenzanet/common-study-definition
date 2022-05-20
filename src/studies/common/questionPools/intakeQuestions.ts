@@ -1710,7 +1710,7 @@ export class FindOutAboutPlatform extends Item {
         return [
             text_why_asking("intake.Q17.helpGroup.text.0"),
             {
-                content: _T("intake.Q17.helpGroup.text.1", "We would like to know how you found out about our website infectieradar.be."),
+                content: _T("intake.Q17.helpGroup.text.1", "We would like to know how you found out about our website."),
             },
         ];
     }
