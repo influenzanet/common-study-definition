@@ -49,6 +49,17 @@ export const WeeklyResponses = {
         "yes": "1",
         "no": "0"
     },
+    took_medication: {
+            "no": "0",
+            "pain": "1",
+            "cough": "2",
+            "antiviral": "3",
+            "antibio": "4",
+            "homeo": "7",
+            "alternative": "8",
+            "other": "5",
+            "dontknow": "6"
+    },
     symptom_test: {
         "yes": "1",
         "not_yet": "2",
