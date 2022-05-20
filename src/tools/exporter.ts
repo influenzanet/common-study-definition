@@ -2,7 +2,8 @@ import { Logger } from "case-editor-tools/logger/logger";
 import { Study } from "case-editor-tools/types/study";
 import { generateFilesForStudy } from 'case-editor-tools/exporter';
 import { writeFileSync } from "fs";
-
+import { LanguageHelpers } from "../studies/common/languages/languageHelpers";
+import { Translation, TranslationSet } from "../studies/common/languages";
 
 const usage = () => {
     Logger.log("Expected command line arguments:")
@@ -26,23 +27,50 @@ const readStudyKey = () => {
     return studyKeyArg[0].replace('study=', '');
 }
 
-export function study_exporter(studies: Study[]) {
+/**
+ *
+ * @param studies
+ * @param all
+ */
+export function study_exporter(studies: Study[], all?:boolean) {
 
-    const studyKey = readStudyKey();
+    var to_build : Study[] = studies;
 
-    const currentStudy = studies.filter(study => {
-        if (study.outputFolderName && study.outputFolderName === studyKey) {
-            return true;
+    if(!all) {
+        const studyKey = readStudyKey();
+
+        const to_build = studies.filter(study => {
+            if (study.outputFolderName && study.outputFolderName === studyKey) {
+                return true;
+            }
+            return study.studyKey === studyKey
+        });
+        if (!to_build || to_build.length < 1) {
+            Logger.error(`No study find with key: ${studyKey}.`);
+            process.exit(1)
         }
-        return study.studyKey === studyKey
-    });
-    if (!currentStudy || currentStudy.length < 1) {
-        Logger.error(`No study find with key: ${studyKey}.`);
-        process.exit(1)
     }
 
-    currentStudy.forEach(study => generateFilesForStudy(study, true));
+    to_build.forEach(study => generateFilesForStudy(study, true));
 }
+
+export function buildMissing(outputFolder:string) {
+
+    LanguageHelpers.missing.forEach((missingKeys, language) =>{
+        const m : TranslationSet = {};
+        missingKeys.forEach((ref, key)=>{
+            const t: Translation = {
+                "en": ref,
+            };
+            t[language] = "_TODO_";
+            m[key] = t;
+        });
+
+        json_export(outputFolder + '/missing-'+language+'.json', m);
+
+    });
+}
+
 
 export function json_export(filename:string, object:any, pretty?: number) {
     writeFileSync(filename, JSON.stringify(object, undefined, pretty ? 2 : undefined));
