@@ -1013,7 +1013,7 @@ export class MeansOfTransport extends Item {
             itemKey: this.itemKey,
             isRequired: this.isRequired,
             condition: this.condition,
-            questionText: _T("intake.Q3.title.0", "What is your home postal code?"),
+            questionText: _T("intake.Q7.title.0", "What is your home postal code?"),
             topDisplayCompoments: [
                 ComponentGenerators.text({
                     className: 'mb-2',
