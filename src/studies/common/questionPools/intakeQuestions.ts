@@ -353,7 +353,7 @@ export class PostalCodeWork extends Item {
             parentKey: this.parentKey,
             itemKey: this.itemKey,
             isRequired: this.isRequired,
-            condition: this.condition,
+            condition: this.getCondition(),
             questionText: _T("intake.Q4b.title.0", "What is the postal code of your school/college/workplace (where you spend the majority of your working/studying time)?"),
             helpGroupContent: this.getHelpGroupContent(),
             responseOptions: [
