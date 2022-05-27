@@ -139,7 +139,7 @@ export class DateOfBirth extends Item {
             displayCondition: expWithArgs('isDefined',
                 expWithArgs('getResponseItem', editor.getItem().key, [responseGroupKey, dateInputKey].join('.'))
             ),
-            content: Array.from(_T("intake.Q2.rg.feedback.text.1", "years old"),
+            content: Array.from(_T("intake.Q2.rg.feedback.text.1", " years old"),
             ).map(([code, str]) => {
                 return {
                     code: code, parts: [
