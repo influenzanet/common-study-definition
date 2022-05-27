@@ -30,12 +30,21 @@ export interface ItemProps {
 
 export abstract class ItemQuestion extends Item {
 
+    /**
+     *
+     * @param props Properties
+     * @param defaultKey default item key to use in common implementation, could be overridden by keyOverride props
+     */
     constructor(props: ItemProps, defaultKey: string) {
         super(props.parentKey, props.keyOverride ? props.keyOverride: defaultKey);
         this.isRequired = props.isRequired;
     }
 
-    // Create the condition
+    /**
+     * Create the condition to show the question.
+     * This method will be called before buildItem and set the condition field (no need to call it directly)
+     * @returns
+     */
     getCondition() : Expression | undefined {
         return undefined;
     }
@@ -48,19 +57,46 @@ export abstract class ItemQuestion extends Item {
 }
 
 export interface GroupProps {
+     /**
+     * @var parentKey full key path of the parent item, required to generate this item's unique key (e.g. `<surveyKey>.<groupKey>`).
+     */
     parentKey: string
+
+    /**
+     * @var keyOverride key to override the default item key for this group
+     */
     keyOverride?: string,
+
+    /**
+     * @var isRequired should questions of this group need to have a response
+     * This can be used in buildGroup() to provide a common value for the questions of this group.
+     * It's not use by default
+     */
     isRequired?: boolean
+
+    /**
+     * Selection expression for this group
+     */
     selectionMethod?: Expression
 }
 
 export abstract class GroupQuestion extends Group {
 
+    /**
+     *
+     * @param props
+     * @param defaultKey Default key to be used for base implementation of this group
+     */
     constructor(props: GroupProps, defaultKey: string) {
         const groupKey = props.keyOverride ? props.keyOverride : defaultKey;
         super(props.parentKey, groupKey, props.selectionMethod)
     }
 
+    /**
+     * Condition to show this group.
+     * If returns non undefined value the condition will be set to the group
+     * @returns
+     */
     getCondition() : Expression | undefined {
         return undefined;
     }
