@@ -610,7 +610,7 @@
   },
   "intake.Q26.title.0": {
     "en": "Are you taking or do you plan to take this winter homeopathic medicine in order to prevent COVID-19?",
-    "fr": "TODO"
+    "fr": "Prenez-vous ou prévoyez-vous de prendre cet hiver des médicaments homéopathiques pour vous protéger des infections respiratoires comme la grippe ou la COVID-19 ?"
   },
   "intake.Q26.helpGroup.text.1": {
     "en": "We are interested in knowing more about your health-related habits",
@@ -618,11 +618,11 @@
   },
   "intake.Q26.rg.scg.option.0": {
     "en": "Yes",
-    "fr": "TODO"
+    "fr": "Oui"
   },
   "intake.Q26.rg.scg.option.1": {
     "en": "No",
-    "fr": "TODO"
+    "fr": "Non"
   },
   "intake.Q26.rg.scg.option.2": {
     "en": "I don't know",
@@ -630,11 +630,11 @@
   },
   "intake.Q26.rg.scg.option.3": {
     "en": "I don't want to answer",
-    "fr": "TODO"
+    "fr": "Je ne souhaite pas répondre"
   },
   "intake.Q17.title.0": {
     "en": "Where did you first hear about the platform?",
-    "fr": "TODO"
+    "fr": "Comment avez-vous eu connaissance cette étude ?"
   },
   "intake.Q17.helpGroup.text.1": {
     "en": "We would like to know how you found out about our website",
