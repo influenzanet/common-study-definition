@@ -491,7 +491,7 @@ export class SymptomsStart extends ItemQuestion {
                         min: { dtype: 'exp', exp: expWithArgs('timestampWithOffset', -5184000) },
                         max: { dtype: 'exp', exp: expWithArgs('timestampWithOffset', 10) },
                     },
-                    content: _T( "weekly.HS.Q3.rg.scg.dateInput.0", "Choose date"),
+                    description: _T( "weekly.HS.Q3.rg.scg.dateInput.0", "Choose date"),
                 },
                 {
                     key: '1', role: 'option',
@@ -569,7 +569,7 @@ export class SymptomsEnd extends ItemQuestion {
                         },
                         max: { dtype: 'exp', exp: expWithArgs('timestampWithOffset', 10) },
                     },
-                    content: _T("weekly.HS.Q4.rg.scg.dateInput.0", "Choose date"),
+                    description: _T("weekly.HS.Q4.rg.scg.dateInput.0", "Choose date"),
                 },
                 {
                     key: '1', role: 'option',
@@ -705,7 +705,7 @@ export class FeverStart extends ItemQuestion {
                         },
                         max: { dtype: 'exp', exp: se.timestampWithOffset({ seconds: 10 }) },
                     },
-                    content: _T("weekly.HS.Q6.rg.scg.dateInput.0", "Choose date")
+                    description: _T("weekly.HS.Q6.rg.scg.dateInput.0", "Choose date")
                 },
                 {
                     key: '2', role: 'option',

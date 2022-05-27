@@ -287,7 +287,7 @@ export class FluVaccineThisSeasonWhen extends SubVaccineQuestion {
                         min: { dtype: 'exp', exp: expWithArgs('timestampWithOffset', -21427200) },
                         max: { dtype: 'exp', exp: expWithArgs('timestampWithOffset', 0) }
                     },
-                    content: _T("vaccination.HV.Q10b.rg.scg.description.dateInput.0", "Choose date"),
+                    description: _T("vaccination.HV.Q10b.rg.scg.description.dateInput.0", "Choose date"),
                 },
                 {
                     key: '0', role: 'option',
@@ -738,7 +738,7 @@ export class CovidDateLastVaccine extends SubVaccineQuestion {
                     optionProps: {
                         max: { dtype: 'exp', exp: expWithArgs('timestampWithOffset', 10) },
                     },
-                    content: _T("vaccination.HV.Q35j.rg.scg.dateInput.0", "Choose date")
+                    description: _T("vaccination.HV.Q35j.rg.scg.dateInput.0", "Choose date")
                 },
                 {
                     key: '0', role: 'option',
