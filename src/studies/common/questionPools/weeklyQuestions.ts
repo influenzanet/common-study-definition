@@ -1575,7 +1575,7 @@ export class VisitedMedicalService extends ItemQuestion {
     }
 
     buildItem() {
-        return SurveyItems.singleChoice({
+        return SurveyItems.multipleChoice({
             parentKey: this.parentKey,
             itemKey: this.itemKey,
             isRequired: this.isRequired,
@@ -1945,7 +1945,7 @@ export class TookMedication extends ItemQuestion {
 
 
     buildItem() {
-        return SurveyItems.singleChoice({
+        return SurveyItems.multipleChoice({
             parentKey: this.parentKey,
             itemKey: this.itemKey,
             isRequired: this.isRequired,

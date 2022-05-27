@@ -332,7 +332,7 @@ export class FluVaccineThisSeasonReasonFor extends SubVaccineQuestion {
     }
 
     buildItem() {
-        return SurveyItems.singleChoice({
+        return SurveyItems.multipleChoice({
             parentKey: this.parentKey,
             itemKey: this.itemKey,
             isRequired: this.isRequired,
@@ -415,7 +415,7 @@ export class FluVaccineThisSeasonReasonAgainst extends SubVaccineQuestion {
     }
 
     buildItem() {
-        return SurveyItems.singleChoice({
+        return SurveyItems.multipleChoice({
             parentKey: this.parentKey,
             itemKey: this.itemKey,
             isRequired: this.isRequired,
@@ -585,7 +585,7 @@ export class CovidVaccineBrand extends SubVaccineQuestion {
     }
 
     buildItem() {
-        return SurveyItems.singleChoice({
+        return SurveyItems.multipleChoice({
             parentKey: this.parentKey,
             itemKey: this.itemKey,
             isRequired: this.isRequired,
