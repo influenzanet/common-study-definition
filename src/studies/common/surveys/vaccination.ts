@@ -3,6 +3,7 @@ import { ExpressionName, SurveyGroupItem } from "survey-engine/data_types";
 import {  SurveyDefinition } from "case-editor-tools/surveys/types";
 import  * as pool  from "../questionPools/vaccinationQuestions";
 import { ItemBuilder } from "../../../tools/items";
+
 export class VaccinationDef extends SurveyDefinition {
 
     items: ItemBuilder[];

@@ -1,3 +1,6 @@
+import { Group, Item } from "case-editor-tools/surveys/types";
+import { Expression, SurveyItem, SurveySingleItem } from "survey-engine/data_types";
+
 /**
  * Common parameters for Item class
  */
@@ -22,4 +25,52 @@ export interface ItemProps {
     * @var keyOverride use this to override the default key for this item (only last part of the key, parent's key is not influenced).
     */
     keyOverride?: string;
+}
+
+
+export abstract class ItemQuestion extends Item {
+
+    constructor(props: ItemProps, defaultKey: string) {
+        super(props.parentKey, props.keyOverride ? props.keyOverride: defaultKey);
+        this.isRequired = props.isRequired;
+    }
+
+    // Create the condition
+    getCondition() : Expression | undefined {
+        return undefined;
+    }
+
+    get(): SurveySingleItem {
+        this.condition = this.getCondition();
+        return super.get();
+    }
+
+}
+
+export interface GroupProps {
+    parentKey: string
+    keyOverride?: string,
+    isRequired?: boolean
+    selectionMethod?: Expression
+}
+
+export abstract class GroupQuestion extends Group {
+
+    constructor(props: GroupProps, defaultKey: string) {
+        const groupKey = props.keyOverride ? props.keyOverride : defaultKey;
+        super(props.parentKey, groupKey, props.selectionMethod)
+    }
+
+    getCondition() : Expression | undefined {
+        return undefined;
+    }
+
+    get(): SurveyItem {
+        const condition = this.getCondition();
+        if(condition) {
+            this.groupEditor.setCondition(condition);
+        }
+        return super.get();
+    }
+
 }

@@ -89,7 +89,7 @@ export class IntakeDef extends SurveyDefinition {
         const Q_find_platform = new pool.FindOutAboutPlatform({parentKey: rootKey, isRequired:true});
         this.items.push(Q_find_platform);
 
-        const surveyEndText = new pool.FinalText(rootKey);
+        const surveyEndText = new pool.FinalText({parentKey: rootKey});
         this.items.push(surveyEndText);
     }
 

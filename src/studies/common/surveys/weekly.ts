@@ -2,7 +2,6 @@ import { _T } from "../languages"
 import { Item, SurveyDefinition } from "case-editor-tools/surveys/types";
 import * as pool from "../questionPools/weeklyQuestions";
 import { ItemBuilder } from "../../../tools/items";
-
 export class WeeklyDef extends SurveyDefinition {
 
     items: ItemBuilder[];

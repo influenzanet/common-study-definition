@@ -10,7 +10,7 @@ import { SurveyItems } from 'case-editor-tools/surveys';
 import { ComponentGenerators } from "case-editor-tools/surveys/utils/componentGenerators";
 import { StudyEngine as se } from "case-editor-tools/expression-utils/studyEngineExpressions";
 import { WeeklyResponses as ResponseEncoding } from "../responses/weekly";
-import { ItemProps } from "./types";
+import { GroupProps, GroupQuestion, ItemProps, ItemQuestion } from "./types";
 
 interface SymptomsProps extends ItemProps {
     useRash: boolean;
@@ -23,12 +23,11 @@ interface SymptomsProps extends ItemProps {
  * @param isRequired if true adds a default "hard" validation to the question to check if it has a response.
  * @param keyOverride use this to override the default key for this item (only last part of the key, parent's key is not influenced).
  */
-export class Symptoms extends Item {
+export class Symptoms extends ItemQuestion {
     useRash: boolean;
 
     constructor(props: SymptomsProps) {
-        super(props.parentKey, props.keyOverride ? props.keyOverride: 'Q1');
-        this.isRequired = props.isRequired;
+        super(props, 'Q1');
         this.useRash = props.useRash;
     }
 
@@ -37,6 +36,7 @@ export class Symptoms extends Item {
             parentKey: this.parentKey,
             itemKey: this.itemKey,
             isRequired: this.isRequired,
+            condition: this.condition,
             questionText: _T(
                 "weekly.Q1.title.0",
                 "Have you had any of the following symptoms since your last questionnaire (or in the past week, if this the first tie you are taking this questionnaire)?"
@@ -222,7 +222,7 @@ interface SymptomsGroupProps {
  * @param keySymptomsQuestion reference to the symptom survey
  * @param keyOverride use this to override the default key for this item (only last part of the key, parent's key is not influenced).
  */
-export class SymptomsGroup extends Group {
+export class SymptomsGroup extends GroupQuestion {
 
     keySymptomsQuestion: string;
 
@@ -231,10 +231,8 @@ export class SymptomsGroup extends Group {
     }
 
     constructor(props:SymptomsGroupProps) {
-
-        super(props.parentKey, props.defaultKey ? props.defaultKey : 'HS');
+        super(props, 'HS');
         this.keySymptomsQuestion = props.keySymptomsQuestion;
-        this.groupEditor.setCondition(this.getCondition());
     }
 
     buildGroup() {
@@ -249,11 +247,10 @@ export class SymptomsGroup extends Group {
  * @param isRequired if true adds a default "hard" validation to the question to check if it has a response.
  * @param keyOverride use this to override the default key for this item (only last part of the key, parent's key is not influenced).
  */
-export class SameIllness extends Item {
+export class SameIllness extends ItemQuestion {
 
     constructor(props: ItemProps) {
-        super(props.parentKey, props.keyOverride ? props.keyOverride: 'Q2');
-        this.isRequired = props.isRequired;
+        super(props, 'Q2');
     }
 
     getCondition() {
@@ -269,7 +266,7 @@ export class SameIllness extends Item {
             parentKey: this.parentKey,
             itemKey: this.itemKey,
             isRequired: this.isRequired,
-            condition: this.getCondition(),
+            condition: this.condition,
             questionText: _T(
                 "weekly.HS.Q2.title.0",
                 "When you filled in the previous questionnaire, you indicated that you were still sick. Are the symptoms you are  reporting now from the same timeframe as the symptoms you reported the last time?"
@@ -331,11 +328,10 @@ export class SameIllness extends Item {
  * @param isRequired if true adds a default "hard" validation to the question to check if it has a response.
  * @param keyOverride use this to override the default key for this item (only last part of the key, parent's key is not influenced).
  */
- export class PcrTestedContact extends Item {
+ export class PcrTestedContact extends ItemQuestion {
 
     constructor(props: ItemProps) {
-        super(props.parentKey, props.keyOverride ? props.keyOverride: 'Qcov3');
-        this.isRequired = props.isRequired;
+        super(props, 'Qcov3');
     }
 
     buildItem() {
@@ -343,7 +339,7 @@ export class SameIllness extends Item {
             parentKey: this.parentKey,
             itemKey: this.itemKey,
             isRequired: this.isRequired,
-            //condition: this.getCondition(),
+            condition: this.condition,
             questionText: _T(
                 "weekly.HS.Qcov3.title.0",
                  "In the 14 days before your symptoms started, have you been in close contact with someone for whom an antigenic or PCR test has confirmed that they have COVID-19?"
@@ -384,12 +380,11 @@ interface PcrCovidProps extends ItemProps {
     covid19ContactKey: string
 }
 
-export class PcrHouseholdContact extends Item {
+export class PcrHouseholdContact extends ItemQuestion {
     covid19ContactKey: string
 
     constructor(props: PcrCovidProps) {
-        super(props.parentKey, props.keyOverride ? props.keyOverride: 'Qcov3b');
-        this.isRequired = props.isRequired;
+        super(props, 'Qcov3b');
         this.covid19ContactKey = props.covid19ContactKey;
     }
 
@@ -403,7 +398,7 @@ export class PcrHouseholdContact extends Item {
             parentKey: this.parentKey,
             itemKey: this.itemKey,
             isRequired: this.isRequired,
-            condition: this.getCondition(),
+            condition: this.condition,
             questionText: _T(
                 "weekly.HS.Qcov3b.title.0", "Was this person or one of these persons a member of your household?"
             ),
@@ -459,13 +454,12 @@ interface SameIllnessProps extends ItemProps {
  * @param isRequired if true adds a default "hard" validation to the question to check if it has a response.
  * @param keyOverride use this to override the default key for this item (only last part of the key, parent's key is not influenced).
  */
-export class SymptomsStart extends Item {
+export class SymptomsStart extends ItemQuestion {
 
     keySameIllness: string;
 
     constructor(props: SameIllnessProps) {
-        super(props.parentKey, props.keyOverride ? props.keyOverride: 'Q3');
-        this.isRequired = props.isRequired;
+        super(props, 'Q3');
         this.keySameIllness = props.keySameIllness;
     }
 
@@ -480,12 +474,11 @@ export class SymptomsStart extends Item {
 
         const date_input_key = ResponseEncoding.symptoms_start.date_input;
 
-
         return SurveyItems.singleChoice({
             parentKey: this.parentKey,
             itemKey: this.itemKey,
             isRequired: this.isRequired,
-            condition: this.getCondition(),
+            condition: this.condition,
             questionText: _T(
                 "weekly.HS.Q3.title.0",
                 "On what day did you begin feeling the first symptoms? If you do not recall the exact date, please give an approximate date."
@@ -543,13 +536,12 @@ interface SymptomStartProps extends ItemProps {
  * @param isRequired if true adds a default "hard" validation to the question to check if it has a response.
  * @param keyOverride use this to override the default key for this item (only last part of the key, parent's key is not influenced).
  */
-export class SymptomsEnd extends Item {
+export class SymptomsEnd extends ItemQuestion {
 
     keySymptomsStart: string;
 
     constructor(props: SymptomStartProps) {
-        super(props.parentKey, props.keyOverride ? props.keyOverride: 'Q4');
-        this.isRequired = props.isRequired;
+        super(props, 'Q4');
         this.keySymptomsStart = props.keySymptomsStart;
     }
 
@@ -558,7 +550,7 @@ export class SymptomsEnd extends Item {
             parentKey: this.parentKey,
             itemKey: this.itemKey,
             isRequired: this.isRequired,
-            //condition: this.getCondition(),
+            condition: this.condition,
             questionText: _T( "weekly.HS.Q4.title.0", "When did your symptoms end?"),
             helpGroupContent: this.getHelpGroupContent(),
             responseOptions: [
@@ -616,11 +608,10 @@ export class SymptomsEnd extends Item {
  * @param isRequired if true adds a default "hard" validation to the question to check if it has a response.
  * @param keyOverride use this to override the default key for this item (only last part of the key, parent's key is not influenced).
  */
-export class SymptomsSuddenlyDeveloped extends Item {
+export class SymptomsSuddenlyDeveloped extends ItemQuestion {
 
     constructor(props: ItemProps) {
-        super(props.parentKey, props.keyOverride ? props.keyOverride: 'Q5');
-        this.isRequired = props.isRequired;
+        super(props, 'Q5');
     }
 
     buildItem() {
@@ -628,7 +619,7 @@ export class SymptomsSuddenlyDeveloped extends Item {
             parentKey: this.parentKey,
             itemKey: this.itemKey,
             isRequired: this.isRequired,
-            //condition: this.getCondition(),
+            condition: this.condition,
             questionText: _T( "weekly.HS.Q5.title.0", "Did your symptoms develop suddenly over a few hours?"),
             helpGroupContent: this.getHelpGroupContent(),
             responseOptions: this.getResponses()
@@ -672,13 +663,12 @@ interface SymptomsAndStartProps extends ItemProps {
     keySymptomStart: string
 }
 
-export class FeverStart extends Item {
+export class FeverStart extends ItemQuestion {
     keySymptomsQuestion: string
     keySymptomStart: string
 
     constructor(props: SymptomsAndStartProps) {
-        super(props.parentKey, props.keyOverride ? props.keyOverride: '');
-        this.isRequired = props.isRequired;
+        super(props, '');
         this.keySymptomsQuestion = props.keySymptomsQuestion;
         this.keySymptomStart = props.keySymptomStart;
     }
@@ -693,7 +683,7 @@ export class FeverStart extends Item {
             parentKey: this.parentKey,
             itemKey: this.itemKey,
             isRequired: this.isRequired,
-            condition: this.getCondition(),
+            condition: this.condition,
             questionText: _T(
                 "weekly.HS.Q6.title.0",
                 "On what day did your fever start? If you do not recall the exact date, please give an approximate date."
@@ -746,13 +736,12 @@ interface SymptomDependentProps extends ItemProps {
     keySymptomsQuestion: string
 }
 
-abstract class SymptomDependentQuestion extends Item {
+abstract class SymptomDependentQuestion extends ItemQuestion {
 
     keySymptomsQuestion: string;
 
     constructor(defaultKey: string, props:SymptomDependentProps ) {
-        super(props.parentKey, props.keyOverride ? props.keyOverride: defaultKey);
-        this.isRequired = props.isRequired;
+        super(props, defaultKey);
         this.keySymptomsQuestion = props.keySymptomsQuestion;
     }
 
@@ -790,7 +779,7 @@ export class FeverDevelopedSuddenly extends SymptomDependentQuestion {
             parentKey: this.parentKey,
             itemKey: this.itemKey,
             isRequired: this.isRequired,
-            condition: this.getCondition(),
+            condition: this.condition,
             questionText: _T("weekly.HS.Q6b.title.0" , "Did your fever develop suddenly over a few hours?"),
             helpGroupContent: this.getHelpGroupContent(),
             responseOptions: this.getResponses()
@@ -848,7 +837,7 @@ export class DidUMeasureTemperature extends SymptomDependentQuestion {
             parentKey: this.parentKey,
             itemKey: this.itemKey,
             isRequired: this.isRequired,
-            condition: this.getCondition(),
+            condition: this.condition,
             questionText: _T("weekly.HS.Q6c.title.0", "Did you take your temperature?"),
             helpGroupContent: this.getHelpGroupContent(),
             responseOptions: this.getResponses()
@@ -927,7 +916,7 @@ export class HighestTemprerature extends SymptomDependentQuestion {
             parentKey: this.parentKey,
             itemKey: this.itemKey,
             isRequired: this.isRequired,
-            condition: this.getCondition(),
+            condition: this.condition,
             questionText: _T("weekly.HS.Q6d.title.0", "What was your highest temperature measured?"),
             helpGroupContent: this.getHelpGroupContent(),
             responseOptions: this.getResponses()
@@ -981,7 +970,10 @@ export class HighestTemprerature extends SymptomDependentQuestion {
     }
 }
 
-export class FeverGroup extends Group {
+interface FeverGroupProps extends SymptomsAndStartProps {
+}
+
+export class FeverGroup extends GroupQuestion {
 
     keySymptomsQuestion: string
 
@@ -993,15 +985,11 @@ export class FeverGroup extends Group {
         return se.multipleChoice.any(this.keySymptomsQuestion, ResponseEncoding.symptoms.fever);
     }
 
-    constructor(props: SymptomsAndStartProps) {
-        const defaultKey = 'Q6';
-        super(props.parentKey, props.keyOverride ? props.keyOverride : defaultKey);
-
+    constructor(props: FeverGroupProps) {
+        super(props, 'Q6');
+        this.isRequired = props.isRequired;
         this.keySymptomsQuestion = props.keySymptomsQuestion;
         this.keySymptomStart = props.keySymptomStart;
-        this.isRequired = props.isRequired;
-        this.groupEditor.setCondition(this.getCondition());
-
     }
 
     buildItems() {
@@ -1031,11 +1019,10 @@ export class FeverGroup extends Group {
  * @param isRequired if true adds a default "hard" validation to the question to check if it has a response.
  * @param keyOverride use this to override the default key for this item (only last part of the key, parent's key is not influenced).
  */
-export class ConsentForMore extends Item {
+export class ConsentForMore extends ItemQuestion {
 
     constructor(props: ItemProps) {
-        super(props.parentKey, props.keyOverride ? props.keyOverride: 'Q36');
-        this.isRequired = props.isRequired;
+        super(props, 'Q36');
     }
 
     buildItem() {
@@ -1043,7 +1030,7 @@ export class ConsentForMore extends Item {
             parentKey: this.parentKey,
             itemKey: this.itemKey,
             isRequired: this.isRequired,
-            //condition: this.getCondition(),
+            condition: this.condition,
             questionText: _T("weekly.HS.Q36.title.0", "Thank you for all these information. They will help us to estimate the frequency of symptoms among general population. You can stop here. If you have a little more time, we propose you to answer further questions about your symptoms and care. Do you accept to answer to these additional questions?"),
             helpGroupContent: this.getHelpGroupContent(),
             responseOptions: this.getResponses()
@@ -1072,7 +1059,7 @@ export class ConsentForMore extends Item {
     }
 }
 
-interface HasMoreGroupProps extends ItemProps {
+interface HasMoreGroupProps extends GroupProps {
     consentForMoreKey: string;
 }
 
@@ -1083,7 +1070,7 @@ interface HasMoreGroupProps extends ItemProps {
  * @param userConsentForSymptoms reference to the symptom survey
  * @param keyOverride use this to override the default key for this item (only last part of the key, parent's key is not influenced).
  */
-export class HasMoreGroup extends Group {
+export class HasMoreGroup extends GroupQuestion {
 
     consentForMoreKey : string;
 
@@ -1093,11 +1080,8 @@ export class HasMoreGroup extends Group {
 
     constructor(props: HasMoreGroupProps) {
         const defaultKey = 'EX';
-        super(props.parentKey, props.keyOverride ? props.keyOverride: defaultKey);
+        super(props, defaultKey);
         this.consentForMoreKey = props.consentForMoreKey;
-        this.groupEditor.setCondition(
-            this.getCondition()
-        );
     }
 
     buildGroup() {
@@ -1112,11 +1096,10 @@ export class HasMoreGroup extends Group {
  * @param isRequired if true adds a default "hard" validation to the question to check if it has a response.
  * @param keyOverride use this to override the default key for this item (only last part of the key, parent's key is not influenced).
  */
-export class SymptomImpliedCovidTest extends Item {
+export class SymptomImpliedCovidTest extends ItemQuestion {
 
     constructor(props: ItemProps) {
-        super(props.parentKey, props.keyOverride ? props.keyOverride: 'Qcov16h');
-        this.isRequired = props.isRequired;
+        super(props, 'Qcov16h');
     }
 
     buildItem() {
@@ -1124,7 +1107,7 @@ export class SymptomImpliedCovidTest extends Item {
             parentKey: this.parentKey,
             itemKey: this.itemKey,
             isRequired: this.isRequired,
-            //condition: this.getCondition(),
+            condition: this.condition,
             questionText: _T("weekly.EX.Qcov16h.title.0", "Because of your symptoms, did you undergo a test/analyses to know if you have COVID-19?"),
             helpGroupContent: this.getHelpGroupContent(),
             responseOptions: this.getResponses()
@@ -1166,7 +1149,6 @@ interface CovidTestQuestionProps extends ItemProps {
     keySymptomImpliedCovidTest: string;
 }
 
-
 /**
  * TEST TYPE
  *
@@ -1175,13 +1157,12 @@ interface CovidTestQuestionProps extends ItemProps {
  * @param isRequired if true adds a default "hard" validation to the question to check if it has a response.
  * @param keyOverride use this to override the default key for this item (only last part of the key, parent's key is not influenced).
  */
-export class CovidTestType extends Item {
+export class CovidTestType extends ItemQuestion {
 
     keySymptomImpliedCovidTest: string;
 
     constructor(props: CovidTestQuestionProps) {
-        super(props.parentKey, props.keyOverride ? props.keyOverride: 'Qcov16i');
-        this.isRequired = props.isRequired;
+        super(props, 'Qcov16i');
         this.keySymptomImpliedCovidTest = props.keySymptomImpliedCovidTest;
     }
 
@@ -1197,7 +1178,7 @@ export class CovidTestType extends Item {
             parentKey: this.parentKey,
             itemKey: this.itemKey,
             isRequired: this.isRequired,
-            condition: this.getCondition(),
+            condition: this.condition,
             questionText: _T("weekly.EX.Qcov16i.title.0", "Which analyse(s) was it?"),
             helpGroupContent: this.getHelpGroupContent(),
             topDisplayCompoments: [
@@ -1242,13 +1223,12 @@ interface TestTypeProps extends ItemProps {
     keyTestType: string
 }
 
-abstract class TestTypeDependentQuestion extends Item {
+abstract class TestTypeDependentQuestion extends ItemQuestion {
 
     keyTestType: string;
 
     constructor(defaultKey: string, props: TestTypeProps) {
-        super(props.parentKey, props.keyOverride ? props.keyOverride: defaultKey);
-        this.isRequired = props.isRequired;
+        super(props, defaultKey);
         this.keyTestType = props.keyTestType;
     }
 
@@ -1287,7 +1267,7 @@ export class ResultPCRTest extends TestTypeDependentQuestion {
             parentKey: this.parentKey,
             itemKey: this.itemKey,
             isRequired: this.isRequired,
-            condition: this.getCondition(),
+            condition: this.condition,
             questionText: _T("weekly.EX.Qcov16b.title.0", "Do you know the result of your PCR test? (if several were performed and at least one was positive, chose the “Positive” answer)"),
             helpGroupContent: this.getHelpGroupContent(),
 
@@ -1352,7 +1332,7 @@ export class ResultAntigenicTest extends TestTypeDependentQuestion {
             parentKey: this.parentKey,
             itemKey: this.itemKey,
             isRequired: this.isRequired,
-            condition: this.getCondition(),
+            condition: this.condition,
             questionText: _T("weekly.EX.Qcov16f.title.0", "Do you know the result of this rapid antigen detection test on nasopharyngeal sample? (if several were performed and at least one was positive, chose the “Positive” answer)"),
             helpGroupContent: this.getHelpGroupContent(),
             responseOptions: this.getResponses()
@@ -1415,7 +1395,7 @@ export class ResultRapidAntigenicTest extends TestTypeDependentQuestion {
             parentKey: this.parentKey,
             itemKey: this.itemKey,
             isRequired: this.isRequired,
-            condition: this.getCondition(),
+            condition: this.condition,
             questionText: _T("weekly.EX.Qcov16k.title.0", "Do you know the result of this antigenic test or self-test on nasal sample? (if several were performed and at least one was positive, chose the “Positive” answer)"),
             helpGroupContent: this.getHelpGroupContent(),
             responseOptions: this.getResponses()
@@ -1455,11 +1435,10 @@ export class ResultRapidAntigenicTest extends TestTypeDependentQuestion {
 
 
 
-export class FluTest extends Item {
+export class FluTest extends ItemQuestion {
 
     constructor(props: ItemProps) {
-        super(props.parentKey, props.keyOverride ? props.keyOverride: 'Qcov19');
-        this.isRequired = props.isRequired;
+        super(props, 'Qcov19');
     }
 
     buildItem() {
@@ -1467,7 +1446,7 @@ export class FluTest extends Item {
             parentKey: this.parentKey,
             itemKey: this.itemKey,
             isRequired: this.isRequired,
-            //condition: this.getCondition(),
+            condition: this.condition,
             questionText: _T("weekly.EX.Qcov19.title.0", "Because of your symptoms, did you undergo a test/analyses to know if you have the Flu?"),
             helpGroupContent: this.getHelpGroupContent(),
             responseOptions: this.getResponses()
@@ -1524,13 +1503,12 @@ interface ResultFluTestProps extends ItemProps {
  * @param isRequired if true adds a default "hard" validation to the question to check if it has a response.
  * @param keyOverride use this to override the default key for this item (only last part of the key, parent's key is not influenced).
  */
-export class ResultFluTest extends Item {
+export class ResultFluTest extends ItemQuestion {
 
     keyFluTest: string
 
     constructor(props: ResultFluTestProps) {
-        super(props.parentKey, props.keyOverride ? props.keyOverride: 'Qcov19b');
-        this.isRequired = props.isRequired;
+        super(props, 'Qcov19b');
         this.keyFluTest = props.keyFluTest;
     }
 
@@ -1544,7 +1522,7 @@ export class ResultFluTest extends Item {
             parentKey: this.parentKey,
             itemKey: this.itemKey,
             isRequired: this.isRequired,
-            condition: this.getCondition(),
+            condition: this.condition,
             questionText: _T("weekly.EX.Qcov19b.title.0", "Have you received the results of your Flu test?"),
             helpGroupContent: this.getHelpGroupContent(),
             responseOptions: this.getResponses()
@@ -1590,11 +1568,10 @@ export class ResultFluTest extends Item {
  * @param isRequired if true adds a default "hard" validation to the question to check if it has a response.
  * @param keyOverride use this to override the default key for this item (only last part of the key, parent's key is not influenced).
  */
-export class VisitedMedicalService extends Item {
+export class VisitedMedicalService extends ItemQuestion {
 
     constructor(props: ItemProps) {
-        super(props.parentKey, props.keyOverride ? props.keyOverride: 'Q7');
-        this.isRequired = props.isRequired;
+        super(props, 'Q7');
     }
 
     buildItem() {
@@ -1602,7 +1579,7 @@ export class VisitedMedicalService extends Item {
             parentKey: this.parentKey,
             itemKey: this.itemKey,
             isRequired: this.isRequired,
-            //condition: this.getCondition(),
+            condition: this.condition,
             questionText: _T("weekly.EX.Q7.title.0", "Because of your symptoms, did you VISIT (see face to face or teleconsultation) any medical services?"),
             helpGroupContent: this.getHelpGroupContent(),
             bottomDisplayCompoments: [
@@ -1689,13 +1666,12 @@ interface VisitedMedicalServiceProps extends ItemProps {
  * @param keyOverride use this to override the default key for this item (only last part of the key, parent's key is not influenced).
  */
 
-export class VisitedMedicalServiceWhen extends Item {
+export class VisitedMedicalServiceWhen extends ItemQuestion {
 
     keyVisitedMedicalServ: string
 
     constructor(props: VisitedMedicalServiceProps) {
-        super(props.parentKey, props.keyOverride ? props.keyOverride: 'Q7b');
-        this.isRequired = props.isRequired;
+        super(props, 'Q7b');
         this.keyVisitedMedicalServ = props.keyVisitedMedicalServ;
     }
 
@@ -1716,7 +1692,7 @@ export class VisitedMedicalServiceWhen extends Item {
         );
 
         // CONDITION
-        editor.setCondition(this.getCondition());
+        editor.setCondition(this.condition);
 
         // INFO POPUP
         editor.setHelpGroupComponent( generateHelpGroupComponent(this.getHelpGroupContent())  );
@@ -1849,13 +1825,12 @@ export class VisitedMedicalServiceWhen extends Item {
  * @param keyOverride use this to override the default key for this item (only last part of the key, parent's key is not influenced).
  */
 
-export class WhyVisitedNoMedicalService extends Item {
+export class WhyVisitedNoMedicalService extends ItemQuestion {
 
     keyVisitedMedicalServ: string
 
     constructor(props: VisitedMedicalServiceProps) {
-        super(props.parentKey, props.keyOverride ? props.keyOverride: 'Qcov18');
-        this.isRequired = props.isRequired;
+        super(props, 'Qcov18');
         this.keyVisitedMedicalServ = props.keyVisitedMedicalServ;
     }
 
@@ -1870,7 +1845,7 @@ export class WhyVisitedNoMedicalService extends Item {
             parentKey: this.parentKey,
             itemKey: this.itemKey,
             isRequired: this.isRequired,
-            condition: this.getCondition(),
+            condition: this.condition,
             questionText: _T("weekly.EX.Qcov18.title.0", "What is the main reason for which you did not consult any health professional for the symptoms you declared today?"),
             helpGroupContent: this.getHelpGroupContent(),
             responseOptions: this.getResponses()
@@ -1959,13 +1934,12 @@ interface TookMedicationProps extends ItemProps {
  * @param isRequired if true adds a default "hard" validation to the question to check if it has a response.
  * @param keyOverride use this to override the default key for this item (only last part of the key, parent's key is not influenced).
  */
-export class TookMedication extends Item {
+export class TookMedication extends ItemQuestion {
 
     useHayFever: boolean;
 
     constructor(props: TookMedicationProps) {
-        super(props.parentKey, props.keyOverride ? props.keyOverride: 'Q9');
-        this.isRequired = props.isRequired;
+        super(props, 'Q9');
         this.useHayFever = props.useHayFever ?? false;
     }
 
@@ -1975,7 +1949,7 @@ export class TookMedication extends Item {
             parentKey: this.parentKey,
             itemKey: this.itemKey,
             isRequired: this.isRequired,
-            //condition: this.getCondition(),
+            condition: this.condition,
             questionText: _T("weekly.EX.Q9.title.0", "Did you take medication for these symptoms?"),
             helpGroupContent: this.getHelpGroupContent(),
             topDisplayCompoments: [
@@ -2096,11 +2070,10 @@ export class TookMedication extends Item {
  * @param isRequired if true adds a default "hard" validation to the question to check if it has a response.
  * @param keyOverride use this to override the default key for this item (only last part of the key, parent's key is not influenced).
  */
-export class Hospitalized extends Item {
+export class Hospitalized extends ItemQuestion {
 
     constructor(props: ItemProps) {
-        super(props.parentKey, props.keyOverride ? props.keyOverride: 'Q14');
-        this.isRequired = props.isRequired;
+        super(props, 'Q14');
     }
 
     buildItem() {
@@ -2108,7 +2081,7 @@ export class Hospitalized extends Item {
             parentKey: this.parentKey,
             itemKey: this.itemKey,
             isRequired: this.isRequired,
-            //condition: this.getCondition(),
+            condition: this.condition,
             questionText: _T("weekly.EX.Q14.title.0", "Because of your symptoms, were you hospitalized?"),
             helpGroupContent: this.getHelpGroupContent(),
             responseOptions: this.getResponses()
@@ -2148,11 +2121,10 @@ export class Hospitalized extends Item {
  * @param isRequired if true adds a default "hard" validation to the question to check if it has a response.
  * @param keyOverride use this to override the default key for this item (only last part of the key, parent's key is not influenced).
  */
-export class DailyRoutine extends Item {
+export class DailyRoutine extends ItemQuestion {
 
     constructor(props: ItemProps) {
-        super(props.parentKey, props.keyOverride ? props.keyOverride: 'Q10');
-        this.isRequired = props.isRequired;
+        super(props, 'Q10');
     }
 
     buildItem() {
@@ -2160,7 +2132,7 @@ export class DailyRoutine extends Item {
             parentKey: this.parentKey,
             itemKey: this.itemKey,
             isRequired: this.isRequired,
-            //condition: this.getCondition(),
+            condition: this.condition,
             questionText: _T("weekly.EX.Q10.title.0", "Did you change your daily routine because of your illness?"),
             helpGroupContent: this.getHelpGroupContent(),
             responseOptions: this.getResponses()
@@ -2209,13 +2181,12 @@ interface DailyRoutineProps extends ItemProps {
     keyDailyRoutine: string;
 }
 
-export class DailyRoutineToday extends Item {
+export class DailyRoutineToday extends ItemQuestion {
 
     keyDailyRoutine: string;
 
     constructor(props: DailyRoutineProps) {
-        super(props.parentKey, props.keyOverride ? props.keyOverride: 'Q10b');
-        this.isRequired = props.isRequired;
+        super(props, 'Q10b');
         this.keyDailyRoutine = props.keyDailyRoutine;
     }
 
@@ -2229,7 +2200,7 @@ export class DailyRoutineToday extends Item {
             parentKey: this.parentKey,
             itemKey: this.itemKey,
             isRequired: this.isRequired,
-            condition: this.getCondition(),
+            condition: this.condition,
             questionText: _T("weekly.EX.Q10b.title.0", "Are you currently still unable to work or attend school due to your symptoms/complaints?"),
             helpGroupContent: this.getHelpGroupContent(),
             responseOptions: this.getResponses()
@@ -2281,13 +2252,12 @@ export class DailyRoutineToday extends Item {
  * @param isRequired if true adds a default "hard" validation to the question to check if it has a response.
  * @param keyOverride use this to override the default key for this item (only last part of the key, parent's key is not influenced).
  */
-export class DailyRoutineDaysMissed extends Item {
+export class DailyRoutineDaysMissed extends ItemQuestion {
 
     keyDailyRoutine: string;
 
     constructor(props: DailyRoutineProps) {
-        super(props.parentKey, props.keyOverride ? props.keyOverride: 'Q10c');
-        this.isRequired = props.isRequired;
+        super(props, 'Q10c');
         this.keyDailyRoutine = props.keyDailyRoutine;
     }
 
@@ -2301,7 +2271,7 @@ export class DailyRoutineDaysMissed extends Item {
             parentKey: this.parentKey,
             itemKey: this.itemKey,
             isRequired: this.isRequired,
-            condition: this.getCondition(),
+            condition: this.condition,
             questionText: _T("weekly.EX.Q10c.title.0", "For how many days have you been unable to work normally/go to school (when you otherwise would have)?"),
             helpGroupContent: this.getHelpGroupContent(),
             responseOptions: this.getResponses()
@@ -2360,11 +2330,10 @@ export class DailyRoutineDaysMissed extends Item {
  * @param isRequired if true adds a default "hard" validation to the question to check if it has a response.
  * @param keyOverride use this to override the default key for this item (only last part of the key, parent's key is not influenced).
  */
- export class CovidHabitsChange extends Item {
+ export class CovidHabitsChange extends ItemQuestion {
 
     constructor(props: ItemProps) {
-        super(props.parentKey, props.keyOverride ? props.keyOverride: 'Qcov7');
-        this.isRequired = props.isRequired;
+        super(props, 'Qcov7');
     }
 
     buildItem() {
@@ -2378,6 +2347,10 @@ export class DailyRoutineDaysMissed extends Item {
 
         // INFO POPUP
         editor.setHelpGroupComponent(generateHelpGroupComponent(this.getHelpGroupContent()));
+
+        if(this.condition) {
+            editor.setCondition(this.condition);
+        }
 
         // RESPONSE PART
 
@@ -2496,11 +2469,10 @@ export class DailyRoutineDaysMissed extends Item {
  * @param isRequired if true adds a default "hard" validation to the question to check if it has a response.
  * @param keyOverride use this to override the default key for this item (only last part of the key, parent's key is not influenced).
  */
-export class CauseOfSymptoms extends Item {
+export class CauseOfSymptoms extends ItemQuestion {
 
     constructor(props: ItemProps) {
-        super(props.parentKey, props.keyOverride ? props.keyOverride: 'Q11');
-        this.isRequired = props.isRequired;
+        super(props, 'Q11');
     }
 
     buildItem() {
@@ -2508,7 +2480,7 @@ export class CauseOfSymptoms extends Item {
             parentKey: this.parentKey,
             itemKey: this.itemKey,
             isRequired: this.isRequired,
-            //condition: this.getCondition(),
+            condition: this.condition,
             questionText: _T("weekly.EX.Q11.title.0", "What do you think is causing your symptoms?"),
             helpGroupContent: this.getHelpGroupContent(),
             responseOptions: this.getResponses()
@@ -2573,9 +2545,9 @@ export class CauseOfSymptoms extends Item {
     }
 }
 
-export class SurveyEnd extends Item {
+export class SurveyEnd extends ItemQuestion {
     constructor(props: ItemProps) {
-        super(props.parentKey, props.keyOverride ? props.keyOverride : 'surveyEnd');
+        super(props, 'surveyEnd');
     }
 
     buildItem() {
