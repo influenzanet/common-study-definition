@@ -75,7 +75,7 @@ export class StudyRulesBuilder {
             se.participantActions.updateFlag(flags.vaccinationCompleted.key, flags.vaccinationCompleted.values.yes)
         );
 
-        const ageResponseComp = responseGroupKey + '.' + IntakeResponses.birthDate;
+        const ageResponseComp = responseGroupKey + '.' + IntakeResponses.birthDate.date;
 
         const handleChild = se.ifThen(
             se.checkSurveyResponseKey(this.keys.intakeKey),
