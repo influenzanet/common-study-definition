@@ -1002,7 +1002,7 @@ export class MeansOfTransport extends ItemQuestion {
             itemKey: this.itemKey,
             isRequired: this.isRequired,
             condition: this.condition,
-            questionText: _T("intake.Q7.title.0", "What is your home postal code?"),
+            questionText: _T("intake.Q7.title.0", "What means of transportation do you typically use for your daily activities?"),
             topDisplayCompoments: [
                 ComponentGenerators.text({
                     className: 'mb-2',
