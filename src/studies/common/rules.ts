@@ -7,15 +7,31 @@ import { IntakeResponses } from "./responses/intake";
 import { responseGroupKey } from "case-editor-tools/constants/key-definitions";
 import { SurveyKeys } from "./keys";
 
+interface StudyRulesSet {
+    entry: Expression[]
+    submit: Expression[]
+    timer?: Expression[]
+    merger?: Expression[]
+}
+
 export class StudyRulesBuilder {
 
     keys: SurveyKeys;
 
+    rules: StudyRulesSet
+
+    created: boolean;
+
     constructor(keys: SurveyKeys) {
         this.keys = keys;
+        this.rules = {
+           entry: [],
+           submit: []
+        };
+        this.created = false;
     }
 
-    build(): StudyRules {
+    create() {
 
         const assignedSurveys = se.participantActions.assignedSurveys;
 
@@ -121,12 +137,35 @@ export class StudyRulesBuilder {
             handleChild
         ];
 
+        this.rules.entry = entryRules;
+        this.rules.submit = submitRules;
+
+        this.extraRules();
+        this.created = true;
+    }
+
+    /**
+     *
+     * Build extra rules (placeholder for extension)
+     */
+    extraRules() {
+
+    }
+
+    build(): StudyRules {
+
+        if(!this.created) {
+            this.create();
+        }
+
         /**
          * STUDY RULES
          */
         return new StudyRules(
-            entryRules,
-            submitRules,
+            this.rules.entry,
+            this.rules.submit,
+            this.rules.timer,
+            this.rules.merger
         );
     }
 }
