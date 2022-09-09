@@ -27,7 +27,7 @@ export class SurveyBuilder extends SurveyDefinition {
             }
             item.setCondition(condition);
         }
-
+        this.items.push(item);
     }
  
     // Default implementation build survey from the stacked items
