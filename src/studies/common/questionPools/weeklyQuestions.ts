@@ -6,10 +6,10 @@ import { initLikertScaleItem } from "case-editor-tools/surveys/responseTypeGener
 import { expWithArgs, generateHelpGroupComponent, generateLocStrings, generateTitleComponent } from "case-editor-tools/surveys/utils/simple-generators";
 import { likertScaleKey, matrixKey, responseGroupKey } from "case-editor-tools/constants/key-definitions";
 import { MultipleChoicePrefix, singleChoicePrefix, text_how_answer, text_select_all_apply, text_why_asking, require_response, trans_select_all_apply } from "./helpers";
-import { SurveyItems } from 'case-editor-tools/surveys';
+import { SurveyEngine, SurveyItems } from 'case-editor-tools/surveys';
 import { ComponentGenerators } from "case-editor-tools/surveys/utils/componentGenerators";
 import { StudyEngine as se } from "case-editor-tools/expression-utils/studyEngineExpressions";
-import { WeeklyResponses as ResponseEncoding } from "../responses/weekly";
+import { SymptomKeysType, WeeklyResponses as ResponseEncoding } from "../responses/weekly";
 import { GroupProps, GroupQuestion, ItemProps, ItemQuestion } from "./types";
 
 interface SymptomsProps extends ItemProps {
@@ -29,6 +29,23 @@ export class Symptoms extends ItemQuestion {
     constructor(props: SymptomsProps) {
         super(props, 'Q1');
         this.useRash = props.useRash;
+    }
+
+    /**
+     * Helper to create a condition based on this question response
+     * @param symptoms 
+     * @returns 
+     */
+    createSymptomCondition(...symptoms: SymptomKeysType[]) {
+        return SurveyEngine.multipleChoice.any(this.key, ...symptoms);
+    }
+
+    /**
+     * Helper to create a condition based on this question response checking for any response except 'no-symptom' response
+     * @returns 
+     */
+    createAnySymptomCondition() {
+        return se.responseHasOnlyKeysOtherThan(this.key, MultipleChoicePrefix, ResponseEncoding.symptoms.no_symptom);
     }
 
     buildItem() {
@@ -55,115 +72,116 @@ export class Symptoms extends ItemQuestion {
     }
 
     getResponses() {
-        const exclusiveOptionRule =  se.multipleChoice.any(this.key, ResponseEncoding.symptoms.no_symptom);
-        const r =  [
+        const codes = ResponseEncoding.symptoms;
+        const exclusiveOptionRule =  se.multipleChoice.any(this.key, codes.no_symptom);
+        const r : OptionDef[] =  [
             {
-                key: ResponseEncoding.symptoms.no_symptom,
+                key: codes.no_symptom,
                 role: 'option',
                 content: _T("weekly.Q1.rg.mcg.option.0", "No symptoms"),
             },
             {
-                key: '1', role: 'option',
+                key: codes.fever, role: 'option',
                 disabled:exclusiveOptionRule,
                 content: _T( "weekly.Q1.rg.mcg.option.1", "Fever")
             },
             {
-                key: '2', role: 'option',
+                key: codes.chills, role: 'option',
                 disabled: exclusiveOptionRule,
                 content: _T("weekly.Q1.rg.mcg.option.2", "Chills")
             },
             {
-                key: '3', role: 'option',
+                key: codes.rhino, role: 'option',
                 disabled: exclusiveOptionRule,
                 content: _T("weekly.Q1.rg.mcg.option.3", "Runny or blocked nose")
             },
             {
-                key: '4', role: 'option',
+                key: codes.sneeze, role: 'option',
                 disabled: exclusiveOptionRule,
                 content: _T("weekly.Q1.rg.mcg.option.4","Sneezing")
             },
             {
-                key: '5', role: 'option',
+                key: codes.sorethroat, role: 'option',
                 disabled: exclusiveOptionRule,
                 content: _T( "weekly.Q1.rg.mcg.option.5", "Sore throat")
             },
             {
-                key: '6', role: 'option',
+                key: codes.cough, role: 'option',
                 disabled:exclusiveOptionRule,
                 content: _T("weekly.Q1.rg.mcg.option.6", "Cough")
             },
             {
-                key: '7', role: 'option',
+                key: codes.dyspnea, role: 'option',
                 disabled: exclusiveOptionRule,
                 content: _T( "weekly.Q1.rg.mcg.option.7", "Shortness of breath")
             },
             {
-                key: '8', role: 'option',
+                key: codes.headache, role: 'option',
                 disabled: exclusiveOptionRule,
                 content: _T("weekly.Q1.rg.mcg.option.8", "Headache")
             },
             {
-                key: '9', role: 'option',
+                key: codes.pain, role: 'option',
                 disabled: exclusiveOptionRule,
                 content: _T( "weekly.Q1.rg.mcg.option.9", "Muscle/joint pain")
             },
             {
-                key: '10', role: 'option',
+                key: codes.chestpain, role: 'option',
                 disabled: exclusiveOptionRule,
                 content: _T( "weekly.Q1.rg.mcg.option.10", "Chest pain")
             },
             {
-                key: '11', role: 'option',
+                key: codes.asthenia, role: 'option',
                 disabled: exclusiveOptionRule,
                 content: _T("weekly.Q1.rg.mcg.option.11", "Feeling tired or exhausted (malaise)")
             },
             {
-                key: '12', role: 'option',
+                key: codes.anorexia, role: 'option',
                 disabled: exclusiveOptionRule,
                 content: _T( "weekly.Q1.rg.mcg.option.12", "Loss of appetite")
             },
             {
-                key: '13', role: 'option',
+                key: codes.sputum, role: 'option',
                 disabled: exclusiveOptionRule,
                 content: _T( "weekly.Q1.rg.mcg.option.13", "Coloured sputum/phlegm")
             },
             {
-                key: '14', role: 'option',
+                key: codes.wateryeye, role: 'option',
                 disabled: exclusiveOptionRule,
                 content: _T( "weekly.Q1.rg.mcg.option.14", "Watery, bloodshot eyes")
             },
             {
-                key: '15', role: 'option',
+                key: codes.nausea, role: 'option',
                 disabled: exclusiveOptionRule,
                 content: _T("weekly.Q1.rg.mcg.option.15", "Nausea")
             },
             {
-                key: '16', role: 'option',
+                key: codes.vomiting, role: 'option',
                 disabled: exclusiveOptionRule,
                 content: _T("weekly.Q1.rg.mcg.option.16",  "Vomiting")
             },
             {
-                key: '17', role: 'option',
+                key: codes.diarrhea, role: 'option',
                 disabled: exclusiveOptionRule,
                 content: _T( "weekly.Q1.rg.mcg.option.17", "Diarrhoea")
             },
             {
-                key: '18', role: 'option',
+                key: codes.abdopain, role: 'option',
                 disabled: exclusiveOptionRule,
                 content: _T( "weekly.Q1.rg.mcg.option.18", "Stomachache")
             },
             {
-                key: '23', role: 'option',
+                key: codes.loss_smell, role: 'option',
                 disabled: exclusiveOptionRule,
                 content: _T("weekly.Q1.rg.mcg.option.19", "Loss of smell")
             },
             {
-                key: '21', role: 'option',
+                key: codes.loss_taste, role: 'option',
                 disabled: exclusiveOptionRule,
                 content: _T( "weekly.Q1.rg.mcg.option.20", "Loss of taste"),
             },
             {
-                key: '22', role: 'option',
+                key: codes.nose_bleed, role: 'option',
                 disabled: exclusiveOptionRule,
                 content: _T("weekly.Q1.rg.mcg.option.21","Nose bleed"),
             },
@@ -172,7 +190,7 @@ export class Symptoms extends ItemQuestion {
         if(this.useRash) {
 
             r.push({
-                key: '20', role: 'option',
+                key: codes.rash, role: 'option',
                 disabled: exclusiveOptionRule,
                 content: _T( "weekly.Q1.rg.mcg.option.22","Rash")
             });
@@ -180,7 +198,7 @@ export class Symptoms extends ItemQuestion {
 
         r.push(
         {
-            key: '19', role: 'option',
+            key: codes.other, role: 'option',
             disabled: exclusiveOptionRule,
             content: _T( "weekly.Q1.rg.mcg.option.23", "Other"),
         });
@@ -1959,10 +1977,18 @@ export class TookMedication extends ItemQuestion {
         });
     }
 
-    getResponses() {
+    /**
+     * Creates a condition based on this question response when antibiotic is checked
+     * @returns 
+     */
+    createTookAntibioticCondition() {
+        return se.responseHasKeysAny(this.key, MultipleChoicePrefix, ResponseEncoding.took_medication.antibio);
+    }
 
-        const no_medication = '0';
-        const dont_know = '6';
+    getResponses() {
+        const codes = ResponseEncoding.took_medication; 
+        const no_medication =  codes.no;
+        const dont_know = codes.dontknow;
 
         // Exclusive with 'No' response
         const exclusiveNo = se.responseHasKeysAny(this.key, MultipleChoicePrefix, no_medication);
@@ -1973,7 +1999,7 @@ export class TookMedication extends ItemQuestion {
         // Exclusive with Dont know response
         const exclusiveDontKnow = se.responseHasKeysAny(this.key, MultipleChoicePrefix, dont_know);
 
-        const r = [
+        const r : OptionDef[] = [
             {
                 key: no_medication,
                 role: 'option',
@@ -1981,13 +2007,13 @@ export class TookMedication extends ItemQuestion {
                 content: _T("weekly.EX.Q9.rg.mcg.option.0", "No medication")
             },
             {
-                key: '1',
+                key: codes.pain,
                 role: 'option',
                 disabled: exclusiveOther,
                 content: _T("weekly.EX.Q9.rg.mcg.option.1", "Pain killers (e.g. paracetamol, lemsip, ibuprofen, aspirin, calpol, etc)")
             },
             {
-                key: '2',
+                key: codes.cough,
                 role: 'option',
                 disabled: exclusiveOther,
                 content: _T("weekly.EX.Q9.rg.mcg.option.2", "Cough medication (e.g. expectorants)")
@@ -2004,31 +2030,31 @@ export class TookMedication extends ItemQuestion {
         }
 
         const rest = [    {
-                key: '3',
+                key: codes.antiviral,
                 role: 'option',
                 disabled: exclusiveOther,
                 content: _T("weekly.EX.Q9.rg.mcg.option.3", "Antivirals against influenza (eg: Tamiflu)")
             },
             {
-                key: '4',
+                key: codes.antibio,
                 role: 'option',
                 disabled: exclusiveOther,
                 content: _T("weekly.EX.Q9.rg.mcg.option.4", "Antibiotics")
             },
             {
-                key: '7',
+                key: codes.homeo,
                 role: 'option',
                 disabled: exclusiveOther,
                 content: _T("weekly.EX.Q9.rg.mcg.option.5", "Homeopathy")
             },
             {
-                key: '8',
+                key: codes.alternative,
                 role: 'option',
                 disabled: exclusiveOther,
                 content: _T("weekly.EX.Q9.rg.mcg.option.6", "Alternative medicine (essential oil, phytotherapy, etc.)")
             },
             {
-                key: '5',
+                key: codes.other,
                 role: 'option',
                 disabled: exclusiveOther,
                 content: _T("weekly.EX.Q9.rg.mcg.option.7", "Other")

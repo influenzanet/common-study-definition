@@ -1,30 +1,47 @@
+
+const symptomsEncoding = {
+    no_symptom: '0',
+    fever: '1',
+    "chills": "2",
+    "rhino": "3",
+    "sneeze": "4",
+    "sorethroat": "5",
+    "cough": "6",
+    "dyspnea": "7",
+    "headache": "8",
+    "pain": "9",
+    "chestpain": "10",
+    "asthenia": "11",
+    "anorexia": "12",
+    "sputum": "13",
+    "wateryeye": "14",
+    "nausea": "15",
+    "vomiting": "16",
+    "diarrhea": "17",
+    "abdopain": "18",
+    "loss_smell": "23",
+    "loss_taste": "21",
+    "nose_bleed": "22",
+    "rash": "20",
+    "other": "19"
+} as const;
+
+const TookMedicationCodes = {
+    "no": "0",
+    "pain": "1",
+    "cough": "2",
+    "antiviral": "3",
+    "antibio": "4",
+    "homeo": "7",
+    "alternative": "8",
+    "other": "5",
+    "dontknow": "6"
+} as const;
+
+export type SymptomKeysType =  keyof typeof symptomsEncoding;
+
 export const WeeklyResponses = {
-    symptoms: {
-        no_symptom: '0',
-        fever: '1',
-        "chills": "2",
-        "rhino": "3",
-        "sneeze": "4",
-        "sorethroat": "5",
-        "cough": "6",
-        "dyspnea": "7",
-        "headache": "8",
-        "pain": "9",
-        "chestpain": "10",
-        "asthenia": "11",
-        "anorexia": "12",
-        "sputum": "13",
-        "wateryeye": "14",
-        "nausea": "15",
-        "vomiting": "16",
-        "diarrhea": "17",
-        "abdopain": "18",
-        "loss_smell": "23",
-        "loss_taste": "21",
-        "nose_bleed": "22",
-        "rash": "20",
-        "other": "19"
-    },
+    symptoms: symptomsEncoding,
     same_illness: {
         'yes': '0',
         'no': '1',
@@ -49,17 +66,7 @@ export const WeeklyResponses = {
         "yes": "1",
         "no": "0"
     },
-    took_medication: {
-            "no": "0",
-            "pain": "1",
-            "cough": "2",
-            "antiviral": "3",
-            "antibio": "4",
-            "homeo": "7",
-            "alternative": "8",
-            "other": "5",
-            "dontknow": "6"
-    },
+    took_medication: TookMedicationCodes,
     symptom_test: {
         "yes": "1",
         "not_yet": "2",
