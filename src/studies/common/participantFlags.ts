@@ -1,9 +1,5 @@
 import { stringify } from "querystring";
-
-export interface FlagDefinition {
-    key: string;
-    values: Record<string, string>
-}
+import { FlagDefinition } from "../../types";
 
 interface AgeFlagDefinition extends FlagDefinition {
     age: number;
@@ -17,14 +13,6 @@ const ageFlag : AgeFlagDefinition = {
         yes: 'C'
     }
 }
-
-export function flag(name: string, values: Record<string, string>) {
-    return {
-        key: name,
-        values: values
-    }
-};
-
 
 export const ParticipantFlags = {
     isChild:  ageFlag,

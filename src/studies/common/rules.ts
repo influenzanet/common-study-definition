@@ -6,13 +6,8 @@ import { WeeklyResponses } from "./responses/weekly";
 import { IntakeResponses } from "./responses/intake";
 import { responseGroupKey } from "case-editor-tools/constants/key-definitions";
 import { SurveyKeys } from "./keys";
+import { StudyRulesSet } from "../../types";
 
-interface StudyRulesSet {
-    entry: Expression[]
-    submit: Expression[]
-    timer?: Expression[]
-    merger?: Expression[]
-}
 
 export class StudyRulesBuilder {
 
