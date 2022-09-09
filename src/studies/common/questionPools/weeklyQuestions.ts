@@ -33,16 +33,22 @@ export class Symptoms extends ItemQuestion {
 
     /**
      * Helper to create a condition based on this question response
-     * @param symptoms 
-     * @returns 
+     * @param symptoms
+     * @returns
      */
     createSymptomCondition(...symptoms: SymptomKeysType[]) {
-        return SurveyEngine.multipleChoice.any(this.key, ...symptoms);
+
+        const r : string[] = [];
+        symptoms.forEach(symptom=> {
+            r.push(ResponseEncoding.symptoms[symptom]);
+        })
+
+        return SurveyEngine.multipleChoice.any(this.key, ...r);
     }
 
     /**
      * Helper to create a condition based on this question response checking for any response except 'no-symptom' response
-     * @returns 
+     * @returns
      */
     createAnySymptomCondition() {
         return se.responseHasOnlyKeysOtherThan(this.key, MultipleChoicePrefix, ResponseEncoding.symptoms.no_symptom);
@@ -1979,14 +1985,14 @@ export class TookMedication extends ItemQuestion {
 
     /**
      * Creates a condition based on this question response when antibiotic is checked
-     * @returns 
+     * @returns
      */
     createTookAntibioticCondition() {
         return se.responseHasKeysAny(this.key, MultipleChoicePrefix, ResponseEncoding.took_medication.antibio);
     }
 
     getResponses() {
-        const codes = ResponseEncoding.took_medication; 
+        const codes = ResponseEncoding.took_medication;
         const no_medication =  codes.no;
         const dont_know = codes.dontknow;
 
