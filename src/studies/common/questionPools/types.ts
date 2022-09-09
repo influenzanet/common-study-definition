@@ -1,15 +1,6 @@
 import { Group, Item } from "case-editor-tools/surveys/types";
 import { Expression, SurveyItem, SurveySingleItem } from "survey-engine/data_types";
 
-/**
- * Common parameters for Item class
- */
-
-export interface GroupProps {
-    parentKey: string,
-    keyOverride?: string;
-}
-
 export interface ItemProps {
     /**
      * @var parentKey full key path of the parent item, required to generate this item's unique key (e.g. `<surveyKey>.<groupKey>`).
@@ -46,6 +37,10 @@ export abstract class ItemQuestion extends Item {
      * @returns
      */
     getCondition() : Expression | undefined {
+        // If condition is already defined the returns it
+        if(this.condition) {
+            return this.condition;
+        }
         return undefined;
     }
 
@@ -82,6 +77,8 @@ export interface GroupProps {
 
 export abstract class GroupQuestion extends Group {
 
+    condition: Expression | undefined;
+
     /**
      *
      * @param props
@@ -98,6 +95,10 @@ export abstract class GroupQuestion extends Group {
      * @returns
      */
     getCondition() : Expression | undefined {
+        // If condition is already defined the returns it
+        if(this.condition) {
+            return this.condition;
+        }
         return undefined;
     }
 
