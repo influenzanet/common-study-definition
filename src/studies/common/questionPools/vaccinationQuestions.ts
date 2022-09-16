@@ -1,5 +1,5 @@
 import { _T } from "../languages"
-import { Group } from "case-editor-tools/surveys/types";
+import { Group, OptionDef } from "case-editor-tools/surveys/types";
 import { expWithArgs} from "case-editor-tools/surveys/utils/simple-generators";
 import { ComponentGenerators } from "case-editor-tools/surveys/utils/componentGenerators";
 import { SurveyItems } from 'case-editor-tools/surveys';
@@ -346,46 +346,53 @@ export class FluVaccineThisSeasonReasonFor extends SubVaccineQuestion {
         });
     }
 
-    getResponses() {
+    getResponses(): OptionDef[] {
+
+        const codes = ResponseEncoding.flu_vac_reason;
+
         return [
             {
-                key: '0', role: 'option',
+                key: codes.riskgroup, role: 'option', // '0'
                 content: _T("vaccination.HV.Q10c.rg.mcg.option.0", "I belong to a risk group (e.g, pregnant, over 65, underlying health condition, etc)")
             },
             {
-                key: '1', role: 'option',
+                key: codes.myrisk, role: 'option', // '1'
                 content: _T("vaccination.HV.Q10c.rg.mcg.option.1", "Vaccination decreases my risk of getting influenza")
-            }, {
-                key: '2', role: 'option',
+            },
+            {
+                key: codes.spread, role: 'option', // '2'
                 content: _T("vaccination.HV.Q10c.rg.mcg.option.2", "Vaccination decreases the risk of spreading influenza to others")
             },
             {
-                key: '3', role: 'option',
+                key: codes.doctor, role: 'option', // '3'
                 content: _T("vaccination.HV.Q10c.rg.mcg.option.3", "My doctor recommended it")
             },
             {
-                key: '4', role: 'option',
+                key: codes.work, role: 'option', // '4'
                 content: _T("vaccination.HV.Q10c.rg.mcg.option.4", "It was recommended in my workplace/school")
             },
             {
-                key: '5', role: 'option',
+                key: codes.available, role: 'option', // '5'
                 content: _T("vaccination.HV.Q10c.rg.mcg.option.5", "The vaccine was readily available and vaccine administration was convenient")
             },
             {
-                key: '6', role: 'option',
+                key: codes.free , role: 'option', // '6'
                 content: _T("vaccination.HV.Q10c.rg.mcg.option.6", "The vaccine was free (no cost)")
             },
             {
-                key: '7', role: 'option',
+                key: codes.miss, role: 'option', // '7'
                 content: _T("vaccination.HV.Q10c.rg.mcg.option.7", "I don't want to miss work/school")
-            }, {
-                key: '8', role: 'option',
+            },
+            {
+                key: codes.always, role: 'option', // '8'
                 content: _T("vaccination.HV.Q10c.rg.mcg.option.8", "I always get the vaccine")
-            }, {
-                key: '12', role: 'option',
+            },
+            {
+                key: codes.covid19, role: 'option', // '12'
                 content: _T("vaccination.HV.Q10c.rg.mcg.option.9", "I try to protect myself against infections, because of the circulation of the pandemic coronavirus")
-            }, {
-                key: '9', role: 'input',
+            },
+            {
+                key: codes.other, role: 'input', // '9'
                 style: [{ key: 'className', value: 'w-100' }],
                 content: _T("vaccination.HV.Q10c.rg.mcg.input.10", "Other reason(s)"),
                 description: _T("vaccination.HV.Q10c.rg.mcg.description.input.10", "Describe here (optional)")
@@ -429,63 +436,65 @@ export class FluVaccineThisSeasonReasonAgainst extends SubVaccineQuestion {
         });
     }
 
-    getResponses() {
+    getResponses(): OptionDef[] {
+        const codes = ResponseEncoding.flu_notvac_reason;
+
         return [
             {
-                key: '0', role: 'option',
+                key: codes.plan, role: 'option', //  '0',
                 content: _T("vaccination.HV.Q10d.rg.mcg.option.0", "I am planning to be vaccinated, but haven't been yet")
             },
             {
-                key: '1', role: 'option',
+                key: codes.offer, role: 'option', // '1'
                 content: _T("vaccination.HV.Q10d.rg.mcg.option.1", "I haven't been offered the vaccine")
             },
             {
-                key: '2', role: 'option',
+                key: codes.risk_group, role: 'option', // '2'
                 content: _T("vaccination.HV.Q10d.rg.mcg.option.2", "I don't belong to a risk group")
             },
             {
-                key: '3', role: 'option',
+                key: codes.own_immunity, role: 'option', // '3'
                 content: _T("vaccination.HV.Q10d.rg.mcg.option.3", "It is better to build your own natural immunity against influenza")
             },
             {
-                key: '4', role: 'option',
+                key: codes.doubt, role: 'option', //  '4'
                 content: _T("vaccination.HV.Q10d.rg.mcg.option.4", "I doubt that the influenza vaccine is effective")
             },
             {
-                key: '5', role: 'option',
+                key: codes.minor_illness, role: 'option', // '5'
                 content: _T("vaccination.HV.Q10d.rg.mcg.option.5", "Influenza is a minor illness")
             },
             {
-                key: '6', role: 'option',
+                key: codes.unlikely, role: 'option', // '6'
                 content: _T("vaccination.HV.Q10d.rg.mcg.option.6", "I don't think I am likely to get influenza")
             },
             {
-                key: '7', role: 'option',
+                key: codes.cause_flu, role: 'option', // '7'
                 content: _T("vaccination.HV.Q10d.rg.mcg.option.7", "I believe that influenza vaccine can cause influenza")
             }, {
-                key: '8', role: 'option',
+                key: codes.safety, role: 'option', // '8'
                 content: _T("vaccination.HV.Q10d.rg.mcg.option.8", "I am worried that the vaccine is not safe or will cause illness or other adverse events")
             }, {
-                key: '9', role: 'option',
+                key: codes.vaccine, role: 'option', // '9'
                 content: _T("vaccination.HV.Q10d.rg.mcg.option.9", "I don't like having vaccinations")
             }, {
-                key: '10', role: 'option',
+                key: codes.not_available, role: 'option', //  '10'
                 content: _T("vaccination.HV.Q10d.rg.mcg.option.10", "The vaccine is not readily available to me")
             }, {
-                key: '11', role: 'option',
+                key: codes.free, role: 'option', // '11'
                 content: _T("vaccination.HV.Q10d.rg.mcg.option.11", "The vaccine is not free of charge")
             }, {
-                key: '12', role: 'option',
+                key: codes.no_reason, role: 'option', // '12'
                 content: _T("vaccination.HV.Q10d.rg.mcg.option.12", "No particular reason")
             }, {
-                key: '13', role: 'option',
+                key: codes.doctor, role: 'option', // '13'
                 content: _T("vaccination.HV.Q10d.rg.mcg.option.13", "Although my doctor recommend a vaccine, I do not get one")
             }, {
-                key: '14', role: 'input',
+                key: codes.other, role: 'input', // '14'
                 content: _T("vaccination.HV.Q10d.rg.mcg.input.14", "Other reason(s)"),
                 description: _T("vaccination.HV.Q10d.rg.mcg.description.input.14", "Describe here (optional)")
             },
-        ]
+        ];
     }
 
     getHelpGroupContent() {
@@ -529,18 +538,21 @@ export class CovidVac extends ItemQuestion {
         });
     }
 
-    getResponses() {
+    getResponses(): OptionDef[] {
+
+        const codes = ResponseEncoding.covid_vac;
+
         return [
             {
-                key: '1', role: 'option',
+                key: codes.yes, role: 'option',
                 content: _T("vaccination.HV.Q35.rg.scg.option.0", "Yes, I received at least one COVID-19 vaccine")
             },
             {
-                key: '0', role: 'option',
+                key: codes.no, role: 'option',
                 content: _T("vaccination.HV.Q35.rg.scg.option.1", "No, I did not receive the COVID-19 vaccine")
             },
             {
-                key: '2', role: 'option',
+                key: codes.dontknow, role: 'option',
                 content: _T("vaccination.HV.Q35.rg.scg.option.2", "I don't know/can't remember.")
             },
         ];
@@ -599,22 +611,23 @@ export class CovidVaccineBrand extends SubVaccineQuestion {
         });
     }
 
-    getResponses() {
+    getResponses(): OptionDef[] {
+        const codes = ResponseEncoding.covid_vac_brands;
         return [
             {
-                key: '1', role: 'option',
+                key: codes.pfizer, role: 'option',
                 content: _T("vaccination.HV.Q35i.rg.mcg.option.0", "Pfizer/BioNTech")
             },
             {
-                key: '2', role: 'option',
+                key: codes.moderna, role: 'option',
                 content: _T("vaccination.HV.Q35i.rg.mcg.option.1", "Moderna")
             },
             {
-                key: '3', role: 'option',
+                key: codes.astrazeneca, role: 'option',
                 content: _T("vaccination.HV.Q35i.rg.mcg.option.2", "AstraZeneca")
             },
             {
-                key: '4', role: 'option',
+                key: codes.janssen, role: 'option',
                 content: _T("vaccination.HV.Q35i.rg.mcg.option.3", "Janssen Pharmaceutica (Johnson & Johnson)")
             },
             {
@@ -642,7 +655,7 @@ export class CovidVaccineBrand extends SubVaccineQuestion {
 /**
  * VACCINE SHOTS: How many times has the participant been vaccinated
  *
- * @param parentKey full key path of the parent item, required to genrate this item's unique key (e.g. `<surveyKey>.<groupKey>`).
+ * @param parentKey full key path of the parent item, required to generate this item's unique key (e.g. `<surveyKey>.<groupKey>`).
  * @param keyVac Covid vaccination question key
  * @param isRequired if true adds a default "hard" validation to the question to check if it has a response.
  * @param keyOverride use this to override the default key for this item (only last part of the key, parent's key is not influenced).
@@ -667,26 +680,27 @@ export class CovidVaccineShots extends SubVaccineQuestion {
         });
     }
 
-    getResponses() {
+    getResponses(): OptionDef[] {
+        const codes = ResponseEncoding.covid_vac_shots;
         return [
             {
-                key: '1', role: 'option',
+                key: codes.one, role: 'option', // '1'
                 content: _T("vaccination.HV.Q35c.rg.scg.option.0", "One")
             },
             {
-                key: '2', role: 'option',
+                key: codes.two, role: 'option', // '2'
                 content: _T("vaccination.HV.Q35c.rg.scg.option.1", "Two")
             },
             {
-                key: '4', role: 'option',
+                key: codes.three, role: 'option', // '4'
                 content: _T("vaccination.HV.Q35c.rg.scg.option.2", "Three")
             },
             {
-                key: '5', role: 'option',
+                key: codes.more_3, role: 'option', // '5'
                 content: _T("vaccination.HV.Q35c.rg.scg.option.3", "More than three")
             },
             {
-                key: '99', role: 'option',
+                key: codes.dontknow , role: 'option', // '99'
                 content: _T("vaccination.HV.Q35c.rg.scg.option.4", "I Don't know/Can't remember")
             },
         ];
@@ -732,24 +746,24 @@ export class CovidDateLastVaccine extends SubVaccineQuestion {
             condition: this.condition,
             questionText: _T("vaccination.HV.Q35j.title.0", "When did you receive your last injection of a vaccine against COVID-19? If you do not know the exact date, provide an estimate."),
             helpGroupContent: this.getHelpGroupContent(),
-            responseOptions: [
-                {
-                    key: '1', role: 'dateInput',
-                    optionProps: {
-                        max: { dtype: 'exp', exp: expWithArgs('timestampWithOffset', 10) },
-                    },
-                    description: _T("vaccination.HV.Q35j.rg.scg.dateInput.0", "Choose date")
-                },
-                {
-                    key: '0', role: 'option',
-                    content: _T("vaccination.HV.Q35j.rg.scg.option.1", "I don’t know/can’t remember")
-                },
-            ]
+            responseOptions: this.getResponses()
         });
     }
 
-    getResponses() {
-        return ;
+    getResponses(): OptionDef[] {
+        return [
+            {
+                key: '1', role: 'dateInput',
+                optionProps: {
+                    max: { dtype: 'exp', exp: expWithArgs('timestampWithOffset', 10) },
+                },
+                description: _T("vaccination.HV.Q35j.rg.scg.dateInput.0", "Choose date")
+            },
+            {
+                key: '0', role: 'option',
+                content: _T("vaccination.HV.Q35j.rg.scg.option.1", "I don’t know/can’t remember")
+            },
+        ];
     }
 
     getHelpGroupContent() {
@@ -818,7 +832,7 @@ interface CovidSecondVacProps extends CovidVacProps {
         });
     }
 
-    getResponses() {
+    getResponses(): OptionDef[] {
         return [
             {
                 key: '1', role: 'option',
@@ -897,7 +911,7 @@ export class CovidSecondShotAgainstReason extends SubVaccineQuestion {
         });
     }
 
-    getResponses() {
+    getResponses(): OptionDef[] {
         return [
             {
                 key: '1', role: 'option',
@@ -979,7 +993,7 @@ export class CovidVaccineProReasons extends SubVaccineQuestion {
         });
     }
 
-    getResponses() {
+    getResponses() : OptionDef[] {
         return [
             {
                 key: '21', role: 'option',
@@ -1086,7 +1100,7 @@ export class CovidVaccineAgainstReasons extends SubVaccineQuestion {
         });
     }
 
-    getResponses() {
+    getResponses(): OptionDef[] {
         return [
             {
                 key: '0', role: 'option',
