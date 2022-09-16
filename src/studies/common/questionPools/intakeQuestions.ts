@@ -1021,34 +1021,39 @@ export class MeansOfTransport extends ItemQuestion {
                 })
             ],
             helpGroupContent: this.getHelpGroupContent(),
-            responseOptions: [
-                {
-                    key: '0', role: 'option',
-                    content: _T("intake.Q7.rg.scg.option.0", "Walking")
-                },
-                {
-                    key: '1', role: 'option',
-                    content: _T("intake.Q7.rg.scg.option.1", "Bike")
-                },
-                {
-                    key: '2', role: 'option',
-                    content: _T("intake.Q7.rg.scg.option.2", "Motorbike/scooter")
-                },
-                {
-                    key: '3', role: 'option',
-                    content: _T("intake.Q7.rg.scg.option.3", "Car")
-                },
-                {
-                    key: '4', role: 'option',
-                    content: _T("intake.Q7.rg.scg.option.4", "Public transportation (bus, train, tube, etc)")
-                },
-                {
-                    key: '5', role: 'option',
-                    content: _T("intake.Q7.rg.scg.option.5", "Other")
-                },
-            ]
+            responseOptions: this.getResponses()
         });
 
+    }
+
+    getResponses(): OptionDef[] {
+        const codes = ResponseEncoding.transport;
+        return [
+            {
+                key: codes.walk, role: 'option',
+                content: _T("intake.Q7.rg.scg.option.0", "Walking")
+            },
+            {
+                key: codes.bike, role: 'option',
+                content: _T("intake.Q7.rg.scg.option.1", "Bike")
+            },
+            {
+                key: codes.scooter, role: 'option',
+                content: _T("intake.Q7.rg.scg.option.2", "Motorbike/scooter")
+            },
+            {
+                key: codes.car, role: 'option',
+                content: _T("intake.Q7.rg.scg.option.3", "Car")
+            },
+            {
+                key: codes.public, role: 'option',
+                content: _T("intake.Q7.rg.scg.option.4", "Public transportation (bus, train, tube, etc)")
+            },
+            {
+                key: codes.other, role: 'option',
+                content: _T("intake.Q7.rg.scg.option.5", "Other")
+            },
+        ];
     }
 
     getHelpGroupContent() {
@@ -1085,29 +1090,30 @@ export class CommonColdFrequency extends ItemQuestion {
     }
 
     getResponses(): OptionDef[] {
+        const codes = ResponseEncoding.cold_frequency;
         return [
             {
-                key: '0', role: 'option',
+                key: codes.never, role: 'option',
                 content: _T("intake.Q8.rg.scg.option.0", "Never")
             },
             {
-                key: '1', role: 'option',
+                key: codes.once, role: 'option',
                 content: _T("intake.Q8.rg.scg.option.1", "Once or twice a year")
             },
             {
-                key: '2', role: 'option',
+                key: codes.times_3, role: 'option',
                 content: _T("intake.Q8.rg.scg.option.2", "Between 3 and 5 times a year")
             },
             {
-                key: '3', role: 'option',
+                key: codes.times_6, role: 'option',
                 content: _T("intake.Q8.rg.scg.option.3", "Between 6 and 10 times a year")
             },
             {
-                key: '4', role: 'option',
+                key: codes.times_10, role: 'option',
                 content: _T("intake.Q8.rg.scg.option.4", "More than 10 times a year")
             },
             {
-                key: '5', role: 'option',
+                key: codes.dontknow, role: 'option',
                 content: _T("intake.Q8.rg.scg.option.5", "I don't know")
             },
         ];
@@ -1130,6 +1136,8 @@ export class RegularMedication extends ItemQuestion {
     }
 
     buildItem() {
+
+
         return SurveyItems.multipleChoice({
             parentKey: this.parentKey,
             itemKey: this.itemKey,
@@ -1146,44 +1154,47 @@ export class RegularMedication extends ItemQuestion {
     }
 
     getResponses(): OptionDef[] {
-        const exclusiveOptionRule = expWithArgs('responseHasKeysAny', this.key, responseGroupKey + '.' + multipleChoiceKey, '0');
+
+        const codes = ResponseEncoding.condition;
+
+        const exclusiveOptionRule = se.multipleChoice.any(this.key, codes.none);
 
         return [
             {
-                key: '0', role: 'option',
+                key: codes.none, role: 'option',
                 content: _T("intake.Q11.rg.mcg.option.0", "No")
             },
             {
-                key: '1', role: 'option',
+                key: codes.asthma, role: 'option',
                 disabled: exclusiveOptionRule,
                 content: _T("intake.Q11.rg.mcg.option.1", "Asthma")
             }, {
-                key: '2', role: 'option',
+                key: codes.diabetes, role: 'option',
                 disabled: exclusiveOptionRule,
                 content: _T("intake.Q11.rg.mcg.option.2", "Diabetes")
             },
             {
-                key: '3', role: 'option',
+                key: codes.lung, role: 'option',
                 disabled: exclusiveOptionRule,
                 content: _T("intake.Q11.rg.mcg.option.3", "Chronic lung disorder besides asthma e.g. COPD, emphysema, or other disorders that affect your breathing")
             },
             {
-                key: '4', role: 'option',
+                key: codes.heart, role: 'option',
                 disabled: exclusiveOptionRule,
                 content: _T("intake.Q11.rg.mcg.option.4", "Heart disorder")
             },
             {
-                key: '5', role: 'option',
+                key: codes.kidney, role: 'option',
                 disabled: exclusiveOptionRule,
                 content: _T("intake.Q11.rg.mcg.option.5", "Kidney disorder")
             },
             {
-                key: '6', role: 'option',
+                key: codes.immuno, role: 'option',
                 disabled: exclusiveOptionRule,
                 content: _T("intake.Q11.rg.mcg.option.6", "An immunocompromising condition (e.g. splenectomy, organ transplant, acquired immune deficiency, cancer treatment)")
             },
             {
-                key: '7', role: 'option',
+                key: codes.noanswer, role: 'option',
                 disabled: exclusiveOptionRule,
                 content: _T("intake.Q11.rg.mcg.option.7", "I would rather not answer")
             },
@@ -1275,15 +1286,18 @@ export class Pregnancy extends ItemQuestion {
     }
 
     getResponses(): OptionDef[] {
+        const codes = ResponseEncoding.pregnancy;
         return [
             {
-                key: '0', role: 'option',
+                key: codes.yes, role: 'option',
                 content: _T("intake.Q12.rg.scg.option.0", "Yes")
-            }, {
-                key: '1', role: 'option',
+            },
+            {
+                key: codes.no, role: 'option',
                 content: _T("intake.Q12.rg.scg.option.1", "No")
-            }, {
-                key: '2', role: 'option',
+            },
+            {
+                key: codes.dontknow, role: 'option',
                 content: _T("intake.Q12.rg.scg.option.2", "Don't know/would rather not answer")
             },
         ];

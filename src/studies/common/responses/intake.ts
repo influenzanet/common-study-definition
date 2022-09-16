@@ -7,8 +7,11 @@ export const IntakeResponses = {
     birthDate: {
         'date': '1',
     },
+    // Q12 Pregnancy
     pregnancy: {
         'yes': '0',
+        "no": "1",
+        "dontknow": "2"
     },
     // Q5 contact with people
     contact_people: {
@@ -29,6 +32,36 @@ export const IntakeResponses = {
         "retired": "7",
         "other": "8"
     },
+    // Q7 Mean of Transport
+    transport: {
+        "walk": "0",
+        "bike": "1",
+        "scooter": "2",
+        "car": "3",
+        "public": "4",
+        "other": "5"
+    },
+    // Q8 Common colde frequency
+    cold_frequency: {
+        "never": "0",
+        "once": "1",
+        "times_3": "2",
+        "times_6": "3",
+        "times_10": "4",
+        "dontknow": "5"
+    },
+    // Q11 Condition
+    condition: {
+        "none": "0",
+        "asthma": "1",
+        "diabetes": "2",
+        "lung": "3",
+        "heart": "4",
+        "kidney": "5",
+        "immuno": "6",
+        "noanswer": "7"
+    },
+
     find_about: {
         "radio": "0",
         "newspaper": "1",
