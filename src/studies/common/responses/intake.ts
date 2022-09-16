@@ -20,6 +20,7 @@ export const IntakeResponses = {
         "patient": "2",
         "crowd": "3",
         "none": "4"
+        // "5" used in FR
     },
     main_activity: {
         "fulltime": "0",
@@ -69,13 +70,14 @@ export const IntakeResponses = {
         "poster": "3",
         "family": "4",
         "work": "5",
-        "healthworker": "6",
-        "project": "7",
-        "webinstit": "8",
-        "webinfo": "9",
-        "webhealth": "10",
-        "social": "12",
         "other": "99",
+        // French specific codes
+        "healthworker": "6", // French Code
+        "project": "7", // French Code
+        "webinstit": "8", // French Code
+        "webinfo": "9", // French Code
+        "webhealth": "10", // French Code
+        "social": "12", // French Code
         "other_alt":"13" // 13 code is used as "other" in historical French surveys
     },
     "smoking": {
