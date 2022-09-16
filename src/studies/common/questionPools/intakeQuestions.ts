@@ -327,6 +327,7 @@ interface MainActivityProps extends ItemProps {
     keyMainActivity: string;
 
 }
+
 export class PostalCodeWork extends ItemQuestion {
 
     keyMainActivity: string;
@@ -633,30 +634,40 @@ export class PeopleMet extends ItemQuestion {
 
     }
 
+    // Condition when option None is checked
+    getExclusiveNoneCondition() {
+        return se.singleChoice.any(this.key, ResponseEncoding.contact_people.none);
+    }
+
     getResponses(): OptionDef[] {
-        const optionExclusive = expWithArgs('responseHasKeysAny',this.key, responseGroupKey + '.' + multipleChoiceKey, '4');
+
+        const codes = ResponseEncoding.contact_people;
+
+        const optionExclusive = this.getExclusiveNoneCondition();
 
         return [
             {
-                key: '0', role: 'option',
+                key: codes.children, role: 'option',
                 disabled: optionExclusive,
                 content: _T("intake.Q5.rg.mcg.option.0", "More than 10 children or teenagers (without counting your own children)")
             },
             {
-                key: '1', role: 'option',
+                key: codes.elder, role: 'option',
                 disabled: optionExclusive,
                 content: _T("intake.Q5.rg.mcg.option.1", "More than 10 people aged over 65")
             },
             {
-                key: '2', role: 'option',
+                key: codes.patient, role: 'option',
                 disabled: optionExclusive,
                 content: _T("intake.Q5.rg.mcg.option.2", "Patients")
-            }, {
-                key: '3', role: 'option',
+            },
+            {
+                key: codes.crowd, role: 'option',
                 disabled: optionExclusive,
                 content: _T("intake.Q5.rg.mcg.option.3", "Groups of people (more than 10 individuals at any one time)")
-            }, {
-                key: '4', role: 'option',
+            },
+            {
+                key: codes.none, role: 'option',
                 content: _T("intake.Q5.rg.mcg.option.4", "None of the above")
             },
         ];
@@ -690,7 +701,7 @@ export class PeopleMet extends ItemQuestion {
 export class AgeGroups extends ItemQuestion {
 
     constructor(props: ItemProps) {
-        super(props,'Q6');
+        super(props, 'Q6');
     }
 
     getHelpGroupContent() {

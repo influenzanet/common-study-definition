@@ -10,6 +10,14 @@ export const IntakeResponses = {
     pregnancy: {
         'yes': '0',
     },
+    // Q5 contact with people
+    contact_people: {
+        "children": "0",
+        "elder": "1",
+        "patient": "2",
+        "crowd": "3",
+        "none": "4"
+    },
     main_activity: {
         "fulltime": "0",
         "partial": "1",
@@ -44,4 +52,4 @@ export const IntakeResponses = {
         "daily_more": "3",
         "dontknow": "4"
     },
-};
+} as const;
