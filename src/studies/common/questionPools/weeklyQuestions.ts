@@ -1860,9 +1860,8 @@ export class WhyVisitedNoMedicalService extends ItemQuestion {
 
     getCondition() {
         const codes = ResponseEncoding.visit_medical;
-        return se.responseHasOnlyKeysOtherThan(this.keyVisitedMedicalServ, codes.no);
+        return se.responseHasKeysAny(this.keyVisitedMedicalServ, codes.no);
     }
-
 
     buildItem() {
         return SurveyItems.singleChoice({
