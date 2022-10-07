@@ -1705,7 +1705,7 @@ export class VisitedMedicalServiceWhen extends ItemQuestion {
 
     getCondition() {
         const codes = ResponseEncoding.visit_medical;
-        return client.responseHasOnlyKeysOtherThan(this.keyVisitedMedicalServ, codes.no, codes.other);
+        return client.responseHasOnlyKeysOtherThan(this.keyVisitedMedicalServ, codes.no, codes.plan);
         //expWithArgs('responseHasOnlyKeysOtherThan', keyVisitedMedicalServ, [responseGroupKey, multipleChoiceKey].join('.'), '0', '5')
     }
 
