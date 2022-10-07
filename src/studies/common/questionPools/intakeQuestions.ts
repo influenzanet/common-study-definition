@@ -619,7 +619,6 @@ export class PeopleMet extends ItemQuestion {
 
     buildItem() {
 
-
         return SurveyItems.multipleChoice({
             parentKey: this.parentKey,
             itemKey: this.itemKey,
@@ -635,7 +634,7 @@ export class PeopleMet extends ItemQuestion {
 
     // Condition when option None is checked
     getExclusiveNoneCondition() {
-        return client.singleChoice.any(this.key, ResponseEncoding.contact_people.none);
+        return client.multipleChoice.any(this.key, ResponseEncoding.contact_people.none);
     }
 
     getResponses(): OptionDef[] {
