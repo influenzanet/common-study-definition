@@ -1,13 +1,12 @@
 import { Expression } from "survey-engine/data_types";
 import { StudyRules } from "case-editor-tools/types/studyRules";
-import { StudyEngine as se } from "case-editor-tools/expression-utils/studyEngineExpressions";
 import { ParticipantFlags as flags  } from "./participantFlags";
 import { WeeklyResponses } from "./responses/weekly";
 import { IntakeResponses } from "./responses/intake";
 import { responseGroupKey } from "case-editor-tools/constants/key-definitions";
 import { SurveyKeys } from "./keys";
 import { StudyRulesSet } from "../../types";
-
+import { ServerExpression as se } from "../../tools/expressions";
 
 export class StudyRulesBuilder {
 

@@ -1,9 +1,8 @@
 
 import { Item } from "case-editor-tools/surveys/types";
 import { Expression } from "survey-engine/data_types";
-import { StudyEngine as se } from "case-editor-tools/expression-utils/studyEngineExpressions";
 import { ItemDependency, QuestionType } from "../types/item";
-
+import { ClientExpression as client } from "./expressions";
 interface SingleItemDependencyProps {
     item: Item;
     type: QuestionType;
@@ -12,7 +11,7 @@ interface SingleItemDependencyProps {
 
 /**
  * Describes condition dependent of one SingleItem (question)
- * 
+ *
  */
 export class SingleItemDependency implements ItemDependency {
 
@@ -29,10 +28,10 @@ export class SingleItemDependency implements ItemDependency {
     getCondition() {
         const key = this.item.key;
         if(this.type == 'single') {
-            return se.singleChoice.any(key, ...this.responses);
+            return client.singleChoice.any(key, ...this.responses);
         }
         if(this.type == 'multiple') {
-            return se.multipleChoice.any(key, ...this.responses);
+            return client.multipleChoice.any(key, ...this.responses);
         }
     }
 }
@@ -58,7 +57,7 @@ export class SingleItemDependency implements ItemDependency {
         });
 
         if(conditions.length > 0) {
-            return se.and(...conditions);
+            return client.logic.and(...conditions);
         }
         return undefined;
     }

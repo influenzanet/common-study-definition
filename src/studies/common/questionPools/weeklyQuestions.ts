@@ -6,12 +6,11 @@ import { initLikertScaleItem } from "case-editor-tools/surveys/responseTypeGener
 import { expWithArgs, generateHelpGroupComponent, generateLocStrings, generateTitleComponent } from "case-editor-tools/surveys/utils/simple-generators";
 import { likertScaleKey, matrixKey, responseGroupKey } from "case-editor-tools/constants/key-definitions";
 import { MultipleChoicePrefix, singleChoicePrefix, text_how_answer, text_select_all_apply, text_why_asking, require_response, trans_select_all_apply } from "./helpers";
-import { SurveyEngine, SurveyItems } from 'case-editor-tools/surveys';
+import { SurveyItems } from 'case-editor-tools/surveys';
 import { ComponentGenerators } from "case-editor-tools/surveys/utils/componentGenerators";
-import { StudyEngine as se } from "case-editor-tools/expression-utils/studyEngineExpressions";
 import { SymptomKeysType, WeeklyResponses as ResponseEncoding } from "../responses/weekly";
 import { GroupProps, GroupQuestion, ItemProps, ItemQuestion } from "./types";
-
+import { ClientExpression as client } from "../../../tools/expressions";
 interface SymptomsProps extends ItemProps {
     useRash: boolean;
 }
@@ -43,7 +42,7 @@ export class Symptoms extends ItemQuestion {
             r.push(ResponseEncoding.symptoms[symptom]);
         })
 
-        return SurveyEngine.multipleChoice.any(this.key, ...r);
+        return client.multipleChoice.any(this.key, ...r);
     }
 
     /**
@@ -51,7 +50,7 @@ export class Symptoms extends ItemQuestion {
      * @returns
      */
     createAnySymptomCondition() {
-        return se.responseHasOnlyKeysOtherThan(this.key, MultipleChoicePrefix, ResponseEncoding.symptoms.no_symptom);
+        return client.responseHasOnlyKeysOtherThan(this.key, MultipleChoicePrefix, ResponseEncoding.symptoms.no_symptom);
     }
 
     buildItem() {
@@ -79,7 +78,7 @@ export class Symptoms extends ItemQuestion {
 
     getResponses() {
         const codes = ResponseEncoding.symptoms;
-        const exclusiveOptionRule =  se.multipleChoice.any(this.key, codes.no_symptom);
+        const exclusiveOptionRule =  client.multipleChoice.any(this.key, codes.no_symptom);
         const r : OptionDef[] =  [
             {
                 key: codes.no_symptom,
@@ -251,7 +250,7 @@ export class SymptomsGroup extends GroupQuestion {
     keySymptomsQuestion: string;
 
     getCondition() {
-        return se.responseHasOnlyKeysOtherThan(this.keySymptomsQuestion, MultipleChoicePrefix, ResponseEncoding.symptoms.no_symptom);
+        return client.responseHasOnlyKeysOtherThan(this.keySymptomsQuestion, MultipleChoicePrefix, ResponseEncoding.symptoms.no_symptom);
     }
 
     constructor(props:SymptomsGroupProps) {
@@ -413,7 +412,7 @@ export class PcrHouseholdContact extends ItemQuestion {
     }
 
     getCondition() {
-        return se.responseHasKeysAny(this.covid19ContactKey, singleChoicePrefix, ResponseEncoding.pcr_contacts.yes);
+        return client.responseHasKeysAny(this.covid19ContactKey, singleChoicePrefix, ResponseEncoding.pcr_contacts.yes);
         // expWithArgs('responseHasKeysAny', covid19ContactKey, [responseGroupKey, singleChoiceKey].join('.'), '1')
     }
 
@@ -698,7 +697,7 @@ export class FeverStart extends ItemQuestion {
     }
 
     getCondition() {
-        return se.responseHasKeysAny(this.keySymptomsQuestion, MultipleChoicePrefix, ResponseEncoding.symptoms.fever);
+        return client.responseHasKeysAny(this.keySymptomsQuestion, MultipleChoicePrefix, ResponseEncoding.symptoms.fever);
     }
 
     buildItem() {
@@ -727,7 +726,7 @@ export class FeverStart extends ItemQuestion {
                                 returnType: 'int',
                             }
                         },
-                        max: { dtype: 'exp', exp: se.timestampWithOffset({ seconds: 10 }) },
+                        max: { dtype: 'exp', exp: client.timestampWithOffset({ seconds: 10 }) },
                     },
                     description: _T("weekly.HS.Q6.rg.scg.dateInput.0", "Choose date")
                 },
@@ -773,7 +772,7 @@ abstract class SymptomDependentQuestion extends ItemQuestion {
 
     getCondition() {
         const symptoms = this.getTriggerSymptoms();
-        return se.multipleChoice.any(this.keySymptomsQuestion, ...symptoms);
+        return client.multipleChoice.any(this.keySymptomsQuestion, ...symptoms);
         //expWithArgs('responseHasKeysAny', keySymptomsQuestion, [responseGroupKey, multipleChoiceKey].join('.'), '1')
     }
 }
@@ -923,10 +922,10 @@ export class HighestTemprerature extends SymptomDependentQuestion {
     }
 
     getCondition() {
-        return se.and(
-            se.singleChoice.any(this.keyDidYouMeasureTemperature, ResponseEncoding.measure_temp.yes),
+        return client.logic.and(
+            client.singleChoice.any(this.keyDidYouMeasureTemperature, ResponseEncoding.measure_temp.yes),
             super.getCondition()
-        )
+        );
     }
 
     getTriggerSymptoms() {
@@ -1006,7 +1005,7 @@ export class FeverGroup extends GroupQuestion {
     isRequired?: boolean;
 
     getCondition() {
-        return se.multipleChoice.any(this.keySymptomsQuestion, ResponseEncoding.symptoms.fever);
+        return client.multipleChoice.any(this.keySymptomsQuestion, ResponseEncoding.symptoms.fever);
     }
 
     constructor(props: FeverGroupProps) {
@@ -1099,7 +1098,7 @@ export class HasMoreGroup extends GroupQuestion {
     consentForMoreKey : string;
 
     getCondition() {
-        return se.singleChoice.any(this.consentForMoreKey, ResponseEncoding.consent_more.yes)
+        return client.singleChoice.any(this.consentForMoreKey, ResponseEncoding.consent_more.yes)
     }
 
     constructor(props: HasMoreGroupProps) {
@@ -1193,7 +1192,7 @@ export class CovidTestType extends ItemQuestion {
     getCondition() {
         // FIXME: in case keysymptomImpliedCovidTest chnges type eg: single -> multiple, this will break unless
         // singleChoiceKey is changed to multipleChoiceKey
-        return  se.responseHasKeysAny(this.keySymptomImpliedCovidTest, singleChoicePrefix, ResponseEncoding.symptom_test.yes);
+        return  client.responseHasKeysAny(this.keySymptomImpliedCovidTest, singleChoicePrefix, ResponseEncoding.symptom_test.yes);
         //expWithArgs('responseHasKeysAny', keysymptomImpliedCovidTest, responseGroupKey + '.' + singleChoiceKey, '1'),
     }
 
@@ -1260,7 +1259,7 @@ abstract class TestTypeDependentQuestion extends ItemQuestion {
 
     getCondition() {
         const test_types = this.getTriggerTests();
-        return se.multipleChoice.any(this.keyTestType, ...test_types);
+        return client.multipleChoice.any(this.keyTestType, ...test_types);
         //expWithArgs('responseHasKeysAny', keySymptomsQuestion, [responseGroupKey, multipleChoiceKey].join('.'), '1')
     }
 }
@@ -1538,7 +1537,7 @@ export class ResultFluTest extends ItemQuestion {
 
     getCondition() {
         const codes = ResponseEncoding.flu_test;
-        return  se.responseHasKeysAny(this.keyFluTest,  codes.yes, codes.yes_antigenic );
+        return  client.responseHasKeysAny(this.keyFluTest,  codes.yes, codes.yes_antigenic );
     }
 
     buildItem() {
@@ -1619,12 +1618,12 @@ export class VisitedMedicalService extends ItemQuestion {
         const codes = ResponseEncoding.visit_medical;
 
         // All response except no
-        const exclusiveNo = se.responseHasOnlyKeysOtherThan(this.key, MultipleChoicePrefix, codes.no);
+        const exclusiveNo = client.responseHasOnlyKeysOtherThan(this.key, MultipleChoicePrefix, codes.no);
 
         // All response except planned visit
-        const exclusivePlan = se.responseHasOnlyKeysOtherThan(this.key, MultipleChoicePrefix, codes.plan);
+        const exclusivePlan = client.responseHasOnlyKeysOtherThan(this.key, MultipleChoicePrefix, codes.plan);
 
-        const exclusiveOther = se.multipleChoice.any(this.key, codes.no, codes.plan);
+        const exclusiveOther = client.multipleChoice.any(this.key, codes.no, codes.plan);
 
         return [
             {
@@ -1701,7 +1700,7 @@ export class VisitedMedicalServiceWhen extends ItemQuestion {
 
     getCondition() {
         const codes = ResponseEncoding.visit_medical;
-        return se.responseHasOnlyKeysOtherThan(this.keyVisitedMedicalServ, codes.no, codes.other);
+        return client.responseHasOnlyKeysOtherThan(this.keyVisitedMedicalServ, codes.no, codes.other);
         //expWithArgs('responseHasOnlyKeysOtherThan', keyVisitedMedicalServ, [responseGroupKey, multipleChoiceKey].join('.'), '0', '5')
     }
 
@@ -1762,7 +1761,7 @@ export class VisitedMedicalServiceWhen extends ItemQuestion {
         const visits = ResponseEncoding.visit_medical;
 
         const displayCondition = (code:string) => {
-            return se.multipleChoice.any(this.keyVisitedMedicalServ, code);
+            return client.multipleChoice.any(this.keyVisitedMedicalServ, code);
         }
 
         const rg_inner = initMatrixQuestion(matrixKey, [
@@ -1860,7 +1859,7 @@ export class WhyVisitedNoMedicalService extends ItemQuestion {
 
     getCondition() {
         const codes = ResponseEncoding.visit_medical;
-        return se.responseHasKeysAny(this.keyVisitedMedicalServ, codes.no);
+        return client.responseHasKeysAny(this.keyVisitedMedicalServ, codes.no);
     }
 
     buildItem() {
@@ -1987,7 +1986,7 @@ export class TookMedication extends ItemQuestion {
      * @returns
      */
     createTookAntibioticCondition() {
-        return se.responseHasKeysAny(this.key, MultipleChoicePrefix, ResponseEncoding.took_medication.antibio);
+        return client.responseHasKeysAny(this.key, MultipleChoicePrefix, ResponseEncoding.took_medication.antibio);
     }
 
     getResponses() {
@@ -1996,13 +1995,13 @@ export class TookMedication extends ItemQuestion {
         const dont_know = codes.dontknow;
 
         // Exclusive with 'No' response
-        const exclusiveNo = se.responseHasKeysAny(this.key, MultipleChoicePrefix, no_medication);
+        const exclusiveNo = client.responseHasKeysAny(this.key, MultipleChoicePrefix, no_medication);
 
         // Exclusive Conditon for all other options : except No and Dont know
-        const exclusiveOther = se.responseHasKeysAny(this.key, MultipleChoicePrefix, no_medication, dont_know)
+        const exclusiveOther = client.responseHasKeysAny(this.key, MultipleChoicePrefix, no_medication, dont_know)
 
         // Exclusive with Dont know response
-        const exclusiveDontKnow = se.responseHasKeysAny(this.key, MultipleChoicePrefix, dont_know);
+        const exclusiveDontKnow = client.responseHasKeysAny(this.key, MultipleChoicePrefix, dont_know);
 
         const r : OptionDef[] = [
             {
@@ -2222,7 +2221,7 @@ export class DailyRoutineToday extends ItemQuestion {
     }
 
     getCondition() {
-        return se.singleChoice.any(this.keyDailyRoutine, ResponseEncoding.daily_routine.off);
+        return client.singleChoice.any(this.keyDailyRoutine, ResponseEncoding.daily_routine.off);
         //expWithArgs('responseHasKeysAny', keyDailyRoutine, [responseGroupKey, singleChoiceKey].join('.'), '2')
     }
 
@@ -2293,7 +2292,7 @@ export class DailyRoutineDaysMissed extends ItemQuestion {
     }
 
     getCondition() {
-        return se.singleChoice.any(this.keyDailyRoutine, ResponseEncoding.daily_routine.off);
+        return client.singleChoice.any(this.keyDailyRoutine, ResponseEncoding.daily_routine.off);
         //expWithArgs('responseHasKeysAny', keyDailyRoutine, [responseGroupKey, singleChoiceKey].join('.'), '2')
     }
 

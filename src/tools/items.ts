@@ -1,7 +1,8 @@
 import { GenericQuestionProps, Group, Item, OptionDef } from "case-editor-tools/surveys/types";
-import { SurveyEngine, SurveyItems } from 'case-editor-tools/surveys';
+import { SurveyItems } from 'case-editor-tools/surveys';
 import { Expression, SurveyItem, SurveySingleItem } from "survey-engine/data_types";
 import { ItemConditionable, QuestionType } from "../types/item";
+import { ClientExpression } from "./expressions";
 
 export type ItemBuilder = Item | Group;
 
@@ -138,13 +139,13 @@ export type BaseQuestionOptions = Omit<GenericQuestionProps, 'parentKey' | 'item
  * Simple implementation for basic choice based question
  */
 export abstract class BaseChoiceQuestion extends ItemQuestion {
-    
+
     protected options?: BaseQuestionOptions;
-    
+
     protected questionType : QuestionType;
 
     abstract getResponses(): OptionDef[]
-    
+
     constructor(props: ItemProps, defaultKey: string, questionType: QuestionType) {
         super(props, defaultKey);
         this.questionType = questionType;
@@ -159,8 +160,8 @@ export abstract class BaseChoiceQuestion extends ItemQuestion {
         if(!this.options) {
             throw new Error("options are not defined of " + this.key);
         }
-        
-        const o = { 
+
+        const o = {
             parentKey: this.parentKey,
             itemKey: this.itemKey,
             isRequired: this.isRequired,
@@ -185,10 +186,10 @@ export abstract class BaseChoiceQuestion extends ItemQuestion {
      */
     createConditionFrom(responses: string[]) {
         if(this.questionType == 'single') {
-            return SurveyEngine.singleChoice.any(this.key, ...responses);
+            return ClientExpression.singleChoice.any(this.key, ...responses);
         }
         if(this.questionType == 'multiple') {
-            return SurveyEngine.multipleChoice.any(this.key, ...responses);
+            return ClientExpression.multipleChoice.any(this.key, ...responses);
         }
     }
 

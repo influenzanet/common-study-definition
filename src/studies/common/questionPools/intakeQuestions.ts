@@ -8,10 +8,9 @@ import { OptionDef } from "case-editor-tools/surveys/types";
 import { SurveyItems } from 'case-editor-tools/surveys';
 import { initMatrixQuestion,  ResponseRowCell } from "case-editor-tools/surveys/responseTypeGenerators/matrixGroupComponent";
 import {require_response, text_select_all_apply, text_why_asking, text_how_answer, singleChoicePrefix, MultipleChoicePrefix } from './helpers';
-import { StudyEngine as se } from "case-editor-tools/expression-utils/studyEngineExpressions";
 import { IntakeResponses as ResponseEncoding } from "../responses/intake";
 import { ItemProps, ItemQuestion } from "./types";
-
+import { ClientExpression as client } from "../../../tools/expressions";
 
 interface GenderProps extends ItemProps {
     useOther?:boolean
@@ -339,7 +338,7 @@ export class PostalCodeWork extends ItemQuestion {
 
     getCondition() {
         const codes = ResponseEncoding.main_activity;
-        return se.singleChoice.any(this.keyMainActivity, codes.fulltime, codes.partial, codes.self, codes.student )
+        return client.singleChoice.any(this.keyMainActivity, codes.fulltime, codes.partial, codes.self, codes.student )
         //expWithArgs('responseHasKeysAny', keyMainActivity, [responseGroupKey, singleChoiceKey].join('.'), '0', '1', '2', '3')
     }
 
@@ -636,7 +635,7 @@ export class PeopleMet extends ItemQuestion {
 
     // Condition when option None is checked
     getExclusiveNoneCondition() {
-        return se.singleChoice.any(this.key, ResponseEncoding.contact_people.none);
+        return client.singleChoice.any(this.key, ResponseEncoding.contact_people.none);
     }
 
     getResponses(): OptionDef[] {
@@ -1157,7 +1156,7 @@ export class RegularMedication extends ItemQuestion {
 
         const codes = ResponseEncoding.condition;
 
-        const exclusiveOptionRule = se.multipleChoice.any(this.key, codes.none);
+        const exclusiveOptionRule = client.multipleChoice.any(this.key, codes.none);
 
         return [
             {
@@ -1545,7 +1544,7 @@ export class SpecialDiet extends ItemQuestion {
 
         const NoSpecialDiet = '0';
 
-        const exclusiveOptionRule = se.multipleChoice.any(this.key, NoSpecialDiet);
+        const exclusiveOptionRule = client.multipleChoice.any(this.key, NoSpecialDiet);
 
         return [
             {
@@ -1582,9 +1581,6 @@ export class SpecialDiet extends ItemQuestion {
 /**
  * HOEMOPATHIC MEDICINE: single choice question about homeopathy
  *
- * @param parentKey full key path of the parent item, required to genrate this item's unique key (e.g. `<surveyKey>.<groupKey>`).
- * @param isRequired if true adds a default "hard" validation to the question to check if it has a response.
- * @param keyOverride use this to override the default key for this item (only last part of the key, parent's key is not influenced).
  */
 export class HomeophaticMedicine extends ItemQuestion {
 
