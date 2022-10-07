@@ -68,17 +68,13 @@ export class VacStart extends ItemQuestion {
 }
 
 interface VacGroupProps extends GroupProps {
-    keyVacStart: string
+    keyVacStart: string // keyVacStart reference to the vac survey
 }
 
 
 /**
  * GROUP DEPENDING VACCINATION SURVEY ROUND
- *
- * @param parentKey full key path of the parent item, required to generate this item's unique key (e.g. `<surveyKey>.<groupKey>`).
- * @param keyVacStart reference to the vac survey
- * @param keyOverride use this to override the default key for this item (only last part of the key, parent's key is not influenced).
- */
+*/
 export const hasVacGroup = (props: VacGroupProps): Group => {
 
     const flagVac = ParticipantFlags.vaccinationCompleted;
@@ -106,10 +102,6 @@ export const hasVacGroup = (props: VacGroupProps): Group => {
 
 /**
  * FLU VACCINE LAST SEASON: single choice about last season's vaccine
- *
- * @param parentKey full key path of the parent item, required to genrate this item's unique key (e.g. `<surveyKey>.<groupKey>`).
- * @param isRequired if true adds a default "hard" validation to the question to check if it has a response.
- * @param keyOverride use this to override the default key for this item (only last part of the key, parent's key is not influenced).
  */
 export class FluVaccineLastSeason extends ItemQuestion {
 
@@ -167,9 +159,6 @@ export class FluVaccineLastSeason extends ItemQuestion {
 /**
  * FLU VACCINE THIS SEASON: single choice about this season's vaccine
  *
- * @param parentKey full key path of the parent item, required to generate this item's unique key (e.g. `<surveyKey>.<groupKey>`).
- * @param isRequired if true adds a default "hard" validation to the question to check if it has a response.
- * @param keyOverride use this to override the default key for this item (only last part of the key, parent's key is not influenced).
  */
 export class FluVaccineThisSeason extends ItemQuestion {
 
@@ -227,13 +216,25 @@ class QuestionException extends Error {
     }
 }
 
+
+/**
+ * Question props with a triggering question (dependency on the trigger question's response(s))
+ * Here only single choice is implemented
+ */
 interface SubVaccineQuestionProps extends ItemProps {
     triggerQuestion: string;
 }
 
 abstract class SubVaccineQuestion extends ItemQuestion {
 
+    /**
+     * Trigger Question key
+     */
     triggerQuestion?: string;
+
+    /**
+     * Trigger response of the trigger question
+     */
     triggerResponse?: string;
 
     constructor(props: SubVaccineQuestionProps, defaultKey: string) {
@@ -253,16 +254,13 @@ abstract class SubVaccineQuestion extends ItemQuestion {
 }
 
 interface FluVaccineProps extends ItemProps {
-    keyFluVaccineThisSeason: string
+    keyFluVaccineThisSeason: string // keyFluVaccineThisSeason full key of the question about if you received flu vaccine this year, if set, dependency is applied
+
 }
 
 /**
  * WHEN RECEIVED FLU VACCINE THIS SEASON: single choice about this season's vaccine
  *
- * @param parentKey full key path of the parent item, required to generate this item's unique key (e.g. `<surveyKey>.<groupKey>`).
- * @param keyFluVaccineThisSeason full key of the question about if you received flu vaccine this year, if set, dependency is applied
- * @param isRequired if true adds a default "hard" validation to the question to check if it has a response.
- * @param keyOverride use this to override the default key for this item (only last part of the key, parent's key is not influenced).
  */
 export class FluVaccineThisSeasonWhen extends SubVaccineQuestion {
 
@@ -317,11 +315,6 @@ export class FluVaccineThisSeasonWhen extends SubVaccineQuestion {
 
 /**
  *  REASONS FOR FLU VACCINE THIS SEASON: multiple choice
- *
- * @param parentKey full key path of the parent item, required to generate this item's unique key (e.g. `<surveyKey>.<groupKey>`).
- * @param keyFluVaccineThisSeason full key of the question about if you received flu vaccine this year, if set, dependency is applied
- * @param isRequired if true adds a default "hard" validation to the question to check if it has a response.
- * @param keyOverride use this to override the default key for this item (only last part of the key, parent's key is not influenced).
  */
 export class FluVaccineThisSeasonReasonFor extends SubVaccineQuestion {
 
@@ -408,10 +401,6 @@ export class FluVaccineThisSeasonReasonFor extends SubVaccineQuestion {
 /**
  *  REASONS AGAINST FLU VACCINE THIS SEASON: multiple choice
  *
- * @param parentKey full key path of the parent item, required to generate this item's unique key (e.g. `<surveyKey>.<groupKey>`).
- * @param keyFluVaccineThisSeason full key of the question about if you received flu vaccine this year, if set, dependency is applied
- * @param isRequired if true adds a default "hard" validation to the question to check if it has a response.
- * @param keyOverride use this to override the default key for this item (only last part of the key, parent's key is not influenced).
  */
 export class FluVaccineThisSeasonReasonAgainst extends SubVaccineQuestion {
 
@@ -515,10 +504,6 @@ export class FluVaccineThisSeasonReasonAgainst extends SubVaccineQuestion {
 
 /**
  * CovidVac: single choice question about vaccination status
- *
- * @param parentKey full key path of the parent item, required to generate this item's unique key (e.g. `<surveyKey>.<groupKey>`).
- * @param isRequired if true adds a default "hard" validation to the question to check if it has a response.
- * @param keyOverride use this to override the default key for this item (only last part of the key, parent's key is not influenced).
  */
 export class CovidVac extends ItemQuestion {
 
@@ -582,11 +567,6 @@ interface CovidVacProps extends ItemProps {
 
 /**
  * Covid VACCINE BRAND: Which vaccine was provided
- *
- * @param parentKey full key path of the parent item, required to generate this item's unique key (e.g. `<surveyKey>.<groupKey>`).
- * @param keyVac Covid vaccination question key
- * @param isRequired if true adds a default "hard" validation to the question to check if it has a response.
- * @param keyOverride use this to override the default key for this item (only last part of the key, parent's key is not influenced).
  */
 export class CovidVaccineBrand extends SubVaccineQuestion {
 
@@ -654,11 +634,6 @@ export class CovidVaccineBrand extends SubVaccineQuestion {
 
 /**
  * VACCINE SHOTS: How many times has the participant been vaccinated
- *
- * @param parentKey full key path of the parent item, required to generate this item's unique key (e.g. `<surveyKey>.<groupKey>`).
- * @param keyVac Covid vaccination question key
- * @param isRequired if true adds a default "hard" validation to the question to check if it has a response.
- * @param keyOverride use this to override the default key for this item (only last part of the key, parent's key is not influenced).
  */
 export class CovidVaccineShots extends SubVaccineQuestion {
 
@@ -724,11 +699,6 @@ export class CovidVaccineShots extends SubVaccineQuestion {
 
 /**
  * DATE LAST VACCINE: What is the date of the last vaccination
- *
- * @param parentKey full key path of the parent item, required to generate this item's unique key (e.g. `<surveyKey>.<groupKey>`).
- * @param keyvac Key of the question vaccination
- * @param isRequired if true adds a default "hard" validation to the question to check if it has a response.
- * @param keyOverride use this to override the default key for this item (only last part of the key, parent's key is not influenced).
  */
 export class CovidDateLastVaccine extends SubVaccineQuestion {
 
@@ -789,7 +759,6 @@ interface CovidSecondVacProps extends CovidVacProps {
 /**
  * SECOND SHOT: single choice question about second shot planned
  */
-
  export class CovidSecondShotPlan extends SubVaccineQuestion {
 
     keyVaccineShots?:string;
@@ -872,15 +841,7 @@ export class CovidSecondShotAgainstReason extends SubVaccineQuestion {
 
     keyVaccineShots?:string;
 
-    /**
-    * @param parentKey full key path of the parent item, required to generate this item's unique key (e.g. `<surveyKey>.<groupKey>`).
-    * @param keyVac Question about Covid Vaccination status
-    * @param keyVaccineShots question key about vaccination shots count
-    * @param isRequired if true adds a default "hard" validation to the question to check if it has a response.
-    * @param keyOverride use this to override the default key for this item (only last part of the key, parent's key is not influenced).
-    */
-
-     constructor(props: CovidSecondVacProps) {
+    constructor(props: CovidSecondVacProps) {
         const p = {triggerQuestion: props.keyVac, ...props}
         super(p, 'Q35l');
         this.keyVaccineShots = props.keyVaccineShots;
@@ -1073,13 +1034,7 @@ export class CovidVaccineProReasons extends SubVaccineQuestion {
 
 export class CovidVaccineAgainstReasons extends SubVaccineQuestion {
 
-    /**
-    * @param parentKey * @param parentKey full key path of the parent item, required to genrate this item's unique key (e.g. `<surveyKey>.<groupKey>`).
-    * @param keyvac Covid Vaccination question key
-    * @param isRequired if true adds a default "hard" validation to the question to check if it has a response.
-    * @param keyOverride use this to override the default key for this item (only last part of the key, parent's key is not influenced).
-     */
-     constructor(props: CovidVacProps) {
+    constructor(props: CovidVacProps) {
         const p = {triggerQuestion: props.keyVac, ...props}
         super(p, 'Q35m');
         this.triggerResponse = ResponseEncoding.covid_vac.no;

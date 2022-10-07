@@ -20,9 +20,6 @@ interface SymptomsProps extends ItemProps {
 /**
  * SYMPTOMS: multiple choice question about allergies
  *
- * @param parentKey full key path of the parent item, required to generate this item's unique key (e.g. `<surveyKey>.<groupKey>`).
- * @param isRequired if true adds a default "hard" validation to the question to check if it has a response.
- * @param keyOverride use this to override the default key for this item (only last part of the key, parent's key is not influenced).
  */
 export class Symptoms extends ItemQuestion {
     useRash: boolean;
@@ -234,6 +231,11 @@ export class Symptoms extends ItemQuestion {
     }
 }
 
+/**
+  * @param parentKey full key path of the parent item, required to generate this item's unique key (e.g. `<surveyKey>.<groupKey>`).
+ * @param keySymptomsQuestion reference to the symptom survey
+ * @param keyOverride use this to override the default key for this item (only last part of the key, parent's key is not influenced).
+*/
 interface SymptomsGroupProps {
     parentKey: string
     keySymptomsQuestion: string
@@ -242,10 +244,6 @@ interface SymptomsGroupProps {
 
 /**
  * GROUP DEPENDING ON IF ANY SYMPTOMS PRESENT
- *
- * @param parentKey full key path of the parent item, required to generate this item's unique key (e.g. `<surveyKey>.<groupKey>`).
- * @param keySymptomsQuestion reference to the symptom survey
- * @param keyOverride use this to override the default key for this item (only last part of the key, parent's key is not influenced).
  */
 export class SymptomsGroup extends GroupQuestion {
 
@@ -267,10 +265,6 @@ export class SymptomsGroup extends GroupQuestion {
 
 /**
  * SAME ILLNESS
- *
- * @param parentKey full key path of the parent item, required to generate this item's unique key (e.g. `<surveyKey>.<groupKey>`).
- * @param isRequired if true adds a default "hard" validation to the question to check if it has a response.
- * @param keyOverride use this to override the default key for this item (only last part of the key, parent's key is not influenced).
  */
 export class SameIllness extends ItemQuestion {
 
@@ -348,10 +342,6 @@ export class SameIllness extends ItemQuestion {
 
 /**
  * PCR TESTED CONTACTS COVID-19: single choice question about contact with PCR tested Covid19 patients
- *
- * @param parentKey full key path of the parent item, required to generate this item's unique key (e.g. `<surveyKey>.<groupKey>`).
- * @param isRequired if true adds a default "hard" validation to the question to check if it has a response.
- * @param keyOverride use this to override the default key for this item (only last part of the key, parent's key is not influenced).
  */
  export class PcrTestedContact extends ItemQuestion {
 
@@ -473,11 +463,6 @@ interface SameIllnessProps extends ItemProps {
 
 /**
  * SYMPTOMS START
- *
- * @param parentKey full key path of the parent item, required to generate this item's unique key (e.g. `<surveyKey>.<groupKey>`).
- * @param keySameIllness reference to 'same illness' question
- * @param isRequired if true adds a default "hard" validation to the question to check if it has a response.
- * @param keyOverride use this to override the default key for this item (only last part of the key, parent's key is not influenced).
  */
 export class SymptomsStart extends ItemQuestion {
 
@@ -575,11 +560,6 @@ const getSymptomStartDate = (keySymptomsStart: string): Expression => {
 
 /**
  * SYMPTOMS END
- *
- * @param parentKey full key path of the parent item, required to genrate this item's unique key (e.g. `<surveyKey>.<groupKey>`).
- * @param keySymptomsStart reference to symptoms start question
- * @param isRequired if true adds a default "hard" validation to the question to check if it has a response.
- * @param keyOverride use this to override the default key for this item (only last part of the key, parent's key is not influenced).
  */
 export class SymptomsEnd extends ItemQuestion {
 
@@ -641,9 +621,6 @@ export class SymptomsEnd extends ItemQuestion {
 /**
  * SYMPTOMS DEVELOPED SUDDENLY
  *
- * @param parentKey full key path of the parent item, required to genrate this item's unique key (e.g. `<surveyKey>.<groupKey>`).
- * @param isRequired if true adds a default "hard" validation to the question to check if it has a response.
- * @param keyOverride use this to override the default key for this item (only last part of the key, parent's key is not influenced).
  */
 export class SymptomsSuddenlyDeveloped extends ItemQuestion {
 
@@ -785,10 +762,6 @@ abstract class SymptomDependentQuestion extends ItemQuestion {
 
 /**
  * FEVER DEVELOPED SUDDENLY
- *
- * @param parentKey full key path of the parent item, required to genrate this item's unique key (e.g. `<surveyKey>.<groupKey>`).
- * @param isRequired if true adds a default "hard" validation to the question to check if it has a response.
- * @param keyOverride use this to override the default key for this item (only last part of the key, parent's key is not influenced).
  */
 export class FeverDevelopedSuddenly extends SymptomDependentQuestion {
 
@@ -906,16 +879,12 @@ export class DidUMeasureTemperature extends SymptomDependentQuestion {
 }
 
 interface TemperatureProps extends SymptomDependentProps {
-    keyDidYouMeasureTemperature: string
+    keyDidYouMeasureTemperature: string // @param keyDidYouMeasureTemperature reference to the question if temperature was taken
+
 }
 
 /**
  * HIGHEST TEMPERATURE
- *
- * @param parentKey full key path of the parent item, required to genrate this item's unique key (e.g. `<surveyKey>.<groupKey>`).
- * @param keyDidYouMeasureTemperature reference to the question if temperature was taken
- * @param isRequired if true adds a default "hard" validation to the question to check if it has a response.
- * @param keyOverride use this to override the default key for this item (only last part of the key, parent's key is not influenced).
  */
 export class HighestTemprerature extends SymptomDependentQuestion {
 
@@ -1041,11 +1010,6 @@ export class FeverGroup extends GroupQuestion {
 
 /**
  * CONSENT FOR MORE QUESTIONS: single choice question to get consent for further questions
- *
- * @param parentKey full key path of the parent item, required to genrate this item's unique key (e.g. `<surveyKey>.<groupKey>`).
- * @param keySymptomsQuestion reference to the symptom survey
- * @param isRequired if true adds a default "hard" validation to the question to check if it has a response.
- * @param keyOverride use this to override the default key for this item (only last part of the key, parent's key is not influenced).
  */
 export class ConsentForMore extends ItemQuestion {
 
@@ -1088,15 +1052,11 @@ export class ConsentForMore extends ItemQuestion {
 }
 
 interface HasMoreGroupProps extends GroupProps {
-    consentForMoreKey: string;
+    consentForMoreKey: string; // Key of the question consent for more
 }
 
 /**
  * GROUP DEPENDING ON IF ANY SYMPTOMS PRESENT AND USER WANTS TO ANSWER MORE QUESTIONS
- *
- * @param parentKey full key path of the parent item, required to genrate this item's unique key (e.g. `<surveyKey>.<groupKey>`).
- * @param userConsentForSymptoms reference to the symptom survey
- * @param keyOverride use this to override the default key for this item (only last part of the key, parent's key is not influenced).
  */
 export class HasMoreGroup extends GroupQuestion {
 
@@ -1119,10 +1079,6 @@ export class HasMoreGroup extends GroupQuestion {
 
 /**
  * SYMPTOM IMPLIED COVID-19 TEST PERFORMED
- *
- * @param parentKey full key path of the parent item, required to genrate this item's unique key (e.g. `<surveyKey>.<groupKey>`).
- * @param isRequired if true adds a default "hard" validation to the question to check if it has a response.
- * @param keyOverride use this to override the default key for this item (only last part of the key, parent's key is not influenced).
  */
 export class SymptomImpliedCovidTest extends ItemQuestion {
 
@@ -1174,16 +1130,12 @@ export class SymptomImpliedCovidTest extends ItemQuestion {
 }
 
 interface CovidTestQuestionProps extends ItemProps {
-    keySymptomImpliedCovidTest: string;
+    keySymptomImpliedCovidTest: string; // keysymptomImpliedCovidTest key to the answer of Qcov16
+
 }
 
 /**
  * TEST TYPE
- *
- * @param parentKey full key path of the parent item, required to genrate this item's unique key (e.g. `<surveyKey>.<groupKey>`).
- * @param keysymptomImpliedCovidTest key to the answer of Qcov16
- * @param isRequired if true adds a default "hard" validation to the question to check if it has a response.
- * @param keyOverride use this to override the default key for this item (only last part of the key, parent's key is not influenced).
  */
 export class CovidTestType extends ItemQuestion {
 
@@ -1248,7 +1200,8 @@ export class CovidTestType extends ItemQuestion {
 }
 
 interface TestTypeProps extends ItemProps {
-    keyTestType: string
+    keyTestType: string // keyTestType key to the answer of Qcov16
+
 }
 
 abstract class TestTypeDependentQuestion extends ItemQuestion {
@@ -1272,11 +1225,6 @@ abstract class TestTypeDependentQuestion extends ItemQuestion {
 
 /**
  * RESULT COVID-19 PCR TEST: result COVID-19 test
- *
- * @param parentKey full key path of the parent item, required to genrate this item's unique key (e.g. `<surveyKey>.<groupKey>`).
- * @param keyTestType key to the answer of Qcov16
- * @param isRequired if true adds a default "hard" validation to the question to check if it has a response.
- * @param keyOverride use this to override the default key for this item (only last part of the key, parent's key is not influenced).
  */
 export class ResultPCRTest extends TestTypeDependentQuestion {
 
@@ -1338,10 +1286,6 @@ export class ResultPCRTest extends TestTypeDependentQuestion {
 /**
  * RESULT COVID-19 RAPID TEST: result COVID-19 rapid test
  *
- * @param parentKey full key path of the parent item, required to genrate this item's unique key (e.g. `<surveyKey>.<groupKey>`).
- * @param keyTestType key to the answer of test type
- * @param isRequired if true adds a default "hard" validation to the question to check if it has a response.
- * @param keyOverride use this to override the default key for this item (only last part of the key, parent's key is not influenced).
  */
 export class ResultAntigenicTest extends TestTypeDependentQuestion {
 
@@ -1401,10 +1345,6 @@ export class ResultAntigenicTest extends TestTypeDependentQuestion {
 /**
  * RESULT COVID-19 RAPID TEST: result COVID-19 rapid test
  *
- * @param parentKey full key path of the parent item, required to genrate this item's unique key (e.g. `<surveyKey>.<groupKey>`).
- * @param keyTestType key to the answer of Qcov16
- * @param isRequired if true adds a default "hard" validation to the question to check if it has a response.
- * @param keyOverride use this to override the default key for this item (only last part of the key, parent's key is not influenced).
  */
 export class ResultRapidAntigenicTest extends TestTypeDependentQuestion {
 
@@ -1460,8 +1400,6 @@ export class ResultRapidAntigenicTest extends TestTypeDependentQuestion {
         ];
     }
 }
-
-
 
 export class FluTest extends ItemQuestion {
 
@@ -1519,18 +1457,14 @@ export class FluTest extends ItemQuestion {
 }
 
 interface ResultFluTestProps extends ItemProps {
-    keyFluTest: string
+    keyFluTest: string // * @param keyFluTest key to the answer of Qcov16
+
 
 }
 
 /**
  * RESULT FLU PCR TEST: result flu test
- *
- * @param parentKey full key path of the parent item, required to genrate this item's unique key (e.g. `<surveyKey>.<groupKey>`).
- * @param keyFluTest key to the answer of Qcov16
- * @param isRequired if true adds a default "hard" validation to the question to check if it has a response.
- * @param keyOverride use this to override the default key for this item (only last part of the key, parent's key is not influenced).
- */
+*/
 export class ResultFluTest extends ItemQuestion {
 
     keyFluTest: string
@@ -1592,10 +1526,7 @@ export class ResultFluTest extends ItemQuestion {
 /**
  * VISITED MEDICAL SERVICE
  *
- * @param parentKey full key path of the parent item, required to genrate this item's unique key (e.g. `<surveyKey>.<groupKey>`).
- * @param isRequired if true adds a default "hard" validation to the question to check if it has a response.
- * @param keyOverride use this to override the default key for this item (only last part of the key, parent's key is not influenced).
- */
+*/
 export class VisitedMedicalService extends ItemQuestion {
 
     constructor(props: ItemProps) {
@@ -1680,7 +1611,8 @@ export class VisitedMedicalService extends ItemQuestion {
 }
 
 interface VisitedMedicalServiceProps extends ItemProps {
-    keyVisitedMedicalServ: string
+    keyVisitedMedicalServ: string //  keyVisitedMedicalServ: reference to quesiton if visited any medical service
+
 
 }
 
@@ -1688,12 +1620,7 @@ interface VisitedMedicalServiceProps extends ItemProps {
 /**
  * WHEN VISITED MEDICAL SERVICE
  *
- * @param parentKey full key path of the parent item, required to genrate this item's unique key (e.g. `<surveyKey>.<groupKey>`).
- * @param keyVisitedMedicalServ: reference to quesiton if visited any medical service
- * @param isRequired if true adds a default "hard" validation to the question to check if it has a response.
- * @param keyOverride use this to override the default key for this item (only last part of the key, parent's key is not influenced).
  */
-
 export class VisitedMedicalServiceWhen extends ItemQuestion {
 
     keyVisitedMedicalServ: string
@@ -1846,11 +1773,8 @@ export class VisitedMedicalServiceWhen extends ItemQuestion {
 /**
  * WHY CONSULTED NO MEDICAL SERVICE
  *
- * @param parentKey full key path of the parent item, required to genrate this item's unique key (e.g. `<surveyKey>.<groupKey>`).
  * @param keyVisitedMedicalServ key to check if medical services have been visited.
  * @param keyContactedMedicalServ key to check if medical services have been contacted.
- * @param isRequired if true adds a default "hard" validation to the question to check if it has a response.
- * @param keyOverride use this to override the default key for this item (only last part of the key, parent's key is not influenced).
  */
 
 export class WhyVisitedNoMedicalService extends ItemQuestion {
@@ -1957,9 +1881,6 @@ interface TookMedicationProps extends ItemProps {
 /**
  * TOOK ANY MEDICATION
  *
- * @param parentKey full key path of the parent item, required to genrate this item's unique key (e.g. `<surveyKey>.<groupKey>`).
- * @param isRequired if true adds a default "hard" validation to the question to check if it has a response.
- * @param keyOverride use this to override the default key for this item (only last part of the key, parent's key is not influenced).
  */
 export class TookMedication extends ItemQuestion {
 
@@ -2100,10 +2021,6 @@ export class TookMedication extends ItemQuestion {
 
 /**
  * HOSPITALIZED BECAUSE OF SYMPTOMS: single choice question to check if symptoms lead to hospitalization
- *
- * @param parentKey full key path of the parent item, required to genrate this item's unique key (e.g. `<surveyKey>.<groupKey>`).
- * @param isRequired if true adds a default "hard" validation to the question to check if it has a response.
- * @param keyOverride use this to override the default key for this item (only last part of the key, parent's key is not influenced).
  */
 export class Hospitalized extends ItemQuestion {
 
@@ -2151,10 +2068,6 @@ export class Hospitalized extends ItemQuestion {
 
 /**
  * DAILY ROUTINE
- *
- * @param parentKey full key path of the parent item, required to genrate this item's unique key (e.g. `<surveyKey>.<groupKey>`).
- * @param isRequired if true adds a default "hard" validation to the question to check if it has a response.
- * @param keyOverride use this to override the default key for this item (only last part of the key, parent's key is not influenced).
  */
 export class DailyRoutine extends ItemQuestion {
 
@@ -2213,9 +2126,9 @@ export class DailyRoutine extends ItemQuestion {
 }
 
 interface DailyRoutineProps extends ItemProps {
-    keyDailyRoutine: string;
-}
+    keyDailyRoutine: string; //keyDailyRoutine: reference to question if participant missed work/school
 
+}
 export class DailyRoutineToday extends ItemQuestion {
 
     keyDailyRoutine: string;
@@ -2282,10 +2195,6 @@ export class DailyRoutineToday extends ItemQuestion {
 /**
  * DAILY ROUTINE DAYS MISSED WORK/SCHOOL
  *
- * @param parentKey full key path of the parent item, required to genrate this item's unique key (e.g. `<surveyKey>.<groupKey>`).
- * @param keyDailyRoutine: reference to question if participant missed work/school
- * @param isRequired if true adds a default "hard" validation to the question to check if it has a response.
- * @param keyOverride use this to override the default key for this item (only last part of the key, parent's key is not influenced).
  */
 export class DailyRoutineDaysMissed extends ItemQuestion {
 
@@ -2361,9 +2270,6 @@ export class DailyRoutineDaysMissed extends ItemQuestion {
 /**
  * COVID-19 Personal Habits Changes: likert scale question about changes in personal habits after experiencing covid symptoms
  *
- * @param parentKey full key path of the parent item, required to genrate this item's unique key (e.g. `<surveyKey>.<groupKey>`).
- * @param isRequired if true adds a default "hard" validation to the question to check if it has a response.
- * @param keyOverride use this to override the default key for this item (only last part of the key, parent's key is not influenced).
  */
  export class CovidHabitsChange extends ItemQuestion {
 
@@ -2499,10 +2405,6 @@ export class DailyRoutineDaysMissed extends ItemQuestion {
 
 /**
  * PERCIEVED CAUSE OF SYMPTOMS
- *
- * @param parentKey full key path of the parent item, required to genrate this item's unique key (e.g. `<surveyKey>.<groupKey>`).
- * @param isRequired if true adds a default "hard" validation to the question to check if it has a response.
- * @param keyOverride use this to override the default key for this item (only last part of the key, parent's key is not influenced).
  */
 export class CauseOfSymptoms extends ItemQuestion {
 

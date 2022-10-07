@@ -18,10 +18,6 @@ interface GenderProps extends ItemProps {
 
 /**
  * GENDER: Single choice question about gender
- *
- * @param parentKey full key path of the parent item, required to generate this item's unique key (e.g. `<surveyKey>.<groupKey>`).
- * @param isRequired if true adds a default "hard" validation to the question to check if it has a response.
- * @param keyOverride use this to override the default key for this item (only last part of the key, parent's key is not influenced).
  */
 export class Gender extends ItemQuestion {
 
@@ -80,10 +76,6 @@ export class Gender extends ItemQuestion {
 
 /**
  * AGE: Date of birth (year and month)
- *
- * @param parentKey full key path of the parent item, required to generate this item's unique key (e.g. `<surveyKey>.<groupKey>`).
- * @param isRequired if true adds a default "hard" validation to the question to check if it has a response.
- * @param keyOverride use this to override the default key for this item (only last part of the key, parent's key is not influenced).
  */
 export class DateOfBirth extends ItemQuestion {
 
@@ -159,10 +151,6 @@ export class DateOfBirth extends ItemQuestion {
 
 /**
  * LOCATION (postal code): Simple input field to enter 4 numeric digits, embedded into a single choice for opt-out
- *
- * @param parentKey full key path of the parent item, required to generate this item's unique key (e.g. `<surveyKey>.<groupKey>`).
- * @param isRequired if true adds a default "hard" validation to the question to check if it has a response.
- * @param keyOverride use this to override the default key for this item (only last part of the key, parent's key is not influenced).
  */
 export class PostalCode extends ItemQuestion {
 
@@ -240,9 +228,6 @@ export class PostalCode extends ItemQuestion {
 /**
  * MAIN ACTIVITY: single choice question about main activity
  *
- * @param parentKey full key path of the parent item, required to generate this item's unique key (e.g. `<surveyKey>.<groupKey>`).
- * @param isRequired if true adds a default "hard" validation to the question to check if it has a response.
- * @param keyOverride use this to override the default key for this item (only last part of the key, parent's key is not influenced).
  */
 export class MainActivity extends ItemQuestion {
 
@@ -410,10 +395,6 @@ export class PostalCodeWork extends ItemQuestion {
 
 /**
  * WORK TYPE: single choice question about main type of work
- *
- * @param parentKey full key path of the parent item, required to generate this item's unique key (e.g. `<surveyKey>.<groupKey>`).
- * @param isRequired if true adds a default "hard" validation to the question to check if it has a response.
- * @param keyOverride use this to override the default key for this item (only last part of the key, parent's key is not influenced).
  */
 export class WorkTypeEurostat extends ItemQuestion {
 
@@ -505,17 +486,12 @@ export class WorkTypeEurostat extends ItemQuestion {
 }
 
 interface EducationProps extends ItemProps {
-    keyQBirthday?: string
+    keyQBirthday?: string //  keyQBirthday key of the question collecting birthday
 
 }
 
 /**
  * HIGHEST EDUCATION: single choice about what is the highest level of formal education
- *
- * @param parentKey full key path of the parent item, required to generate this item's unique key (e.g. `<surveyKey>.<groupKey>`).
- * @param keyQBirthday key of the question collecting birthday
- * @param isRequired if true adds a default "hard" validation to the question to check if it has a response.
- * @param keyOverride use this to override the default key for this item (only last part of the key, parent's key is not influenced).
  */
  export class HighestEducation extends ItemQuestion {
 
@@ -605,10 +581,6 @@ interface EducationProps extends ItemProps {
 
 /**
  * PEOPLE MET: multiple choice for person groups you met
- *
- * @param parentKey full key path of the parent item, required to generate this item's unique key (e.g. `<surveyKey>.<groupKey>`).
- * @param isRequired if true adds a default "hard" validation to the question to check if it has a response.
- * @param keyOverride use this to override the default key for this item (only last part of the key, parent's key is not influenced).
  */
 export class PeopleMet extends ItemQuestion {
 
@@ -692,9 +664,6 @@ export class PeopleMet extends ItemQuestion {
 /**
  * AGE GROUPS: dropdown table about number of people in different age groups
  *
- * @param parentKey full key path of the parent item, required to generate this item's unique key (e.g. `<surveyKey>.<groupKey>`).
- * @param isRequired if true adds a default "hard" validation to the question to check if it has a response.
- * @param keyOverride use this to override the default key for this item (only last part of the key, parent's key is not influenced).
  */
 export class AgeGroups extends ItemQuestion {
 
@@ -836,10 +805,6 @@ interface AgeGroupsProps extends ItemProps {
 
 /**
  * PEOPLE AT RISK: single choice about people at risk among contacts
- *
- * @param parentKey full key path of the parent item, required to generate this item's unique key (e.g. `<surveyKey>.<groupKey>`).
- * @param isRequired if true adds a default "hard" validation to the question to check if it has a response.
- * @param keyOverride use this to override the default key for this item (only last part of the key, parent's key is not influenced).
  */
 export class PeopleAtRisk extends ItemQuestion {
 
@@ -906,11 +871,7 @@ export class PeopleAtRisk extends ItemQuestion {
 
 /**
  * CHILDREN IN SCHOOL: single choice with how many children going to school or daycare
- *
- * @param parentKey full key path of the parent item, required to generate this item's unique key (e.g. `<surveyKey>.<groupKey>`).
  * @param keyOfAgeGroups full key of the question about age groups, if set, dependency is applied
- * @param isRequired if true adds a default "hard" validation to the question to check if it has a response.
- * @param keyOverride use this to override the default key for this item (only last part of the key, parent's key is not influenced).
  */
  export class ChildrenInSchool extends ItemQuestion {
 
@@ -995,9 +956,6 @@ export class PeopleAtRisk extends ItemQuestion {
 /**
  * MEANS OF TRANSPORT: single choice about main means of transport
  *
- * @param parentKey full key path of the parent item, required to generate this item's unique key (e.g. `<surveyKey>.<groupKey>`).
- * @param isRequired if true adds a default "hard" validation to the question to check if it has a response.
- * @param keyOverride use this to override the default key for this item (only last part of the key, parent's key is not influenced).
  */
 export class MeansOfTransport extends ItemQuestion {
 
@@ -1234,18 +1192,12 @@ function exprPregnancyCondition(keyQGender: string, keyQBirthday: string ) {
 }
 
 interface PregnancyProps extends ItemProps {
-    keyQGender: string;
-    keyQBirthday: string;
+    keyQGender: string; // keyQGender reference to the survey item about gender
+    keyQBirthday: string; // keyQBirthday reference to the survey item about birthday
 }
 
 /**
  * PREGNANCY: single choice question about pregnancy
- *
- * @param parentKey full key path of the parent item, required to generate this item's unique key (e.g. `<surveyKey>.<groupKey>`).
- * @param keyQGender reference to the survey item about gender
- * @param keyQBirthday reference to the survey item about birthday
- * @param isRequired if true adds a default "hard" validation to the question to check if it has a response.
- * @param keyOverride use this to override the default key for this item (only last part of the key, parent's key is not influenced).
  */
 export class Pregnancy extends ItemQuestion {
 
@@ -1303,16 +1255,12 @@ export class Pregnancy extends ItemQuestion {
 }
 
 interface PregnancyTrimesterProps extends PregnancyProps {
-    keyQPregnancy: string
+    keyQPregnancy: string // keyQPregnancy reference to the survey item about pregnancy
+
 }
 
 /**
- * TRIMESTER: single choice question about pregrancy
- *
- * @param parentKey full key path of the parent item, required to genrate this item's unique key (e.g. `<surveyKey>.<groupKey>`).
- * @param keyQPregnancy reference to the survey item about pregnancy
- * @param isRequired if true adds a default "hard" validation to the question to check if it has a response.
- * @param keyOverride use this to override the default key for this item (only last part of the key, parent's key is not influenced).
+ * TRIMESTER: single choice question about pregnancy
  */
 export class PregnancyTrimester extends ItemQuestion {
 
@@ -1439,10 +1387,6 @@ export class Smoking extends ItemQuestion {
 
 /**
  * Allergies: multiple choice question about allergies
- *
- * @param parentKey full key path of the parent item, required to genrate this item's unique key (e.g. `<surveyKey>.<groupKey>`).
- * @param isRequired if true adds a default "hard" validation to the question to check if it has a response.
- * @param keyOverride use this to override the default key for this item (only last part of the key, parent's key is not influenced).
  */
 export class Allergies extends ItemQuestion {
 
@@ -1516,7 +1460,6 @@ export class Allergies extends ItemQuestion {
 
 /**
  * SPACIAL DIET: multiple choice question about special diet
- *
 */
 export class SpecialDiet extends ItemQuestion {
 
@@ -1634,10 +1577,6 @@ export class HomeophaticMedicine extends ItemQuestion {
 
 /**
  * Find out about Platform: multiple choice question about where the participant found out about the platform
- *
- * @param parentKey full key path of the parent item, required to genrate this item's unique key (e.g. `<surveyKey>.<groupKey>`).
- * @param isRequired if true adds a default "hard" validation to the question to check if it has a response.
- * @param keyOverride use this to override the default key for this item (only last part of the key, parent's key is not influenced).
  */
 export class FindOutAboutPlatform extends ItemQuestion {
 
