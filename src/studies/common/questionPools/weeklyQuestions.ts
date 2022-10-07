@@ -11,6 +11,8 @@ import { ComponentGenerators } from "case-editor-tools/surveys/utils/componentGe
 import { SymptomKeysType, WeeklyResponses as ResponseEncoding } from "../responses/weekly";
 import { GroupProps, GroupQuestion, ItemProps, ItemQuestion } from "./types";
 import { ClientExpression as client } from "../../../tools/expressions";
+import { Expression } from "survey-engine/data_types";
+
 interface SymptomsProps extends ItemProps {
     useRash: boolean;
 }
@@ -546,8 +548,28 @@ export class SymptomsStart extends ItemQuestion {
     }
 }
 
-interface SymptomStartProps extends ItemProps {
+interface SymptomEndProps extends ItemProps {
     keySymptomsStart: string
+}
+
+
+/**
+ * Get the value of the date of symptomStartDate question
+ * @param keySymptomsStart The item key of the question
+ * @returns
+ */
+const getSymptomStartDate = (keySymptomsStart: string): Expression => {
+    const date_input_key = ResponseEncoding.symptoms_start.date_input;
+
+    return {
+        name: 'getAttribute',
+        data: [
+            { dtype: 'exp', exp: client.getResponseItem(keySymptomsStart, [singleChoicePrefix, date_input_key].join('.')) },
+            { str: 'value', dtype: 'str' }
+        ],
+        returnType: 'int',
+    };
+
 }
 
 
@@ -563,12 +585,13 @@ export class SymptomsEnd extends ItemQuestion {
 
     keySymptomsStart: string;
 
-    constructor(props: SymptomStartProps) {
+    constructor(props: SymptomEndProps) {
         super(props, 'Q4');
         this.keySymptomsStart = props.keySymptomsStart;
     }
 
     buildItem() {
+
         return SurveyItems.singleChoice({
             parentKey: this.parentKey,
             itemKey: this.itemKey,
@@ -580,17 +603,8 @@ export class SymptomsEnd extends ItemQuestion {
                 {
                     key: '0', role: 'dateInput',
                     optionProps: {
-                        min: {
-                            dtype: 'exp', exp: {
-                                name: 'getAttribute',
-                                data: [
-                                    { dtype: 'exp', exp: expWithArgs('getResponseItem', this.keySymptomsStart, singleChoicePrefix) },
-                                    { str: 'value', dtype: 'str' }
-                                ],
-                                returnType: 'int',
-                            }
-                        },
-                        max: { dtype: 'exp', exp: expWithArgs('timestampWithOffset', 10) },
+                        min: { dtype: 'exp', exp: getSymptomStartDate(this.keySymptomsStart) },
+                        max: { dtype: 'exp', exp: client.timestampWithOffset({seconds: 10}) },
                     },
                     description: _T("weekly.HS.Q4.rg.scg.dateInput.0", "Choose date"),
                 },
@@ -650,6 +664,7 @@ export class SymptomsSuddenlyDeveloped extends ItemQuestion {
     }
 
     getResponses() {
+
         return [
             {
                 key: '0', role: 'option',
@@ -701,7 +716,6 @@ export class FeverStart extends ItemQuestion {
     }
 
     buildItem() {
-        const date_input_key = ResponseEncoding.symptoms_start.date_input;
         return SurveyItems.singleChoice({
             parentKey: this.parentKey,
             itemKey: this.itemKey,
@@ -716,16 +730,7 @@ export class FeverStart extends ItemQuestion {
                 {
                     key: '1', role: 'dateInput',
                     optionProps: {
-                        min: {
-                            dtype: 'exp', exp: {
-                                name: 'getAttribute',
-                                data: [
-                                    { dtype: 'exp', exp: expWithArgs('getResponseItem', this.keySymptomStart, [singleChoicePrefix, date_input_key].join('.')) },
-                                    { str: 'value', dtype: 'str' }
-                                ],
-                                returnType: 'int',
-                            }
-                        },
+                        min: { dtype: 'exp', exp: getSymptomStartDate(this.keySymptomStart)},
                         max: { dtype: 'exp', exp: client.timestampWithOffset({ seconds: 10 }) },
                     },
                     description: _T("weekly.HS.Q6.rg.scg.dateInput.0", "Choose date")
