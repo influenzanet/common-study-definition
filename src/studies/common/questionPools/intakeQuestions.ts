@@ -1519,10 +1519,7 @@ export class Allergies extends ItemQuestion {
 /**
  * SPACIAL DIET: multiple choice question about special diet
  *
- * @param parentKey full key path of the parent item, required to generate this item's unique key (e.g. `<surveyKey>.<groupKey>`).
- * @param isRequired if true adds a default "hard" validation to the question to check if it has a response.
- * @param keyOverride use this to override the default key for this item (only last part of the key, parent's key is not influenced).
- */
+*/
 export class SpecialDiet extends ItemQuestion {
 
     constructor(props: ItemProps) {
@@ -1531,7 +1528,7 @@ export class SpecialDiet extends ItemQuestion {
 
     buildItem() {
 
-        return SurveyItems.singleChoice({
+        return SurveyItems.multipleChoice({
             parentKey: this.parentKey,
             itemKey: this.itemKey,
             isRequired: this.isRequired,
@@ -1546,11 +1543,13 @@ export class SpecialDiet extends ItemQuestion {
 
     getResponses(): OptionDef[] {
 
-        const exclusiveOptionRule = expWithArgs('responseHasKeysAny', this.key, responseGroupKey + '.' + multipleChoiceKey, '0');
+        const NoSpecialDiet = '0';
+
+        const exclusiveOptionRule = se.multipleChoice.any(this.key, NoSpecialDiet);
 
         return [
             {
-                key: '0', role: 'option',
+                key: NoSpecialDiet, role: 'option',
                 content: _T("intake.Q15.rg.mcg.option.0", "No special diet")
             },
             {
