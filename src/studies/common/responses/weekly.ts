@@ -99,4 +99,4 @@ export const WeeklyResponses = {
         "yes": "1",
         "off": "2"
     }
-};
+} as const;
