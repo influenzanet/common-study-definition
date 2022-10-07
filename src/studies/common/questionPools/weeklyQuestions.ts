@@ -78,7 +78,7 @@ export class Symptoms extends ItemQuestion {
         });
     }
 
-    getResponses() {
+    getResponses():Array<OptionDef> {
         const codes = ResponseEncoding.symptoms;
         const exclusiveOptionRule =  client.multipleChoice.any(this.key, codes.no_symptom);
         const r : OptionDef[] =  [
@@ -1618,7 +1618,7 @@ export class VisitedMedicalService extends ItemQuestion {
         });
     }
 
-    getResponses() {
+    getResponses():Array<OptionDef> {
 
         const codes = ResponseEncoding.visit_medical;
 
