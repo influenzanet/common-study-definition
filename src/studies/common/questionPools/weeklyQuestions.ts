@@ -232,7 +232,7 @@ export class Symptoms extends ItemQuestion {
 }
 
 /**
-  * @param parentKey full key path of the parent item, required to generate this item's unique key (e.g. `<surveyKey>.<groupKey>`).
+ * @param parentKey full key path of the parent item, required to generate this item's unique key (e.g. `<surveyKey>.<groupKey>`).
  * @param keySymptomsQuestion reference to the symptom survey
  * @param keyOverride use this to override the default key for this item (only last part of the key, parent's key is not influenced).
 */
@@ -1865,10 +1865,7 @@ export class WhyVisitedNoMedicalService extends ItemQuestion {
                 content: _T("weekly.EX.Qcov18.helpGroup.text.1", "To understand why some people do not consult a doctor."),
                 style: [{ key: 'variant', value: 'p' }],
             },
-            text_how_answer("weekly.EX.Qcov18.helpGroup.text.2"),
-            {
-                content: trans_select_all_apply("weekly.EX.Qcov18.helpGroup.text.3"),
-            },
+            text_how_answer("weekly.EX.Qcov18.helpGroup.text.2")
         ]
     }
 }
