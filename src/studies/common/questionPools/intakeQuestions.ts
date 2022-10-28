@@ -6,11 +6,14 @@ import { matrixKey, multipleChoiceKey, responseGroupKey, singleChoiceKey } from 
 import { ComponentGenerators } from "case-editor-tools/surveys/utils/componentGenerators";
 import { OptionDef } from "case-editor-tools/surveys/types";
 import { SurveyItems } from 'case-editor-tools/surveys';
+import { initMultipleChoiceGroup } from "case-editor-tools/surveys/responseTypeGenerators/optionGroupComponents";
 import { initMatrixQuestion,  ResponseRowCell } from "case-editor-tools/surveys/responseTypeGenerators/matrixGroupComponent";
 import {require_response, text_select_all_apply, text_why_asking, text_how_answer, singleChoicePrefix, MultipleChoicePrefix } from './helpers';
 import { IntakeResponses as ResponseEncoding } from "../responses/intake";
 import { ItemProps, ItemQuestion } from "./types";
 import { ClientExpression as client } from "../../../tools/expressions";
+import { as_option } from "../../../tools/options";
+import { Expression } from "survey-engine/data_types";
 
 interface GenderProps extends ItemProps {
     useOther?:boolean
@@ -661,14 +664,22 @@ export class PeopleMet extends ItemQuestion {
     }
 }
 
+interface AgeGroupsProps extends ItemProps {
+    useAlone?: boolean;
+}
+
+
 /**
  * AGE GROUPS: dropdown table about number of people in different age groups
  *
  */
 export class AgeGroups extends ItemQuestion {
 
-    constructor(props: ItemProps) {
+    useAlone: boolean;
+
+    constructor(props: AgeGroupsProps) {
         super(props, 'Q6');
+        this.useAlone = props.useAlone ?? false;
     }
 
     getHelpGroupContent() {
@@ -696,6 +707,8 @@ export class AgeGroups extends ItemQuestion {
         // RESPONSE PART
         const rg = editor.addNewResponseComponent({ role: 'responseGroup' });
 
+       
+
         // Dropdown options - used in each cell
         const ddg: ResponseRowCell = {
             key: 'col1', role: 'dropDownGroup',
@@ -719,9 +732,25 @@ export class AgeGroups extends ItemQuestion {
             ]
         };
 
+        var disabled: Expression | undefined  = undefined;
+
+        const alone_yes = "1";
+            
+        if(this.useAlone) {
+
+            const mg = initMultipleChoiceGroup(multipleChoiceKey, [
+                as_option(alone_yes, _T("intake.Q6.alone.yes", "I live alone"))
+            ]);
+            editor.addExistingResponseComponent(mg, rg?.key);   
+            //rg_inner.displayCondition = client.multipleChoice.none();
+
+            disabled = client.multipleChoice.any(this.key, alone_yes);
+        }
+
         const rg_inner = initMatrixQuestion(matrixKey, [
             {
                 key: 'row0', role: 'responseRow',
+                disabled: disabled,
                 cells: [
                     {
                         key: 'l', role: 'label',
@@ -732,6 +761,7 @@ export class AgeGroups extends ItemQuestion {
             },
             {
                 key: 'row1', role: 'responseRow',
+                disabled: disabled,
                 cells: [
                     {
                         key: 'l', role: 'label',
@@ -742,6 +772,7 @@ export class AgeGroups extends ItemQuestion {
             },
             {
                 key: 'row2', role: 'responseRow',
+                disabled: disabled,
                 cells: [
                     {
                         key: 'l', role: 'label',
@@ -752,6 +783,7 @@ export class AgeGroups extends ItemQuestion {
             },
             {
                 key: 'row3', role: 'responseRow',
+                disabled: disabled,
                 cells: [
                     {
                         key: 'l', role: 'label',
@@ -762,6 +794,7 @@ export class AgeGroups extends ItemQuestion {
             },
             {
                 key: 'row4', role: 'responseRow',
+                disabled: disabled,
                 cells: [
                     {
                         key: 'l', role: 'label',
@@ -779,16 +812,23 @@ export class AgeGroups extends ItemQuestion {
         }
 
         if (this.isRequired) {
+
+            const cond : Expression[] = [
+                exprRowHasResponse("row0"),
+                exprRowHasResponse("row1"),
+                exprRowHasResponse("row2"),
+                exprRowHasResponse("row3"),
+                exprRowHasResponse("row4")
+            ];
+
+            if(this.useAlone) {
+               cond.push( client.multipleChoice.any(this.key, alone_yes ) );
+            }
+
             editor.addValidation({
                 key: 'r1',
                 type: 'hard',
-                rule: expWithArgs('or',
-                    exprRowHasResponse("row0"),
-                    exprRowHasResponse("row1"),
-                    exprRowHasResponse("row2"),
-                    exprRowHasResponse("row3"),
-                    exprRowHasResponse("row4")
-                )
+                rule: expWithArgs('or', ...cond )
             });
         }
 
@@ -798,7 +838,7 @@ export class AgeGroups extends ItemQuestion {
 
 }
 
-interface AgeGroupsProps extends ItemProps {
+interface SubAgeGroupsProps extends ItemProps {
     keyOfAgeGroups?: string
 }
 
@@ -810,7 +850,7 @@ export class PeopleAtRisk extends ItemQuestion {
 
     keyOfAgeGroups?: string
 
-    constructor(props: AgeGroupsProps) {
+    constructor(props: SubAgeGroupsProps) {
         super(props, 'Q6c');
         this.keyOfAgeGroups = props.keyOfAgeGroups;
     }
@@ -878,7 +918,7 @@ export class PeopleAtRisk extends ItemQuestion {
 
     keyOfAgeGroups?: string
 
-    constructor(props: AgeGroupsProps) {
+    constructor(props: SubAgeGroupsProps) {
         super(props, 'Q6b');
         this.keyOfAgeGroups = props.keyOfAgeGroups;
     }
@@ -1085,14 +1125,21 @@ export class CommonColdFrequency extends ItemQuestion {
     }
 }
 
+interface RegularMedicationProps extends ItemProps {
+    useRatherNotAnswer?: boolean;
+}
+
+
 export class RegularMedication extends ItemQuestion {
 
-    constructor(props: ItemProps) {
+    useRatherNotAnswer: boolean;
+
+    constructor(props: RegularMedicationProps) {
         super(props, 'Q11');
+        this.useRatherNotAnswer = props.useRatherNotAnswer ?? true;
     }
 
     buildItem() {
-
 
         return SurveyItems.multipleChoice({
             parentKey: this.parentKey,
@@ -1115,7 +1162,7 @@ export class RegularMedication extends ItemQuestion {
 
         const exclusiveOptionRule = client.multipleChoice.any(this.key, codes.none);
 
-        return [
+        const r : OptionDef[] = [
             {
                 key: codes.none, role: 'option',
                 content: _T("intake.Q11.rg.mcg.option.0", "No")
@@ -1149,12 +1196,17 @@ export class RegularMedication extends ItemQuestion {
                 disabled: exclusiveOptionRule,
                 content: _T("intake.Q11.rg.mcg.option.6", "An immunocompromising condition (e.g. splenectomy, organ transplant, acquired immune deficiency, cancer treatment)")
             },
-            {
+            
+        ];
+        if(this.useRatherNotAnswer) {
+          r.push( {
                 key: codes.noanswer, role: 'option',
                 disabled: exclusiveOptionRule,
                 content: _T("intake.Q11.rg.mcg.option.7", "I would rather not answer")
-            },
-        ];
+                }
+            );
+        }
+        return r;
     }
 
     getHelpGroupContent() {

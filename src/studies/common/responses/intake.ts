@@ -50,6 +50,7 @@ export const IntakeResponses = {
         "times_6": "3",
         "times_10": "4",
         "dontknow": "5"
+        // 6 used in France (sometimes, not every year)
     },
     // Q11 Condition
     condition: {

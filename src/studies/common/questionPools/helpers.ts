@@ -11,7 +11,7 @@ import { ItemComponent } from "survey-engine/data_types";
 export const singleChoicePrefix = [responseGroupKey, singleChoiceKey].join('.');
 
 /**
- * Multiple choice key prefix (rg.scg)
+ * Multiple choice key prefix (rg.mcg)
  */
  export const MultipleChoicePrefix = [responseGroupKey, multipleChoiceKey].join('.');
 
