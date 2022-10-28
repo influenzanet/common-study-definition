@@ -599,7 +599,7 @@ export class PeopleMet extends ItemQuestion {
             itemKey: this.itemKey,
             isRequired: this.isRequired,
             condition: this.condition,
-            questionText: _T("intake.Q5.title.0", "Except people you meet on public transportation, do you have contact with any of the following during the course of a typical day (so without COVID-19 measures)?"),
+            questionText: _T("intake.Q5.title.0", "Except people you meet on public transports, do you have contact with any of the following during the course of a typical day (so without COVID-19 measures)?"),
             helpGroupContent: this.getHelpGroupContent(),
             topDisplayCompoments: [ text_select_all_apply("intake.Q5.rg.dwL8.text.0") ],
             responseOptions: this.getResponses(),
@@ -707,7 +707,7 @@ export class AgeGroups extends ItemQuestion {
         // RESPONSE PART
         const rg = editor.addNewResponseComponent({ role: 'responseGroup' });
 
-       
+
 
         // Dropdown options - used in each cell
         const ddg: ResponseRowCell = {
@@ -735,13 +735,13 @@ export class AgeGroups extends ItemQuestion {
         var disabled: Expression | undefined  = undefined;
 
         const alone_yes = "1";
-            
+
         if(this.useAlone) {
 
             const mg = initMultipleChoiceGroup(multipleChoiceKey, [
                 as_option(alone_yes, _T("intake.Q6.alone.yes", "I live alone"))
             ]);
-            editor.addExistingResponseComponent(mg, rg?.key);   
+            editor.addExistingResponseComponent(mg, rg?.key);
             //rg_inner.displayCondition = client.multipleChoice.none();
 
             disabled = client.multipleChoice.any(this.key, alone_yes);
@@ -1196,7 +1196,7 @@ export class RegularMedication extends ItemQuestion {
                 disabled: exclusiveOptionRule,
                 content: _T("intake.Q11.rg.mcg.option.6", "An immunocompromising condition (e.g. splenectomy, organ transplant, acquired immune deficiency, cancer treatment)")
             },
-            
+
         ];
         if(this.useRatherNotAnswer) {
           r.push( {
