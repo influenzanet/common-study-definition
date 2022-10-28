@@ -16,7 +16,7 @@
     "nl": "TODO"
   },
   "vaccination.Q0.rg.scg.option.0": {
-    "en": "In the meantime I received a new vaccine dose, or a new invitation to be vaccinated.",
+    "en": "In the meantime I received a new vaccine dose, or a new invitation to be vaccinated. (**)",
     "nl": "TODO"
   },
   "vaccination.Q0.rg.scg.option.1": {
@@ -124,7 +124,7 @@
     "nl": "Wat zijn voor jou de belangrijkste redenen om dit jaar een griepprik te halen?"
   },
   "vaccination.HV.Q10c.rg.LlBq.text.0": {
-    "en": "Select the options that are most applicable",
+    "en": "Select all options that apply",
     "nl": "TODO"
   },
   "vaccination.HV.Q10c.rg.mcg.option.0": {
@@ -196,7 +196,7 @@
     "nl": "Geef alle redenen aan die een rol speelden in de beslissing."
   },
   "vaccination.HV.Q10d.rg.t2y2.text.0": {
-    "en": "Select the options that are most applicable",
+    "en": "Select all options that apply",
     "nl": "TODO"
   },
   "vaccination.HV.Q10d.rg.mcg.option.0": {
@@ -316,7 +316,7 @@
     "nl": "TODO"
   },
   "vaccination.HV.Q35i.rg.LMsj.text.0": {
-    "en": "Select more than one option if you received different brands",
+    "en": "Select all options that apply",
     "nl": "TODO"
   },
   "vaccination.HV.Q35i.rg.mcg.option.0": {
@@ -516,7 +516,7 @@
     "nl": "TODO"
   },
   "vaccination.HV.Q35f.rg.T5UL.text.0": {
-    "en": "Select the options that are most applicable",
+    "en": "Select all options that apply",
     "nl": "TODO"
   },
   "vaccination.HV.Q35f.rg.mcg.option.0": {
@@ -600,7 +600,7 @@
     "nl": "TODO"
   },
   "vaccination.HV.Q35m.rg.nm76.text.0": {
-    "en": "Select the options that are most applicable",
+    "en": "Select all options that apply",
     "nl": "TODO"
   },
   "vaccination.HV.Q35m.rg.mcg.option.0": {

@@ -99,7 +99,7 @@ export class DateOfBirth extends ItemQuestion {
 
         // QUESTION TEXT
         editor.setTitleComponent(
-            generateTitleComponent(_T("intake.Q2.title.0", "What is your date of birth (month and year)?"))
+            generateTitleComponent(_T("intake.Q2.title.0", "What is your date of birth (year and month)?"))
         );
 
         editor.setHelpGroupComponent(generateHelpGroupComponent(this.getHelpGroupContent()));
@@ -345,7 +345,7 @@ export class PostalCodeWork extends ItemQuestion {
                 },
                 {
                     key: '1', role: 'option',
-                    content: _T("intake.Q4b.rg.scg.option.1", "I don’t know")
+                    content: _T("intake.Q4b.rg.scg.option.1", "I don’t know/can’t remember")
                 },
                 {
                     key: '2', role: 'option',
@@ -535,7 +535,7 @@ interface EducationProps extends ItemProps {
             {
                 key: '1', role: 'option',
                 disabled: expWithArgs('responseHasKeysAny',this.key, responseGroupKey + '.' + multipleChoiceKey, '0', '2', '3', '4'),
-                content: _T("intake.Q4d.rg.mcg.option.1", "GCSEs, levels, CSEs or equivalent")
+                content: _T("intake.Q4d.rg.mcg.option.1", "GCSE's, levels, CSEs or equivalent")
             },
             {
                 key: '2', role: 'option',
@@ -545,7 +545,7 @@ interface EducationProps extends ItemProps {
             {
                 key: '3', role: 'option',
                 disabled: expWithArgs('responseHasKeysAny', this.key, responseGroupKey + '.' + multipleChoiceKey, '0', '1', '2', '4'),
-                content: _T("intake.Q4d.rg.mcg.option.3", "Bachelor Degree (BA, BSc) or equivalent")
+                content: _T("intake.Q4d.rg.mcg.option.3", "Bachelors Degree (BA, BSc) or equivalent")
             },
             {
                 key: '4', role: 'option',
@@ -651,7 +651,7 @@ export class PeopleMet extends ItemQuestion {
                 style: [{ key: 'variant', value: 'p' }],
             },
             {
-                content: _T("intake.Q5.helpGroup.text.2", "Hint:", "common.why_are_we_asking"),
+                content: _T("intake.Q5.helpGroup.text.2", "Why are we asking this?", "common.why_are_we_asking"),
                 style: [{ key: 'variant', value: 'h5' }],
             },
             {

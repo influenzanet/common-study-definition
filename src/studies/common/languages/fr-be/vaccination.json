@@ -16,7 +16,7 @@
     "fr-be": "TODO"
   },
   "vaccination.Q0.rg.scg.option.0": {
-    "en": "In the meantime I received a new vaccine dose, or a new invitation to be vaccinated.",
+    "en": "",
     "fr-be": "Sur ces entrefaites, j'ai reçu une nouvelle dose du vaccin ou une nouvelle invitation à me faire vacciner."
   },
   "vaccination.Q0.rg.scg.option.1": {
@@ -124,7 +124,7 @@
     "fr-be": "TODO"
   },
   "vaccination.HV.Q10c.rg.LlBq.text.0": {
-    "en": "Select the options that are most applicable",
+    "en": "Select all options that apply",
     "fr-be": "Sélectionnez jusqu'à 3 options les plus pertinentes."
   },
   "vaccination.HV.Q10c.rg.mcg.option.0": {
@@ -196,7 +196,7 @@
     "fr-be": "TODO"
   },
   "vaccination.HV.Q10d.rg.t2y2.text.0": {
-    "en": "Select the options that are most applicable",
+    "en": "Select all options that apply",
     "fr-be": "Sélectionnez jusqu'à 3 options les plus pertinentes."
   },
   "vaccination.HV.Q10d.rg.mcg.option.0": {
@@ -316,7 +316,7 @@
     "fr-be": "TODO"
   },
   "vaccination.HV.Q35i.rg.LMsj.text.0": {
-    "en": "Select more than one option if you received different brands",
+    "en": "Select all options that apply",
     "fr-be": "TODO"
   },
   "vaccination.HV.Q35i.rg.mcg.option.0": {
@@ -516,7 +516,7 @@
     "fr-be": "Veuillez sélectionner toutes les réponses qui entrent en ligne de compte pour prendre votre décision."
   },
   "vaccination.HV.Q35f.rg.T5UL.text.0": {
-    "en": "Select the options that are most applicable",
+    "en": "Select all options that apply",
     "fr-be": "Sélectionnez jusqu'à 3 options les plus pertinentes."
   },
   "vaccination.HV.Q35f.rg.mcg.option.0": {
@@ -600,7 +600,7 @@
     "fr-be": "Veuillez sélectionner toutes les réponses qui entrent en ligne de compte pour prendre votre décision."
   },
   "vaccination.HV.Q35m.rg.nm76.text.0": {
-    "en": "Select the options that are most applicable",
+    "en": "Select all options that apply",
     "fr-be": "Sélectionnez jusqu'à 3 options les plus pertinentes."
   },
   "vaccination.HV.Q35m.rg.mcg.option.0": {

@@ -16,7 +16,7 @@
     "fr": "Ce questionnaire vous est proposé pour savoir si votre situation vaccinale a changé depuis votre dernière réponse."
   },
   "vaccination.Q0.rg.scg.option.0": {
-    "en": "In the meantime I received a new vaccine dose, or a new invitation to be vaccinated.",
+    "en": "In the meantime I received a new vaccine dose, or a new invitation to be vaccinated. (**)",
     "fr": "J'ai recu un nouveau vaccin ou une proposition pour être vacciné"
   },
   "vaccination.Q0.rg.scg.option.1": {
@@ -101,7 +101,7 @@
     "fr": "Quelles étaient vos raisons pour vous faire vacciner contre la grippe cette année ?"
   },
   "vaccination.HV.Q10c.rg.LlBq.text.0": {
-    "en": "Select the options that are most applicable",
+    "en": "Select all options that apply",
     "fr": "TODO"
   },
   "vaccination.HV.Q10c.rg.mcg.option.0": {
@@ -165,7 +165,7 @@
     "fr": "Cochez toutes les raisons qui ont influencé votre décision."
   },
   "vaccination.HV.Q10d.rg.t2y2.text.0": {
-    "en": "Select the options that are most applicable",
+    "en": "Select all options that apply",
     "fr": "TODO"
   },
   "vaccination.HV.Q10d.rg.mcg.option.0": {
@@ -269,7 +269,7 @@
     "fr": "Indiquez quels types de vaccins vous avez reçu au moins une fois"
   },
   "vaccination.HV.Q35i.rg.LMsj.text.0": {
-    "en": "Select more than one option if you received different brands",
+    "en": "Select all options that apply",
     "fr": "TODO"
   },
   "vaccination.HV.Q35i.rg.mcg.option.0": {
@@ -429,7 +429,7 @@
     "fr": "TODO"
   },
   "vaccination.HV.Q35f.rg.T5UL.text.0": {
-    "en": "Select the options that are most applicable",
+    "en": "Select all options that apply",
     "fr": "TODO"
   },
   "vaccination.HV.Q35f.rg.mcg.option.0": {
@@ -505,7 +505,7 @@
     "fr": "TODO"
   },
   "vaccination.HV.Q35m.rg.nm76.text.0": {
-    "en": "Select the options that are most applicable",
+    "en": "Select all options that apply",
     "fr": "Indiquez les réponses les plus appropriées"
   },
   "vaccination.HV.Q35m.rg.mcg.option.0": {

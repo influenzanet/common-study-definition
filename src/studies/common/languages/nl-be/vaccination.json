@@ -16,7 +16,7 @@
     "nl-be": "TODO"
   },
   "vaccination.Q0.rg.scg.option.0": {
-    "en": "In the meantime I received a new vaccine dose, or a new invitation to be vaccinated.",
+    "en": "In the meantime I received a new vaccine dose, or a new invitation to be vaccinated. (**)",
     "nl-be": "In de tussentijd kreeg ik een nieuwe dosis van het vaccin of kreeg ik een nieuwe uitnodiging voor een vaccin. "
   },
   "vaccination.Q0.rg.scg.option.1": {
@@ -124,7 +124,7 @@
     "nl-be": "TODO"
   },
   "vaccination.HV.Q10c.rg.LlBq.text.0": {
-    "en": "Select the options that are most applicable",
+    "en": "Select all options that apply",
     "nl-be": "Selecteer maximaal 3 opties die het meest van toepassing zijn"
   },
   "vaccination.HV.Q10c.rg.mcg.option.0": {
@@ -196,7 +196,7 @@
     "nl-be": "TODO"
   },
   "vaccination.HV.Q10d.rg.t2y2.text.0": {
-    "en": "Select the options that are most applicable",
+    "en": "Select all options that apply",
     "nl-be": "Selecteer maximaal 3 opties die het meest van toepassing zijn"
   },
   "vaccination.HV.Q10d.rg.mcg.option.0": {
@@ -316,7 +316,7 @@
     "nl-be": "TODO"
   },
   "vaccination.HV.Q35i.rg.LMsj.text.0": {
-    "en": "Select more than one option if you received different brands",
+    "en": "Select all options that apply",
     "nl-be": "TODO"
   },
   "vaccination.HV.Q35i.rg.mcg.option.0": {
@@ -516,7 +516,7 @@
     "nl-be": "Gelieve de opties aan te duiden die het meest van toepassing zijn voor u. "
   },
   "vaccination.HV.Q35f.rg.T5UL.text.0": {
-    "en": "Select the options that are most applicable",
+    "en": "Select all options that apply",
     "nl-be": "Selecteer maximaal 3 opties die het meest van toepassing zijn"
   },
   "vaccination.HV.Q35f.rg.mcg.option.0": {
@@ -600,7 +600,7 @@
     "nl-be": "Gelieve de opties aan te duiden die het meest van toepassing zijn voor u. "
   },
   "vaccination.HV.Q35m.rg.nm76.text.0": {
-    "en": "Select the options that are most applicable",
+    "en": "Select all options that apply",
     "nl-be": "Selecteer maximaal 3 opties die het meest van toepassing zijn"
   },
   "vaccination.HV.Q35m.rg.mcg.option.0": {

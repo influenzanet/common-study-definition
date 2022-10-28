@@ -172,7 +172,7 @@ export class Symptoms extends ItemQuestion {
             {
                 key: codes.abdopain, role: 'option',
                 disabled: exclusiveOptionRule,
-                content: _T( "weekly.Q1.rg.mcg.option.18", "Stomachache")
+                content: _T( "weekly.Q1.rg.mcg.option.18", "Stomach ache")
             },
             {
                 key: codes.loss_smell, role: 'option',
@@ -1327,7 +1327,7 @@ export class ResultAntigenicTest extends TestTypeDependentQuestion {
             },
             {
                 key: '99', role: 'option',
-                content: _T("weekly.EX.Qcov16f.rg.scg.option.3", "I don't know / I don't want to answer"),
+                content: _T("weekly.EX.Qcov16f.rg.scg.option.3", "I don't know/can't remember"),
             },
         ];
     }
@@ -1386,7 +1386,7 @@ export class ResultRapidAntigenicTest extends TestTypeDependentQuestion {
             },
             {
                 key: '99', role: 'option',
-                content: _T("weekly.EX.Qcov16k.rg.scg.option.3", "I don't know / I don't want to answer"),
+                content: _T("weekly.EX.Qcov16k.rg.scg.option.3", "I don't know/can't remember"),
             },
         ];
     }
@@ -2370,7 +2370,7 @@ export class DailyRoutineDaysMissed extends ItemQuestion {
     getScaleOptions() {
         return [
             {
-                key: "1", content: _T("weekly.EX.Qcov7.rg.likert_1.option.0", " Yes, I am following this measure now for the first time, or in a stricter way")
+                key: "1", content: _T("weekly.EX.Qcov7.rg.likert_1.option.0", "Yes, I am following this measure now for the first time, or in a stricter way")
             },
             {
                 key: "2", content: _T("weekly.EX.Qcov7.rg.likert_1.option.1", "No, I was already following this measure")
