@@ -36,6 +36,7 @@ export function require_response(editor: ItemEditor, itemKey: string, responseGr
  */
 export function text_select_all_apply(id:string) {
     return ComponentGenerators.text({
+            key: "all_apply",
             className: "mb-2",
             content: trans_select_all_apply(id)
         });
@@ -58,6 +59,7 @@ export function trans_select_all_apply(id:string): LanguageMap {
  */
 export function text_why_asking(id:string) {
     return {
+        key: "why_asking",
         content: _T(id, "Why are we asking this?", "common.why_are_we_asking"),
         style: [{ key: 'variant', value: 'h5' }],
     };
@@ -70,6 +72,7 @@ export function text_why_asking(id:string) {
  */
 export function text_how_answer(id:string) {
     return {
+        key: "how_answer",
         content: _T( id, "How should I answer this question?", "common.how_should_i_answer"),
         style: [{ key: 'variant', value: 'h5' }],
     };
