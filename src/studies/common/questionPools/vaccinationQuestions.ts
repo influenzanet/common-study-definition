@@ -8,6 +8,8 @@ import { ParticipantFlags } from "../participantFlags";
 
 import { VaccinationResponses as ResponseEncoding } from "../responses/vaccination";
 import { ItemProps, GroupProps, ItemQuestion } from "./types";
+import { ClientExpression } from "../../../tools";
+import { Expression } from "survey-engine/data_types";
 
 export class VacStart extends ItemQuestion {
 
@@ -176,6 +178,15 @@ export class FluVaccineThisSeason extends ItemQuestion {
             helpGroupContent: this.getHelpGroupContent(),
             responseOptions: this.getResponses()
         });
+    }
+
+    /**
+     * Create an expression based on this question response when Vaccination is Yes
+     * This can be used to compose expression using this question response
+     * @returns Expression
+     */
+    createIsVaccinatedCondition(): Expression {
+        return ClientExpression.singleChoice.any(this.key, ResponseEncoding.flu_vaccine_season.yes);
     }
 
     getResponses() {
@@ -1056,6 +1067,8 @@ export class CovidVaccineAgainstReasons extends SubVaccineQuestion {
     }
 
     getResponses(): OptionDef[] {
+
+        // Nota : codes 18, 19 are already in use (France)
         return [
             {
                 key: '0', role: 'option',
