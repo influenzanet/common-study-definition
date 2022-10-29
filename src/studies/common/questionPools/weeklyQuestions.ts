@@ -263,13 +263,20 @@ export class SymptomsGroup extends GroupQuestion {
     }
 }
 
+interface SameIllnessProps extends ItemProps {
+    useDoesNotApply?: boolean;
+}
+
 /**
  * SAME ILLNESS
  */
 export class SameIllness extends ItemQuestion {
 
-    constructor(props: ItemProps) {
+    useDoesNotApply: boolean;
+
+    constructor(props: SameIllnessProps) {
         super(props, 'Q2');
+        this.useDoesNotApply = props.useDoesNotApply ?? true;
     }
 
     getCondition() {
@@ -304,7 +311,7 @@ export class SameIllness extends ItemQuestion {
     }
 
     getResponses() {
-        return [
+        const r : OptionDef[] = [
             {
                 key: '0', role: 'option',
                 content: _T("weekly.HS.Q2.rg.scg.option.0", "Yes")
@@ -317,11 +324,19 @@ export class SameIllness extends ItemQuestion {
                 key: '2', role: 'option',
                 content: _T("weekly.HS.Q2.rg.scg.option.2", "I don’t know/can’t remember")
             },
-            {
-                key: '9', role: 'option',
-                content: _T("weekly.HS.Q2.rg.scg.option.3", "This does not apply to me")
-            },
+
         ];
+
+        if(this.useDoesNotApply) {
+            r.push(
+                {
+                    key: '9', role: 'option',
+                    content: _T("weekly.HS.Q2.rg.scg.option.3", "This does not apply to me")
+                }
+            );
+        }
+
+        return r;
     }
 
     getHelpGroupContent() {
