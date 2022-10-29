@@ -471,7 +471,7 @@ export class PcrHouseholdContact extends ItemQuestion {
     }
 }
 
-interface SameIllnessProps extends ItemProps {
+interface SymptomsStartProps extends ItemProps {
     keySameIllness: string; // reference to 'same illness' question
 }
 
@@ -483,7 +483,7 @@ export class SymptomsStart extends ItemQuestion {
 
     keySameIllness: string;
 
-    constructor(props: SameIllnessProps) {
+    constructor(props: SymptomsStartProps) {
         super(props, 'Q3');
         this.keySameIllness = props.keySameIllness;
     }
