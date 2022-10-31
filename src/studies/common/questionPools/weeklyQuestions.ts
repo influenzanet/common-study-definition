@@ -1146,7 +1146,7 @@ export class SymptomImpliedCovidTest extends ItemQuestion {
 
 interface CovidTestQuestionProps extends ItemProps {
     keySymptomImpliedCovidTest: string; // keysymptomImpliedCovidTest key to the answer of Qcov16
-
+    useSerology?: boolean
 }
 
 /**
@@ -1156,8 +1156,10 @@ export class CovidTestType extends ItemQuestion {
 
     keySymptomImpliedCovidTest: string;
 
+    useSerology: boolean;
     constructor(props: CovidTestQuestionProps) {
         super(props, 'Qcov16i');
+        this.useSerology = props.useSerology ?? true;
         this.keySymptomImpliedCovidTest = props.keySymptomImpliedCovidTest;
     }
 
@@ -1184,15 +1186,24 @@ export class CovidTestType extends ItemQuestion {
     }
 
     getResponses() {
+
+        const sero : OptionDef[] = [];
+
+        if(this.useSerology) {
+            sero.push(
+                {
+                    key: ResponseEncoding.test_type.sero, role: 'option',
+                    content: _T("weekly.EX.Qcov16i.rg.mcg.option.1", "A serological analysis (screening for antibodies against this virus, from a drop of blood at fingertip or a blood sample)")
+                },
+            );
+        }
+
         return [
             {
                 key: ResponseEncoding.test_type.pcr, role: 'option',
                 content: _T("weekly.EX.Qcov16i.rg.mcg.option.0", "A PCR test (virus search, on a swab in nose or mouth, or a sputum or saliva sample)")
             },
-            {
-                key: ResponseEncoding.test_type.sero, role: 'option',
-                content: _T("weekly.EX.Qcov16i.rg.mcg.option.1", "A serological analysis (screening for antibodies against this virus, from a drop of blood at fingertip or a blood sample)")
-            },
+            ...sero,
             {
                 key: ResponseEncoding.test_type.antigenic, role: 'option',
                 content: _T("weekly.EX.Qcov16i.rg.mcg.option.2", "A rapid antigen detection test on a sample realized in the back of the nose (nasopharyngeal sampling, done by a health professional or a trained person, with a swab inserted to 15 cm into the nose, result obtained in less than one hour)")
@@ -2347,7 +2358,7 @@ export class DailyRoutineDaysMissed extends ItemQuestion {
                 style: [{ key: 'className', value:  className}, { key: 'variant', value: 'h5' }],
                 content: generateLocStrings(lang),
             }, rg?.key);
-            editor.addExistingResponseComponent(initLikertScaleItem(likertScaleKey + '_' + rowKey, likertOptions), rg?.key);
+            editor.addExistingResponseComponent(initLikertScaleItem(this.getLikertRowKey(rowKey), likertOptions), rg?.key);
 
             if(first) {
                 first = false;
@@ -2357,6 +2368,10 @@ export class DailyRoutineDaysMissed extends ItemQuestion {
 
         return editor.getItem();
 
+    }
+
+    getLikertRowKey(rowKey: string) {
+        return likertScaleKey + '_' + rowKey;
     }
 
     getOptionItems(): Map<string, LanguageMap> {
@@ -2398,20 +2413,28 @@ export class DailyRoutineDaysMissed extends ItemQuestion {
 
     }
 
+    static readonly likertScaleCodes = {
+        'yes_more': "1",
+        'yes_already': "2",
+        'no':'0',
+        'not_applicable': "3"
+    } as const;
+
 
     getScaleOptions() {
+        const codes = CovidHabitsChange.likertScaleCodes;
         return [
             {
-                key: "1", content: _T("weekly.EX.Qcov7.rg.likert_1.option.0", "Yes, I am following this measure now for the first time, or in a stricter way")
+                key: codes.yes_more, content: _T("weekly.EX.Qcov7.rg.likert_1.option.0", "Yes, I am following this measure now for the first time, or in a stricter way")
             },
             {
-                key: "2", content: _T("weekly.EX.Qcov7.rg.likert_1.option.1", "No, I was already following this measure")
+                key: codes.yes_already, content: _T("weekly.EX.Qcov7.rg.likert_1.option.1", "No, I was already following this measure")
             },
             {
-                key: "0", content: _T("weekly.EX.Qcov7.rg.likert_1.option.2", "No, I am not following this measure")
+                key: codes.no, content: _T("weekly.EX.Qcov7.rg.likert_1.option.2", "No, I am not following this measure")
             },
             {
-                key: "3", content: _T("weekly.EX.Qcov7.rg.likert_1.option.3", "Not applicable")
+                key: codes.not_applicable, content: _T("weekly.EX.Qcov7.rg.likert_1.option.3", "Not applicable")
             }
         ];
     }
