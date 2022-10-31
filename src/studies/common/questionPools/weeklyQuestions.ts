@@ -12,7 +12,7 @@ import { SymptomKeysType, WeeklyResponses as ResponseEncoding } from "../respons
 import { GroupProps, GroupQuestion, ItemProps, ItemQuestion } from "./types";
 import { ClientExpression as client } from "../../../tools/expressions";
 import { Expression } from "survey-engine/data_types";
-
+import { MatrixRow } from "../../../compat";
 interface SymptomsProps extends ItemProps {
     useRash: boolean;
 }
@@ -1626,9 +1626,8 @@ export class VisitedMedicalService extends ItemQuestion {
 }
 
 interface VisitedMedicalServiceProps extends ItemProps {
-    keyVisitedMedicalServ: string //  keyVisitedMedicalServ: reference to quesiton if visited any medical service
-
-
+    keyVisitedMedicalServ: string //  keyVisitedMedicalServ: reference to question if visited any medical service
+    useHospitalAdmission?: boolean;
 }
 
 
@@ -1639,10 +1638,12 @@ interface VisitedMedicalServiceProps extends ItemProps {
 export class VisitedMedicalServiceWhen extends ItemQuestion {
 
     keyVisitedMedicalServ: string
+    useHospitalAdmission: boolean;
 
     constructor(props: VisitedMedicalServiceProps) {
         super(props, 'Q7b');
         this.keyVisitedMedicalServ = props.keyVisitedMedicalServ;
+        this.useHospitalAdmission = props.useHospitalAdmission ?? true;
     }
 
     getCondition() {
@@ -1711,6 +1712,20 @@ export class VisitedMedicalServiceWhen extends ItemQuestion {
             return client.multipleChoice.any(this.keyVisitedMedicalServ, code);
         }
 
+        const row_hosp_admission : MatrixRow[] = [];
+
+        if(this.useHospitalAdmission) {
+            row_hosp_admission.push({
+                key: 'r3', role: 'responseRow', cells: [
+                    {
+                        key: 'col0', role: 'label', content: _T("weekly.EX.Q7b.rg.mat.r3.col0.label.0", "Hospital admission"),
+                    },
+                    { ...ddOptions }
+                ],
+                displayCondition: displayCondition(visits.hospital)
+            },);
+        }
+
         const rg_inner = initMatrixQuestion(matrixKey, [
             {
                 key: 'header', role: 'headerRow', cells: [
@@ -1740,15 +1755,7 @@ export class VisitedMedicalServiceWhen extends ItemQuestion {
                 ],
                 displayCondition: displayCondition(visits.emergency)
             },
-            {
-                key: 'r3', role: 'responseRow', cells: [
-                    {
-                        key: 'col0', role: 'label', content: _T("weekly.EX.Q7b.rg.mat.r3.col0.label.0", "Hospital admission"),
-                    },
-                    { ...ddOptions }
-                ],
-                displayCondition: displayCondition(visits.hospital)
-            },
+            ...row_hosp_admission,
             {
                 key: 'r4', role: 'responseRow', cells: [
                     {
