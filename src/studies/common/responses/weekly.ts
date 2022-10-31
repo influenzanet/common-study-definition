@@ -38,6 +38,48 @@ const TookMedicationCodes = {
     "dontknow": "6"
 } as const;
 
+const CovidHabitsChangesCodes = {
+
+    "wash_hands": "1",
+    "cough_elbow": "2",
+    "use_tissue": "3",
+    
+    "wear_mask": "4a",
+    "wear_mask_home": "4b",
+    
+    // In standard and use in France
+    "wear_mask_french": "4",
+    "wear_mask_home_french": "17",
+    
+    "avoid_shakehands": "5",
+    
+    "stop_hug": "11",
+
+    "public_transport": "6",
+    
+    "avoid_gathering": "7",
+
+    "stay_home": "8",
+
+    "telework": "9",
+
+    "avoid_travel": "10",
+
+    "food_delivered": "13",
+   
+    "isolate_home": "18",
+
+    "avoid_friends": "14",
+
+    "avoid_at_risk": "15",
+
+    "avoid_children": "16",
+
+    "none": "12"
+
+} as const;
+
+
 export type SymptomKeysType =  keyof typeof symptomsEncoding;
 
 export const WeeklyResponses = {
@@ -98,5 +140,6 @@ export const WeeklyResponses = {
         "no": "0",
         "yes": "1",
         "off": "2"
-    }
+    },
+    covid_habits: CovidHabitsChangesCodes
 } as const;
