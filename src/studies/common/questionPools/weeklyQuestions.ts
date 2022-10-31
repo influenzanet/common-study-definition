@@ -1893,7 +1893,8 @@ export class WhyVisitedNoMedicalService extends ItemQuestion {
 }
 
 interface TookMedicationProps extends ItemProps {
-    useHayFever?: boolean;
+    useHayFever?: boolean; // 
+    useOtherTextInput?: boolean; // Show option Other with a textinput
 }
 
 
@@ -1905,9 +1906,12 @@ export class TookMedication extends ItemQuestion {
 
     useHayFever: boolean;
 
+    useOtherTextInput: boolean;
+
     constructor(props: TookMedicationProps) {
         super(props, 'Q9');
         this.useHayFever = props.useHayFever ?? false;
+        this.useOtherTextInput = props.useOtherTextInput ?? false;
     }
 
 
@@ -1978,6 +1982,17 @@ export class TookMedication extends ItemQuestion {
             });
         }
 
+        const otherOption: OptionDef = {
+            key: codes.other,
+            role: 'option',
+            disabled: exclusiveOther,
+            content: _T("weekly.EX.Q9.rg.mcg.option.7", "Other")
+        };
+        if(this.useOtherTextInput) {
+            otherOption.role = 'input';
+            otherOption.description = _T('weekly.EX.Q9.rg.mcg.option.7.desc', "Please specify")
+        } 
+
         const rest = [    {
                 key: codes.antiviral,
                 role: 'option',
@@ -2002,12 +2017,7 @@ export class TookMedication extends ItemQuestion {
                 disabled: exclusiveOther,
                 content: _T("weekly.EX.Q9.rg.mcg.option.6", "Alternative medicine (essential oil, phytotherapy, etc.)")
             },
-            {
-                key: codes.other,
-                role: 'option',
-                disabled: exclusiveOther,
-                content: _T("weekly.EX.Q9.rg.mcg.option.7", "Other")
-            },
+            otherOption,
             {
                 key: dont_know,
                 role: 'option',
