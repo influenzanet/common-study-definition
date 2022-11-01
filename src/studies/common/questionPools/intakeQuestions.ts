@@ -246,7 +246,7 @@ export class MainActivity extends ItemQuestion {
             itemKey: this.itemKey,
             isRequired: this.isRequired,
             condition: this.condition,
-            questionText: _T("intake.Q4.title.0", "What is your current professional status?"),
+            questionText: _T("intake.Q4.title.0", "What is your current professional status? (Assume a normal situation, without any COVID-19 measures)."),
             helpGroupContent: this.getHelpGroupContent(),
             responseOptions: [
                 {
