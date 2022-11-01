@@ -1669,7 +1669,6 @@ export class VisitedMedicalServiceWhen extends ItemQuestion {
 
         const itemKey = this.key;
         const editor = new ItemEditor(undefined, { itemKey: itemKey, isGroup: false });
-        editor.setVersion(1);
 
         editor.setTitleComponent(
             generateTitleComponent(_T("weekly.EX.Q7b.title.0", "How soon after your symptoms appeared did you first VISIT this medical service?"))

@@ -99,7 +99,6 @@ export class DateOfBirth extends ItemQuestion {
     buildItem() {
 
         const editor = new ItemEditor(undefined, { itemKey: this.key, isGroup: false });
-        editor.setVersion(1);
 
         // QUESTION TEXT
         editor.setTitleComponent(
@@ -695,7 +694,6 @@ export class AgeGroups extends ItemQuestion {
     buildItem() {
 
         const editor = new ItemEditor(undefined, { itemKey: this.key, isGroup: false });
-        editor.setVersion(1);
 
         // QUESTION TEXT
         editor.setTitleComponent(
