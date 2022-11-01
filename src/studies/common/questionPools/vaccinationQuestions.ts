@@ -10,6 +10,7 @@ import { VaccinationResponses as ResponseEncoding } from "../responses/vaccinati
 import { ItemProps, GroupProps, ItemQuestion } from "./types";
 import { ClientExpression } from "../../../tools";
 import { Expression } from "survey-engine/data_types";
+import { textComponent } from "../../../compat";
 
 export class VacStart extends ItemQuestion {
 
@@ -34,7 +35,8 @@ export class VacStart extends ItemQuestion {
                 ),
             //helpGroupContent: this.getHelpGroupContent(),
             bottomDisplayCompoments: [
-                ComponentGenerators.text({
+                textComponent({
+                    key: "note1",
                     'content': _T(
                         "vaccination.Q0.privacy.note",
                         "(**) By selecting one of these options you give your consent to use your historical data to prefill this survey's responses."

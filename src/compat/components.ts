@@ -16,7 +16,7 @@ export interface CommonProps {
   }
 
 
-export const textComponenent = (props: TextProps): ItemComponent => {
+export const textComponent = (props: TextProps): ItemComponent => {
     const styles = [];
     if (props.className !== undefined) {
       styles.push({

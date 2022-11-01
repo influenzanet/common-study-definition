@@ -4,7 +4,7 @@ import { expWithArgs } from "case-editor-tools/surveys/utils/simple-generators";
 import { LanguageMap, _T } from "../languages"
 import { responseGroupKey, singleChoiceKey, multipleChoiceKey } from "case-editor-tools/constants/key-definitions";
 import { ItemComponent } from "survey-engine/data_types";
-import { textComponenent } from "../../../compat";
+import { textComponent } from "../../../compat";
 
 /**
  * Single choice key prefix (rg.scg)
@@ -36,7 +36,7 @@ export function require_response(editor: ItemEditor, itemKey: string, responseGr
  * @returns
  */
 export function text_select_all_apply(id:string) {
-    return textComponenent({
+    return textComponent({
             key: "all_apply",
             className: "mb-2",
             content: trans_select_all_apply(id)

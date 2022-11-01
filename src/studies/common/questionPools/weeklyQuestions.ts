@@ -12,7 +12,7 @@ import { SymptomKeysType, WeeklyResponses as ResponseEncoding } from "../respons
 import { GroupProps, GroupQuestion, ItemProps, ItemQuestion } from "./types";
 import { ClientExpression as client } from "../../../tools/expressions";
 import { Expression } from "survey-engine/data_types";
-import { MatrixRow } from "../../../compat";
+import { MatrixRow, textComponent } from "../../../compat";
 interface SymptomsProps extends ItemProps {
     useRash: boolean;
 }
@@ -64,7 +64,8 @@ export class Symptoms extends ItemQuestion {
             ),
             helpGroupContent: this.getHelpGroupContent(),
             bottomDisplayCompoments: [
-                ComponentGenerators.text({
+                textComponent({
+                    key: "note1",
                     content: _T(
                         "weekly.Q1.rg.cGJZ.text.0",
                         "Multiple answers possible. If you suffer from chronic illness, only indicate symptoms that have changed. For example, if you experience chronic shortness of breath, only mark this symptom if it has recently gotten worse."
@@ -299,7 +300,8 @@ export class SameIllness extends ItemQuestion {
                 ),
             helpGroupContent: this.getHelpGroupContent(),
             bottomDisplayCompoments: [
-                ComponentGenerators.text({
+                textComponent({
+                    key: "note1",
                     'content': _T(
                         "vaccination.Q0.privacy.note",
                         "(**) By selecting one of these options you give your consent to use your historical data to prefill this survey's responses."
@@ -1683,7 +1685,8 @@ export class VisitedMedicalServiceWhen extends ItemQuestion {
         const rg = editor.addNewResponseComponent({ role: 'responseGroup' });
 
         editor.addExistingResponseComponent(
-            ComponentGenerators.text({
+            textComponent({
+             key: "note1",
              content:  _T("weekly.EX.Q7b.rg.sFcN.text.0", 'Select the correct number of days')
             })
         , rg?.key);
@@ -1904,7 +1907,7 @@ export class WhyVisitedNoMedicalService extends ItemQuestion {
 }
 
 interface TookMedicationProps extends ItemProps {
-    useHayFever?: boolean; // 
+    useHayFever?: boolean; //
     useOtherTextInput?: boolean; // Show option Other with a textinput
 }
 
@@ -2002,7 +2005,7 @@ export class TookMedication extends ItemQuestion {
         if(this.useOtherTextInput) {
             otherOption.role = 'input';
             otherOption.description = _T('weekly.EX.Q9.rg.mcg.option.7.desc', "Please specify")
-        } 
+        }
 
         const rest = [    {
                 key: codes.antiviral,
@@ -2337,6 +2340,7 @@ export class DailyRoutineDaysMissed extends ItemQuestion {
 
         const rg = editor.addNewResponseComponent({ role: 'responseGroup' });
         editor.addExistingResponseComponent({
+            key: "note1",
             role: 'text',
             style: [{ key: 'className', value: 'mb-2' }],
             content: generateLocStrings(_T("weekly.EX.Qcov7.rg.gU4U.text.0", "To be completed optionally")),
@@ -2354,6 +2358,7 @@ export class DailyRoutineDaysMissed extends ItemQuestion {
             const className = first ? first_row_style  : row_style;
 
             editor.addExistingResponseComponent({
+                key: "text_" + rowKey,
                 role: 'text',
                 style: [{ key: 'className', value:  className}, { key: 'variant', value: 'h5' }],
                 content: generateLocStrings(lang),

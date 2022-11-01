@@ -14,6 +14,7 @@ import { ItemProps, ItemQuestion } from "./types";
 import { ClientExpression as client } from "../../../tools/expressions";
 import { as_option } from "../../../tools/options";
 import { Expression } from "survey-engine/data_types";
+import { textComponent } from "../../../compat";
 
 interface GenderProps extends ItemProps {
     useOther?:boolean
@@ -1011,7 +1012,8 @@ export class MeansOfTransport extends ItemQuestion {
             condition: this.condition,
             questionText: _T("intake.Q7.title.0", "What means of transportation do you typically use for your daily activities?"),
             topDisplayCompoments: [
-                ComponentGenerators.text({
+                textComponent({
+                    key: "text_1",
                     className: 'mb-2',
                     content: _T("intake.Q7.rg.9JtQ.text.0", "Please select the transportation means you use the most."),
                 })
