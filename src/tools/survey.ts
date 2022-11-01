@@ -3,12 +3,29 @@ import { Expression, isExpression } from "survey-engine/data_types";
 import { isConditionable, ItemDependency } from "../types/item";
 import { ItemBuilder } from "./items";
 
+
+export interface SurveyBuilderProps extends SurveyProps {
+    metadata?: Map<string,string>;
+}
+
+interface SurveyMetadata {
+    [key:string]: string;
+}
+
 export class SurveyBuilder extends SurveyDefinition {
 
     items: ItemBuilder[];
 
-    constructor(props: SurveyProps) {
+    constructor(props: SurveyBuilderProps) {
         super(props);
+        if(props.metadata) {
+            const meta : SurveyMetadata = {};
+            props.metadata.forEach((value, key)=> {
+                meta[key] = value;
+            });
+            this.editor.setMetadata(meta);
+        }
+
         this.items = [];
     }
 
