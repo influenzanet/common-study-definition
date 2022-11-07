@@ -17,7 +17,7 @@
   },
   "intake.Q1.helpGroup.text.1": {
     "en": "In order to examine the differences between men and women.",
-    "fr": "Pour savoir si le risque de contracter la grippe est différent entre hommes et femmes."
+    "fr": "Pour vérifier la représentativité des participants de GrippeNet.fr/COVIDnet.fr. Nous souhaiterions également savoir si le risque d'attraper la COVID-19 ou la grippe est différent entre les femmes et les hommes."
   },
   "intake.Q1.rg.scg.option.0": {
     "en": "Male",
@@ -37,7 +37,7 @@
   },
   "intake.Q2.helpGroup.text.1": {
     "en": "In order to examine the differences between age groups.",
-    "fr": "Les chances de contracter la grippe et les risques de complications varient selon l'âge."
+    "fr": "Le risque de contracter une infection respiratoire comme la grippe ou la COVID-19 et celui de développer des complications varient avec l'âge."
   },
   "intake.Q2.rg.feedback.text.1": {
     "en": " years old",
@@ -45,15 +45,15 @@
   },
   "intake.Q3.title.0": {
     "en": "What is your home postal code?",
-    "fr": "Quelle est le code postal de votre domicile ?"
+    "fr": "Quelle est la commune de votre domicile ?"
   },
   "intake.Q3.helpGroup.text.1": {
     "en": "In order to verify the representativeness of our cohort (the group of participants in this study), and to examine the geographical differences in the spread of the coronavirus and influenza.",
-    "fr": "Pour vérifier la représentativité de notre échantillon et pour voir si le risque de contracter la grippe varie à travers le pays."
+    "fr": "Pour vérifier la représentativité de notre échantillon et afin d'étudier la propagation de la COVID-19 et de la grippe à l'échelle géographique."
   },
-   "intake.Q3.helpGroup.text.3": {
+  "intake.Q3.helpGroup.text.3": {
     "en": "Insert the postal code of your place of residence",
-    "fr": "Indiquez le code postal de votre résidence"
+    "fr": "Cliquez sur le bouton puis entrez votre code postal et cliquez sur votre commune dans la liste affichée. Seule la commune est enregistrée."
   },
   "intake.Q3.rg.scg.input.0": {
     "en": "Postal code:",
@@ -69,7 +69,7 @@
   },
   "intake.Q3.error.3": {
     "en": "Please enter the digits of your postal code",
-    "fr": "Tapez les chiffre de votre code postal"
+    "fr": "Entrez les chiffres de votre code postal"
   },
   "intake.Q3.error.4": {
     "en": "Please enter at most 5 digits",
@@ -81,11 +81,11 @@
   },
   "intake.Q4.helpGroup.text.1": {
     "en": "To check how representative our sample is compared to the population as a whole, and to find out whether the chance of getting flu is different for people in different types of occupation.",
-    "fr": "Afin de vérifier la représentativité de notre échantillon comparée à la population dans son ensemble, et savoir si le risque de contracter la grippe est différent pour les personnes ayant différents types d'occupation."
+    "fr": "Pour vérifier que les participants de GrippeNet.fr/COVIDnet.fr ressemblent dans l’ensemble à la population française. Le risque d’attraper une maladie respiratoire comme la grippe ou la COVID-19 pourrait varier en fonction de l’activité, nous voudrions étudier cela."
   },
   "intake.Q4.helpGroup.text.3": {
     "en": "Please, tick the box that most closely resembles your main occupation. For pre-school children who don't go to daycare tick the \"other\" box.",
-    "fr": "Merci de cocher la réponse qui se rapproche le plus de votre activité principale. Pour les enfants qui ne vont pas encore à l’école et ne sont pas gardés en dehors du domicile, cocher la case « Aucune de ces réponses »"
+    "fr": "Merci de cocher la réponse qui se rapproche le plus de votre activité principale. Pour les enfants qui ne vont pas encore à l’école et ne sont pas gardés en dehors du domicile, cocher la case « Aucune de ces réponses »."
   },
   "intake.Q4.rg.scg.option.0": {
     "en": "Paid employment, full time",
@@ -145,7 +145,7 @@
   },
   "intake.Q4b.rg.scg.option.2": {
     "en": "Not applicable (e.g. don’t have a fixed workplace)",
-    "fr": "Non applicable (par exemple, je n''ai pas de lieu de travail fixe)"
+    "fr": "Non applicable (par exemple, je n'ai pas de lieu de travail fixe)"
   },
   "intake.Q4b.error.3": {
     "en": "Please enter the digits of your postal code",
@@ -161,11 +161,11 @@
   },
   "intake.Q4h.helpGroup.text.1": {
     "en": "To check how representative our sample is compared to the population as a whole and to find out whether the chance of getting COVID-19 or flu are different for people in different types of occupation.",
-    "fr": "Pour vérifier que les participants de GrippeNet.fr/COVIDnet.fr  ressemblent dans l’ensemble à la population française. Le risque d’attraper une infection respiratoire comme la grippe ou la COVID-19 pourrait varier en fonction de l’activité, nous voudrions étudier cela."
+    "fr": "Pour vérifier que les participants de GrippeNet.fr/COVIDnet.fr ressemblent dans l’ensemble à la population française. Le risque d’attraper une infection respiratoire comme la grippe ou la COVID-19 pourrait varier en fonction de l’activité, nous voudrions étudier cela."
   },
   "intake.Q4h.helpGroup.text.3": {
     "en": "Please tick the box that most closely resembles your main occupation.",
-    "fr": "Merci de cocher la case de l’activité qui ressemble la plus à votre activité principale."
+    "fr": "Merci de cocher la réponse qui se rapproche le plus de votre activité principale. Pour les enfants qui ne vont pas encore à l'école et ne sont pas gardés en dehors du domicile, cocher la case \"Aucune de ces réponses\"."
   },
   "intake.Q4h.rg.scg.option.0": {
     "en": "Services and sales workers (Personal Services Workers, Sales Workers, Personal Care Workers, Protective Services Workers)",
@@ -193,7 +193,7 @@
   },
   "intake.Q4h.rg.scg.option.6": {
     "en": "Clerical support workers (General and Keyboard Clerks, Customer Services Clerks,  Numerical and Material Recording Clerks, Other Clerical Support Workers)",
-    "fr": "TODO"
+    "fr": "Employé de type administratif (ex : secrétariat, service clients, saisie de données...)"
   },
   "intake.Q4h.rg.scg.option.7": {
     "en": "Skilled agricultural, forestry and fishery workers",
@@ -217,7 +217,7 @@
   },
   "intake.Q4d.title.0": {
     "en": "What is the highest level of formal education/qualification that you have?",
-    "fr": "Quel est votre plus haut niveau de qualification ?"
+    "fr": "Quel est votre plus haut niveau de qualification ? Si vous êtes toujours scolarisé ou étudiant, cochez s'il-vous-plaît la case correspondant au diplôme le plus élevé que vous avez obtenu jusqu'à maintenant."
   },
   "intake.Q4d.helpGroup.text.1": {
     "en": "To check how representative our sample is compared to the population of the UK (Italy, Belgium..) as a whole.",
@@ -253,7 +253,7 @@
   },
   "intake.Q5.title.0": {
     "en": "Except people you meet on public transports, do you have contact with any of the following during the course of a typical day (so without COVID-19 measures)?",
-    "fr": "Sans compter les personnes que vous croisez pendant vos déplacements et vos courses, avez-vous des contacts avec les personnes suivantes au cours d''une journée typique ? (Sélectionnez toutes les options qui s''appliquent, s''il y a lieu)"
+    "fr": "Sans compter les personnes que vous croisez pendant vos déplacements et vos courses, avez-vous des contacts avec les personnes suivantes au cours d'une journée typique ? (Sélectionnez toutes les options qui s'appliquent, s'il y a lieu)"
   },
   "intake.Q5.helpGroup.text.1": {
     "en": "To find out whether you are likely to be exposed to more infection risk than the average person (e.g. work with children, or patients).",
@@ -285,7 +285,7 @@
   },
   "intake.Q6.title.0": {
     "en": "INCLUDING YOU, how many people in each of the following age groups live in your household?",
-    "fr": "En dehors de vous, combien de personnes de chacune des classes d''âge suivantes vivent dans votre foyer ? Surtout ne vous comptez pas, indiquez seulement les autres personnes de votre foyer pour chaque catégorie cochée."
+    "fr": "En dehors de vous, combien de personnes de chacune des classes d'âge suivantes vivent dans votre foyer ? Surtout ne vous comptez pas, indiquez seulement les autres personnes de votre foyer pour chaque catégorie cochée."
   },
   "intake.Q6.helpGroup.text.1": {
     "en": "Members of larger households, or those with children, may more likely get infected than the others.",
@@ -309,7 +309,7 @@
   },
   "intake.Q6.rg.mat.row4.l.label.0": {
     "en": "65+",
-    "fr": "plus de 65 ans"
+    "fr": "65 ans ou plus"
   },
   "intake.Q6c.title.0": {
     "en": "One or several of these people are they at risk of complications in case of flu or COVID-19 (e.g, pregnant, over 65, underlying health condition, obese, etc.)?",
@@ -333,11 +333,11 @@
   },
   "intake.Q6c.rg.scg.option.2": {
     "en": "Don't know/would rather not answer",
-    "fr": "Je ne sais pas, je ne désire pas répondre"
+    "fr": "Je ne sais pas / ne souhaite pas répondre"
   },
   "intake.Q6b.title.0": {
     "en": "How many of the children in your household go to school or day-care?",
-    "fr": "Combien d''enfants de votre foyer sont gardés en dehors du domicile (école, crèche, garderie, assistante maternelle…)?"
+    "fr": "Combien d'enfants de votre foyer sont gardés en dehors du domicile (école, crèche, garderie, assistante maternelle…)?"
   },
   "intake.Q6b.helpGroup.text.1": {
     "en": "Attending school, daycare or childcare can increase the risk of contracting the coronavirus or influenza, as well as other similar illnesses. We wish to study this issue.",
@@ -359,7 +359,6 @@
     "en": "What means of transportation do you typically use for your daily activities?",
     "fr": "Quel est votre principal moyen de déplacement ?"
   },
-
   "intake.Q7.helpGroup.text.1": {
     "en": "We want to know if people who regularly use public transportation have a higher risk of infection.",
     "fr": "L’utilisation des transports en commun pourrait peut-être augmenter le risque d’attraper une infection respiratoire comme la grippe ou la COVID-19. Nous voudrions étudier cela."
@@ -370,7 +369,7 @@
   },
   "intake.Q7.rg.9JtQ.text.0": {
     "en": "Please select the transportation means you use the most.",
-    "fr": "TODO"
+    "fr": "Merci de choisir le mode de transport que vous utilisez le plus souvent."
   },
   "intake.Q7.rg.scg.option.0": {
     "en": "Walking",
@@ -398,27 +397,27 @@
   },
   "intake.Q8.title.0": {
     "en": "How often do you have common colds or flu-like diseases?",
-    "fr": "A quelle fréquence avez-vous des rhumes ou la grippe ?"
+    "fr": "A quelle fréquence avez-vous des rhumes ou des états grippaux ?"
   },
   "intake.Q8.helpGroup.text.1": {
     "en": "We want to know if some people have an increased risk of infection.",
-    "fr": "Nous souhaitons savoir si certaines personnes présente une fréquence d'infection plus élevée"
+    "fr": "Nous souhaitons savoir si certaines personnes présentent une fréquence d'infection plus élevée."
   },
   "intake.Q8.rg.scg.option.0": {
     "en": "Never",
-    "fr": "Jamais"
+    "fr": "Presque jamais"
   },
   "intake.Q8.rg.scg.option.1": {
     "en": "Once or twice a year",
-    "fr": "1 ou 2 fois par an"
+    "fr": "Une ou deux fois par an"
   },
   "intake.Q8.rg.scg.option.2": {
     "en": "Between 3 and 5 times a year",
-    "fr": "De 3 à 5 fois par an"
+    "fr": "Entre 3 et 5 fois par an"
   },
   "intake.Q8.rg.scg.option.3": {
     "en": "Between 6 and 10 times a year",
-    "fr": "De 6 à 10 fois par an"
+    "fr": "Entre 6 et 10 fois par an"
   },
   "intake.Q8.rg.scg.option.4": {
     "en": "More than 10 times a year",
@@ -430,7 +429,7 @@
   },
   "intake.Q11.title.0": {
     "en": "Do you take regular medication for any of the following medical conditions?",
-    "fr": "Prenez-vous régulièrement des médicaments pour l''un des troubles suivants ? (Sélectionnez toutes les options qui s''appliquent)"
+    "fr": "Prenez-vous régulièrement des médicaments pour l'un des troubles suivants ? (Sélectionnez toutes les options qui s'appliquent)"
   },
   "intake.Q11.helpGroup.text.1": {
     "en": "This question allows us to find out whether you have other medical conditions that may increase your risk of having more severe illness if you are infected.",
@@ -438,7 +437,7 @@
   },
   "intake.Q11.helpGroup.text.3": {
     "en": "Only answer \"yes\" if you take regular medication for your medical problem. If, for instance, you only occasionally take an asthma inhaler, then do not answer \"yes\" for asthma.",
-    "fr": "Ne cochez une réponse que si vous prenez régulièrement des médicaments pour ce trouble. Par exemple, si vous ne prenez des médicaments contre l’asthme qu’occasionnellement (moins de quatre fois par an), ne cochez pas la case « Asthme »."
+    "fr": "Ne sélectionnez une réponse que si vous prenez régulièrement des médicaments pour ce trouble. Par exemple, si vous ne prenez des médicaments contre l’asthme qu’occasionnellement (moins de quatre fois par an), ne cochez pas la case « Asthme »."
   },
   "intake.Q11.rg.mcg.option.0": {
     "en": "No",
@@ -466,7 +465,7 @@
   },
   "intake.Q11.rg.mcg.option.6": {
     "en": "An immunocompromising condition (e.g. splenectomy, organ transplant, acquired immune deficiency, cancer treatment)",
-    "fr": "Immunodépression (ablation de la rate, maladie du foie, greffe d''organe, immunodéficience acquise dont VIH, traitement de cancer en cours, prise de corticoïdes ou d’un traitement immunosuppresseur…)"
+    "fr": "Immunodépression (ablation de la rate, maladie du foie, greffe d'organe, immunodéficience acquise dont VIH, traitement de cancer en cours, prise de corticoïdes ou d’un traitement immunosuppresseur…)"
   },
   "intake.Q11.rg.mcg.option.7": {
     "en": "I would rather not answer",
@@ -490,7 +489,7 @@
   },
   "intake.Q12.rg.scg.option.2": {
     "en": "Don't know/would rather not answer",
-    "fr": "Je ne sais pas, je ne désire pas répondre"
+    "fr": "Je ne sais pas / préfère ne pas répondre"
   },
   "intake.Q12b.title.0": {
     "en": "Which trimester of the pregnancy are you in?",
@@ -518,7 +517,7 @@
   },
   "intake.Q13.title.0": {
     "en": "Do you smoke tobacco?",
-    "fr": "Fumez-vous ?"
+    "fr": "Fumez-vous du tabac ?"
   },
   "intake.Q13.helpGroup.text.1": {
     "en": "Smoking might make you more likely to get a more severe dose of virus disease. We would like to test this.",
@@ -526,7 +525,7 @@
   },
   "intake.Q13.helpGroup.text.3": {
     "en": "Please, answer as accurately as possible.",
-    "fr": "Merci de répondre le plus précisément possible. Si vous fumez autre chose (ex : la pipe, le cigare), indiquez globalement combien de fois par jour vous le faites."
+    "fr": "Merci de répondre le plus précisément possible."
   },
   "intake.Q13.rg.scg.option.0": {
     "en": "No",
@@ -550,7 +549,7 @@
   },
   "intake.Q13.rg.scg.option.5": {
     "en": "Dont know/would rather not answer",
-    "fr": "Je ne sais pas, je ne désire pas répondre"
+    "fr": "Je ne sais pas / préfère ne pas répondre"
   },
   "intake.Q14.title.0": {
     "en": "Do you have one of the following allergies that can cause respiratory symptoms?",
@@ -578,7 +577,7 @@
   },
   "intake.Q14.rg.mcg.option.3": {
     "en": "Other allergies that cause respiratory symptoms (e.g. sneezing, runny eyes)",
-    "fr": "Autres allergies provoquant des symptômes respiratoires (p. ex. éternuements, yeux larmoyants, etc)"
+    "fr": "Autres allergies provoquant des symptômes respiratoires (par ex. éternuements, yeux larmoyants, etc)"
   },
   "intake.Q14.rg.mcg.option.4": {
     "en": "I do not have an allergy that causes respiratory symptoms",
@@ -670,6 +669,6 @@
   },
   "intake.surveyEnd.title.0": {
     "en": "Thank you! This was all for now, please submit (push « send ») your responses. Please come back or continue reporting symptoms you experience during the last week.",
-    "fr": "Merci pour votre participation. Votre profil est complété, vous pouvez maintenant remplir le questionnaire vaccination et hebdomadaire pour ce participant"
+    "fr": "Merci pour votre participation. Votre profil est complété, vous pouvez dès à présent remplir le questionnaire de vaccination (grippe et COVID-19), et le questionnaire hebdomadaire de ce participant."
   }
 }

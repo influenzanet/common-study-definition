@@ -1,11 +1,11 @@
 {
   "vaccination.name.0": {
     "en": "Vaccination questionnaire",
-    "fr": "Questionnaire vacination"
+    "fr": "Questionnaire de vaccination contre la grippe et la COVID-19"
   },
   "vaccination.description.0": {
     "en": "The purpose of the vaccination questionnaire is to find out more about protection given by the vaccine and monitor vaccination uptake in Italy.",
-    "fr": "Ce questionnaire permet de mieux connaître le profil des participants de GrippeNet.fr\/COVIDnet.fr, et vous prendra entre 2 et 5 minutes. Il est important de le mettre à jour en cours de saison si vous recevez une nouvelle dose de vaccin contre la grippe ou la COVID-19. Il sera dans ce cas pré-complété avec ce que vous avez indiqué dans le précédent questionnaire."
+    "fr": "Ce questionnaire permet de mieux connaître le profil des participants de GrippeNet.fr/COVIDnet.fr, et vous prendra entre 2 et 5 minutes. Il est important de le mettre à jour en cours de saison si vous recevez une nouvelle dose de vaccin contre la grippe ou la COVID-19. Il sera dans ce cas pré-complété avec ce que vous avez indiqué dans le précédent questionnaire."
   },
   "vaccination.typicalDuration.0": {
     "en": "Duration 5-10 minutes",
@@ -21,24 +21,23 @@
   },
   "vaccination.Q0.rg.scg.option.1": {
     "en": "In the meantime nothing has changed in terms of vaccination for me.",
-    "fr": "Rien n'a changé dans mes vaccins "
+    "fr": "Rien n'a changé dans mes vaccins"
   },
   "vaccination.Q0.rg.scg.option.2": {
     "en": "I'm not sure, and would like to take these questions to make sure my information on vaccination is up to date.",
-    "fr": "Je ne suis pas sûr et je souhaite répondre"
+    "fr": "Je ne suis pas sûr et je souhaite revoir ce questionnaire pour mettre à jour au besoin les informations sur mes vaccinations"
   },
   "vaccination.HV.Q9.title.0": {
     "en": "Did you receive a flu vaccine during the previous flu season (2020-2021)?",
-    "fr": "Avez-vous été vacciné(e) contre la grippe lors de la dernière saison automne/hiver (2020-2021) ?"
+    "fr": "L'an dernier (2021-2022) avez-vous été vacciné contre la grippe ?"
   },
   "vaccination.HV.Q9.helpGroup.text.1": {
     "en": "We would like to study what level of protection the vaccine provides. We would also like to know if there is any protection from vaccines received in previous years.",
-    "fr": "Nous aimerions savoir à quel point la protection par le vaccin fonctionne. Nous aimerions aussi savoir si il y a une certaine protection par les vaccins reçus au cours des années précédentes."
+    "fr": "Les vaccins reçus les années précédentes pourraient apporter une protection. Nous voudrions étudier cela."
   },
-
   "vaccination.HV.Q9.helpGroup.text.3": {
     "en": "Answer 'yes' if you were vaccinated in autumn/winter 2020-2021.",
-    "fr": "Répondez « oui » si vous avez été vacciné cette saison, habituellement à l'automne. Si vous vous faites vacciner après avoir rempli ce questionnaire, merci de revenir et corriger votre réponse."
+    "fr": "Répondez « oui » si vous avez été vacciné contre la grippe la saison dernière (entre septembre 2021 et février 2022)."
   },
   "vaccination.HV.Q9.rg.scg.option.0": {
     "en": "Yes",
@@ -50,11 +49,11 @@
   },
   "vaccination.HV.Q9.rg.scg.option.2": {
     "en": "I don't know/can't remember",
-    "fr": "Je ne sais pas \/ ne me souviens pas"
+    "fr": "Je ne sais pas / ne me souviens pas"
   },
   "vaccination.HV.Q10.title.0": {
     "en": "Have you received a flu vaccine this autumn/winter season? (2021-2022)",
-    "fr": "Avez-vous été vacciné contre la grippe cette année (depuis octobre 2021) ?"
+    "fr": "Avez-vous été vacciné contre la grippe cette année (depuis le mois d'octobre 2022) ?"
   },
   "vaccination.HV.Q10.helpGroup.text.1": {
     "en": "We would like to be able to work out how much protection the vaccine gives.",
@@ -62,7 +61,7 @@
   },
   "vaccination.HV.Q10.helpGroup.text.3": {
     "en": "Report yes, if you received the vaccine this season, usually in the autumn. If you get vaccinated after filling in this questionnaire, please return to this and update your answer.",
-    "fr": "Répondez « Oui » si vous avez été vacciné contre la grippe cette saison (entre octobre 2021 et janvier 2022). Si vous vous faites vacciner après avoir rempli ce questionnaire, merci de le mettre à jour."
+    "fr": "Répondez « Oui » si vous avez été vacciné contre la grippe cette saison (entre octobre 2022 et janvier 2023). Si vous vous faites vacciner après avoir rempli ce questionnaire, merci de le mettre à jour."
   },
   "vaccination.HV.Q10.rg.scg.option.0": {
     "en": "Yes",
@@ -78,7 +77,7 @@
   },
   "vaccination.HV.Q10b.title.0": {
     "en": "When were you vaccinated against flu this season (2021-2022)?",
-    "fr": "Quand avez-vous été vacciné contre la grippe cette année (depuis octobre 2021) ?"
+    "fr": "Quand avez-vous été vacciné contre la grippe cette année (depuis octobre 2022) ?"
   },
   "vaccination.HV.Q10b.helpGroup.text.1": {
     "en": "Knowing when people get vaccinated tells us how the vaccination program is being followed, as well as the effectiveness of the vaccine.",
@@ -86,7 +85,7 @@
   },
   "vaccination.HV.Q10b.helpGroup.text.3": {
     "en": "Try to answer as precisely as possible. If you do not know the exact date, provide as close an estimate as possible. For example, if you remember the month, try to recall if it was in the beginning or end of the month. Did any important events take place (such as holidays or birthdays) that may help you to refresh your memory?",
-    "fr": "Essayez de répondre le plus précisément possible. Si vous ne connaissez pas la date précise, donnez votre meilleure estimation. Par exemple, vous pouvez vous rappeler du mois, puis essayez de vous souvenir si c'était au début ou à la fin du mois. Essayez de vous servir d'événements importants (p. ex. vacances ou anniversaire) pour vous aider à vous rafraîchir la mémoire."
+    "fr": "Merci de répondre de façon aussi précise que possible. Si vous ne connaissez pas la date exacte, merci de donner la meilleure estimation possible. Par exemple, vous pouvez vous rappeler du mois. Essayez alors de vous souvenir si c'était plutôt au début ou à la fin du mois. Peut-être certains évènements (des vacances, un anniversaire) peuvent-ils vous aider à préciser la date ?"
   },
   "vaccination.HV.Q10b.rg.scg.description.dateInput.0": {
     "en": "Choose date",
@@ -94,7 +93,7 @@
   },
   "vaccination.HV.Q10b.rg.scg.option.1": {
     "en": "I don't know (anymore)",
-    "fr": "Je ne sais pas, je ne m'en souviens plus"
+    "fr": "Je ne sais pas / ne me souviens pas"
   },
   "vaccination.HV.Q10c.title.0": {
     "en": "What were your reasons for getting a seasonal influenza vaccination this year?",
@@ -122,7 +121,7 @@
   },
   "vaccination.HV.Q10c.rg.mcg.option.4": {
     "en": "It was recommended in my workplace/school",
-    "fr": "Cela m’a été recommandé sur mon lieu de travail \/ école"
+    "fr": "Cela m’a été recommandé sur mon lieu de travail / école"
   },
   "vaccination.HV.Q10c.rg.mcg.option.5": {
     "en": "The vaccine was readily available and vaccine administration was convenient",
@@ -274,7 +273,7 @@
   },
   "vaccination.HV.Q35i.rg.mcg.option.0": {
     "en": "Pfizer/BioNTech",
-    "fr": "Comirnaty® des laboratoires Pfizer\/BioNTech"
+    "fr": "Comirnaty® des laboratoires Pfizer/BioNTech"
   },
   "vaccination.HV.Q35i.rg.mcg.option.1": {
     "en": "Moderna",
@@ -326,7 +325,7 @@
   },
   "vaccination.HV.Q35c.rg.scg.option.4": {
     "en": "I Don't know/Can't remember",
-    "fr": "Je ne sais pas \/ ne me souviens pas"
+    "fr": "Je ne sais pas / ne me souviens pas"
   },
   "vaccination.HV.Q35j.title.0": {
     "en": "When did you receive your last injection of a vaccine against COVID-19? If you do not know the exact date, provide an estimate.",
@@ -346,7 +345,7 @@
   },
   "vaccination.HV.Q35j.rg.scg.option.1": {
     "en": "I don’t know/can’t remember",
-    "fr": "Je ne sais pas \/ ne me souviens pas"
+    "fr": "Je ne sais pas / ne me souviens pas"
   },
   "vaccination.HV.Q35k.title.0": {
     "en": "Do you plan to receive a second injection in the upcoming weeks?",
@@ -458,7 +457,7 @@
   },
   "vaccination.HV.Q35f.rg.mcg.option.6": {
     "en": "It was recommended in my workplace/school.",
-    "fr": "Cela m’a été recommandé dans mon lieu de travail \/ étude"
+    "fr": "Cela m’a été recommandé dans mon lieu de travail / étude"
   },
   "vaccination.HV.Q35f.rg.mcg.option.7": {
     "en": "The vaccine was readily available and vaccine administration was convenient.",
@@ -470,7 +469,7 @@
   },
   "vaccination.HV.Q35f.rg.mcg.option.9": {
     "en": "I don’t want to miss work/school.",
-    "fr": "Je ne veux pas manquer le travail \/ les cours"
+    "fr": "Je ne veux pas manquer le travail / les cours"
   },
   "vaccination.HV.Q35f.rg.mcg.option.10": {
     "en": "I always accept vaccination when it is offered to me.",
