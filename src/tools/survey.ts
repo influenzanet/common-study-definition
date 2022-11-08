@@ -1,6 +1,6 @@
 import { Item, SurveyDefinition, SurveyProps } from "case-editor-tools/surveys/types";
 import { Expression, isExpression } from "survey-engine/data_types";
-import { isConditionable, ItemDependency } from "../types/item";
+import { isConditionable } from "../types/item";
 import { ItemBuilder } from "./items";
 
 
@@ -29,12 +29,10 @@ export class SurveyBuilder extends SurveyDefinition {
         this.items = [];
     }
 
-    push(item:Item, condition?: Expression|ItemDependency|(()=>Expression)) {
+    push(item:ItemBuilder, condition?: Expression|(()=>Expression)) {
         if(condition && !isExpression(condition)) {
             if(typeof(condition) == "function") {
                 condition = condition();
-            } else {
-                condition = condition.getCondition();
             }
         }
 
@@ -46,7 +44,7 @@ export class SurveyBuilder extends SurveyDefinition {
         }
         this.items.push(item);
     }
- 
+
     // Default implementation build survey from the stacked items
     buildSurvey() {
         for (const item of this.items) {

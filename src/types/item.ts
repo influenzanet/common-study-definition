@@ -1,13 +1,9 @@
 import { Expression } from "survey-engine/data_types";
 import { Group, Item } from "case-editor-tools/surveys/types";
 
-export type QuestionType = 'single' | 'multiple'; 
+export type QuestionType = 'single' | 'multiple';
 
-// Object returning a condition
-export interface ItemDependency {
-    getCondition(): Expression | undefined;
-}
-
+// Object accepting condition
 export interface ItemConditionable {
     setCondition(condition: Expression):void;
 }
