@@ -1,8 +1,6 @@
 import { SurveyDefinition } from "case-editor-tools/surveys/types";
 import { Study } from "case-editor-tools/types/study";
 import { StudyRules } from "case-editor-tools/types/studyRules";
-import { Survey } from "survey-engine/data_types";
-
 /**
  * StudyBuilder create a study definition object using dynamic loading
  * The instance of the survey class must be created after the language are loaded (avoid import side effect)
