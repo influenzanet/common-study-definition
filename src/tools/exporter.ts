@@ -4,7 +4,7 @@ import { generateFilesForStudy } from 'case-editor-tools/exporter';
 import { writeFileSync } from "fs";
 import { LanguageHelpers } from "../studies/common/languages/languageHelpers";
 import { Translation, TranslationSet } from "../studies/common/languages";
-
+import { StudyChecker } from "./checker";
 const usage = () => {
     Logger.log("Expected command line arguments:")
     Logger.log("   - study=<studyKey>")
@@ -27,31 +27,66 @@ const readStudyKey = () => {
     return studyKeyArg[0].replace('study=', '');
 }
 
+export const selectFromStudyKey = (studies: Study[]): Study[] => {
+    const studyKey = readStudyKey();
+
+    const to_build = studies.filter(study => {
+        if (study.outputFolderName && study.outputFolderName === studyKey) {
+            return true;
+        }
+        return study.studyKey === studyKey
+    });
+    if (!to_build || to_build.length < 1) {
+        Logger.error(`No study find with key: ${studyKey}.`);
+        process.exit(1)
+    }
+    return to_build;
+}
+
+interface ExporterOpts {
+    missing? : boolean;
+    check?: boolean;
+}
+
 /**
  *
  * @param studies
- * @param all
  */
-export function study_exporter(studies: Study[], all?:boolean) {
+export function study_exporter(studies: Study[], o?: ExporterOpts|boolean) {
 
-    var to_build : Study[] = studies;
-
-    if(!all) {
-        const studyKey = readStudyKey();
-
-        const to_build = studies.filter(study => {
-            if (study.outputFolderName && study.outputFolderName === studyKey) {
-                return true;
-            }
-            return study.studyKey === studyKey
-        });
-        if (!to_build || to_build.length < 1) {
-            Logger.error(`No study find with key: ${studyKey}.`);
-            process.exit(1)
-        }
+    if(typeof(o) == "boolean") {
+       Logger.warn("Using old study_exporter() behaviour, do not accept boolean as second argument any more");
+       o = {};
     }
 
-    to_build.forEach(study => generateFilesForStudy(study, true));
+    const opts = Object.assign(o ?? {}, {missing: true, check:true});
+
+    const outputBase = './output';
+    studies.forEach(study => {
+
+        const output = outputBase + '/' +(study.outputFolderName ?? study.studyKey);
+
+        LanguageHelpers.missing.clear();
+        
+        generateFilesForStudy(study, true);
+
+        if(opts.check) {
+            const checker = new StudyChecker(study);
+            const result = checker.check();
+            if(result.size > 0) {
+                result.forEach((r, key) => {
+                    const n = r.problems.length;
+                    Logger.warn(`check for ${key} has ${n} problems`);
+                });
+                console.log(result);
+            }
+            json_export(output + '/checks.json', result);
+        }
+
+        if(opts.missing) {
+            buildMissing(output);
+        }
+    });
 }
 
 export function buildMissing(outputFolder:string) {
@@ -66,10 +101,12 @@ export function buildMissing(outputFolder:string) {
             m[key] = t;
         });
 
-        json_export(outputFolder + '/missing-'+language+'.json', m);
+        json_export(outputFolder + '/missing-' + language + '.json', m);
 
     });
 }
+
+
 
 
 export function json_export(filename:string, object:any, pretty?: number) {
