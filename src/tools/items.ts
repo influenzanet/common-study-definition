@@ -1,7 +1,7 @@
 import { GenericQuestionProps, Group, Item, OptionDef } from "case-editor-tools/surveys/types";
 import { SurveyItems } from 'case-editor-tools/surveys';
 import { Expression, SurveyItem, SurveySingleItem } from "survey-engine/data_types";
-import { ItemConditionable, QuestionType } from "../types/item";
+import { isConditionable, ItemConditionable, QuestionType } from "../types/item";
 import { ClientExpression } from "./expressions";
 
 export type ItemBuilder = Item | Group;
@@ -24,7 +24,10 @@ export interface ItemProps {
 }
 
 
-export abstract class ItemQuestion extends Item  implements ItemConditionable {
+/**
+ * ItemQuestion enhances Item handling Condition
+ */
+export abstract class ItemQuestion extends Item implements ItemConditionable {
 
     /**
      *
@@ -124,6 +127,41 @@ export abstract class GroupQuestion extends Group implements ItemConditionable {
     }
 }
 
+/**
+ * Base implementation of a simple groups, as a collection of items
+ */
+export class SimpleGroupQuestion extends GroupQuestion {
+
+    innerItems: Item[]
+
+    constructor(props: GroupProps, defaultKey: string) {
+        super(props, defaultKey);
+        this.innerItems = [];
+    }
+
+    buildGroup(): void {
+        this.innerItems.forEach(i => {
+            this.addItem(i.get());
+        });
+    }
+
+    add(items: Item|Item[], condition?: Expression) {
+        if(!Array.isArray(items)) {
+          items = [items];
+        }
+        if(condition) {
+            items.forEach(i => {
+                if(isConditionable(i)) {
+                    i.setCondition(condition);
+                }
+            });
+        }
+        this.innerItems.push(...items);
+    }
+
+
+}
+
 type HelpGroupContentType =  Array<{
     content: Map<string, string>;
     style?: Array<{
@@ -136,7 +174,9 @@ type HelpGroupContentType =  Array<{
 export type BaseQuestionOptions = Omit<GenericQuestionProps, 'parentKey' | 'itemKey' | 'isRequired' | 'condition'  >;
 
 /**
- * Simple implementation for basic choice based question
+ * Simple implementation for basic choice based question. Provides simple interface to defined core elements
+ * - options to define static options (text, top/bottomDisplayComponents )
+ * - methods for helpgroup and response list (to be overrideable at runtime)
  */
 export abstract class BaseChoiceQuestion extends ItemQuestion {
 

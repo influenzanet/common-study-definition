@@ -1,5 +1,5 @@
 import { Item, SurveyDefinition, SurveyProps } from "case-editor-tools/surveys/types";
-import { Expression, isExpression } from "survey-engine/data_types";
+import { Expression, isExpression, Survey } from "survey-engine/data_types";
 import { isConditionable } from "../types/item";
 import { ItemBuilder } from "./items";
 
@@ -12,6 +12,10 @@ interface SurveyMetadata {
     [key:string]: string;
 }
 
+/**
+ * SurveyBuilder is a base class to create a Survey.
+ * It enhances SurveyDefinition (provided by case-editor-tools)
+ */
 export class SurveyBuilder extends SurveyDefinition {
 
     items: ItemBuilder[];
@@ -51,4 +55,7 @@ export class SurveyBuilder extends SurveyDefinition {
             this.addItem(item.get());
         }
     }
+
+
 }
+
