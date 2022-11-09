@@ -1,31 +1,24 @@
 import { Expression } from "survey-engine/data_types";
-import { StudyRules } from "case-editor-tools/types/studyRules";
 import { ParticipantFlags as flags  } from "./participantFlags";
 import { WeeklyResponses } from "./responses/weekly";
 import { IntakeResponses } from "./responses/intake";
 import { responseGroupKey } from "case-editor-tools/constants/key-definitions";
 import { SurveyKeys } from "./keys";
-import { StudyRulesSet } from "../../types";
 import { ServerExpression as se } from "../../tools/expressions";
+import { AbstractStudyRulesBuilder } from "../../tools";
 
-export class StudyRulesBuilder {
+
+
+export class StudyRulesBuilder extends AbstractStudyRulesBuilder {
 
     keys: SurveyKeys;
 
-    rules: StudyRulesSet
-
-    created: boolean;
-
     constructor(keys: SurveyKeys) {
+        super();
         this.keys = keys;
-        this.rules = {
-           entry: [],
-           submit: []
-        };
-        this.created = false;
     }
 
-    create() {
+    protected create() {
 
         const assignedSurveys = se.participantActions.assignedSurveys;
 
@@ -135,7 +128,6 @@ export class StudyRulesBuilder {
         this.rules.submit = submitRules;
 
         this.extraRules();
-        this.created = true;
     }
 
     /**
@@ -146,20 +138,4 @@ export class StudyRulesBuilder {
 
     }
 
-    build(): StudyRules {
-
-        if(!this.created) {
-            this.create();
-        }
-
-        /**
-         * STUDY RULES
-         */
-        return new StudyRules(
-            this.rules.entry,
-            this.rules.submit,
-            this.rules.timer,
-            this.rules.merger
-        );
-    }
 }
