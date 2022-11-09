@@ -11,8 +11,8 @@ const ageFlag : AgeFlagDefinition = {
     values: {
         no: 'NC',
         yes: 'C'
-    }
-}
+    } as const
+} as const;
 
 export const ParticipantFlags = {
     isChild:  ageFlag,
@@ -21,15 +21,15 @@ export const ParticipantFlags = {
         values: {
             no: '0',
             yes: '1'
-        }
-    },
+        } as const
+    } as const,
     vaccinationCompleted: {
         key: 'completedVaccSurvey',
         values: {
             no: '0',
             yes: '1'
-        }
-    },
+        } as const
+    } as const,
 
-}
+} as const;
 
