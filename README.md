@@ -13,6 +13,62 @@ Several layers are added to handle specific features
 - For simple choice question (single, multiple) BaseChoiceQuestion can produce simpler code
 - 
 
+## Installation 
+
+Required : Node (16+), Python (if you want to use scripts/)
+
+For a standalone installation 
+
+- clone the repo
+
+
+Install dependencies:
+
+```bash
+ yarn
+```
+
+## Usage
+
+### As Standalone repo
+
+To build the common surveys
+
+
+Build the generator (needed each time the code in typescript has been edited):
+
+```bash
+yarn build
+```
+
+Build the surveys and export them as json files (will be in an /output directory)
+
+```bash
+yarn export
+```
+
+### Usage to create an extra repo
+
+To override the surveys and/or create your own and using the helpers in this repository, you will need to make a link in this repo
+
+Example of setup using nested repo
+
+- Create your repo with an src/ dir
+
+- Clone this repo inside it (in common-study-definition directory for example), you can also use it as submodule (if not add the directory in .gitignore to avoid commiting it)
+
+- Symlink the common-study-definition/src as "src/common" directory
+
+```
+ln -s common-study-definition/src src/common
+```
+
+Then you can have a src/ with the "common" part as a module in your own repo
+
+### Using as package
+
+Not yet but we are working on.
+
 ## Translations
 
 In surveys definitions only an english reference text is provided (this text is not to be used for end users but should be used to drive the translation).
