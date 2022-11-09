@@ -76,6 +76,12 @@ export class LanguageHelpers {
     Object.entries(inputTranslations).forEach((entry)=>{
 
       const key = entry[0];
+
+      // Ignore keys starting with # is a comment
+      if (key.startsWith('#')) {
+        return;
+      }
+
       const trans : Translation = {};
       Object.entries(entry[1] as InputTranslation).forEach((kv) => {
         const text = Array.isArray(kv[1]) ? kv[1].join("\n") : "" + kv[1];
