@@ -8,10 +8,12 @@ This repository uses case-editor-tools to build the survey json using typescript
 
 Several layers are added to handle specific features
 
-- Translations are handled externally from the survey definition and question using the _T() helpers (to be used in place of the text definition)
+- Translations are handled outside from the survey definition and question using the _T() helpers (to be used in place of the text definition), see Translations
 - ItemQuestion, GroupQuestion are used instead of Item & Group class (they inherit from them respectively) to provides extra helpers
+- SurveyBuilder class overload SurveyDefinition 
+- study_exporter() is used to export the study files, it handles translations, generate a file with missing translations, and can check survey consistency (not implemented yet)
 - For simple choice question (single, multiple) BaseChoiceQuestion can produce simpler code
-- 
+- Some extra helpers are available in src/tools (as_option, exp_as_arg, num_as_arg, ...)
 
 ## Installation 
 
@@ -20,7 +22,6 @@ Required : Node (16+), Python (if you want to use scripts/)
 For a standalone installation 
 
 - clone the repo
-
 
 Install dependencies:
 
@@ -33,7 +34,6 @@ Install dependencies:
 ### As Standalone repo
 
 To build the common surveys
-
 
 Build the generator (needed each time the code in typescript has been edited):
 
