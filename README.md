@@ -90,29 +90,27 @@ For security the reference english text must be the same in the translation file
 A translation file is a JSON file containing an JSON object with translation entries.
 The key of each entry is the text id (used in the survey definition) and the content the Translation object.
 
-By convention, this repository has organized translations by language and survey (each translation file only translate to one language), but a translation file can handle any language you want and any keys (it's possible for example to have a file containing all the languages used for a platform in one file if it's simpler for you).
+By convention, this repository has organized translations by language and survey (each translation file only translate to one language).
 
-Proposed translation files are here mixing language and platform (country and implementation of the platform's specificities like the name of the platform). They are provided as example and they will probably need to be overridden to be useable for another platform.
+Proposed translation files in this repo are mixing language and platform concerns (country and implementation of the platform's specificities like the name of the platform are used in the translated text). They are provided as example and they will probably need to be overridden to be useable for another platform.
 
 Each translation entry, has the language code as key. If a language code is starting with '#' if will be ignored ()
 
 The reference text is always using the "**en**" language code, and is mandatory for each entry.
 
-Languages codes are arbitrary identifier, but they must be the same identifiers used in the platform as language identifiers (it's advised to use codes like iso language code or IETF inspired coding, like "en-uk").
+Languages codes are arbitrary identifier, but they must be the same identifiers used in the platform (web sites, templates,...) as language identifiers (it's advised to use codes like iso language code or IETF inspired coding, like "en-uk").
 
-Here a translation with languages "fr", "it"
+Here a translation with language to "fr" language
 ```js
 {
    "survey.Qxx.my.text.ref": {
         "en": "English reference text",
         "fr": "Un texte",
-        "it": "Un testo"
         "#": "A comment targeting the translator"
    },
    "survey.Qxx.another.text": {
         "en":"Another reference text",
         "fr":"Un autre text",
-        "it":"Un altro testo",
         "#": "A comment"
         "#2": "Another comment"
    }
