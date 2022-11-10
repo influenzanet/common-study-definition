@@ -109,7 +109,7 @@
   },
   "vaccination.HV.Q10c.rg.mcg.option.1": {
     "en": "Vaccination decreases my risk of getting influenza",
-    "fr": "La vaccination diminue mon risque de contracter la grippe"
+    "fr": "La vaccination diminue mes risques de contracter la grippe"
   },
   "vaccination.HV.Q10c.rg.mcg.option.2": {
     "en": "Vaccination decreases the risk of spreading influenza to others",
@@ -145,7 +145,7 @@
   },
   "vaccination.HV.Q10c.rg.mcg.input.10": {
     "en": "Other reason(s)",
-    "fr": "Autres raisons"
+    "fr": "Autre(s) raison(s)"
   },
   "vaccination.HV.Q10c.rg.mcg.description.input.10": {
     "en": "Describe here (optional)",
@@ -161,7 +161,7 @@
   },
   "vaccination.HV.Q10d.helpGroup.text.3": {
     "en": "Tick all those reasons that were important in your decision.",
-    "fr": "Cochez toutes les raisons qui ont influencé votre décision."
+    "fr": "Choisissez toutes les affirmations qui ont comptées pour prendre votre décision."
   },
   "vaccination.HV.Q10d.rg.t2y2.text.0": {
     "en": "Select all options that apply",
@@ -169,7 +169,7 @@
   },
   "vaccination.HV.Q10d.rg.mcg.option.0": {
     "en": "I am planning to be vaccinated, but haven't been yet",
-    "fr": "Je prévois de me faire vacciner mais ne l'ai pas encore fait"
+    "fr": "Je prévois de me faire vacciner, mais ne l'ai pas encore fait"
   },
   "vaccination.HV.Q10d.rg.mcg.option.1": {
     "en": "I haven't been offered the vaccine",
@@ -193,19 +193,19 @@
   },
   "vaccination.HV.Q10d.rg.mcg.option.6": {
     "en": "I don't think I am likely to get influenza",
-    "fr": "Je ne pense pas être susceptible de contracter la grippe"
+    "fr": "Je ne pense pas que je sois susceptible de contracter la grippe"
   },
   "vaccination.HV.Q10d.rg.mcg.option.7": {
     "en": "I believe that influenza vaccine can cause influenza",
-    "fr": "Je crois que le vaccin antigrippal peut causer la grippe"
+    "fr": "Je pense que le vaccin contre la grippe peut causer la grippe"
   },
   "vaccination.HV.Q10d.rg.mcg.option.8": {
     "en": "I am worried that the vaccine is not safe or will cause illness or other adverse events",
-    "fr": "Je pense que le vaccin n'est pas sûr ou qu'il peut causer d'autres maladies ou effets indésirables"
+    "fr": "Je crains que le vaccin ne soit pas sûr ou cause une maladie ou d'autres évènements indésirables"
   },
   "vaccination.HV.Q10d.rg.mcg.option.9": {
     "en": "I don't like having vaccinations",
-    "fr": "Je n'aime pas me faire vacciner"
+    "fr": "Je n'aime pas recevoir de vaccins"
   },
   "vaccination.HV.Q10d.rg.mcg.option.10": {
     "en": "The vaccine is not readily available to me",
@@ -217,11 +217,11 @@
   },
   "vaccination.HV.Q10d.rg.mcg.option.12": {
     "en": "No particular reason",
-    "fr": "Aucune raison particulière"
+    "fr": "Je ne sais pas"
   },
   "vaccination.HV.Q10d.rg.mcg.option.13": {
     "en": "Although my doctor recommend a vaccine, I do not get one",
-    "fr": " Bien que mon médecin me l'ait recommandé, je ne me suis pas fait vacciner"
+    "fr": "La vaccination m'a été recommandée par mon médecin, mais je ne me suis pas fait vacciner"
   },
   "vaccination.HV.Q10d.rg.mcg.input.14": {
     "en": "Other reason(s)",
@@ -229,7 +229,7 @@
   },
   "vaccination.HV.Q10d.rg.mcg.description.input.14": {
     "en": "Describe here (optional)",
-    "fr": "Précisez-ici"
+    "fr": "Précisez ici (optionnel)"
   },
   "vaccination.HV.Q35.title.0": {
     "en": "Have you received a COVID-19 vaccine?",
@@ -333,11 +333,11 @@
   },
   "vaccination.HV.Q35j.helpGroup.text.1": {
     "en": "Knowing when people are vaccinated tells us how well the vaccination program is being carried out.",
-    "fr": "TODO"
+    "fr": "Connaître la date de vaccination permet de savoir comment le programme de vaccination est appliqué."
   },
   "vaccination.HV.Q35j.helpGroup.text.3": {
     "en": "Please try and answer as accurately as possible. If you do not know the precise date, please give your best estimate of the month and year of vaccination.",
-    "fr": "Répondez s'il vous plait de manière aussi précise que possible. Si vous ne connaissez pas la date précise, indiquez votre estimation du mois et l'année estimées la plus proche"
+    "fr": "Merci de répondre de façon aussi précise que possible. Si vous ne connaissez pas la date exacte, merci de donner la meilleure estimation possible. Par exemple, vous pouvez vous rappeler du mois. Essayez alors de vous souvenir si c'était plutôt au début ou à la fin du mois. Peut-être certains évènements (des vacances, un anniversaire) peuvent-ils vous aider à préciser la date ?"
   },
   "vaccination.HV.Q35j.rg.scg.dateInput.0": {
     "en": "Choose date",
@@ -493,7 +493,7 @@
   },
   "vaccination.HV.Q35m.title.0": {
     "en": "What were your reasons for NOT getting a COVID-19 vaccination? Select the options that are most applicable.",
-    "fr": "Pourquoi n’avez-vous pas été vacciné contre la COVID-19 ? (Sélectionnez toutes les options qui s'appliquent)"
+    "fr": "Quelles sont les raisons actuelles pour lesquelles vous ne vous faites pas vacciner contre la COVID-19 ? (Sélectionnez toutes les options qui s'appliquent)"
   },
   "vaccination.HV.Q35m.helpGroup.text.1": {
     "en": "We would like to know the main reasons why people are declining COVID-19 vaccination.",
@@ -501,7 +501,7 @@
   },
   "vaccination.HV.Q35m.helpGroup.text.3": {
     "en": "Please select the options that mattered to take your decision.",
-    "fr": "TODO"
+    "fr": "Choisissez toutes les options qui ont comptées pour prendre votre décision."
   },
   "vaccination.HV.Q35m.rg.nm76.text.0": {
     "en": "Select all options that apply",
