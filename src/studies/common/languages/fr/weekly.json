@@ -5,7 +5,7 @@
   },
   "weekly.description.0": {
     "en": "Please also report if you had no complaints.",
-    "fr": "Ce questionnaire a pour but de nous informer de vos symptômes y compris si vous n'en aavez aucun"
+    "fr": "Ce questionnaire a pour but de nous informer de vos symptômes, y compris si vous n'en avez pas."
   },
   "weekly.typicalDuration.0": {
     "en": "Duration 1-5 minutes",
@@ -17,7 +17,7 @@
   },
   "weekly.Q1.helpGroup.text.1": {
     "en": "The most important part of this study is about following up on the symptoms you have reported.",
-    "fr": "Le but principal de ce questionnaire est de suivre les symptômes des participants. Merci de déclarer vos symptômes, même si vous pensez qu'ils ne sont pas dus à la grippe."
+    "fr": "Le but principal de ce questionnaire est de suivre les symptômes des participants. Merci de déclarer vos symptômes, même si vous pensez qu'ils ne sont pas dus à la grippe ou à la COVID-19."
   },
   "weekly.Q1.helpGroup.text.3": {
     "en": "If you suffer from chronic illness, only indicate symptoms that have changed. For example, if you experience chronic shortness of breath, only mark this symptom if it has recently gotten worse. Multiple answers possible.",
@@ -65,7 +65,7 @@
   },
   "weekly.Q1.rg.mcg.option.9": {
     "en": "Muscle/joint pain",
-    "fr": "Douleurs musculaires\/articulaires"
+    "fr": "Douleurs musculaires/articulaires"
   },
   "weekly.Q1.rg.mcg.option.10": {
     "en": "Chest pain",
@@ -133,7 +133,7 @@
   },
   "weekly.HS.Q2.helpGroup.text.3": {
     "en": "If you think that the complaints you are indicating today are caused by the same infection or the same problem (the same period during which you experienced the complaints), answer 'yes'.",
-    "fr": "Si vous pensez que les symptômes que vous rapportez aujourd’hui sont causés par la même maladie que la fois précédente, cochez « oui »."
+    "fr": "Si vous pensez que les symptômes que vous rapportez aujourd’hui sont causés par la même maladie que la fois précédente, cochez « Oui »."
   },
   "weekly.HS.Q2.rg.scg.option.0": {
     "en": "Yes",
@@ -145,7 +145,7 @@
   },
   "weekly.HS.Q2.rg.scg.option.2": {
     "en": "I don’t know/can’t remember",
-    "fr": "Je ne sais pas / je ne m'en souviens plus"
+    "fr": "Je ne sais pas / ne me souviens pas"
   },
   "weekly.HS.Q2.rg.scg.option.3": {
     "en": "This does not apply to me",
@@ -205,7 +205,7 @@
   },
   "weekly.HS.Q3.helpGroup.text.3": {
     "en": "Answer as precisely as possible.",
-    "fr": "Donnez une estimation aussi précise que possible."
+    "fr": "Donnez s'il vous plaît une estimation aussi précise que possible."
   },
   "weekly.HS.Q3.rg.scg.dateInput.0": {
     "en": "Choose date",
@@ -213,7 +213,7 @@
   },
   "weekly.HS.Q3.rg.scg.option.1": {
     "en": "I don't know/can't remember",
-    "fr": "Je ne sais pas / je ne m'en souviens plus"
+    "fr": "Je ne sais pas / ne me souviens pas"
   },
   "weekly.HS.Q4.title.0": {
     "en": "When did your symptoms end?",
@@ -225,7 +225,7 @@
   },
   "weekly.HS.Q4.helpGroup.text.3": {
     "en": "Answer as precisely as possible.",
-    "fr": "Donnez une estimation aussi précise que possible"
+    "fr": "Donnez s'il vous plaît une estimation aussi précise que possible."
   },
   "weekly.HS.Q4.rg.scg.dateInput.0": {
     "en": "Choose date",
@@ -233,7 +233,7 @@
   },
   "weekly.HS.Q4.rg.scg.option.1": {
     "en": "I don't know/can't remember",
-    "fr": "Je ne sais pas / je ne m'en souviens plus"
+    "fr": "Je ne sais pas / ne me souviens pas"
   },
   "weekly.HS.Q4.rg.scg.option.2": {
     "en": "I am still ill",
@@ -249,7 +249,7 @@
   },
   "weekly.HS.Q5.helpGroup.text.3": {
     "en": "Answer “yes” if your symptoms appeared within a few hours, and not gradually over a period of several days.",
-    "fr": "Cochez oui si les symptômes se sont développés sur quelques heures, et non sur quelques jours."
+    "fr": "Cochez “oui“ si les symptômes se sont développés sur quelques heures, et non sur quelques jours."
   },
   "weekly.HS.Q5.rg.scg.option.0": {
     "en": "Yes",
@@ -261,7 +261,7 @@
   },
   "weekly.HS.Q5.rg.scg.option.2": {
     "en": "I don’t know/can’t remember",
-    "fr": "Je ne sais pas / je ne m'en souviens plus"
+    "fr": "Je ne sais pas / ne me souviens pas"
   },
   "weekly.HS.Q6.title.0": {
     "en": "On what day did your fever start? If you do not recall the exact date, please give an approximate date.",
@@ -273,15 +273,15 @@
   },
   "weekly.HS.Q6.helpGroup.text.3": {
     "en": "Answer as precisely as possible.",
-    "fr": "Donnez, s'il vous plaît, une estimation aussi précise que possible."
+    "fr": "Donnez s'il vous plaît une estimation aussi précise que possible."
   },
   "weekly.HS.Q6.rg.scg.dateInput.0": {
     "en": "Choose date",
-    "fr": "Sélectionner la date"
+    "fr": "Choisissez la date"
   },
   "weekly.HS.Q6.rg.scg.option.1": {
     "en": "I don’t know/can’t remember",
-    "fr": "Je ne sais pas / je ne m'en souviens plus"
+    "fr": "Je ne sais pas / ne me souviens pas"
   },
   "weekly.HS.Q6b.title.0": {
     "en": "Did your fever develop suddenly over a few hours?",
@@ -293,7 +293,7 @@
   },
   "weekly.HS.Q6b.helpGroup.text.3": {
     "en": "Answer “yes” if your symptoms appeared within a few hours, and not gradually over a period of several days.",
-    "fr": "Cochez «oui» si votre fièvre est apparue en quelques heures plutôt que progressivement sur quelques jours."
+    "fr": "Cochez «oui» si votre fièvre est apparue en quelques heures, et non sur quelques jours."
   },
   "weekly.HS.Q6b.rg.scg.option.0": {
     "en": "Yes",
@@ -305,7 +305,7 @@
   },
   "weekly.HS.Q6b.rg.scg.option.2": {
     "en": "I don’t know/can’t remember",
-    "fr": "Je ne sais pas"
+    "fr": "Je ne sais pas / ne me souviens pas"
   },
   "weekly.HS.Q6c.title.0": {
     "en": "Did you take your temperature?",
@@ -317,7 +317,7 @@
   },
   "weekly.HS.Q6c.helpGroup.text.3": {
     "en": "Answer yes, if you took your temperature using a thermometer.",
-    "fr": "Répondez oui si vous avez mesuré votre température à l’aide d’un thermomètre."
+    "fr": "Répondez “oui“ si vous avez mesuré votre température à l’aide d’un thermomètre."
   },
   "weekly.HS.Q6c.rg.scg.option.0": {
     "en": "Yes",
@@ -369,15 +369,15 @@
   },
   "weekly.HS.Q6d.rg.scg.option.6": {
     "en": "I don't know/can't remember",
-    "fr": "Je ne sais pas / je ne m'en souviens plus"
+    "fr": "Je ne sais pas / ne me souviens pas"
   },
   "weekly.HS.Q36.title.0": {
     "en": "Thank you for all these information. They will help us to estimate the frequency of symptoms among general population. You can stop here. If you have a little more time, we propose you to answer further questions about your symptoms and care. Do you accept to answer to these additional questions?",
-    "fr": "Merci pour les informations que vous nous avez fournies. Elles vont nous permettre d’estimer la fréquence des différents symptômes dans la population. Vous pouvez vous arrêter là. S’il vous reste un peu de temps, nous vous proposons de répondre à des questions complémentaires sur vos symptômes et leur prise en charge. Acceptez-vous des répondre à ces questions complémentaires ?"
+    "fr": "Merci pour les informations que vous nous avez fournies. Elles vont nous permettre d’estimer la fréquence des différents symptômes dans la population. Vous pouvez vous arrêter là. S’il vous reste un peu de temps, nous vous proposons de répondre à des questions complémentaires sur vos symptômes et leur prise en charge. Acceptez-vous de répondre à ces questions complémentaires ?"
   },
   "weekly.HS.Q36.helpGroup.text.1": {
     "en": "We want to know if you are willing to answer the follow-up questions. Your answers to the follow-up questions may assist our research.",
-    "fr": "Nous souhaitons savoir si vous souhaitez répondre à des questions complémentaires qui nous aident à étudier plus avant certains facteurs liés aux infections respiratoires comme les comportements de recours aux soins."
+    "fr": "Nous souhaitons savoir si vous souhaitez répondre à des questions complémentaires qui nous aident à étudier plus précisément certains facteurs liés aux infections respiratoires comme les comportements de recours aux soins."
   },
   "weekly.HS.Q36.rg.scg.option.0": {
     "en": "Yes",
@@ -401,7 +401,7 @@
   },
   "weekly.EX.Q7.rg.mcg.option.0": {
     "en": "No",
-    "fr": "Non"
+    "fr": "Non, aucun"
   },
   "weekly.EX.Q7.rg.mcg.option.1": {
     "en": "GP or GP's practice nurse",
@@ -413,7 +413,7 @@
   },
   "weekly.EX.Q7.rg.mcg.option.3": {
     "en": "Hospital accident & emergency department / out of hours service",
-    "fr": "Urgences hospitalières\/service de garde\/SOS Médecins"
+    "fr": "Urgences hospitalières/service de garde/SOS Médecins"
   },
   "weekly.EX.Q7.rg.mcg.option.4": {
     "en": "Other medical services",
@@ -421,7 +421,7 @@
   },
   "weekly.EX.Q7.rg.mcg.option.5": {
     "en": "No, but I have an appointment scheduled",
-    "fr": "Non, mais j'ai rendez-vous prochainement"
+    "fr": "Non, mais j'ai un rendez-vous prochainement"
   },
   "weekly.EX.Q7b.title.0": {
     "en": "How soon after your symptoms appeared did you first VISIT this medical service?",
@@ -453,7 +453,7 @@
   },
   "weekly.EX.Q7b.rg.mat.r1.col1.option.1": {
     "en": "1 day",
-    "fr": "1 jour"
+    "fr": "1 jour après"
   },
   "weekly.EX.Q7b.rg.mat.r1.col1.option.2": {
     "en": "2 days",
@@ -473,23 +473,23 @@
   },
   "weekly.EX.Q7b.rg.mat.r1.col1.option.6": {
     "en": "More than 7 days",
-    "fr": "Plus de 7 jours"
+    "fr": "Plus de 7 jours après"
   },
   "weekly.EX.Q7b.rg.mat.r1.col1.option.7": {
     "en": "I don't know/can't remember",
-    "fr": "Je ne sais pas / je ne m'en souviens plus"
+    "fr": "Je ne sais pas / ne me souviens pas"
   },
   "weekly.EX.Q7b.rg.mat.r2.col0.label.0": {
     "en": "Hospital accident & department/out of hours service",
-    "fr": "Urgences hospitalières\/service de garde\/SOS Médecins"
+    "fr": "Urgences hospitalières/service de garde/SOS Médecins"
   },
   "weekly.EX.Q7b.rg.mat.r2.col1.option.0": {
     "en": "Same day",
-    "fr": "Jour même"
+    "fr": "Le jour même"
   },
   "weekly.EX.Q7b.rg.mat.r2.col1.option.1": {
     "en": "1 day",
-    "fr": "1 jour"
+    "fr": "1 jour après"
   },
   "weekly.EX.Q7b.rg.mat.r2.col1.option.2": {
     "en": "2 days",
@@ -509,11 +509,11 @@
   },
   "weekly.EX.Q7b.rg.mat.r2.col1.option.6": {
     "en": "More than 7 days",
-    "fr": "Plus de 7 jours"
+    "fr": "Plus de 7 jours après"
   },
   "weekly.EX.Q7b.rg.mat.r2.col1.option.7": {
     "en": "I don't know/can't remember",
-    "fr": "Je ne sais pas / je ne m'en souviens plus"
+    "fr": "Je ne sais pas / ne me souviens pas"
   },
   "weekly.EX.Q7b.rg.mat.r3.col0.label.0": {
     "en": "Hospital admission",
@@ -521,11 +521,11 @@
   },
   "weekly.EX.Q7b.rg.mat.r3.col1.option.0": {
     "en": "Same day",
-    "fr": "Jour même"
+    "fr": "Le jour même"
   },
   "weekly.EX.Q7b.rg.mat.r3.col1.option.1": {
     "en": "1 day",
-    "fr": "1 jour"
+    "fr": "1 jour après"
   },
   "weekly.EX.Q7b.rg.mat.r3.col1.option.2": {
     "en": "2 days",
@@ -545,11 +545,11 @@
   },
   "weekly.EX.Q7b.rg.mat.r3.col1.option.6": {
     "en": "More than 7 days",
-    "fr": "Plus de 7 jours"
+    "fr": "Plus de 7 jours après"
   },
   "weekly.EX.Q7b.rg.mat.r3.col1.option.7": {
     "en": "I don't know/can't remember",
-    "fr": "Je ne sais pas / je ne m'en souviens plus"
+    "fr": "Je ne sais pas / ne me souviens pas"
   },
   "weekly.EX.Q7b.rg.mat.r4.col0.label.0": {
     "en": "Other medical services",
@@ -557,11 +557,11 @@
   },
   "weekly.EX.Q7b.rg.mat.r4.col1.option.0": {
     "en": "Same day",
-    "fr": "Jour même"
+    "fr": "Le jour même"
   },
   "weekly.EX.Q7b.rg.mat.r4.col1.option.1": {
     "en": "1 day",
-    "fr": "1 jour"
+    "fr": "1 jour après"
   },
   "weekly.EX.Q7b.rg.mat.r4.col1.option.2": {
     "en": "2 days",
@@ -581,11 +581,11 @@
   },
   "weekly.EX.Q7b.rg.mat.r4.col1.option.6": {
     "en": "More than 7 days",
-    "fr": "Plus de 7 jours"
+    "fr": "Plus de 7 jours après"
   },
   "weekly.EX.Q7b.rg.mat.r4.col1.option.7": {
     "en": "I don't know/can't remember",
-    "fr": "Je ne sais pas / je ne m'en souviens plus"
+    "fr": "Je ne sais pas / ne me souviens pas"
   },
   "weekly.EX.Qcov18.title.0": {
     "en": "What is the main reason for which you did not consult any health professional for the symptoms you declared today?",
@@ -593,7 +593,7 @@
   },
   "weekly.EX.Qcov18.helpGroup.text.1": {
     "en": "To understand why some people do not consult a doctor.",
-    "fr": "Ces informations nous aident à mieux comprendre le comportement de recours ou de non recours aux soins et à interpréter ce que l'on observe dans Grippenet par rapport aux autres systèmes de surveillance"
+    "fr": "Ces informations nous aident à mieux comprendre le comportement de recours ou de non recours aux soins et à interpréter ce que l'on observe dans GrippeNet.fr/COVIDnet.fr par rapport aux autres systèmes de surveillance."
   },
   "weekly.EX.Qcov18.rg.scg.option.0": {
     "en": "My symptoms appeared very recently",
@@ -645,7 +645,7 @@
   },
   "weekly.EX.Qcov18.rg.scg.option.11": {
     "en": "I don't know / I don't want to answer",
-    "fr": "Je ne sais\/ne souhaite pas répondre"
+    "fr": "Je ne sais/ne souhaite pas répondre"
   },
   "weekly.EX.Qcov16h.title.0": {
     "en": "Because of your symptoms, did you undergo a test/analyses to know if you have COVID-19?",
@@ -653,7 +653,7 @@
   },
   "weekly.EX.Qcov16h.helpGroup.text.1": {
     "en": "We want to know which complaints lead people to get tested for the coronavirus.",
-    "fr": "Nous souhaitons étudier quels situations (associations de symptômes par exemple) motivent la réalisation d'un test"
+    "fr": "Nous souhaitons étudier quelles situations (symptômes par exemple) motivent la réalisation d'un test."
   },
   "weekly.EX.Qcov16h.rg.scg.option.0": {
     "en": "Yes",
@@ -677,7 +677,7 @@
   },
   "weekly.EX.Qcov16i.helpGroup.text.1": {
     "en": "We are interested in knowing how many people with symptoms have udergone a test",
-    "fr": "Nous souhaitons connaître combien de personnes vont faire un test en cas de symptômes"
+    "fr": "Nous souhaitons connaître combien de personnes vont faire un test en cas de symptômes."
   },
   "weekly.EX.Qcov16i.rg.mcg.option.0": {
     "en": "A PCR test (virus search, on a swab in nose or mouth, or a sputum or saliva sample)",
@@ -689,27 +689,27 @@
   },
   "weekly.EX.Qcov16i.rg.mcg.option.2": {
     "en": "A rapid antigen detection test on a sample realized in the back of the nose (nasopharyngeal sampling, done by a health professional or a trained person, with a swab inserted to 15 cm into the nose, result obtained in less than one hour)",
-    "fr": "Un test antigénique rapide réalisé sur un prélèvement au fond du nez (prélèvement nasopharyngé réalisé par un professionnel de santé ou du personnel ayant reçu une formation adaptée, avec un écouvillon qui s’insère jusqu’à 15 cm dans le nez, résultat obtenu en moins d’une heure)"
+    "fr": "Un test antigénique rapide réalisé par un professionnel"
   },
   "weekly.EX.Qcov16i.rg.mcg.option.3": {
     "en": "A rapid antigen detection test or autotest done on a nasal sample (a swab inserted to 1 - 4 cm into the nostril, sampling that can be done by oneself, result obtained in a few minutes)",
-    "fr": "Un test antigénique rapide ou autotest réalisé sur un prélèvement nasal (écouvillon inséré de 1 à 4 cm dans la narine, prélèvement pouvant être fait soi-même, résultat disponible en quelques minutes)"
+    "fr": "Un test antigénique rapide ou autotest réalisé soi-même"
   },
   "weekly.EX.Qcov16b.title.0": {
     "en": "Do you know the result of your PCR test? (if several were performed and at least one was positive, chose the “Positive” answer)",
-    "fr": "Avez-vous déjà reçu le résultat de ce test PCR ?"
+    "fr": "Avez-vous déjà reçu le résultat de ce test PCR ? (Si vous en avez réalisé plusieurs et que vous en avez obtenu au moins un positif, choisissez la réponse “positif“.)"
   },
   "weekly.EX.Qcov16b.helpGroup.text.1": {
     "en": "We want to understand how the coronavirus is spreading within the population.",
-    "fr": "TODO"
+    "fr": "Nous souhaitons comprendre comment le virus de la COVID-19 se diffuse dans la population."
   },
   "weekly.EX.Qcov16b.rg.scg.option.0": {
     "en": "Yes, positive for COVID-19",
-    "fr": "Oui, Positif pour la COVID-19"
+    "fr": "Oui, positif pour la COVID-19"
   },
   "weekly.EX.Qcov16b.rg.scg.option.1": {
     "en": "Yes, negative for COVID-19",
-    "fr": "Oui, Négatif pour la COVID-19"
+    "fr": "Oui, négatif pour la COVID-19"
   },
   "weekly.EX.Qcov16b.rg.scg.option.2": {
     "en": "Yes, the results are inconclusive",
@@ -721,19 +721,19 @@
   },
   "weekly.EX.Qcov16f.title.0": {
     "en": "Do you know the result of this rapid antigen detection test on nasopharyngeal sample? (if several were performed and at least one was positive, chose the “Positive” answer)",
-    "fr": "Connaissez-vous le résultat de ce test antigénique rapide sur prélèvement nasopharyngé ? (si vous en avez réalisé plusieurs et que vous en avez obtenu au moins un positif, choisissez la réponse « positif »)"
+    "fr": "Connaissez-vous le résultat de ce test antigénique rapide sur prélèvement nasopharyngé ? (Si vous en avez réalisé plusieurs et que vous en avez obtenu au moins un positif, choisissez la réponse « positif ».)"
   },
   "weekly.EX.Qcov16f.helpGroup.text.1": {
     "en": "We want to understand how the coronavirus is spreading within the population.",
-    "fr": "Nous souhaitons comprendre comment le virus du Covid-19 se diffuse dans la population."
+    "fr": "Nous souhaitons comprendre comment le virus de la COVID-19 se diffuse dans la population."
   },
   "weekly.EX.Qcov16f.rg.scg.option.0": {
     "en": "Yes, positive for COVID-19",
-    "fr": "Oui, Positif pour la COVID-19"
+    "fr": "Oui, positif pour la COVID-19"
   },
   "weekly.EX.Qcov16f.rg.scg.option.1": {
     "en": "Yes, negative for COVID-19",
-    "fr": "Oui, Négatif pour la COVID-19"
+    "fr": "Oui, négatif pour la COVID-19"
   },
   "weekly.EX.Qcov16f.rg.scg.option.2": {
     "en": "Yes, the results are inconclusive",
@@ -741,23 +741,23 @@
   },
   "weekly.EX.Qcov16f.rg.scg.option.3": {
     "en": "I don't know/can't remember",
-    "fr": "Non, je ne sais pas ou ne me souviens pas"
+    "fr": "Non, je ne sais pas / ne me souviens pas"
   },
   "weekly.EX.Qcov16k.title.0": {
     "en": "Do you know the result of this antigenic test or self-test on nasal sample? (if several were performed and at least one was positive, chose the “Positive” answer)",
-    "fr": "Connaissez-vous le résultat de ce test antigénique rapide ou autotest sur prélèvement nasal ? (si vous en avez réalisé plusieurs et que vous en avez obtenu au moins un positif, choisissez la réponse « positif »)"
+    "fr": "Connaissez-vous le résultat de ce test antigénique rapide ou autotest sur prélèvement nasal ? (Si vous en avez réalisé plusieurs et que vous en avez obtenu au moins un positif, choisissez la réponse « positif ».)"
   },
   "weekly.EX.Qcov16k.helpGroup.text.1": {
     "en": "We want to understand how the coronavirus is spreading within the population.",
-    "fr": "Nous souhaitons comprendre comment le virus du Covid-19 se diffuse dans la population."
+    "fr": "Nous souhaitons comprendre comment le virus de la COVID-19 se diffuse dans la population."
   },
   "weekly.EX.Qcov16k.rg.scg.option.0": {
     "en": "Yes, positive for COVID-19",
-    "fr": "Oui, Positif pour la COVID-19"
+    "fr": "Oui, positif pour la COVID-19"
   },
   "weekly.EX.Qcov16k.rg.scg.option.1": {
     "en": "Yes, negative for COVID-19",
-    "fr": "Oui, Négatif pour la COVID-19"
+    "fr": "Oui, négatif pour la COVID-19"
   },
   "weekly.EX.Qcov16k.rg.scg.option.2": {
     "en": "Yes, the results are inconclusive",
@@ -765,7 +765,7 @@
   },
   "weekly.EX.Qcov16k.rg.scg.option.3": {
     "en": "I don't know/can't remember",
-    "fr": "Non, je ne sais pas ou ne me souviens pas"
+    "fr": "Non, je ne sais pas / ne me souviens pas"
   },
   "weekly.EX.Qcov19.title.0": {
     "en": "Because of your symptoms, did you undergo a test/analyses to know if you have the Flu?",
@@ -773,7 +773,7 @@
   },
   "weekly.EX.Qcov19.helpGroup.text.1": {
     "en": "We want to know which complaints lead people to get tested for the flu.",
-    "fr": "Nous souhaitons étudier quelles situations (association de symptômes par exemple) motivent la réalisation d'un test pour la grippe"
+    "fr": "Nous souhaitons étudier quelles situations (symptômes par exemple) motivent la réalisation d'un test pour la grippe."
   },
   "weekly.EX.Qcov19.rg.scg.option.0": {
     "en": "Yes, a PCR test based on a swab in nose or mouth, or a sputum or saliva sample",
@@ -805,11 +805,11 @@
   },
   "weekly.EX.Qcov19b.rg.scg.option.0": {
     "en": "Yes, the test is positive for influenza",
-    "fr": "Oui, Positif pour la grippe"
+    "fr": "Oui, positif pour la grippe"
   },
   "weekly.EX.Qcov19b.rg.scg.option.1": {
     "en": "Yes, the test is negative for influenza",
-    "fr": "Oui, Négatif pour la grippe"
+    "fr": "Oui, négatif pour la grippe"
   },
   "weekly.EX.Qcov19b.rg.scg.option.2": {
     "en": "Yes, the results are inconclusive",
@@ -861,11 +861,11 @@
   },
   "weekly.EX.Q9.rg.mcg.option.7": {
     "en": "Other",
-    "fr": "Autre"
+    "fr": "Autres (précisez)"
   },
   "weekly.EX.Q9.rg.mcg.option.8": {
     "en": "I don't know/can't remember",
-    "fr": "Je ne sais pas / je ne m'en souviens plus"
+    "fr": "Je ne sais pas / ne me souviens pas"
   },
   "weekly.EX.Q14.title.0": {
     "en": "Because of your symptoms, were you hospitalized?",
@@ -876,8 +876,8 @@
     "fr": "La COVID-19 et la grippe peuvent se compliquer et nécessiter une hospitalisation. Nous voudrions étudier cela."
   },
   "weekly.EX.Q14.helpGroup.text.2": {
-    "en":"Answer yes only if the hospitalization is related to your current symptoms and not if it was planned before or related to an accident.",
-    "fr":"Ne répondez oui que si votre hospitalisation est liée aux symptômes que vous avez déclarés, et non s’il s’agissait d’une hospitalisation prévue à l’avance, ou consécutive à un accident."
+    "en": "Answer yes only if the hospitalization is related to your current symptoms and not if it was planned before or related to an accident.",
+    "fr": "Ne répondez oui que si votre hospitalisation est liée aux symptômes que vous avez déclarés, et non s’il s’agissait d’une hospitalisation prévue à l’avance, ou consécutive à un accident."
   },
   "weekly.EX.Q14.rg.scg.option.0": {
     "en": "Yes",
@@ -897,7 +897,7 @@
   },
   "weekly.EX.Q10.helpGroup.text.3": {
     "en": "We want to know if you have missed work or school due to your symptoms, or if you have modified your daily routine in any way (for example, if you were unable to engage in sport activities). If you are a student, and were unable to attend online classes due to your symptoms, you should also select option 2. We are interested in changes due to your symptoms/complaints and not due to any quarantine.",
-    "fr": "Nous souhaitons savoir si vous avez manqué le travail ou l’école du fait de votre maladie, ou si vous avez changé vos habitudes de vie d’une autre façon.\nSi vous êtes actuellement en congé maternité, cochez \"non\""
+    "fr": "Nous souhaitons savoir si vous avez manqué le travail ou l’école du fait de votre maladie, ou si vous avez changé vos habitudes de vie d’une autre façon. Si vous êtes actuellement en congé maternité, cochez “non“."
   },
   "weekly.EX.Q10.rg.scg.option.0": {
     "en": "No, I was able to go about my daily activities as usual",
@@ -905,15 +905,15 @@
   },
   "weekly.EX.Q10.rg.scg.option.1": {
     "en": "Yes, but I did not take time off work/school",
-    "fr": "Oui, mais je n'ai pas eu d’arrêt de travail\/d’école"
+    "fr": "Oui, mais je n'ai pas eu d’arrêt de travail/d’école"
   },
   "weekly.EX.Q10.rg.scg.option.2": {
     "en": "Yes, I took time off school or work",
-    "fr": "Oui, et j'ai eu un arrêt de travail\/d’école"
+    "fr": "Oui, et j'ai eu un arrêt de travail/d’école"
   },
   "weekly.EX.Q10b.title.0": {
     "en": "Are you currently still unable to work or attend school due to your symptoms/complaints?",
-    "fr": "Etes-vous toujours en arrêt maladie\/d'école ?"
+    "fr": "Etes-vous toujours en arrêt maladie/d'école ?"
   },
   "weekly.EX.Q10b.helpGroup.text.1": {
     "en": "To determine how the symptoms are impacting your daily life.",
@@ -921,7 +921,7 @@
   },
   "weekly.EX.Q10b.helpGroup.text.3": {
     "en": "Answer 'yes' if you missed work or school today due to certain symptoms.",
-    "fr": "Cochez oui si vous seriez au travail ou à l’école aujourd’hui, si vous n’étiez pas malade."
+    "fr": "Cochez “oui“ si vous seriez au travail ou à l’école aujourd’hui, si vous n’étiez pas malade."
   },
   "weekly.EX.Q10b.rg.scg.option.0": {
     "en": "Yes",
@@ -937,7 +937,7 @@
   },
   "weekly.EX.Q10c.title.0": {
     "en": "For how many days have you been unable to work normally/go to school (when you otherwise would have)?",
-    "fr": "Combien de temps avez-vous été en arrêt maladie\/d’école (si vous êtes toujours en arrêt : depuis combien de temps l’êtes-vous)?"
+    "fr": "Combien de temps avez-vous été en arrêt maladie/d’école (si vous êtes toujours en arrêt : depuis combien de temps l’êtes-vous)?"
   },
   "weekly.EX.Q10c.helpGroup.text.1": {
     "en": "To calculate the number of days a person misses work or school due to certain symptoms.",
@@ -985,7 +985,7 @@
   },
   "weekly.EX.Qcov7.helpGroup.text.1": {
     "en": "To examine how different measures are being followed.",
-    "fr": "Pour étudier le suivi et l'application de ces mesures dans la population et leurs changements au court du temps"
+    "fr": "Pour étudier le suivi et l'application de ces mesures dans la population et leurs changements au cours du temps."
   },
   "weekly.EX.Qcov7.helpGroup.text.3": {
     "en": "For example, 'Avoid shaking hands': Answer 'yes' if you shake hands less or not at all due to your symptoms; Answer 'No, I am not following this measure' if you continue to shake hands despite your symptoms; Answer 'No, I was already following this measure' if you had already stopped shaking hands before the onset of your symptoms and you did not change this behaviour.",
@@ -1037,9 +1037,8 @@
   },
   "weekly.EX.Qcov7.rg.ioJs.text.13": {
     "en": "Stop greeting by hugging and/or kissing on both cheeks",
-    "fr": "Eviter de faire la bise et\/ou serrer les gens dans vos bras"
+    "fr": "Eviter de faire la bise et/ou serrer les gens dans vos bras"
   },
-
   "weekly.EX.Qcov7.rg.ujsK.text.15": {
     "en": "Limit your use of public transport",
     "fr": "Limiter votre utilisation des transports en commun"
@@ -1066,7 +1065,7 @@
   },
   "weekly.EX.Qcov7.rg.isolate_at_home": {
     "en": "Isolate from people living in your home",
-    "fr":"Vous isoler des personnes qui vivent au même domicile que vous"
+    "fr": "Vous isoler des personnes qui vivent au même domicile que vous"
   },
   "weekly.EX.Qcov7.rg.QSBP.text.27": {
     "en": "Avoid seeing friends and family",
@@ -1090,7 +1089,7 @@
   },
   "weekly.EX.Q11.helpGroup.text.3": {
     "en": "If you are reasonably sure of the cause of your symptoms, select the appropriate box. Otherwise, select 'No, I Don’t know'.",
-    "fr": "Si vous êtes raisonnablement sûr de ce qui a causé vos symptômes, cochez la case appropriée. Sinon,  cochez « Je ne sais pas »."
+    "fr": "Si vous êtes raisonnablement sûr de ce qui a causé vos symptômes, cochez la case appropriée. Sinon, cochez « Je ne sais pas »."
   },
   "weekly.EX.Q11.rg.scg.option.0": {
     "en": "Flu or flu-like illness",
@@ -1106,7 +1105,7 @@
   },
   "weekly.EX.Q11.rg.scg.option.3": {
     "en": "Allergy/hay fever",
-    "fr": "Allergie\/rhume des foins"
+    "fr": "Allergie/rhume des foins"
   },
   "weekly.EX.Q11.rg.scg.option.4": {
     "en": "Ashtma",
@@ -1114,7 +1113,7 @@
   },
   "weekly.EX.Q11.rg.scg.option.5": {
     "en": "Gastroenteritis complaints or gastric flu",
-    "fr": "Gastro-entérite\/grippe intestinale"
+    "fr": "Gastro-entérite/grippe intestinale"
   },
   "weekly.EX.Q11.rg.scg.option.6": {
     "en": "Other",

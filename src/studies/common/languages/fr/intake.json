@@ -1,15 +1,15 @@
 {
   "intake.name.0": {
     "en": "Intake questionnaire",
-    "fr": ""
+    "fr": "Questionnaire préliminaire"
   },
   "intake.description.0": {
     "en": "The purpose of the background questionnaire is to find out a little more about each user.",
-    "fr": "TODO"
+    "fr": "Le but de ce questionnaire est de connaître le profil des participants"
   },
   "intake.typicalDuration.0": {
     "en": "Duration 5-10 minutes",
-    "fr": "TODO"
+    "fr": "Environ 5 à 10 minutes"
   },
   "intake.Q1.title.0": {
     "en": "What is your gender?",
@@ -290,6 +290,10 @@
   "intake.Q6.helpGroup.text.1": {
     "en": "Members of larger households, or those with children, may more likely get infected than the others.",
     "fr": "Les personnes qui habitent dans un foyer de grande taille, ou celles qui ont des enfants, ont plus de risque d’attraper une infection respiratoire comme la grippe ou la COVID-19 que les autres."
+  },
+  "intake.Q6.helpGroup.answer_tip": {
+    "en": "Answer tip",
+    "fr": "_TODO_"
   },
   "intake.Q6.rg.mat.row0.l.label.0": {
     "en": "0 - 4 years",
@@ -666,6 +670,10 @@
   "intake.Q17.rg.mcg.option.6": {
     "en": "Other",
     "fr": "Autre (préciser)"
+  },
+  "intake.Q17.helpGroup.text.answer_tip": {
+    "en": "Answer tip",
+    "fr": "_TODO_"
   },
   "intake.surveyEnd.title.0": {
     "en": "Thank you! This was all for now, please submit (push « send ») your responses. Please come back or continue reporting symptoms you experience during the last week.",
