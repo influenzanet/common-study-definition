@@ -15,6 +15,7 @@ import { ClientExpression as client } from "../../../tools/expressions";
 import { as_option } from "../../../tools/options";
 import { Expression } from "survey-engine/data_types";
 import { textComponent } from "../../../compat";
+import { trans_text } from "../../../tools";
 
 interface GenderProps extends ItemProps {
     useOther?:boolean
@@ -665,7 +666,8 @@ export class PeopleMet extends ItemQuestion {
 }
 
 interface AgeGroupsProps extends ItemProps {
-    useAlone?: boolean;
+    useAlone?: boolean; // Add "I live alone option before the other"
+    useAnswerTip?: boolean; // Add How answer section in HelpGroup
 }
 
 
@@ -676,19 +678,26 @@ interface AgeGroupsProps extends ItemProps {
 export class AgeGroups extends ItemQuestion {
 
     useAlone: boolean;
+    useAnswerTip: boolean;
 
     constructor(props: AgeGroupsProps) {
         super(props, 'Q6');
         this.useAlone = props.useAlone ?? false;
+        this.useAnswerTip = props.useAnswerTip ?? false;
     }
 
     getHelpGroupContent() {
-        return [
+        const g = [
             text_why_asking("intake.Q6.helpGroup.text.0"),
             {
                 content: _T("intake.Q6.helpGroup.text.1", "Members of larger households, or those with children, may more likely get infected than the others."),
             },
         ];
+        if(this.useAnswerTip) {
+            g.push(text_how_answer("intake.Q6.helpGroup.how_answer"));
+            g.push(trans_text("intake.Q6.helpGroup.answer_tip","Answer tip"));
+        }
+        return g;
     }
 
     buildItem() {
@@ -1222,10 +1231,6 @@ export class RegularMedication extends ItemQuestion {
             }
         ]
     }
-}
-
-function exprIsFemale(keyQGender: string) {
-    return expWithArgs('responseHasKeysAny', keyQGender, singleChoicePrefix, ResponseEncoding.gender.female)
 }
 
 function exprPregnancyCondition(keyQGender: string, keyQBirthday: string ) {
