@@ -1233,6 +1233,10 @@ export class RegularMedication extends ItemQuestion {
     }
 }
 
+function exprIsFemale(keyQGender: string) {
+    return expWithArgs('responseHasKeysAny', keyQGender, singleChoicePrefix, ResponseEncoding.gender.female)
+}
+
 function exprPregnancyCondition(keyQGender: string, keyQBirthday: string ) {
 
     return expWithArgs('and',
