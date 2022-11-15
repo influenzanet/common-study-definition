@@ -1635,14 +1635,19 @@ export class HomeophaticMedicine extends ItemQuestion {
     }
 }
 
+interface FindOutAboutPlatformProps extends ItemProps {
+    useAnswerTip?: boolean;
+}
 
 /**
  * Find out about Platform: multiple choice question about where the participant found out about the platform
  */
 export class FindOutAboutPlatform extends ItemQuestion {
 
-    constructor(props: ItemProps) {
+    useAnswerTip: boolean;
+    constructor(props: FindOutAboutPlatformProps) {
         super(props, 'Q17');
+        this.useAnswerTip = props.useAnswerTip ?? false;
     }
 
     buildItem() {
@@ -1697,12 +1702,20 @@ export class FindOutAboutPlatform extends ItemQuestion {
     }
 
     getHelpGroupContent() {
-        return [
+        const g = [
             text_why_asking("intake.Q17.helpGroup.text.0"),
             {
                 content: _T("intake.Q17.helpGroup.text.1", "We would like to know how you found out about our website."),
             },
         ];
+
+        if(this.useAnswerTip) {
+            g.push(...[
+                text_how_answer("intake.Q17.helpGroup.text.how_answer"),
+                trans_text("intake.Q17.helpGroup.text.answer_tip", "Answer tip")
+            ]);
+        }
+        return g;
     }
 }
 
