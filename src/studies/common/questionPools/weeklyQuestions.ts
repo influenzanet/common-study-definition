@@ -1661,7 +1661,8 @@ export class VisitedMedicalServiceWhen extends ItemQuestion {
 
     getCondition() {
         const codes = ResponseEncoding.visit_medical;
-        return client.responseHasOnlyKeysOtherThan(this.keyVisitedMedicalServ, codes.no, codes.plan);
+        return client.multipleChoice.none(this.keyVisitedMedicalServ, codes.no, codes.plan);
+        //client.responseHasOnlyKeysOtherThan(this.keyVisitedMedicalServ,  codes.no, codes.plan);
         //expWithArgs('responseHasOnlyKeysOtherThan', keyVisitedMedicalServ, [responseGroupKey, multipleChoiceKey].join('.'), '0', '5')
     }
 
@@ -1738,6 +1739,8 @@ export class VisitedMedicalServiceWhen extends ItemQuestion {
                 displayCondition: displayCondition(visits.hospital)
             },);
         }
+
+        const row_medical_service : MatrixRow[] = [];
 
         const rg_inner = initMatrixQuestion(matrixKey, [
             {
