@@ -30,6 +30,12 @@ export interface ItemProps {
 export abstract class ItemQuestion extends Item implements ItemConditionable {
 
     /**
+     *  Base question options
+     *  To be useable the question implementation should handle the option
+     */
+    protected options?: Partial<BaseQuestionOptions>;
+
+    /**
      *
      * @param props Properties
      * @param defaultKey default item key to use in common implementation, could be overridden by keyOverride props
@@ -59,6 +65,10 @@ export abstract class ItemQuestion extends Item implements ItemConditionable {
     get(): SurveySingleItem {
         this.condition = this.getCondition();
         return super.get();
+    }
+
+    setOptions(o: Partial<BaseQuestionOptions>) {
+        this.options = { ...this.options, ...o};
     }
 
 }
@@ -180,8 +190,11 @@ export type BaseQuestionOptions = Omit<GenericQuestionProps, 'parentKey' | 'item
  */
 export abstract class BaseChoiceQuestion extends ItemQuestion {
 
-    protected options?: BaseQuestionOptions;
-
+    /**
+     * Overrides options, who must be complete here (with questionText)
+     */
+    declare protected  options?: BaseQuestionOptions;
+    
     protected questionType : QuestionType;
 
     abstract getResponses(): OptionDef[]
