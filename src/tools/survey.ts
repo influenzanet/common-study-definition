@@ -1,5 +1,5 @@
 import { Item, SurveyDefinition, SurveyProps } from "case-editor-tools/surveys/types";
-import { Expression, isExpression, Survey } from "survey-engine/data_types";
+import { Expression, ExpressionArg, ExpressionName, isExpression, Survey, SurveyItem, SurveyPrefillRuleNames } from "survey-engine/data_types";
 import { isConditionable } from "../types/item";
 import { ItemBuilder } from "./items";
 
@@ -20,6 +20,8 @@ export class SurveyBuilder extends SurveyDefinition {
 
     items: ItemBuilder[];
 
+    prefillRules: Expression[]
+
     constructor(props: SurveyBuilderProps) {
         super(props);
         if(props.metadata) {
@@ -29,8 +31,26 @@ export class SurveyBuilder extends SurveyDefinition {
             });
             this.editor.setMetadata(meta);
         }
-
+        this.prefillRules = [];
         this.items = [];
+    }
+
+    prefillWithLastResponse(item: Item, maxDelay?:number ) {
+        const params: ExpressionArg[] =  [
+            { str: this.key },
+            { str: item.key }
+        ];
+
+        if(maxDelay) {
+            params.push({'dtype': 'num', num: maxDelay});
+        }
+
+        this.prefillRules.push(
+            {
+                name: <SurveyPrefillRuleNames>"GET_LAST_SURVEY_ITEM",
+                data: params
+            }
+        );
     }
 
     push(item:ItemBuilder, condition?: Expression|(()=>Expression)) {
@@ -49,11 +69,14 @@ export class SurveyBuilder extends SurveyDefinition {
         this.items.push(item);
     }
 
+
+
     // Default implementation build survey from the stacked items
     buildSurvey() {
         for (const item of this.items) {
             this.addItem(item.get());
         }
+        this.editor.setPrefillRules(this.prefillRules);
     }
 
 

@@ -2,10 +2,9 @@ import {  _T } from "../languages"
 import { SurveyItem, SurveyGroupItem, ExpressionName } from "survey-engine/data_types";
 import { Item, SurveyDefinition } from "case-editor-tools/surveys/types";
 import  * as pool from "../questionPools/intakeQuestions";
+import { SurveyBuilder } from "../../../tools";
 
-export class IntakeDef extends SurveyDefinition {
-
-    items: Item[];
+export class IntakeDef extends SurveyBuilder {
 
     Q_birthdate: Item;
 
@@ -97,27 +96,5 @@ export class IntakeDef extends SurveyDefinition {
         return this.Q_birthdate.key;
     }
 
-    buildSurvey() {
-        const prefillRules = []
-
-        for (const item of this.items) {
-
-            const surveyItem = item.get();
-
-            this.addItem(surveyItem);
-
-            prefillRules.push(
-                {
-                    name: <ExpressionName>"GET_LAST_SURVEY_ITEM",
-                    data: [
-                        { str: "intake" },
-                        { str: surveyItem.key }
-                    ]
-                }
-            );
-        }
-
-        this.editor.setPrefillRules(prefillRules);
-    }
 }
 

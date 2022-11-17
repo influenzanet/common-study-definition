@@ -3,10 +3,9 @@ import { ExpressionName, SurveyGroupItem } from "survey-engine/data_types";
 import {  SurveyDefinition } from "case-editor-tools/surveys/types";
 import  * as pool  from "../questionPools/vaccinationQuestions";
 import { ItemBuilder } from "../../../tools/items";
+import { SurveyBuilder } from "../../../tools";
 
-export class VaccinationDef extends SurveyDefinition {
-
-    items: ItemBuilder[];
+export class VaccinationDef extends SurveyBuilder {
 
     constructor() {
         super({
@@ -72,26 +71,5 @@ export class VaccinationDef extends SurveyDefinition {
         hasVaccineGroup.addItem(Q_vaccineContra.get());
 
         this.items.push(hasVaccineGroup);
-
-        const prefillRules = []
-        for (const item of (<SurveyGroupItem>hasVaccineGroup.get()).items) {
-            prefillRules.push(
-                {
-                    name: <ExpressionName>"GET_LAST_SURVEY_ITEM",
-                    data: [
-                        { str: "vaccination" },
-                        { str: item.key }
-                    ]
-                }
-            );
-        }
-
-        this.editor.setPrefillRules(prefillRules);
-    }
-
-    buildSurvey() {
-        for (const item of this.items) {
-            this.addItem(item.get());
-        }
     }
 }

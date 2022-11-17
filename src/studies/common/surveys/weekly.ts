@@ -2,9 +2,8 @@ import { _T } from "../languages"
 import { Item, SurveyDefinition } from "case-editor-tools/surveys/types";
 import * as pool from "../questionPools/weeklyQuestions";
 import { ItemBuilder } from "../../../tools/items";
-export class WeeklyDef extends SurveyDefinition {
-
-    items: ItemBuilder[];
+import { SurveyBuilder } from "../../../tools";
+export class WeeklyDef extends SurveyBuilder {
 
     Q_same_illnes: Item;
 
@@ -155,11 +154,5 @@ export class WeeklyDef extends SurveyDefinition {
 
     getSameIllnessKey() {
         return this.Q_same_illnes.key;
-    }
-
-    buildSurvey() {
-        for (const item of this.items) {
-            this.addItem(item.get());
-        }
     }
 }
