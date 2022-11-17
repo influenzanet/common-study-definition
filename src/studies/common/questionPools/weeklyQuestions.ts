@@ -13,6 +13,8 @@ import { GroupProps, GroupQuestion, ItemProps, ItemQuestion } from "./types";
 import { ClientExpression as client } from "../../../tools/expressions";
 import { Expression } from "survey-engine/data_types";
 import { MatrixRow, textComponent } from "../../../compat";
+import { trans_text } from "../../../tools";
+
 interface SymptomsProps extends ItemProps {
     useRash: boolean;
 }
@@ -1826,18 +1828,19 @@ export class WhyVisitedNoMedicalService extends ItemQuestion {
 
     getCondition() {
         const codes = ResponseEncoding.visit_medical;
-        return client.responseHasKeysAny(this.keyVisitedMedicalServ, codes.no);
+        return client.multipleChoice.any(this.keyVisitedMedicalServ, codes.no);
     }
 
     buildItem() {
         return SurveyItems.singleChoice({
+            ...this.options,
             parentKey: this.parentKey,
             itemKey: this.itemKey,
             isRequired: this.isRequired,
             condition: this.condition,
             questionText: _T("weekly.EX.Qcov18.title.0", "What is the main reason for which you did not consult any health professional for the symptoms you declared today?"),
             helpGroupContent: this.getHelpGroupContent(),
-            responseOptions: this.getResponses()
+            responseOptions: this.getResponses(), 
         });
     }
 
@@ -1903,7 +1906,8 @@ export class WhyVisitedNoMedicalService extends ItemQuestion {
                 content: _T("weekly.EX.Qcov18.helpGroup.text.1", "To understand why some people do not consult a doctor."),
                 style: [{ key: 'variant', value: 'p' }],
             },
-            text_how_answer("weekly.EX.Qcov18.helpGroup.text.2")
+            text_how_answer("weekly.EX.Qcov18.helpGroup.text.2"),
+            trans_text("weekly.EX.Qcov18.helpGroup.answer_tip", "answer tip")
         ]
     }
 }
@@ -1951,7 +1955,7 @@ export class TookMedication extends ItemQuestion {
      * @returns
      */
     createTookAntibioticCondition() {
-        return client.responseHasKeysAny(this.key, MultipleChoicePrefix, ResponseEncoding.took_medication.antibio);
+        return client.multipleChoice.any(this.key, ResponseEncoding.took_medication.antibio);
     }
 
     getResponses() {
@@ -2522,21 +2526,15 @@ export class CauseOfSymptoms extends ItemQuestion {
 
     getHelpGroupContent() {
         return [
-            {
-                content: _T("weekly.EX.Q11.helpGroup.text.0", "Why are we asking this question?"),
-                style: [{ key: 'variant', value: 'h5' }],
-            },
+            text_why_asking("weekly.EX.Q11.helpGroup.text.0"),
             {
                 content: _T("weekly.EX.Q11.helpGroup.text.1", "To see if our assessment of your illness, based on your symptoms, matches what you believe to be the cause. You may have a better idea of the cause of your illness than our computer algorithms."),
                 style: [{ key: 'variant', value: 'p' }],
             },
-            {
-                content: _T("weekly.EX.Q11.helpGroup.text.2", "How should I answer this question?"),
-                style: [{ key: 'variant', value: 'h5' }],
-            },
+            text_how_answer("weekly.EX.Q11.helpGroup.text.2"),
             {
                 content: _T("weekly.EX.Q11.helpGroup.text.3", "If you are reasonably sure of the cause of your symptoms, select the appropriate box. Otherwise, select 'No, I Don’t know'."),
-            },
+            }
         ];
     }
 }
