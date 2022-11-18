@@ -1,4 +1,5 @@
 import { Item, SurveyDefinition, SurveyProps } from "case-editor-tools/surveys/types";
+import { Duration, durationObjectToSeconds } from "case-editor-tools/types/duration";
 import { Expression, ExpressionArg, ExpressionName, isExpression, Survey, SurveyItem, SurveyPrefillRuleNames } from "survey-engine/data_types";
 import { isConditionable } from "../types/item";
 import { ItemBuilder } from "./items";
@@ -35,14 +36,15 @@ export class SurveyBuilder extends SurveyDefinition {
         this.items = [];
     }
 
-    prefillWithLastResponse(item: Item, maxDelay?:number ) {
+    prefillWithLastResponse(item: Item, maxDelay?:number|Duration ) {
         const params: ExpressionArg[] =  [
             { str: this.key },
             { str: item.key }
         ];
 
         if(maxDelay) {
-            params.push({'dtype': 'num', num: maxDelay});
+            const delay = (typeof(maxDelay) == "number") ? maxDelay : durationObjectToSeconds(maxDelay);
+            params.push({'dtype': 'num', num: delay});
         }
 
         this.prefillRules.push(
