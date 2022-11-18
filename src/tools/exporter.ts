@@ -67,7 +67,7 @@ export function study_exporter(studies: Study[], o?: ExporterOpts|boolean) {
         const output = outputBase + '/' +(study.outputFolderName ?? study.studyKey);
 
         LanguageHelpers.missing.clear();
-        
+
         generateFilesForStudy(study, true);
 
         if(opts.check) {
@@ -84,6 +84,7 @@ export function study_exporter(studies: Study[], o?: ExporterOpts|boolean) {
         }
 
         if(opts.missing) {
+            console.log("Build missing translation file");
             buildMissing(output);
         }
     });
@@ -91,6 +92,7 @@ export function study_exporter(studies: Study[], o?: ExporterOpts|boolean) {
 
 export function buildMissing(outputFolder:string) {
 
+    console.log(LanguageHelpers.missing);
     LanguageHelpers.missing.forEach((missingKeys, language) =>{
         const m : TranslationSet = {};
         missingKeys.forEach((ref, key)=>{
@@ -101,13 +103,12 @@ export function buildMissing(outputFolder:string) {
             m[key] = t;
         });
 
-        json_export(outputFolder + '/missing-' + language + '.json', m);
+        const file = outputFolder + '/missing-' + language + '.json';
+        console.log("Missing file " + file);
+        json_export(file, m);
 
     });
 }
-
-
-
 
 export function json_export(filename:string, object:any, pretty?: number) {
     writeFileSync(filename, JSON.stringify(object, undefined, pretty ? 2 : undefined));
