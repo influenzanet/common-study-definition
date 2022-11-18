@@ -12,7 +12,7 @@ import { IntakeResponses as ResponseEncoding } from "../responses/intake";
 import { ItemProps, ItemQuestion } from "./types";
 import { Expression } from "survey-engine/data_types";
 import { textComponent } from "../../../compat";
-import { trans_text, ClientExpression as client, as_option, option_def   } from "../../../tools";
+import { trans_text, ClientExpression as client, as_option, option_def, option_input_other   } from "../../../tools";
 
 interface GenderProps extends ItemProps {
     useOther?:boolean
@@ -461,12 +461,7 @@ export class WorkTypeEurostat extends ItemQuestion {
                     key: '13', role: 'option',
                     content: _T("intake.Q4h.rg.scg.option.9", "Elementary occupations (Cleaners and Helpers, Agricultural, Forestry and Fishery Labourers, Labourers in Mining, Construction, Manufacturing and Transport, Food Preparation Assistants, Street and Related Sales and Services Workers, Refuse Workers and Other Elementary Workers)")
                 },
-                {
-                    key: '5', role: 'input',
-                    style: [{ key: 'className', value: 'w-100' }],
-                    content: _T("intake.Q4h.rg.scg.input.10", "Other"),
-                    description: _T("intake.Q4h.rg.scg.description.input.10", "Describe here (optional)")
-                },
+                option_input_other('5', _T("intake.Q4h.rg.scg.input.10", "Other"), "intake.Q4h.rg.scg.description.input.10")
             ]
         });
     }
@@ -1485,35 +1480,22 @@ export class Allergies extends ItemQuestion {
 
         const exclusiveOptionRule = client.multipleChoice.any(this.key, codes.none);
 
+
+        const OtherContent = _T("intake.Q14.rg.mcg.option.3", "Other allergies that cause respiratory symptoms (e.g. sneezing, runny eyes)");
+        
+        const other_option = this.useOtherInput ?
+                option_input_other(codes.other, OtherContent, 'intake.Q14.rg.mcg.option.3.desc')
+                : as_option(codes.other, OtherContent);
+        other_option.disabled = exclusiveOptionRule;
+
+        const o = { disabled: exclusiveOptionRule };
+
         return [
-            {
-                key: codes.hay, role: 'option',
-                disabled: exclusiveOptionRule,
-                content: _T("intake.Q14.rg.mcg.option.0", "Hay fever")
-            },
-            {
-                key: codes.dust, role: 'option',
-                disabled: exclusiveOptionRule,
-                content: _T("intake.Q14.rg.mcg.option.1", "Allergy against house dust mite")
-            },
-            {
-                key: codes.pets, role: 'option',
-                disabled: exclusiveOptionRule,
-                content: _T("intake.Q14.rg.mcg.option.2", "Allergy against domestic animals or pets")
-            },
-            option_def(
-                codes.other,
-                _T("intake.Q14.rg.mcg.option.3", "Other allergies that cause respiratory symptoms (e.g. sneezing, runny eyes)") ,
-                {
-                    disabled: exclusiveOptionRule,
-                    role: this.useOtherInput ? 'input' : 'option',
-                    defaultStyle: this.useOtherInput ? true : false,
-                }
-            ),
-            {
-                key: codes.none, role: 'option',
-                content: _T("intake.Q14.rg.mcg.option.4", "I do not have an allergy that causes respiratory symptoms")
-            },
+            option_def(codes.hay,  _T("intake.Q14.rg.mcg.option.0", "Hay fever"),  o),
+            option_def(codes.dust,_T("intake.Q14.rg.mcg.option.1", "Allergy against house dust mite"), o),
+            option_def(codes.pets, _T("intake.Q14.rg.mcg.option.2", "Allergy against domestic animals or pets"), o),
+            other_option,
+            as_option(codes.none, _T("intake.Q14.rg.mcg.option.4", "I do not have an allergy that causes respiratory symptoms")),
         ]
     }
 
