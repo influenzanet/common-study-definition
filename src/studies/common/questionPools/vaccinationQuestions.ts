@@ -1143,3 +1143,19 @@ export class CovidVaccineAgainstReasons extends SubVaccineQuestion {
         ];
     }
 }
+
+
+export class FinalText extends ItemQuestion {
+
+    constructor(props: ItemProps) {
+        super(props, 'surveyEnd');
+    }
+
+    buildItem() {
+        return SurveyItems.surveyEnd(
+            this.parentKey,
+            _T("vaccination.surveyEnd.title.0", "Thank you! This was all for now, please submit (push « send ») your responses."),
+            this.condition,
+        )
+    }
+}

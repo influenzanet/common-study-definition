@@ -71,5 +71,8 @@ export class VaccinationDef extends SurveyBuilder {
         hasVaccineGroup.addItem(Q_vaccineContra.get());
 
         this.items.push(hasVaccineGroup);
+
+        const QSurveyEnd = new pool.FinalText({parentKey: rootKey});
+        this.items.push(QSurveyEnd);
     }
 }
