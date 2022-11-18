@@ -10,5 +10,9 @@
     "common.how_should_i_answer": {
         "en":"How should I answer this question?",
         "fr":"Comment dois-je répondre"
+    },
+    "common.other_describe_here": {
+        "en":"Describe here (optional)",
+        "fr":"Précisez ici (optionnel)"
     }
 }

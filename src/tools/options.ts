@@ -34,6 +34,15 @@ interface OptionDefOpts extends Omit<OptionDef, "key" | "content" | "role"> {
     defaultStyle?: boolean; // For input type can apply the default style
 }
 
+/**
+ * Option input with automatic description "describe here"
+ * The description text is using "common" text or use the trans id as translation text
+ * @param key option key
+ * @param content option content 
+ * @param trans translation id for the text "Describe here (optional)", if not available will lookup common text entry
+ * @param opts other option parameters
+ * @returns 
+ */
 export const option_input_other = (key:string, content: Map<string,string>, trans:string, opts?:OptionDefOpts) => {
     const defaultStyle = opts?.defaultStyle ?? true;
     const o: OptionDefOpts = {
@@ -48,9 +57,9 @@ export const option_input_other = (key:string, content: Map<string,string>, tran
 /**
  * Generic option definition generator
  * By default will generate a simple option
- * @param key
- * @param content
- * @param opts
+ * @param key option key
+ * @param content option content text
+ * @param opts other option parameters. For input 'defaultStyle' option will add styles from @see{default_input_option_style}
  * @returns
  */
 export const option_def = (key:string, content: Map<string,string>, opts?: OptionDefOpts): OptionDef => {
@@ -70,7 +79,8 @@ export const option_def = (key:string, content: Map<string,string>, opts?: Optio
 }
 
 /**
- * Manipulate
+ * Manipulate an already existing option list
+ * Can insert a new option before or after another existing one, or remove options
  */
 export class OptionList {
     options: OptionDef[]

@@ -11,6 +11,7 @@ import { ItemProps, GroupProps, ItemQuestion } from "./types";
 import { ClientExpression } from "../../../tools";
 import { Expression } from "survey-engine/data_types";
 import { textComponent } from "../../../compat";
+import { as_input_option, option_input_other } from "../../../tools/options";
 
 export class VacStart extends ItemQuestion {
 
@@ -397,12 +398,7 @@ export class FluVaccineThisSeasonReasonFor extends SubVaccineQuestion {
                 key: codes.covid19, role: 'option', // '12'
                 content: _T("vaccination.HV.Q10c.rg.mcg.option.9", "I try to protect myself against infections, because of the circulation of the pandemic coronavirus")
             },
-            {
-                key: codes.other, role: 'input', // '9'
-                style: [{ key: 'className', value: 'w-100' }],
-                content: _T("vaccination.HV.Q10c.rg.mcg.input.10", "Other reason(s)"),
-                description: _T("vaccination.HV.Q10c.rg.mcg.description.input.10", "Describe here (optional)")
-            },
+            option_input_other(codes.other, _T("vaccination.HV.Q10c.rg.mcg.input.10", "Other reason(s)"), "vaccination.HV.Q10c.rg.mcg.description.input.10")
         ];
     }
 
@@ -491,11 +487,9 @@ export class FluVaccineThisSeasonReasonAgainst extends SubVaccineQuestion {
             }, {
                 key: codes.doctor, role: 'option', // '13'
                 content: _T("vaccination.HV.Q10d.rg.mcg.option.13", "Although my doctor recommend a vaccine, I do not get one")
-            }, {
-                key: codes.other, role: 'input', // '14'
-                content: _T("vaccination.HV.Q10d.rg.mcg.input.14", "Other reason(s)"),
-                description: _T("vaccination.HV.Q10d.rg.mcg.description.input.14", "Describe here (optional)")
-            },
+            }, 
+
+            option_input_other(codes.other, _T("vaccination.HV.Q10d.rg.mcg.input.14", "Other reason(s)"), "vaccination.HV.Q10d.rg.mcg.description.input.14" )
         ];
     }
 
@@ -907,12 +901,8 @@ export class CovidSecondShotAgainstReason extends SubVaccineQuestion {
                 key: '5', role: 'option',
                 content: _T("vaccination.HV.Q35l.rg.scg.option.4", "I changed my mind and don’t want to be vaccinated anymore.")
             },
-            {
-                key: '6', role: 'input',
-                style: [{ key: 'className', value: 'w-100' }],
-                content: _T("vaccination.HV.Q35l.rg.scg.input.5", "Other"),
-                description: _T("vaccination.HV.Q35l.rg.scg.description.input.5", "Describe here (optional)")
-            },
+            option_input_other('6',  _T("vaccination.HV.Q35l.rg.scg.input.5", "Other"), "vaccination.HV.Q35l.rg.scg.description.input.5"),
+           
             {
                 key: '0', role: 'option',
                 content: _T("vaccination.HV.Q35l.rg.scg.option.6", "I don't know")
@@ -1021,12 +1011,7 @@ export class CovidVaccineProReasons extends SubVaccineQuestion {
                 key: '23', role: 'option',
                 content: _T("vaccination.HV.Q35f.rg.mcg.option.12", "To obtain a valid vaccination passport.")
             },
-            {
-                key: '9', role: 'input',
-                style: [{ key: 'className', value: 'w-100' }],
-                content: _T("vaccination.HV.Q35f.rg.mcg.input.13", "Other"),
-                description: _T("vaccination.HV.Q35f.rg.mcg.description.input.13", "Describe here (optional)")
-            },
+            option_input_other('9', _T("vaccination.HV.Q35f.rg.mcg.input.13", "Other"), "vaccination.HV.Q35f.rg.mcg.description.input.13" )
         ];
     }
 
@@ -1140,11 +1125,7 @@ export class CovidVaccineAgainstReasons extends SubVaccineQuestion {
                 key: '12', role: 'option',
                 content: _T("vaccination.HV.Q35m.rg.mcg.option.16", "I don't know")
             },
-            {
-                key: '14', role: 'input',
-                content: _T("vaccination.HV.Q35m.rg.mcg.input.17", "Other reason(s)"),
-                description: _T("vaccination.HV.Q35m.rg.mcg.description.input.17", "Describe here (optional)")
-            },
+            option_input_other('14', _T("vaccination.HV.Q35m.rg.mcg.input.17", "Other reason(s)"), "vaccination.HV.Q35m.rg.mcg.description.input.17")
         ];
     }
 
