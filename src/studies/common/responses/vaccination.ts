@@ -7,6 +7,30 @@ const CovidVaccindeBrands = {
         "dontknow": "99"
 } as const;
 
+const CovidReasonNotVaccinated = {
+    "plan": "0",
+    "notproposed": "1",
+    "pregnant_disc": "15",
+    "pregnant_fear": "16",
+    "notriskgroup": "2",
+    "natural_immunity": "3",
+    "doubt_efficacy": "4",
+    "benign": "5",
+    "avoid_health_facilities": "17",
+    "unlikely": "6",
+    "cause_covid": "7",
+    "adverse_event": "8",
+    "dontlike": "9",
+    "accessible": "10",
+    "disagree": "20",
+    "not_free": "11",
+    "dontknow": "12",
+    "other": "14",
+    "counter_indication": '18', // Code used in France (2022)
+    "bad_experience": '19',// Code used in France (2022)
+} as const;
+
+
 export const VaccinationResponses = {
 
     vacstart: {
@@ -78,6 +102,7 @@ export const VaccinationResponses = {
         'dontknow': '99',
     },
 
+    covid_notvac_reason: CovidReasonNotVaccinated,
 
     covid_vac_brands: CovidVaccindeBrands,
 
