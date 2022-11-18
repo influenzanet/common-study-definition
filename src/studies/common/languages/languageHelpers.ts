@@ -48,6 +48,7 @@ export class LanguageMap extends Map<string, string> {
       text.push(...t);
     }
     super(text);
+    this.delete(altKey); // Remove "alt" key entry if provided to reduce the noise
   }
 }
 
