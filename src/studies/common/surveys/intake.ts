@@ -92,8 +92,8 @@ export class IntakeDef extends SurveyBuilder {
         this.items.push(surveyEndText);
     }
 
-    getBirthDateKey():string {
-        return this.Q_birthdate.key;
+    getBirthDateItem():Item {
+        return this.Q_birthdate;
     }
 
 }

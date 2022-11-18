@@ -591,6 +591,8 @@ export class SymptomsEnd extends ItemQuestion {
 
     buildItem() {
 
+        const codes = ResponseEncoding.symptoms_end;
+
         return SurveyItems.singleChoice({
             parentKey: this.parentKey,
             itemKey: this.itemKey,
@@ -600,7 +602,7 @@ export class SymptomsEnd extends ItemQuestion {
             helpGroupContent: this.getHelpGroupContent(),
             responseOptions: [
                 {
-                    key: '0', role: 'dateInput',
+                    key: codes.date_input, role: 'dateInput',
                     optionProps: {
                         min: { dtype: 'exp', exp: getSymptomStartDate(this.keySymptomsStart) },
                         max: { dtype: 'exp', exp: client.timestampWithOffset({seconds: 10}) },
@@ -608,11 +610,11 @@ export class SymptomsEnd extends ItemQuestion {
                     description: _T("weekly.HS.Q4.rg.scg.dateInput.0", "Choose date"),
                 },
                 {
-                    key: '1', role: 'option',
+                    key: codes.dont_know, role: 'option',
                     content: _T( "weekly.HS.Q4.rg.scg.option.1", "I don't know/can't remember")
                 },
                 {
-                    key: '2', role: 'option',
+                    key: codes.still_ill, role: 'option',
                     content: _T( "weekly.HS.Q4.rg.scg.option.2", "I am still ill")
                 },
             ]
@@ -1840,7 +1842,7 @@ export class WhyVisitedNoMedicalService extends ItemQuestion {
             condition: this.condition,
             questionText: _T("weekly.EX.Qcov18.title.0", "What is the main reason for which you did not consult any health professional for the symptoms you declared today?"),
             helpGroupContent: this.getHelpGroupContent(),
-            responseOptions: this.getResponses(), 
+            responseOptions: this.getResponses(),
         });
     }
 

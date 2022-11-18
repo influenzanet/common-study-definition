@@ -43,20 +43,20 @@ const CovidHabitsChangesCodes = {
     "wash_hands": "1",
     "cough_elbow": "2",
     "use_tissue": "3",
-    
+
     "wear_mask": "4a",
     "wear_mask_home": "4b",
-    
+
     // In standard and use in France
     "wear_mask_french": "4",
     "wear_mask_home_french": "17",
-    
+
     "avoid_shakehands": "5",
-    
+
     "stop_hug": "11",
 
     "public_transport": "6",
-    
+
     "avoid_gathering": "7",
 
     "stay_home": "8",
@@ -66,7 +66,7 @@ const CovidHabitsChangesCodes = {
     "avoid_travel": "10",
 
     "food_delivered": "13",
-   
+
     "isolate_home": "18",
 
     "avoid_friends": "14",
@@ -89,45 +89,50 @@ export const WeeklyResponses = {
         'no': '1',
         'dontknow': '2',
         'notapply': '9'
-    },
+    } as const,
     symptoms_start: {
         'date_input': '0',
         'dont_know': '1'
-    },
+    } as const,
+    symptoms_end: {
+        'date_input': '0',
+        'dont_know': '1',
+        'still_ill': '2'
+    } as const,
     pcr_contacts: {
         'yes': '1',
         'no': '0',
         'dont_know': '2',
-    },
+    } as const,
     measure_temp: {
         'yes': '0',
         'no':'1',
         'dont_know': '2'
-    },
+    } as const,
     consent_more: {
         "yes": "1",
         "no": "0"
-    },
+    } as const,
     took_medication: TookMedicationCodes,
     symptom_test: {
         "yes": "1",
         "not_yet": "2",
         "no_wont": "3",
         "no": "0"
-    },
+    } as const,
     test_type: {
         "pcr": "1",
         "sero": "2",
         "antigenic": "3",
         "antigenic_nasal": "4"
-    },
+    } as const,
     flu_test: {
         "yes": "1",
         "yes_antigenic": "5",
         "plan": "3",
         "wontgo": "4",
         "no": "0"
-    },
+    } as const,
     visit_medical: {
         "no": "0",
         "gp": "1",
@@ -135,11 +140,11 @@ export const WeeklyResponses = {
         "emergency": "3",
         "other": "4",
         "plan": "5"
-    },
+    } as const,
     daily_routine: {
         "no": "0",
         "yes": "1",
         "off": "2"
-    },
+    } as const,
     covid_habits: CovidHabitsChangesCodes
 } as const;

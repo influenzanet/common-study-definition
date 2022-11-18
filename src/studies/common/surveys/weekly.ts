@@ -7,6 +7,8 @@ export class WeeklyDef extends SurveyBuilder {
 
     Q_same_illnes: Item;
 
+    Q_symptom_end: Item;
+
     constructor() {
         super({
             surveyKey: 'weekly',
@@ -47,6 +49,8 @@ export class WeeklyDef extends SurveyBuilder {
         // // Q4 when symptoms end --------------------------------------
         const Q_symptomsEnd = new pool.SymptomsEnd({parentKey:hasSymptomGroupKey, keySymptomsStart: Q_symptomStart.key, isRequired:true});
         hasSymptomGroup.addItem(Q_symptomsEnd.get());
+
+        this.Q_symptom_end = Q_symptomsEnd;
 
         // // Q5 symptoms developed suddenly --------------------------------------
         const Q_symptomsSuddenlyDeveloped = new pool.SymptomsSuddenlyDeveloped({parentKey:hasSymptomGroupKey, isRequired:true});
@@ -152,7 +156,7 @@ export class WeeklyDef extends SurveyBuilder {
         this.items.push(surveyEndText);
     }
 
-    getSameIllnessKey() {
-        return this.Q_same_illnes.key;
+    getSymptomEnd():Item {
+        return this.Q_symptom_end;
     }
 }

@@ -29,11 +29,9 @@ export class CommonStudyBuilder extends StudyBuilder {
 
         // Keys inform the rules builder of the key of all dependent questions
         const keys: SurveyKeys = {
-            intakeKey: intake.key,
-            intakeBirthDateKey: intake.getBirthDateKey(),
-            weeklyKey: weekly.key,
-            weeklySameIllnessKey: weekly.getSameIllnessKey(),
-            vacKey: vacc.key,
+            intake: intake,
+            weekly: weekly,
+            vaccination: vacc,
         };
 
         const builder = new StudyRulesBuilder(keys);
