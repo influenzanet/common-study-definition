@@ -6,3 +6,5 @@ export * from "./survey";
 export * from "./expressions";
 export * from "./text";
 export * from "./rules";
+export * from "./encoding";
+export * from "./options";
