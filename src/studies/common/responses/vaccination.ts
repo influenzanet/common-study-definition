@@ -86,7 +86,7 @@ export const VaccinationResponses = {
         "avoid_healthseek": "17", // Because of covid I avoid to get to doctor or to pharmacy
         "risk_covid": "18", // Fear about the flu shot increase the risk of getting the covid
         "covid_other": "19", // Other reason related to covid
-        
+        "bad_experience": "20" // Introduced in 2022 in France
     },
     covid_vac: {
         'yes': '1',
