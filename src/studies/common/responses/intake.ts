@@ -88,4 +88,11 @@ export const IntakeResponses = {
         "daily_more": "3",
         "dontknow": "4"
     },
+    allergy: {
+        "hay": "1",
+        "dust": "2",
+        "pets": "3",
+        "other": "4",
+        "none": "5"
+    }
 } as const;

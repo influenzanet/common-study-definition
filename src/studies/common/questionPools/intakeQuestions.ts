@@ -3,7 +3,6 @@ import { ComponentEditor } from "case-editor-tools/surveys/survey-editor/compone
 import { ItemEditor } from "case-editor-tools/surveys/survey-editor/item-editor";
 import { expWithArgs, generateHelpGroupComponent, generateLocStrings, generateTitleComponent } from "case-editor-tools/surveys/utils/simple-generators";
 import { matrixKey, multipleChoiceKey, responseGroupKey, singleChoiceKey } from "case-editor-tools/constants/key-definitions";
-import { ComponentGenerators } from "case-editor-tools/surveys/utils/componentGenerators";
 import { OptionDef } from "case-editor-tools/surveys/types";
 import { SurveyItems } from 'case-editor-tools/surveys';
 import { initMultipleChoiceGroup } from "case-editor-tools/surveys/responseTypeGenerators/optionGroupComponents";
@@ -11,11 +10,9 @@ import { initMatrixQuestion,  ResponseRowCell } from "case-editor-tools/surveys/
 import {require_response, text_select_all_apply, text_why_asking, text_how_answer, singleChoicePrefix, MultipleChoicePrefix } from './helpers';
 import { IntakeResponses as ResponseEncoding } from "../responses/intake";
 import { ItemProps, ItemQuestion } from "./types";
-import { ClientExpression as client } from "../../../tools/expressions";
-import { as_option } from "../../../tools/options";
 import { Expression } from "survey-engine/data_types";
 import { textComponent } from "../../../compat";
-import { trans_text } from "../../../tools";
+import { trans_text, ClientExpression as client, as_option, option_def   } from "../../../tools";
 
 interface GenderProps extends ItemProps {
     useOther?:boolean
@@ -715,7 +712,20 @@ export class AgeGroups extends ItemQuestion {
         // RESPONSE PART
         const rg = editor.addNewResponseComponent({ role: 'responseGroup' });
 
+        var disabled: Expression | undefined  = undefined;
 
+        const alone_yes = "1";
+
+        if(this.useAlone) {
+
+            const mg = initMultipleChoiceGroup(multipleChoiceKey, [
+                as_option(alone_yes, _T("intake.Q6.alone.yes", "I live alone"))
+            ]);
+            editor.addExistingResponseComponent(mg, rg?.key);
+            //rg_inner.displayCondition = client.multipleChoice.none();
+
+            disabled = client.multipleChoice.any(this.key, alone_yes);
+        }
 
         // Dropdown options - used in each cell
         const ddg: ResponseRowCell = {
@@ -739,21 +749,6 @@ export class AgeGroups extends ItemQuestion {
                 },
             ]
         };
-
-        var disabled: Expression | undefined  = undefined;
-
-        const alone_yes = "1";
-
-        if(this.useAlone) {
-
-            const mg = initMultipleChoiceGroup(multipleChoiceKey, [
-                as_option(alone_yes, _T("intake.Q6.alone.yes", "I live alone"))
-            ]);
-            editor.addExistingResponseComponent(mg, rg?.key);
-            //rg_inner.displayCondition = client.multipleChoice.none();
-
-            disabled = client.multipleChoice.any(this.key, alone_yes);
-        }
 
         const rg_inner = initMatrixQuestion(matrixKey, [
             {
@@ -812,6 +807,13 @@ export class AgeGroups extends ItemQuestion {
                 ]
             }
         ]);
+
+        if(this.useAlone) {
+            rg_inner.displayCondition = client.logic.or(
+                client.logic.not(client.hasResponse(this.key, MultipleChoicePrefix)),
+                client.multipleChoice.none(this.key, alone_yes)
+            );
+        }
 
         editor.addExistingResponseComponent(rg_inner, rg?.key);
 
@@ -1444,6 +1446,9 @@ export class Smoking extends ItemQuestion {
     }
 }
 
+interface AllergiesProps extends ItemProps {
+    useOtherInput?: boolean;
+}
 
 
 /**
@@ -1451,8 +1456,11 @@ export class Smoking extends ItemQuestion {
  */
 export class Allergies extends ItemQuestion {
 
-    constructor(props: ItemProps) {
+    useOtherInput: boolean;
+
+    constructor(props: AllergiesProps) {
         super(props, 'Q14');
+        this.useOtherInput = props.useOtherInput ?? false;
     }
 
     buildItem() {
@@ -1473,32 +1481,37 @@ export class Allergies extends ItemQuestion {
 
     getResponses() : OptionDef[] {
 
-        const noAllergyCode = '5';
+        const codes = ResponseEncoding.allergy;
 
-        const exclusiveOptionRule = expWithArgs('responseHasKeysAny', this.key, MultipleChoicePrefix, noAllergyCode);
+        const exclusiveOptionRule = client.multipleChoice.any(this.key, codes.none);
+
         return [
             {
-                key: '1', role: 'option',
+                key: codes.hay, role: 'option',
                 disabled: exclusiveOptionRule,
                 content: _T("intake.Q14.rg.mcg.option.0", "Hay fever")
             },
             {
-                key: '2', role: 'option',
+                key: codes.dust, role: 'option',
                 disabled: exclusiveOptionRule,
                 content: _T("intake.Q14.rg.mcg.option.1", "Allergy against house dust mite")
             },
             {
-                key: '3', role: 'option',
+                key: codes.pets, role: 'option',
                 disabled: exclusiveOptionRule,
                 content: _T("intake.Q14.rg.mcg.option.2", "Allergy against domestic animals or pets")
             },
+            option_def(
+                codes.other,
+                _T("intake.Q14.rg.mcg.option.3", "Other allergies that cause respiratory symptoms (e.g. sneezing, runny eyes)") ,
+                {
+                    disabled: exclusiveOptionRule,
+                    role: this.useOtherInput ? 'input' : 'option',
+                    defaultStyle: this.useOtherInput ? true : false,
+                }
+            ),
             {
-                key: '4', role: 'option',
-                disabled: exclusiveOptionRule,
-                content: _T("intake.Q14.rg.mcg.option.3", "Other allergies that cause respiratory symptoms (e.g. sneezing, runny eyes)")
-            },
-            {
-                key: noAllergyCode, role: 'option',
+                key: codes.none, role: 'option',
                 content: _T("intake.Q14.rg.mcg.option.4", "I do not have an allergy that causes respiratory symptoms")
             },
         ]
