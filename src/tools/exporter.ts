@@ -5,6 +5,8 @@ import { writeFileSync } from "fs";
 import { LanguageHelpers } from "../studies/common/languages/languageHelpers";
 import { Translation, TranslationSet } from "../studies/common/languages";
 import { StudyChecker } from "./checker";
+import { stringify } from "querystring";
+import { isSurveyBuilder } from "./survey";
 const usage = () => {
     Logger.log("Expected command line arguments:")
     Logger.log("   - study=<studyKey>")
@@ -46,6 +48,7 @@ export const selectFromStudyKey = (studies: Study[]): Study[] => {
 interface ExporterOpts {
     missing? : boolean;
     check?: boolean;
+    classNames?: boolean;
 }
 
 /**
@@ -78,7 +81,6 @@ export function study_exporter(studies: Study[], o?: ExporterOpts|boolean) {
                     const n = r.problems.length;
                     Logger.warn(`check for ${key} has ${n} problems`);
                 });
-                console.log(result);
             }
             json_export(output + '/checks.json', result);
         }
@@ -87,12 +89,22 @@ export function study_exporter(studies: Study[], o?: ExporterOpts|boolean) {
             console.log("Build missing translation file");
             buildMissing(output);
         }
+        if(opts.classNames) {
+            const names : Record<string, Record<string,string>> = {};
+            study.surveys.forEach(survey => {
+                if(isSurveyBuilder(survey)) {
+                    const nn = survey.getQuestionClasses();
+                    names[survey.key] = nn;
+                }
+            });
+            json_export(output + '/classes.json', names);
+        }
     });
 }
 
 export function buildMissing(outputFolder:string) {
 
-    console.log(LanguageHelpers.missing);
+    //console.log(LanguageHelpers.missing);
     LanguageHelpers.missing.forEach((missingKeys, language) =>{
         const m : TranslationSet = {};
         missingKeys.forEach((ref, key)=>{
@@ -102,7 +114,6 @@ export function buildMissing(outputFolder:string) {
             t[language] = "_TODO_";
             m[key] = t;
         });
-
         const file = outputFolder + '/missing-' + language + '.json';
         console.log("Missing file " + file);
         json_export(file, m);

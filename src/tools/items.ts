@@ -6,6 +6,11 @@ import { ClientExpression } from "./expressions";
 
 export type ItemBuilder = Item | Group;
 
+export const isGroupBuilder = (item: ItemBuilder): item is Group=> {
+    return 'groupEditor' in item;
+}
+
+
 export interface ItemProps {
     /**
      * @var parentKey full key path of the parent item, required to generate this item's unique key (e.g. `<surveyKey>.<groupKey>`).
@@ -137,6 +142,10 @@ export abstract class GroupQuestion extends Group implements ItemConditionable {
     }
 }
 
+export const isSimpleGroupQuestion = (item: ItemBuilder): item is SimpleGroupQuestion => {
+    return 'innerItems' in item;
+}
+
 /**
  * Base implementation of a simple groups, as a collection of items
  */
@@ -168,8 +177,6 @@ export class SimpleGroupQuestion extends GroupQuestion {
         }
         this.innerItems.push(...items);
     }
-
-
 }
 
 type HelpGroupContentType =  Array<{

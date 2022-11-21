@@ -1,8 +1,8 @@
 import { Item, SurveyDefinition, SurveyProps } from "case-editor-tools/surveys/types";
 import { Duration, durationObjectToSeconds } from "case-editor-tools/types/duration";
-import { Expression, ExpressionArg, ExpressionName, isExpression, Survey, SurveyItem, SurveyPrefillRuleNames } from "survey-engine/data_types";
+import { Expression, ExpressionArg, ExpressionName, isExpression, isSurveyGroupItem, Survey, SurveyItem, SurveyPrefillRuleNames } from "survey-engine/data_types";
 import { isConditionable } from "../types/item";
-import { ItemBuilder } from "./items";
+import { isGroupBuilder, isSimpleGroupQuestion, ItemBuilder } from "./items";
 
 
 export interface SurveyBuilderProps extends SurveyProps {
@@ -71,8 +71,6 @@ export class SurveyBuilder extends SurveyDefinition {
         this.items.push(item);
     }
 
-
-
     // Default implementation build survey from the stacked items
     buildSurvey() {
         for (const item of this.items) {
@@ -81,6 +79,27 @@ export class SurveyBuilder extends SurveyDefinition {
         this.editor.setPrefillRules(this.prefillRules);
     }
 
+    getQuestionClasses():Record<string,string> {
+        const names: Record<string,string> = {};
+        
+        const collectNames = (item:ItemBuilder) => {
+            const className = item.constructor.name;
+            names[className] = item.key;
+            if(isSimpleGroupQuestion(item)) {
+                for(const sub of item.innerItems) {
+                    collectNames(sub);
+                }
+            }
+        }
+        
+        for (const item of this.items) {
+            collectNames(item); 
+        }
+        return names;
+    }
+}
 
+export const isSurveyBuilder = (d: SurveyDefinition): d is SurveyBuilder => {
+    return 'items' in d && 'prefillRules' in d;
 }
 

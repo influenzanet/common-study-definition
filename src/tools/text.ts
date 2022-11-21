@@ -7,6 +7,7 @@ import { _T } from "../studies/common/languages";
  */
 export const transTextComponent = (id: string, ref:string, opts?: Omit<TextProps, "content">): ItemComponent => {
     return textComponent({
+        key: id,
         content: _T(id, ref),
         ...opts
     });
