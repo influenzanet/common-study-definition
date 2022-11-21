@@ -36,3 +36,24 @@ export const textComponent = (props: TextProps): ItemComponent => {
       displayCondition: props.displayCondition,
     }
 }
+
+interface MarkdownProps extends CommonProps {
+    content: Map<string, string>;
+    className?: string;
+  }
+
+export const markdownComponent = (props: MarkdownProps): ItemComponent => {
+    const styles = [];
+    if (props.className !== undefined) {
+      styles.push({
+        key: 'className', value: props.className
+      })
+    }
+    return {
+      key: props.key ?? generateRandomKey(3),
+      role: 'markdown',
+      style: styles.length > 0 ? styles : undefined,
+      content: generateLocStrings(props.content),
+      displayCondition: props.displayCondition,
+    }
+  }
