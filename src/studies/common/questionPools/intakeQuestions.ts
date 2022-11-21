@@ -662,12 +662,19 @@ interface AgeGroupsProps extends ItemProps {
     useAnswerTip?: boolean; // Add How answer section in HelpGroup
 }
 
+interface AgeGroupQuestion {
+    key: string;
+    getAnyAgeGroupCondition(): Expression
+    getAnyChildrenCondition(): Expression
+}
 
 /**
  * AGE GROUPS: dropdown table about number of people in different age groups
  *
  */
 export class AgeGroups extends ItemQuestion {
+
+    readonly AloneYes = '1';
 
     useAlone: boolean;
     useAnswerTip: boolean;
@@ -692,6 +699,48 @@ export class AgeGroups extends ItemQuestion {
         return g;
     }
 
+    responseRow(row:string):string {
+        return [responseGroupKey, matrixKey, row, 'col1'].join('.');
+    }
+
+    getAnyAgeGroupCondition():Expression {
+        // CONDITION
+        const cond = 
+        expWithArgs('or',
+            expWithArgs('responseHasOnlyKeysOtherThan', this.key, this.responseRow('row0'), '0'),
+            expWithArgs('responseHasOnlyKeysOtherThan', this.key, this.responseRow('row1'), '0'),
+            expWithArgs('responseHasOnlyKeysOtherThan', this.key, this.responseRow('row2'), '0'),
+            expWithArgs('responseHasOnlyKeysOtherThan', this.key, this.responseRow('row3'), '0'),
+            expWithArgs('responseHasOnlyKeysOtherThan', this.key, this.responseRow('row4'), '0'),
+        );
+
+        if(this.useAlone) {
+            return client.logic.and(this.getIsNotAloneCondition(), cond);
+        }
+        return cond;
+    }
+
+    getAnyChildrenCondition():Expression {
+
+        const cond = expWithArgs('or',
+                expWithArgs('responseHasOnlyKeysOtherThan', this.key, this.responseRow('row0'), '0'),
+                expWithArgs('responseHasOnlyKeysOtherThan', this.key, this.responseRow('row1'), '0'),
+            );
+        
+        if(this.useAlone) {
+            return client.logic.and(this.getIsNotAloneCondition(), cond);
+        }
+        return cond;
+    }
+
+    getIsNotAloneCondition() : Expression  {
+        return client.logic.or(
+            client.logic.not(client.hasResponse(this.key, MultipleChoicePrefix)),
+            client.multipleChoice.none(this.key, this.AloneYes)
+        );
+    }
+
+
     buildItem() {
 
         const editor = new ItemEditor(undefined, { itemKey: this.key, isGroup: false });
@@ -709,17 +758,17 @@ export class AgeGroups extends ItemQuestion {
 
         var disabled: Expression | undefined  = undefined;
 
-        const alone_yes = "1";
+        
 
         if(this.useAlone) {
 
             const mg = initMultipleChoiceGroup(multipleChoiceKey, [
-                as_option(alone_yes, _T("intake.Q6.alone.yes", "I live alone"))
+                as_option(this.AloneYes, _T("intake.Q6.alone.yes", "I live alone"))
             ]);
             editor.addExistingResponseComponent(mg, rg?.key);
             //rg_inner.displayCondition = client.multipleChoice.none();
 
-            disabled = client.multipleChoice.any(this.key, alone_yes);
+            disabled = client.multipleChoice.any(this.key, this.AloneYes);
         }
 
         // Dropdown options - used in each cell
@@ -804,10 +853,7 @@ export class AgeGroups extends ItemQuestion {
         ]);
 
         if(this.useAlone) {
-            rg_inner.displayCondition = client.logic.or(
-                client.logic.not(client.hasResponse(this.key, MultipleChoicePrefix)),
-                client.multipleChoice.none(this.key, alone_yes)
-            );
+            rg_inner.displayCondition = this.getIsNotAloneCondition();
         }
 
         editor.addExistingResponseComponent(rg_inner, rg?.key);
@@ -827,7 +873,7 @@ export class AgeGroups extends ItemQuestion {
             ];
 
             if(this.useAlone) {
-               cond.push( client.multipleChoice.any(this.key, alone_yes ) );
+               cond.push( client.multipleChoice.any(this.key, this.AloneYes ) );
             }
 
             editor.addValidation({
@@ -844,7 +890,7 @@ export class AgeGroups extends ItemQuestion {
 }
 
 interface SubAgeGroupsProps extends ItemProps {
-    keyOfAgeGroups?: string
+    ageGroupQuestion: AgeGroupQuestion
 }
 
 
@@ -853,24 +899,15 @@ interface SubAgeGroupsProps extends ItemProps {
  */
 export class PeopleAtRisk extends ItemQuestion {
 
-    keyOfAgeGroups?: string
+    ageGroupQuestion: AgeGroupQuestion
 
     constructor(props: SubAgeGroupsProps) {
         super(props, 'Q6c');
-        this.keyOfAgeGroups = props.keyOfAgeGroups;
+        this.ageGroupQuestion = props.ageGroupQuestion;
     }
 
     getCondition() {
-        // CONDITION
-        if (this.keyOfAgeGroups) {
-            return expWithArgs('or',
-                    expWithArgs('responseHasOnlyKeysOtherThan', this.keyOfAgeGroups, [responseGroupKey, matrixKey, 'row0', 'col1'].join('.'), '0'),
-                    expWithArgs('responseHasOnlyKeysOtherThan', this.keyOfAgeGroups, [responseGroupKey, matrixKey, 'row1', 'col1'].join('.'), '0'),
-                    expWithArgs('responseHasOnlyKeysOtherThan', this.keyOfAgeGroups, [responseGroupKey, matrixKey, 'row2', 'col1'].join('.'), '0'),
-                    expWithArgs('responseHasOnlyKeysOtherThan', this.keyOfAgeGroups, [responseGroupKey, matrixKey, 'row3', 'col1'].join('.'), '0'),
-                    expWithArgs('responseHasOnlyKeysOtherThan', this.keyOfAgeGroups, [responseGroupKey, matrixKey, 'row4', 'col1'].join('.'), '0'),
-            );
-        }
+        return this.ageGroupQuestion.getAnyAgeGroupCondition();
     }
 
     buildItem() {
@@ -921,20 +958,15 @@ export class PeopleAtRisk extends ItemQuestion {
  export class ChildrenInSchool extends ItemQuestion {
 
 
-    keyOfAgeGroups?: string
+    ageGroupQuestion: AgeGroupQuestion
 
     constructor(props: SubAgeGroupsProps) {
         super(props, 'Q6b');
-        this.keyOfAgeGroups = props.keyOfAgeGroups;
+        this.ageGroupQuestion = props.ageGroupQuestion;
     }
 
     getCondition() {
-        if (this.keyOfAgeGroups) {
-            return expWithArgs('or',
-                    expWithArgs('responseHasOnlyKeysOtherThan', this.keyOfAgeGroups, [responseGroupKey, matrixKey, 'row0', 'col1'].join('.'), '0'),
-                    expWithArgs('responseHasOnlyKeysOtherThan', this.keyOfAgeGroups, [responseGroupKey, matrixKey, 'row1', 'col1'].join('.'), '0'),
-                );
-        }
+        return this.ageGroupQuestion.getAnyChildrenCondition();
     }
 
     buildItem() {
