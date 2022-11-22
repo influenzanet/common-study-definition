@@ -44,7 +44,7 @@
     "nl-be": "Hoe moet ik deze vraag beantwoorden?"
   },
   "vaccination.HV.Q9.helpGroup.text.3": {
-    "en": "Answer 'yes' if you were vaccinated in autumn/winter 2020-2021.",
+    "en": "Answer 'yes' if you were vaccinated in the previous autumn/winter season",
     "nl-be": "Antwoord 'ja' als u het vaccin vorig jaar (herfst / winter van 2020-2021) heeft gekregen."
   },
   "vaccination.HV.Q9.rg.scg.option.0": {
@@ -92,7 +92,7 @@
     "nl-be": "TODO"
   },
   "vaccination.HV.Q10b.title.0": {
-    "en": "When were you vaccinated against flu this season (2021-2022)?",
+    "en": "When were you vaccinated against flu this season ?",
     "nl-be": "Wanneer bent u in het huidige griepseizoen (2020/2021) gevaccineerd tegen de griep?"
   },
   "vaccination.HV.Q10b.helpGroup.text.0": {
@@ -176,7 +176,7 @@
     "nl-be": "Beschrijf hier (optioneel in te vullen)"
   },
   "vaccination.HV.Q10d.title.0": {
-    "en": "What were your reasons for NOT getting a seasonal influenza vaccination in seaseon 2020/2021?",
+    "en": "What were your reasons for NOT getting a seasonal influenza vaccination for this current season ?",
     "nl-be": "TODO"
   },
   "vaccination.HV.Q10d.helpGroup.text.0": {

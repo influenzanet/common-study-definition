@@ -117,7 +117,7 @@ export class FluVaccineLastSeason extends ItemQuestion {
             itemKey: this.itemKey,
             isRequired: this.isRequired,
             condition: this.condition,
-            questionText: _T("vaccination.HV.Q9.title.0", "Did you receive a flu vaccine during the previous flu season (2020-2021)?"),
+            questionText: _T("vaccination.HV.Q9.title.0", "Did you receive a flu vaccine during the previous flu season ?"),
             helpGroupContent: this.getHelpGroupContent(),
             responseOptions: this.getResponses()
         });
@@ -151,7 +151,7 @@ export class FluVaccineLastSeason extends ItemQuestion {
             },
             text_how_answer("vaccination.HV.Q9.helpGroup.text.2"),
             {
-                content: _T("vaccination.HV.Q9.helpGroup.text.3", "Answer 'yes' if you were vaccinated in autumn/winter 2020-2021."),
+                content: _T("vaccination.HV.Q9.helpGroup.text.3", "Answer 'yes' if you were vaccinated in the previous autumn/winter season"),
             },
         ];
     }
@@ -174,7 +174,7 @@ export class FluVaccineThisSeason extends ItemQuestion {
             itemKey: this.itemKey,
             isRequired: this.isRequired,
             condition: this.condition,
-            questionText: _T("vaccination.HV.Q10.title.0", "Have you received a flu vaccine this autumn/winter season? (2021-2022)"),
+            questionText: _T("vaccination.HV.Q10.title.0", "Have you received a flu vaccine this autumn/winter season?"),
             helpGroupContent: this.getHelpGroupContent(),
             responseOptions: this.getResponses()
         });
@@ -287,7 +287,7 @@ export class FluVaccineThisSeasonWhen extends SubVaccineQuestion {
             itemKey: this.itemKey,
             isRequired: this.isRequired,
             condition: this.condition,
-            questionText: _T("vaccination.HV.Q10b.title.0", "When were you vaccinated against flu this season (2021-2022)?"),
+            questionText: _T("vaccination.HV.Q10b.title.0", "When were you vaccinated against flu this season ?"),
             helpGroupContent: this.getHelpGroupContent(),
             responseOptions: [
                 {
@@ -422,7 +422,7 @@ export class FluVaccineThisSeasonReasonAgainst extends SubVaccineQuestion {
             topDisplayCompoments: [
                 text_select_all_apply("vaccination.HV.Q10d.rg.t2y2.text.0")
             ],
-            questionText: _T("vaccination.HV.Q10d.title.0", "What were your reasons for NOT getting a seasonal influenza vaccination in seaseon 2020/2021?"),
+            questionText: _T("vaccination.HV.Q10d.title.0", "What were your reasons for NOT getting a seasonal influenza vaccination for this current season ?"),
             helpGroupContent: this.getHelpGroupContent(),
             responseOptions: this.getResponses()
         });
@@ -481,7 +481,7 @@ export class FluVaccineThisSeasonReasonAgainst extends SubVaccineQuestion {
             }, {
                 key: codes.doctor, role: 'option', // '13'
                 content: _T("vaccination.HV.Q10d.rg.mcg.option.13", "Although my doctor recommend a vaccine, I do not get one")
-            }, 
+            },
 
             option_input_other(codes.other, _T("vaccination.HV.Q10d.rg.mcg.input.14", "Other reason(s)"), "vaccination.HV.Q10d.rg.mcg.description.input.14" )
         ];
@@ -896,7 +896,7 @@ export class CovidSecondShotAgainstReason extends SubVaccineQuestion {
                 content: _T("vaccination.HV.Q35l.rg.scg.option.4", "I changed my mind and don’t want to be vaccinated anymore.")
             },
             option_input_other('6',  _T("vaccination.HV.Q35l.rg.scg.input.5", "Other"), "vaccination.HV.Q35l.rg.scg.description.input.5"),
-           
+
             {
                 key: '0', role: 'option',
                 content: _T("vaccination.HV.Q35l.rg.scg.option.6", "I don't know")
