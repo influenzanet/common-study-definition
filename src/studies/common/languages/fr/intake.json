@@ -53,7 +53,7 @@
   },
   "intake.Q3.helpGroup.text.3": {
     "en": "Insert the postal code of your place of residence",
-    "fr": "Cliquez sur le bouton puis entrez votre code postal et cliquez sur votre commune dans la liste affichée. Seule la commune est enregistrée."
+    "fr": "Entrez votre code postal, cliquez sur le bouton « Rechercher » et cliquez sur votre commune dans la liste affichée. Seule la commune est enregistrée."
   },
   "intake.Q3.rg.scg.input.0": {
     "en": "Postal code:",
@@ -125,7 +125,7 @@
   },
   "intake.Q4b.title.0": {
     "en": "What is the postal code of your school/college/workplace (where you spend the majority of your working/studying time)?",
-    "fr": "Quelle est la commune de votre école/université/lieu de travail (là où vous passez la plus grande partie de votre temps à travailler/étudier)?"
+    "fr": "Pourriez-vous indiquer le nom de la commune de votre école/université/lieu de travail (là où vous passez la plus grande partie de votre temps à travailler/étudier) ?"
   },
   "intake.Q4b.helpGroup.text.1": {
     "en": "To be able to determine the distance you regularly travel during your movements.",
@@ -137,11 +137,11 @@
   },
   "intake.Q4b.rg.scg.description.input.0": {
     "en": "Postal code",
-    "fr": "Commune"
+    "fr": "Oui"
   },
   "intake.Q4b.rg.scg.option.1": {
     "en": "I don’t know/can’t remember",
-    "fr": "Je ne sais pas"
+    "fr": "Non, je en la connais pas"
   },
   "intake.Q4b.rg.scg.option.2": {
     "en": "Not applicable (e.g. don’t have a fixed workplace)",
@@ -149,11 +149,11 @@
   },
   "intake.Q4b.error.3": {
     "en": "Please enter the digits of your postal code",
-    "fr": "TODO"
+    "fr": "Entrez les chiffres de votre code postal"
   },
   "intake.Q4b.error.4": {
     "en": "Please enter at most 5 digits",
-    "fr": "TODO"
+    "fr": "Merci de noter les 5 chiffres du code postal"
   },
   "intake.Q4h.title.0": {
     "en": "Which of the following descriptions most closely matches with your main occupation? ",
@@ -165,7 +165,7 @@
   },
   "intake.Q4h.helpGroup.text.3": {
     "en": "Please tick the box that most closely resembles your main occupation.",
-    "fr": "Merci de cocher la réponse qui se rapproche le plus de votre activité principale. Pour les enfants qui ne vont pas encore à l'école et ne sont pas gardés en dehors du domicile, cocher la case \"Aucune de ces réponses\"."
+    "fr": "Merci de cocher la case de l’activité qui ressemble le plus à votre activité principale."
   },
   "intake.Q4h.rg.scg.option.0": {
     "en": "Services and sales workers (Personal Services Workers, Sales Workers, Personal Care Workers, Protective Services Workers)",
@@ -225,7 +225,7 @@
   },
   "intake.Q4d.helpGroup.text.3": {
     "en": "Please choose the box that represents your HIGHEST level of educational achievements. The different option rougly equate to: 1 - no qualifications, 2 - school-leaving exams at around 16 years of age, 3 - school-leaving exams at around 18 years of age, 4 - University degree or equivalent professional qualification, 5 - Higher degree or advanced professional qualification. If you are an adult who is currently undergoing part - time training(e.g.night school) then tick the box that represents your current highest level of education.",
-    "fr": "Merci de choisir la proposition qui correspond au plus haut niveau d’étude que vous avez atteint. Si vous êtes étudiant, merci de cocher la case « Je suis toujours scolarisé ou étudiant » ainsi que la case correspondant à votre plus haut niveau d’étude."
+    "fr": "Merci de choisir la proposition qui correspond au plus haut niveau d’étude que vous avez atteint, pour le moment."
   },
   "intake.Q4d.rg.mcg.option.0": {
     "en": "I have no formal qualification",
@@ -269,7 +269,7 @@
   },
   "intake.Q5.rg.mcg.option.1": {
     "en": "More than 10 people aged over 65",
-    "fr": "Plus de 10 personnes âgées de plus de 65 ans au cours de la journée"
+    "fr": "Plus de 10 personnes âgées de plus de 65 ans dans une même journée"
   },
   "intake.Q5.rg.mcg.option.2": {
     "en": "Patients",
@@ -521,7 +521,7 @@
   },
   "intake.Q13.title.0": {
     "en": "Do you smoke tobacco?",
-    "fr": "Fumez-vous du tabac ?"
+    "fr": "Fumez-vous du tabac ? (hors cigarette électronique) "
   },
   "intake.Q13.helpGroup.text.1": {
     "en": "Smoking might make you more likely to get a more severe dose of virus disease. We would like to test this.",
@@ -581,7 +581,7 @@
   },
   "intake.Q14.rg.mcg.option.3": {
     "en": "Other allergies that cause respiratory symptoms (e.g. sneezing, runny eyes)",
-    "fr": "Autres allergies provoquant des symptômes respiratoires (par ex. éternuements, yeux larmoyants, etc)"
+    "fr": "Autres allergies provoquant des symptômes respiratoires (par ex. éternuements, yeux larmoyants, etc)(préciser)"
   },
   "intake.Q14.rg.mcg.option.4": {
     "en": "I do not have an allergy that causes respiratory symptoms",
@@ -677,6 +677,6 @@
   },
   "intake.surveyEnd.title.0": {
     "en": "Thank you! This was all for now, please submit (push « send ») your responses. Please come back or continue reporting symptoms you experience during the last week.",
-    "fr": "Merci pour votre participation. Votre profil est complété, vous pouvez dès à présent remplir le questionnaire de vaccination (grippe et COVID-19), et le questionnaire hebdomadaire de ce participant."
+    "fr": "Vous pouvez maintenant valider ce questionnaire. Merci pour votre participation. Une fois ce questionnaire validé, vous pourrez remplir le questionnaire de vaccination (grippe et COVID-19) et le questionnaire hebdomadaire de ce participant."
   }
 }

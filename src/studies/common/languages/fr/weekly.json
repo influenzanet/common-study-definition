@@ -5,7 +5,7 @@
   },
   "weekly.description.0": {
     "en": "Please also report if you had no complaints.",
-    "fr": "Ce questionnaire a pour but de nous informer de vos symptômes, y compris si vous n'en avez pas."
+    "fr": "Ce questionnaire a pour but de nous informer de votre état de santé, que vous ayez ou non des symptômes."
   },
   "weekly.typicalDuration.0": {
     "en": "Duration 1-5 minutes",
@@ -349,19 +349,19 @@
   },
   "weekly.HS.Q6d.rg.scg.option.1": {
     "en": "37.0°C - 37.4°C",
-    "fr": "37° – 37.4°C"
+    "fr": "37° – 37,4°C"
   },
   "weekly.HS.Q6d.rg.scg.option.2": {
     "en": "37.5°C - 37.9°C",
-    "fr": "37.5°C – 37.9°C"
+    "fr": "37,5°C – 37,9°C"
   },
   "weekly.HS.Q6d.rg.scg.option.3": {
     "en": "38.0°C - 38.9°C",
-    "fr": "38°C – 38.9°C"
+    "fr": "38°C – 38,9°C"
   },
   "weekly.HS.Q6d.rg.scg.option.4": {
     "en": "39.0°C - 39.9°C",
-    "fr": "39°C – 39.9°C"
+    "fr": "39°C – 39,9°C"
   },
   "weekly.HS.Q6d.rg.scg.option.5": {
     "en": "40.0°C or more",
@@ -437,7 +437,7 @@
   },
   "weekly.EX.Q7b.rg.sFcN.text.0": {
     "en": "Select the correct number of days",
-    "fr": "Selectionnez le nombre de jours correspondant au délai pour ces services médicaux"
+    "fr": "sélectionnez toutes les options applicables"
   },
   "weekly.EX.Q7b.rg.mat.header.col0.text.0": {
     "en": "Medical Service",
@@ -693,7 +693,7 @@
   },
   "weekly.EX.Qcov16i.rg.mcg.option.3": {
     "en": "A rapid antigen detection test or autotest done on a nasal sample (a swab inserted to 1 - 4 cm into the nostril, sampling that can be done by oneself, result obtained in a few minutes)",
-    "fr": "Un test antigénique rapide ou autotest réalisé soi-même"
+    "fr": "Un test antigénique rapide ou autotest réalisé vous-même"
   },
   "weekly.EX.Qcov16b.title.0": {
     "en": "Do you know the result of your PCR test? (if several were performed and at least one was positive, chose the “Positive” answer)",
@@ -721,7 +721,7 @@
   },
   "weekly.EX.Qcov16f.title.0": {
     "en": "Do you know the result of this rapid antigen detection test on nasopharyngeal sample? (if several were performed and at least one was positive, chose the “Positive” answer)",
-    "fr": "Connaissez-vous le résultat de ce test antigénique rapide sur prélèvement nasopharyngé ? (Si vous en avez réalisé plusieurs et que vous en avez obtenu au moins un positif, choisissez la réponse « positif ».)"
+    "fr": "Connaissez-vous le résultat de ce test antigénique rapide réalisé par un professionnel ? (Si vous en avez réalisé plusieurs et que vous en avez obtenu au moins un positif, choisissez la réponse « positif ».)"
   },
   "weekly.EX.Qcov16f.helpGroup.text.1": {
     "en": "We want to understand how the coronavirus is spreading within the population.",
@@ -745,7 +745,7 @@
   },
   "weekly.EX.Qcov16k.title.0": {
     "en": "Do you know the result of this antigenic test or self-test on nasal sample? (if several were performed and at least one was positive, chose the “Positive” answer)",
-    "fr": "Connaissez-vous le résultat de ce test antigénique rapide ou autotest sur prélèvement nasal ? (Si vous en avez réalisé plusieurs et que vous en avez obtenu au moins un positif, choisissez la réponse « positif ».)"
+    "fr": "Connaissez-vous le résultat de ce test antigénique rapide ou autotest réalisé vous-même ? (Si vous en avez réalisé plusieurs et que vous en avez obtenu au moins un positif, choisissez la réponse « positif ».)"
   },
   "weekly.EX.Qcov16k.helpGroup.text.1": {
     "en": "We want to understand how the coronavirus is spreading within the population.",
@@ -821,7 +821,7 @@
   },
   "weekly.EX.Q9.title.0": {
     "en": "Did you take medication for these symptoms?",
-    "fr": "Avez-vous pris des médicaments pour ces symptômes ? (Sélectionnez toutes les options qui s'appliquent)"
+    "fr": "Avez-vous pris des médicaments pour ces symptômes ?"
   },
   "weekly.EX.Q9.helpGroup.text.1": {
     "en": "To find out who gets treated, and how effective treatment is.",
@@ -989,11 +989,11 @@
   },
   "weekly.EX.Qcov7.helpGroup.text.3": {
     "en": "For example, 'Avoid shaking hands': Answer 'yes' if you shake hands less or not at all due to your symptoms; Answer 'No, I am not following this measure' if you continue to shake hands despite your symptoms; Answer 'No, I was already following this measure' if you had already stopped shaking hands before the onset of your symptoms and you did not change this behaviour.",
-    "fr": "TODO"
+    "fr": "Par exemple, « Évitez de vous serrer la main » : répondez « oui » si vous avez serré moins la main ou pas du tout en raison de vos symptômes ; Répondez « Non, je n'applique pas cette mesure » ​​si vous continuez à vous serrer la main malgré vos symptômes ; Répondez « Non, j'appliquais déjà cette mesure » ​​si vous aviez déjà cessé de serrer la main avant le début de vos symptômes et que vous n'avez pas changé ce comportement."
   },
   "weekly.EX.Qcov7.rg.gU4U.text.0": {
     "en": "To be completed optionally",
-    "fr": "TODO"
+    "fr": "Remplir toutes les options qui s'appliquent"
   },
   "weekly.EX.Qcov7.rg.v1C0.text.1": {
     "en": "Regularly wash or disinfect hands",
@@ -1125,6 +1125,6 @@
   },
   "weekly.surveyEnd.title.0": {
     "en": "Thank you! This was all for now, please submit (push « send ») your responses. We will ask you again next week.",
-    "fr": "Merci pour votre participation. "
+    "fr": "Merci pour votre participation, vous pouvez maintenant valider votre questionnaire en appuyant sur le bouton situé ci-dessous."
   }
 }

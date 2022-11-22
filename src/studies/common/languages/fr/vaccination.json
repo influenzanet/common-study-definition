@@ -101,7 +101,7 @@
   },
   "vaccination.HV.Q10c.rg.LlBq.text.0": {
     "en": "Select all options that apply",
-    "fr": "TODO"
+    "fr": "Sélectionnez toutes les réponses appropriées"
   },
   "vaccination.HV.Q10c.rg.mcg.option.0": {
     "en": "I belong to a risk group (e.g, pregnant, over 65, underlying health condition, etc)",
@@ -165,7 +165,7 @@
   },
   "vaccination.HV.Q10d.rg.t2y2.text.0": {
     "en": "Select all options that apply",
-    "fr": "TODO"
+    "fr": "Sélectionnez toutes les réponses appropriées"
   },
   "vaccination.HV.Q10d.rg.mcg.option.0": {
     "en": "I am planning to be vaccinated, but haven't been yet",
@@ -181,7 +181,7 @@
   },
   "vaccination.HV.Q10d.rg.mcg.option.3": {
     "en": "It is better to build your own natural immunity against influenza",
-    "fr": "Il est préférable de développer sa propre immunité naturelle contre la grippe"
+    "fr": "Il est préférable de se construire sa propre immunité naturelle contre la grippe"
   },
   "vaccination.HV.Q10d.rg.mcg.option.4": {
     "en": "I doubt that the influenza vaccine is effective",
@@ -269,7 +269,7 @@
   },
   "vaccination.HV.Q35i.rg.LMsj.text.0": {
     "en": "Select all options that apply",
-    "fr": "TODO"
+    "fr": "Sélectionnez toutes les options qui s’appliquent"
   },
   "vaccination.HV.Q35i.rg.mcg.option.0": {
     "en": "Pfizer/BioNTech",
@@ -493,19 +493,19 @@
   },
   "vaccination.HV.Q35m.title.0": {
     "en": "What were your reasons for NOT getting a COVID-19 vaccination? Select the options that are most applicable.",
-    "fr": "Quelles sont les raisons actuelles pour lesquelles vous ne vous faites pas vacciner contre la COVID-19 ? (Sélectionnez toutes les options qui s'appliquent)"
+    "fr": "Quelles sont les raisons actuelles pour lesquelles vous ne vous faites pas vacciner contre la COVID-19 ?"
   },
   "vaccination.HV.Q35m.helpGroup.text.1": {
     "en": "We would like to know the main reasons why people are declining COVID-19 vaccination.",
-    "fr": "Nous souhaitons étudier les raisons qui motivent le choix de ne pas recevoir le vaccin contre la Covid-19"
+    "fr": "Nous souhaitons étudier les raisons qui motivent le choix de ne pas recevoir le vaccin contre la COVID-19."
   },
   "vaccination.HV.Q35m.helpGroup.text.3": {
     "en": "Please select the options that mattered to take your decision.",
-    "fr": "Choisissez toutes les options qui ont comptées pour prendre votre décision."
+    "fr": "Choisissez toutes les affirmations qui comptent aujourd’hui pour ne pas vous faire vacciner."
   },
   "vaccination.HV.Q35m.rg.nm76.text.0": {
     "en": "Select all options that apply",
-    "fr": "Indiquez les réponses les plus appropriées"
+    "fr": "Sélectionnez toutes les options qui s’appliquent"
   },
   "vaccination.HV.Q35m.rg.mcg.option.0": {
     "en": "I am planning to be vaccinated but haven’t been yet",
