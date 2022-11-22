@@ -13,6 +13,12 @@ export const transTextComponent = (id: string, ref:string, opts?: Omit<TextProps
     });
 }
 
+/**
+ * Simple translated text content (useable in Helpgroup content)
+ * @param id id of the translation
+ * @param ref reference text
+ * @returns 
+ */
 export const trans_text = (id:string, ref:string) => {
     return {
         content : _T(id, ref)

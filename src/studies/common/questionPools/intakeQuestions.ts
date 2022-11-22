@@ -1611,8 +1611,6 @@ export class SpecialDiet extends ItemQuestion {
         ];
     }
 
-    getHelpGroupContent() {
-    }
 }
 
 interface HomeophaticMedicineProps extends ItemProps {

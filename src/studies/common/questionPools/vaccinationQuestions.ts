@@ -34,7 +34,7 @@ export class VacStart extends ItemQuestion {
                 "vaccination.Q0.title.0",
                 "Four weeks ago you received a questionnaire about your vaccination status.  This new questionnaire is to monitor any further changes. Select the option that applies to you."
                 ),
-            //helpGroupContent: this.getHelpGroupContent(),
+            helpGroupContent: this.getHelpGroupContent(),
             bottomDisplayCompoments: [
                 textComponent({
                     key: "note1",
@@ -67,9 +67,6 @@ export class VacStart extends ItemQuestion {
         ]
     }
 
-    getHelpGroupContent() {
-
-    }
 }
 
 interface VacGroupProps extends GroupProps {
@@ -348,7 +345,7 @@ export class FluVaccineThisSeasonReasonFor extends SubVaccineQuestion {
             topDisplayCompoments: [
                 text_select_all_apply("vaccination.HV.Q10c.rg.LlBq.text.0")
             ],
-            //helpGroupContent: this.getHelpGroupContent(),
+            helpGroupContent: this.getHelpGroupContent(),
             responseOptions: this.getResponses()
         });
     }
@@ -402,9 +399,6 @@ export class FluVaccineThisSeasonReasonFor extends SubVaccineQuestion {
         ];
     }
 
-    getHelpGroupContent() {
-
-    }
 }
 
 /**

@@ -76,6 +76,10 @@ export abstract class ItemQuestion extends Item implements ItemConditionable {
         this.options = { ...this.options, ...o};
     }
 
+    getHelpGroupContent(): HelpGroupContentType|undefined {
+        return undefined;
+    }
+
 }
 
 export interface GroupProps {
