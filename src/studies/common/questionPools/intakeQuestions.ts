@@ -13,6 +13,7 @@ import { ItemProps, ItemQuestion } from "./types";
 import { Expression } from "survey-engine/data_types";
 import { textComponent } from "../../../compat";
 import { trans_text, ClientExpression as client, as_option, option_def, option_input_other   } from "../../../tools";
+import { TimeUnits } from "../../../compat";
 
 interface GenderProps extends ItemProps {
     useOther?:boolean
@@ -145,6 +146,12 @@ export class DateOfBirth extends ItemQuestion {
             require_response(editor, this.key, responseGroupKey);
         }
         return editor.getItem();
+    }
+
+    getAgeExpression(unit: TimeUnits): Expression {
+        const dateInputKey = ResponseEncoding.birthDate.date;
+        const slotKey = [responseGroupKey, dateInputKey].join('.');
+        return client.dateResponseDiffFromNow(this.key, slotKey, unit);
     }
 
 }
@@ -705,7 +712,7 @@ export class AgeGroups extends ItemQuestion {
 
     getAnyAgeGroupCondition():Expression {
         // CONDITION
-        const cond = 
+        const cond =
         expWithArgs('or',
             expWithArgs('responseHasOnlyKeysOtherThan', this.key, this.responseRow('row0'), '0'),
             expWithArgs('responseHasOnlyKeysOtherThan', this.key, this.responseRow('row1'), '0'),
@@ -726,7 +733,7 @@ export class AgeGroups extends ItemQuestion {
                 expWithArgs('responseHasOnlyKeysOtherThan', this.key, this.responseRow('row0'), '0'),
                 expWithArgs('responseHasOnlyKeysOtherThan', this.key, this.responseRow('row1'), '0'),
             );
-        
+
         if(this.useAlone) {
             return client.logic.and(this.getIsNotAloneCondition(), cond);
         }
@@ -758,7 +765,7 @@ export class AgeGroups extends ItemQuestion {
 
         var disabled: Expression | undefined  = undefined;
 
-        
+
 
         if(this.useAlone) {
 
@@ -1514,7 +1521,7 @@ export class Allergies extends ItemQuestion {
 
 
         const OtherContent = _T("intake.Q14.rg.mcg.option.3", "Other allergies that cause respiratory symptoms (e.g. sneezing, runny eyes)");
-        
+
         const other_option = this.useOtherInput ?
                 option_input_other(codes.other, OtherContent, 'intake.Q14.rg.mcg.option.3.desc')
                 : as_option(codes.other, OtherContent);
@@ -1608,14 +1615,21 @@ export class SpecialDiet extends ItemQuestion {
     }
 }
 
+interface HomeophaticMedicineProps extends ItemProps {
+    useHelpgroup?: boolean;
+}
+
 /**
  * HOEMOPATHIC MEDICINE: single choice question about homeopathy
  *
  */
 export class HomeophaticMedicine extends ItemQuestion {
 
-    constructor(props: ItemProps) {
+    useHelpgroup: boolean;
+
+    constructor(props: HomeophaticMedicineProps) {
         super(props, 'Q26');
+        this.useHelpgroup = props.useHelpgroup ?? true;
     }
 
     buildItem() {
@@ -1653,6 +1667,9 @@ export class HomeophaticMedicine extends ItemQuestion {
     }
 
     getHelpGroupContent() {
+        if(!this.useHelpgroup) {
+            return undefined;
+        }
         return [
             text_why_asking("intake.Q26.helpGroup.text.0"),
             {

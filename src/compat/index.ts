@@ -4,3 +4,4 @@
  */
 export * from "./matrix";
 export * from "./components";
+export * from "./types";

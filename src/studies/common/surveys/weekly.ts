@@ -82,7 +82,7 @@ export class WeeklyDef extends SurveyBuilder {
         const hasMoreGroup = new pool.HasMoreGroup({parentKey: rootKey, consentForMoreKey: Q_wantsMore.key});
         const hasMoreGroupKey = hasMoreGroup.key;
 
-        // // Q7 visited medical service --------------------------------------
+        // // Q7 visited medical service 
         const Q_visitedMedicalService = new pool.VisitedMedicalService({parentKey: hasMoreGroupKey, isRequired: true});
         hasMoreGroup.addItem(Q_visitedMedicalService.get());
 
@@ -119,7 +119,8 @@ export class WeeklyDef extends SurveyBuilder {
         hasMoreGroup.addItem(Q_fluTest.get());
 
         //Qcov19b Flu PCR test result
-        const Q_resultFluPCRTest = new pool.ResultFluTest({parentKey:hasMoreGroupKey, keyFluTest: Q_fluTest.key, isRequired: true})
+        const Q_resultFluPCRTest = new pool.ResultFluTest({parentKey:hasMoreGroupKey, isRequired: true})
+        Q_resultFluPCRTest.setCondition(Q_fluTest.getHasTestCondition());
         hasMoreGroup.addItem(Q_resultFluPCRTest.get());
 
         // // Q9 took medication --------------------------------------
