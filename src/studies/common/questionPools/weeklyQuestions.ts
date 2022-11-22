@@ -17,6 +17,7 @@ import { trans_text } from "../../../tools";
 
 interface SymptomsProps extends ItemProps {
     useRash: boolean;
+    noteOnTop?: boolean;
 }
 
 /**
@@ -25,10 +26,11 @@ interface SymptomsProps extends ItemProps {
  */
 export class Symptoms extends ItemQuestion {
     useRash: boolean;
-
+    noteOnTop: boolean;
     constructor(props: SymptomsProps) {
         super(props, 'Q1');
         this.useRash = props.useRash;
+        this.noteOnTop= props.noteOnTop ?? false;
     }
 
     /**
@@ -55,6 +57,17 @@ export class Symptoms extends ItemQuestion {
     }
 
     buildItem() {
+
+        const note = [
+            textComponent({
+                key: "note1",
+                content: _T(
+                    "weekly.Q1.rg.cGJZ.text.0",
+                    "Multiple answers possible. If you suffer from chronic illness, only indicate symptoms that have changed. For example, if you experience chronic shortness of breath, only mark this symptom if it has recently gotten worse."
+                ),
+            })
+        ];
+
         return SurveyItems.multipleChoice({
             parentKey: this.parentKey,
             itemKey: this.itemKey,
@@ -65,15 +78,8 @@ export class Symptoms extends ItemQuestion {
                 "Have you had any of the following symptoms since your last questionnaire (or in the past week, if this the first tie you are taking this questionnaire)?"
             ),
             helpGroupContent: this.getHelpGroupContent(),
-            bottomDisplayCompoments: [
-                textComponent({
-                    key: "note1",
-                    content: _T(
-                        "weekly.Q1.rg.cGJZ.text.0",
-                        "Multiple answers possible. If you suffer from chronic illness, only indicate symptoms that have changed. For example, if you experience chronic shortness of breath, only mark this symptom if it has recently gotten worse."
-                    ),
-                })
-            ],
+            topDisplayCompoments: this.noteOnTop ? note : undefined,
+            bottomDisplayCompoments: this.noteOnTop ? undefined : note,
             responseOptions: this.getResponses()
         });
     }
@@ -1486,12 +1492,11 @@ export class FluTest extends ItemQuestion {
             },
         ]
     }
-}
 
-interface ResultFluTestProps extends ItemProps {
-    keyFluTest: string // * @param keyFluTest key to the answer of Qcov16
-
-
+    getHasTestCondition(): Expression {
+        const codes = ResponseEncoding.flu_test;
+        return  client.singleChoice.any(this.key,  codes.yes, codes.yes_antigenic );
+    }
 }
 
 /**
@@ -1499,16 +1504,8 @@ interface ResultFluTestProps extends ItemProps {
 */
 export class ResultFluTest extends ItemQuestion {
 
-    keyFluTest: string
-
-    constructor(props: ResultFluTestProps) {
+    constructor(props: ItemProps) {
         super(props, 'Qcov19b');
-        this.keyFluTest = props.keyFluTest;
-    }
-
-    getCondition() {
-        const codes = ResponseEncoding.flu_test;
-        return  client.responseHasKeysAny(this.keyFluTest,  codes.yes, codes.yes_antigenic );
     }
 
     buildItem() {
@@ -1555,17 +1552,28 @@ export class ResultFluTest extends ItemQuestion {
     }
 }
 
+interface VisitedMedicalServiceProps extends ItemProps {
+    noteOnTop?: boolean;
+}
+
+
 /**
  * VISITED MEDICAL SERVICE
  *
 */
 export class VisitedMedicalService extends ItemQuestion {
-
-    constructor(props: ItemProps) {
+    noteOnTop: boolean;
+    constructor(props: VisitedMedicalServiceProps) {
         super(props, 'Q7');
+        this.noteOnTop = props.noteOnTop ?? false;
     }
 
     buildItem() {
+
+        const note = [
+            text_select_all_apply("weekly.EX.Q7.rg.DTpM.text.0")
+        ];
+
         return SurveyItems.multipleChoice({
             parentKey: this.parentKey,
             itemKey: this.itemKey,
@@ -1573,10 +1581,8 @@ export class VisitedMedicalService extends ItemQuestion {
             condition: this.condition,
             questionText: _T("weekly.EX.Q7.title.0", "Because of your symptoms, did you VISIT (see face to face or teleconsultation) any medical services?"),
             helpGroupContent: this.getHelpGroupContent(),
-            bottomDisplayCompoments: [
-                text_select_all_apply("weekly.EX.Q7.rg.DTpM.text.0")
-            ],
-
+            topDisplayCompoments: this.noteOnTop ? note : undefined,
+            bottomDisplayCompoments: this.noteOnTop ? undefined : note,
             responseOptions: this.getResponses()
         });
     }
@@ -1642,7 +1648,7 @@ export class VisitedMedicalService extends ItemQuestion {
     }
 }
 
-interface VisitedMedicalServiceProps extends ItemProps {
+interface SubVisitedMedicalServiceProps extends ItemProps {
     keyVisitedMedicalServ: string //  keyVisitedMedicalServ: reference to question if visited any medical service
     useHospitalAdmission?: boolean;
 }
@@ -1657,7 +1663,7 @@ export class VisitedMedicalServiceWhen extends ItemQuestion {
     keyVisitedMedicalServ: string
     useHospitalAdmission: boolean;
 
-    constructor(props: VisitedMedicalServiceProps) {
+    constructor(props: SubVisitedMedicalServiceProps) {
         super(props, 'Q7b');
         this.keyVisitedMedicalServ = props.keyVisitedMedicalServ;
         this.useHospitalAdmission = props.useHospitalAdmission ?? true;
@@ -1823,7 +1829,7 @@ export class WhyVisitedNoMedicalService extends ItemQuestion {
 
     keyVisitedMedicalServ: string
 
-    constructor(props: VisitedMedicalServiceProps) {
+    constructor(props: SubVisitedMedicalServiceProps) {
         super(props, 'Qcov18');
         this.keyVisitedMedicalServ = props.keyVisitedMedicalServ;
     }
@@ -2371,6 +2377,7 @@ export class DailyRoutineDaysMissed extends ItemQuestion {
                 style: [{ key: 'className', value:  className}, { key: 'variant', value: 'h5' }],
                 content: generateLocStrings(lang),
             }, rg?.key);
+            
             editor.addExistingResponseComponent(initLikertScaleItem(this.getLikertRowKey(rowKey), likertOptions), rg?.key);
 
             if(first) {
