@@ -151,7 +151,7 @@ export class DateOfBirth extends ItemQuestion {
     getAgeExpression(unit: TimeUnits): Expression {
         const dateInputKey = ResponseEncoding.birthDate.date;
         const slotKey = [responseGroupKey, dateInputKey].join('.');
-        return client.dateResponseDiffFromNow(this.key, slotKey, unit);
+        return client.dateResponseDiffFromNow(this.key, slotKey, unit, true);
     }
 
 }
