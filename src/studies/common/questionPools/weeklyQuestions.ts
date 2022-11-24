@@ -1651,6 +1651,7 @@ export class VisitedMedicalService extends ItemQuestion {
 interface SubVisitedMedicalServiceProps extends ItemProps {
     keyVisitedMedicalServ: string //  keyVisitedMedicalServ: reference to question if visited any medical service
     useHospitalAdmission?: boolean;
+    useAnswerTip?: boolean;
 }
 
 
@@ -1662,11 +1663,14 @@ export class VisitedMedicalServiceWhen extends ItemQuestion {
 
     keyVisitedMedicalServ: string
     useHospitalAdmission: boolean;
+    useAnswerTip: boolean;
+
 
     constructor(props: SubVisitedMedicalServiceProps) {
         super(props, 'Q7b');
         this.keyVisitedMedicalServ = props.keyVisitedMedicalServ;
         this.useHospitalAdmission = props.useHospitalAdmission ?? true;
+        this.useAnswerTip = props.useAnswerTip ?? false;
     }
 
     getCondition() {
@@ -1828,10 +1832,12 @@ export class VisitedMedicalServiceWhen extends ItemQuestion {
 export class WhyVisitedNoMedicalService extends ItemQuestion {
 
     keyVisitedMedicalServ: string
+    useAnswerTip: boolean;
 
     constructor(props: SubVisitedMedicalServiceProps) {
         super(props, 'Qcov18');
         this.keyVisitedMedicalServ = props.keyVisitedMedicalServ;
+        this.useAnswerTip =  props.useAnswerTip ?? false;;
     }
 
     getCondition() {
@@ -1908,14 +1914,19 @@ export class WhyVisitedNoMedicalService extends ItemQuestion {
     }
 
     getHelpGroupContent() {
+        
+        const answer_tip = this.useAnswerTip ? [ 
+            text_how_answer("weekly.EX.Qcov18.helpGroup.text.2"),
+            trans_text("weekly.EX.Qcov18.helpGroup.answer_tip", "answer tip")
+            ] : [];
+        
         return [
             text_why_asking("weekly.EX.Qcov18.helpGroup.text.0"),
             {
                 content: _T("weekly.EX.Qcov18.helpGroup.text.1", "To understand why some people do not consult a doctor."),
                 style: [{ key: 'variant', value: 'p' }],
             },
-            text_how_answer("weekly.EX.Qcov18.helpGroup.text.2"),
-            trans_text("weekly.EX.Qcov18.helpGroup.answer_tip", "answer tip")
+           ...answer_tip
         ]
     }
 }
