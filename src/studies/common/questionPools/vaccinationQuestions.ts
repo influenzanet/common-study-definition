@@ -11,7 +11,7 @@ import { ItemProps, GroupProps, ItemQuestion } from "./types";
 import { ClientExpression } from "../../../tools";
 import { Expression } from "survey-engine/data_types";
 import { textComponent } from "../../../compat";
-import { as_input_option, option_input_other } from "../../../tools/options";
+import { as_input_option, option_def, option_input_other } from "../../../tools/options";
 
 export class VacStart extends ItemQuestion {
 
@@ -432,58 +432,52 @@ export class FluVaccineThisSeasonReasonAgainst extends SubVaccineQuestion {
         const codes = ResponseEncoding.flu_notvac_reason;
 
         return [
-            {
-                key: codes.plan, role: 'option', //  '0',
-                content: _T("vaccination.HV.Q10d.rg.mcg.option.0", "I am planning to be vaccinated, but haven't been yet")
-            },
-            {
-                key: codes.offer, role: 'option', // '1'
-                content: _T("vaccination.HV.Q10d.rg.mcg.option.1", "I haven't been offered the vaccine")
-            },
-            {
-                key: codes.risk_group, role: 'option', // '2'
-                content: _T("vaccination.HV.Q10d.rg.mcg.option.2", "I don't belong to a risk group")
-            },
-            {
-                key: codes.own_immunity, role: 'option', // '3'
-                content: _T("vaccination.HV.Q10d.rg.mcg.option.3", "It is better to build your own natural immunity against influenza")
-            },
-            {
-                key: codes.doubt, role: 'option', //  '4'
-                content: _T("vaccination.HV.Q10d.rg.mcg.option.4", "I doubt that the influenza vaccine is effective")
-            },
-            {
-                key: codes.minor_illness, role: 'option', // '5'
-                content: _T("vaccination.HV.Q10d.rg.mcg.option.5", "Influenza is a minor illness")
-            },
-            {
-                key: codes.unlikely, role: 'option', // '6'
-                content: _T("vaccination.HV.Q10d.rg.mcg.option.6", "I don't think I am likely to get influenza")
-            },
-            {
-                key: codes.cause_flu, role: 'option', // '7'
-                content: _T("vaccination.HV.Q10d.rg.mcg.option.7", "I believe that influenza vaccine can cause influenza")
-            }, {
-                key: codes.safety, role: 'option', // '8'
-                content: _T("vaccination.HV.Q10d.rg.mcg.option.8", "I am worried that the vaccine is not safe or will cause illness or other adverse events")
-            }, {
-                key: codes.vaccine, role: 'option', // '9'
-                content: _T("vaccination.HV.Q10d.rg.mcg.option.9", "I don't like having vaccinations")
-            }, {
-                key: codes.not_available, role: 'option', //  '10'
-                content: _T("vaccination.HV.Q10d.rg.mcg.option.10", "The vaccine is not readily available to me")
-            }, {
-                key: codes.free, role: 'option', // '11'
-                content: _T("vaccination.HV.Q10d.rg.mcg.option.11", "The vaccine is not free of charge")
-            }, {
-                key: codes.no_reason, role: 'option', // '12'
-                content: _T("vaccination.HV.Q10d.rg.mcg.option.12", "No particular reason")
-            }, {
-                key: codes.doctor, role: 'option', // '13'
-                content: _T("vaccination.HV.Q10d.rg.mcg.option.13", "Although my doctor recommend a vaccine, I do not get one")
-            },
-
-            option_input_other(codes.other, _T("vaccination.HV.Q10d.rg.mcg.input.14", "Other reason(s)"), "vaccination.HV.Q10d.rg.mcg.description.input.14" )
+            option_def(codes.plan, 
+                _T("vaccination.HV.Q10d.rg.mcg.option.0", "I am planning to be vaccinated, but haven't been yet")
+            ), //  '0',
+            option_def(codes.offer,  // "1"
+                _T("vaccination.HV.Q10d.rg.mcg.option.1", "I haven't been offered the vaccine")
+            ), 
+            option_def(codes.risk_group, // '2'
+                _T("vaccination.HV.Q10d.rg.mcg.option.2", "I don't belong to a risk group")
+            ),
+            option_def(codes.own_immunity,  // '3' 
+                _T("vaccination.HV.Q10d.rg.mcg.option.3", "It is better to build your own natural immunity against influenza")
+            ),
+            option_def(codes.doubt, //  '4'
+                _T("vaccination.HV.Q10d.rg.mcg.option.4", "I doubt that the influenza vaccine is effective") 
+            ),
+            option_def(codes.minor_illness, // '5'
+                _T("vaccination.HV.Q10d.rg.mcg.option.5", "Influenza is a minor illness")
+            ),
+            option_def(codes.unlikely, // '6'
+                _T("vaccination.HV.Q10d.rg.mcg.option.6", "I don't think I am likely to get influenza")
+            ),
+            option_def(codes.cause_flu,// '7'
+                 _T("vaccination.HV.Q10d.rg.mcg.option.7", "I believe that influenza vaccine can cause influenza")
+            ), 
+            option_def(codes.safety, // '8'
+                _T("vaccination.HV.Q10d.rg.mcg.option.8", "I am worried that the vaccine is not safe or will cause illness or other adverse events")
+            ),
+            option_def(codes.vaccine, // '9'
+                _T("vaccination.HV.Q10d.rg.mcg.option.9", "I don't like having vaccinations")
+            ),
+            option_def(codes.not_available,  //  '10'
+                _T("vaccination.HV.Q10d.rg.mcg.option.10", "The vaccine is not readily available to me")
+            ), 
+            option_def(codes.free, // '11'
+                 _T("vaccination.HV.Q10d.rg.mcg.option.11", "The vaccine is not free of charge")
+            ),  
+            option_def(codes.doctor,  // '13'
+                _T("vaccination.HV.Q10d.rg.mcg.option.13", "Although my doctor recommend a vaccine, I do not get one")
+            ),
+            option_def(codes.no_reason, // '12'
+                 _T("vaccination.HV.Q10d.rg.mcg.option.12", "No particular reason")
+            ),
+            option_input_other(codes.other, 
+                _T("vaccination.HV.Q10d.rg.mcg.input.14", "Other reason(s)"), 
+                "vaccination.HV.Q10d.rg.mcg.description.input.14" 
+            )
         ];
     }
 
