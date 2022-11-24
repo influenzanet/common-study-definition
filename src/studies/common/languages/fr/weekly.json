@@ -13,7 +13,7 @@
   },
   "weekly.Q1.title.0": {
     "en": "Have you had any of the following symptoms since your last questionnaire (or in the past week, if this the first tie you are taking this questionnaire)?",
-    "fr": "Depuis votre dernière déclaration (ou dans les sept derniers jours, si cela est votre première visite de la saison), avez-vous eu certains des symptômes suivants ? Si vous présentez ces symptômes de façon chronique et qu’ils n’ont pas changé, ne les déclarez pas. (Sélectionnez toutes les options qui s'appliquent) "
+    "fr": "Depuis votre dernière déclaration (ou dans les sept derniers jours, si cela est votre première visite de la saison), avez-vous eu certains des symptômes suivants ? Si vous présentez ces symptômes de façon chronique et qu’ils n’ont pas changé, ne les déclarez pas."
   },
   "weekly.Q1.helpGroup.text.1": {
     "en": "The most important part of this study is about following up on the symptoms you have reported.",
@@ -389,7 +389,7 @@
   },
   "weekly.EX.Q7.title.0": {
     "en": "Because of your symptoms, did you VISIT (see face to face or teleconsultation) any medical services?",
-    "fr": "En raison de vos symptômes, avez-vous consulté (vu en télé-consultation ou physiquement, à votre domicile ou au cabinet) un des services médicaux  suivants ? (Sélectionnez toutes les options qui s'appliquent)"
+    "fr": "En raison de vos symptômes, avez-vous consulté (vu en télé-consultation ou physiquement, à votre domicile ou au cabinet) un des services médicaux  suivants ?"
   },
   "weekly.EX.Q7.helpGroup.text.1": {
     "en": "To find out whether people contact the health services because of their symptoms.",

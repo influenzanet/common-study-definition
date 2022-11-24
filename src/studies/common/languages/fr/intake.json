@@ -141,7 +141,7 @@
   },
   "intake.Q4b.rg.scg.option.1": {
     "en": "I don’t know/can’t remember",
-    "fr": "Non, je en la connais pas"
+    "fr": "Non, je ne la connais pas"
   },
   "intake.Q4b.rg.scg.option.2": {
     "en": "Not applicable (e.g. don’t have a fixed workplace)",
@@ -253,7 +253,7 @@
   },
   "intake.Q5.title.0": {
     "en": "Except people you meet on public transports, do you have contact with any of the following during the course of a typical day (so without COVID-19 measures)?",
-    "fr": "Sans compter les personnes que vous croisez pendant vos déplacements et vos courses, avez-vous des contacts avec les personnes suivantes au cours d'une journée typique ? (Sélectionnez toutes les options qui s'appliquent, s'il y a lieu)"
+    "fr": "Sans compter les personnes que vous croisez pendant vos déplacements et vos courses, avez-vous des contacts avec les personnes suivantes au cours d'une journée typique ?"
   },
   "intake.Q5.helpGroup.text.1": {
     "en": "To find out whether you are likely to be exposed to more infection risk than the average person (e.g. work with children, or patients).",
@@ -293,7 +293,7 @@
   },
   "intake.Q6.helpGroup.answer_tip": {
     "en": "Answer tip",
-    "fr": "_TODO_"
+    "fr": "Un foyer est défini comme un groupe de personnes (pas forcément de la même famille) qui habitent à la même adresse et partagent une cuisine et une pièce de vie. Exemple : Vous faites partie d'un foyer de 3 personnes : vous, votre conjoint (19 - 44 ans) et un enfant (5 - 18 ans). Il vous faut alors inscrire « 1 » en face des catégories «5 - 18 ans» et «19 - 44 ans», puis entrer «0» en face des autres catégories."
   },
   "intake.Q6.rg.mat.row0.l.label.0": {
     "en": "0 - 4 years",
@@ -433,7 +433,7 @@
   },
   "intake.Q11.title.0": {
     "en": "Do you take regular medication for any of the following medical conditions?",
-    "fr": "Prenez-vous régulièrement des médicaments pour l'un des troubles suivants ? (Sélectionnez toutes les options qui s'appliquent)"
+    "fr": "Prenez-vous régulièrement des médicaments pour l'un des troubles suivants ? "
   },
   "intake.Q11.helpGroup.text.1": {
     "en": "This question allows us to find out whether you have other medical conditions that may increase your risk of having more severe illness if you are infected.",
@@ -557,7 +557,7 @@
   },
   "intake.Q14.title.0": {
     "en": "Do you have one of the following allergies that can cause respiratory symptoms?",
-    "fr": "Avez-vous l'une des allergies respiratoires suivantes ? (Sélectionnez toutes les options qui s'appliquent)"
+    "fr": "Avez-vous l'une des allergies respiratoires suivantes ? "
   },
   "intake.Q14.helpGroup.text.1": {
     "en": "Certain allergies provoke the same symptoms as respiratory infections.",
@@ -617,7 +617,7 @@
   },
   "intake.Q26.helpGroup.text.1": {
     "en": "We are interested in knowing more about your health-related habits",
-    "fr": "TODO"
+    "fr": "Nous souhaitons connaitre les habitudes de santé de la population"
   },
   "intake.Q26.rg.scg.option.0": {
     "en": "Yes",
@@ -641,7 +641,7 @@
   },
   "intake.Q17.helpGroup.text.1": {
     "en": "We would like to know how you found out about our website.",
-    "fr": "Comment avez-vous eu connaissance cette étude ? (Sélectionnez toutes les options qui s'appliquent)"
+    "fr": "Nous souhaitons savoir comment vous avez eu connaissance de ce site. Sélectionnez toutes les options qui s'appliquent."
   },
   "intake.Q17.rg.mcg.option.0": {
     "en": "Radio or television",
@@ -653,7 +653,7 @@
   },
   "intake.Q17.rg.mcg.option.2": {
     "en": "The internet (a website, link, a search engine)",
-    "fr": "TODO"
+    "fr": "Internet (un site, lien, ou moteur de recherche)"
   },
   "intake.Q17.rg.mcg.option.3": {
     "en": "By poster",
