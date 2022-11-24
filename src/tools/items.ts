@@ -183,7 +183,7 @@ export class SimpleGroupQuestion extends GroupQuestion {
     }
 }
 
-type HelpGroupContentType =  Array<{
+export type HelpGroupContentType =  Array<{
     content: Map<string, string>;
     style?: Array<{
         key: string;
@@ -205,7 +205,7 @@ export abstract class BaseChoiceQuestion extends ItemQuestion {
      * Overrides options, who must be complete here (with questionText)
      */
     declare protected  options?: BaseQuestionOptions;
-    
+
     protected questionType : QuestionType;
 
     abstract getResponses(): OptionDef[]

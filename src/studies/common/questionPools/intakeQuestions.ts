@@ -12,7 +12,7 @@ import { IntakeResponses as ResponseEncoding } from "../responses/intake";
 import { ItemProps, ItemQuestion } from "./types";
 import { Expression } from "survey-engine/data_types";
 import { textComponent } from "../../../compat";
-import { trans_text, ClientExpression as client, as_option, option_def, option_input_other   } from "../../../tools";
+import { trans_text, ClientExpression as client, as_option, option_def, option_input_other, HelpGroupContentType   } from "../../../tools";
 import { TimeUnits } from "../../../compat";
 
 interface GenderProps extends ItemProps {
@@ -942,7 +942,7 @@ export class PeopleAtRisk extends ItemQuestion {
         });
     }
 
-    getHelpGroupContent() {
+    getHelpGroupContent(): HelpGroupContentType|undefined {
         return [
             text_why_asking("intake.Q6c.helpGroup.text.0"),
             {
