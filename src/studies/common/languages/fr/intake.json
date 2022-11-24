@@ -477,7 +477,7 @@
   },
   "intake.Q12.title.0": {
     "en": "Are you currently pregnant?",
-    "fr": "Êtes-vous actuellement enceinte ?"
+    "fr": "Êtes-vous enceinte ?"
   },
   "intake.Q12.helpGroup.text.1": {
     "en": "Pregnancy is a potential risk factor for severe symptoms in the event of infection.",
@@ -581,7 +581,7 @@
   },
   "intake.Q14.rg.mcg.option.3": {
     "en": "Other allergies that cause respiratory symptoms (e.g. sneezing, runny eyes)",
-    "fr": "Autres allergies provoquant des symptômes respiratoires (par ex. éternuements, yeux larmoyants, etc)(préciser)"
+    "fr": "Autres allergies causant des symptômes respiratoires"
   },
   "intake.Q14.rg.mcg.option.4": {
     "en": "I do not have an allergy that causes respiratory symptoms",

@@ -589,7 +589,7 @@
   },
   "weekly.EX.Qcov18.title.0": {
     "en": "What is the main reason for which you did not consult any health professional for the symptoms you declared today?",
-    "fr": "Quelle est la raison principale pour laquelle vous n’avez pas consulté en présentiel ou à distance un professionnel de santé pour les symptômes que vous déclarez aujourd’hui ?"
+    "fr": "Quelle est la raison principale pour laquelle vous n’avez pas encore consulté un médecin pour les symptômes que vous déclarez aujourd’hui ?"
   },
   "weekly.EX.Qcov18.helpGroup.text.1": {
     "en": "To understand why some people do not consult a doctor.",
@@ -981,7 +981,7 @@
   },
   "weekly.EX.Qcov7.title.0": {
     "en": "Did you begin to follow or increase any of the measures below, due to your symptoms (compared to the period before your symptoms began)?",
-    "fr": "Pour cet épisode, quelle(s) mesure(s) barrière(s) avez-vous utilisée(s) ? (Sélectionnez toutes les réponses qui s’appliquent)"
+    "fr": "Pour cet épisode, quelle(s) mesure(s) barrière(s) avez-vous utilisée(s) ?"
   },
   "weekly.EX.Qcov7.helpGroup.text.1": {
     "en": "To examine how different measures are being followed.",
