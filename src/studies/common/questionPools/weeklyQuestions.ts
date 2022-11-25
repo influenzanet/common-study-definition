@@ -2284,6 +2284,7 @@ export class DailyRoutineDaysMissed extends ItemQuestion {
             itemKey: this.itemKey,
             isRequired: this.isRequired,
             condition: this.condition,
+            topDisplayCompoments: this.options?.topDisplayCompoments,
             questionText: _T("weekly.EX.Q10c.title.0", "For how many days have you been unable to work normally/go to school (when you otherwise would have)?"),
             helpGroupContent: this.getHelpGroupContent(),
             responseOptions: this.getResponses()
