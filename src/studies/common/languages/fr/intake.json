@@ -129,7 +129,7 @@
   },
   "intake.Q4b.helpGroup.text.1": {
     "en": "To be able to determine the distance you regularly travel during your movements.",
-    "fr": "Afin d'étudier la propagation de la COVID-19 et de la grippe à l'échelle géographique."
+    "fr": "Pour vérifier la représentativité de notre échantillon et afin d'étudier la propagation de la COVID-19 et de la grippe à l'échelle géographique."
   },
   "intake.Q4b.rg.scg.input.0": {
     "en": "Postal code",
@@ -165,7 +165,7 @@
   },
   "intake.Q4h.helpGroup.text.3": {
     "en": "Please tick the box that most closely resembles your main occupation.",
-    "fr": "Merci de cocher la case de l’activité qui ressemble le plus à votre activité principale."
+    "fr": "Merci de cocher la case de l’activité qui ressemble la plus à votre activité principale."
   },
   "intake.Q4h.rg.scg.option.0": {
     "en": "Services and sales workers (Personal Services Workers, Sales Workers, Personal Care Workers, Protective Services Workers)",
@@ -641,7 +641,7 @@
   },
   "intake.Q17.helpGroup.text.1": {
     "en": "We would like to know how you found out about our website.",
-    "fr": "Nous souhaitons savoir comment vous avez eu connaissance de ce site. Sélectionnez toutes les options qui s'appliquent."
+    "fr": "Nous souhaitons savoir comment vous avez eu connaissance de ce site."
   },
   "intake.Q17.rg.mcg.option.0": {
     "en": "Radio or television",
