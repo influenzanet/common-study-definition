@@ -993,11 +993,11 @@
   },
   "weekly.EX.Qcov7.helpGroup.text.3": {
     "en": "For example, 'Avoid shaking hands': Answer 'yes' if you shake hands less or not at all due to your symptoms; Answer 'No, I am not following this measure' if you continue to shake hands despite your symptoms; Answer 'No, I was already following this measure' if you had already stopped shaking hands before the onset of your symptoms and you did not change this behaviour.",
-    "fr": "Par exemple, « Évitez de vous serrer la main » : répondez « oui » si vous avez serré moins la main ou pas du tout en raison de vos symptômes ; Répondez « Non, je n'applique pas cette mesure » ​​si vous continuez à vous serrer la main malgré vos symptômes ; Répondez « Non, j'appliquais déjà cette mesure » ​​si vous aviez déjà cessé de serrer la main avant le début de vos symptômes et que vous n'avez pas changé ce comportement."
+    "fr": "Par exemple, « Évitez de vous serrer la main » : répondez « Davantage » si vous avez serré moins la main ou pas du tout en raison de vos symptômes ; Répondez « Non » ​​si vous continuez à vous serrer la main malgré vos symptômes ; Répondez « Pareil » ​​si vous aviez déjà cessé de serrer la main avant le début de vos symptômes et que vous n'avez pas changé ce comportement."
   },
   "weekly.EX.Qcov7.rg.gU4U.text.0": {
     "en": "To be completed optionally",
-    "fr": "Merci d’apporter une réponse à chacune des mesures barrières de ce tableau"
+    "fr": "Merci d’apporter une réponse à chacune des mesures barrières de ce tableau. Indiquez 'Davantage' si vous avez commencé à appliquer cette mesure."
   },
   "weekly.EX.Qcov7.rg.v1C0.text.1": {
     "en": "Regularly wash or disinfect hands",
@@ -1005,15 +1005,15 @@
   },
   "weekly.EX.Qcov7.rg.likert_1.option.0": {
     "en": "Yes, I am following this measure now for the first time, or in a stricter way",
-    "fr": "Oui, j'applique cette mesure maintenant ou de manière plus importante"
+    "fr": "Davantage"
   },
   "weekly.EX.Qcov7.rg.likert_1.option.1": {
     "en": "No, I was already following this measure",
-    "fr": "Non, j'appliquais déjà cette mesure"
+    "fr": "Pareil"
   },
   "weekly.EX.Qcov7.rg.likert_1.option.2": {
     "en": "No, I am not following this measure",
-    "fr": "Non, je n'applique pas cette mesure"
+    "fr": "Non"
   },
   "weekly.EX.Qcov7.rg.likert_1.option.3": {
     "en": "Not applicable",
