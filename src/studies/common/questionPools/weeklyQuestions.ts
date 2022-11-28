@@ -1840,7 +1840,7 @@ export class WhyVisitedNoMedicalService extends ItemQuestion {
         this.useAnswerTip =  props.useAnswerTip ?? false;;
     }
 
-    getCondition() {
+    getCondition(): Expression|undefined {
         const codes = ResponseEncoding.visit_medical;
         return client.multipleChoice.any(this.keyVisitedMedicalServ, codes.no);
     }
