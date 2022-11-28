@@ -471,12 +471,12 @@ export class FluVaccineThisSeasonReasonAgainst extends SubVaccineQuestion {
             option_def(codes.doctor,  // '13'
                 _T("vaccination.HV.Q10d.rg.mcg.option.13", "Although my doctor recommend a vaccine, I do not get one")
             ),
-            option_def(codes.no_reason, // '12'
-                 _T("vaccination.HV.Q10d.rg.mcg.option.12", "No particular reason")
-            ),
             option_input_other(codes.other, 
                 _T("vaccination.HV.Q10d.rg.mcg.input.14", "Other reason(s)"), 
                 "vaccination.HV.Q10d.rg.mcg.description.input.14" 
+            ),
+            option_def(codes.no_reason, // '12'
+                 _T("vaccination.HV.Q10d.rg.mcg.option.12", "No particular reason")
             )
         ];
     }
@@ -1109,11 +1109,11 @@ export class CovidVaccineAgainstReasons extends SubVaccineQuestion {
                 key: '11', role: 'option',
                 content: _T("vaccination.HV.Q35m.rg.mcg.option.15", "The vaccine is not free of charge")
             },
+            option_input_other('14', _T("vaccination.HV.Q35m.rg.mcg.input.17", "Other reason(s)"), "vaccination.HV.Q35m.rg.mcg.description.input.17"),
             {
                 key: '12', role: 'option',
                 content: _T("vaccination.HV.Q35m.rg.mcg.option.16", "I don't know")
             },
-            option_input_other('14', _T("vaccination.HV.Q35m.rg.mcg.input.17", "Other reason(s)"), "vaccination.HV.Q35m.rg.mcg.description.input.17")
         ];
     }
 
