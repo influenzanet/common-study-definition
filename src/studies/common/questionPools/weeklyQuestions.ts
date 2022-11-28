@@ -311,7 +311,7 @@ export class SameIllness extends ItemQuestion {
                 textComponent({
                     key: "note1",
                     'content': _T(
-                        "vaccination.Q0.privacy.note",
+                        "weekly.Q2.bottom.note.privacy",
                         "(**) By selecting one of these options you give your consent to use your historical data to prefill this survey's responses."
                     )
                 })

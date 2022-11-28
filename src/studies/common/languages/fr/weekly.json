@@ -151,6 +151,10 @@
     "en": "This does not apply to me",
     "fr": "Non applicable (je ne suis plus malade)"
   },
+  "weekly.Q2.bottom.note.privacy": {
+    "en": "(**) By selecting one of these options you give your consent to use your historical data to prefill this survey's responses.",
+    "fr": ""
+  },
   "weekly.HS.Qcov3.title.0": {
     "en": "In the 14 days before your symptoms started, have you been in close contact with someone for whom an antigenic or PCR test has confirmed that they have COVID-19?",
     "fr": "Dans les 14 jours avant l’apparition de vos symptômes, avez-vous été en contact étroit avec une personne ayant une COVID-19 confirmée par test PCR ou antigénique ?"
