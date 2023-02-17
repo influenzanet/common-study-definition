@@ -8,12 +8,12 @@ export interface SurveyKeys {
     vaccination: SurveyDefinition;
 }
 
-interface WeeklySurveyDefinition {
+export interface WeeklySurveyDefinition {
     key: string
     getSymptomEnd(): Item
 }
 
-interface IntakeSurveyDefinition {
+export interface IntakeSurveyDefinition {
     key:string
     getBirthDateItem(): Item
 }
