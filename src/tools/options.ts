@@ -4,6 +4,16 @@ import { _T } from "../studies/common/languages";
 
 export const default_input_option_style = [{ key: 'className', value: 'w-100' }] as const;
 
+// Common roles available for options
+export const optionRoles = {
+    'option': 'option', // Only the label
+    'text': 'text', // Text View
+    'number': 'numberInput',
+    'input': 'input',
+    'time': 'timeInput',
+    'date': 'dateInput', // Only available for singleChoice group
+} as const;
+
 /**
  * Helper to create a simple option component
  * @param key
@@ -38,10 +48,10 @@ interface OptionDefOpts extends Omit<OptionDef, "key" | "content" | "role"> {
  * Option input with automatic description "describe here"
  * The description text is using "common" text or use the trans id as translation text
  * @param key option key
- * @param content option content 
+ * @param content option content
  * @param trans translation id for the text "Describe here (optional)", if not available will lookup common text entry
  * @param opts other option parameters
- * @returns 
+ * @returns
  */
 export const option_input_other = (key:string, content: Map<string,string>, trans:string, opts?:OptionDefOpts) => {
     const defaultStyle = opts?.defaultStyle ?? true;
