@@ -10,6 +10,25 @@ export const isGroupBuilder = (item: ItemBuilder): item is Group=> {
     return 'groupEditor' in item;
 }
 
+/**
+ * Create an item key from parent + itemKey
+ *
+ * This helper just embeds the full key of an item (dot separated) to avoid hardcoding it everywhere
+ * And does extra checks, like checking itemKey is not empty and doest contains dot
+ *
+ * @param parentKey
+ * @param itemKey
+ * @returns
+ */
+export const surveyItemKey = (parentKey: string, itemKey: string) => {
+    if(!itemKey) {
+        throw new Error("Itemkey cannot be empty");
+    }
+    if(itemKey.includes('.')) {
+        throw new Error("itemKey cannot contains dot,'" + itemKey+"' given");
+    }
+    return parentKey + '.' + itemKey;
+}
 
 export interface ItemProps {
     /**
