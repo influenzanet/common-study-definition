@@ -1,8 +1,13 @@
 import { OptionDef } from "case-editor-tools/surveys/types";
 import { _T } from "../studies/common/languages";
+import { ComponentProperties, ExpressionArg } from "survey-engine/data_types";
+import { isExpressionArg, isValidExpressionArg } from "./expressions";
 
 
 export const default_input_option_style = [{ key: 'className', value: 'w-100' }] as const;
+
+
+
 
 // Common roles available for options
 export const optionRoles = {
@@ -39,6 +44,25 @@ export function as_input_option(key:string, content: Map<string,string>, descrip
     };
 }
 
+const check_componenet_props = function(props: ComponentProperties) {
+    
+    const check = function(name: keyof ComponentProperties) {
+        if(typeof(props[name]) === "undefined") {
+            return ;
+        }
+        if(!isExpressionArg(props[name])) {
+            throw new Error("ComponentProperties "+ name +" must be an ExpressionArg");
+        }
+        if(!isValidExpressionArg(props[name] as ExpressionArg)) {
+            throw new Error("ComponentProperties "+ name +" must be a valid ExpressionArg");
+        }
+    }
+    check('dateInputMode');
+    check('max');
+    check('min')
+    check('stepSize'); 
+} 
+
 interface OptionDefOpts extends Omit<OptionDef, "key" | "content" | "role"> {
     role?: string; // Override with optional property, will be set as 'option' by default
     defaultStyle?: boolean; // For input type can apply the default style
@@ -74,6 +98,10 @@ export const option_input_other = (key:string, content: Map<string,string>, tran
  */
 export const option_def = (key:string, content: Map<string,string>, opts?: OptionDefOpts): OptionDef => {
     const role = opts?.role ?? 'option';
+
+    if(opts?.optionProps) {
+        check_componenet_props(opts.optionProps);
+    }
 
     const o = {
         key: key,
