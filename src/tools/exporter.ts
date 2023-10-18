@@ -69,8 +69,6 @@ export function study_exporter(studies: Study[], o?: ExporterOpts|boolean) {
 
         const output = outputBase + '/' +(study.outputFolderName ?? study.studyKey);
 
-        LanguageHelpers.missing.clear();
-
         generateFilesForStudy(study, true);
 
         if(opts.check) {
@@ -98,13 +96,14 @@ export function study_exporter(studies: Study[], o?: ExporterOpts|boolean) {
                 }
             });
             json_export(output + '/classes.json', names);
-        }
+        }     
+        // Clear missing translation for next study ()
+        LanguageHelpers.missing.clear();  
     });
 }
 
 export function buildMissing(outputFolder:string) {
 
-    //console.log(LanguageHelpers.missing);
     LanguageHelpers.missing.forEach((missingKeys, language) =>{
         const m : TranslationSet = {};
         missingKeys.forEach((ref, key)=>{
