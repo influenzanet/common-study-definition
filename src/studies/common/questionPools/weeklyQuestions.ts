@@ -12,12 +12,13 @@ import { SymptomKeysType, WeeklyResponses as ResponseEncoding } from "../respons
 import { GroupProps, GroupQuestion, ItemProps, ItemQuestion } from "./types";
 import { ClientExpression as client } from "../../../tools/expressions";
 import { Expression } from "survey-engine/data_types";
-import { MatrixRow, textComponent } from "../../../compat";
+import { MatrixRow, markdownComponent, textComponent } from "../../../compat";
 import { trans_text } from "../../../tools";
 
 interface SymptomsProps extends ItemProps {
     useRash: boolean;
     noteOnTop?: boolean;
+    useMarkdownNote?: boolean; // Use Markdow note instead of textComponent
 }
 
 /**
@@ -27,10 +28,12 @@ interface SymptomsProps extends ItemProps {
 export class Symptoms extends ItemQuestion {
     useRash: boolean;
     noteOnTop: boolean;
+    useMarkdownNote: boolean;
     constructor(props: SymptomsProps) {
         super(props, 'Q1');
         this.useRash = props.useRash;
         this.noteOnTop= props.noteOnTop ?? false;
+        this.useMarkdownNote = props.useMarkdownNote ?? false;
     }
 
     /**
@@ -57,6 +60,8 @@ export class Symptoms extends ItemQuestion {
     }
 
     buildItem() {
+
+        const noteFunc = this.useMarkdownNote ? markdownComponent : textComponent;
 
         const note = [
             textComponent({
@@ -1914,12 +1919,12 @@ export class WhyVisitedNoMedicalService extends ItemQuestion {
     }
 
     getHelpGroupContent() {
-        
-        const answer_tip = this.useAnswerTip ? [ 
+
+        const answer_tip = this.useAnswerTip ? [
             text_how_answer("weekly.EX.Qcov18.helpGroup.text.2"),
             trans_text("weekly.EX.Qcov18.helpGroup.answer_tip", "answer tip")
             ] : [];
-        
+
         return [
             text_why_asking("weekly.EX.Qcov18.helpGroup.text.0"),
             {
@@ -2389,7 +2394,7 @@ export class DailyRoutineDaysMissed extends ItemQuestion {
                 style: [{ key: 'className', value:  className}, { key: 'variant', value: 'h5' }],
                 content: generateLocStrings(lang),
             }, rg?.key);
-            
+
             editor.addExistingResponseComponent(initLikertScaleItem(this.getLikertRowKey(rowKey), likertOptions), rg?.key);
 
             if(first) {

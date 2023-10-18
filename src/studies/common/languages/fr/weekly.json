@@ -13,7 +13,7 @@
   },
   "weekly.Q1.title.0": {
     "en": "Have you had any of the following symptoms since your last questionnaire (or in the past week, if this the first tie you are taking this questionnaire)?",
-    "fr": "Depuis votre dernière déclaration (ou dans les sept derniers jours, si cela est votre première visite de la saison), avez-vous eu certains des symptômes suivants ? Si vous présentez ces symptômes de façon chronique et qu’ils n’ont pas changé, ne les déclarez pas."
+    "fr": "Depuis votre dernière déclaration (ou dans les sept derniers jours, si cela est votre première visite de la saison), avez-vous eu certains des symptômes suivants ?"
   },
   "weekly.Q1.helpGroup.text.1": {
     "en": "The most important part of this study is about following up on the symptoms you have reported.",
@@ -25,7 +25,11 @@
   },
   "weekly.Q1.rg.cGJZ.text.0": {
     "en": "Multiple answers possible. If you suffer from chronic illness, only indicate symptoms that have changed. For example, if you experience chronic shortness of breath, only mark this symptom if it has recently gotten worse.",
-    "fr": "Plusieurs réponses sont possibles"
+    "fr": [
+        "Plusieurs réponses sont possibles.",
+        "",
+        "Si vous présentez ces symptômes de façon chronique et qu’ils n’ont pas changé, ne les déclarez pas"
+      ]
   },
   "weekly.Q1.rg.mcg.option.0": {
     "en": "No symptoms",
@@ -421,7 +425,7 @@
   },
   "weekly.EX.Q7.rg.mcg.option.4": {
     "en": "Other medical services",
-    "fr": "Autres services médicaux (infirmier, médecine du travail, PMI...)"
+    "fr": "Autres services médicaux (sage-femme, infirmier, médecine du travail, PMI...)"
   },
   "weekly.EX.Q7.rg.mcg.option.5": {
     "en": "No, but I have an appointment scheduled",
