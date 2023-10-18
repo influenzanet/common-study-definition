@@ -1,7 +1,7 @@
 import { OptionDef } from "case-editor-tools/surveys/types";
 import { format } from "util";
-import { _T } from "../studies/common/languages";
 import { as_option,OptionList } from "../tools";
+import { _T } from "../studies/common/languages";
 
 const o = (key:string) => {
     return as_option(key, _T(key, key));
