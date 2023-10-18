@@ -2,7 +2,8 @@ export const IntakeResponses = {
     gender: {
         'male':  '0',
         'female': '1',
-        'other': '2'
+        'other': '2',
+        'dontwant': '3', // Dont want to answer, use in France from 2023
     },
     birthDate: {
         'date': '1',

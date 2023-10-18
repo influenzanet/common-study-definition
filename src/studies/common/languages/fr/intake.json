@@ -217,7 +217,7 @@
   },
   "intake.Q4d.title.0": {
     "en": "What is the highest level of formal education/qualification that you have?",
-    "fr": "Quel est votre plus haut niveau de qualification ? Si vous êtes toujours scolarisé ou étudiant, cochez s'il-vous-plaît la case correspondant au diplôme le plus élevé que vous avez obtenu jusqu'à maintenant."
+    "fr": "Quel est votre plus haut niveau de qualification ?"
   },
   "intake.Q4d.helpGroup.text.1": {
     "en": "To check how representative our sample is compared to the population of the UK (Italy, Belgium..) as a whole.",

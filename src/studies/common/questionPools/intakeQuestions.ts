@@ -17,6 +17,7 @@ import { TimeUnits } from "../../../compat";
 
 interface GenderProps extends ItemProps {
     useOther?:boolean
+    useDontWantAnswer?: boolean;
 }
 
 /**
@@ -26,9 +27,13 @@ export class Gender extends ItemQuestion {
 
     useOther: boolean;
 
+    // Dont want to answer response, introduced in France, 2023
+    useDontWantAnswer: boolean;
+
     constructor(props:GenderProps ) {
         super(props, 'Q1');
         this.useOther = props.useOther ?? true;
+        this.useDontWantAnswer = props.useDontWantAnswer ?? false;
     }
 
     buildItem() {
@@ -50,6 +55,12 @@ export class Gender extends ItemQuestion {
         t.push({
             key: ResponseEncoding.gender.other, role: 'option',
             content: _T("intake.Q1.rg.scg.option.2", "Other")
+        });
+       }
+       if(this.useDontWantAnswer) {
+        t.push({
+            key: ResponseEncoding.gender.dontwant, role: 'option',
+            content: _T("intake.Q1.rg.scg.option.3", "I dont want to answer")
         });
        }
 
