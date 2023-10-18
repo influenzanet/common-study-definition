@@ -14,3 +14,9 @@ export interface Translation {
 export interface TranslationSet {
     [key:string]: Translation;
 };
+
+
+export type TranslateArray = [string, string][];
+export type TranslateMap = Map<string, string>;
+
+export type MissingTranslations = Map<string, TranslateMap>

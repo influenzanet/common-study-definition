@@ -1,8 +1,6 @@
 import { Logger } from "case-editor-tools/logger/logger";
-import {TranslationSet, Translation} from "./types";
+import {TranslationSet, Translation, TranslateArray, TranslateMap, MissingTranslations} from "./types";
 
-type TranslateArray = [string, string][];
-type TranslateMap = Map<string, string>;
 
 
 // Translation from JSON files
@@ -59,7 +57,7 @@ export class LanguageHelpers {
   /**
    * Missing keys by language => (key=>reference text)
    */
-  static missing: Map<string, TranslateMap> = new Map();
+  static missing: MissingTranslations = new Map();
 
   /**
    *
@@ -102,10 +100,12 @@ export class LanguageHelpers {
    */
   static setMissing(key: string, language: string, reference?: string) {
     var m = LanguageHelpers.missing.get(language);
-    if (m == undefined) {
+    if(m === undefined) {
+      console.log("Register missing language");
       m = new Map<string, string>();
       LanguageHelpers.missing.set(language, m);
     }
+    console.log("add Missing "+ key);
     m.set(key, typeof (reference) == "undefined" ? "_unknown_" : reference);
   }
 
