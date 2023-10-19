@@ -1,13 +1,9 @@
 import { OptionDef } from "case-editor-tools/surveys/types";
 import { _T } from "../studies/common/languages";
 import { ComponentProperties, ExpressionArg } from "survey-engine/data_types";
-import { isExpressionArg, isValidExpressionArg } from "./expressions";
-
+import { ClientExpression as client, isExpressionArg, isValidExpressionArg } from "./expressions";
 
 export const default_input_option_style = [{ key: 'className', value: 'w-100' }] as const;
-
-
-
 
 // Common roles available for options
 export const optionRoles = {
@@ -42,6 +38,29 @@ export function as_input_option(key:string, content: Map<string,string>, descrip
         content: content,
         description: description
     };
+}
+
+/**
+ * Make a list of options exclusive to the others
+ * @param key key of the item containing the options
+ * @param options options list
+ * @param group list of option keys to be exclusives
+ * @param otherGroup list of option keys complementary (if not defined, the key not in previous group are used)
+ */
+export const make_exclusive_options = (key: string, options: OptionDef[], group: string[], otherGroup?:string[])=> {
+    const g2 = otherGroup ?? options.filter((o)=> !group.includes(o.key)).map(o => o.key);
+   
+    const g1Exclusive = client.multipleChoice.any(key, ...group);
+    const g2Exclusive = client.multipleChoice.any(key, ...g2);
+
+    options.forEach(o=>{
+        if(group.includes(o.key)) {
+            o.disabled = g2Exclusive;
+        }
+        if(g2?.includes(o.key)) {
+            o.disabled = g1Exclusive;
+        }
+    });
 }
 
 const check_componenet_props = function(props: ComponentProperties) {
