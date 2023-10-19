@@ -174,7 +174,7 @@ export const isSimpleGroupQuestion = (item: ItemBuilder): item is SimpleGroupQue
  */
 export class SimpleGroupQuestion extends GroupQuestion {
 
-    innerItems: Item[]
+    innerItems: ItemBuilder[]
 
     constructor(props: GroupProps, defaultKey: string) {
         super(props, defaultKey);
@@ -187,7 +187,7 @@ export class SimpleGroupQuestion extends GroupQuestion {
         });
     }
 
-    add(items: Item|Item[], condition?: Expression) {
+    add(items: ItemBuilder|ItemBuilder[], condition?: Expression) {
         if(!Array.isArray(items)) {
           items = [items];
         }
