@@ -34,8 +34,10 @@ const TookMedicationCodes = {
     "antibio": "4",
     "homeo": "7",
     "alternative": "8",
+    "antiviralCovid": "9",
     "other": "5",
-    "dontknow": "6"
+    "dontknow": "6",
+
 } as const;
 
 const CovidHabitsChangesCodes = {

@@ -1081,6 +1081,11 @@ export class ConsentForMore extends ItemQuestion {
             },
         ];
     }
+
+    // Get Expression testing if this question is Yes
+    getYesCondition(): Expression {
+        return client.singleChoice.any(this.key, ResponseEncoding.consent_more.yes);
+    }
 }
 
 interface HasMoreGroupProps extends GroupProps {
@@ -1938,7 +1943,9 @@ export class WhyVisitedNoMedicalService extends ItemQuestion {
 
 interface TookMedicationProps extends ItemProps {
     useHayFever?: boolean; //
+    useCovidAntiviral?: boolean;
     useOtherTextInput?: boolean; // Show option Other with a textinput
+
 }
 
 
@@ -1952,10 +1959,14 @@ export class TookMedication extends ItemQuestion {
 
     useOtherTextInput: boolean;
 
+    useCovidAntiviral:boolean;
+
+
     constructor(props: TookMedicationProps) {
         super(props, 'Q9');
         this.useHayFever = props.useHayFever ?? false;
         this.useOtherTextInput = props.useOtherTextInput ?? false;
+        this.useCovidAntiviral = props.useCovidAntiviral ?? false;
     }
 
 
@@ -2032,17 +2043,29 @@ export class TookMedication extends ItemQuestion {
             disabled: exclusiveOther,
             content: _T("weekly.EX.Q9.rg.mcg.option.7", "Other")
         };
+
         if(this.useOtherTextInput) {
             otherOption.role = 'input';
             otherOption.description = _T('weekly.EX.Q9.rg.mcg.option.7.desc', "Please specify")
         }
 
-        const rest = [    {
+        r.push({
                 key: codes.antiviral,
                 role: 'option',
                 disabled: exclusiveOther,
                 content: _T("weekly.EX.Q9.rg.mcg.option.3", "Antivirals against influenza (eg: Tamiflu)")
-            },
+            });
+
+        if(this.useCovidAntiviral) {
+            r.push({
+                key: codes.antiviralCovid,
+                role: 'option',
+                disabled: exclusiveOther,
+                content: _T("weekly.EX.Q9.rg.mcg.option.9", "Antivirals against Covid (eg: Paxlovid)")
+            });
+        }
+
+        const rest = [
             {
                 key: codes.antibio,
                 role: 'option',
