@@ -705,7 +705,7 @@
   },
   "weekly.EX.Qcov16b.title.0": {
     "en": "Do you know the result of your PCR test? (if several were performed and at least one was positive, chose the “Positive” answer)",
-    "fr": "Avez-vous déjà reçu le résultat de ce test PCR ? (Si vous en avez réalisé plusieurs et que vous en avez obtenu au moins un positif, choisissez la réponse “positif“.)"
+    "fr": "Avez-vous déjà reçu le résultat de ce test PCR ?"
   },
   "weekly.EX.Qcov16b.helpGroup.text.1": {
     "en": "We want to understand how the coronavirus is spreading within the population.",
@@ -729,7 +729,7 @@
   },
   "weekly.EX.Qcov16f.title.0": {
     "en": "Do you know the result of this rapid antigen detection test on nasopharyngeal sample? (if several were performed and at least one was positive, chose the “Positive” answer)",
-    "fr": "Connaissez-vous le résultat de ce test antigénique rapide réalisé par un professionnel ? (Si vous en avez réalisé plusieurs et que vous en avez obtenu au moins un positif, choisissez la réponse « positif ».)"
+    "fr": "Connaissez-vous le résultat de ce test antigénique rapide réalisé par un professionnel ?"
   },
   "weekly.EX.Qcov16f.helpGroup.text.1": {
     "en": "We want to understand how the coronavirus is spreading within the population.",
@@ -753,7 +753,7 @@
   },
   "weekly.EX.Qcov16k.title.0": {
     "en": "Do you know the result of this antigenic test or self-test on nasal sample? (if several were performed and at least one was positive, chose the “Positive” answer)",
-    "fr": "Connaissez-vous le résultat de ce test antigénique rapide ou autotest réalisé vous-même ? (Si vous en avez réalisé plusieurs et que vous en avez obtenu au moins un positif, choisissez la réponse « positif ».)"
+    "fr": "Connaissez-vous le résultat de ce test antigénique rapide ou autotest réalisé vous-même ?"
   },
   "weekly.EX.Qcov16k.helpGroup.text.1": {
     "en": "We want to understand how the coronavirus is spreading within the population.",
