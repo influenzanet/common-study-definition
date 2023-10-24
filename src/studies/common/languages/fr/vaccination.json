@@ -53,7 +53,7 @@
   },
   "vaccination.HV.Q10.title.0": {
     "en": "Have you received a flu vaccine this autumn/winter season? (2021-2022)",
-    "fr": "Avez-vous été vacciné contre la grippe cette année (depuis le mois d'octobre 2023) ?"
+    "fr": "Avez-vous été vacciné contre la grippe cette année (depuis octobre 2023) ?"
   },
   "vaccination.HV.Q10.helpGroup.text.1": {
     "en": "We would like to be able to work out how much protection the vaccine gives.",
@@ -193,7 +193,7 @@
   },
   "vaccination.HV.Q10d.rg.mcg.option.6": {
     "en": "I don't think I am likely to get influenza",
-    "fr": "Je ne pense pas que je sois susceptible de contracter la grippe"
+    "fr": "Je ne pense pas être à risque de contracter la grippe"
   },
   "vaccination.HV.Q10d.rg.mcg.option.7": {
     "en": "I believe that influenza vaccine can cause influenza",
@@ -329,7 +329,7 @@
   },
   "vaccination.HV.Q35j.title.0": {
     "en": "When did you receive your last injection of a vaccine against COVID-19? If you do not know the exact date, provide an estimate.",
-    "fr": "Quand avez-vous reçu votre dernière dose de vaccin contre la COVID-19 ?"
+    "fr": "Quand avez-vous reçu votre dernière dose de vaccin contre la Covid-19 ?"
   },
   "vaccination.HV.Q35j.helpGroup.text.1": {
     "en": "Knowing when people are vaccinated tells us how well the vaccination program is being carried out.",
@@ -345,7 +345,7 @@
   },
   "vaccination.HV.Q35j.rg.scg.option.1": {
     "en": "I don’t know/can’t remember",
-    "fr": "Je ne sais pas / ne me souviens pas"
+    "fr": "Je ne sais pas / Je ne me souviens pas"
   },
   "vaccination.HV.Q35k.title.0": {
     "en": "Do you plan to receive a second injection in the upcoming weeks?",
@@ -525,7 +525,7 @@
   },
   "vaccination.HV.Q35m.rg.mcg.option.4": {
     "en": "I don’t belong to a risk group",
-    "fr": "Je n'appartiens pas à un groupe de personnes à risque de complications en cas de Covid-19"
+    "fr": "Je n'appartiens pas à un groupe pour lequel la vaccination est recommandée (femmes enceintes, plus de 65 ans, problèmes de santé sous-jacents, résidents dans un établissement de soins de longue durée ou médico-social, obèses, professionnels de santé, etc.)"
   },
   "vaccination.HV.Q35m.rg.mcg.option.5": {
     "en": "It is better to build your own natural immunity against COVID-19",
