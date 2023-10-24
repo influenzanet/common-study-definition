@@ -11,7 +11,7 @@ import { ComponentGenerators } from "case-editor-tools/surveys/utils/componentGe
 import { SymptomKeysType, WeeklyResponses as ResponseEncoding } from "../responses/weekly";
 import { GroupProps, GroupQuestion, ItemProps, ItemQuestion } from "./types";
 import { ClientExpression as client } from "../../../tools/expressions";
-import { Expression } from "survey-engine/data_types";
+import { Expression, ItemComponent } from "survey-engine/data_types";
 import { MatrixRow, markdownComponent, textComponent } from "../../../compat";
 import { trans_text } from "../../../tools";
 
@@ -64,8 +64,9 @@ export class Symptoms extends ItemQuestion {
         const noteFunc = this.useMarkdownNote ? markdownComponent : textComponent;
 
         const note = [
-            textComponent({
+            noteFunc({
                 key: "note1",
+                className: this.noteOnTop ? 'mb-1' : undefined,
                 content: _T(
                     "weekly.Q1.rg.cGJZ.text.0",
                     "Multiple answers possible. If you suffer from chronic illness, only indicate symptoms that have changed. For example, if you experience chronic shortness of breath, only mark this symptom if it has recently gotten worse."
@@ -1179,6 +1180,7 @@ export class CovidTestType extends ItemQuestion {
     keySymptomImpliedCovidTest: string;
 
     useSerology: boolean;
+
     constructor(props: CovidTestQuestionProps) {
         super(props, 'Qcov16i');
         this.useSerology = props.useSerology ?? true;
@@ -1200,9 +1202,8 @@ export class CovidTestType extends ItemQuestion {
             condition: this.condition,
             questionText: _T("weekly.EX.Qcov16i.title.0", "Which analyse(s) was it?"),
             helpGroupContent: this.getHelpGroupContent(),
-            topDisplayCompoments: [
-                text_select_all_apply("weekly.EX.Qcov16i.rg.tyZC.text.0")
-            ],
+            topDisplayCompoments: this.getNotes("top", text_select_all_apply("weekly.EX.Qcov16i.rg.tyZC.text.0")),
+            bottomDisplayCompoments: this.getNotes('bottom'),
             responseOptions: this.getResponses()
         });
     }
@@ -1249,7 +1250,6 @@ export class CovidTestType extends ItemQuestion {
 
 interface TestTypeProps extends ItemProps {
     keyTestType: string // keyTestType key to the answer of Qcov16
-
 }
 
 abstract class TestTypeDependentQuestion extends ItemQuestion {
@@ -1294,8 +1294,9 @@ export class ResultPCRTest extends TestTypeDependentQuestion {
             condition: this.condition,
             questionText: _T("weekly.EX.Qcov16b.title.0", "Do you know the result of your PCR test? (if several were performed and at least one was positive, chose the “Positive” answer)"),
             helpGroupContent: this.getHelpGroupContent(),
-
-            responseOptions: this.getResponses()
+            responseOptions: this.getResponses(),
+            topDisplayCompoments: this.getNotes('top'),
+            bottomDisplayCompoments: this.getNotes('bottom'),
         });
     }
 
@@ -1355,7 +1356,9 @@ export class ResultAntigenicTest extends TestTypeDependentQuestion {
             condition: this.condition,
             questionText: _T("weekly.EX.Qcov16f.title.0", "Do you know the result of this rapid antigen detection test on nasopharyngeal sample? (if several were performed and at least one was positive, chose the “Positive” answer)"),
             helpGroupContent: this.getHelpGroupContent(),
-            responseOptions: this.getResponses()
+            responseOptions: this.getResponses(),
+            topDisplayCompoments: this.getNotes('top'),
+            bottomDisplayCompoments: this.getNotes('bottom'),
         });
     }
 
@@ -1414,7 +1417,9 @@ export class ResultRapidAntigenicTest extends TestTypeDependentQuestion {
             condition: this.condition,
             questionText: _T("weekly.EX.Qcov16k.title.0", "Do you know the result of this antigenic test or self-test on nasal sample? (if several were performed and at least one was positive, chose the “Positive” answer)"),
             helpGroupContent: this.getHelpGroupContent(),
-            responseOptions: this.getResponses()
+            responseOptions: this.getResponses(),
+            topDisplayCompoments: this.getNotes('top'),
+            bottomDisplayCompoments: this.getNotes('bottom'),
         });
     }
 

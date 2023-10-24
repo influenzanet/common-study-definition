@@ -1,6 +1,6 @@
 import { GenericQuestionProps, Group, Item, OptionDef } from "case-editor-tools/surveys/types";
 import { SurveyItems } from 'case-editor-tools/surveys';
-import { Expression, SurveyItem, SurveySingleItem } from "survey-engine/data_types";
+import { Expression, ItemComponent, SurveyItem, SurveySingleItem } from "survey-engine/data_types";
 import { isConditionable, ItemConditionable, QuestionType } from "../types/item";
 import { ClientExpression } from "./expressions";
 
@@ -30,6 +30,25 @@ export const surveyItemKey = (parentKey: string, itemKey: string) => {
     return parentKey + '.' + itemKey;
 }
 
+
+// Can add notes to the question
+interface QuestioNotes {
+    top?: ItemComponent | ItemComponent[]
+    bottom?: ItemComponent | ItemComponent[]
+}
+
+const createNotes = (notes: QuestioNotes, side: keyof QuestioNotes): ItemComponent[]|undefined => {
+        const nn = side == 'top' ? notes?.top : notes?.bottom;
+        if(!nn) {
+            return undefined;
+        }
+        if(Array.isArray(nn)) {
+            return nn;
+        }
+        return [nn];
+}
+
+
 export interface ItemProps {
     /**
      * @var parentKey full key path of the parent item, required to generate this item's unique key (e.g. `<surveyKey>.<groupKey>`).
@@ -45,6 +64,8 @@ export interface ItemProps {
     * @var keyOverride use this to override the default key for this item (only last part of the key, parent's key is not influenced).
     */
     keyOverride?: string;
+
+    notes?: QuestioNotes
 }
 
 
@@ -58,6 +79,7 @@ export abstract class ItemQuestion extends Item implements ItemConditionable {
      *  To be useable the question implementation should handle the option
      */
     protected options?: Partial<BaseQuestionOptions>;
+
 
     /**
      *
@@ -97,6 +119,27 @@ export abstract class ItemQuestion extends Item implements ItemConditionable {
 
     getHelpGroupContent(): HelpGroupContentType|undefined {
         return undefined;
+    }
+
+    /**
+     * Get notes for a side of the question
+     * Notes used given components (first) and then add the componets eventualy passed in options 
+     * @param side top or bottom components
+     * @param components List of built-in componenet (added systematically)
+     * @returns 
+     */
+    getNotes(side: 'top'|'bottom', ...components:ItemComponent[]): undefined|ItemComponent[] {
+        const comp = components ?? [];
+        if(this.options?.bottomDisplayCompoments && side == 'bottom') {
+            comp.push(...this.options?.bottomDisplayCompoments );
+        }
+        if(this.options?.topDisplayCompoments && side == 'top') {
+            comp.push(...this.options?.topDisplayCompoments);
+        }
+        if(comp.length == 0) {
+            return undefined;
+        }
+        return comp;
     }
 
 }

@@ -38,7 +38,7 @@ export function require_response(editor: ItemEditor, itemKey: string, responseGr
 export function text_select_all_apply(id:string) {
     return textComponent({
             key: "all_apply",
-            className: "mb-2",
+            className: "mb-1",
             content: trans_select_all_apply(id)
         });
 }
