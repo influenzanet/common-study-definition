@@ -1,9 +1,7 @@
 import { ItemEditor } from "case-editor-tools/surveys/survey-editor/item-editor";
 import { expWithArgs } from "case-editor-tools/surveys/utils/simple-generators";
-//import { ComponentGenerators } from "case-editor-tools/surveys/utils/componentGenerators";
 import { LanguageMap, _T } from "../languages"
 import { responseGroupKey, singleChoiceKey, multipleChoiceKey } from "case-editor-tools/constants/key-definitions";
-import { ItemComponent } from "survey-engine/data_types";
 import { textComponent } from "../../../compat";
 
 /**
@@ -38,7 +36,7 @@ export function require_response(editor: ItemEditor, itemKey: string, responseGr
 export function text_select_all_apply(id:string) {
     return textComponent({
             key: "all_apply",
-            className: "mb-1",
+            className: "mb-2",
             content: trans_select_all_apply(id)
         });
 }
