@@ -8,7 +8,7 @@ import { likertScaleKey, matrixKey, responseGroupKey } from "case-editor-tools/c
 import { MultipleChoicePrefix, singleChoicePrefix, text_how_answer, text_select_all_apply, text_why_asking, require_response, trans_select_all_apply } from "./helpers";
 import { SurveyItems } from 'case-editor-tools/surveys';
 import { ComponentGenerators } from "case-editor-tools/surveys/utils/componentGenerators";
-import { SymptomKeysType, WeeklyResponses as ResponseEncoding } from "../responses/weekly";
+import { SymptomKeysType, VisitMedicalServiceTypes, WeeklyResponses as ResponseEncoding } from "../responses/weekly";
 import { GroupProps, GroupQuestion, ItemProps, ItemQuestion } from "./types";
 import { ClientExpression as client } from "../../../tools/expressions";
 import { Expression, ItemComponent } from "survey-engine/data_types";
@@ -1165,6 +1165,11 @@ export class SymptomImpliedCovidTest extends ItemQuestion {
             },
         ];
     }
+
+    // Create a condition to test if this question has yes Response
+    getYesResponseCondition() : Expression {
+        return client.singleChoice.any(this.key, ResponseEncoding.symptom_test.yes);
+    }
 }
 
 interface CovidTestQuestionProps extends ItemProps {
@@ -1661,7 +1666,18 @@ export class VisitedMedicalService extends ItemQuestion {
             },
         ];
     }
+
+    /* 
+    * Create a condition for response to this question based on a list of response
+    * Expected response are names of ResponseEncoding.visit_medical, so not code but the name (more human meaning full)
+    */
+    getResponseCondition(...kinds: VisitMedicalServiceTypes[]):Expression {
+        const codes = ResponseEncoding.visit_medical;
+        const rr = kinds.map(name=> codes[name]);
+        return client.multipleChoice.any(this.key, ...rr);
+    }
 }
+
 
 interface SubVisitedMedicalServiceProps extends ItemProps {
     keyVisitedMedicalServ: string //  keyVisitedMedicalServ: reference to question if visited any medical service

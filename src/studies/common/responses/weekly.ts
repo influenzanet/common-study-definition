@@ -82,7 +82,17 @@ const CovidHabitsChangesCodes = {
 } as const;
 
 
+const visit_medical = {
+    "no": "0",
+    "gp": "1",
+    "hospital": "2",
+    "emergency": "3",
+    "other": "4",
+    "plan": "5"
+} as const;
+
 export type SymptomKeysType =  keyof typeof symptomsEncoding;
+export type VisitMedicalServiceTypes = keyof typeof visit_medical;
 
 export const WeeklyResponses = {
     symptoms: symptomsEncoding,
@@ -135,14 +145,7 @@ export const WeeklyResponses = {
         "wontgo": "4",
         "no": "0"
     } as const,
-    visit_medical: {
-        "no": "0",
-        "gp": "1",
-        "hospital": "2",
-        "emergency": "3",
-        "other": "4",
-        "plan": "5"
-    } as const,
+    visit_medical: visit_medical,
     daily_routine: {
         "no": "0",
         "yes": "1",
