@@ -381,7 +381,7 @@
   },
   "weekly.HS.Q36.title.0": {
     "en": "Thank you for all these information. They will help us to estimate the frequency of symptoms among general population. You can stop here. If you have a little more time, we propose you to answer further questions about your symptoms and care. Do you accept to answer to these additional questions?",
-    "fr": "Merci pour ces informations. Vous pouvez vous arrêter là. S’il vous reste un peu de temps, nous vous proposons de répondre à des questions complémentaires sur vos symptômes et leur prise en charge. Acceptez-vous de répondre à ces questions complémentaires ?"
+    "fr": "Merci pour ces informations. Vous pouvez vous arrêter là. S’il vous reste un peu de temps, nous vous proposons de répondre à des questions complémentaires sur vos symptômes et leur prise en charge. Acceptez-vous d'y répondre ?"
   },
   "weekly.HS.Q36.helpGroup.text.1": {
     "en": "We want to know if you are willing to answer the follow-up questions. Your answers to the follow-up questions may assist our research.",
@@ -705,7 +705,7 @@
   },
   "weekly.EX.Qcov16b.title.0": {
     "en": "Do you know the result of your PCR test? (if several were performed and at least one was positive, chose the “Positive” answer)",
-    "fr": "Avez-vous déjà reçu le résultat de ce test PCR ? (Si vous en avez réalisé plusieurs et que vous en avez obtenu au moins un positif, choisissez la réponse “positif“.)"
+    "fr": "Avez-vous déjà reçu le résultat de ce test PCR ? "
   },
   "weekly.EX.Qcov16b.helpGroup.text.1": {
     "en": "We want to understand how the coronavirus is spreading within the population.",
@@ -729,7 +729,7 @@
   },
   "weekly.EX.Qcov16f.title.0": {
     "en": "Do you know the result of this rapid antigen detection test on nasopharyngeal sample? (if several were performed and at least one was positive, chose the “Positive” answer)",
-    "fr": "Connaissez-vous le résultat de ce test antigénique rapide réalisé par un professionnel ? (Si vous en avez réalisé plusieurs et que vous en avez obtenu au moins un positif, choisissez la réponse « positif ».)"
+    "fr": "Connaissez-vous le résultat de ce test antigénique rapide réalisé par un professionnel ?"
   },
   "weekly.EX.Qcov16f.helpGroup.text.1": {
     "en": "We want to understand how the coronavirus is spreading within the population.",
@@ -757,15 +757,15 @@
   },
   "weekly.EX.Qcov16k.helpGroup.text.1": {
     "en": "We want to understand how the coronavirus is spreading within the population.",
-    "fr": "Nous souhaitons comprendre comment le virus de la COVID-19 se diffuse dans la population."
+    "fr": "Nous souhaitons comprendre comment le virus de la Covid-19 se diffuse dans la population."
   },
   "weekly.EX.Qcov16k.rg.scg.option.0": {
     "en": "Yes, positive for COVID-19",
-    "fr": "Oui, positif pour la COVID-19"
+    "fr": "Oui, positif pour la Covid-19"
   },
   "weekly.EX.Qcov16k.rg.scg.option.1": {
     "en": "Yes, negative for COVID-19",
-    "fr": "Oui, négatif pour la COVID-19"
+    "fr": "Oui, négatif pour la Covid-19"
   },
   "weekly.EX.Qcov16k.rg.scg.option.2": {
     "en": "Yes, the results are inconclusive",
@@ -777,7 +777,7 @@
   },
   "weekly.EX.Qcov19.title.0": {
     "en": "Because of your symptoms, did you undergo a test/analyses to know if you have the Flu?",
-    "fr": "En raison de vos symptômes, avez-vous effectué un test pour savoir si vous avez la grippe ?"
+    "fr": "En raison de vos symptômes, avez-vous effectué un test pour savoir si vous aviez la grippe ?"
   },
   "weekly.EX.Qcov19.helpGroup.text.1": {
     "en": "We want to know which complaints lead people to get tested for the flu.",
@@ -869,7 +869,7 @@
   },
   "weekly.EX.Q9.rg.mcg.option.7": {
     "en": "Other",
-    "fr": "Autres"
+    "fr": "Autre"
   },
   "weekly.EX.Q9.rg.mcg.option.8": {
     "en": "I don't know/can't remember",
@@ -941,7 +941,7 @@
   },
   "weekly.EX.Q10b.rg.scg.option.2": {
     "en": "Other (I did not have to work or go to school today in any case)",
-    "fr": "Autres (par exemple, je n’avais pas à être au travail aujourd’hui)"
+    "fr": "Autre (par exemple, je n’avais pas à être au travail aujourd’hui)"
   },
   "weekly.EX.Q10c.title.0": {
     "en": "For how many days have you been unable to work normally/go to school (when you otherwise would have)?",
@@ -1001,7 +1001,7 @@
   },
   "weekly.EX.Qcov7.rg.gU4U.text.0": {
     "en": "To be completed optionally",
-    "fr": "Pour chacune des mesures suivantes, Indiquez «Davantage» si vous appliquez cette mesure maintenant ou de manière plus importante, «Pareil» si vous appliquiez déjà cette mesure avant d'avoir les symptômes déclarés, «Non» si vous n'appliquez pas cette mesure, et «Non appliquable» si vous n'êtes pas concerné par cette mesure (par ex vous ne voyez jamais personne, donc la question sur le port du masque ne vous concerne pas)."
+    "fr": "Pour chacune des mesures suivantes, Indiquez «Davantage» si vous appliquez cette mesure maintenant ou de manière plus importante, «Pareil» si vous appliquiez déjà cette mesure avant d'avoir les symptômes déclarés, «Non» si vous n'appliquez pas cette mesure, et «Non appliquable» si vous n'êtes pas concerné par cette mesure (par exemple, si vous ne voyez jamais personne, la question sur le port du masque ne vous concerne pas)."
   },
   "weekly.EX.Qcov7.rg.v1C0.text.1": {
     "en": "Regularly wash or disinfect hands",
@@ -1133,6 +1133,6 @@
   },
   "weekly.surveyEnd.title.0": {
     "en": "Thank you! This was all for now, please submit (push « send ») your responses. We will ask you again next week.",
-    "fr": "Merci pour votre participation ! Vous pouvez maintenant valider votre questionnaire en appuyant sur le bouton situé ci-dessous."
+    "fr": "Merci pour votre participation ! Vous pouvez maintenant valider votre questionnaire en cliquant ci-dessous."
   }
 }

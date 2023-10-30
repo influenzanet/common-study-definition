@@ -29,7 +29,7 @@
   },
   "vaccination.HV.Q9.title.0": {
     "en": "Did you receive a flu vaccine during the previous flu season (2020-2021)?",
-    "fr": "L'an dernier (2022-2023) avez-vous été vacciné contre la grippe ?"
+    "fr": "L'an dernier (2022-2023), avez-vous été vacciné contre la grippe ?"
   },
   "vaccination.HV.Q9.helpGroup.text.1": {
     "en": "We would like to study what level of protection the vaccine provides. We would also like to know if there is any protection from vaccines received in previous years.",
@@ -37,7 +37,7 @@
   },
   "vaccination.HV.Q9.helpGroup.text.3": {
     "en": "Answer 'yes' if you were vaccinated in the previous autumn/winter season",
-    "fr": "Répondez « oui » si vous avez été vacciné contre la grippe la saison dernière (entre septembre 2022 et février 2023)."
+    "fr": "Répondez « oui » si vous avez été vacciné contre la grippe la saison dernière (entre octobre 2022 et mars 2023)."
   },
   "vaccination.HV.Q9.rg.scg.option.0": {
     "en": "Yes",
@@ -177,7 +177,7 @@
   },
   "vaccination.HV.Q10d.rg.mcg.option.2": {
     "en": "I don't belong to a risk group",
-    "fr": "Je n'appartiens pas à un groupe pour lequel la vaccination est recommandée (femmes enceintes, plus de 65 ans, problèmes de santé sous-jacents, contacts avec des enfants de moins de 6 mois à risque, résidents dans un établissement de soins de longue durée ou médico-social, obèses,  professionnels de santé, etc.)"
+    "fr": "Je n'appartiens pas à un groupe pour lequel la vaccination est recommandée (femmes enceintes, plus de 65 ans, problèmes de santé sous-jacents, contacts avec des enfants de moins de 6 mois à risque, résidents dans un établissement de soins de longue durée ou médico-social, obésité,  professionnels de santé, etc.)"
   },
   "vaccination.HV.Q10d.rg.mcg.option.3": {
     "en": "It is better to build your own natural immunity against influenza",
