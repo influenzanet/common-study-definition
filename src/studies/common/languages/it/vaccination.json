@@ -16,16 +16,16 @@
     "it": "Quattro settimane fa ti abbiamo invitato a compilare un questionario sulla vaccinazione. Questo nuovo questionario ti viene proposto per monitorare se ci sono stati cambiamenti nella tua situazione vaccinale. Seleziona le opzioni che si applicano al tuo caso."
   },
   "vaccination.Q0.rg.scg.option.0": {
-    "en": "In the meantime I received a new vaccine dose, or a new invitation to be vaccinated. (**)",
-    "it": "Nel frattempo ho ricevuto una nuova dose di vaccino o un nuovo invito a essere vaccinato. (**)"
+    "en": "In the meantime I received a new vaccine dose, or a new invitation to be vaccinated.",
+    "it": "Nel frattempo ho ricevuto una nuova dose di vaccino o un nuovo invito a essere vaccinato."
   },
   "vaccination.Q0.rg.scg.option.1": {
     "en": "In the meantime nothing has changed in terms of vaccination for me.",
     "it": "Nel frattempo, nulla è cambiato nella mia situazione vaccinale."
   },
   "vaccination.Q0.rg.scg.option.2": {
-    "en": "I'm not sure, and would like to take these questions to make sure my information on vaccination is up to date. (**)",
-    "it": "Non sono sicuro/a e vorrei rispondere di nuovo alle domande del questionario per essere certi che la mia informazione sul mio stato vaccinale sia aggiornata. (**)"
+    "en": "I'm not sure, and would like to take these questions to make sure my information on vaccination is up to date.",
+    "it": "Non sono sicuro/a e vorrei rispondere di nuovo alle domande del questionario per essere certi che la mia informazione sul mio stato vaccinale sia aggiornata."
   },
   "vaccination.Q0.privacy.note": {
     "en": "(**) By selecting one of these options you give your consent to use your historical data to prefill this survey's responses.",
