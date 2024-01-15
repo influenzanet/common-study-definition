@@ -16,7 +16,7 @@
     "it": "Hai avuto uno dei seguenti sintomi dall'ultima volta che hai compilato il questionario (o nell'ultima settimana se è la prima volta che lo compili)?"
   },
   "weekly.Q1.helpGroup.text.0": {
-    "en": "Why are we asking this question?",
+    "en": "Why are we asking this?",
     "it": "Perché ti facciamo questa domanda?"
   },
   "weekly.Q1.helpGroup.text.1": {
@@ -105,7 +105,7 @@
   },
   "weekly.Q1.rg.mcg.option.17": {
     "en": "Diarrhoea",
-    "it": "Diarrea (almeno tre volte al giorno)"
+    "it": "Diarrea"
   },
   "weekly.Q1.rg.mcg.option.18": {
     "en": "Stomach ache",
@@ -136,7 +136,7 @@
     "it": "Quando hai compilato il questionario la volta precedente, hai indicato di essere ancora malato (ovvero che i tuoi sintomi non erano ancora terminati). I sintomi che stai riportando stavolta fanno parte dello stesso episodio di malattia?"
   },
   "weekly.HS.Q2.helpGroup.text.0": {
-    "en": "Why are we asking this question?",
+    "en": "Why are we asking this?",
     "it": "Perché ti facciamo questa domanda?"
   },
   "weekly.HS.Q2.helpGroup.text.1": {
@@ -172,7 +172,7 @@
     "it": "Nelle due settimane prima dell'inizio dei tuoi sintomi, sei stato in contatto con qualcuno che è risultato positivo ad un test antigenico o molecolare (caso confermato) per il COVID-19?"
   },
   "weekly.HS.Qcov3.helpGroup.text.0": {
-    "en": "Why are we asking this question?",
+    "en": "Why are we asking this?",
     "it": "Perché ti facciamo questa domanda?"
   },
   "weekly.HS.Qcov3.helpGroup.text.1": {
@@ -196,7 +196,7 @@
     "it": "Questa persona fa parte del tuo nucleo familiare? (ovvero vive presso la tua stessa abitazione)"
   },
   "weekly.HS.Qcov3b.helpGroup.text.0": {
-    "en": "Why are we asking this question?",
+    "en": "Why are we asking this?",
     "it": "Perché ti facciamo questa domanda?"
   },
   "weekly.HS.Qcov3b.helpGroup.text.1": {
@@ -228,7 +228,7 @@
     "it": "Quando sono comparsi i primi sintomi? Se non ricordi la data esatta, per favore inserisci una data approssimata."
   },
   "weekly.HS.Q3.helpGroup.text.0": {
-    "en": "Why are we asking this question?",
+    "en": "Why are we asking this?",
     "it": "Perché ti facciamo questa domanda?"
   },
   "weekly.HS.Q3.helpGroup.text.1": {
@@ -256,7 +256,7 @@
     "it": "Quando sono terminati i sintomi?"
   },
   "weekly.HS.Q4.helpGroup.text.0": {
-    "en": "Why are we asking this question?",
+    "en": "Why are we asking this?",
     "it": "Perché ti facciamo questa domanda?"
   },
   "weekly.HS.Q4.helpGroup.text.1": {
@@ -288,7 +288,7 @@
     "it": "I sintomi si sono manifestati in maniera improvvisa nel giro di qualche ora?"
   },
   "weekly.HS.Q5.helpGroup.text.0": {
-    "en": "Why are we asking this question?",
+    "en": "Why are we asking this?",
     "it": "Perché ti facciamo questa domanda?"
   },
   "weekly.HS.Q5.helpGroup.text.1": {
@@ -320,7 +320,7 @@
     "it": "In quale giorno è cominciata la febbre? Se non ricordi la data esatta, ti chiediamo di inserire una data approssimativa."
   },
   "weekly.HS.Q6.helpGroup.text.0": {
-    "en": "Why are we asking this question?",
+    "en": "Why are we asking this?",
     "it": "Perché ti facciamo questa domanda?"
   },
   "weekly.HS.Q6.helpGroup.text.1": {
@@ -348,7 +348,7 @@
     "it": "La febbre è salita improvvisamente nel giro di poche ore?"
   },
   "weekly.HS.Q6b.helpGroup.text.0": {
-    "en": "Why are we asking this question?",
+    "en": "Why are we asking this?",
     "it": "Perché ti facciamo questa domanda?"
   },
   "weekly.HS.Q6b.helpGroup.text.1": {
@@ -380,7 +380,7 @@
     "it": "Ti sei misurato/a la febbre?"
   },
   "weekly.HS.Q6c.helpGroup.text.0": {
-    "en": "Why are we asking this question?",
+    "en": "Why are we asking this?",
     "it": "Perché ti facciamo questa domanda?"
   },
   "weekly.HS.Q6c.helpGroup.text.1": {
@@ -388,7 +388,7 @@
     "it": "L’influenza e il COVID-19 di solito causano febbre alta. Tuttavia non tutti si misurano la febbre quando sono ammalati."
   },
   "weekly.HS.Q6c.helpGroup.text.2": {
-    "en": "How should I answer it?",
+    "en": "How should I answer this question?",
     "it": "Come devi rispondere?"
   },
   "weekly.HS.Q6c.helpGroup.text.3": {
@@ -412,7 +412,7 @@
     "it": "Quando ti sei misurato la temperatura, qual è stata la più alta raggiunta?"
   },
   "weekly.HS.Q6d.helpGroup.text.0": {
-    "en": "Why are we asking this question?",
+    "en": "Why are we asking this?",
     "it": "Perché ti facciamo questa domanda?"
   },
   "weekly.HS.Q6d.helpGroup.text.1": {
@@ -460,7 +460,7 @@
     "it": "Grazie per tutte le informazioni che ci hai fornito, ci aiuteranno a stimare la frequenza dei sintomi riportati dai partecipanti. Puoi fermarti qui oppure, se hai ancora un po' di tempo, puoi accettare di rispondere ad ulteriori domande a proposito del tuo stato di salute. Vuoi rispondere a queste domande aggiuntive?"
   },
   "weekly.HS.Q36.helpGroup.text.0": {
-    "en": "Why are we asking this question?",
+    "en": "Why are we asking this?",
     "it": "Perché ti facciamo questa domanda?"
   },
   "weekly.HS.Q36.helpGroup.text.1": {
@@ -488,7 +488,7 @@
     "it": "Per capire se le persone si fanno visitare dal proprio medico medico o presso altre strutture sanitarie in seguito alla comparsa di sintomi."
   },
   "weekly.EX.Q7.helpGroup.text.2": {
-    "en": "How should I answer it?",
+    "en": "How should I answer this question?",
     "it": "Come devi rispondere?"
   },
   "weekly.EX.Q7.helpGroup.text.3": {
@@ -496,7 +496,7 @@
     "it": "Seleziona tutte le opzioni che si applicano al tuo caso. Se hai già un appuntamento prenotato, seleziona l’ultima opzione."
   },
   "weekly.EX.Q7.rg.DTpM.text.0": {
-    "en": "Multiple answers possible",
+    "en": "Select all options that apply",
     "it": "Puoi selezionare più di un'opzione"
   },
   "weekly.EX.Q7.rg.mcg.option.0": {
@@ -536,7 +536,7 @@
     "it": "Per capire quanto rapidamente le persone che presentano sintomi si rivolgono alle strutture sanitarie."
   },
   "weekly.EX.Q7b.helpGroup.text.2": {
-    "en": "How should I answer it?",
+    "en": "How should I answer this question?",
     "it": "Come devi rispondere?"
   },
   "weekly.EX.Q7b.helpGroup.text.3": {
@@ -700,7 +700,7 @@
     "it": "Per quale motivo non ti sei rivolto a nessuna struttura sanitaria per i sintomi che stai segnalando?"
   },
   "weekly.EX.Qcov18.helpGroup.text.0": {
-    "en": "Why are we asking this question?",
+    "en": "Why are we asking this?",
     "it": "Perché ti facciamo questa domanda?"
   },
   "weekly.EX.Qcov18.helpGroup.text.1": {
@@ -711,8 +711,12 @@
     "en": "How should I answer this question?",
     "it": "Come devi rispondere?"
   },
+  "weekly.EX.Qcov18.helpGroup.text.3": {
+    "en": "Multiple answers are possible.",
+    "it": "Puoi inserire più di una risposta."
+  },
   "weekly.EX.Qcov18.rg.4opV.text.0": {
-    "en": "Multiple answers possible",
+    "en": "Select all options that apply",
     "it": "Puoi inserire più di una risposta"
   },
   "weekly.EX.Qcov18.rg.scg.option.0": {
@@ -772,7 +776,7 @@
     "it": "A causa dei tuoi sintomi, sei stato sottoposto ad analisi per accertare se hai il COVID-19?"
   },
   "weekly.EX.Qcov16h.helpGroup.text.0": {
-    "en": "Why are we asking this question?",
+    "en": "Why are we asking this?",
     "it": "Perché ti facciamo questa domanda?"
   },
   "weekly.EX.Qcov16h.helpGroup.text.1": {
@@ -800,7 +804,7 @@
     "it": "A quale tipo di analisi sei stato sottoposto?"
   },
   "weekly.EX.Qcov16i.helpGroup.text.0": {
-    "en": "Why are we asking this question?",
+    "en": "Why are we asking this?",
     "it": "Perché ti facciamo questa domanda?"
   },
   "weekly.EX.Qcov16i.helpGroup.text.1": {
@@ -808,7 +812,7 @@
     "it": "Siamo interessati a sapere quanti individui con sintomi si sono sottoposti a un test"
   },
   "weekly.EX.Qcov16i.rg.tyZC.text.0": {
-    "en": "Multiple answers possible",
+    "en": "Select all options that apply",
     "it": "Puoi inseire più di una risposta"
   },
   "weekly.EX.Qcov16i.rg.mcg.option.0": {
@@ -832,7 +836,7 @@
     "it": "Hai già ottenuto il risultato del tampone con test PCR?"
   },
   "weekly.EX.Qcov16b.helpGroup.text.0": {
-    "en": "Why are we asking this question?",
+    "en": "Why are we asking this?",
     "it": "Perché ti facciamo questa domanda?"
   },
   "weekly.EX.Qcov16b.helpGroup.text.1": {
@@ -860,7 +864,7 @@
     "it": "Hai già ottenuto i risultati del test antigenico con tampone nasale-faringeo?"
   },
   "weekly.EX.Qcov16f.helpGroup.text.0": {
-    "en": "Why are we asking this question?",
+    "en": "Why are we asking this?",
     "it": "Perché ti facciamo questa domanda?"
   },
   "weekly.EX.Qcov16f.helpGroup.text.1": {
@@ -881,14 +885,14 @@
   },
   "weekly.EX.Qcov16f.rg.scg.option.3": {
     "en": "I don't know/can't remember",
-    "it": "Non so/non ricordo"
+    "it": "Non so / non voglio rispondere"
   },
   "weekly.EX.Qcov16k.title.0": {
     "en": "Do you know the result of this antigenic test or self-test on nasal sample? (if several were performed and at least one was positive, chose the “Positive” answer)",
     "it": "Hai già ottenuto i risultati del test antigenico rapido con tampone nasale?"
   },
   "weekly.EX.Qcov16k.helpGroup.text.0": {
-    "en": "Why are we asking this question?",
+    "en": "Why are we asking this?",
     "it": "Perché ti facciamo questa domanda?"
   },
   "weekly.EX.Qcov16k.helpGroup.text.1": {
@@ -909,14 +913,14 @@
   },
   "weekly.EX.Qcov16k.rg.scg.option.3": {
     "en": "I don't know/can't remember",
-    "it": "Non so/non ricordo"
+    "it": "Non so / non voglio rispondere"
   },
   "weekly.EX.Qcov19.title.0": {
     "en": "Because of your symptoms, did you undergo a test/analyses to know if you have the Flu?",
     "it": "A causa dei tuoi sintomi, hai ricevuto un test virologico per sapere se hai l'influenza?"
   },
   "weekly.EX.Qcov19.helpGroup.text.0": {
-    "en": "Why are we asking this question?",
+    "en": "Why are we asking this?",
     "it": "Perché ti facciamo questa domanda?"
   },
   "weekly.EX.Qcov19.helpGroup.text.1": {
@@ -948,7 +952,7 @@
     "it": "Hai ottenuto il risultato del tuo test per l'influenza?"
   },
   "weekly.EX.Qcov19b.helpGroup.text.0": {
-    "en": "Why are we asking this question?",
+    "en": "Why are we asking this?",
     "it": "Perché ti facciamo questa domanda?"
   },
   "weekly.EX.Qcov19b.helpGroup.text.1": {
@@ -984,7 +988,7 @@
     "it": "Per sapere quante persone assumono farmaci e qual è l'efficacia."
   },
   "weekly.EX.Q9.helpGroup.text.2": {
-    "en": "How should I answer it?",
+    "en": "How should I answer this question?",
     "it": "Come devi rispondere?"
   },
   "weekly.EX.Q9.helpGroup.text.3": {
@@ -1036,12 +1040,20 @@
     "it": "Per i tuoi sintomi, sei stato ricoverato in ospedale?"
   },
   "weekly.EX.Q14.helpGroup.text.0": {
-    "en": "Why are we asking this question?",
+    "en": "Why are we asking this?",
     "it": "Perché ti facciamo questa domanda?"
   },
   "weekly.EX.Q14.helpGroup.text.1": {
     "en": "We want to understand the rates of hospitalization due to symptoms",
     "it": "Vogliamo sapere quante persone vengono ricoverate in ospedale a seguito dell'insorgenza dei sintomi"
+  },
+  "weekly.Q14.helGroup.how_answer": {
+    "en": "How should I answer this question?",
+    "it": "Come devi rispondere?"
+  },
+  "weekly.EX.Q14.helpGroup.text.2": {
+    "en": "Answer yes only if the hospitalization is related to your current symptoms and not if it was planned before or related to an accident.",
+    "it": "Rispondi 'sì' solo se il ricovero è collegato ai tuoi sintomi attuali e non se era previsto in precedenza o se è correlato a un incidente."
   },
   "weekly.EX.Q14.rg.scg.option.0": {
     "en": "Yes",
@@ -1056,7 +1068,7 @@
     "it": "Hai modificato la tua routine quotidiana a causa di questi sintomi?"
   },
   "weekly.EX.Q10.helpGroup.text.0": {
-    "en": "Why are we asking this question?",
+    "en": "Why are we asking this?",
     "it": "Perché ti facciamo questa domanda?"
   },
   "weekly.EX.Q10.helpGroup.text.1": {
@@ -1088,7 +1100,7 @@
     "it": "Sei ancora assente dal lavoro/da scuola per via dei tuoi sintomi?"
   },
   "weekly.EX.Q10b.helpGroup.text.0": {
-    "en": "Why are we asking this question?",
+    "en": "Why are we asking this?",
     "it": "Perché ti facciamo questa domanda?"
   },
   "weekly.EX.Q10b.helpGroup.text.1": {
@@ -1120,7 +1132,7 @@
     "it": "Per quanti giorni sei stato/a assente dal lavoro/da scuola??"
   },
   "weekly.EX.Q10c.helpGroup.text.0": {
-    "en": "Why are we asking this question?",
+    "en": "Why are we asking this?",
     "it": "Perché ti facciamo questa domanda?"
   },
   "weekly.EX.Q10c.helpGroup.text.1": {
@@ -1172,7 +1184,7 @@
     "it": "A causa dei tuoi sintomi, hai adottato o rafforzato una delle seguenti misure cautelari (rispetto al periodo precedente in cui i sintomi non erano ancora comparsi)?"
   },
   "weekly.EX.Qcov7.helpGroup.text.0": {
-    "en": "Why are we asking this question?",
+    "en": "Why are we asking this?",
     "it": "Perché ti facciamo questa domanda?"
   },
   "weekly.EX.Qcov7.helpGroup.text.1": {
@@ -1196,7 +1208,7 @@
     "it": "Lavarti o disinfettarti regolarmente le mani"
   },
   "weekly.EX.Qcov7.rg.likert_1.option.0": {
-    "en": " Yes, I am following this measure now for the first time, or in a stricter way",
+    "en": "Yes, I am following this measure now for the first time, or in a stricter way",
     "it": " Sì, ho appena adottato questa misura o l'ho resa più restrittiva "
   },
   "weekly.EX.Qcov7.rg.likert_1.option.1": {
@@ -1516,7 +1528,7 @@
     "it": "Quale ritieni sia la causa dei tuoi sintomi?"
   },
   "weekly.EX.Q11.helpGroup.text.0": {
-    "en": "Why are we asking this question?",
+    "en": "Why are we asking this?",
     "it": "Perché ti facciamo questa domanda?"
   },
   "weekly.EX.Q11.helpGroup.text.1": {
