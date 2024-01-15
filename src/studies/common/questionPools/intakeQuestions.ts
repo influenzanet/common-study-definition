@@ -549,7 +549,7 @@ interface EducationProps extends ItemProps {
             {
                 key: '1', role: 'option',
                 disabled: expWithArgs('responseHasKeysAny',this.key, responseGroupKey + '.' + multipleChoiceKey, '0', '2', '3', '4'),
-                content: _T("intake.Q4d.rg.mcg.option.1", "GCSE's, levels, CSEs or equivalent")
+                content: _T("intake.Q4d.rg.mcg.option.1", "GCSEs, levels, CSEs or equivalent")
             },
             {
                 key: '2', role: 'option',
@@ -559,7 +559,7 @@ interface EducationProps extends ItemProps {
             {
                 key: '3', role: 'option',
                 disabled: expWithArgs('responseHasKeysAny', this.key, responseGroupKey + '.' + multipleChoiceKey, '0', '1', '2', '4'),
-                content: _T("intake.Q4d.rg.mcg.option.3", "Bachelors Degree (BA, BSc) or equivalent")
+                content: _T("intake.Q4d.rg.mcg.option.3", "Bachelor Degree (BA, BSc) or equivalent")
             },
             {
                 key: '4', role: 'option',
@@ -610,7 +610,7 @@ export class PeopleMet extends ItemQuestion {
             itemKey: this.itemKey,
             isRequired: this.isRequired,
             condition: this.condition,
-            questionText: _T("intake.Q5.title.0", "Except people you meet on public transports, do you have contact with any of the following during the course of a typical day (so without COVID-19 measures)?"),
+            questionText: _T("intake.Q5.title.0", "Except people you meet on public transportation, do you have contact with any of the following during the course of a typical day (so without COVID-19 measures)?"),
             helpGroupContent: this.getHelpGroupContent(),
             topDisplayCompoments: [ text_select_all_apply("intake.Q5.rg.dwL8.text.0") ],
             responseOptions: this.getResponses(),
@@ -1647,7 +1647,7 @@ export class HomeophaticMedicine extends ItemQuestion {
             itemKey: this.itemKey,
             isRequired: this.isRequired,
             condition: this.condition,
-            questionText: _T("intake.Q26.title.0", "Are you taking or do you plan to take this winter homeopathic medicine in order to prevent COVID-19?"),
+            questionText: _T("intake.Q26.title.0", "Are you taking or do you plan to take this winter homeopathic products in order to prevent COVID-19?"),
             helpGroupContent: this.getHelpGroupContent(),
             responseOptions:this.getResponses()
         });
