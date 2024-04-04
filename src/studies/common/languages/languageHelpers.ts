@@ -129,6 +129,9 @@ export class LanguageHelpers {
       const get_trans = (key: string): [string, string] | undefined => {
 
         if (!(key in translations)) {
+          // use the reference text if languageId == referenceKey
+          if (languageId == referenceKey && reference !== undefined)
+            return [languageId, reference]
           return undefined;
         }
 
