@@ -13,10 +13,19 @@ import { Expression } from "survey-engine/data_types";
 import { textComponent } from "../../../compat";
 import { as_input_option, option_def, option_input_other } from "../../../tools/options";
 
+interface VacStartProps extends ItemProps {
+    usePrefillsNote?: boolean;
+}
+
 export class VacStart extends ItemQuestion {
 
-    constructor(props: ItemProps) {
+    usePrefillsNote: boolean;
+
+    constructor(props: VacStartProps) {
         super(props, 'Q0');
+
+        this.usePrefillsNote = props.usePrefillsNote ?? false;
+
     }
 
     getCondition() {
@@ -35,7 +44,7 @@ export class VacStart extends ItemQuestion {
                 "Four weeks ago you received a questionnaire about your vaccination status.  This new questionnaire is to monitor any further changes. Select the option that applies to you."
                 ),
             helpGroupContent: this.getHelpGroupContent(),
-            bottomDisplayCompoments: [
+            bottomDisplayCompoments: this.usePrefillsNote ? [
                 textComponent({
                     key: "note1",
                     'content': _T(
@@ -43,7 +52,7 @@ export class VacStart extends ItemQuestion {
                         "(**) By selecting one of these options you give your consent to use your historical data to prefill this survey's responses."
                     )
                 })
-            ],
+            ] : [],
             responseOptions: this.getResponses()
         });
     }
@@ -58,11 +67,14 @@ export class VacStart extends ItemQuestion {
                 key: '1', role: 'option',
                 content: _T(
                     "vaccination.Q0.rg.scg.option.0",
-                    "In the meantime I received a new vaccine dose, or a new invitation to be vaccinated. (**)")
+                    "In the meantime I received a new vaccine dose, or a new invitation to be vaccinated."
+                    + (this.usePrefillsNote ? ' (**)' : ''))
             },
             {
                 key: '3', role: 'option',
-                content: _T("vaccination.Q0.rg.scg.option.2", "I'm not sure, and would like to take these questions to make sure my information on vaccination is up to date. (**)")
+                content: _T(
+                    "vaccination.Q0.rg.scg.option.2", "I'm not sure, and would like to take these questions to make sure my information on vaccination is up to date."
+                    + (this.usePrefillsNote ? ' (**)' : ''))
             },
         ]
     }

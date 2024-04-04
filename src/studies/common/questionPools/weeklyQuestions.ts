@@ -280,6 +280,7 @@ export class SymptomsGroup extends GroupQuestion {
 
 interface SameIllnessProps extends ItemProps {
     useDoesNotApply?: boolean;
+    usePrefillsNote?: boolean;
 }
 
 /**
@@ -288,10 +289,12 @@ interface SameIllnessProps extends ItemProps {
 export class SameIllness extends ItemQuestion {
 
     useDoesNotApply: boolean;
+    usePrefillsNote: boolean;
 
     constructor(props: SameIllnessProps) {
         super(props, 'Q2');
         this.useDoesNotApply = props.useDoesNotApply ?? true;
+        this.usePrefillsNote = props.usePrefillsNote ?? false;
     }
 
     getCondition() {
@@ -311,9 +314,10 @@ export class SameIllness extends ItemQuestion {
             questionText: _T(
                 "weekly.HS.Q2.title.0",
                 "When you filled in the previous questionnaire, you indicated that you were still sick. Are the symptoms you are  reporting now from the same timeframe as the symptoms you reported the last time?"
+                + (this.usePrefillsNote ? ' (**)' : '')
                 ),
             helpGroupContent: this.getHelpGroupContent(),
-            bottomDisplayCompoments: [
+            bottomDisplayCompoments: this.usePrefillsNote ? [
                 textComponent({
                     key: "note1",
                     'content': _T(
@@ -321,7 +325,7 @@ export class SameIllness extends ItemQuestion {
                         "(**) By selecting one of these options you give your consent to use your historical data to prefill this survey's responses."
                     )
                 })
-            ],
+            ] : [],
             responseOptions: this.getResponses()
         });
     }
