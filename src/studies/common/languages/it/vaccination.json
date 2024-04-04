@@ -32,8 +32,8 @@
     "it": "(**) Selezionando una di queste opzioni fornisci il tuo consenso ad utilizzare i tuoi dati storici per precomilare il questionario di vaccinazione."
   },
   "vaccination.HV.Q9.title.0": {
-    "en": "Did you receive a flu vaccine during the previous flu season (2020-2021)?",
-    "it": "Sei stato vaccinato contro l'influenza durante la passata stagione influenzale (2020-2021)?"
+    "en": "Did you receive a flu vaccine during the previous flu season ?",
+    "it": "Sei stato vaccinato contro l'influenza durante la passata stagione influenzale (2022-2023)?"
   },
   "vaccination.HV.Q9.helpGroup.text.0": {
     "en": "Why are we asking this?",
@@ -49,7 +49,7 @@
   },
   "vaccination.HV.Q9.helpGroup.text.3": {
     "en": "Answer 'yes' if you were vaccinated in the previous autumn/winter season",
-    "it": "Rispondi 'sì' se sei stato vaccinato contro l’influenza l’anno scorso durante la stagione autunno inverno 2020-2021."
+    "it": "Rispondi 'sì' se sei stato vaccinato contro l’influenza l’anno scorso durante la stagione autunno inverno 2022-2023."
   },
   "vaccination.HV.Q9.rg.scg.option.0": {
     "en": "Yes",
@@ -64,8 +64,8 @@
     "it": "Non so/non ricordo"
   },
   "vaccination.HV.Q10.title.0": {
-    "en": "Have you received a flu vaccine this autumn/winter season? (2021-2022)",
-    "it": "Hai ricevuto il vaccino contro l'influenza per la prossima stagione autunno/inverno? (2021-2022)"
+    "en": "Have you received a flu vaccine this autumn/winter season?",
+    "it": "Hai ricevuto il vaccino contro l'influenza per la prossima stagione autunno/inverno? (2023-2024)"
   },
   "vaccination.HV.Q10.helpGroup.text.0": {
     "en": "Why are we asking this?",
@@ -76,7 +76,7 @@
     "it": "Vogliamo studiare l’efficacia della protezione del vaccino influenzale."
   },
   "vaccination.HV.Q10.helpGroup.text.2": {
-    "en": "How should I answer it?",
+    "en": "How should I answer this question?",
     "it": "Come devo rispondere?"
   },
   "vaccination.HV.Q10.helpGroup.text.3": {
@@ -97,7 +97,7 @@
   },
   "vaccination.HV.Q10b.title.0": {
     "en": "When were you vaccinated against flu this season ?",
-    "it": "Quando hai ricevuto la vaccinazione per questa stagione? (2021-2022)?"
+    "it": "Quando hai ricevuto la vaccinazione per questa stagione? (2023-2024)?"
   },
   "vaccination.HV.Q10b.helpGroup.text.0": {
     "en": "Why are we asking this?",
@@ -192,7 +192,7 @@
     "it": "Vogliamo capire le ragioni per cui alcune persone decidono di vaccinarsi e altre no."
   },
   "vaccination.HV.Q10d.helpGroup.text.2": {
-    "en": "How should I answer it?",
+    "en": "How should I answer this question?",
     "it": "Come devi rispondere?"
   },
   "vaccination.HV.Q10d.helpGroup.text.3": {
@@ -682,5 +682,9 @@
   "vaccination.HV.Q35m.rg.mcg.description.input.17": {
     "en": "Describe here (optional)",
     "it": "Descrizione (opzionale)"
+  },
+  "vaccination.surveyEnd.title.0": {
+    "en": "Thank you! This was all for now, please submit (push « send ») your responses.",
+    "it": "Grazie! Per ora è tutto, per favore invia le tue risposte premendo il pulsante « Invia »."
   }
 }
