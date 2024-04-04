@@ -2,7 +2,7 @@ import { Item, SurveyDefinition, SurveyProps } from "case-editor-tools/surveys/t
 import { Duration, durationObjectToSeconds } from "case-editor-tools/types/duration";
 import { Expression, ExpressionArg, ExpressionName, isExpression, isSurveyGroupItem, Survey, SurveyItem, SurveyPrefillRuleNames } from "survey-engine/data_types";
 import { isConditionable } from "../types/item";
-import { isGroupBuilder, isSimpleGroupQuestion, ItemBuilder } from "./items";
+import { isGroupBuilder, isSimpleGroupQuestion, ItemBuilder, ItemQuestion } from "./items";
 
 
 export interface SurveyBuilderProps extends SurveyProps {
@@ -97,6 +97,13 @@ export class SurveyBuilder extends SurveyDefinition {
         }
         return names;
     }
+
+    replaceQuestion(newQuestion: ItemQuestion) {
+        this.items = this.items.map((item) =>
+            item.key === newQuestion.key ? newQuestion : item,
+        );
+}
+
 }
 
 export const isSurveyBuilder = (d: SurveyDefinition): d is SurveyBuilder => {
