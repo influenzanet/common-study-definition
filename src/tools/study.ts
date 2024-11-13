@@ -7,10 +7,7 @@ import { Expression } from "survey-engine/data_types/expression";
  * The instance of the survey class must be created after the language are loaded (avoid import side effect)
  */
 
-export type CustomStudyRules = Array<{
-    name: string;
-    rules: Expression[];
-}>;
+type CustomStudyRules = Study['customStudyRules']
 
 export abstract class StudyBuilder {
 
@@ -28,6 +25,13 @@ export abstract class StudyBuilder {
 
     getStudyRules(): StudyRules|undefined {
         return this.studyRules;
+    }
+
+    addCustomStudyRules(name :string, rules: Expression[]) {
+        if(typeof(this.customStudyRules) === "undefined") {
+            this.customStudyRules = [];
+        }
+        this.customStudyRules.push({'name': name, rules: rules});
     }
 
     getCustomStudyRules(): CustomStudyRules|undefined {
