@@ -1,7 +1,8 @@
 import { OptionDef } from "case-editor-tools/surveys/types";
 import { _T } from "../studies/common/languages";
-import { ComponentProperties, ExpressionArg } from "survey-engine/data_types";
+import { ComponentProperties, Expression, ExpressionArg } from "survey-engine/data_types";
 import { ClientExpression as client, isExpressionArg, isValidExpressionArg } from "./expressions";
+import { QuestionType } from "../types/item";
 
 export const default_input_option_style = [{ key: 'className', value: 'w-100' }] as const;
 
@@ -197,3 +198,57 @@ export class OptionList {
         return this.options;
     }
 }
+
+// Describe a question class with getResponses() method available
+interface ItemWithResponses {
+    key: string;
+    getResponses(): OptionDef[];
+}
+
+// Helper to create condition from an Item class, exposing getResponse()
+export const condition_builder = (item: ItemWithResponses, choiceType:QuestionType )=>{
+    return new ConditionBuilder(item.key, choiceType,  item.getResponses());
+}
+
+// ConditionBuilder for choice (single/mutliple) question
+// Simple helper for question without createConditionFrom available
+// It creates condition based on response and check if response are 
+export class ConditionBuilder {
+
+    itemKey: string;
+
+    choiceType: 'single'|'multiple'
+
+    options: OptionDef[]
+
+    constructor(itemKey: string, choiceType: 'single'|'multiple', options: OptionDef[]) {
+        this.itemKey = itemKey;
+        this.choiceType = choiceType;
+        this.options = options;
+    }
+
+    createConditionFrom(...optionKeys: string[]):Expression {
+        const keys = this.getOptionKeys();
+        const unknown: string[] = [];
+        optionKeys.forEach(k => {
+            if(!keys.has(k)) {
+                console.warn("Key "+ k +" is not defined for " + this.itemKey);
+            }
+        });
+        if(this.choiceType == 'single') {
+            return client.singleChoice.any(this.itemKey, ...optionKeys);
+        } else {
+            return client.multipleChoice.any(this.itemKey, ...optionKeys);
+        }
+    }
+    
+    getOptionKeys(): Set<string> {
+        const keys = new Set<string>();
+        this.options.forEach(o=> {
+            keys.add(o.key);
+        })
+        return keys;
+    }
+}
+
+
