@@ -1,7 +1,6 @@
 import { _T } from "../languages"
 import { Group, OptionDef } from "case-editor-tools/surveys/types";
 import { expWithArgs} from "case-editor-tools/surveys/utils/simple-generators";
-import { ComponentGenerators } from "case-editor-tools/surveys/utils/componentGenerators";
 import { SurveyItems } from 'case-editor-tools/surveys';
 import { singleChoicePrefix, text_how_answer, text_select_all_apply, text_why_asking } from "./helpers";
 import { ParticipantFlags } from "../participantFlags";
@@ -9,9 +8,9 @@ import { ParticipantFlags } from "../participantFlags";
 import { VaccinationResponses as ResponseEncoding } from "../responses/vaccination";
 import { ItemProps, GroupProps, ItemQuestion } from "./types";
 import { ClientExpression } from "../../../tools";
-import { Expression } from "survey-engine/data_types";
+import { Expression, SurveyItem } from "survey-engine/data_types";
 import { textComponent } from "../../../compat";
-import { as_input_option, option_def, option_input_other } from "../../../tools/options";
+import { option_def, option_input_other } from "../../../tools/options";
 
 interface VacStartProps extends ItemProps {
     usePrefillsNote?: boolean;
@@ -28,12 +27,12 @@ export class VacStart extends ItemQuestion {
 
     }
 
-    getCondition() {
+    getCondition():Expression {
         const hadCompletedVaccSurvey = expWithArgs('eq', expWithArgs('getAttribute', expWithArgs('getAttribute', expWithArgs('getContext'), 'participantFlags'), 'completedVaccSurvey'), "1");
         return hadCompletedVaccSurvey;
     }
 
-    buildItem() {
+    buildItem():SurveyItem {
         return SurveyItems.singleChoice({
             parentKey: this.parentKey,
             itemKey: this.itemKey,
@@ -57,7 +56,7 @@ export class VacStart extends ItemQuestion {
         });
     }
 
-    getResponses() {
+    getResponses():OptionDef[] {
         return [
             {
                 key: ResponseEncoding.vacstart.nothing_changed, role: 'option',
@@ -123,7 +122,7 @@ export class FluVaccineLastSeason extends ItemQuestion {
         super(props, 'Q9');
     }
 
-    buildItem() {
+    buildItem():SurveyItem {
         return SurveyItems.singleChoice({
             parentKey: this.parentKey,
             itemKey: this.itemKey,
@@ -135,7 +134,7 @@ export class FluVaccineLastSeason extends ItemQuestion {
         });
     }
 
-    getResponses() {
+    getResponses():OptionDef[] {
         return [
                 {
                 key: ResponseEncoding.flu_vaccine_last.yes, role: 'option',
@@ -180,7 +179,7 @@ export class FluVaccineThisSeason extends ItemQuestion {
         super(props, 'Q10');
     }
 
-    buildItem() {
+    buildItem():SurveyItem {
         return SurveyItems.singleChoice({
             parentKey: this.parentKey,
             itemKey: this.itemKey,
@@ -201,7 +200,7 @@ export class FluVaccineThisSeason extends ItemQuestion {
         return ClientExpression.singleChoice.any(this.key, ResponseEncoding.flu_vaccine_season.yes);
     }
 
-    getResponses() {
+    getResponses():OptionDef[] {
         return [
             {
                 key: ResponseEncoding.flu_vaccine_season.yes, role: 'option',
@@ -265,7 +264,7 @@ abstract class SubVaccineQuestion extends ItemQuestion {
         this.triggerQuestion =  props.triggerQuestion;
     }
 
-    getCondition() {
+    getCondition():Expression|undefined {
         if(!this.triggerQuestion) {
             return undefined;
         }
@@ -293,7 +292,7 @@ export class FluVaccineThisSeasonWhen extends SubVaccineQuestion {
         this.triggerResponse = ResponseEncoding.flu_vaccine_season.yes;
     }
 
-    buildItem() {
+    buildItem():SurveyItem {
         return SurveyItems.singleChoice({
             parentKey: this.parentKey,
             itemKey: this.itemKey,
@@ -347,7 +346,7 @@ export class FluVaccineThisSeasonReasonFor extends SubVaccineQuestion {
         this.triggerResponse = ResponseEncoding.flu_vaccine_season.yes;
     }
 
-    buildItem() {
+    buildItem():SurveyItem {
         return SurveyItems.multipleChoice({
             parentKey: this.parentKey,
             itemKey: this.itemKey,
@@ -425,7 +424,7 @@ export class FluVaccineThisSeasonReasonAgainst extends SubVaccineQuestion {
         this.triggerResponse = ResponseEncoding.flu_vaccine_season.no;
     }
 
-    buildItem() {
+    buildItem():SurveyItem {
         return SurveyItems.multipleChoice({
             parentKey: this.parentKey,
             itemKey: this.itemKey,
@@ -518,7 +517,7 @@ export class CovidVac extends ItemQuestion {
         super(props,  'Q35');
     }
 
-    buildItem() {
+    buildItem():SurveyItem {
         return SurveyItems.singleChoice({
             parentKey: this.parentKey,
             itemKey: this.itemKey,
@@ -583,7 +582,7 @@ export class CovidVaccineBrand extends SubVaccineQuestion {
         this.triggerResponse = ResponseEncoding.covid_vac.yes;
     }
 
-    buildItem() {
+    buildItem():SurveyItem {
         return SurveyItems.multipleChoice({
             parentKey: this.parentKey,
             itemKey: this.itemKey,
@@ -650,7 +649,7 @@ export class CovidVaccineShots extends SubVaccineQuestion {
         this.triggerResponse = ResponseEncoding.covid_vac.yes;
     }
 
-    buildItem() {
+    buildItem():SurveyItem {
         return SurveyItems.singleChoice({
             parentKey: this.parentKey,
             itemKey: this.itemKey,
@@ -715,7 +714,7 @@ export class CovidDateLastVaccine extends SubVaccineQuestion {
         this.triggerResponse =ResponseEncoding.covid_vac.yes;
     }
 
-    buildItem() {
+    buildItem():SurveyItem {
         return SurveyItems.singleChoice({
             parentKey: this.parentKey,
             itemKey: this.itemKey,
@@ -785,7 +784,7 @@ interface CovidSecondVacProps extends CovidVacProps {
         this.triggerResponse = ResponseEncoding.covid_vac.yes;
     }
 
-    getCondition() {
+    getCondition():Expression|undefined {
         const cond = super.getCondition();
         if(this.keyVaccineShots) {
             return expWithArgs('and',
@@ -796,7 +795,7 @@ interface CovidSecondVacProps extends CovidVacProps {
         return cond;
     }
 
-    buildItem() {
+    buildItem():SurveyItem {
         return SurveyItems.singleChoice({
             parentKey: this.parentKey,
             itemKey: this.itemKey,
@@ -855,7 +854,7 @@ export class CovidSecondShotAgainstReason extends SubVaccineQuestion {
         this.triggerResponse = ResponseEncoding.covid_vac.yes;
     }
 
-    getCondition() {
+    getCondition():Expression|undefined {
         const cond = super.getCondition();
         // '0' response ?
         if(this.keyVaccineShots) {
@@ -867,7 +866,7 @@ export class CovidSecondShotAgainstReason extends SubVaccineQuestion {
         return cond;
     }
 
-    buildItem() {
+    buildItem():SurveyItem {
         return SurveyItems.singleChoice({
             parentKey: this.parentKey,
             itemKey: this.itemKey,
@@ -942,7 +941,7 @@ export class CovidVaccineProReasons extends SubVaccineQuestion {
         this.triggerResponse = ResponseEncoding.covid_vac.yes;
     }
 
-    buildItem() {
+    buildItem():SurveyItem {
         return SurveyItems.multipleChoice({
             parentKey: this.parentKey,
             itemKey: this.itemKey,
@@ -1038,7 +1037,7 @@ export class CovidVaccineAgainstReasons extends SubVaccineQuestion {
         this.triggerResponse = ResponseEncoding.covid_vac.no;
     }
 
-    buildItem() {
+    buildItem():SurveyItem {
         return SurveyItems.multipleChoice({
             parentKey: this.parentKey,
             itemKey: this.itemKey,
@@ -1151,7 +1150,7 @@ export class FinalText extends ItemQuestion {
         super(props, 'surveyEnd');
     }
 
-    buildItem() {
+    buildItem():SurveyItem {
         return SurveyItems.surveyEnd(
             this.parentKey,
             _T("vaccination.surveyEnd.title.0", "Thank you! This was all for now, please submit (push « send ») your responses."),

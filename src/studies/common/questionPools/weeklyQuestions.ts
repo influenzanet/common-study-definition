@@ -1,17 +1,16 @@
 import { LanguageMap, _T } from "../languages"
-import { Group, Item, OptionDef } from "case-editor-tools/surveys/types";
+import { OptionDef } from "case-editor-tools/surveys/types";
 import { ItemEditor } from "case-editor-tools/surveys/survey-editor/item-editor";
 import { initMatrixQuestion,  ResponseRowCell } from "case-editor-tools/surveys/responseTypeGenerators/matrixGroupComponent";
 import { initLikertScaleItem } from "case-editor-tools/surveys/responseTypeGenerators/likertGroupComponents";
 import { expWithArgs, generateHelpGroupComponent, generateLocStrings, generateTitleComponent } from "case-editor-tools/surveys/utils/simple-generators";
 import { likertScaleKey, matrixKey, responseGroupKey } from "case-editor-tools/constants/key-definitions";
-import { MultipleChoicePrefix, singleChoicePrefix, text_how_answer, text_select_all_apply, text_why_asking, require_response, trans_select_all_apply } from "./helpers";
+import { MultipleChoicePrefix, singleChoicePrefix, text_how_answer, text_select_all_apply, text_why_asking, require_response } from "./helpers";
 import { SurveyItems } from 'case-editor-tools/surveys';
-import { ComponentGenerators } from "case-editor-tools/surveys/utils/componentGenerators";
 import { SymptomKeysType, VisitMedicalServiceTypes, WeeklyResponses as ResponseEncoding } from "../responses/weekly";
 import { GroupProps, GroupQuestion, ItemProps, ItemQuestion } from "./types";
 import { ClientExpression as client } from "../../../tools/expressions";
-import { Expression, ItemComponent } from "survey-engine/data_types";
+import { Expression, SurveyItem } from "survey-engine/data_types";
 import { MatrixRow, markdownComponent, textComponent } from "../../../compat";
 import { trans_text } from "../../../tools";
 
@@ -41,7 +40,7 @@ export class Symptoms extends ItemQuestion {
      * @param symptoms
      * @returns
      */
-    createSymptomCondition(...symptoms: SymptomKeysType[]) {
+    createSymptomCondition(...symptoms: SymptomKeysType[]):Expression {
 
         const r : string[] = [];
         symptoms.forEach(symptom=> {
@@ -55,11 +54,11 @@ export class Symptoms extends ItemQuestion {
      * Helper to create a condition based on this question response checking for any response except 'no-symptom' response
      * @returns
      */
-    createAnySymptomCondition() {
+    createAnySymptomCondition():Expression {
         return client.responseHasOnlyKeysOtherThan(this.key, MultipleChoicePrefix, ResponseEncoding.symptoms.no_symptom);
     }
 
-    buildItem() {
+    buildItem():SurveyItem {
 
         const noteFunc = this.useMarkdownNote ? markdownComponent : textComponent;
 
@@ -90,7 +89,7 @@ export class Symptoms extends ItemQuestion {
         });
     }
 
-    getResponses():Array<OptionDef> {
+    getResponses(): OptionDef[] {
         const codes = ResponseEncoding.symptoms;
         const exclusiveOptionRule =  client.multipleChoice.any(this.key, codes.no_symptom);
         const r : OptionDef[] =  [
@@ -264,7 +263,7 @@ export class SymptomsGroup extends GroupQuestion {
 
     keySymptomsQuestion: string;
 
-    getCondition() {
+    getCondition():Expression {
         return client.responseHasOnlyKeysOtherThan(this.keySymptomsQuestion, MultipleChoicePrefix, ResponseEncoding.symptoms.no_symptom);
     }
 
@@ -297,7 +296,7 @@ export class SameIllness extends ItemQuestion {
         this.usePrefillsNote = props.usePrefillsNote ?? false;
     }
 
-    getCondition() {
+    getCondition():Expression {
         const hadOngoingSymptomsLastWeek = expWithArgs('eq',
                     expWithArgs('getAttribute', expWithArgs('getAttribute', expWithArgs('getContext'), 'participantFlags'), 'prev'),
                     "1"
@@ -305,7 +304,7 @@ export class SameIllness extends ItemQuestion {
         return hadOngoingSymptomsLastWeek;
     }
 
-    buildItem() {
+    buildItem():SurveyItem {
         return SurveyItems.singleChoice({
             parentKey: this.parentKey,
             itemKey: this.itemKey,
@@ -330,7 +329,7 @@ export class SameIllness extends ItemQuestion {
         });
     }
 
-    getResponses() {
+    getResponses():OptionDef[] {
         const r : OptionDef[] = [
             {
                 key: '0', role: 'option',
@@ -384,7 +383,7 @@ export class SameIllness extends ItemQuestion {
         super(props, 'Qcov3');
     }
 
-    buildItem() {
+    buildItem():SurveyItem {
         return SurveyItems.singleChoice({
             parentKey: this.parentKey,
             itemKey: this.itemKey,
@@ -399,7 +398,7 @@ export class SameIllness extends ItemQuestion {
         });
     }
 
-    getResponses() {
+    getResponses():OptionDef[] {
         const codes = ResponseEncoding.pcr_contacts;
         return [
             {
@@ -438,12 +437,12 @@ export class PcrHouseholdContact extends ItemQuestion {
         this.covid19ContactKey = props.covid19ContactKey;
     }
 
-    getCondition() {
+    getCondition():Expression {
         return client.responseHasKeysAny(this.covid19ContactKey, singleChoicePrefix, ResponseEncoding.pcr_contacts.yes);
         // expWithArgs('responseHasKeysAny', covid19ContactKey, [responseGroupKey, singleChoiceKey].join('.'), '1')
     }
 
-    buildItem() {
+    buildItem():SurveyItem {
         return SurveyItems.singleChoice({
             parentKey: this.parentKey,
             itemKey: this.itemKey,
@@ -457,7 +456,7 @@ export class PcrHouseholdContact extends ItemQuestion {
         });
     }
 
-    getResponses() {
+    getResponses():OptionDef[] {
         return [
             {
                 key: '1', role: 'option', content: _T("weekly.HS.Qcov3b.rg.scg.option.0",  "Yes")
@@ -508,14 +507,14 @@ export class SymptomsStart extends ItemQuestion {
         this.keySameIllness = props.keySameIllness;
     }
 
-    getCondition() {
+    getCondition():Expression {
         const codes = ResponseEncoding.same_illness;
         return expWithArgs('not',
             expWithArgs('responseHasKeysAny', this.keySameIllness, singleChoicePrefix, codes.yes, codes.notapply)
         );
     }
 
-    buildItem() {
+    buildItem():SurveyItem {
 
         const date_input_key = ResponseEncoding.symptoms_start.date_input;
 
@@ -605,7 +604,7 @@ export class SymptomsEnd extends ItemQuestion {
         this.keySymptomsStart = props.keySymptomsStart;
     }
 
-    buildItem() {
+    buildItem():SurveyItem {
 
         const codes = ResponseEncoding.symptoms_end;
 
@@ -665,7 +664,7 @@ export class SymptomsSuddenlyDeveloped extends ItemQuestion {
         super(props, 'Q5');
     }
 
-    buildItem() {
+    buildItem():SurveyItem {
         return SurveyItems.singleChoice({
             parentKey: this.parentKey,
             itemKey: this.itemKey,
@@ -677,7 +676,7 @@ export class SymptomsSuddenlyDeveloped extends ItemQuestion {
         });
     }
 
-    getResponses() {
+    getResponses():OptionDef[] {
 
         return [
             {
@@ -725,11 +724,11 @@ export class FeverStart extends ItemQuestion {
         this.keySymptomStart = props.keySymptomStart;
     }
 
-    getCondition() {
+    getCondition():Expression {
         return client.responseHasKeysAny(this.keySymptomsQuestion, MultipleChoicePrefix, ResponseEncoding.symptoms.fever);
     }
 
-    buildItem() {
+    buildItem():SurveyItem {
         return SurveyItems.singleChoice({
             parentKey: this.parentKey,
             itemKey: this.itemKey,
@@ -789,7 +788,7 @@ abstract class SymptomDependentQuestion extends ItemQuestion {
 
     abstract getTriggerSymptoms(): Array<string>;
 
-    getCondition() {
+    getCondition():Expression {
         const symptoms = this.getTriggerSymptoms();
         return client.multipleChoice.any(this.keySymptomsQuestion, ...symptoms);
         //expWithArgs('responseHasKeysAny', keySymptomsQuestion, [responseGroupKey, multipleChoiceKey].join('.'), '1')
@@ -812,7 +811,7 @@ export class FeverDevelopedSuddenly extends SymptomDependentQuestion {
         ];
     }
 
-    buildItem() {
+    buildItem():SurveyItem {
         return SurveyItems.singleChoice({
             parentKey: this.parentKey,
             itemKey: this.itemKey,
@@ -824,7 +823,7 @@ export class FeverDevelopedSuddenly extends SymptomDependentQuestion {
         });
     }
 
-    getResponses() {
+    getResponses():OptionDef[] {
         return [
             {
                 key: '0', role: 'option',
@@ -870,7 +869,7 @@ export class DidUMeasureTemperature extends SymptomDependentQuestion {
     }
 
 
-    buildItem() {
+    buildItem():SurveyItem {
         return SurveyItems.singleChoice({
             parentKey: this.parentKey,
             itemKey: this.itemKey,
@@ -882,7 +881,7 @@ export class DidUMeasureTemperature extends SymptomDependentQuestion {
         });
     }
 
-    getResponses() {
+    getResponses(): OptionDef[] {
         const codes = ResponseEncoding.measure_temp;
         return  [
             {
@@ -932,7 +931,7 @@ export class HighestTemprerature extends SymptomDependentQuestion {
         this.keyDidYouMeasureTemperature = props.keyDidYouMeasureTemperature;
     }
 
-    getCondition() {
+    getCondition():Expression {
         return client.logic.and(
             client.singleChoice.any(this.keyDidYouMeasureTemperature, ResponseEncoding.measure_temp.yes),
             super.getCondition()
@@ -945,7 +944,7 @@ export class HighestTemprerature extends SymptomDependentQuestion {
         ];
     }
 
-    buildItem() {
+    buildItem():SurveyItem {
         return SurveyItems.singleChoice({
             parentKey: this.parentKey,
             itemKey: this.itemKey,
@@ -957,7 +956,7 @@ export class HighestTemprerature extends SymptomDependentQuestion {
         });
     }
 
-    getResponses() {
+    getResponses():OptionDef[] {
         return  [
             {
                 key: '0', role: 'option',
@@ -1015,7 +1014,7 @@ export class FeverGroup extends GroupQuestion {
 
     isRequired?: boolean;
 
-    getCondition() {
+    getCondition():Expression {
         return client.multipleChoice.any(this.keySymptomsQuestion, ResponseEncoding.symptoms.fever);
     }
 
@@ -1054,7 +1053,7 @@ export class ConsentForMore extends ItemQuestion {
         super(props, 'Q36');
     }
 
-    buildItem() {
+    buildItem():SurveyItem {
         return SurveyItems.singleChoice({
             parentKey: this.parentKey,
             itemKey: this.itemKey,
@@ -1066,7 +1065,7 @@ export class ConsentForMore extends ItemQuestion {
         });
     }
 
-    getResponses() {
+    getResponses():OptionDef[] {
         return  [
             {
                 key: ResponseEncoding.consent_more.yes, role: 'option', content: _T("weekly.HS.Q36.rg.scg.option.0", "Yes")
@@ -1104,7 +1103,7 @@ export class HasMoreGroup extends GroupQuestion {
 
     consentForMoreKey : string;
 
-    getCondition() {
+    getCondition():Expression {
         return client.singleChoice.any(this.consentForMoreKey, ResponseEncoding.consent_more.yes)
     }
 
@@ -1128,7 +1127,7 @@ export class SymptomImpliedCovidTest extends ItemQuestion {
         super(props, 'Qcov16h');
     }
 
-    buildItem() {
+    buildItem():SurveyItem {
         return SurveyItems.singleChoice({
             parentKey: this.parentKey,
             itemKey: this.itemKey,
@@ -1140,7 +1139,7 @@ export class SymptomImpliedCovidTest extends ItemQuestion {
         });
     }
 
-    getResponses() {
+    getResponses():OptionDef[] {
         return [
             {
                 key: ResponseEncoding.symptom_test.yes, role: 'option',
@@ -1196,14 +1195,14 @@ export class CovidTestType extends ItemQuestion {
         this.keySymptomImpliedCovidTest = props.keySymptomImpliedCovidTest;
     }
 
-    getCondition() {
+    getCondition():Expression {
         // FIXME: in case keysymptomImpliedCovidTest chnges type eg: single -> multiple, this will break unless
         // singleChoiceKey is changed to multipleChoiceKey
         return  client.responseHasKeysAny(this.keySymptomImpliedCovidTest, singleChoicePrefix, ResponseEncoding.symptom_test.yes);
         //expWithArgs('responseHasKeysAny', keysymptomImpliedCovidTest, responseGroupKey + '.' + singleChoiceKey, '1'),
     }
 
-    buildItem() {
+    buildItem():SurveyItem {
         return SurveyItems.multipleChoice({
             parentKey: this.parentKey,
             itemKey: this.itemKey,
@@ -1217,7 +1216,7 @@ export class CovidTestType extends ItemQuestion {
         });
     }
 
-    getResponses() {
+    getResponses():OptionDef[] {
 
         const sero : OptionDef[] = [];
 
@@ -1272,7 +1271,7 @@ abstract class TestTypeDependentQuestion extends ItemQuestion {
 
     abstract getTriggerTests(): Array<string>;
 
-    getCondition() {
+    getCondition():Expression {
         const test_types = this.getTriggerTests();
         return client.multipleChoice.any(this.keyTestType, ...test_types);
         //expWithArgs('responseHasKeysAny', keySymptomsQuestion, [responseGroupKey, multipleChoiceKey].join('.'), '1')
@@ -1295,7 +1294,7 @@ export class ResultPCRTest extends TestTypeDependentQuestion {
         ]
     }
 
-    buildItem() {
+    buildItem():SurveyItem {
         return SurveyItems.singleChoice({
             parentKey: this.parentKey,
             itemKey: this.itemKey,
@@ -1309,7 +1308,7 @@ export class ResultPCRTest extends TestTypeDependentQuestion {
         });
     }
 
-    getResponses() {
+    getResponses():OptionDef[] {
         return [
             {
                 key: '1', role: 'option',
@@ -1357,7 +1356,7 @@ export class ResultAntigenicTest extends TestTypeDependentQuestion {
         ]
     }
 
-    buildItem() {
+    buildItem():SurveyItem {
         return SurveyItems.singleChoice({
             parentKey: this.parentKey,
             itemKey: this.itemKey,
@@ -1371,7 +1370,7 @@ export class ResultAntigenicTest extends TestTypeDependentQuestion {
         });
     }
 
-    getResponses() {
+    getResponses():OptionDef[] {
         return  [
             {
                 key: '1', role: 'option',
@@ -1418,7 +1417,7 @@ export class ResultRapidAntigenicTest extends TestTypeDependentQuestion {
         ];
     }
 
-    buildItem() {
+    buildItem():SurveyItem {
         return SurveyItems.singleChoice({
             parentKey: this.parentKey,
             itemKey: this.itemKey,
@@ -1432,7 +1431,7 @@ export class ResultRapidAntigenicTest extends TestTypeDependentQuestion {
         });
     }
 
-    getResponses() {
+    getResponses():OptionDef[] {
         return [
             {
                 key: '1', role: 'option',
@@ -1469,7 +1468,7 @@ export class FluTest extends ItemQuestion {
         super(props, 'Qcov19');
     }
 
-    buildItem() {
+    buildItem():SurveyItem {
         return SurveyItems.singleChoice({
             parentKey: this.parentKey,
             itemKey: this.itemKey,
@@ -1481,7 +1480,7 @@ export class FluTest extends ItemQuestion {
         });
     }
 
-    getResponses() {
+    getResponses():OptionDef[] {
         const codes = ResponseEncoding.flu_test;
         return [
             {
@@ -1532,7 +1531,7 @@ export class ResultFluTest extends ItemQuestion {
         super(props, 'Qcov19b');
     }
 
-    buildItem() {
+    buildItem():SurveyItem {
         return SurveyItems.singleChoice({
             parentKey: this.parentKey,
             itemKey: this.itemKey,
@@ -1544,7 +1543,7 @@ export class ResultFluTest extends ItemQuestion {
         });
     }
 
-    getResponses() {
+    getResponses():OptionDef[] {
         return [
             {
                 key: '1', role: 'option',
@@ -1592,7 +1591,7 @@ export class VisitedMedicalService extends ItemQuestion {
         this.noteOnTop = props.noteOnTop ?? false;
     }
 
-    buildItem() {
+    buildItem():SurveyItem {
 
         const note = [
             text_select_all_apply("weekly.EX.Q7.rg.DTpM.text.0")
@@ -1611,7 +1610,7 @@ export class VisitedMedicalService extends ItemQuestion {
         });
     }
 
-    getResponses():Array<OptionDef> {
+    getResponses():OptionDef[] {
 
         const codes = ResponseEncoding.visit_medical;
 
@@ -1708,14 +1707,14 @@ export class VisitedMedicalServiceWhen extends ItemQuestion {
         this.useAnswerTip = props.useAnswerTip ?? false;
     }
 
-    getCondition() {
+    getCondition():Expression {
         const codes = ResponseEncoding.visit_medical;
         return client.multipleChoice.none(this.keyVisitedMedicalServ, codes.no, codes.plan);
         //client.responseHasOnlyKeysOtherThan(this.keyVisitedMedicalServ,  codes.no, codes.plan);
         //expWithArgs('responseHasOnlyKeysOtherThan', keyVisitedMedicalServ, [responseGroupKey, multipleChoiceKey].join('.'), '0', '5')
     }
 
-    buildItem() {
+    buildItem():SurveyItem {
 
         const itemKey = this.key;
         const editor = new ItemEditor(undefined, { itemKey: itemKey, isGroup: false });
@@ -1880,7 +1879,7 @@ export class WhyVisitedNoMedicalService extends ItemQuestion {
         return client.multipleChoice.any(this.keyVisitedMedicalServ, codes.no);
     }
 
-    buildItem() {
+    buildItem():SurveyItem {
         return SurveyItems.singleChoice({
             ...this.options,
             parentKey: this.parentKey,
@@ -1893,7 +1892,7 @@ export class WhyVisitedNoMedicalService extends ItemQuestion {
         });
     }
 
-    getResponses() {
+    getResponses():OptionDef[] {
         return  [
             {
                 key: '1', role: 'option',
@@ -1995,7 +1994,7 @@ export class TookMedication extends ItemQuestion {
     }
 
 
-    buildItem() {
+    buildItem():SurveyItem {
         return SurveyItems.multipleChoice({
             parentKey: this.parentKey,
             itemKey: this.itemKey,
@@ -2012,13 +2011,12 @@ export class TookMedication extends ItemQuestion {
 
     /**
      * Creates a condition based on this question response when antibiotic is checked
-     * @returns
      */
-    createTookAntibioticCondition() {
+    createTookAntibioticCondition():Expression {
         return client.multipleChoice.any(this.key, ResponseEncoding.took_medication.antibio);
     }
 
-    getResponses() {
+    getResponses():OptionDef[] {
         const codes = ResponseEncoding.took_medication;
         const no_medication =  codes.no;
         const dont_know = codes.dontknow;
@@ -2149,7 +2147,7 @@ export class Hospitalized extends ItemQuestion {
         super(props, 'Q14');
     }
 
-    buildItem() {
+    buildItem():SurveyItem {
         return SurveyItems.singleChoice({
             parentKey: this.parentKey,
             itemKey: this.itemKey,
@@ -2161,7 +2159,7 @@ export class Hospitalized extends ItemQuestion {
         });
     }
 
-    getResponses() {
+    getResponses():OptionDef[] {
         return  [
             {
                 key: '1', role: 'option', content: _T("weekly.EX.Q14.rg.scg.option.0", "Yes")
@@ -2196,7 +2194,7 @@ export class DailyRoutine extends ItemQuestion {
         super(props, 'Q10');
     }
 
-    buildItem() {
+    buildItem():SurveyItem {
         return SurveyItems.singleChoice({
             parentKey: this.parentKey,
             itemKey: this.itemKey,
@@ -2208,7 +2206,7 @@ export class DailyRoutine extends ItemQuestion {
         });
     }
 
-    getResponses() {
+    getResponses():OptionDef[] {
 
         const codes = ResponseEncoding.daily_routine;
 
@@ -2259,12 +2257,12 @@ export class DailyRoutineToday extends ItemQuestion {
         this.keyDailyRoutine = props.keyDailyRoutine;
     }
 
-    getCondition() {
+    getCondition():Expression {
         return client.singleChoice.any(this.keyDailyRoutine, ResponseEncoding.daily_routine.off);
         //expWithArgs('responseHasKeysAny', keyDailyRoutine, [responseGroupKey, singleChoiceKey].join('.'), '2')
     }
 
-    buildItem() {
+    buildItem():SurveyItem {
         return SurveyItems.singleChoice({
             parentKey: this.parentKey,
             itemKey: this.itemKey,
@@ -2276,7 +2274,7 @@ export class DailyRoutineToday extends ItemQuestion {
         });
     }
 
-    getResponses() {
+    getResponses():OptionDef[] {
         return [
             {
                 key: '0',
@@ -2326,12 +2324,12 @@ export class DailyRoutineDaysMissed extends ItemQuestion {
         this.keyDailyRoutine = props.keyDailyRoutine;
     }
 
-    getCondition() {
+    getCondition():Expression {
         return client.singleChoice.any(this.keyDailyRoutine, ResponseEncoding.daily_routine.off);
         //expWithArgs('responseHasKeysAny', keyDailyRoutine, [responseGroupKey, singleChoiceKey].join('.'), '2')
     }
 
-    buildItem() {
+    buildItem():SurveyItem {
         return SurveyItems.dropDown({
             parentKey: this.parentKey,
             itemKey: this.itemKey,
@@ -2344,7 +2342,7 @@ export class DailyRoutineDaysMissed extends ItemQuestion {
         });
     }
 
-    getResponses() {
+    getResponses():OptionDef[] {
         return [
             {
                 key: '0', role: 'option', content: _T("weekly.EX.Q10c.rg.ddg.option.0", "1 day"),
@@ -2399,7 +2397,7 @@ export class DailyRoutineDaysMissed extends ItemQuestion {
         super(props, 'Qcov7');
     }
 
-    buildItem() {
+    buildItem():SurveyItem {
 
         const editor = new ItemEditor(undefined, { itemKey: this.key, isGroup: false });
 
@@ -2549,7 +2547,7 @@ export class CauseOfSymptoms extends ItemQuestion {
         super(props, 'Q11');
     }
 
-    buildItem() {
+    buildItem():SurveyItem {
         return SurveyItems.singleChoice({
             parentKey: this.parentKey,
             itemKey: this.itemKey,
@@ -2561,7 +2559,7 @@ export class CauseOfSymptoms extends ItemQuestion {
         });
     }
 
-    getResponses():Array<OptionDef> {
+    getResponses():OptionDef[] {
         return  [
             {
                 key: '0', role: 'option',
@@ -2618,7 +2616,7 @@ export class SurveyEnd extends ItemQuestion {
         super(props, 'surveyEnd');
     }
 
-    buildItem() {
+    buildItem():SurveyItem {
         return SurveyItems.surveyEnd(
             this.parentKey,
             _T(
