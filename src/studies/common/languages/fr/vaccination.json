@@ -28,7 +28,7 @@
     "fr": "Je ne suis pas sûr et je souhaite revoir ce questionnaire pour mettre à jour au besoin les informations sur mes vaccinations"
   },
   "vaccination.HV.Q9.title.0": {
-    "en": "Did you receive a flu vaccine during the previous flu season (2020-2021)?",
+    "en": "Did you receive a flu vaccine during the previous flu season ?",
     "fr": "L'an dernier (2022-2023), avez-vous été vacciné contre la grippe ?"
   },
   "vaccination.HV.Q9.helpGroup.text.1": {
@@ -52,7 +52,7 @@
     "fr": "Je ne sais pas / Je ne me souviens pas"
   },
   "vaccination.HV.Q10.title.0": {
-    "en": "Have you received a flu vaccine this autumn/winter season? (2021-2022)",
+    "en": "Have you received a flu vaccine this autumn/winter season?",
     "fr": "Avez-vous été vacciné contre la grippe cette année (depuis octobre 2023) ?"
   },
   "vaccination.HV.Q10.helpGroup.text.1": {
