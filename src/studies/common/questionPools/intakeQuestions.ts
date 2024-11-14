@@ -10,7 +10,7 @@ import { initMatrixQuestion,  ResponseRowCell } from "case-editor-tools/surveys/
 import {require_response, text_select_all_apply, text_why_asking, text_how_answer, singleChoicePrefix, MultipleChoicePrefix } from './helpers';
 import { IntakeResponses as ResponseEncoding } from "../responses/intake";
 import { ItemProps, ItemQuestion } from "./types";
-import { Expression } from "survey-engine/data_types";
+import { Expression, SurveyItem } from "survey-engine/data_types";
 import { textComponent } from "../../../compat";
 import { trans_text, ClientExpression as client, as_option, option_def, option_input_other, HelpGroupContentType   } from "../../../tools";
 import { TimeUnits } from "../../../compat";
@@ -36,7 +36,7 @@ export class Gender extends ItemQuestion {
         this.useDontWantAnswer = props.useDontWantAnswer ?? false;
     }
 
-    buildItem() {
+    buildItem():SurveyItem {
         return SurveyItems.singleChoice({
             parentKey: this.parentKey,
             itemKey: this.itemKey,
@@ -106,7 +106,7 @@ export class DateOfBirth extends ItemQuestion {
         ]
     }
 
-    buildItem() {
+    buildItem():SurveyItem {
 
         const editor = new ItemEditor(undefined, { itemKey: this.key, isGroup: false });
 
@@ -191,7 +191,7 @@ export class PostalCode extends ItemQuestion {
         ];
     }
 
-    buildItem() {
+    buildItem():SurveyItem {
 
         return SurveyItems.singleChoice({
             parentKey: this.parentKey,
@@ -254,9 +254,50 @@ export class MainActivity extends ItemQuestion {
         super(props, 'Q4');
     }
 
-    buildItem() {
+    getResponses(): OptionDef[] {
         const codes = ResponseEncoding.main_activity;
+        return [
+            {
+                key: codes.fulltime, role: 'option',
+                content: _T("intake.Q4.rg.scg.option.0", "Paid employment, full time")
+            },
+            {
+                key: codes.partial, role: 'option',
+                content: _T("intake.Q4.rg.scg.option.1", "Paid employment, part time")
+            },
+            {
+                key: codes.self, role: 'option',
+                content: _T("intake.Q4.rg.scg.option.2", "Self-employed (businessman, farmer, tradesman, etc.)")
+            },
+            {
+                key: codes.student, role: 'option',
+                content: _T("intake.Q4.rg.scg.option.3", "Attending daycare/school/college/university")
+            },
+            {
+                key: codes.home, role: 'option',
+                content: _T("intake.Q4.rg.scg.option.4", "Home-maker (e.g. housewife)")
+            },
+            {
+                key: codes.unemployed, role: 'option',
+                content: _T("intake.Q4.rg.scg.option.5", "Unemployed")
+            },
+            {
+                key: codes.sick, role: 'option',
+                content: _T("intake.Q4.rg.scg.option.6", "Long-term sick-leave or parental leave")
+            },
+            {
+                key: codes.retired, role: 'option',
+                content: _T("intake.Q4.rg.scg.option.7", "Retired")
+            },
+            {
+                key: codes.other, role: 'option',
+                content: _T("intake.Q4.rg.scg.option.8", "Other")
+            },
+        ]
+    }
 
+    buildItem():SurveyItem {
+        
         return SurveyItems.singleChoice({
             parentKey: this.parentKey,
             itemKey: this.itemKey,
@@ -264,44 +305,7 @@ export class MainActivity extends ItemQuestion {
             condition: this.condition,
             questionText: _T("intake.Q4.title.0", "What is your current professional status? (Assume a normal situation, without any COVID-19 measures)."),
             helpGroupContent: this.getHelpGroupContent(),
-            responseOptions: [
-                {
-                    key: codes.fulltime, role: 'option',
-                    content: _T("intake.Q4.rg.scg.option.0", "Paid employment, full time")
-                },
-                {
-                    key: codes.partial, role: 'option',
-                    content: _T("intake.Q4.rg.scg.option.1", "Paid employment, part time")
-                },
-                {
-                    key: codes.self, role: 'option',
-                    content: _T("intake.Q4.rg.scg.option.2", "Self-employed (businessman, farmer, tradesman, etc.)")
-                },
-                {
-                    key: codes.student, role: 'option',
-                    content: _T("intake.Q4.rg.scg.option.3", "Attending daycare/school/college/university")
-                },
-                {
-                    key: codes.home, role: 'option',
-                    content: _T("intake.Q4.rg.scg.option.4", "Home-maker (e.g. housewife)")
-                },
-                {
-                    key: codes.unemployed, role: 'option',
-                    content: _T("intake.Q4.rg.scg.option.5", "Unemployed")
-                },
-                {
-                    key: codes.sick, role: 'option',
-                    content: _T("intake.Q4.rg.scg.option.6", "Long-term sick-leave or parental leave")
-                },
-                {
-                    key: codes.retired, role: 'option',
-                    content: _T("intake.Q4.rg.scg.option.7", "Retired")
-                },
-                {
-                    key: codes.other, role: 'option',
-                    content: _T("intake.Q4.rg.scg.option.8", "Other")
-                },
-            ]
+            responseOptions: this.getResponses(),
         });
     }
 
@@ -328,7 +332,6 @@ export class MainActivity extends ItemQuestion {
 
 interface MainActivityProps extends ItemProps {
     keyMainActivity: string;
-
 }
 
 export class PostalCodeWork extends ItemQuestion {
@@ -340,14 +343,31 @@ export class PostalCodeWork extends ItemQuestion {
         this.keyMainActivity = props.keyMainActivity;
     }
 
-    getCondition() {
+    getCondition():Expression {
         const codes = ResponseEncoding.main_activity;
         return client.singleChoice.any(this.keyMainActivity, codes.fulltime, codes.partial, codes.self, codes.student )
-        //expWithArgs('responseHasKeysAny', keyMainActivity, [responseGroupKey, singleChoiceKey].join('.'), '0', '1', '2', '3')
     }
 
+    getResponses(): OptionDef[] {
+        return  [
+            {
+                key: '0', role: 'input',
+                // style: [{ key: 'className', value: 'w-100' }],
+                content: _T("intake.Q4b.rg.scg.input.0", "Postal code"),
+                description: _T("intake.Q4b.rg.scg.description.input.0", "Postal code"),
+            },
+            {
+                key: '1', role: 'option',
+                content: _T("intake.Q4b.rg.scg.option.1", "I don’t know/can’t remember")
+            },
+            {
+                key: '2', role: 'option',
+                content: _T("intake.Q4b.rg.scg.option.2", "Not applicable (e.g. don’t have a fixed workplace)")
+            },
+        ];
+    }
 
-    buildItem() {
+    buildItem():SurveyItem {
         return SurveyItems.singleChoice({
             parentKey: this.parentKey,
             itemKey: this.itemKey,
@@ -355,22 +375,7 @@ export class PostalCodeWork extends ItemQuestion {
             condition: this.condition,
             questionText: _T("intake.Q4b.title.0", "What is the postal code of your school/college/workplace (where you spend the majority of your working/studying time)?"),
             helpGroupContent: this.getHelpGroupContent(),
-            responseOptions: [
-                {
-                    key: '0', role: 'input',
-                    // style: [{ key: 'className', value: 'w-100' }],
-                    content: _T("intake.Q4b.rg.scg.input.0", "Postal code"),
-                    description: _T("intake.Q4b.rg.scg.description.input.0", "Postal code"),
-                },
-                {
-                    key: '1', role: 'option',
-                    content: _T("intake.Q4b.rg.scg.option.1", "I don’t know/can’t remember")
-                },
-                {
-                    key: '2', role: 'option',
-                    content: _T("intake.Q4b.rg.scg.option.2", "Not applicable (e.g. don’t have a fixed workplace)")
-                },
-            ],
+            responseOptions: this.getResponses(),
             customValidations: [
                 {
                     key: 'r2',
@@ -424,13 +429,59 @@ export class WorkTypeEurostat extends ItemQuestion {
         this.keyMainActivity = props.keyMainActivity;
     }
 
-    getCondition() {
+    getCondition(): Expression|undefined {
        if(this.keyMainActivity) {
             return  expWithArgs('responseHasKeysAny', this.keyMainActivity, [responseGroupKey, singleChoiceKey].join('.'), '0', '1', '2')
        }
     }
 
-    buildItem() {
+    getResponses(): OptionDef[] {
+        return [
+            {
+                key: '2', role: 'option',
+                content: _T("intake.Q4h.rg.scg.option.0", "Services and sales workers (Personal Services Workers, Sales Workers, Personal Care Workers, Protective Services Workers)")
+            },
+            {
+                key: '3', role: 'option',
+                content: _T("intake.Q4h.rg.scg.option.1", "Craft and related trades workers (Handicraft and printing workers, Food processing, wood working, garment and other craft and related trades workers,  Metal, machinery and related trades workers, Electrical and electronic trades workers, Building and related trades workers, excluding electricians)")
+            },
+            {
+                key: '6', role: 'option',
+                content: _T("intake.Q4h.rg.scg.option.2", "Armed forces occupations (Commissioned armed forces officers, Armed forces occupations other ranks, Non-commissioned armed forces officers)")
+            },
+            {
+                key: '7', role: 'option',
+                content: _T("intake.Q4h.rg.scg.option.3", "Managers (Chief Executives, Senior Officials and Legislators, Administrative and Commercial Managers, Production and Specialized Services Managers, Hospitality, Retail and Other Services Managers)")
+            },
+            {
+                key: '8', role: 'option',
+                content: _T("intake.Q4h.rg.scg.option.4", "Professionals (Science and Engineering Professionals, Health Professionals,  Teaching Professionals, Business and Administration Professionals, Information and Communications Technology Professionals, Legal, Social and Cultural Professionals)")
+            },
+            {
+                key: '9', role: 'option',
+                content: _T("intake.Q4h.rg.scg.option.5", "Technicians and associate professionals (Science and Engineering Associate Professionals, Health Associate Professionals, Business and Administration Associate Professionals, Legal, Social, Cultural and Related Associate Professionals, Information and Communications Technicians)")
+            },
+            {
+                key: '10', role: 'option',
+                content: _T("intake.Q4h.rg.scg.option.6", "Clerical support workers (General and Keyboard Clerks, Customer Services Clerks,  Numerical and Material Recording Clerks, Other Clerical Support Workers)")
+            },
+            {
+                key: '11', role: 'option',
+                content: _T("intake.Q4h.rg.scg.option.7", "Skilled agricultural, forestry and fishery workers")
+            },
+            {
+                key: '12', role: 'option',
+                content: _T("intake.Q4h.rg.scg.option.8", "Plant and machine operators and assemblers (Stationary Plant and Machine Operators, Assemblers, Drivers and Mobile Plant Operators)")
+            },
+            {
+                key: '13', role: 'option',
+                content: _T("intake.Q4h.rg.scg.option.9", "Elementary occupations (Cleaners and Helpers, Agricultural, Forestry and Fishery Labourers, Labourers in Mining, Construction, Manufacturing and Transport, Food Preparation Assistants, Street and Related Sales and Services Workers, Refuse Workers and Other Elementary Workers)")
+            },
+            option_input_other('5', _T("intake.Q4h.rg.scg.input.10", "Other"), "intake.Q4h.rg.scg.description.input.10")
+        ];
+    }
+
+    buildItem():SurveyItem {
         return SurveyItems.singleChoice({
             parentKey: this.parentKey,
             itemKey: this.itemKey,
@@ -438,49 +489,7 @@ export class WorkTypeEurostat extends ItemQuestion {
             condition: this.condition,
             questionText: _T("intake.Q4h.title.0", "Which of the following descriptions most closely matches with your main occupation? "),
             helpGroupContent: this.getHelpGroupContent(),
-            responseOptions: [
-                {
-                    key: '2', role: 'option',
-                    content: _T("intake.Q4h.rg.scg.option.0", "Services and sales workers (Personal Services Workers, Sales Workers, Personal Care Workers, Protective Services Workers)")
-                },
-                {
-                    key: '3', role: 'option',
-                    content: _T("intake.Q4h.rg.scg.option.1", "Craft and related trades workers (Handicraft and printing workers, Food processing, wood working, garment and other craft and related trades workers,  Metal, machinery and related trades workers, Electrical and electronic trades workers, Building and related trades workers, excluding electricians)")
-                },
-                {
-                    key: '6', role: 'option',
-                    content: _T("intake.Q4h.rg.scg.option.2", "Armed forces occupations (Commissioned armed forces officers, Armed forces occupations other ranks, Non-commissioned armed forces officers)")
-                },
-                {
-                    key: '7', role: 'option',
-                    content: _T("intake.Q4h.rg.scg.option.3", "Managers (Chief Executives, Senior Officials and Legislators, Administrative and Commercial Managers, Production and Specialized Services Managers, Hospitality, Retail and Other Services Managers)")
-                },
-                {
-                    key: '8', role: 'option',
-                    content: _T("intake.Q4h.rg.scg.option.4", "Professionals (Science and Engineering Professionals, Health Professionals,  Teaching Professionals, Business and Administration Professionals, Information and Communications Technology Professionals, Legal, Social and Cultural Professionals)")
-                },
-                {
-                    key: '9', role: 'option',
-                    content: _T("intake.Q4h.rg.scg.option.5", "Technicians and associate professionals (Science and Engineering Associate Professionals, Health Associate Professionals, Business and Administration Associate Professionals, Legal, Social, Cultural and Related Associate Professionals, Information and Communications Technicians)")
-                },
-                {
-                    key: '10', role: 'option',
-                    content: _T("intake.Q4h.rg.scg.option.6", "Clerical support workers (General and Keyboard Clerks, Customer Services Clerks,  Numerical and Material Recording Clerks, Other Clerical Support Workers)")
-                },
-                {
-                    key: '11', role: 'option',
-                    content: _T("intake.Q4h.rg.scg.option.7", "Skilled agricultural, forestry and fishery workers")
-                },
-                {
-                    key: '12', role: 'option',
-                    content: _T("intake.Q4h.rg.scg.option.8", "Plant and machine operators and assemblers (Stationary Plant and Machine Operators, Assemblers, Drivers and Mobile Plant Operators)")
-                },
-                {
-                    key: '13', role: 'option',
-                    content: _T("intake.Q4h.rg.scg.option.9", "Elementary occupations (Cleaners and Helpers, Agricultural, Forestry and Fishery Labourers, Labourers in Mining, Construction, Manufacturing and Transport, Food Preparation Assistants, Street and Related Sales and Services Workers, Refuse Workers and Other Elementary Workers)")
-                },
-                option_input_other('5', _T("intake.Q4h.rg.scg.input.10", "Other"), "intake.Q4h.rg.scg.description.input.10")
-            ]
+            responseOptions: this.getResponses(),
         });
     }
 
@@ -516,14 +525,14 @@ interface EducationProps extends ItemProps {
         this.keyQBirthday = props.keyQBirthday;
     }
 
-    getCondition() {
+    getCondition(): Expression {
         return expWithArgs('gte',
             expWithArgs('dateResponseDiffFromNow', this.keyQBirthday, [responseGroupKey, '1'].join('.'), 'years', 1),
             16
         )
     }
 
-    buildItem() {
+    buildItem():SurveyItem {
 
         return SurveyItems.multipleChoice({
             parentKey: this.parentKey,
@@ -603,7 +612,7 @@ export class PeopleMet extends ItemQuestion {
         this.isRequired = props.isRequired;
     }
 
-    buildItem() {
+    buildItem():SurveyItem {
 
         return SurveyItems.multipleChoice({
             parentKey: this.parentKey,
@@ -619,7 +628,7 @@ export class PeopleMet extends ItemQuestion {
     }
 
     // Condition when option None is checked
-    getExclusiveNoneCondition() {
+    getExclusiveNoneCondition():Expression {
         return client.multipleChoice.any(this.key, ResponseEncoding.contact_people.none);
     }
 
@@ -759,7 +768,7 @@ export class AgeGroups extends ItemQuestion {
     }
 
 
-    buildItem() {
+    buildItem():SurveyItem {
 
         const editor = new ItemEditor(undefined, { itemKey: this.key, isGroup: false });
 
@@ -775,8 +784,6 @@ export class AgeGroups extends ItemQuestion {
         const rg = editor.addNewResponseComponent({ role: 'responseGroup' });
 
         var disabled: Expression | undefined  = undefined;
-
-
 
         if(this.useAlone) {
 
@@ -928,7 +935,24 @@ export class PeopleAtRisk extends ItemQuestion {
         return this.ageGroupQuestion.getAnyAgeGroupCondition();
     }
 
-    buildItem() {
+    getResponses(): OptionDef[] {
+        return [
+            {
+                key: '1', role: 'option',
+                content: _T("intake.Q6c.rg.scg.option.0", "Yes")
+            },
+            {
+                key: '0', role: 'option',
+                content: _T("intake.Q6c.rg.scg.option.1", "No")
+            },
+            {
+                key: '2', role: 'option',
+                content: _T("intake.Q6c.rg.scg.option.2", "Don't know/would rather not answer")
+            },
+        ]
+    }
+
+    buildItem():SurveyItem {
         return SurveyItems.singleChoice({
             parentKey: this.parentKey,
             itemKey: this.itemKey,
@@ -936,20 +960,7 @@ export class PeopleAtRisk extends ItemQuestion {
             condition: this.condition,
             questionText: _T("intake.Q6c.title.0", "One or several of these people are they at risk of complications in case of flu or COVID-19 (e.g, pregnant, over 65, underlying health condition, obese, etc.)?"),
             helpGroupContent: this.getHelpGroupContent(),
-            responseOptions: [
-                {
-                    key: '1', role: 'option',
-                    content: _T("intake.Q6c.rg.scg.option.0", "Yes")
-                },
-                {
-                    key: '0', role: 'option',
-                    content: _T("intake.Q6c.rg.scg.option.1", "No")
-                },
-                {
-                    key: '2', role: 'option',
-                    content: _T("intake.Q6c.rg.scg.option.2", "Don't know/would rather not answer")
-                },
-            ]
+            responseOptions: this.getResponses(),
         });
     }
 
@@ -987,7 +998,7 @@ export class PeopleAtRisk extends ItemQuestion {
         return this.ageGroupQuestion.getAnyChildrenCondition();
     }
 
-    buildItem() {
+    buildItem():SurveyItem {
         return SurveyItems.singleChoice({
             parentKey: this.parentKey,
             itemKey: this.itemKey,
@@ -1058,7 +1069,7 @@ export class MeansOfTransport extends ItemQuestion {
         super(props, 'Q7');
     }
 
-    buildItem() {
+    buildItem():SurveyItem {
         return SurveyItems.singleChoice({
             parentKey: this.parentKey,
             itemKey: this.itemKey,
@@ -1129,7 +1140,7 @@ export class CommonColdFrequency extends ItemQuestion {
         super(props, 'Q8');
     }
 
-    buildItem() {
+    buildItem():SurveyItem {
         return SurveyItems.singleChoice({
             parentKey: this.parentKey,
             itemKey: this.itemKey,
@@ -1195,7 +1206,7 @@ export class RegularMedication extends ItemQuestion {
         this.useRatherNotAnswer = props.useRatherNotAnswer ?? true;
     }
 
-    buildItem() {
+    buildItem():SurveyItem {
 
         return SurveyItems.multipleChoice({
             parentKey: this.parentKey,
@@ -1327,11 +1338,11 @@ export class Pregnancy extends ItemQuestion {
         ];
     }
 
-    getCondition() {
+    getCondition():Expression {
         return exprPregnancyCondition(this.keyQGender, this.keyQBirthday);
     }
 
-    buildItem() {
+    buildItem():SurveyItem {
         return SurveyItems.singleChoice({
             parentKey: this.parentKey,
             itemKey: this.itemKey,
@@ -1384,7 +1395,7 @@ export class PregnancyTrimester extends ItemQuestion {
         this.keyQPregnancy = props.keyQPregnancy;
     }
 
-    getCondition() {
+    getCondition():Expression {
         return expWithArgs('and',
             exprPregnancyCondition(this.keyQGender, this.keyQBirthday),
             expWithArgs('responseHasKeysAny', this.keyQPregnancy, [responseGroupKey, singleChoiceKey].join('.'), ResponseEncoding.pregnancy.yes)
@@ -1400,7 +1411,7 @@ export class PregnancyTrimester extends ItemQuestion {
         ]
     }
 
-    buildItem() {
+    buildItem():SurveyItem {
 
         return SurveyItems.singleChoice({
             parentKey: this.parentKey,
@@ -1442,7 +1453,7 @@ export class Smoking extends ItemQuestion {
         super(props, 'Q13');
     }
 
-    buildItem() {
+    buildItem():SurveyItem {
         return SurveyItems.singleChoice({
             parentKey: this.parentKey,
             itemKey: this.itemKey,
@@ -1508,7 +1519,7 @@ export class Allergies extends ItemQuestion {
         this.useOtherInput = props.useOtherInput ?? false;
     }
 
-    buildItem() {
+    buildItem():SurveyItem {
 
         return SurveyItems.multipleChoice({
             parentKey: this.parentKey,
@@ -1529,7 +1540,6 @@ export class Allergies extends ItemQuestion {
         const codes = ResponseEncoding.allergy;
 
         const exclusiveOptionRule = client.multipleChoice.any(this.key, codes.none);
-
 
         const OtherContent = _T("intake.Q14.rg.mcg.option.3", "Other allergies that cause respiratory symptoms (e.g. sneezing, runny eyes)");
 
@@ -1573,7 +1583,7 @@ export class SpecialDiet extends ItemQuestion {
         super(props, 'Q15');
     }
 
-    buildItem() {
+    buildItem():SurveyItem {
 
         return SurveyItems.multipleChoice({
             parentKey: this.parentKey,
@@ -1641,7 +1651,7 @@ export class HomeophaticMedicine extends ItemQuestion {
         this.useHelpgroup = props.useHelpgroup ?? true;
     }
 
-    buildItem() {
+    buildItem():SurveyItem {
         return SurveyItems.singleChoice({
             parentKey: this.parentKey,
             itemKey: this.itemKey,
@@ -1703,7 +1713,7 @@ export class FindOutAboutPlatform extends ItemQuestion {
         this.useAnswerTip = props.useAnswerTip ?? false;
     }
 
-    buildItem() {
+    buildItem():SurveyItem {
         return SurveyItems.multipleChoice({
             parentKey: this.parentKey,
             itemKey: this.itemKey,
@@ -1778,7 +1788,7 @@ export class FinalText extends ItemQuestion {
         super(props, 'surveyEnd');
     }
 
-    buildItem() {
+    buildItem():SurveyItem {
         return SurveyItems.surveyEnd(
             this.parentKey,
             _T("intake.surveyEnd.title.0", "Thank you! This was all for now, please submit (push « send ») your responses. Please come back or continue reporting symptoms you experience during the last week."),
