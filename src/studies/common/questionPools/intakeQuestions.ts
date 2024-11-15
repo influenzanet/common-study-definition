@@ -6,7 +6,7 @@ import { matrixKey, multipleChoiceKey, responseGroupKey, singleChoiceKey } from 
 import { OptionDef } from "case-editor-tools/surveys/types";
 import { SurveyItems } from 'case-editor-tools/surveys';
 import { initMultipleChoiceGroup } from "case-editor-tools/surveys/responseTypeGenerators/optionGroupComponents";
-import { initMatrixQuestion,  ResponseRowCell } from "case-editor-tools/surveys/responseTypeGenerators/matrixGroupComponent";
+import { initMatrixQuestion,  MatrixRow,  ResponseRowCell } from "case-editor-tools/surveys/responseTypeGenerators/matrixGroupComponent";
 import {require_response, text_select_all_apply, text_why_asking, text_how_answer, singleChoicePrefix, MultipleChoicePrefix } from './helpers';
 import { IntakeResponses as ResponseEncoding } from "../responses/intake";
 import { ItemProps, ItemQuestion } from "./types";
@@ -695,6 +695,14 @@ interface AgeGroupQuestion {
     getAnyChildrenCondition(): Expression
 }
 
+
+interface MatrixRowDesc {
+    key: string
+    label: Map<string, string>
+    tags?: string[] // Tags allow to label some option to enable selection of subset of option
+                    // Example : tag "children" for rows corresponding to children to allow creation of condition based on this subset
+}
+
 /**
  * AGE GROUPS: dropdown table about number of people in different age groups
  *
@@ -702,6 +710,8 @@ interface AgeGroupQuestion {
 export class AgeGroups extends ItemQuestion {
 
     readonly AloneYes = '1';
+
+    readonly ResponseZero = '0'; // Code corresponding to the response 0
 
     useAlone: boolean;
     useAnswerTip: boolean;
@@ -726,12 +736,71 @@ export class AgeGroups extends ItemQuestion {
         return g;
     }
 
+    /**
+     * Get responseKey for the corresponding row, useable in expression 
+     * In this question col1 is holding the count response
+     * @param row 
+     * @returns 
+     */
     responseRow(row:string):string {
         return [responseGroupKey, matrixKey, row, 'col1'].join('.');
     }
 
+    /**
+     * Get row keys 
+     * @param tag 
+     * @returns 
+     */
+    getRowKeys(tag?: string):string[] {
+        const keys: string[] = [];
+        this.getRows().forEach(r => {
+            let add = true; 
+            if(tag) {
+                add = Array.isArray(r.tags) && r.tags.includes(tag);
+            }
+            if(add) {
+                keys.push(r.key);
+            }
+        });
+        return keys;
+    }
+
+    getRows():MatrixRowDesc[] {
+        return [
+            {
+                key: 'row0', 
+                label:  _T("intake.Q6.rg.mat.row0.l.label.0", "0 - 4 years"),
+                tags: ['children']
+            },
+            {
+                key: 'row1',
+                label: _T("intake.Q6.rg.mat.row1.l.label.0", "5 - 18 years"),
+                tags: ['children']
+            },
+            {
+                key: 'row2', 
+                label: _T("intake.Q6.rg.mat.row2.l.label.0", "19 - 44 years")
+            },
+            {
+                key: 'row3', 
+                label: _T("intake.Q6.rg.mat.row3.l.label.0", "45 - 64 years")
+            },
+            {
+                key: 'row4', 
+                label: _T("intake.Q6.rg.mat.row4.l.label.0", "65+")
+            }
+        ]
+    }
+
     getAnyAgeGroupCondition():Expression {
         // CONDITION
+
+        const rowConditions = this.getRowKeys().map(rowKey => 
+                                client.responseHasOnlyKeysOtherThan(this.key, this.responseRow(rowKey), this.ResponseZero ));
+
+        const cond = client.logic.or(...rowConditions)
+
+        /**
         const cond =
         expWithArgs('or',
             expWithArgs('responseHasOnlyKeysOtherThan', this.key, this.responseRow('row0'), '0'),
@@ -740,6 +809,7 @@ export class AgeGroups extends ItemQuestion {
             expWithArgs('responseHasOnlyKeysOtherThan', this.key, this.responseRow('row3'), '0'),
             expWithArgs('responseHasOnlyKeysOtherThan', this.key, this.responseRow('row4'), '0'),
         );
+        */
 
         if(this.useAlone) {
             return client.logic.and(this.getIsNotAloneCondition(), cond);
@@ -749,10 +819,17 @@ export class AgeGroups extends ItemQuestion {
 
     getAnyChildrenCondition():Expression {
 
+        const rowConditions = this.getRowKeys('children').map(rowKey => 
+            client.responseHasOnlyKeysOtherThan(this.key, this.responseRow(rowKey), this.ResponseZero ));
+
+        const cond = client.logic.or(...rowConditions);
+
+        /*
         const cond = expWithArgs('or',
                 expWithArgs('responseHasOnlyKeysOtherThan', this.key, this.responseRow('row0'), '0'),
                 expWithArgs('responseHasOnlyKeysOtherThan', this.key, this.responseRow('row1'), '0'),
             );
+        */
 
         if(this.useAlone) {
             return client.logic.and(this.getIsNotAloneCondition(), cond);
@@ -766,7 +843,7 @@ export class AgeGroups extends ItemQuestion {
             client.multipleChoice.none(this.key, this.AloneYes)
         );
     }
-
+    
 
     buildItem():SurveyItem {
 
@@ -801,7 +878,7 @@ export class AgeGroups extends ItemQuestion {
             key: 'col1', role: 'dropDownGroup',
             items: [
                 {
-                    key: '0', role: 'option',
+                    key: this.ResponseZero, role: 'option',
                     content: _T_any("0"),
                 },
                 {
@@ -819,63 +896,21 @@ export class AgeGroups extends ItemQuestion {
             ]
         };
 
-        const rg_inner = initMatrixQuestion(matrixKey, [
-            {
-                key: 'row0', role: 'responseRow',
+        const rows: MatrixRow[] = this.getRows().map(r => {
+            return {
+                key: r.key, role: 'responseRow',
                 disabled: disabled,
                 cells: [
                     {
                         key: 'l', role: 'label',
-                        content: _T("intake.Q6.rg.mat.row0.l.label.0", "0 - 4 years")
+                        content: r.label
                     },
                     { ...ddg }
                 ],
-            },
-            {
-                key: 'row1', role: 'responseRow',
-                disabled: disabled,
-                cells: [
-                    {
-                        key: 'l', role: 'label',
-                        content: _T("intake.Q6.rg.mat.row1.l.label.0", "5 - 18 years")
-                    },
-                    { ...ddg }
-                ],
-            },
-            {
-                key: 'row2', role: 'responseRow',
-                disabled: disabled,
-                cells: [
-                    {
-                        key: 'l', role: 'label',
-                        content: _T("intake.Q6.rg.mat.row2.l.label.0", "19 - 44 years")
-                    },
-                    { ...ddg }
-                ]
-            },
-            {
-                key: 'row3', role: 'responseRow',
-                disabled: disabled,
-                cells: [
-                    {
-                        key: 'l', role: 'label',
-                        content: _T("intake.Q6.rg.mat.row3.l.label.0", "45 - 64 years")
-                    },
-                    { ...ddg }
-                ]
-            },
-            {
-                key: 'row4', role: 'responseRow',
-                disabled: disabled,
-                cells: [
-                    {
-                        key: 'l', role: 'label',
-                        content: _T("intake.Q6.rg.mat.row4.l.label.0", "65+")
-                    },
-                    { ...ddg }
-                ]
             }
-        ]);
+        });
+
+        const rg_inner = initMatrixQuestion(matrixKey, rows);
 
         if(this.useAlone) {
             rg_inner.displayCondition = this.getIsNotAloneCondition();
@@ -884,11 +919,15 @@ export class AgeGroups extends ItemQuestion {
         editor.addExistingResponseComponent(rg_inner, rg?.key);
 
         const exprRowHasResponse = (row:string) => {
-            return expWithArgs('hasResponse', this.key, [responseGroupKey, matrixKey, row, "col1"].join('.'));
+            return client.hasResponse(this.key, [responseGroupKey, matrixKey, row, "col1"].join('.'));
+            //expWithArgs('hasResponse', this.key, [responseGroupKey, matrixKey, row, "col1"].join('.'));
         }
 
         if (this.isRequired) {
 
+            const cond = this.getRowKeys().map(rowKey => exprRowHasResponse(rowKey));
+
+            /*
             const cond : Expression[] = [
                 exprRowHasResponse("row0"),
                 exprRowHasResponse("row1"),
@@ -896,6 +935,7 @@ export class AgeGroups extends ItemQuestion {
                 exprRowHasResponse("row3"),
                 exprRowHasResponse("row4")
             ];
+            */
 
             if(this.useAlone) {
                cond.push( client.multipleChoice.any(this.key, this.AloneYes ) );
