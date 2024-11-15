@@ -8,7 +8,7 @@ import { ParticipantFlags } from "../participantFlags";
 import { VaccinationResponses as ResponseEncoding } from "../responses/vaccination";
 import { ItemProps, GroupProps, ItemQuestion } from "./types";
 import { ClientExpression } from "../../../tools";
-import { Expression, SurveyItem } from "survey-engine/data_types";
+import { Expression, ExpressionArg, SurveyItem } from "survey-engine/data_types";
 import { textComponent } from "../../../compat";
 import { option_def, option_input_other } from "../../../tools/options";
 
@@ -28,6 +28,7 @@ export class VacStart extends ItemQuestion {
     }
 
     getCondition():Expression {
+        // ClientExpression.participantFlags.hasKeyAndValue('completedVaccSurvey'), "1")
         const hadCompletedVaccSurvey = expWithArgs('eq', expWithArgs('getAttribute', expWithArgs('getAttribute', expWithArgs('getContext'), 'participantFlags'), 'completedVaccSurvey'), "1");
         return hadCompletedVaccSurvey;
     }
@@ -277,7 +278,7 @@ abstract class SubVaccineQuestion extends ItemQuestion {
 
 interface FluVaccineProps extends ItemProps {
     keyFluVaccineThisSeason: string // keyFluVaccineThisSeason full key of the question about if you received flu vaccine this year, if set, dependency is applied
-
+    minDate?: ExpressionArg
 }
 
 /**
@@ -286,13 +287,19 @@ interface FluVaccineProps extends ItemProps {
  */
 export class FluVaccineThisSeasonWhen extends SubVaccineQuestion {
 
+    minDate?: ExpressionArg;
+
     constructor( props: FluVaccineProps) {
         const p = {  triggerQuestion:props.keyFluVaccineThisSeason, ...props};
         super(p, 'Q10b');
         this.triggerResponse = ResponseEncoding.flu_vaccine_season.yes;
+        this.minDate = props.minDate;
     }
 
     buildItem():SurveyItem {
+
+        const minDate = this.minDate ?? { dtype: 'exp', exp: expWithArgs('timestampWithOffset', -21427200) };
+
         return SurveyItems.singleChoice({
             parentKey: this.parentKey,
             itemKey: this.itemKey,
@@ -304,7 +311,7 @@ export class FluVaccineThisSeasonWhen extends SubVaccineQuestion {
                 {
                     key: '1', role: 'dateInput',
                     optionProps: {
-                        min: { dtype: 'exp', exp: expWithArgs('timestampWithOffset', -21427200) },
+                        min: minDate,
                         max: { dtype: 'exp', exp: expWithArgs('timestampWithOffset', 0) }
                     },
                     description: _T("vaccination.HV.Q10b.rg.scg.description.dateInput.0", "Choose date"),
