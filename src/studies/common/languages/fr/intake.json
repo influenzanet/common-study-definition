@@ -17,7 +17,7 @@
   },
   "intake.Q1.helpGroup.text.1": {
     "en": "In order to examine the differences between men and women.",
-    "fr": "Pour vérifier la représentativité des participants de GrippeNet.fr/COVIDnet.fr. Nous souhaiterions également savoir si le risque d'attraper la Covid-19 ou la grippe est différent entre les femmes et les hommes."
+    "fr": "Pour vérifier la représentativité des participants de GrippeNet/COVIDnet. Nous souhaiterions également savoir si le risque d'attraper la Covid-19 ou la grippe est différent entre les femmes et les hommes."
   },
   "intake.Q1.rg.scg.option.0": {
     "en": "Male",
@@ -81,7 +81,7 @@
   },
   "intake.Q4.helpGroup.text.1": {
     "en": "To check how representative our sample is compared to the population as a whole, and to find out whether the chance of getting flu is different for people in different types of occupation.",
-    "fr": "Pour vérifier que les participants de GrippeNet.fr/COVIDnet.fr ressemblent dans l’ensemble à la population française. Le risque d’attraper une maladie respiratoire comme la grippe ou la Covid-19 pourrait varier en fonction de l’activité, nous voudrions étudier cela."
+    "fr": "Pour vérifier que les participants de GrippeNet/COVIDnet ressemblent dans l’ensemble à la population française. Le risque d’attraper une maladie respiratoire comme la grippe ou la Covid-19 pourrait varier en fonction de l’activité, nous voudrions étudier cela."
   },
   "intake.Q4.helpGroup.text.3": {
     "en": "Please, tick the box that most closely resembles your main occupation. For pre-school children who don't go to daycare tick the \"other\" box.",
@@ -161,7 +161,7 @@
   },
   "intake.Q4h.helpGroup.text.1": {
     "en": "To check how representative our sample is compared to the population as a whole and to find out whether the chance of getting COVID-19 or flu are different for people in different types of occupation.",
-    "fr": "Pour vérifier que les participants de GrippeNet.fr/COVIDnet.fr ressemblent dans l’ensemble à la population française. Le risque d’attraper une infection respiratoire comme la grippe ou la Covid-19 pourrait varier en fonction de l’activité, nous voudrions étudier cela."
+    "fr": "Pour vérifier que les participants de GrippeNet/COVIDnet ressemblent dans l’ensemble à la population française. Le risque d’attraper une infection respiratoire comme la grippe ou la Covid-19 pourrait varier en fonction de l’activité, nous voudrions étudier cela."
   },
   "intake.Q4h.helpGroup.text.3": {
     "en": "Please tick the box that most closely resembles your main occupation.",
@@ -221,7 +221,7 @@
   },
   "intake.Q4d.helpGroup.text.1": {
     "en": "To check how representative our sample is compared to the population of the UK (Italy, Belgium..) as a whole.",
-    "fr": "Pour vérifier que les participants de GrippeNet.fr/COVIDnet.fr ressemblent dans l’ensemble à la population française."
+    "fr": "Pour vérifier que les participants de GrippeNet/COVIDnet ressemblent dans l’ensemble à la population française."
   },
   "intake.Q4d.helpGroup.text.3": {
     "en": "Please choose the box that represents your HIGHEST level of educational achievements. The different option rougly equate to: 1 - no qualifications, 2 - school-leaving exams at around 16 years of age, 3 - school-leaving exams at around 18 years of age, 4 - University degree or equivalent professional qualification, 5 - Higher degree or advanced professional qualification. If you are an adult who is currently undergoing part - time training(e.g.night school) then tick the box that represents your current highest level of education.",

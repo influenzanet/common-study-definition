@@ -5,7 +5,7 @@
   },
   "vaccination.description.0": {
     "en": "The purpose of the vaccination questionnaire is to find out more about protection given by the vaccine and monitor vaccination uptake in Italy.",
-    "fr": "Ce questionnaire permet de mieux connaître le profil des participants de GrippeNet.fr/COVIDnet.fr, et vous prendra entre 2 et 5 minutes. Il est important de le mettre à jour en cours de saison si vous recevez une nouvelle dose de vaccin contre la grippe ou la Covid-19. Il sera dans ce cas pré-complété avec ce que vous avez indiqué dans le précédent questionnaire."
+    "fr": "Ce questionnaire permet de mieux connaître le profil des participants de GrippeNet/COVIDnet, et vous prendra entre 2 et 5 minutes. Il est important de le mettre à jour en cours de saison si vous recevez une nouvelle dose de vaccin contre la grippe ou la Covid-19. Il sera dans ce cas pré-complété avec ce que vous avez indiqué dans le précédent questionnaire."
   },
   "vaccination.typicalDuration.0": {
     "en": "Duration 5-10 minutes",
@@ -29,7 +29,7 @@
   },
   "vaccination.HV.Q9.title.0": {
     "en": "Did you receive a flu vaccine during the previous flu season ?",
-    "fr": "L'an dernier (2022-2023), avez-vous été vacciné contre la grippe ?"
+    "fr": "L'an dernier (2023-2024), avez-vous été vacciné contre la grippe ?"
   },
   "vaccination.HV.Q9.helpGroup.text.1": {
     "en": "We would like to study what level of protection the vaccine provides. We would also like to know if there is any protection from vaccines received in previous years.",
@@ -37,7 +37,7 @@
   },
   "vaccination.HV.Q9.helpGroup.text.3": {
     "en": "Answer 'yes' if you were vaccinated in the previous autumn/winter season",
-    "fr": "Répondez « oui » si vous avez été vacciné contre la grippe la saison dernière (entre octobre 2022 et mars 2023)."
+    "fr": "Répondez « oui » si vous avez été vacciné contre la grippe la saison dernière (entre octobre 2023 et mars 2024)."
   },
   "vaccination.HV.Q9.rg.scg.option.0": {
     "en": "Yes",
@@ -53,7 +53,7 @@
   },
   "vaccination.HV.Q10.title.0": {
     "en": "Have you received a flu vaccine this autumn/winter season?",
-    "fr": "Avez-vous été vacciné contre la grippe cette année (depuis octobre 2023) ?"
+    "fr": "Avez-vous été vacciné contre la grippe cette année (depuis octobre 2024) ?"
   },
   "vaccination.HV.Q10.helpGroup.text.1": {
     "en": "We would like to be able to work out how much protection the vaccine gives.",
@@ -61,7 +61,7 @@
   },
   "vaccination.HV.Q10.helpGroup.text.3": {
     "en": "Report yes, if you received the vaccine this season, usually in the autumn. If you get vaccinated after filling in this questionnaire, please return to this and update your answer.",
-    "fr": "Répondez « Oui » si vous avez été vacciné contre la grippe cette saison (depuis octobre 2023). Si vous vous faites vacciner après avoir rempli ce questionnaire, merci de le mettre à jour."
+    "fr": "Répondez « Oui » si vous avez été vacciné contre la grippe cette saison (depuis octobre 2024). Si vous vous faites vacciner après avoir rempli ce questionnaire, merci de le mettre à jour."
   },
   "vaccination.HV.Q10.rg.scg.option.0": {
     "en": "Yes",
@@ -77,7 +77,7 @@
   },
   "vaccination.HV.Q10b.title.0": {
     "en": "When were you vaccinated against flu this season ?",
-    "fr": "Quand avez-vous été vacciné contre la grippe cette année (depuis octobre 2023) ?"
+    "fr": "Quand avez-vous été vacciné contre la grippe cette année (depuis octobre 2024) ?"
   },
   "vaccination.HV.Q10b.helpGroup.text.1": {
     "en": "Knowing when people get vaccinated tells us how the vaccination program is being followed, as well as the effectiveness of the vaccine.",
