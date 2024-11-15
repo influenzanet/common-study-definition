@@ -27,7 +27,9 @@ const CovidReasonNotVaccinated = {
     "dontknow": "12",
     "other": "14",
     "counter_indication": '18', // Code used in France (2022)
-    "bad_experience": '19',// Code used in France (2022)
+    "bad_experience": '19',// Code used in France (2022) "I had a bad experience with the vaccine"
+    "prefer_other_measures": "21", // Codes used in France (2024)
+    "vaccined_or_infected":'22', // Codes used in France (2024) "I have receive a vaccine or have been infecter in last 6 months"
 } as const;
 
 
@@ -86,7 +88,8 @@ export const VaccinationResponses = {
         "avoid_healthseek": "17", // Because of covid I avoid to get to doctor or to pharmacy
         "risk_covid": "18", // Fear about the flu shot increase the risk of getting the covid
         "covid_other": "19", // Other reason related to covid
-        "bad_experience": "20" // Introduced in 2022 in France
+        "bad_experience": "20", // Introduced in 2022 in France
+        "prefer_other_measures": "21" // Introduced in 2024, "I prefer to protect my self by other protective measures (mask, hand washing...)"
     },
     covid_vac: {
         'yes': '1',

@@ -85,16 +85,22 @@ export const IntakeResponses = {
         "internet": "2",
         "poster": "3",
         "family": "4",
-        "work": "5",
+        "work": "5", // Concept is "Via school or work"
         "other": "99",
-        // French specific codes
-        "healthworker": "6", // French Code
-        "project": "7", // French Code
-        "webinstit": "8", // French Code
-        "webinfo": "9", // French Code
-        "webhealth": "10", // French Code
-        "social": "12", // French Code
-        "other_alt":"13" // 13 code is used as "other" in historical French surveys
+
+        // French specific codes (can be reused if same label/concept is used )
+        "healthworker": "6", // French Code, from an health worker
+        "project": "7", // French Code, "someone working on the prokect"
+        "webinstit": "8", // French Code, "from an instutional web site"
+        "webinfo": "9", // French Code, "from an generic news/information web site"
+        "webhealth": "10", // French Code, "from a health related web site"
+        "social": "12", // French Code, "from a social network"
+        "other_alt":"13", // 13 code is used as "other" in historical French surveys
+        "poster_in_pharmacy": "14", // French code (2024), "On a poster in a pharmacy", mapped to "3"
+        "poster_in_mytown": "15", // French code (2024), "On a poster in my town", mapped to "3"
+        "poster_healthoffice":"17", // French code (2024), "On a poster at health professionnal office"
+        "at_work_only": "18", // French code,  mapped to "5"
+        "at_school": "16", // French code, mapped to "5" label "School or university"
     } as const,
     "smoking": {
         "no": "0",
