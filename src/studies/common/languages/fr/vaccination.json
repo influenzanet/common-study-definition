@@ -5,7 +5,7 @@
   },
   "vaccination.description.0": {
     "en": "The purpose of the vaccination questionnaire is to find out more about protection given by the vaccine and monitor vaccination uptake in Italy.",
-    "fr": "Ce questionnaire permet de mieux connaître le profil des participants de GrippeNet/COVIDnet, et vous prendra entre 2 et 5 minutes. Il est important de le mettre à jour en cours de saison si vous recevez une nouvelle dose de vaccin contre la grippe ou la Covid-19. Il sera dans ce cas pré-complété avec ce que vous avez indiqué dans le précédent questionnaire."
+    "fr": "Ce questionnaire permet de mieux connaître le profil des participants de Grippenet/Covidnet, et vous prendra entre 2 et 5 minutes. Il est important de le mettre à jour en cours de saison si vous recevez une nouvelle dose de vaccin contre la grippe ou la Covid-19. Il sera dans ce cas pré-complété avec ce que vous avez indiqué dans le précédent questionnaire."
   },
   "vaccination.typicalDuration.0": {
     "en": "Duration 5-10 minutes",
