@@ -7,6 +7,7 @@ import { SurveyDefinition } from "case-editor-tools/surveys/types";
 import { StudyRules } from "case-editor-tools/types/studyRules";
 import { StudyBuilder } from "../../tools/study";
 import { SurveyKeys } from "./keys";
+import { VaccinationNewDef } from "./surveys/vaccination_new";
 
 export class CommonStudyBuilder extends StudyBuilder {
 
@@ -19,12 +20,12 @@ export class CommonStudyBuilder extends StudyBuilder {
 
         const intake = new IntakeDef();
         const weekly = new WeeklyDef();
-        const vacc = new VaccinationDef();
-
+        const vacc = new VaccinationNewDef();
+        
         this.surveys = [
             intake,
             weekly,
-            vacc
+            vacc,
         ];
 
         // Keys inform the rules builder of the key of all dependent questions

@@ -105,6 +105,12 @@ export const VaccinationResponses = {
         'dontknow': '99',
     },
 
+    covid_second_shot_plan: {
+        "yes": "1",
+        "no":"0",
+        "dontknow":"99"
+    } as const,
+
     covid_notvac_reason: CovidReasonNotVaccinated,
 
     covid_vac_brands: CovidVaccindeBrands,
