@@ -24,3 +24,18 @@ export const trans_text = (id:string, ref:string) => {
         content : _T(id, ref)
     }
 };
+
+export interface ItemWithKey {
+    key: string;
+}
+
+/**
+ * Produce translation for an item holding a key, adding a suffix
+ * @param item 
+ * @param name 
+ * @param text 
+ * @returns 
+ */
+export const trans_item = function(item: ItemWithKey, name: string, text: string) {
+    return _T(item.key + '.' + name, text);
+}
