@@ -29,13 +29,21 @@ export interface ItemWithKey {
     key: string;
 }
 
+export interface ItemWithTransKey {
+    transKey?: string;
+}
+
+type TranslatableItem = ItemWithKey & ItemWithTransKey;
+
 /**
  * Produce translation for an item holding a key, adding a suffix
+ * The item could also have a transKey entry indicating the specific prefix to use for translations
  * @param item 
  * @param name 
  * @param text 
  * @returns 
  */
-export const trans_item = function(item: ItemWithKey, name: string, text: string) {
-    return _T(item.key + '.' + name, text);
+export const trans_item = function(item: TranslatableItem, name: string, text: string) {
+    const prefix = typeof(item.transKey) == "undefined" ? item.key : item.transKey;
+    return _T(prefix + '.' + name, text);
 }

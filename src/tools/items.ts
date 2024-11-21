@@ -3,6 +3,7 @@ import { SurveyItems } from 'case-editor-tools/surveys';
 import { Expression, ItemComponent, SurveyItem, SurveySingleItem } from "survey-engine/data_types";
 import { isConditionable, ItemConditionable, QuestionType } from "../types/item";
 import { ClientExpression } from "./expressions";
+import { trans_item } from "./text";
 
 export type ItemBuilder = Item | Group;
 
@@ -65,6 +66,11 @@ export interface ItemProps {
     */
     keyOverride?: string;
 
+    /**
+     * Key to use for translations
+     */
+    transKey?: string
+
     notes?: QuestioNotes
 }
 
@@ -80,6 +86,11 @@ export abstract class ItemQuestion extends Item implements ItemConditionable {
      */
     protected options?: Partial<BaseQuestionOptions>;
 
+    /**
+     * Key used for translation
+     * Usually surveyKey.itemKey independently of the question location (itemKey must be unique in the survey regardless grouping)
+     */
+    readonly transKey?: string;
 
     /**
      *
@@ -88,6 +99,9 @@ export abstract class ItemQuestion extends Item implements ItemConditionable {
      */
     constructor(props: ItemProps, defaultKey: string) {
         super(props.parentKey, props.keyOverride ? props.keyOverride: defaultKey);
+        if(props.transKey) {
+            this.transKey = props.transKey;
+        }
         this.isRequired = props.isRequired;
     }
 
@@ -119,6 +133,20 @@ export abstract class ItemQuestion extends Item implements ItemConditionable {
 
     getHelpGroupContent(): HelpGroupContentType|undefined {
         return undefined;
+    }
+
+    getTransKey(): string {
+        return this.transKey ?? this.key;
+    }
+
+    /**
+     * Create a translate entry for this item. Translation id is generated using transKey (or key if not defined), and name as suffix
+     * @param name name of transaltion entry for this item
+     * @param ref Reference text
+     * @returns 
+     */
+    trans(name:string, ref:string) {
+        return trans_item(this, name, ref);
     }
 
     /**
@@ -281,7 +309,7 @@ export abstract class BaseChoiceQuestion extends ItemQuestion {
         this.options = options;
     }
 
-    buildItem() {
+    buildItem():SurveyItem {
 
         if(!this.options) {
             throw new Error("options are not defined of " + this.key);
