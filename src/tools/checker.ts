@@ -71,8 +71,15 @@ export class SurveyChecker {
     checkComponents(itemKey: string, path: string, comp: ItemComponent) {
         if('items' in comp && comp.items) {
             if(comp.items.length == 0) {
-                console.log("empty component " + itemKey + ' ' + path);
-                this.raise(ProblemTypes.empty_element, itemKey, );
+                let enable = true;
+                // Rcsa option generate an empty items in case-editor-tools, disable false positive
+                if( path.includes('/rsca/') && (comp.role == "option" || comp.role == "row") ) {
+                    enable = false;
+                }
+                if(enable) {
+                    //console.log("empty component " + itemKey + ' ' + path);
+                    this.raise(ProblemTypes.empty_element, itemKey, path + '[' + comp.role + ']' );
+                }
             } else {
                 comp.items.forEach( (item, index) =>  {
                     const p = path + '/' + (item.key ? item.key : '[' + index + ']@' + item.role);
