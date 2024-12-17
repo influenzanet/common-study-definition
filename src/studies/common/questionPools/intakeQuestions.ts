@@ -20,6 +20,10 @@ interface GenderProps extends ItemProps {
     useDontWantAnswer?: boolean;
 }
 
+interface PostalCodeProps extends ItemProps {
+    zipLength?: number;
+}
+
 /**
  * GENDER: Single choice question about gender
  */
@@ -173,8 +177,11 @@ export class DateOfBirth extends ItemQuestion {
  */
 export class PostalCode extends ItemQuestion {
 
-    constructor(props: ItemProps) {
+    zipLength : number;
+
+    constructor(props: PostalCodeProps) {
         super(props, 'Q3');
+        this.zipLength = props.zipLength ?? 5;
     }
 
     getHelpGroupContent() {
@@ -224,7 +231,7 @@ export class PostalCode extends ItemQuestion {
                 {
                     key: 'r2max',
                     type: 'hard',
-                    rule: expWithArgs('not', expWithArgs('checkResponseValueWithRegex', this.key, [responseGroupKey, singleChoiceKey, '0'].join('.'), '^[0-9]{6,}$'))
+                    rule: expWithArgs('not', expWithArgs('checkResponseValueWithRegex', this.key, [responseGroupKey, singleChoiceKey, '0'].join('.'),`^[0-9]{${this.zipLength + 1},}$`))
                 }
             ],
             bottomDisplayCompoments: [
