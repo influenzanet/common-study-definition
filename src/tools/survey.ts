@@ -77,6 +77,7 @@ export class SurveyBuilder extends SurveyDefinition {
             this.addItem(item.get());
         }
         this.editor.setPrefillRules(this.prefillRules);
+        this.editor.setRequireLoginBeforeSubmission(true);
     }
 
     getQuestionClasses():Record<string,string> {
