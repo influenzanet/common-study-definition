@@ -1,12 +1,13 @@
 import { Logger } from "case-editor-tools/logger/logger";
 import { Study } from "case-editor-tools/types/study";
 import { generateFilesForStudy } from 'case-editor-tools/exporter';
-import { writeFileSync } from "fs";
-import { LanguageHelpers } from "../studies/common/languages/languageHelpers";
-import { Translation, TranslationSet } from "../studies/common/languages";
-import { StudyChecker } from "./checker";
-import { stringify } from "querystring";
-import { isSurveyBuilder } from "./survey";
+import { existsSync, readFileSync, writeFileSync } from "fs";
+import { LanguageHelpers } from "../../studies/common/languages/languageHelpers";
+import { Translation, TranslationSet } from "../../studies/common/languages";
+import { StudyChecker } from "../checker";
+import { isSurveyBuilder } from "../survey";
+import { ExporterPlugin } from "./plugins";
+
 const usage = () => {
     Logger.log("Expected command line arguments:")
     Logger.log("   - study=<studyKey>")
@@ -45,17 +46,19 @@ export const selectFromStudyKey = (studies: Study[]): Study[] => {
     return to_build;
 }
 
-interface ExporterOpts {
+export interface ExporterOpts {
     missing? : boolean;
     check?: boolean;
     classNames?: boolean;
+    languages?: string[]; // List of languages
+    plugins?: ExporterPlugin[] // List of plugins exporter
 }
 
 /**
  *
  * @param studies
  */
-export function study_exporter(studies: Study[], o?: ExporterOpts|boolean) {
+export function study_exporter(studies: Study[], o?: ExporterOpts|boolean):void {
 
     if(typeof(o) == "boolean") {
        Logger.warn("Using old study_exporter() behaviour, do not accept boolean as second argument any more");
@@ -68,6 +71,8 @@ export function study_exporter(studies: Study[], o?: ExporterOpts|boolean) {
     studies.forEach(study => {
 
         const output = outputBase + '/' +(study.outputFolderName ?? study.studyKey);
+
+        Logger.log(output);
 
         generateFilesForStudy(study, true);
 
@@ -96,9 +101,16 @@ export function study_exporter(studies: Study[], o?: ExporterOpts|boolean) {
                 }
             });
             json_export(output + '/classes.json', names);
-        }     
+        }
+
+        if(opts.plugins) {
+            opts.plugins.forEach(plugin => {
+                plugin.export(study, output, opts.languages);
+            });
+        }
+
         // Clear missing translation for next study ()
-        LanguageHelpers.missing.clear();  
+        LanguageHelpers.missing.clear();
     });
 }
 
@@ -123,4 +135,3 @@ export function buildMissing(outputFolder:string) {
 export function json_export(filename:string, object:any, pretty?: number) {
     writeFileSync(filename, JSON.stringify(object, undefined, pretty ? 2 : undefined));
 }
-
