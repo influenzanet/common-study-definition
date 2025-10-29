@@ -99,6 +99,7 @@ export const IntakeResponses = {
         "poster_in_pharmacy": "14", // French code (2024), "On a poster in a pharmacy", mapped to "3"
         "poster_in_mytown": "15", // French code (2024), "On a poster in my town", mapped to "3"
         "poster_healthoffice":"17", // French code (2024), "On a poster at health professionnal office"
+        "poster_vacc_center": "19", // French code (2025) "On a poster at a vaccination center"
         "at_work_only": "18", // French code,  mapped to "5"
         "at_school": "16", // French code, mapped to "5" label "School or university"
     } as const,

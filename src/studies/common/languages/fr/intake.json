@@ -21,11 +21,11 @@
   },
   "intake.Q1.rg.scg.option.0": {
     "en": "Male",
-    "fr": "Homme"
+    "fr": "Masculin"
   },
   "intake.Q1.rg.scg.option.1": {
     "en": "Female",
-    "fr": "Femme"
+    "fr": "Féminin"
   },
   "intake.Q1.rg.scg.option.2": {
     "en": "Other",
@@ -649,7 +649,7 @@
   },
   "intake.Q17.rg.mcg.option.1": {
     "en": "In the newspaper or in a magazine",
-    "fr": "Par un journal ou magazine"
+    "fr": "Par un journal ou magazine papier"
   },
   "intake.Q17.rg.mcg.option.2": {
     "en": "The internet (a website, link, a search engine)",
