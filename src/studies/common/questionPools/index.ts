@@ -3,4 +3,5 @@ export * as intake from "./intakeQuestions";
 export * as weekly from "./weeklyQuestions";
 export * as vaccination from "./vaccinationQuestions";
 export * as vaccination_new from "./vaccinationQuestions_new";
+export * as vaccination_v2 from "./vaccinationQuestions_v2";
 export * from "./helpers";

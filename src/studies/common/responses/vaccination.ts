@@ -115,4 +115,12 @@ export const VaccinationResponses = {
 
     covid_vac_brands: CovidVaccindeBrands,
 
+    covid_vac_likert: {
+        'current': 'row1', // This season
+     // 'last': 'row2', // Last season, 2024, removed in 2025
+        'last_winter': 'row4',
+        'last_summer': 'row5',
+        'before': 'row3', // Before last season
+    } as const,
+
 } as const;

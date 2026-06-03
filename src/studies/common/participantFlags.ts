@@ -30,6 +30,9 @@ export const ParticipantFlags = {
             yes: '1'
         } as const
     } as const,
+    lastVaccinationTime: {
+        key: 'lastVacTime'
+    } as const,
 
 } as const;
 
