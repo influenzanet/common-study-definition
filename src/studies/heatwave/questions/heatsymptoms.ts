@@ -356,8 +356,23 @@ export class AbsentFromWork extends ItemQuestion {
 
 /*
 Q18 What actions did you take this past week to protect yourself from heat? (select all that apply)
-    (see spec for full option list) + Other (____)
-    "None of these" exclusive option added for a required answer.
+□  	Removed layer/s of clothing
+□  	Frequently drank water
+□  	Stayed inside and closed all window shutters and curtains 
+□  	Went to a park 
+□  	Had recurrent showers/baths
+□  	Went for a swim (e.g. pool, river, lake, sea, etc)
+□  	Sprayed/splashed myself with water
+□  	Turned on fan
+□  	Turned on air-conditioning
+□  	Went to a supermarket with air conditioning
+□  	Went to a museum or library with air conditioning
+□  	Went to a a cooler location in town (e.g., friend’s house)
+□  	Went to a cooler location out of town (e.g. mountain, lake, seaside)
+□  	Slept in another room (cooler) at my living place
+□  	Other (____)
+□ 	None
+
 */
 export class ProtectiveActions extends ItemQuestion {
 
@@ -394,7 +409,7 @@ export class ProtectiveActions extends ItemQuestion {
             option_def('13', _T("heatwave.Q18.code.cooler_out_town", "Went to a cooler location out of town (e.g. mountain, lake, seaside)")),
             option_def('14', _T("heatwave.Q18.code.another_room", "Slept in another room (cooler) at my living place")),
             option_input_other('15', _T("heatwave.Q18.code.other", "Other", "heatwave.common.other"), "heatwave.Q18.code.other_desc"),
-            option_def('0', _T("heatwave.common.none", "None of these", "heatwave.Q18.code.none")),
+            option_def('0', _T("heatwave.common.none", "None", "heatwave.Q18.code.none")),
         ];
         make_exclusive_options(this.key, options, ['0']);
         return options;
@@ -428,7 +443,7 @@ export class ClimateShelter extends ItemQuestion {
     }
 
     buildItem(): SurveyItem {
-        return SurveyItems.singleChoice({
+        return SurveyItems.multipleChoice({
             parentKey: this.parentKey,
             itemKey: this.itemKey,
             isRequired: this.isRequired,
@@ -441,7 +456,7 @@ export class ClimateShelter extends ItemQuestion {
 
     getResponses(): OptionDef[] {
         const c = this.coding;
-        return [
+        const options = [
             option_def(c.all_year, _T("heatwave.Q19.code.all_year", "A public building open all year round (library, museum, etc.)")),
             option_def(c.heat, _T("heatwave.Q19.code.heat", "A public building open specifically because of the heat")),
             option_def(c.leisure, _T("heatwave.Q19.code.leisure", "A private leisure venue (cinema, etc.)")),
@@ -449,10 +464,12 @@ export class ClimateShelter extends ItemQuestion {
             option_input_other(c.other, _T("heatwave.Q19.code.other", "Other", "heatwave.common.other"), "heatwave.Q19.code.other_desc"),
             option_def(c.no, _T("heatwave.common.no", "No", "heatwave.Q19.code.no")),
         ];
+        make_exclusive_options(this.key, options, [c.no]);
+        return options;
     }
 
     responseConditionNo(): Expression {
-        return ClientExpression.singleChoice.any(this.key, this.coding.no);
+        return ClientExpression.multipleChoice.any(this.key, this.coding.no);
     }
 }
 
@@ -476,7 +493,7 @@ export class ClimateShelterNoReason extends ItemQuestion {
             itemKey: this.itemKey,
             isRequired: this.isRequired,
             condition: this.condition,
-            questionText: _T("heatwave.Q19a.title", "What are the reasons?"),
+            questionText: _T("heatwave.Q19a.title", "What are the reasons for not accessing a shelter?"),
             helpGroupContent: this.getHelpGroupContent(),
             responseOptions: this.getResponses()
         });
@@ -584,8 +601,7 @@ export class PublicTransportAirConditioning extends ItemQuestion {
 
 /*
 Q21 Did you or your area experience any disruption related to heat during the past week?
-    □ Blackouts / Wildfires / Water shortages / Droughts / Transit delays / Damages / Transport issues / Other (____)
-    "None of these" exclusive option added for a required answer.
+□ Blackouts / Wildfires / Water shortages / Droughts / Transit delays / Damages / Transport issues / Other (____) / None of these
 */
 export class HeatDisruption extends ItemQuestion {
 
@@ -615,7 +631,7 @@ export class HeatDisruption extends ItemQuestion {
             option_def('6', _T("heatwave.Q21.code.damages", "Damages at my or others' homes")),
             option_def('7', _T("heatwave.Q21.code.transport_issues", "Transport issues")),
             option_input_other('8', _T("heatwave.Q21.code.other", "Other", "heatwave.common.other"), "heatwave.Q21.code.other_desc"),
-            option_def('0', _T("heatwave.common.none", "None of these", "heatwave.Q21.code.none")),
+            option_def('0', _T("heatwave.common.none", "None", "heatwave.Q21.code.none")),
         ];
         make_exclusive_options(this.key, options, ['0']);
         return options;

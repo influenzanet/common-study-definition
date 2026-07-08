@@ -57,24 +57,25 @@ export class HeatSymptoms extends ItemQuestion {
 
     getResponses():OptionDef[] {
 
-        // "No" and "Don't know" are exclusive : selecting one of them disables the symptoms
-        const exclusiveOptionRule =  ClientExpression.multipleChoice.any(this.key, this.coding.no, this.coding.dnk);
+        const c = this.coding;
+        const symptoms = [c.thirst, c.dizziness, c.faiting, c.insomnia, c.confused, c.cramping, c.ataxia, c.palpitations];
 
-        // Option is symptom
+        const exclusiveOptionRule =  ClientExpression.multipleChoice.any(this.key, c.no, c.dnk);
         const sympt = (key: string, content: LanguageMap)=> option_def(key, content, { disabled: exclusiveOptionRule} );
 
         return [
-
-           option_def(this.coding.no, _T('heatwave.common.symptom.no', "No")),
-           sympt(this.coding.thirst, _T('heatwave.common.symptom.thirst', "Extreme thirst")),
-           sympt(this.coding.dizziness, _T('heatwave.common.symptom.dizziness', "Dizziness / light headedness")),
-           sympt(this.coding.faiting, _T('heatwave.common.symptom.faiting', "Fainting / collapsing")),
-           sympt(this.coding.insomnia, _T('heatwave.common.symptom.insomnia', "Too hot to sleep")),
-           sympt(this.coding.confused, _T('heatwave.common.symptom.confused', "Feeling confused / couldn’t think properly")),
-           sympt(this.coding.cramping, _T('heatwave.common.symptom.cramping', "Muscle twitches / cramping")),
-           sympt(this.coding.ataxia, _T('heatwave.common.symptom.ataxia', "Lack of coordination / difficulty with movement")),
-           sympt(this.coding.palpitations, _T('heatwave.common.symptom.palpitations', "Racing heartbeat")),
-           option_def(this.coding.dnk, _T('heatwave.common.symptom.dnk', "Don't know")),
+           option_def(c.no, _T('heatwave.common.symptom.no', "No"),
+                { disabled: ClientExpression.multipleChoice.any(this.key, ...symptoms, c.dnk) }),
+           sympt(c.thirst, _T('heatwave.common.symptom.thirst', "Extreme thirst")),
+           sympt(c.dizziness, _T('heatwave.common.symptom.dizziness', "Dizziness / light headedness")),
+           sympt(c.faiting, _T('heatwave.common.symptom.faiting', "Fainting / collapsing")),
+           sympt(c.insomnia, _T('heatwave.common.symptom.insomnia', "Too hot to sleep")),
+           sympt(c.confused, _T('heatwave.common.symptom.confused', "Feeling confused / couldn’t think properly")),
+           sympt(c.cramping, _T('heatwave.common.symptom.cramping', "Muscle twitches / cramping")),
+           sympt(c.ataxia, _T('heatwave.common.symptom.ataxia', "Lack of coordination / difficulty with movement")),
+           sympt(c.palpitations, _T('heatwave.common.symptom.palpitations', "Racing heartbeat")),
+           option_def(c.dnk, _T('heatwave.common.symptom.dnk', "Don't know"),
+                { disabled: ClientExpression.multipleChoice.any(this.key, ...symptoms, c.no) }),
         ]
     }
 
