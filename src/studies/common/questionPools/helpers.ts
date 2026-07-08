@@ -3,6 +3,7 @@ import { expWithArgs } from "case-editor-tools/surveys/utils/simple-generators";
 import { LanguageMap, _T } from "../languages"
 import { responseGroupKey, singleChoiceKey, multipleChoiceKey } from "case-editor-tools/constants/key-definitions";
 import { textComponent } from "../../../compat";
+import { trans_text } from "../../../tools";
 
 /**
  * Single choice key prefix (rg.scg)
@@ -75,4 +76,48 @@ export function text_how_answer(id:string) {
         content: _T( id, "How should I answer this question?", "common.how_should_i_answer"),
         style: [{ key: 'variant', value: 'h5' }],
     };
+}
+
+
+
+interface DefaultHelpGroupOptions {
+    howAnswer?: boolean
+    WhyAsking?: boolean
+}
+
+/**
+ * Create a default help group with 2 sections : Why are we asking this and How answer this question
+ * The generated translations keys are normalized
+ *  - helpGroup.why_asking for "why are we asking section"
+ *  - helpGroup.asking_reason for "how answer this question" section
+ * Prefix indicates the namespace of the translation (usually the question key in the survey)
+ * @param prefix
+ * @param opts 
+ * @returns 
+ */
+export const createDefaultHelpGroup = (prefix: string, opts?: DefaultHelpGroupOptions) => {
+
+    const oo = opts || {howAnswer: true, WhyAsking: true};
+
+    const h = [];
+
+    if(oo.WhyAsking) {
+        h.push(
+            text_why_asking(prefix + ".helpGroup.why_asking"),
+            trans_text(prefix + ".helpGroup.asking_reason", prefix + " Question asking reason"),
+        )
+    }
+
+    if(oo.howAnswer) {
+        h.push(
+            text_how_answer(prefix + ".helpGroup.how_answer"),
+            trans_text(prefix + ".helpGroup.answer_tip", prefix + " Question answer tip"),
+        )
+    }
+
+    if(!oo.howAnswer && !oo.WhyAsking) {
+        console.warn("Empty helpgroup : Both part asking_reason and answer_tip are disabled in " + prefix);
+    }
+
+    return h;
 }
