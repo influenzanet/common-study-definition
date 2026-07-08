@@ -1,8 +1,8 @@
 import { _T, LanguageMap } from "../../common/languages"
 import { OptionDef } from "case-editor-tools/surveys/types";
 import { SurveyItems } from 'case-editor-tools/surveys';
-import { ItemQuestion, ClientExpression, GroupQuestion, HelpGroupContentType, LikertQuestion, LikertRow, ScaleOption, trans_item, ItemProps, GroupProps } from "../../../tools";
-import { SurveyItem } from "survey-engine/data_types";
+import { ItemQuestion, ClientExpression, ItemProps } from "../../../tools";
+import { Expression, SurveyItem } from "survey-engine/data_types";
 import { option_def } from "../../../tools/options";
 
 /*
@@ -28,6 +28,7 @@ const HeatSymptomsCoding = {
     'cramping':'6', // Muscle twitches / cramping
     'ataxia':'7', // Lack of coordination / difficulty with movement
     'palpitations':'8', // Racing heartbeat
+    'dnk':'99', // Don't know
 } as const;
 
 
@@ -55,9 +56,10 @@ export class HeatSymptoms extends ItemQuestion {
     }
 
     getResponses():OptionDef[] {
-        
-        const exclusiveOptionRule =  ClientExpression.multipleChoice.any(this.key, this.coding.no);
-        
+
+        // "No" and "Don't know" are exclusive : selecting one of them disables the symptoms
+        const exclusiveOptionRule =  ClientExpression.multipleChoice.any(this.key, this.coding.no, this.coding.dnk);
+
         // Option is symptom
         const sympt = (key: string, content: LanguageMap)=> option_def(key, content, { disabled: exclusiveOptionRule} );
 
@@ -72,6 +74,19 @@ export class HeatSymptoms extends ItemQuestion {
            sympt(this.coding.cramping, _T('heatwave.common.symptom.cramping', "Muscle twitches / cramping")),
            sympt(this.coding.ataxia, _T('heatwave.common.symptom.ataxia', "Lack of coordination / difficulty with movement")),
            sympt(this.coding.palpitations, _T('heatwave.common.symptom.palpitations', "Racing heartbeat")),
+           option_def(this.coding.dnk, _T('heatwave.common.symptom.dnk', "Don't know")),
         ]
+    }
+
+    /**
+     * Condition true when the participant reported at least one actual heat symptom
+     * (i.e. any response other than "No" or "Don't know")
+     */
+    createSymptomCondition(): Expression {
+        const c = this.coding;
+        return ClientExpression.multipleChoice.any(
+            this.key,
+            c.thirst, c.dizziness, c.faiting, c.insomnia, c.confused, c.cramping, c.ataxia, c.palpitations
+        );
     }
 }

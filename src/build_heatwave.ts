@@ -1,6 +1,6 @@
 import { StudyBuilder } from "./tools";
 
-import { HeatwaveBackgroundSurvey } from "./studies/heatwave/surveys";
+import { HeatwaveBackgroundSurvey, HeatwaveSymptomsSurvey } from "./studies/heatwave/surveys";
 import { study_exporter } from "./tools/exporter";
 import { DocumentExporterPlugin } from "./tools/exporter/documents";
 
@@ -16,9 +16,12 @@ class HeatwaveStudy extends StudyBuilder {
         meta.set('timestamp', Date.now().toString(36));
 
         const background = new HeatwaveBackgroundSurvey();
-        
+
+        const symptoms = new HeatwaveSymptomsSurvey();
+
         this.surveys = [
             background,
+            symptoms,
         ];
     }
 }
