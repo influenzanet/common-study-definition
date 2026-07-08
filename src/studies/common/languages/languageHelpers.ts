@@ -59,6 +59,8 @@ export class LanguageHelpers {
    */
   static missing: MissingTranslations = new Map();
 
+  static verboseMissing: boolean = true;
+
   /**
    *
    * @param languageId language id of this translation set
@@ -105,7 +107,9 @@ export class LanguageHelpers {
       m = new Map<string, string>();
       LanguageHelpers.missing.set(language, m);
     }
-    console.log("add Missing "+ key);
+    if(LanguageHelpers.verboseMissing) {
+      console.log("add Missing "+ key);
+    }
     m.set(key, typeof (reference) == "undefined" ? "_unknown_" : reference);
   }
 
@@ -158,7 +162,9 @@ export class LanguageHelpers {
         text.push(trans);
       } else {
         LanguageHelpers.setMissing(id, languageId, reference);
-        console.warn(`Missing ${id} for ${languageId}`);
+        if(LanguageHelpers.verboseMissing) {
+          console.warn(`Missing ${id} for ${languageId}`);
+        }
       }
 
     });
