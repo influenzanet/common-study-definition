@@ -1,0 +1,574 @@
+{
+  "heatwave.Q1.title": {
+    "en": "Do you live in rental accommodation?",
+    "nl-be": "_TODO_"
+  },
+  "heatwave.Q10.code.temp": {
+    "en": "Temperature (°C)",
+    "nl-be": "_TODO_"
+  },
+  "heatwave.Q10.title": {
+    "en": "What was the highest temperature recorded inside your home over the past week?",
+    "nl-be": "_TODO_"
+  },
+  "heatwave.Q11.code.temp": {
+    "en": "Temperature (°C)",
+    "nl-be": "_TODO_"
+  },
+  "heatwave.Q11.title": {
+    "en": "What was the lowest temperature recorded inside your home over the past week?",
+    "nl-be": "_TODO_"
+  },
+  "heatwave.Q12.code.holiday": {
+    "en": "Holiday destination",
+    "nl-be": "_TODO_"
+  },
+  "heatwave.Q12.code.holiday_desc": {
+    "en": "Closest municipality",
+    "nl-be": "_TODO_"
+  },
+  "heatwave.Q12.code.home": {
+    "en": "Home",
+    "nl-be": "_TODO_"
+  },
+  "heatwave.Q12.code.other": {
+    "en": "Other",
+    "nl-be": "_TODO_"
+  },
+  "heatwave.Q12.code.other_desc": {
+    "en": "Describe here (optional)",
+    "nl-be": "_TODO_"
+  },
+  "heatwave.Q12.code.work": {
+    "en": "Work/School",
+    "nl-be": "_TODO_"
+  },
+  "heatwave.Q12.title": {
+    "en": "During daylight hours, which location did you spend the most time in this past week?",
+    "nl-be": "_TODO_"
+  },
+  "heatwave.Q13.title": {
+    "en": "How uncomfortable (e.g. intense sweat, exhaustion, etc.) were you because of the hot weather this past week during the day?",
+    "nl-be": "_TODO_"
+  },
+  "heatwave.Q14.code.holiday": {
+    "en": "Holiday destination",
+    "nl-be": "_TODO_"
+  },
+  "heatwave.Q14.code.holiday_desc": {
+    "en": "Closest municipality",
+    "nl-be": "_TODO_"
+  },
+  "heatwave.Q14.code.home": {
+    "en": "Home",
+    "nl-be": "_TODO_"
+  },
+  "heatwave.Q14.code.other": {
+    "en": "Other",
+    "nl-be": "_TODO_"
+  },
+  "heatwave.Q14.code.other_desc": {
+    "en": "Describe here (optional)",
+    "nl-be": "_TODO_"
+  },
+  "heatwave.Q14.title": {
+    "en": "During night hours, which location did you spend the most time in this past week?",
+    "nl-be": "_TODO_"
+  },
+  "heatwave.Q15.title": {
+    "en": "How uncomfortable (intense sweat, exhaustion, etc.) were you because of the temperature this past week during the night?",
+    "nl-be": "_TODO_"
+  },
+  "heatwave.Q16.title": {
+    "en": "Did you experience any symptoms due to high/extreme heat this past week?",
+    "nl-be": "_TODO_"
+  },
+  "heatwave.Q16a.code.hospital": {
+    "en": "Yes, from a hospital",
+    "nl-be": "_TODO_"
+  },
+  "heatwave.Q16a.code.medical_centre": {
+    "en": "Yes, from a medical centre",
+    "nl-be": "_TODO_"
+  },
+  "heatwave.Q16a.code.other": {
+    "en": "Other",
+    "nl-be": "_TODO_"
+  },
+  "heatwave.Q16a.code.other_desc": {
+    "en": "Describe here (optional)",
+    "nl-be": "_TODO_"
+  },
+  "heatwave.Q16a.code.pharmacy": {
+    "en": "Yes, from a pharmacy",
+    "nl-be": "_TODO_"
+  },
+  "heatwave.Q16a.code.telephone": {
+    "en": "Yes, through a telephone or online health advice service",
+    "nl-be": "_TODO_"
+  },
+  "heatwave.Q16a.title": {
+    "en": "Did you seek health care to manage your symptoms?",
+    "nl-be": "_TODO_"
+  },
+  "heatwave.Q17.code.canceled": {
+    "en": "I canceled some activities (other than work) for the day",
+    "nl-be": "_TODO_"
+  },
+  "heatwave.Q17.code.changed_time": {
+    "en": "Changed the time when I go to work/everyday activities",
+    "nl-be": "_TODO_"
+  },
+  "heatwave.Q17.code.could_not_work": {
+    "en": "I could not work",
+    "nl-be": "_TODO_"
+  },
+  "heatwave.Q17.code.couldnt_concentrate": {
+    "en": "Went to work but couldn't concentrate",
+    "nl-be": "_TODO_"
+  },
+  "heatwave.Q17.code.other": {
+    "en": "Other",
+    "nl-be": "_TODO_"
+  },
+  "heatwave.Q17.code.other_desc": {
+    "en": "Describe here (optional)",
+    "nl-be": "_TODO_"
+  },
+  "heatwave.Q17.code.went_to_ac": {
+    "en": "I didn't work from home as usual but went to the office/location with AC because of AC",
+    "nl-be": "_TODO_"
+  },
+  "heatwave.Q17.code.work_from_home": {
+    "en": "I had to work from home",
+    "nl-be": "_TODO_"
+  },
+  "heatwave.Q17.title": {
+    "en": "Did extreme heat alter your routine/quality of life this past week?",
+    "nl-be": "_TODO_"
+  },
+  "heatwave.Q17a.code.max1day": {
+    "en": "Yes, for 1 day or less",
+    "nl-be": "_TODO_"
+  },
+  "heatwave.Q17a.code.more1day": {
+    "en": "Yes, for more than 1 day",
+    "nl-be": "_TODO_"
+  },
+  "heatwave.Q17a.title": {
+    "en": "Were you absent from work/normal activities due to your symptoms this past week?",
+    "nl-be": "_TODO_"
+  },
+  "heatwave.Q18.code.ac": {
+    "en": "Turned on air-conditioning",
+    "nl-be": "_TODO_"
+  },
+  "heatwave.Q18.code.another_room": {
+    "en": "Slept in another room (cooler) at my living place",
+    "nl-be": "_TODO_"
+  },
+  "heatwave.Q18.code.closed_shutters": {
+    "en": "Stayed inside and closed all window shutters and curtains",
+    "nl-be": "_TODO_"
+  },
+  "heatwave.Q18.code.cooler_in_town": {
+    "en": "Went to a cooler location in town (e.g. friend's house)",
+    "nl-be": "_TODO_"
+  },
+  "heatwave.Q18.code.cooler_out_town": {
+    "en": "Went to a cooler location out of town (e.g. mountain, lake, seaside)",
+    "nl-be": "_TODO_"
+  },
+  "heatwave.Q18.code.drank_water": {
+    "en": "Frequently drank water",
+    "nl-be": "_TODO_"
+  },
+  "heatwave.Q18.code.fan": {
+    "en": "Turned on fan",
+    "nl-be": "_TODO_"
+  },
+  "heatwave.Q18.code.museum": {
+    "en": "Went to a museum or library with air conditioning",
+    "nl-be": "_TODO_"
+  },
+  "heatwave.Q18.code.other": {
+    "en": "Other",
+    "nl-be": "_TODO_"
+  },
+  "heatwave.Q18.code.other_desc": {
+    "en": "Describe here (optional)",
+    "nl-be": "_TODO_"
+  },
+  "heatwave.Q18.code.park": {
+    "en": "Went to a park",
+    "nl-be": "_TODO_"
+  },
+  "heatwave.Q18.code.removed_layers": {
+    "en": "Removed layer/s of clothing",
+    "nl-be": "_TODO_"
+  },
+  "heatwave.Q18.code.showers": {
+    "en": "Had recurrent showers/baths",
+    "nl-be": "_TODO_"
+  },
+  "heatwave.Q18.code.splashed": {
+    "en": "Sprayed/splashed myself with water",
+    "nl-be": "_TODO_"
+  },
+  "heatwave.Q18.code.supermarket": {
+    "en": "Went to a supermarket with air conditioning",
+    "nl-be": "_TODO_"
+  },
+  "heatwave.Q18.code.swim": {
+    "en": "Went for a swim (e.g. pool, river, lake, sea, etc.)",
+    "nl-be": "_TODO_"
+  },
+  "heatwave.Q18.title": {
+    "en": "What actions did you take this past week to protect yourself from heat?",
+    "nl-be": "_TODO_"
+  },
+  "heatwave.Q19.code.all_year": {
+    "en": "A public building open all year round (library, museum, etc.)",
+    "nl-be": "_TODO_"
+  },
+  "heatwave.Q19.code.heat": {
+    "en": "A public building open specifically because of the heat",
+    "nl-be": "_TODO_"
+  },
+  "heatwave.Q19.code.leisure": {
+    "en": "A private leisure venue (cinema, etc.)",
+    "nl-be": "_TODO_"
+  },
+  "heatwave.Q19.code.other": {
+    "en": "Other",
+    "nl-be": "_TODO_"
+  },
+  "heatwave.Q19.code.other_desc": {
+    "en": "Describe here (optional)",
+    "nl-be": "_TODO_"
+  },
+  "heatwave.Q19.code.shop": {
+    "en": "A shop / shopping centre",
+    "nl-be": "_TODO_"
+  },
+  "heatwave.Q19.title": {
+    "en": "Have you accessed a climate shelter this past week?",
+    "nl-be": "_TODO_"
+  },
+  "heatwave.Q19a.code.mobility": {
+    "en": "I have mobility issues and cannot go",
+    "nl-be": "_TODO_"
+  },
+  "heatwave.Q19a.code.none_nearby": {
+    "en": "There are no climate shelters nearby",
+    "nl-be": "_TODO_"
+  },
+  "heatwave.Q19a.code.other": {
+    "en": "Other",
+    "nl-be": "_TODO_"
+  },
+  "heatwave.Q19a.code.other_desc": {
+    "en": "Describe here (optional)",
+    "nl-be": "_TODO_"
+  },
+  "heatwave.Q19a.code.too_crowded": {
+    "en": "It is too crowded",
+    "nl-be": "_TODO_"
+  },
+  "heatwave.Q19a.code.too_far": {
+    "en": "It is too far/hard to reach",
+    "nl-be": "_TODO_"
+  },
+  "heatwave.Q19a.title": {
+    "en": "What are the reasons?",
+    "nl-be": "_TODO_"
+  },
+  "heatwave.Q2.code.cabin": {
+    "en": "Cabin / Caravan / Houseboat",
+    "nl-be": "_TODO_"
+  },
+  "heatwave.Q2.code.flat": {
+    "en": "Flat / Apartment",
+    "nl-be": "_TODO_"
+  },
+  "heatwave.Q2.code.other": {
+    "en": "Other",
+    "nl-be": "_TODO_"
+  },
+  "heatwave.Q2.code.other_description": {
+    "en": "",
+    "nl-be": "_TODO_"
+  },
+  "heatwave.Q2.code.semidetached": {
+    "en": "Semi-detached / row or terrace house / historic attached home",
+    "nl-be": "_TODO_"
+  },
+  "heatwave.Q2.code.separate": {
+    "en": "Separate house",
+    "nl-be": "_TODO_"
+  },
+  "heatwave.Q2.title": {
+    "en": "What best describes your current housing?",
+    "nl-be": "_TODO_"
+  },
+  "heatwave.Q20.code.no_but_usually": {
+    "en": "No, but I usually use them",
+    "nl-be": "_TODO_"
+  },
+  "heatwave.Q20.code.no_not_usually": {
+    "en": "No, I don't usually use them",
+    "nl-be": "_TODO_"
+  },
+  "heatwave.Q20.code.no_other": {
+    "en": "No (other reasons)",
+    "nl-be": "_TODO_"
+  },
+  "heatwave.Q20.code.yes_less": {
+    "en": "Yes, less than usual",
+    "nl-be": "_TODO_"
+  },
+  "heatwave.Q20.code.yes_more": {
+    "en": "Yes, more than usual",
+    "nl-be": "_TODO_"
+  },
+  "heatwave.Q20.code.yes_usual": {
+    "en": "Yes, as usual",
+    "nl-be": "_TODO_"
+  },
+  "heatwave.Q20.title": {
+    "en": "Did you use public transport this past week?",
+    "nl-be": "_TODO_"
+  },
+  "heatwave.Q20a.code.out_of_order": {
+    "en": "Yes but it was out of order",
+    "nl-be": "_TODO_"
+  },
+  "heatwave.Q20a.title": {
+    "en": "Did it have air-conditioning onboard?",
+    "nl-be": "_TODO_"
+  },
+  "heatwave.Q21.code.blackouts": {
+    "en": "Blackouts",
+    "nl-be": "_TODO_"
+  },
+  "heatwave.Q21.code.damages": {
+    "en": "Damages at my or others' homes",
+    "nl-be": "_TODO_"
+  },
+  "heatwave.Q21.code.droughts": {
+    "en": "Droughts",
+    "nl-be": "_TODO_"
+  },
+  "heatwave.Q21.code.other": {
+    "en": "Other",
+    "nl-be": "_TODO_"
+  },
+  "heatwave.Q21.code.other_desc": {
+    "en": "Describe here (optional)",
+    "nl-be": "_TODO_"
+  },
+  "heatwave.Q21.code.transit_delays": {
+    "en": "Transit delays",
+    "nl-be": "_TODO_"
+  },
+  "heatwave.Q21.code.transport_issues": {
+    "en": "Transport issues",
+    "nl-be": "_TODO_"
+  },
+  "heatwave.Q21.code.water_shortages": {
+    "en": "Water shortages",
+    "nl-be": "_TODO_"
+  },
+  "heatwave.Q21.code.wildfires": {
+    "en": "Wildfires",
+    "nl-be": "_TODO_"
+  },
+  "heatwave.Q21.title": {
+    "en": "Did you or your area experience any disruption related to heat during the past week?",
+    "nl-be": "_TODO_"
+  },
+  "heatwave.Q3.code.0": {
+    "en": "0",
+    "nl-be": "_TODO_"
+  },
+  "heatwave.Q3.code.dnk": {
+    "en": "Don’t know",
+    "nl-be": "_TODO_"
+  },
+  "heatwave.Q3.code.full": {
+    "en": "6-12h (full day)",
+    "nl-be": "_TODO_"
+  },
+  "heatwave.Q3.code.half": {
+    "en": "0-6h (half a day)",
+    "nl-be": "_TODO_"
+  },
+  "heatwave.Q3.title": {
+    "en": "How many hours (approximately) of direct sunlight does your house receive currently?",
+    "nl-be": "_TODO_"
+  },
+  "heatwave.Q4.title": {
+    "en": "Do you have air-conditioning in your current housing?",
+    "nl-be": "_TODO_"
+  },
+  "heatwave.Q5.code.always": {
+    "en": "Always",
+    "nl-be": "_TODO_"
+  },
+  "heatwave.Q5.code.never": {
+    "en": "Never ",
+    "nl-be": "_TODO_"
+  },
+  "heatwave.Q5.code.often": {
+    "en": "Often",
+    "nl-be": "_TODO_"
+  },
+  "heatwave.Q5.code.sometimes": {
+    "en": "Sometimes",
+    "nl-be": "_TODO_"
+  },
+  "heatwave.Q5.title": {
+    "en": "How often do you use it on hot days (> 30 degrees)",
+    "nl-be": "_TODO_"
+  },
+  "heatwave.Q6.code.outdoors": {
+    "en": "I work outdoors",
+    "nl-be": "_TODO_"
+  },
+  "heatwave.Q6.title": {
+    "en": "Do you have air-conditioning in your current workplace/school?",
+    "nl-be": "_TODO_"
+  },
+  "heatwave.Q7.codes.10_40": {
+    "en": "Between 10-40 hours",
+    "nl-be": "_TODO_"
+  },
+  "heatwave.Q7.codes.1_10": {
+    "en": "Between 1-10 hours",
+    "nl-be": "_TODO_"
+  },
+  "heatwave.Q7.codes.less1h": {
+    "en": "Less than 1 hour",
+    "nl-be": "_TODO_"
+  },
+  "heatwave.Q7.codes.over40": {
+    "en": "More than 40 hours",
+    "nl-be": "_TODO_"
+  },
+  "heatwave.Q7.title": {
+    "en": "In a typical summer week, approximately how many hours do you feel too hot while working, doing household activities or carrying out other daily activities (including at home)?",
+    "nl-be": "_TODO_"
+  },
+  "heatwave.Q8.title": {
+    "en": "In a typical summer week, approximately how many hours do you feel too hot while exercising, or doing other more intense/strenuous daily activities?",
+    "nl-be": "_TODO_"
+  },
+  "heatwave.Q9.title": {
+    "en": "Have you experienced any symptoms due to high/extreme heat during the summer of 2025 and first part of 2026?",
+    "nl-be": "_TODO_"
+  },
+  "heatwave.background.description": {
+    "en": "Heatwave background survey description",
+    "nl-be": "_TODO_"
+  },
+  "heatwave.background.name": {
+    "en": "Heatwave Background survey",
+    "nl-be": "_TODO_"
+  },
+  "heatwave.background.typicalDuration": {
+    "en": "Duration 5-10 minutes",
+    "nl-be": "_TODO_"
+  },
+  "heatwave.common.dkn": {
+    "en": "Don't know",
+    "nl-be": "_TODO_"
+  },
+  "heatwave.common.dnk": {
+    "en": "Don’t know",
+    "nl-be": "_TODO_"
+  },
+  "heatwave.common.no": {
+    "en": "No",
+    "nl-be": "_TODO_"
+  },
+  "heatwave.common.none": {
+    "en": "None of these",
+    "nl-be": "_TODO_"
+  },
+  "heatwave.common.symptom.ataxia": {
+    "en": "Lack of coordination / difficulty with movement",
+    "nl-be": "_TODO_"
+  },
+  "heatwave.common.symptom.confused": {
+    "en": "Feeling confused / couldn’t think properly",
+    "nl-be": "_TODO_"
+  },
+  "heatwave.common.symptom.cramping": {
+    "en": "Muscle twitches / cramping",
+    "nl-be": "_TODO_"
+  },
+  "heatwave.common.symptom.dizziness": {
+    "en": "Dizziness / light headedness",
+    "nl-be": "_TODO_"
+  },
+  "heatwave.common.symptom.dnk": {
+    "en": "Don't know",
+    "nl-be": "_TODO_"
+  },
+  "heatwave.common.symptom.faiting": {
+    "en": "Fainting / collapsing",
+    "nl-be": "_TODO_"
+  },
+  "heatwave.common.symptom.insomnia": {
+    "en": "Too hot to sleep",
+    "nl-be": "_TODO_"
+  },
+  "heatwave.common.symptom.no": {
+    "en": "No",
+    "nl-be": "_TODO_"
+  },
+  "heatwave.common.symptom.palpitations": {
+    "en": "Racing heartbeat",
+    "nl-be": "_TODO_"
+  },
+  "heatwave.common.symptom.thirst": {
+    "en": "Extreme thirst",
+    "nl-be": "_TODO_"
+  },
+  "heatwave.common.yes": {
+    "en": "Yes",
+    "nl-be": "_TODO_"
+  },
+  "heatwave.discomfort.a_little": {
+    "en": "A little",
+    "nl-be": "_TODO_"
+  },
+  "heatwave.discomfort.extremely": {
+    "en": "Extremely",
+    "nl-be": "_TODO_"
+  },
+  "heatwave.discomfort.not_at_all": {
+    "en": "Not at all",
+    "nl-be": "_TODO_"
+  },
+  "heatwave.discomfort.quite": {
+    "en": "Quite",
+    "nl-be": "_TODO_"
+  },
+  "heatwave.discomfort.very": {
+    "en": "Very",
+    "nl-be": "_TODO_"
+  },
+  "heatwave.symptoms.description": {
+    "en": "Weekly survey about heat exposure, symptoms and the actions you took because of the heat",
+    "nl-be": "_TODO_"
+  },
+  "heatwave.symptoms.name": {
+    "en": "Heat-Related Illness Survey",
+    "nl-be": "_TODO_"
+  },
+  "heatwave.symptoms.typicalDuration": {
+    "en": "Duration 5-10 minutes",
+    "nl-be": "_TODO_"
+  }
+}
