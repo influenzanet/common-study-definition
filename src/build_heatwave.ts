@@ -17,9 +17,9 @@ class HeatwaveStudy extends StudyBuilder {
 
         meta.set('timestamp', Date.now().toString(36));
 
-        const background = new HeatwaveBackgroundSurvey();
+        const background = new HeatwaveBackgroundSurvey(meta);
 
-        const symptoms = new HeatwaveSymptomsSurvey();
+        const symptoms = new HeatwaveSymptomsSurvey(meta);
 
         this.surveys = [
             background,

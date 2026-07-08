@@ -4,7 +4,7 @@ import * as questions from "../questions/background";
 
 export class HeatwaveBackgroundSurvey extends SurveyBuilder {
 
-    constructor() {
+    constructor(metadata: Map<string, string>) {
         super({
             surveyKey: 'heatback',
             name: _T( "heatwave.background.name", "Heatwave Background survey"),
@@ -14,7 +14,8 @@ export class HeatwaveBackgroundSurvey extends SurveyBuilder {
             ),
             durationText: _T(
                 "heatwave.background.typicalDuration", "Duration 5-10 minutes"
-            )
+            ),
+            metadata: metadata
         });
 
         this.items = [];

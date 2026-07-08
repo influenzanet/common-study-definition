@@ -4,7 +4,7 @@ import * as questions from "../questions/heatsymptoms";
 
 export class HeatwaveSymptomsSurvey extends SurveyBuilder {
 
-    constructor() {
+    constructor(metadata: Map<string, string>) {
         super({
             surveyKey: 'heatsymptoms',
             name: _T("heatwave.symptoms.name", "Heat-Related Illness Survey"),
@@ -14,7 +14,8 @@ export class HeatwaveSymptomsSurvey extends SurveyBuilder {
             ),
             durationText: _T(
                 "heatwave.symptoms.typicalDuration", "Duration 5-10 minutes"
-            )
+            ),
+            metadata:metadata
         });
 
         this.items = [];
