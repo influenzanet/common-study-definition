@@ -11,6 +11,7 @@
     "prestart": "npm run-script build",
     "start": "node build/index.js",
     "export":"node build/build.js",
+    "export-heatwave":"node build/build_heatwave.js",
     "test": "jest --config jestconfig.json"
 },
   "dependencies": {

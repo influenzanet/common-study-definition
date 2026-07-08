@@ -1,13 +1,10 @@
 import { _T } from "../../common/languages"
 import { OptionDef } from "case-editor-tools/surveys/types";
 import { SurveyItems } from 'case-editor-tools/surveys';
-import { createDefaultHelpGroup, text_how_answer, text_select_all_apply, text_why_asking } from "../../common/questionPools/helpers";
-import { ItemQuestion, ClientExpression, GroupQuestion, HelpGroupContentType, LikertQuestion, LikertRow, ScaleOption, trans_item, ItemProps, GroupProps } from "../../../tools";
-import { Expression, ExpressionArg, SurveyItem } from "survey-engine/data_types";
-import { textComponent } from "../../../compat";
-import { as_input_option, option_def, option_input_other } from "../../../tools/options";
-
-
+import { ItemQuestion, ClientExpression, ItemProps } from "../../../tools";
+import { Expression, SurveyItem } from "survey-engine/data_types";
+import { as_input_option, option_def } from "../../../tools/options";
+import { HeatSymptoms } from "./symptoms";
 
 /*
 Do you live in rental accommodation?
@@ -249,7 +246,7 @@ Q7 In a typical summer week, approximately how many hours do you feel too hot wh
 ○  	Between 10-40 hours
 ○  	More than 40 hours
 */
-export class HowManyHoursTooHot extends ItemQuestion {
+export class HoursTooHotWorking extends ItemQuestion {
 
     constructor(props:ItemProps) {
         super(props, 'Q7');
@@ -274,5 +271,40 @@ export class HowManyHoursTooHot extends ItemQuestion {
             option_def('3', _T("heatwave.Q7.codes.10_40", "Between 10-40 hours")),
             option_def('4', _T("heatwave.Q7.codes.over40", "More than 40 hours")),
          ];
+    }
+}
+
+export class HoursTooHotExercising extends ItemQuestion {
+
+    constructor(props:ItemProps) {
+        super(props, 'Q8');
+    }
+
+    buildItem():SurveyItem {
+        return SurveyItems.singleChoice({
+            parentKey: this.parentKey,
+            itemKey: this.itemKey,
+            isRequired: this.isRequired,
+            condition: this.condition,
+            questionText: _T("heatwave.Q8.title", "In a typical summer week, approximately how many hours do you feel too hot while exercising, or doing other more intense/strenuous daily activities?"),
+            helpGroupContent: this.getHelpGroupContent(),
+            responseOptions: this.getResponses()
+        });
+    }
+
+    getResponses():OptionDef[] {
+        // Nota translation are from Q7 translation key since responses are intented to be the same
+        return [ 
+            option_def('1', _T("heatwave.Q7.codes.less1h", "Less than 1 hour")),
+            option_def('2', _T("heatwave.Q7.codes.1_10", "Between 1-10 hours")),
+            option_def('3', _T("heatwave.Q7.codes.10_40", "Between 10-40 hours")),
+            option_def('4', _T("heatwave.Q7.codes.over40", "More than 40 hours")),
+         ];
+    }
+}
+
+export class LastSummerSymptoms extends HeatSymptoms {
+    constructor(props: ItemProps) {
+        super(props, "Q9", _T("heatwave.Q9.title", "Have you experienced any symptoms due to high/extreme heat during the summer of 2025 and first part of 2026?"));
     }
 }

@@ -2,7 +2,7 @@ import { _T } from "../../common/languages"
 import { ClientExpression as ce, SurveyBuilder } from "../../../tools";
 import * as questions from "../questions/background";
 
-export class HeatwaveBackgroundSurveyBuilder extends SurveyBuilder {
+export class HeatwaveBackgroundSurvey extends SurveyBuilder {
 
     constructor() {
         super({
@@ -44,7 +44,14 @@ export class HeatwaveBackgroundSurveyBuilder extends SurveyBuilder {
         const Q6 = new questions.AirConditionnerWork({'parentKey': rootKey, isRequired: defaultRequired});
         this.items.push(Q6);
 
-        const Q7 = new questions.HowManyHoursTooHot({'parentKey': rootKey, isRequired: defaultRequired});
+        const Q7 = new questions.HoursTooHotWorking({'parentKey': rootKey, isRequired: defaultRequired});
         this.items.push(Q7);
+
+        const Q8 = new questions.HoursTooHotExercising({'parentKey': rootKey, isRequired: defaultRequired});
+        this.items.push(Q8);
+
+        const Q9 = new questions.LastSummerSymptoms({'parentKey': rootKey, isRequired: defaultRequired});
+        this.items.push(Q9);
+
     }
 }
