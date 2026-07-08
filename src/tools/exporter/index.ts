@@ -127,11 +127,34 @@ export function buildMissing(outputFolder:string) {
         });
         const file = outputFolder + '/missing-' + language + '.json';
         console.log("Missing file " + file);
-        json_export(file, m);
-
+        json_export(file, m, {"pretty": 2, "sortKeys": true});
     });
 }
 
-export function json_export(filename:string, object:any, pretty?: number) {
-    writeFileSync(filename, JSON.stringify(object, undefined, pretty ? 2 : undefined));
+interface JSONExportOpts {
+    pretty?: number
+    sortKeys?: boolean
+}
+
+
+export function json_export(filename:string, object:any, opts?: number|JSONExportOpts) {
+
+    let oo: JSONExportOpts = {};
+    if(typeof(opts) == "object") {
+        oo = opts;
+    } 
+    if(typeof(opts) == "number") {
+        oo = {'pretty': opts};
+    }
+
+    const pretty = oo.pretty ? 2 : undefined;
+
+    let replacer = undefined;
+    if(oo.sortKeys) {
+        const allKeys = new Set<string>();
+        JSON.stringify(object, (key, value) => (allKeys.add(key), value));
+        replacer = Array.from(allKeys).sort()
+    }
+
+    writeFileSync(filename, JSON.stringify(object, replacer, pretty));
 }
