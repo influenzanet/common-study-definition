@@ -1459,10 +1459,10 @@ human-signals@^2.1.0:
   resolved "https://registry.yarnpkg.com/human-signals/-/human-signals-2.1.0.tgz#dc91fcba42e4d06e4abaed33b3e7a3c02f514ea0"
   integrity sha512-B4FFZ6q/T2jhhksgkbEW3HBvWIfDW85snkQgawt07S7J5QXTk6BkNV+0yAeZrM5QpMAdYlocGoljn0sJ/WQkFw==
 
-ifn-survey-tools@^0.1.0:
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/ifn-survey-tools/-/ifn-survey-tools-0.1.0.tgz#2e443ed819a569efc1926528ce98973568ea62c8"
-  integrity sha512-/UOe/AX1pITXQfmQ1yx1upuqumAUaR6ZmmZthkOZyRUvPJdXlmqO9RGEIYa7n5nxH+87IEDmSs2AOixE0nFinA==
+ifn-survey-tools@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/ifn-survey-tools/-/ifn-survey-tools-0.2.0.tgz#59481a3ed711337c43fb65caf5d659346941afc0"
+  integrity sha512-XNDUclO2amQuWp5Um21YDFr4FGQ05MDF0GEXSVzBFJM+UnHGmn1gOB3qvzZcwI+tfsPGB7lHqSfVTrGf9aLROQ==
   dependencies:
     date-fns "^2.30.0"
     static-jsx "^1.0.1"
