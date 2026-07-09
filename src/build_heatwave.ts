@@ -1,10 +1,11 @@
 import { StudyBuilder } from "./tools";
 import * as fs from "fs";
 import { join } from "path";
-import { HeatwaveBackgroundSurvey, HeatwaveSymptomsSurvey } from "./studies/heatwave/surveys";
+import { HeatwaveConsentSurvey, HeatwaveBackgroundSurvey, HeatwaveSymptomsSurvey } from "./studies/heatwave/surveys";
 import { study_exporter } from "./tools/exporter";
 import { DocumentExporterPlugin } from "./tools/exporter/documents";
 import { LanguageHelpers } from "./studies/common/languages/languageHelpers";
+import { HeatwaveStudyRulesBuilder } from "./studies/heatwave/rules";
 
 class HeatwaveStudy extends StudyBuilder {
     constructor() {
@@ -17,14 +18,25 @@ class HeatwaveStudy extends StudyBuilder {
 
         meta.set('timestamp', Date.now().toString(36));
 
+        const consent = new HeatwaveConsentSurvey(meta);
+
         const background = new HeatwaveBackgroundSurvey(meta);
 
         const symptoms = new HeatwaveSymptomsSurvey(meta);
 
         this.surveys = [
+            consent,
             background,
             symptoms,
         ];
+
+        this.studyRules = new HeatwaveStudyRulesBuilder({
+            consent: consent.key,
+            consentItemKey: consent.consent.key,
+            consentYesCode: consent.consent.coding.yes,
+            background: background.key,
+            symptoms: symptoms.key,
+        }).build();
     }
 }
 
