@@ -42,6 +42,9 @@ export class HeatwaveStudyRulesBuilder extends AbstractStudyRulesBuilder {
         const consentFlag = flags.heatConsent;
         const backCompleted = flags.heatbackCompleted;
 
+        // PRODUCTION: 604800 (7 days).
+        const SYMPTOMS_INTERVAL_SEC = 3600;
+
         /**
          * ENTRY: assign the consent survey to everyone
          */
@@ -64,8 +67,22 @@ export class HeatwaveStudyRulesBuilder extends AbstractStudyRulesBuilder {
                     se.not(priorConsentYes),
                     se.if(
                         heatbackDone,
-                        // heatback already completed -> go straight to symptoms
-                        assigned.add(symptomsKey, 'immediate'),
+                        // heatback already completed -> resume symptoms, but only jump
+                        // straight in if it's been >= 1 interval since the last symptoms
+                        // submission. This is checked against real submission history
+                        // in order to avoid no/yes toggles that
+                        // can produce more than one symptoms submission per interval.
+                        se.if(
+                            se.participantState.lastSubmissionDateOlderThan(
+                                se.timestampWithOffset({ seconds: -SYMPTOMS_INTERVAL_SEC }),
+                                symptomsKey,
+                            ),
+                            // enough time passed (or never submitted) -> resume now
+                            assigned.add(symptomsKey, 'immediate'),
+                            // submitted recently -> schedule after the interval (validFrom
+                            // in the future, so it isn't submittable early)
+                            assigned.add(symptomsKey, 'prio', se.timestampWithOffset({ seconds: SYMPTOMS_INTERVAL_SEC })),
+                        ),
                         // heatback not completed yet -> present it immediately
                         assigned.add(backgroundKey, 'immediate'),
                     ),
@@ -95,7 +112,7 @@ export class HeatwaveStudyRulesBuilder extends AbstractStudyRulesBuilder {
         const handleSymptoms = se.ifThen(
             se.checkSurveyResponseKey(symptomsKey),
             assigned.remove(symptomsKey, 'all'),
-            assigned.add(symptomsKey, 'prio', se.timestampWithOffset({ days: 7 })),
+            assigned.add(symptomsKey, 'prio', se.timestampWithOffset({ seconds: SYMPTOMS_INTERVAL_SEC })),
         );
 
         this.rules.entry = entryRules;
