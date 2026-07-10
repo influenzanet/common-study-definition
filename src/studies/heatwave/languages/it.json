@@ -329,7 +329,7 @@
   },
   "heatwave.Q2.code.other_description": {
     "en": "",
-    "it": "_TODO_"
+    "it": ""
   },
   "heatwave.Q2.code.semidetached": {
     "en": "Semi-detached / row or terrace house / historic attached home",
@@ -579,6 +579,10 @@
     "en": "Extreme thirst",
     "it": "Sete eccessiva"
   },
+  "heatwave.common.temperature_range_error": {
+    "en": "Please enter a temperature between 15 and 45 °C, or select \"I don't know\".",
+    "it": "Inserisci una temperatura compresa tra 15 e 45 °C, oppure seleziona \"Non lo so\"."
+  },
   "heatwave.common.yes": {
     "en": "Yes",
     "it": "Sì"
@@ -644,4 +648,3 @@
     "it": "Durata 5-10 minuti"
   }
 }
-
