@@ -4,6 +4,7 @@ import { SurveyItems } from 'case-editor-tools/surveys';
 import { ItemQuestion, ClientExpression, ItemProps, num_as_arg } from "../../../tools";
 import { Expression, SurveyItem } from "survey-engine/data_types";
 import { as_input_option, option_def, option_input_other, make_exclusive_options } from "../../../tools/options";
+import { text_why_asking } from "../../common/questionPools/helpers";
 import { HeatSymptoms } from "./symptoms";
 
 /*
@@ -109,6 +110,16 @@ export class DaytimeLocation extends ItemQuestion {
             option_def('dnk', _T("heatwave.common.dkn", "Don't know", "heatwave.Q12.code.dnk")),
         ];
     }
+
+    getHelpGroupContent() {
+        return [
+            text_why_asking("heatwave.Q12.helpGroup.text.0"),
+            {
+                content: _T("heatwave.Q12.helpGroup.text.1", "We are asking this question to get the environmental temperature in the reported location."),
+                style: [{ key: 'variant', value: 'p' }],
+            },
+        ];
+    }
 }
 
 /*
@@ -179,6 +190,16 @@ export class NighttimeLocation extends ItemQuestion {
             as_input_option('3', _T("heatwave.Q14.code.holiday", "Holiday destination"), _T("heatwave.Q14.code.holiday_desc", "Closest municipality")),
             option_input_other('4', _T("heatwave.Q14.code.other", "Other", "heatwave.common.other"), "heatwave.Q14.code.other_desc"),
             option_def('dnk', _T("heatwave.common.dkn", "Don't know", "heatwave.Q14.code.dnk")),
+        ];
+    }
+
+    getHelpGroupContent() {
+        return [
+            text_why_asking("heatwave.Q14.helpGroup.text.0"),
+            {
+                content: _T("heatwave.Q14.helpGroup.text.1", "We are asking this question to get the environmental temperature in the reported location."),
+                style: [{ key: 'variant', value: 'p' }],
+            },
         ];
     }
 }

@@ -4,6 +4,7 @@ import { SurveyItems } from 'case-editor-tools/surveys';
 import { ItemQuestion, ClientExpression, ItemProps } from "../../../tools";
 import { Expression, SurveyItem } from "survey-engine/data_types";
 import { as_input_option, option_def } from "../../../tools/options";
+import { text_why_asking } from "../../common/questionPools/helpers";
 import { HeatSymptoms } from "./symptoms";
 
 /*
@@ -48,6 +49,16 @@ export class RentalAccomodation extends ItemQuestion {
             },
         ];
     }
+
+    getHelpGroupContent() {
+        return [
+            text_why_asking("heatwave.Q1.helpGroup.text.0"),
+            {
+                content: _T("heatwave.Q1.helpGroup.text.1", "This refers to the accommodation where you spend most of your summer, it can also be a holiday house."),
+                style: [{ key: 'variant', value: 'p' }],
+            },
+        ];
+    }
 }
 
 /*
@@ -84,6 +95,16 @@ export class DescribeHousing extends ItemQuestion {
             option_def('3', _T('heatwave.Q2.code.flat', "Flat / Apartment")),
             option_def('4', _T('heatwave.Q2.code.cabin', "Cabin / Caravan / Houseboat")),
             as_input_option('5', _T('heatwave.Q2.code.other', "Other", "heatwave.common.other"), _T("heatwave.Q2.code.other_description", "")),
+        ];
+    }
+
+    getHelpGroupContent() {
+        return [
+            text_why_asking("heatwave.Q2.helpGroup.text.0"),
+            {
+                content: _T("heatwave.Q2.helpGroup.text.1", "This refers to the accommodation where you spend most of your summer, it can also be a holiday house."),
+                style: [{ key: 'variant', value: 'p' }],
+            },
         ];
     }
 }
