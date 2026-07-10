@@ -1,12 +1,13 @@
 import { _T } from "../../common/languages"
 import { SurveyBuilder } from "../../../tools";
 import * as questions from "../questions/heatsymptoms";
+import { HeatwaveKeys } from "./keys";
 
 export class HeatwaveSymptomsSurvey extends SurveyBuilder {
 
     constructor(metadata: Map<string, string>) {
         super({
-            surveyKey: 'heatsymptoms',
+            surveyKey: HeatwaveKeys.SymptomSurvey,
             name: _T("heatwave.symptoms.name", "Heat-Related Illness Survey"),
             description: _T(
                 "heatwave.symptoms.description",

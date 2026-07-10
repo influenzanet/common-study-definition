@@ -1,12 +1,13 @@
 import { _T } from "../../common/languages"
 import { ClientExpression as ce, SurveyBuilder } from "../../../tools";
 import * as questions from "../questions/background";
+import { HeatwaveKeys } from "./keys";
 
 export class HeatwaveBackgroundSurvey extends SurveyBuilder {
 
     constructor(metadata: Map<string, string>) {
         super({
-            surveyKey: 'heatback',
+            surveyKey: HeatwaveKeys.BackgroundSurvey,
             name: _T( "heatwave.background.name", "Heatwave Background survey"),
             description: _T(
                 "heatwave.background.description",
