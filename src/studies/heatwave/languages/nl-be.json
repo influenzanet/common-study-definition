@@ -280,7 +280,7 @@
     "nl-be": "_TODO_"
   },
   "heatwave.Q19a.title": {
-    "en": "What are the reasons?",
+    "en": "What are the reasons for not accessing a shelter?",
     "nl-be": "_TODO_"
   },
   "heatwave.Q2.code.cabin": {
@@ -492,7 +492,7 @@
     "nl-be": "_TODO_"
   },
   "heatwave.common.none": {
-    "en": "None of these",
+    "en": "None",
     "nl-be": "_TODO_"
   },
   "heatwave.common.symptom.ataxia": {

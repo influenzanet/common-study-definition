@@ -160,7 +160,7 @@ export class AirConditionning extends ItemQuestion {
         return [ 
         option_def(this.coding.yes, _T('heatwave.common.yes', "Yes", "heatwave.Q3.code.yes")),
         option_def(this.coding.no,  _T('heatwave.common.no', "No", "heatwave.Q3.code.no")),
-        option_def(this.coding.dnk, _T('heatwave.common.yes', "Don’t know", "heatwave.Q3.code.dnk")),
+        option_def(this.coding.dnk, _T('heatwave.common.dnk', "Don’t know", "heatwave.Q3.code.dnk")),
         ];
     }
 
@@ -234,7 +234,7 @@ export class AirConditionnerWork extends ItemQuestion {
             option_def('1', _T('heatwave.common.yes', "Yes", "heatwave.Q6.code.yes")),
             option_def('0',  _T('heatwave.common.no', "No", "heatwave.Q6.code.no")),
             option_def('2',  _T('heatwave.Q6.code.outdoors', "I work outdoors")),
-            option_def('3', _T('heatwave.common.dnk', "Don’t know", "heatwave.Q6.code.dnk")),
+            option_def('3', _T('heatwave.common.dkn', "Don’t know", "heatwave.Q6.code.dnk")),
         ];
     }
 }
