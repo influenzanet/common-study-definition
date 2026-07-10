@@ -1,4 +1,20 @@
 {
+  "heatwave.Q1.code.other": {
+    "de-be": "_TODO_",
+    "en": "Other"
+  },
+  "heatwave.Q1.code.other_desc": {
+    "de-be": "_TODO_",
+    "en": "Describe here (optional)"
+  },
+  "heatwave.Q1.helpGroup.text.0": {
+    "de-be": "_TODO_",
+    "en": "Why are we asking this?"
+  },
+  "heatwave.Q1.helpGroup.text.1": {
+    "de-be": "_TODO_",
+    "en": "This refers to the accommodation where you spend most of your summer, it can also be a holiday house."
+  },
   "heatwave.Q1.title": {
     "de-be": "_TODO_",
     "en": "Do you live in rental accommodation?"
@@ -43,6 +59,14 @@
     "de-be": "_TODO_",
     "en": "Work/School"
   },
+  "heatwave.Q12.helpGroup.text.0": {
+    "de-be": "_TODO_",
+    "en": "Why are we asking this?"
+  },
+  "heatwave.Q12.helpGroup.text.1": {
+    "de-be": "_TODO_",
+    "en": "We are asking this question to get the environmental temperature in the reported location."
+  },
   "heatwave.Q12.title": {
     "de-be": "_TODO_",
     "en": "During daylight hours, which location did you spend the most time in this past week?"
@@ -70,6 +94,14 @@
   "heatwave.Q14.code.other_desc": {
     "de-be": "_TODO_",
     "en": "Describe here (optional)"
+  },
+  "heatwave.Q14.helpGroup.text.0": {
+    "de-be": "_TODO_",
+    "en": "Why are we asking this?"
+  },
+  "heatwave.Q14.helpGroup.text.1": {
+    "de-be": "_TODO_",
+    "en": "We are asking this question to get the environmental temperature in the reported location."
   },
   "heatwave.Q14.title": {
     "de-be": "_TODO_",
@@ -307,6 +339,14 @@
     "de-be": "_TODO_",
     "en": "Separate house"
   },
+  "heatwave.Q2.helpGroup.text.0": {
+    "de-be": "_TODO_",
+    "en": "Why are we asking this?"
+  },
+  "heatwave.Q2.helpGroup.text.1": {
+    "de-be": "_TODO_",
+    "en": "This refers to the accommodation where you spend most of your summer, it can also be a holiday house."
+  },
   "heatwave.Q2.title": {
     "de-be": "_TODO_",
     "en": "What best describes your current housing?"
@@ -431,6 +471,10 @@
     "de-be": "_TODO_",
     "en": "How often do you use it on hot days (> 30 degrees)"
   },
+  "heatwave.Q6.code.no_work": {
+    "de-be": "_TODO_",
+    "en": "I don't work / study"
+  },
   "heatwave.Q6.code.outdoors": {
     "de-be": "_TODO_",
     "en": "I work outdoors"
@@ -538,6 +582,26 @@
   "heatwave.common.yes": {
     "de-be": "_TODO_",
     "en": "Yes"
+  },
+  "heatwave.consent.Q1.text": {
+    "de-be": "_TODO_",
+    "en": "Bla bla bla, Please read the [information sheet](https://influweb.org/privacy) for more information"
+  },
+  "heatwave.consent.Q1.title": {
+    "de-be": "_TODO_",
+    "en": "Do you consent to take part in the heatwave surveys?"
+  },
+  "heatwave.consent.description": {
+    "de-be": "_TODO_",
+    "en": "Consent to take part in the heatwave surveys"
+  },
+  "heatwave.consent.name": {
+    "de-be": "_TODO_",
+    "en": "Heatwave Consent"
+  },
+  "heatwave.consent.typicalDuration": {
+    "de-be": "_TODO_",
+    "en": "Duration less than 1 minute"
   },
   "heatwave.discomfort.a_little": {
     "de-be": "_TODO_",
