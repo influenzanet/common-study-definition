@@ -3,7 +3,7 @@ import { OptionDef } from "case-editor-tools/surveys/types";
 import { SurveyItems } from 'case-editor-tools/surveys';
 import { ItemQuestion, ClientExpression, ItemProps } from "../../../tools";
 import { Expression, SurveyItem } from "survey-engine/data_types";
-import { as_input_option, option_def } from "../../../tools/options";
+import { as_input_option, option_def, option_input_other } from "../../../tools/options";
 import { text_why_asking } from "../../common/questionPools/helpers";
 import { HeatSymptoms } from "./symptoms";
 
@@ -43,6 +43,7 @@ export class RentalAccomodation extends ItemQuestion {
                 key: '0', role: 'option',
                 content: _T("heatwave.common.no", "No")
             },
+            option_input_other('3', _T("heatwave.Q1.code.other", "Other", "heatwave.common.other"), "heatwave.Q1.code.other_desc"),
             {
                 key: '2', role: 'option',
                 content: _T("heatwave.common.dkn", "I don't know/can't remember")
@@ -255,7 +256,8 @@ export class AirConditionnerWork extends ItemQuestion {
             option_def('1', _T('heatwave.common.yes', "Yes", "heatwave.Q6.code.yes")),
             option_def('0',  _T('heatwave.common.no', "No", "heatwave.Q6.code.no")),
             option_def('2',  _T('heatwave.Q6.code.outdoors', "I work outdoors")),
-            option_def('3', _T('heatwave.common.dkn', "Don’t know", "heatwave.Q6.code.dnk")),
+            option_def('3', _T('heatwave.common.dnk', "Don’t know", "heatwave.Q6.code.dnk")),
+            option_def('4', _T('heatwave.Q6.code.no_work', "I don't work / study")),
         ];
     }
 }
