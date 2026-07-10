@@ -1,11 +1,50 @@
 import { _T } from "../../common/languages"
 import { OptionDef } from "case-editor-tools/surveys/types";
 import { SurveyItems } from 'case-editor-tools/surveys';
+import { generateLocStrings } from "case-editor-tools/surveys/utils/simple-generators";
 import { ItemQuestion, ClientExpression, ItemProps, num_as_arg } from "../../../tools";
-import { Expression, SurveyItem } from "survey-engine/data_types";
+import { Expression, ItemComponent, SurveyItem, Validation } from "survey-engine/data_types";
 import { as_input_option, option_def, option_input_other, make_exclusive_options } from "../../../tools/options";
 import { text_why_asking } from "../../common/questionPools/helpers";
 import { HeatSymptoms } from "./symptoms";
+
+const TEMPERATURE_MIN = 15;
+const TEMPERATURE_MAX = 45;
+
+const temperature_option = (transId: string): OptionDef => {
+    return option_def('temp', _T(transId, "Temperature (°C)"), {
+        role: 'numberInput',
+        optionProps: { min: num_as_arg(TEMPERATURE_MIN), max: num_as_arg(TEMPERATURE_MAX) }
+    });
+}
+
+/**
+ * Validation for the temperature options of Q10/Q11.
+ */
+const temperature_range_validation = (itemKey: string): Validation => {
+    const value = ClientExpression.singleChoice.getNumValue(itemKey, 'temp');
+    return {
+        key: 'range',
+        type: 'hard',
+        rule: ClientExpression.logic.or(
+            ClientExpression.logic.not(ClientExpression.singleChoice.any(itemKey, 'temp')),
+            ClientExpression.logic.and(
+                ClientExpression.compare.gte(value, TEMPERATURE_MIN),
+                ClientExpression.compare.lte(value, TEMPERATURE_MAX),
+            )
+        )
+    };
+}
+
+const temperature_range_error = (transId: string): ItemComponent => {
+    return {
+        role: 'error',
+        content: generateLocStrings(_T("heatwave.common.temperature_range_error",
+            `Please enter a temperature between ${TEMPERATURE_MIN} and ${TEMPERATURE_MAX} °C, or select "I don't know".`,
+            transId)),
+        displayCondition: ClientExpression.logic.not(ClientExpression.getSurveyItemValidation('this', 'range'))
+    };
+}
 
 /*
 Q10 What was the highest temperature recorded inside your home over the past week?
@@ -26,16 +65,15 @@ export class HighestHomeTemperature extends ItemQuestion {
             condition: this.condition,
             questionText: _T("heatwave.Q10.title", "What was the highest temperature recorded inside your home over the past week?"),
             helpGroupContent: this.getHelpGroupContent(),
-            responseOptions: this.getResponses()
+            responseOptions: this.getResponses(),
+            customValidations: [temperature_range_validation(this.key)],
+            bottomDisplayCompoments: [temperature_range_error("heatwave.Q10.error.range")]
         });
     }
 
     getResponses(): OptionDef[] {
         return [
-            option_def('temp', _T("heatwave.Q10.code.temp", "Temperature (°C)"), {
-                role: 'numberInput',
-                optionProps: { min: num_as_arg(15), max: num_as_arg(45) }
-            }),
+            temperature_option("heatwave.Q10.code.temp"),
             option_def('dnk', _T("heatwave.common.dkn", "I don't know", "heatwave.Q10.code.dnk")),
         ];
     }
@@ -60,16 +98,15 @@ export class LowestHomeTemperature extends ItemQuestion {
             condition: this.condition,
             questionText: _T("heatwave.Q11.title", "What was the lowest temperature recorded inside your home over the past week?"),
             helpGroupContent: this.getHelpGroupContent(),
-            responseOptions: this.getResponses()
+            responseOptions: this.getResponses(),
+            customValidations: [temperature_range_validation(this.key)],
+            bottomDisplayCompoments: [temperature_range_error("heatwave.Q11.error.range")]
         });
     }
 
     getResponses(): OptionDef[] {
         return [
-            option_def('temp', _T("heatwave.Q11.code.temp", "Temperature (°C)"), {
-                role: 'numberInput',
-                optionProps: { min: num_as_arg(15), max: num_as_arg(45) }
-            }),
+            temperature_option("heatwave.Q11.code.temp"),
             option_def('dnk', _T("heatwave.common.dkn", "I don't know", "heatwave.Q11.code.dnk")),
         ];
     }

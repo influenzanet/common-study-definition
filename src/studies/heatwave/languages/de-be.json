@@ -579,6 +579,10 @@
     "de-be": "_TODO_",
     "en": "Extreme thirst"
   },
+  "heatwave.common.temperature_range_error": {
+    "en": "Please enter a temperature between 15 and 45 °C, or select \"I don't know\".",
+    "de-be": "_TODO_"
+  },
   "heatwave.common.yes": {
     "de-be": "_TODO_",
     "en": "Yes"
