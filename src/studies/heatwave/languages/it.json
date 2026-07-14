@@ -33,7 +33,7 @@
   },
   "heatwave.Q11.title": {
     "en": "What was the lowest temperature recorded inside your home over the past week?",
-    "it": "Qual è stata la temperatura più alta registrata all'interno della tua abitazione nell'ultima settimana?"
+    "it": "Qual è stata la temperatura più bassa registrata all'interno della tua abitazione nell'ultima settimana?"
   },
   "heatwave.Q12.code.holiday": {
     "en": "Holiday destination",
@@ -73,7 +73,7 @@
   },
   "heatwave.Q13.title": {
     "en": "How uncomfortable (e.g. intense sweat, exhaustion, etc.) were you because of the hot weather this past week during the day?",
-    "it": "Quanto disagio hai provato (ad esempio, sudorazione intensa, spossatezza, ecc.) a causa del caldo diurno della scorsa settimana?"
+    "it": "Quanto sei stato a disagio (ad esempio, sudorazione intensa, spossatezza, ecc.) a causa del caldo diurno della scorsa settimana?"
   },
   "heatwave.Q14.code.holiday": {
     "en": "Holiday destination",
@@ -93,7 +93,7 @@
   },
   "heatwave.Q14.code.other_desc": {
     "en": "Describe here (optional)",
-    "it": "Descrivi (opzionale)"
+    "it": "Descrizione (opzionale)"
   },
   "heatwave.Q14.helpGroup.text.0": {
     "en": "Why are we asking this?",
@@ -109,11 +109,11 @@
   },
   "heatwave.Q15.title": {
     "en": "How uncomfortable (intense sweat, exhaustion, etc.) were you because of the temperature this past week during the night?",
-    "it": "Quanto disagio hai provato (sudorazione intensa, spossatezza, ecc.) a causa delle temperature notturne della scorsa settimana?"
+    "it": "Quanto sei stato a disagio (sudorazione intensa, spossatezza, ecc.) a causa delle temperature notturne della scorsa settimana?"
   },
   "heatwave.Q16.title": {
     "en": "Did you experience any symptoms due to high/extreme heat this past week?",
-    "it": "Hai avvertito sintomi dovuti al caldo elevato/estremo la scorsa settimana?"
+    "it": "Hai avuto sintomi dovuti al caldo elevato/estremo la scorsa settimana?"
   },
   "heatwave.Q16a.code.hospital": {
     "en": "Yes, from a hospital",
@@ -149,7 +149,7 @@
   },
   "heatwave.Q17.code.changed_time": {
     "en": "Changed the time when I go to work/everyday activities",
-    "it": "Ho cambiato l'orario in cui vado al lavoro/alle attività quotidiane"
+    "it": "Ho cambiato l'orario in cui vado al lavoro/mi occupo delle attività quotidiane"
   },
   "heatwave.Q17.code.could_not_work": {
     "en": "I could not work",
@@ -204,12 +204,12 @@
     "it": "Sono rimasto/a in casa con tutte le persiane e le tende chiuse."
   },
   "heatwave.Q18.code.cooler_in_town": {
-    "en": "Went to a cooler location in town (e.g. friend's house)",
+    "en": "Went to a cooler location in town (e.g. friend's or a relative's house)",
     "it": "Sono andato/a in un posto più fresco in città (ad esempio, a casa di un amico/a o parente)."
   },
   "heatwave.Q18.code.cooler_out_town": {
     "en": "Went to a cooler location out of town (e.g. mountain, lake, seaside)",
-    "it": "Sono andato/s in un posto più fresco fuori città (ad esempio montagna, lago, mare)."
+    "it": "Sono andato/a in un posto più fresco fuori città (ad esempio montagna, lago, mare)."
   },
   "heatwave.Q18.code.drank_water": {
     "en": "Frequently drank water",
@@ -277,7 +277,7 @@
   },
   "heatwave.Q19.code.other_desc": {
     "en": "Describe here (optional)",
-    "it": "Descrizione"
+    "it": "Descrizione (opzionale)"
   },
   "heatwave.Q19.code.shop": {
     "en": "A shop / shopping centre",
@@ -425,7 +425,7 @@
   },
   "heatwave.Q21.title": {
     "en": "Did you or your area experience any disruption related to heat during the past week?",
-    "it": "Avete subito disagi a causa del caldo la scorsa settimana, voi o la vostra zona?"
+    "it": "Tu o la tua zona, avete subito disagi a causa del caldo la scorsa settimana?"
   },
   "heatwave.Q3.code.0": {
     "en": "0",
@@ -509,7 +509,7 @@
   },
   "heatwave.Q9.title": {
     "en": "Have you experienced any symptoms due to high/extreme heat during the summer of 2025 and first part of 2026?",
-    "it": "Hai avvertito sintomi dovuti al caldo elevato/estremo durante l'estate del 2025 e la prima parte del 2026?"
+    "it": "Hai avuto sintomi dovuti al caldo elevato/estremo durante l'estate del 2025 e la prima parte del 2026?"
   },
   "heatwave.background.description": {
     "en": "Heatwave background survey description",
@@ -545,7 +545,7 @@
   },
   "heatwave.common.symptom.confused": {
     "en": "Feeling confused / couldn’t think properly",
-    "it": "Confuzione/mancanza di lucidità"
+    "it": "Confusione/mancanza di lucidità"
   },
   "heatwave.common.symptom.cramping": {
     "en": "Muscle twitches / cramping",
