@@ -1,650 +1,650 @@
 {
   "heatwave.Q1.code.other": {
-    "de-be": "_TODO_",
+    "de-be": "Anderes",
     "en": "Other"
   },
   "heatwave.Q1.code.other_desc": {
-    "de-be": "_TODO_",
+    "de-be": "Beschreiben Sie es hier (optional einzutragen)",
     "en": "Describe here (optional)"
   },
   "heatwave.Q1.helpGroup.text.0": {
-    "de-be": "_TODO_",
+    "de-be": "Warum fragen wir das?",
     "en": "Why are we asking this?"
   },
   "heatwave.Q1.helpGroup.text.1": {
-    "de-be": "_TODO_",
+    "de-be": "Damit ist die Unterkunft gemeint, in der Sie den größten Teil des Sommers verbringen. Das kann auch ein Ferienhaus sein.",
     "en": "This refers to the accommodation where you spend most of your summer, it can also be a holiday house."
   },
   "heatwave.Q1.title": {
-    "de-be": "_TODO_",
+    "de-be": "Leben Sie in einer Mietwohnung?",
     "en": "Do you live in rental accommodation?"
   },
   "heatwave.Q10.code.temp": {
-    "de-be": "_TODO_",
+    "de-be": "Temperatur (°C)",
     "en": "Temperature (°C)"
   },
   "heatwave.Q10.title": {
-    "de-be": "_TODO_",
+    "de-be": "Höchste Innentemperatur der vergangenen Woche?",
     "en": "What was the highest temperature recorded inside your home over the past week?"
   },
   "heatwave.Q11.code.temp": {
-    "de-be": "_TODO_",
+    "de-be": "Temperatur (°C)",
     "en": "Temperature (°C)"
   },
   "heatwave.Q11.title": {
-    "de-be": "_TODO_",
+    "de-be": "Niedrigste Innentemperatur der vergangenen Woche?",
     "en": "What was the lowest temperature recorded inside your home over the past week?"
   },
   "heatwave.Q12.code.holiday": {
-    "de-be": "_TODO_",
+    "de-be": "Urlaubsort",
     "en": "Holiday destination"
   },
   "heatwave.Q12.code.holiday_desc": {
-    "de-be": "_TODO_",
+    "de-be": "Nächstgelegene Gemeinde",
     "en": "Closest municipality"
   },
   "heatwave.Q12.code.home": {
-    "de-be": "_TODO_",
+    "de-be": "Zuhause",
     "en": "Home"
   },
   "heatwave.Q12.code.other": {
-    "de-be": "_TODO_",
+    "de-be": "Anderes",
     "en": "Other"
   },
   "heatwave.Q12.code.other_desc": {
-    "de-be": "_TODO_",
+    "de-be": "Beschreiben Sie es hier (optional einzutragen)",
     "en": "Describe here (optional)"
   },
   "heatwave.Q12.code.work": {
-    "de-be": "_TODO_",
+    "de-be": "Arbeit/Schule",
     "en": "Work/School"
   },
   "heatwave.Q12.helpGroup.text.0": {
-    "de-be": "_TODO_",
+    "de-be": "Warum fragen wir das?",
     "en": "Why are we asking this?"
   },
   "heatwave.Q12.helpGroup.text.1": {
-    "de-be": "_TODO_",
+    "de-be": "Wir stellen diese Frage, um die Umgebungstemperatur am angegebenen Ort zu erfassen.",
     "en": "We are asking this question to get the environmental temperature in the reported location."
   },
   "heatwave.Q12.title": {
-    "de-be": "_TODO_",
+    "de-be": "Wo haben Sie tagsüber in der vergangenen Woche die meiste Zeit verbracht?",
     "en": "During daylight hours, which location did you spend the most time in this past week?"
   },
   "heatwave.Q13.title": {
-    "de-be": "_TODO_",
+    "de-be": "Wie stark haben Sie tagsüber unter der Hitze gelitten?",
     "en": "How uncomfortable (e.g. intense sweat, exhaustion, etc.) were you because of the hot weather this past week during the day?"
   },
   "heatwave.Q14.code.holiday": {
-    "de-be": "_TODO_",
+    "de-be": "Urlaubsort",
     "en": "Holiday destination"
   },
   "heatwave.Q14.code.holiday_desc": {
-    "de-be": "_TODO_",
+    "de-be": "Nächstgelegene Gemeinde",
     "en": "Closest municipality"
   },
   "heatwave.Q14.code.home": {
-    "de-be": "_TODO_",
+    "de-be": "Zuhause",
     "en": "Home"
   },
   "heatwave.Q14.code.other": {
-    "de-be": "_TODO_",
+    "de-be": "Anderes",
     "en": "Other"
   },
   "heatwave.Q14.code.other_desc": {
-    "de-be": "_TODO_",
+    "de-be": "Beschreiben Sie es hier (optional einzutragen)",
     "en": "Describe here (optional)"
   },
   "heatwave.Q14.helpGroup.text.0": {
-    "de-be": "_TODO_",
+    "de-be": "Warum fragen wir das?",
     "en": "Why are we asking this?"
   },
   "heatwave.Q14.helpGroup.text.1": {
-    "de-be": "_TODO_",
+    "de-be": "Wir stellen diese Frage, um die Umgebungstemperatur am angegebenen Ort zu erfassen.",
     "en": "We are asking this question to get the environmental temperature in the reported location."
   },
   "heatwave.Q14.title": {
-    "de-be": "_TODO_",
+    "de-be": "Wo haben Sie nachts in der vergangenen Woche die meiste Zeit verbracht?",
     "en": "During night hours, which location did you spend the most time in this past week?"
   },
   "heatwave.Q15.title": {
-    "de-be": "_TODO_",
+    "de-be": "Wie stark haben Sie nachts unter der Temperatur gelitten?",
     "en": "How uncomfortable (intense sweat, exhaustion, etc.) were you because of the temperature this past week during the night?"
   },
   "heatwave.Q16.title": {
-    "de-be": "_TODO_",
+    "de-be": "Hatten Sie in der vergangenen Woche Symptome aufgrund großer/extremer Hitze?",
     "en": "Did you experience any symptoms due to high/extreme heat this past week?"
   },
   "heatwave.Q16a.code.hospital": {
-    "de-be": "_TODO_",
+    "de-be": "Ja, im Krankenhaus",
     "en": "Yes, from a hospital"
   },
   "heatwave.Q16a.code.medical_centre": {
-    "de-be": "_TODO_",
+    "de-be": "Ja, in einem medizinischen Zentrum",
     "en": "Yes, from a medical centre"
   },
   "heatwave.Q16a.code.other": {
-    "de-be": "_TODO_",
+    "de-be": "Anderes",
     "en": "Other"
   },
   "heatwave.Q16a.code.other_desc": {
-    "de-be": "_TODO_",
+    "de-be": "Beschreiben Sie es hier (optional einzutragen)",
     "en": "Describe here (optional)"
   },
   "heatwave.Q16a.code.pharmacy": {
-    "de-be": "_TODO_",
+    "de-be": "Ja, in einer Apotheke",
     "en": "Yes, from a pharmacy"
   },
   "heatwave.Q16a.code.telephone": {
-    "de-be": "_TODO_",
+    "de-be": "Ja, per Telefon- oder Online-Beratung",
     "en": "Yes, through a telephone or online health advice service"
   },
   "heatwave.Q16a.title": {
-    "de-be": "_TODO_",
+    "de-be": "Haben Sie medizinische Hilfe in Anspruch genommen?",
     "en": "Did you seek health care to manage your symptoms?"
   },
   "heatwave.Q17.code.canceled": {
-    "de-be": "_TODO_",
+    "de-be": "Ich habe Aktivitäten abgesagt",
     "en": "I canceled some activities (other than work) for the day"
   },
   "heatwave.Q17.code.changed_time": {
-    "de-be": "_TODO_",
+    "de-be": "Ich habe meine Arbeits-/Aktivitätszeiten geändert",
     "en": "Changed the time when I go to work/everyday activities"
   },
   "heatwave.Q17.code.could_not_work": {
-    "de-be": "_TODO_",
+    "de-be": "Ich konnte nicht arbeiten",
     "en": "I could not work"
   },
   "heatwave.Q17.code.couldnt_concentrate": {
-    "de-be": "_TODO_",
+    "de-be": "Ich konnte mich bei der Arbeit nicht konzentrieren",
     "en": "Went to work but couldn't concentrate"
   },
   "heatwave.Q17.code.other": {
-    "de-be": "_TODO_",
+    "de-be": "Anderes",
     "en": "Other"
   },
   "heatwave.Q17.code.other_desc": {
-    "de-be": "_TODO_",
+    "de-be": "Beschreiben Sie es hier (optional einzutragen)",
     "en": "Describe here (optional)"
   },
   "heatwave.Q17.code.went_to_ac": {
-    "de-be": "_TODO_",
+    "de-be": "Ich bin wegen der Klimaanlage an einen anderen Ort gegangen",
     "en": "I didn't work from home as usual but went to the office/location with AC because of AC"
   },
   "heatwave.Q17.code.work_from_home": {
-    "de-be": "_TODO_",
+    "de-be": "Ich musste von zu Hause arbeiten",
     "en": "I had to work from home"
   },
   "heatwave.Q17.title": {
-    "de-be": "_TODO_",
+    "de-be": "Hat extreme Hitze Ihren Alltag oder Ihre Lebensqualität beeinträchtigt?",
     "en": "Did extreme heat alter your routine/quality of life this past week?"
   },
   "heatwave.Q17a.code.max1day": {
-    "de-be": "_TODO_",
+    "de-be": "Ja, 1 Tag oder weniger",
     "en": "Yes, for 1 day or less"
   },
   "heatwave.Q17a.code.more1day": {
-    "de-be": "_TODO_",
+    "de-be": "Ja, mehr als 1 Tag",
     "en": "Yes, for more than 1 day"
   },
   "heatwave.Q17a.title": {
-    "de-be": "_TODO_",
+    "de-be": "Waren Sie aufgrund Ihrer Symptome von der Arbeit oder normalen Aktivitäten abwesend?",
     "en": "Were you absent from work/normal activities due to your symptoms this past week?"
   },
   "heatwave.Q18.code.ac": {
-    "de-be": "_TODO_",
+    "de-be": "Klimaanlage eingeschaltet",
     "en": "Turned on air-conditioning"
   },
   "heatwave.Q18.code.another_room": {
-    "de-be": "_TODO_",
+    "de-be": "In einem kühleren Zimmer geschlafen",
     "en": "Slept in another room (cooler) at my living place"
   },
   "heatwave.Q18.code.closed_shutters": {
-    "de-be": "_TODO_",
+    "de-be": "Drinnen geblieben und Rollläden/Vorhänge geschlossen",
     "en": "Stayed inside and closed all window shutters and curtains"
   },
   "heatwave.Q18.code.cooler_in_town": {
-    "de-be": "_TODO_",
+    "de-be": "Kühleren Ort in der Stadt aufgesucht",
     "en": "Went to a cooler location in town (e.g. friend's house)"
   },
   "heatwave.Q18.code.cooler_out_town": {
-    "de-be": "_TODO_",
+    "de-be": "Kühleren Ort außerhalb der Stadt aufgesucht",
     "en": "Went to a cooler location out of town (e.g. mountain, lake, seaside)"
   },
   "heatwave.Q18.code.drank_water": {
-    "de-be": "_TODO_",
+    "de-be": "Häufig Wasser getrunken",
     "en": "Frequently drank water"
   },
   "heatwave.Q18.code.fan": {
-    "de-be": "_TODO_",
+    "de-be": "Ventilator eingeschaltet",
     "en": "Turned on fan"
   },
   "heatwave.Q18.code.museum": {
-    "de-be": "_TODO_",
+    "de-be": "Klimatisiertes Museum/Bibliothek besucht",
     "en": "Went to a museum or library with air conditioning"
   },
   "heatwave.Q18.code.other": {
-    "de-be": "_TODO_",
+    "de-be": "Anderes",
     "en": "Other"
   },
   "heatwave.Q18.code.other_desc": {
-    "de-be": "_TODO_",
+    "de-be": "Beschreiben Sie es hier (optional einzutragen)",
     "en": "Describe here (optional)"
   },
   "heatwave.Q18.code.park": {
-    "de-be": "_TODO_",
+    "de-be": "Einen Park besucht",
     "en": "Went to a park"
   },
   "heatwave.Q18.code.removed_layers": {
-    "de-be": "_TODO_",
+    "de-be": "Kleidung ausgezogen",
     "en": "Removed layer/s of clothing"
   },
   "heatwave.Q18.code.showers": {
-    "de-be": "_TODO_",
+    "de-be": "Mehrfach geduscht/gebadet",
     "en": "Had recurrent showers/baths"
   },
   "heatwave.Q18.code.splashed": {
-    "de-be": "_TODO_",
+    "de-be": "Sich mit Wasser abgekühlt",
     "en": "Sprayed/splashed myself with water"
   },
   "heatwave.Q18.code.supermarket": {
-    "de-be": "_TODO_",
+    "de-be": "Klimatisierten Supermarkt besucht",
     "en": "Went to a supermarket with air conditioning"
   },
   "heatwave.Q18.code.swim": {
-    "de-be": "_TODO_",
+    "de-be": "Schwimmen egangen",
     "en": "Went for a swim (e.g. pool, river, lake, sea, etc.)"
   },
   "heatwave.Q18.title": {
-    "de-be": "_TODO_",
+    "de-be": "Welche Maßnahmen haben Sie zum Schutz vor Hitze ergriffen?",
     "en": "What actions did you take this past week to protect yourself from heat?"
   },
   "heatwave.Q19.code.all_year": {
-    "de-be": "_TODO_",
+    "de-be": "Öffentliches Gebäude ganzjährig geöffnet",
     "en": "A public building open all year round (library, museum, etc.)"
   },
   "heatwave.Q19.code.heat": {
-    "de-be": "_TODO_",
+    "de-be": "Öffentliches Gebäude speziell wegen der Hitze geöffnet",
     "en": "A public building open specifically because of the heat"
   },
   "heatwave.Q19.code.leisure": {
-    "de-be": "_TODO_",
+    "de-be": "Private Freizeiteinrichtung",
     "en": "A private leisure venue (cinema, etc.)"
   },
   "heatwave.Q19.code.other": {
-    "de-be": "_TODO_",
+    "de-be": "Anderes",
     "en": "Other"
   },
   "heatwave.Q19.code.other_desc": {
-    "de-be": "_TODO_",
+    "de-be": "Beschreiben Sie es hier (optional einzutragen)",
     "en": "Describe here (optional)"
   },
   "heatwave.Q19.code.shop": {
-    "de-be": "_TODO_",
+    "de-be": "Geschäft/Einkaufszentrum",
     "en": "A shop / shopping centre"
   },
   "heatwave.Q19.title": {
-    "de-be": "_TODO_",
+    "de-be": "Haben Sie einen Klimaschutzraum/Kühlungsort genutzt?",
     "en": "Have you accessed a climate shelter this past week?"
   },
   "heatwave.Q19a.code.mobility": {
-    "de-be": "_TODO_",
+    "de-be": "Mobilitätsprobleme",
     "en": "I have mobility issues and cannot go"
   },
   "heatwave.Q19a.code.none_nearby": {
-    "de-be": "_TODO_",
+    "de-be": "Keine Klimaschutzräume in der Nähe",
     "en": "There are no climate shelters nearby"
   },
   "heatwave.Q19a.code.other": {
-    "de-be": "_TODO_",
+    "de-be": "Anderes",
     "en": "Other"
   },
   "heatwave.Q19a.code.other_desc": {
-    "de-be": "_TODO_",
+    "de-be": "Beschreiben Sie es hier (optional einzutragen)",
     "en": "Describe here (optional)"
   },
   "heatwave.Q19a.code.too_crowded": {
-    "de-be": "_TODO_",
+    "de-be": "Zu überfüllt",
     "en": "It is too crowded"
   },
   "heatwave.Q19a.code.too_far": {
-    "de-be": "_TODO_",
+    "de-be": "Zu weit entfernt/schwer erreichbar",
     "en": "It is too far/hard to reach"
   },
   "heatwave.Q19a.title": {
-    "de-be": "_TODO_",
+    "de-be": "Warum nicht?",
     "en": "What are the reasons for not accessing a shelter?"
   },
   "heatwave.Q2.code.cabin": {
-    "de-be": "_TODO_",
+    "de-be": "Chalet / Wohnwagen / Hausboot",
     "en": "Cabin / Caravan / Houseboat"
   },
   "heatwave.Q2.code.flat": {
-    "de-be": "_TODO_",
+    "de-be": "Wohnung / Appartement",
     "en": "Flat / Apartment"
   },
   "heatwave.Q2.code.other": {
-    "de-be": "_TODO_",
+    "de-be": "Anderes",
     "en": "Other"
   },
   "heatwave.Q2.code.other_description": {
-    "de-be": "_TODO_",
+    "de-be": "",
     "en": ""
   },
   "heatwave.Q2.code.semidetached": {
-    "de-be": "_TODO_",
+    "de-be": "Doppelhaushälfte / Reihenhaus / angebautes historisches Haus",
     "en": "Semi-detached / row or terrace house / historic attached home"
   },
   "heatwave.Q2.code.separate": {
-    "de-be": "_TODO_",
+    "de-be": "Freistehendes Haus",
     "en": "Separate house"
   },
   "heatwave.Q2.helpGroup.text.0": {
-    "de-be": "_TODO_",
+    "de-be": "Warum fragen wir das?",
     "en": "Why are we asking this?"
   },
   "heatwave.Q2.helpGroup.text.1": {
-    "de-be": "_TODO_",
+    "de-be": "Damit ist die Unterkunft gemeint, in der Sie den größten Teil des Sommers verbringen. Das kann auch ein Ferienhaus sein.",
     "en": "This refers to the accommodation where you spend most of your summer, it can also be a holiday house."
   },
   "heatwave.Q2.title": {
-    "de-be": "_TODO_",
+    "de-be": "Welche Beschreibung trifft am besten auf Ihre derzeitige Wohnsituation zu?",
     "en": "What best describes your current housing?"
   },
   "heatwave.Q20.code.no_but_usually": {
-    "de-be": "_TODO_",
+    "de-be": "Nein, normalerweise nutze ich sie",
     "en": "No, but I usually use them"
   },
   "heatwave.Q20.code.no_not_usually": {
-    "de-be": "_TODO_",
+    "de-be": "Nein, normalerweise nutze ich sie nicht",
     "en": "No, I don't usually use them"
   },
   "heatwave.Q20.code.no_other": {
-    "de-be": "_TODO_",
+    "de-be": "Nein (andere Gründe)",
     "en": "No (other reasons)"
   },
   "heatwave.Q20.code.yes_less": {
-    "de-be": "_TODO_",
+    "de-be": "Ja, weniger als gewöhnlich",
     "en": "Yes, less than usual"
   },
   "heatwave.Q20.code.yes_more": {
-    "de-be": "_TODO_",
+    "de-be": "Ja, mehr als gewöhnlich",
     "en": "Yes, more than usual"
   },
   "heatwave.Q20.code.yes_usual": {
-    "de-be": "_TODO_",
+    "de-be": "Ja, wie gewöhnlich",
     "en": "Yes, as usual"
   },
   "heatwave.Q20.title": {
-    "de-be": "_TODO_",
+    "de-be": "Haben Sie in der vergangenen Woche öffentliche Verkehrsmittel genutzt?",
     "en": "Did you use public transport this past week?"
   },
   "heatwave.Q20a.code.out_of_order": {
-    "de-be": "_TODO_",
+    "de-be": "Ja, aber außer Betrieb",
     "en": "Yes but it was out of order"
   },
   "heatwave.Q20a.title": {
-    "de-be": "_TODO_",
+    "de-be": "Gab es eine Klimaanlage an Bord?",
     "en": "Did it have air-conditioning onboard?"
   },
   "heatwave.Q21.code.blackouts": {
-    "de-be": "_TODO_",
+    "de-be": "Stromausfälle",
     "en": "Blackouts"
   },
   "heatwave.Q21.code.damages": {
-    "de-be": "_TODO_",
+    "de-be": "Schäden an Wohnungen/Häusern",
     "en": "Damages at my or others' homes"
   },
   "heatwave.Q21.code.droughts": {
-    "de-be": "_TODO_",
+    "de-be": "Dürre",
     "en": "Droughts"
   },
   "heatwave.Q21.code.other": {
-    "de-be": "_TODO_",
+    "de-be": "Anderes",
     "en": "Other"
   },
   "heatwave.Q21.code.other_desc": {
-    "de-be": "_TODO_",
+    "de-be": "Beschreiben Sie es hier (optional einzutragen)",
     "en": "Describe here (optional)"
   },
   "heatwave.Q21.code.transit_delays": {
-    "de-be": "_TODO_",
+    "de-be": "Verspätungen im Verkehr",
     "en": "Transit delays"
   },
   "heatwave.Q21.code.transport_issues": {
-    "de-be": "_TODO_",
+    "de-be": "Verkehrsprobleme",
     "en": "Transport issues"
   },
   "heatwave.Q21.code.water_shortages": {
-    "de-be": "_TODO_",
+    "de-be": "Wasserknappheit",
     "en": "Water shortages"
   },
   "heatwave.Q21.code.wildfires": {
-    "de-be": "_TODO_",
+    "de-be": "Wald- oder Vegetationsbrände",
     "en": "Wildfires"
   },
   "heatwave.Q21.title": {
-    "de-be": "_TODO_",
+    "de-be": "Gab es in Ihrer Umgebung hitzebedingte Störungen?",
     "en": "Did you or your area experience any disruption related to heat during the past week?"
   },
   "heatwave.Q3.code.0": {
-    "de-be": "_TODO_",
+    "de-be": "0",
     "en": "0"
   },
   "heatwave.Q3.code.dnk": {
-    "de-be": "_TODO_",
+    "de-be": "Weiß nicht",
     "en": "Don’t know"
   },
   "heatwave.Q3.code.full": {
-    "de-be": "_TODO_",
+    "de-be": "6-12 Stunden (ganzer Tag)",
     "en": "6-12h (full day)"
   },
   "heatwave.Q3.code.half": {
-    "de-be": "_TODO_",
+    "de-be": "0-6 Stunden (halber Tag)",
     "en": "0-6h (half a day)"
   },
   "heatwave.Q3.title": {
-    "de-be": "_TODO_",
+    "de-be": "Wie viele Stunden direkte Sonneneinstrahlung erhält Ihre Wohnung derzeit ungefähr?",
     "en": "How many hours (approximately) of direct sunlight does your house receive currently?"
   },
   "heatwave.Q4.title": {
-    "de-be": "_TODO_",
+    "de-be": "Verfügt Ihre derzeitige Wohnung über eine Klimaanlage?",
     "en": "Do you have air-conditioning in your current housing?"
   },
   "heatwave.Q5.code.always": {
-    "de-be": "_TODO_",
+    "de-be": "Immer",
     "en": "Always"
   },
   "heatwave.Q5.code.never": {
-    "de-be": "_TODO_",
+    "de-be": "Nie",
     "en": "Never "
   },
   "heatwave.Q5.code.often": {
-    "de-be": "_TODO_",
+    "de-be": "Oft",
     "en": "Often"
   },
   "heatwave.Q5.code.sometimes": {
-    "de-be": "_TODO_",
+    "de-be": "Manchmal",
     "en": "Sometimes"
   },
   "heatwave.Q5.title": {
-    "de-be": "_TODO_",
+    "de-be": "Wie oft nutzen Sie diese an heißen Tagen (>30°C)?",
     "en": "How often do you use it on hot days (> 30 degrees)"
   },
   "heatwave.Q6.code.no_work": {
-    "de-be": "_TODO_",
+    "de-be": "Ich arbeite nicht und studiere nicht",
     "en": "I don't work / study"
   },
   "heatwave.Q6.code.outdoors": {
-    "de-be": "_TODO_",
+    "de-be": "Ich arbeite im Freien",
     "en": "I work outdoors"
   },
   "heatwave.Q6.title": {
-    "de-be": "_TODO_",
+    "de-be": "Gibt es an Ihrem Arbeitsplatz oder in Ihrer Schule eine Klimaanlage?",
     "en": "Do you have air-conditioning in your current workplace/school?"
   },
   "heatwave.Q7.codes.10_40": {
-    "de-be": "_TODO_",
+    "de-be": "10-40 Stunden",
     "en": "Between 10-40 hours"
   },
   "heatwave.Q7.codes.1_10": {
-    "de-be": "_TODO_",
+    "de-be": "1-10 Stunden",
     "en": "Between 1-10 hours"
   },
   "heatwave.Q7.codes.less1h": {
-    "de-be": "_TODO_",
+    "de-be": "Weniger als 1 Stunde",
     "en": "Less than 1 hour"
   },
   "heatwave.Q7.codes.over40": {
-    "de-be": "_TODO_",
+    "de-be": "Mehr als 40 Stunden",
     "en": "More than 40 hours"
   },
   "heatwave.Q7.title": {
-    "de-be": "_TODO_",
+    "de-be": "Wie viele Stunden pro typischer Sommerwoche ist Ihnen bei der Arbeit, im Haushalt oder bei anderen täglichen Aktivitäten zu heiß?",
     "en": "In a typical summer week, approximately how many hours do you feel too hot while working, doing household activities or carrying out other daily activities (including at home)?"
   },
   "heatwave.Q8.title": {
-    "de-be": "_TODO_",
+    "de-be": "Wie viele Stunden pro typischer Sommerwoche ist Ihnen bei Sport oder anderen körperlich anstrengenden Aktivitäten zu heiß?",
     "en": "In a typical summer week, approximately how many hours do you feel too hot while exercising, or doing other more intense/strenuous daily activities?"
   },
   "heatwave.Q9.title": {
-    "de-be": "_TODO_",
+    "de-be": "Hatten Sie im Sommer 2025 und im ersten Teil des Jahres 2026 Symptome aufgrund großer/extremer Hitze?",
     "en": "Have you experienced any symptoms due to high/extreme heat during the summer of 2025 and first part of 2026?"
   },
   "heatwave.background.description": {
-    "de-be": "_TODO_",
+    "de-be": "Beschreibung der Hintergrundumfrage zu Hitzewellen",
     "en": "Heatwave background survey description"
   },
   "heatwave.background.name": {
-    "de-be": "_TODO_",
+    "de-be": "Hintergrundumfrage zu Hitzewellen",
     "en": "Heatwave Background survey"
   },
   "heatwave.background.typicalDuration": {
-    "de-be": "_TODO_",
+    "de-be": "Dauer 5-10 Minuten",
     "en": "Duration 5-10 minutes"
   },
   "heatwave.common.dkn": {
-    "de-be": "_TODO_",
+    "de-be": "Weiß nicht",
     "en": "Don't know"
   },
   "heatwave.common.dnk": {
-    "de-be": "_TODO_",
+    "de-be": "Weiß nicht",
     "en": "Don’t know"
   },
   "heatwave.common.no": {
-    "de-be": "_TODO_",
+    "de-be": "Nein",
     "en": "No"
   },
   "heatwave.common.none": {
-    "de-be": "_TODO_",
+    "de-be": "Keines",
     "en": "None"
   },
   "heatwave.common.symptom.ataxia": {
-    "de-be": "_TODO_",
+    "de-be": "Koordinationsprobleme / Bewegungsschwierigkeiten",
     "en": "Lack of coordination / difficulty with movement"
   },
   "heatwave.common.symptom.confused": {
-    "de-be": "_TODO_",
+    "de-be": "Verwirrtheit / Konzentrationsprobleme",
     "en": "Feeling confused / couldn’t think properly"
   },
   "heatwave.common.symptom.cramping": {
-    "de-be": "_TODO_",
+    "de-be": "Muskelzuckungen / Krämpfe",
     "en": "Muscle twitches / cramping"
   },
   "heatwave.common.symptom.dizziness": {
-    "de-be": "_TODO_",
+    "de-be": "Schwindel / Benommenheit",
     "en": "Dizziness / light headedness"
   },
   "heatwave.common.symptom.dnk": {
-    "de-be": "_TODO_",
+    "de-be": "Weiß nicht",
     "en": "Don't know"
   },
   "heatwave.common.symptom.faiting": {
-    "de-be": "_TODO_",
+    "de-be": "Ohnmacht / Kreislaufkollaps",
     "en": "Fainting / collapsing"
   },
   "heatwave.common.symptom.insomnia": {
-    "de-be": "_TODO_",
+    "de-be": "Zu heiß zum Schlafen",
     "en": "Too hot to sleep"
   },
   "heatwave.common.symptom.no": {
-    "de-be": "_TODO_",
+    "de-be": "Nein",
     "en": "No"
   },
   "heatwave.common.symptom.palpitations": {
-    "de-be": "_TODO_",
+    "de-be": "Herzrasen",
     "en": "Racing heartbeat"
   },
   "heatwave.common.symptom.thirst": {
-    "de-be": "_TODO_",
+    "de-be": "Extremer Durst",
     "en": "Extreme thirst"
   },
   "heatwave.common.temperature_range_error": {
-    "en": "Please enter a temperature between 15 and 45 °C, or select \"I don't know\".",
-    "de-be": "_TODO_"
+    "de-be": "Bitte geben Sie eine Temperatur zwischen 15 und 45 °C ein oder wählen Sie „Weiß nicht\".",
+    "en": "Please enter a temperature between 15 and 45 °C, or select \"I don't know\"."
   },
   "heatwave.common.yes": {
-    "de-be": "_TODO_",
+    "de-be": "Ja",
     "en": "Yes"
   },
   "heatwave.consent.Q1.code.no": {
-    "de-be": "_TODO_",
+    "de-be": "Nein / Ich möchte meine Teilnahme beenden.",
     "en": "No / I want to withdraw"
   },
   "heatwave.consent.Q1.code.yes": {
-    "de-be": "_TODO_",
+    "de-be": "Ja, ich habe die Teilnahmebedingungen verstanden und erkläre mich mit der Teilnahme an dieser Studie einverstanden.",
     "en": "Yes, I understand the rules and accept to participate in the survey"
   },
   "heatwave.consent.Q1.text": {
-    "de-be": "_TODO_",
+    "de-be": "**Helfen Sie uns, die gesundheitlichen Auswirkungen von Hitzewellen besser zu verstehen – bestätigen Sie Ihre Teilnahme**\n\nLiebe Teilnehmerin, lieber Teilnehmer von Infectieradar,\n\nDa Sie bereits Teil der Infectieradar-Gemeinschaft sind, möchten wir Sie herzlich einladen, an einer neuen Studie über die gesundheitlichen Auswirkungen von Hitzewellen teilzunehmen. Die Studie findet von Mitte Juli bis Mitte September 2026 statt.\n\nFür die Teilnahme bitten wir Sie, zunächst einen kurzen einmaligen Fragebogen zu Ihrer Wohnsituation und dazu auszufüllen, wie sich Hitze auf Sie auswirkt. Während der Studie erhalten Sie anschließend einmal pro Woche einen sehr kurzen Fragebogen (ca. 30 Sekunden). Darin fragen wir, ob bei Ihnen hitzebedingte Beschwerden aufgetreten sind (z. B. starker Durst, Schwindel, Ohnmacht, Schlafprobleme aufgrund der Hitze, Verwirrtheit, Muskelkrämpfe, Koordinationsprobleme oder Herzrasen) und wie Sie damit umgegangen sind.\n\nDie Teilnahme ist vollständig freiwillig. Sie können Ihre Teilnahme jederzeit und ohne Angabe von Gründen beenden, indem Sie diesen kurzen Fragebogen erneut ausfüllen und **„Nein / Ich möchte meine Teilnahme beenden“** auswählen. Dies hat keinerlei Auswirkungen auf Ihre weitere Teilnahme an Infectieradar.\n\nIhre Daten werden gemäß der Datenschutz-Grundverordnung (DSGVO) geschützt. Für Forschungszwecke werden ausschließlich pseudonymisierte Daten verwendet. Ihre Antworten werden vertraulich behandelt und sicher von der **Universität Hasselt (UHasselt)** gespeichert. Ausführliche Informationen, einschließlich Ihrer Rechte im Bereich des Datenschutzes, finden Sie in der **[Teilnehmerinformation zur Studie](link)**. Sie können auch die Kopie einsehen, die Ihnen per E-Mail zugesandt wurde.\n\nDie Zwischenergebnisse werden im Oktober 2026 mitgeteilt. Die endgültigen Ergebnisse werden im Dezember 2026 veröffentlicht. Sie werden in Form anonymisierter und zusammengefasster Statistiken auf [https://www.influweb.org](Influweb)/[https://www.infectieradar.be](Infectieradar) veröffentlicht.\n\nVielen Dank, dass Sie uns dabei helfen, besser zu verstehen, wie sich Hitze auf die Gesundheit in der Bevölkerung auswirkt.",
     "en": "**Help us track the health effects of heat waves — confirm your participation**\n\nDear Influweb participant,\n\nBecause you are already part of the Influweb community, we would like to invite you to take part in a new study on the health effects of heat waves, running from mid-July to mid-September 2026.\n\nTo join, we ask you to complete one short one-off questionnaire now, about your housing and how heat affects you. During the study, you will then receive a short (~30 second) survey once a week, asking whether you experienced any heat-related symptoms (such as extreme thirst, dizziness, fainting, difficulty sleeping due to heat, confusion, muscle cramps, lack of coordination, or a racing heartbeat) and how you managed them.\n\nParticipation is entirely voluntary. You can withdraw at any time, without giving a reason, by compiling again this short questionnaire and selecting “No / I want to withdraw”; this will not affect your involvement in Influweb. Your data is protected under GDPR: only pseudonymized data is used for research purposes, and your responses remain confidential and securely held by ISI Foundation. You can find full details, including your data protection rights, in the study's [Participant Information Sheet](link). **You may also reference the copy sent to your email.**\n\nInterim results will be shared in October 2026 and final results in December 2026, published as anonymous, aggregate statistics on [Name of the platform](link).\n\nThank you for helping us better understand how heat affects health in the community."
   },
   "heatwave.consent.Q1.title": {
-    "de-be": "_TODO_",
+    "de-be": "Möchten Sie an dieser Studie teilnehmen?",
     "en": "Do you want to participate in this study?"
   },
   "heatwave.consent.description": {
-    "de-be": "_TODO_",
+    "de-be": "Einwilligung zur Teilnahme an den Hitzewellen-Umfragen",
     "en": "Consent to take part in the heatwave surveys"
   },
   "heatwave.consent.name": {
-    "de-be": "_TODO_",
+    "de-be": "Einwilligung zur Teilnahme an den Hitzewellen-Umfragen",
     "en": "Heatwave Consent"
   },
   "heatwave.consent.typicalDuration": {
-    "de-be": "_TODO_",
+    "de-be": "Dauer weniger als 1 Minute",
     "en": "Duration less than 1 minute"
   },
   "heatwave.discomfort.a_little": {
-    "de-be": "_TODO_",
+    "de-be": "Ein wenig",
     "en": "A little"
   },
   "heatwave.discomfort.extremely": {
-    "de-be": "_TODO_",
+    "de-be": "Extrem",
     "en": "Extremely"
   },
   "heatwave.discomfort.not_at_all": {
-    "de-be": "_TODO_",
+    "de-be": "Gar nicht",
     "en": "Not at all"
   },
   "heatwave.discomfort.quite": {
-    "de-be": "_TODO_",
+    "de-be": "Ziemlich",
     "en": "Quite"
   },
   "heatwave.discomfort.very": {
-    "de-be": "_TODO_",
+    "de-be": "Sehr",
     "en": "Very"
   },
   "heatwave.symptoms.description": {
-    "de-be": "_TODO_",
+    "de-be": "Wöchentliche Umfrage zu Hitzeexposition, Beschwerden und den Maßnahmen, die Sie aufgrund der Hitze ergriffen haben",
     "en": "Weekly survey about heat exposure, symptoms and the actions you took because of the heat"
   },
   "heatwave.symptoms.name": {
-    "de-be": "_TODO_",
+    "de-be": "Umfrage zu hitzebedingten Beschwerden",
     "en": "Heat-Related Illness Survey"
   },
   "heatwave.symptoms.typicalDuration": {
-    "de-be": "_TODO_",
+    "de-be": "Dauer 5-10 Minuten",
     "en": "Duration 5-10 minutes"
   }
 }
