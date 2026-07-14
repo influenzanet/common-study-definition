@@ -520,8 +520,8 @@
     "nl-be": "Achtergrondvragenlijst over hittegolven"
   },
   "heatwave.background.typicalDuration": {
-    "en": "Duration 5-10 minutes",
-    "nl-be": "Duurt 5-10 minnuten"
+    "en": "Duration 2-3 minutes",
+    "nl-be": "Duur 2-3 minuten"
   },
   "heatwave.common.dkn": {
     "en": "Don't know",
@@ -644,7 +644,7 @@
     "nl-be": "Vragenlijst over hittegerelateerde klachten"
   },
   "heatwave.symptoms.typicalDuration": {
-    "en": "Duration 5-10 minutes",
-    "nl-be": "Duurt 5-10 minnuten"
+    "en": "Duration 2-3 minutes",
+    "nl-be": "Duur 2-3 minuten"
   }
 }

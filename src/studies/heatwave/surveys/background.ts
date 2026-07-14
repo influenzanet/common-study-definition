@@ -14,7 +14,7 @@ export class HeatwaveBackgroundSurvey extends SurveyBuilder {
                  "Heatwave background survey description",
             ),
             durationText: _T(
-                "heatwave.background.typicalDuration", "Duration 5-10 minutes"
+                "heatwave.background.typicalDuration", "Duration 2-3 minutes"
             ),
             metadata: metadata
         });

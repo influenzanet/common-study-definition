@@ -520,8 +520,8 @@
     "fr": "Enquête de contexte pour l'étude sur les impacts de la chaleur sur la santé"
   },
   "heatwave.background.typicalDuration": {
-    "en": "Duration 5-10 minutes",
-    "fr": "Temps estimé : 5 minutes"
+    "en": "Duration 2-3 minutes",
+    "fr": "Temps estimé : 2-3 minutes"
   },
   "heatwave.common.dkn": {
     "en": "Don't know",
@@ -644,7 +644,7 @@
     "fr": "Enquête sur les impacts de la chaleur sur la santé"
   },
   "heatwave.symptoms.typicalDuration": {
-    "en": "Duration 5-10 minutes",
-    "fr": "Temps éstimé : 5 minutes"
+    "en": "Duration 2-3 minutes",
+    "fr": "Temps estimé : 2-3 minutes"
   }
 }

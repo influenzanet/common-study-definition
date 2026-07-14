@@ -520,8 +520,8 @@
     "it": "Indagine di base sull'ondata di calore"
   },
   "heatwave.background.typicalDuration": {
-    "en": "Duration 5-10 minutes",
-    "it": "Durata 5-10 minuti"
+    "en": "Duration 2-3 minutes",
+    "it": "Durata 2-3 minuti"
   },
   "heatwave.common.dkn": {
     "en": "Don't know",
@@ -644,7 +644,7 @@
     "it": "Indagine sulle malattie/sintomi legati al calore"
   },
   "heatwave.symptoms.typicalDuration": {
-    "en": "Duration 5-10 minutes",
-    "it": "Durata 5-10 minuti"
+    "en": "Duration 2-3 minutes",
+    "it": "Durata 2-3 minuti"
   }
 }

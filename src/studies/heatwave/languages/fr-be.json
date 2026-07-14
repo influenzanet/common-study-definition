@@ -520,8 +520,8 @@
     "fr-be": "Enquête de contexte sur les vagues de chaleur"
   },
   "heatwave.background.typicalDuration": {
-    "en": "Duration 5-10 minutes",
-    "fr-be": "Durée 5-10 minutes"
+    "en": "Duration 2-3 minutes",
+    "fr-be": "Durée 2-3 minutes"
   },
   "heatwave.common.dkn": {
     "en": "Don't know",
@@ -644,7 +644,7 @@
     "fr-be": "Enquête sur les problèmes de santé liés à la chaleur"
   },
   "heatwave.symptoms.typicalDuration": {
-    "en": "Duration 5-10 minutes",
-    "fr-be": "Durée 5-10 minutes"
+    "en": "Duration 2-3 minutes",
+    "fr-be": "Durée 2-3 minutes"
   }
 }

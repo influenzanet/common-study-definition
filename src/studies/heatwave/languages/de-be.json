@@ -520,8 +520,8 @@
     "en": "Heatwave Background survey"
   },
   "heatwave.background.typicalDuration": {
-    "de-be": "Dauer 5-10 Minuten",
-    "en": "Duration 5-10 minutes"
+    "de-be": "Dauer 2-3 Minuten",
+    "en": "Duration 2-3 minutes"
   },
   "heatwave.common.dkn": {
     "de-be": "Weiß nicht",
@@ -644,7 +644,7 @@
     "en": "Heat-Related Illness Survey"
   },
   "heatwave.symptoms.typicalDuration": {
-    "de-be": "Dauer 5-10 Minuten",
-    "en": "Duration 5-10 minutes"
+    "de-be": "Dauer 2-3 Minuten",
+    "en": "Duration 2-3 minutes"
   }
 }

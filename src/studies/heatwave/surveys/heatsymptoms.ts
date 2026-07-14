@@ -14,7 +14,7 @@ export class HeatwaveSymptomsSurvey extends SurveyBuilder {
                 "Weekly survey about heat exposure, symptoms and the actions you took because of the heat",
             ),
             durationText: _T(
-                "heatwave.symptoms.typicalDuration", "Duration 5-10 minutes"
+                "heatwave.symptoms.typicalDuration", "Duration 2-3 minutes"
             ),
             metadata:metadata
         });
