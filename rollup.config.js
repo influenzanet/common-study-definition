@@ -17,7 +17,7 @@ const config = {
   {
       //file: packageJson.main,
       dir: 'build',
-      format: "cjs",
+      format: "es",
       sourcemap: true,
       chunkFileNames: '[name].js',
   },
