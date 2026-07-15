@@ -42,8 +42,7 @@ export class HeatwaveStudyRulesBuilder extends AbstractStudyRulesBuilder {
         const consentFlag = flags.heatConsent;
         const backCompleted = flags.heatbackCompleted;
 
-        // PRODUCTION: 604800 (7 days).
-        const SYMPTOMS_INTERVAL_SEC = 3600;
+        const SYMPTOMS_INTERVAL_SEC = 60480;
 
         /**
          * ENTRY: assign the consent survey to everyone
