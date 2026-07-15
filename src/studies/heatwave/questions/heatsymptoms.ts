@@ -14,7 +14,8 @@ const TEMPERATURE_MAX = 45;
 const temperature_option = (transId: string): OptionDef => {
     return option_def('temp', _T(transId, "Temperature (°C)"), {
         role: 'numberInput',
-        optionProps: { min: num_as_arg(TEMPERATURE_MIN), max: num_as_arg(TEMPERATURE_MAX) }
+        optionProps: { min: num_as_arg(TEMPERATURE_MIN), max: num_as_arg(TEMPERATURE_MAX) },
+        description: _T('heatwave.common.temperature.desc', '', transId + '.desc'),
     });
 }
 

@@ -21,7 +21,7 @@
   },
   "heatwave.Q10.code.temp": {
     "en": "Temperature (°C)",
-    "fr": "Préciser ici la température en °C"
+    "fr": "Temperature (°C)"
   },
   "heatwave.Q10.title": {
     "en": "What was the highest temperature recorded inside your home over the past week?",
@@ -29,7 +29,7 @@
   },
   "heatwave.Q11.code.temp": {
     "en": "Temperature (°C)",
-    "fr": "Préciser ici la température en °C"
+    "fr": "Temperature (°C)"
   },
   "heatwave.Q11.title": {
     "en": "What was the lowest temperature recorded inside your home over the past week?",
@@ -53,7 +53,7 @@
   },
   "heatwave.Q12.code.other_desc": {
     "en": "Describe here (optional)",
-    "fr": "Autre Préciser ici le code postal de la commune la plus proche (optionnel)"
+    "fr": "Préciser ici le code postal de la commune la plus proche (optionnel)"
   },
   "heatwave.Q12.code.work": {
     "en": "Work/School",
@@ -578,6 +578,10 @@
   "heatwave.common.symptom.thirst": {
     "en": "Extreme thirst",
     "fr": "Soif extrême"
+  },
+  "heatwave.common.temperature.desc": {
+    "en": "",
+    "fr": "Indiquez la température en °C"
   },
   "heatwave.common.temperature_range_error": {
     "en": "Please enter a temperature between 15 and 45 °C, or select \"I don't know\".",
