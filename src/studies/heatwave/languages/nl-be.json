@@ -579,6 +579,10 @@
     "en": "Extreme thirst",
     "nl-be": "Extreme dorst"
   },
+  "heatwave.common.temperature_desc": {
+    "en": "",
+    "nl-be": "Voer een temperatuur tussen 15 en 45 °C in"
+  },
   "heatwave.common.temperature_range_error": {
     "en": "Please enter a temperature between 15 and 45 °C, or select \"I don't know\".",
     "nl-be": "Voer een temperatuur tussen 15 en 45 °C in, of selecteer 'Weet ik niet'."

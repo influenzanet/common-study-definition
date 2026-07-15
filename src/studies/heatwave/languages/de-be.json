@@ -579,6 +579,10 @@
     "de-be": "Extremer Durst",
     "en": "Extreme thirst"
   },
+  "heatwave.common.temperature_desc": {
+    "de-be": "Bitte geben Sie eine Temperatur zwischen 15 und 45 °C",
+    "en": ""
+  },
   "heatwave.common.temperature_range_error": {
     "de-be": "Bitte geben Sie eine Temperatur zwischen 15 und 45 °C ein oder wählen Sie „Weiß nicht\".",
     "en": "Please enter a temperature between 15 and 45 °C, or select \"I don't know\"."
