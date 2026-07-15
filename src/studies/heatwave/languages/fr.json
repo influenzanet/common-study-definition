@@ -1,19 +1,19 @@
 {
   "heatwave.Q1.code.other": {
     "en": "Other",
-    "fr": "_TODO_"
+    "fr": "Autre"
   },
   "heatwave.Q1.code.other_desc": {
     "en": "Describe here (optional)",
-    "fr": "_TODO_"
+    "fr": "Préciser"
   },
   "heatwave.Q1.helpGroup.text.0": {
     "en": "Why are we asking this?",
-    "fr": "_TODO_"
+    "fr": "Pourquoi demandons vous cela ?"
   },
   "heatwave.Q1.helpGroup.text.1": {
     "en": "This refers to the accommodation where you spend most of your summer, it can also be a holiday house.",
-    "fr": "_TODO_"
+    "fr": "Nous parlons ici du logement où vous passez/aller passer la majorité de votre été, il peut s'agir d'un logement de vacances"
   },
   "heatwave.Q1.title": {
     "en": "Do you live in rental accommodation?",
@@ -21,19 +21,19 @@
   },
   "heatwave.Q10.code.temp": {
     "en": "Temperature (°C)",
-    "fr": "Température (°C)"
+    "fr": "Préciser ici la température en °C"
   },
   "heatwave.Q10.title": {
     "en": "What was the highest temperature recorded inside your home over the past week?",
-    "fr": "Quelle a été est la température la plus élevée enregistrée à l'intérieur de votre logement au cours de la semaine dernière ?"
+    "fr": "Quelle a été la température la plus élevée enregistrée à l'intérieur de votre logement au cours de la semaine dernière ?"
   },
   "heatwave.Q11.code.temp": {
     "en": "Temperature (°C)",
-    "fr": "Température (°C)"
+    "fr": "Préciser ici la température en °C"
   },
   "heatwave.Q11.title": {
     "en": "What was the lowest temperature recorded inside your home over the past week?",
-    "fr": "Quelle a été est la température la plus basse enregistrée à l'intérieur de votre logement au cours de la semaine dernière ?"
+    "fr": "Quelle a été la température la plus basse enregistrée à l'intérieur de votre logement au cours de la semaine dernière ?"
   },
   "heatwave.Q12.code.holiday": {
     "en": "Holiday destination",
@@ -41,7 +41,7 @@
   },
   "heatwave.Q12.code.holiday_desc": {
     "en": "Closest municipality",
-    "fr": "Préciser le nom de la commune la plus proche"
+    "fr": "Préciser le code postal de la commune la plus proche"
   },
   "heatwave.Q12.code.home": {
     "en": "Home",
@@ -53,7 +53,7 @@
   },
   "heatwave.Q12.code.other_desc": {
     "en": "Describe here (optional)",
-    "fr": "Préciser ici (optionnel)"
+    "fr": "Autre Préciser ici le code postal de la commune la plus proche (optionnel)"
   },
   "heatwave.Q12.code.work": {
     "en": "Work/School",
@@ -61,7 +61,7 @@
   },
   "heatwave.Q12.helpGroup.text.0": {
     "en": "Why are we asking this?",
-    "fr": "_TODO_"
+    "fr": "Pourquoi demandons-nous cela ?"
   },
   "heatwave.Q12.helpGroup.text.1": {
     "en": "We are asking this question to get the environmental temperature in the reported location.",
@@ -81,7 +81,7 @@
   },
   "heatwave.Q14.code.holiday_desc": {
     "en": "Closest municipality",
-    "fr": "Préciser le nom de la commune la plus proche"
+    "fr": "Préciser le code postal de la commune la plus proche"
   },
   "heatwave.Q14.code.home": {
     "en": "Home",
@@ -97,11 +97,11 @@
   },
   "heatwave.Q14.helpGroup.text.0": {
     "en": "Why are we asking this?",
-    "fr": "_TODO_"
+    "fr": "Pourquoi demandons-nous cela ?"
   },
   "heatwave.Q14.helpGroup.text.1": {
     "en": "We are asking this question to get the environmental temperature in the reported location.",
-    "fr": "_TODO_"
+    "fr": "Cette question a pour but de connaître la température dans le lieu indiqué"
   },
   "heatwave.Q14.title": {
     "en": "During night hours, which location did you spend the most time in this past week?",
@@ -317,7 +317,7 @@
   },
   "heatwave.Q2.code.cabin": {
     "en": "Cabin / Caravan / Houseboat",
-    "fr": "Cabane / Caravane / Péniche ou maison flottante"
+    "fr": "Cabane / caravane / péniche ou maison flottante"
   },
   "heatwave.Q2.code.flat": {
     "en": "Flat / Apartment",
@@ -329,7 +329,7 @@
   },
   "heatwave.Q2.code.other_description": {
     "en": "",
-    "fr": "Précisier ici (optionnel)"
+    "fr": "Préciser ici (optionnel)"
   },
   "heatwave.Q2.code.semidetached": {
     "en": "Semi-detached / row or terrace house / historic attached home",
@@ -341,11 +341,11 @@
   },
   "heatwave.Q2.helpGroup.text.0": {
     "en": "Why are we asking this?",
-    "fr": "_TODO_"
+    "fr": "Pourquoi demandons-nous cela ?"
   },
   "heatwave.Q2.helpGroup.text.1": {
     "en": "This refers to the accommodation where you spend most of your summer, it can also be a holiday house.",
-    "fr": "_TODO_"
+    "fr": "Nous parlons ici du logement où vous passez/aller passer la majorité de votre été, il peut s'agir d'un logement de vacances"
   },
   "heatwave.Q2.title": {
     "en": "What best describes your current housing?",
@@ -473,7 +473,7 @@
   },
   "heatwave.Q6.code.no_work": {
     "en": "I don't work / study",
-    "fr": "_TODO_"
+    "fr": "Je ne travaille pas / n'étudie pas"
   },
   "heatwave.Q6.code.outdoors": {
     "en": "I work outdoors",
@@ -517,7 +517,7 @@
   },
   "heatwave.background.name": {
     "en": "Heatwave Background survey",
-    "fr": "Enquête de contexte pour l'étude sur les impacts de la chaleur sur la santé"
+    "fr": "Questionnaire d'inclusion (étude sur l'impact de la chaleur sur la santé)"
   },
   "heatwave.background.typicalDuration": {
     "en": "Duration 2-3 minutes",
@@ -581,7 +581,7 @@
   },
   "heatwave.common.temperature_range_error": {
     "en": "Please enter a temperature between 15 and 45 °C, or select \"I don't know\".",
-    "fr": "_TODO_"
+    "fr": "Indiquez une température entre 15 et 45 °C"
   },
   "heatwave.common.yes": {
     "en": "Yes",
@@ -637,11 +637,11 @@
   },
   "heatwave.symptoms.description": {
     "en": "Weekly survey about heat exposure, symptoms and the actions you took because of the heat",
-    "fr": "Enquête hebdomadaire sur l'exposition à la chaleur, les symptômes associés et les mesures prises face à la chaleur"
+    "fr": "Questionnaire hebdomadaire sur l'exposition à la chaleur, les symptômes associés et les mesures prises face à la chaleur"
   },
   "heatwave.symptoms.name": {
     "en": "Heat-Related Illness Survey",
-    "fr": "Enquête sur les impacts de la chaleur sur la santé"
+    "fr": "Questionnaire hebdomadaire (étude sur l’impact de la chaleur sur la santé)"
   },
   "heatwave.symptoms.typicalDuration": {
     "en": "Duration 2-3 minutes",
