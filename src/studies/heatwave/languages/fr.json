@@ -65,7 +65,7 @@
   },
   "heatwave.Q12.helpGroup.text.1": {
     "en": "We are asking this question to get the environmental temperature in the reported location.",
-    "fr": "_TODO_"
+    "fr": "Cette question a pour but de connaître la température ambiante dans le lieu indiqué."
   },
   "heatwave.Q12.title": {
     "en": "During daylight hours, which location did you spend the most time in this past week?",
@@ -93,7 +93,7 @@
   },
   "heatwave.Q14.code.other_desc": {
     "en": "Describe here (optional)",
-    "fr": "Préciser ici (optionnel)"
+    "fr": "Préciser le code postal de la commune la plus proche"
   },
   "heatwave.Q14.helpGroup.text.0": {
     "en": "Why are we asking this?",
@@ -101,7 +101,7 @@
   },
   "heatwave.Q14.helpGroup.text.1": {
     "en": "We are asking this question to get the environmental temperature in the reported location.",
-    "fr": "Cette question a pour but de connaître la température dans le lieu indiqué"
+    "fr": "Cette question a pour but de connaître la température ambiante dans le lieu indiqué"
   },
   "heatwave.Q14.title": {
     "en": "During night hours, which location did you spend the most time in this past week?",
@@ -113,7 +113,7 @@
   },
   "heatwave.Q16.title": {
     "en": "Did you experience any symptoms due to high/extreme heat this past week?",
-    "fr": "Avez-vous ressenti des symptômes dus à une chaleur forte ou extrême la semaine dernière ?"
+    "fr": "Avez-vous ressenti des symptômes dus à une chaleur forte ou extrême la semaine dernière ? (sélectionnez toutes les réponses qui s'appliquent)"
   },
   "heatwave.Q16a.code.hospital": {
     "en": "Yes, from a hospital",
@@ -257,7 +257,7 @@
   },
   "heatwave.Q18.title": {
     "en": "What actions did you take this past week to protect yourself from heat?",
-    "fr": "Quelles actions avez-vous entreprises la semaine dernière pour vous protéger de la chaleur ? (Sélectionnez toutes les réponses qui s'appliquent)"
+    "fr": "Quelles actions avez-vous entreprises la semaine dernière pour vous protéger de la chaleur ? (sélectionnez toutes les réponses qui s'appliquent)"
   },
   "heatwave.Q19.code.all_year": {
     "en": "A public building open all year round (library, museum, etc.)",
