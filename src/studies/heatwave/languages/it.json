@@ -579,7 +579,7 @@
     "en": "Extreme thirst",
     "it": "Sete eccessiva"
   },
-  "heatwave.common.temperature_desc": {
+  "heatwave.common.temperature.desc": {
     "en": "",
     "it": "Inserisci una temperatura compresa tra 15 e 45 °C"
   },

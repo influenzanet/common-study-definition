@@ -579,7 +579,7 @@
     "en": "Extreme thirst",
     "nl-be": "Extreme dorst"
   },
-  "heatwave.common.temperature_desc": {
+  "heatwave.common.temperature.desc": {
     "en": "",
     "nl-be": "Voer een temperatuur tussen 15 en 45 °C in"
   },
