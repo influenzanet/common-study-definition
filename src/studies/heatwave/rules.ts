@@ -42,7 +42,7 @@ export class HeatwaveStudyRulesBuilder extends AbstractStudyRulesBuilder {
         const consentFlag = flags.heatConsent;
         const backCompleted = flags.heatbackCompleted;
 
-        const SYMPTOMS_INTERVAL_SEC = 60480;
+        const SYMPTOMS_INTERVAL_SEC = 604800;
 
         /**
          * ENTRY: assign the consent survey to everyone
