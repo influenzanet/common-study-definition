@@ -579,7 +579,7 @@
     "de-be": "Extremer Durst",
     "en": "Extreme thirst"
   },
-  "heatwave.common.temperature_desc": {
+  "heatwave.common.temperature.desc": {
     "de-be": "Bitte geben Sie eine Temperatur zwischen 15 und 45 °C",
     "en": ""
   },

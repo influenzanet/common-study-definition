@@ -579,7 +579,7 @@
     "en": "Extreme thirst",
     "fr-be": "Soif extrême"
   },
-  "heatwave.common.temperature_desc": {
+  "heatwave.common.temperature.desc": {
     "en": "",
     "fr-be": "Veuillez saisir une température comprise entre 15 et 45 °C"
   },
