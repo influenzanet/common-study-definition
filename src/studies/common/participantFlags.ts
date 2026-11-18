@@ -1,5 +1,4 @@
-import { stringify } from "querystring";
-import { FlagCollection, FlagDefinition } from "../../types";
+import { FlagDefinition } from "../../types";
 
 export interface AgeFlagDefinition extends FlagDefinition {
     age: number;
