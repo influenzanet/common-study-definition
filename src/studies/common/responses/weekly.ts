@@ -91,6 +91,24 @@ const visit_medical = {
     "plan": "5"
 } as const;
 
+const no_medical_visit_reasons = {
+    sympt_recent: '1',
+    sympt_mild: '2',
+    sympt_often: '3',
+    self_medicate: '4',
+    think_no_treatment: '5',
+    appointment_hard: '6',
+    no_time: '7',
+    financial: '8',
+    fear_consequences_covid: '9',
+    vaccinated_covid19: '11',
+    vaccinated_influenza: '12',
+    fear_consequences_viro: '13', // Include all viruses Influenza,Covid19 & RSV
+    other:  '10',
+    dont_know: '99',
+} as const;
+
+
 export type SymptomKeysType =  keyof typeof symptomsEncoding;
 export type VisitMedicalServiceTypes = keyof typeof visit_medical;
 
@@ -132,6 +150,22 @@ export const WeeklyResponses = {
         "no_wont": "3",
         "no": "0"
     } as const,
+    viruses_tested: {
+        "covid19": "1",
+        "influenza": "2",
+        "rsv": "3",
+        "other": "4",
+        "dont_know":"99"
+    } as const,
+    viruses_result: {
+        covid19: "1",
+        influenza: "5",
+        rsv: "6",
+        negative: "2",
+        unconclusive:"3",
+        not_received: "4",
+        dont_know: "99",
+    } as const,
     test_type: {
         "pcr": "1",
         "sero": "2",
@@ -146,6 +180,7 @@ export const WeeklyResponses = {
         "no": "0"
     } as const,
     visit_medical: visit_medical,
+    no_medical_visit_reasons: no_medical_visit_reasons,
     daily_routine: {
         "no": "0",
         "yes": "1",
