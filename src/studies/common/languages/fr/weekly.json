@@ -647,6 +647,14 @@
     "en": "For another reason",
     "fr": "Pour une autre raison"
   },
+   "weekly.EX.Qcov18.rg.scg.option.fear_viro": {
+    "en": "For fear of consequences if the doctor thinks I have COVID-19, Influenza or RSV",
+    "fr": "Par crainte des conséquences si le médecin suspecte la Covid-19, la grippe ou le VRS "
+  },
+  "weekly.EX.Qcov18.rg.scg.option.vacc_flu": {
+    "en": "I'm vaccinated against influenza",
+    "fr": "Parce que je suis vacciné contre la grippe "
+  },
   "weekly.EX.Qcov18.rg.scg.description.input.10": {
     "en": "Describe here (optional)",
     "fr": "Précisez ici (optionnel)"
